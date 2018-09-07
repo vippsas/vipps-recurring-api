@@ -1,0 +1,893 @@
+swagger: '2.0'
+info:
+  description: |
+    # Recurring payments
+
+    Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
+
+    1. A a draft agreement is initialized and the user is redirected for approval.
+    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status
+    3. The merchant can start sending charges which will be charged the user in the future.
+
+    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
+  version: '1.0'
+  title: Recurring Payments Merchant API
+basePath: /vipps-recurring-merchant-api
+tags:
+  - name: draft-agreement-controller
+    description: Draft Agreement Controller
+  - name: application-fail-over-controller
+    description: Application Fail Over Controller
+  - name: health-check-controller
+    description: Health Check Controller
+  - name: agreement-controller
+    description: Agreement Controller
+  - name: swagger-export-json-controller
+    description: Swagger Export Json Controller
+  - name: charge-controller
+    description: Charge Controller
+  - name: swagger-export-yaml-controller
+    description: Swagger Export Yaml Controller
+paths:
+  /api/v1/agreement:
+    get:
+      tags:
+        - agreement-controller
+      summary: List Agreements
+      operationId: listUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: status
+          in: query
+          description: Filter by status
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AgreementDto'
+        '400':
+          description: Bad Request
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Gateway Timeout
+  '/api/v1/agreement/{agreementId}':
+    get:
+      tags:
+        - agreement-controller
+      summary: Fetch an Agreement
+      operationId: getUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: Agreement ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AgreementDto'
+        '400':
+          description: Bad Request
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Agreement not found
+        '500':
+          description: Internal Server Error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Gateway Timeout
+    post:
+      tags:
+        - agreement-controller
+      summary: Update an Agreement
+      operationId: updateUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: Agreement ID
+          required: true
+          type: string
+        - in: body
+          name: agreement
+          description: agreement
+          required: true
+          schema:
+            $ref: '#/definitions/AgreementDto'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AgreementDto'
+        '400':
+          description: Bad Request
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Agreement not found
+        '500':
+          description: Internal Server Error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Gateway Timeout
+  '/api/v1/charge/{agreementId}':
+    get:
+      tags:
+        - charge-controller
+      summary: List Charges
+      operationId: listUsingGET_1
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: The agreement identifier (id)
+          required: true
+          type: string
+        - name: chargeStatus
+          in: query
+          description: The status of the charge
+          required: false
+          type: string
+          enum:
+            - PENDING
+            - DUE
+            - REFUNDED
+            - CHARGED
+            - FAILED
+            - CANCELLED
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CreateChargeResponseDto'
+        '400':
+          description: 'Invalid request, check your parameters'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '500':
+          description: Internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Timeout
+    post:
+      tags:
+        - charge-controller
+      summary: Create a new charge for a given agreement and customer
+      operationId: createUsingPOST
+      consumes:
+        - application/json;charset=UTF-8
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: Agreement ID
+          required: true
+          type: string
+        - in: body
+          name: dto
+          description: dto
+          required: true
+          schema:
+            $ref: '#/definitions/CreateChargeRequestDto'
+        - name: Idempotent-Key
+          in: header
+          description: Idempotent-Key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CreateChargeResponseDto'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/CreateChargeResponseDto'
+        '204':
+          description: No Content (operation succeeded previously)
+        '400':
+          description: 'Invalid request, check your parameters'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '409':
+          description: 'Conflict, retry in a moment. (simultaneous idempotent requests)'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '500':
+          description: Internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Timeout
+  '/api/v1/charge/{agreementId}/{chargeId}':
+    get:
+      tags:
+        - charge-controller
+      summary: Fetch a Charge
+      operationId: getUsingGET_1
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: agreementId
+          required: true
+          type: string
+        - name: chargeId
+          in: path
+          description: The charge identifier (id)
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateChargeResponseDto'
+        '404':
+          description: The requested charge does not exist
+        '500':
+          description: Internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Timeout
+    delete:
+      tags:
+        - charge-controller
+      summary: Cancel a Charge
+      operationId: cancelUsingDELETE
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: The agreement identifier (id)
+          required: true
+          type: string
+        - name: chargeId
+          in: path
+          description: The charge identifier (id)
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateChargeResponseDto'
+        '204':
+          description: No Content (operation succeeded previously)
+        '400':
+          description: 'Invalid request, check your parameters'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '409':
+          description: 'This charge is not in a deletable state, it may have already been charged to the user.'
+        '500':
+          description: Internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Timeout
+  '/api/v1/charge/{agreementId}/{chargeId}/refund':
+    post:
+      tags:
+        - charge-controller
+      summary: Refund a charge
+      operationId: refundUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: The agreement identifier (id)
+          required: true
+          type: string
+        - name: chargeId
+          in: path
+          description: The charge identifier (id)
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: 'Invalid request, check your parameters'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '404':
+          description: Charge does not exist (and never has)
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '500':
+          description: Internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Timeout
+  /api/v1/draftAgreement:
+    post:
+      tags:
+        - draft-agreement-controller
+      summary: Send a new customer to Vipps in order to accept AgreementDto
+      operationId: registerUsingPOST
+      consumes:
+        - application/json;charset=UTF-8
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - in: body
+          name: draftAgreement
+          description: draftAgreement
+          required: true
+          schema:
+            $ref: '#/definitions/DraftAgreement'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DraftAgreementResponse'
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/DraftAgreementResponse'
+        '400':
+          description: Bad Request
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '401':
+          description: Unauthorized
+        '422':
+          description: Unprocessable Entity (invalid json)
+        '500':
+          description: Internal Server Error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Gateway Timeout
+  /health:
+    get:
+      tags:
+        - health-check-controller
+      summary: heathCheck
+      operationId: heathCheckUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HealthCheckStatus'
+  /swagger.json:
+    get:
+      tags:
+        - swagger-export-json-controller
+      summary: Export
+      description: 'Download the latest version of the Swagger Documentation for this service, in json format'
+      operationId: swaggerJsonSpecUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+  /swagger.yaml:
+    get:
+      tags:
+        - swagger-export-yaml-controller
+      summary: Export
+      description: Download the latest version of the Swagger Documentation for this service
+      operationId: swaggerYmlSpecUsingGET
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+definitions:
+  AgreementDto:
+    type: object
+    required:
+      - interval
+      - intervalCount
+      - price
+      - productDescription
+      - productName
+      - status
+    properties:
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      customer:
+        type: integer
+        format: int64
+        example: 12345
+        description: Identifies the customer (Vipps-user)
+        readOnly: true
+      id:
+        type: string
+        example: agr_5kSeqzFAMkfBbc
+        description: Uniquely identifies this agreement
+        readOnly: true
+      interval:
+        type: string
+        example: week
+        description: Interval for subscription
+        enum:
+          - day
+          - week
+          - month
+      intervalCount:
+        type: integer
+        format: int32
+        example: 2
+        description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.'
+        minimum: 1
+        maximum: 31
+      maxCharge:
+        type: integer
+        format: int32
+        example: 12000
+        description: 'Maximum limit set by Vipps-user. Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK ,'
+        readOnly: true
+      price:
+        type: integer
+        format: int32
+        example: 7900
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      productDescription:
+        type: string
+        example: Fin abonnementspakke
+      productName:
+        type: string
+        example: Pluss-abonnement
+        description: Name of the product being subscribed to.
+      startDate:
+        type: string
+        example: '2018-10-22'
+        description: Date when agreement was started.
+        readOnly: true
+      status:
+        type: string
+        example: stoppedByMerchant
+        description: Status of AgreementDto.
+        enum:
+          - pendingUserApproval
+          - active
+          - stoppedByUser
+          - stoppedByMerchant
+          - stoppedByVipps
+      stopDate:
+        type: string
+        example: '2019-10-22'
+        description: Date when agreement was stopped.
+        readOnly: true
+  ApplicationFailOverRequestDTO:
+    type: object
+    properties:
+      operation:
+        type: string
+  CreateChargeOnRequestDtoFindABetterJson:
+    type: object
+    required:
+      - amount
+      - description
+      - hasPriceChanged
+      - type
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      description:
+        type: string
+        example: Månedsabonnement
+        description: This field is visible to the end user in-app
+      dueDate:
+        type: string
+        example: '2030-12-31'
+        description: yyyy-MM-dd
+      hasPriceChanged:
+        type: boolean
+        example: false
+        description: 'If the amount exceeds the amount specified on the agreement, this field must be true to indicate that there is an update price for the parent subscription'
+      retryDays:
+        type: integer
+        format: int32
+        example: 5
+        description: 'The service will attempt to charge the customer for N days [non inclusive], must be null or contain a value >= 0. If zero, no retries will be performed'
+      type:
+        type: string
+        enum:
+          - RECURRING
+  CreateChargeRequestDto:
+    type: object
+    required:
+      - amount
+      - description
+      - hasPriceChanged
+      - type
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      description:
+        type: string
+        example: Månedsabonnement
+        description: This field is visible to the end user in-app
+      dueDate:
+        type: string
+        example: '2030-12-31'
+        description: yyyy-MM-dd
+      hasPriceChanged:
+        type: boolean
+        example: false
+        description: 'If the amount exceeds the amount specified on the agreement, this field must be true to indicate that there is an update price for the parent subscription'
+      retryDays:
+        type: integer
+        format: int32
+        example: 5
+        description: 'The service will attempt to charge the customer for N days [non inclusive], must be null or contain a value >= 0. If zero, no retries will be performed'
+      type:
+        type: string
+        enum:
+          - RECURRING
+  CreateChargeResponseDto:
+    type: object
+    required:
+      - amount
+      - dueDate
+      - id
+      - status
+      - type
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      dueDate:
+        type: string
+        example: '2030-12-31T00:00:00Z'
+      id:
+        type: string
+        example: chg_WCVbcAbRCmu2zk
+      status:
+        type: string
+        example: PENDING
+        enum:
+          - PENDING
+          - DUE
+          - REFUNDED
+          - CHARGED
+          - FAILED
+          - CANCELLED
+      transactionId:
+        type: string
+        description: Only present when status is CHARGED
+        readOnly: true
+      type:
+        type: string
+        example: RECURRING
+        enum:
+          - RECURRING
+          - ONEOFF
+  DraftAgreement:
+    type: object
+    required:
+      - currency
+      - interval
+      - intervalCount
+      - isApp
+      - merchantRedirectUrl
+      - price
+      - productDescription
+      - productName
+    properties:
+      charges:
+        type: array
+        description: 'A maximum of 12 charges can be created with the agreement, additional charges can be created using the `Charge API`'
+        items:
+          $ref: '#/definitions/CreateChargeOnRequestDtoFindABetterJson'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      customerPhoneNumber:
+        type: string
+        example: '+4740000000'
+        description: Customers phone number (if available). Used to simplify the following Vipps interaction
+      initialCharge:
+        $ref: '#/definitions/InitialChargeRequestDto'
+      interval:
+        type: string
+        example: WEEK
+        description: Interval for subscription
+        enum:
+          - WEEK
+          - YEAR
+          - MONTH
+          - DAY
+      intervalCount:
+        type: integer
+        format: int32
+        example: 2
+        description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year'
+        minimum: 1
+        maximum: 31
+      isApp:
+        type: boolean
+        example: true
+        description: If merchant is redirecting user from an app.
+      merchantRedirectUrl:
+        type: string
+        example: 'https://api.merchant.no/landing'
+      price:
+        type: integer
+        format: int32
+        example: 7900
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      productDescription:
+        type: string
+        example: Fin abonnementspakke
+      productName:
+        type: string
+        example: Pluss-abonnement
+        description: Name of the product being subscribed to.
+  DraftAgreementResponse:
+    type: object
+    properties:
+      agreementResource:
+        type: string
+        example: 'https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc'
+        description: 'Reference to AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
+        readOnly: true
+      redirectToVipps:
+        type: string
+        example: 'https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV'
+        description: Customer should be redirected to Vipps using this URL.
+        readOnly: true
+  ErrorDto:
+    type: object
+    properties:
+      description:
+        type: string
+      error:
+        type: string
+      field:
+        type: string
+  HealthCheckStatus:
+    type: object
+    properties:
+      application:
+        type: boolean
+      cosmosDb:
+        type: boolean
+      paymentDb:
+        type: boolean
+  InitialChargeRequestDto:
+    type: object
+    required:
+      - amount
+      - description
+      - type
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      description:
+        type: string
+        example: Månedsabonnement
+        description: This field is visible to the end user in-app
+      retryDays:
+        type: integer
+        format: int32
+        example: 5
+        description: 'The service will attempt to charge the customer for N days [non inclusive]. Must be null (vipps decides a default value) or contain a value from 0 to 10. If zero, no retries will be performed. The retry period must not pass the charge date for the next charge.'
+      type:
+        type: string
+        description: Only ONEOFF is allowed for the initial optional charge
+        enum:
+          - RECURRING
+          - ONEOFF
+  ResponseEntity:
+    type: object
+    properties:
+      body:
+        type: object
+      statusCode:
+        type: string
+        enum:
+          - '100'
+          - '101'
+          - '102'
+          - '103'
+          - '200'
+          - '201'
+          - '202'
+          - '203'
+          - '204'
+          - '205'
+          - '206'
+          - '207'
+          - '208'
+          - '226'
+          - '300'
+          - '301'
+          - '302'
+          - '303'
+          - '304'
+          - '305'
+          - '307'
+          - '308'
+          - '400'
+          - '401'
+          - '402'
+          - '403'
+          - '404'
+          - '405'
+          - '406'
+          - '407'
+          - '408'
+          - '409'
+          - '410'
+          - '411'
+          - '412'
+          - '413'
+          - '414'
+          - '415'
+          - '416'
+          - '417'
+          - '418'
+          - '419'
+          - '420'
+          - '421'
+          - '422'
+          - '423'
+          - '424'
+          - '426'
+          - '428'
+          - '429'
+          - '431'
+          - '451'
+          - '500'
+          - '501'
+          - '502'
+          - '503'
+          - '504'
+          - '505'
+          - '506'
+          - '507'
+          - '508'
+          - '509'
+          - '510'
+          - '511'
+      statusCodeValue:
+        type: integer
+        format: int32
