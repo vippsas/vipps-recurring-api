@@ -1,4 +1,4 @@
-# Vipps eCommerce API version 2
+# Vipps Recurring API version 1
 
 This repo contains developer resources for the Vipps eCommerce API. For more information about this product, "Vipps på Nett", please see: https://www.vipps.no/bedrift/vipps-pa-nett
 
