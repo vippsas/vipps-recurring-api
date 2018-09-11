@@ -10,5 +10,5 @@ The field "retryDays" in Agreement allows for this functionality, Vipps will ret
 # When can I send charges for a user?
 You can send charges once you have polled and found a valid agreement tied to the user.
 
-#Can a user cancel the agreement through the Vipps app
+# Can a user cancel the agreement through the Vipps app
 No, the user needs to contact the Merchant which can then cancel or modify the agreement as they see fit.
