@@ -16,7 +16,7 @@ Document version: 0.1.0.
 
 ### Technical details about the API
 
-Swagger/OAS API documentation is available on GitHub: https://github.com/vippsas/vipps-recurring-api
+Swagger/OAS API documentation is available on GitHub: https://vippsas.github.io/vipps-recurring-api/
 
 ### Getting access to the Vipps Developer Portal
 
