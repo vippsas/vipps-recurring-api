@@ -1,4 +1,4 @@
-# Vipps Invoice API
+# Vipps Recurring API
 
 This is the API documentation for **Vipps Recurring**
 
