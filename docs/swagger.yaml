@@ -10,22 +10,26 @@ info:
     3. The merchant can start sending charges which will be charged the user in the future.
 
     The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
+
+    For information regarding authenthication please read:
+    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token
+
   version: '1.0'
   title: Recurring Payments Merchant API
-basePath: /vipps-recurring-merchant-api
+basePath: /sit3/vipps-recurring-merchant-api
 tags:
-  - name: draft-agreement-controller
-    description: Draft Agreement Controller
-  - name: application-fail-over-controller
-    description: Application Fail Over Controller
-  - name: health-check-controller
-    description: Health Check Controller
   - name: agreement-controller
     description: Agreement Controller
-  - name: swagger-export-json-controller
-    description: Swagger Export Json Controller
   - name: charge-controller
     description: Charge Controller
+  - name: draft-agreement-controller
+    description: Draft Agreement Controller
+  - name: health-check-controller
+    description: Health Check Controller
+  - name: incoming-controller
+    description: Incoming Controller
+  - name: swagger-export-json-controller
+    description: Swagger Export Json Controller
   - name: swagger-export-yaml-controller
     description: Swagger Export Yaml Controller
 paths:
@@ -35,21 +39,25 @@ paths:
         - agreement-controller
       summary: List Agreements
       operationId: listUsingGET
-      consumes:
-        - application/json
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
         - name: status
           in: query
           description: Filter by status
           required: false
           type: string
+          allowEmptyValue: false
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AgreementDto'
+            $ref: '#/definitions/Agreement'
         '400':
           description: Bad Request
           schema:
@@ -68,14 +76,13 @@ paths:
           description: Service unavailable
         '504':
           description: Gateway Timeout
+      deprecated: false
   '/api/v1/agreement/{agreementId}':
     get:
       tags:
         - agreement-controller
       summary: Fetch an Agreement
       operationId: getUsingGET
-      consumes:
-        - application/json
       produces:
         - application/json;charset=UTF-8
       parameters:
@@ -84,11 +91,16 @@ paths:
           description: Agreement ID
           required: true
           type: string
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AgreementDto'
+            $ref: '#/definitions/Agreement'
         '400':
           description: Bad Request
           schema:
@@ -109,6 +121,7 @@ paths:
           description: Service unavailable
         '504':
           description: Gateway Timeout
+      deprecated: false
     post:
       tags:
         - agreement-controller
@@ -119,22 +132,27 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
-        - name: agreementId
-          in: path
-          description: Agreement ID
-          required: true
-          type: string
         - in: body
           name: agreement
           description: agreement
           required: true
           schema:
-            $ref: '#/definitions/AgreementDto'
+            $ref: '#/definitions/Agreement'
+        - name: agreementId
+          in: path
+          description: Agreement ID
+          required: true
+          type: string
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AgreementDto'
+            $ref: '#/definitions/Agreement'
         '400':
           description: Bad Request
           schema:
@@ -155,14 +173,13 @@ paths:
           description: Service unavailable
         '504':
           description: Gateway Timeout
+      deprecated: false
   '/api/v1/charge/{agreementId}':
     get:
       tags:
         - charge-controller
       summary: List Charges
       operationId: listUsingGET_1
-      consumes:
-        - application/json
       produces:
         - application/json;charset=UTF-8
       parameters:
@@ -176,6 +193,7 @@ paths:
           description: The status of the charge
           required: false
           type: string
+          allowEmptyValue: false
           enum:
             - PENDING
             - DUE
@@ -183,13 +201,18 @@ paths:
             - CHARGED
             - FAILED
             - CANCELLED
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: Success
           schema:
             type: array
             items:
-              $ref: '#/definitions/CreateChargeResponseDto'
+              $ref: '#/definitions/Charge'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
@@ -206,6 +229,7 @@ paths:
           description: Service unavailable
         '504':
           description: Timeout
+      deprecated: false
     post:
       tags:
         - charge-controller
@@ -216,6 +240,11 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Idempotent-Key
+          in: header
+          description: Idempotent-Key
+          required: true
+          type: string
         - name: agreementId
           in: path
           description: Agreement ID
@@ -226,23 +255,25 @@ paths:
           description: dto
           required: true
           schema:
-            $ref: '#/definitions/CreateChargeRequestDto'
-        - name: Idempotent-Key
+            $ref: '#/definitions/Charge'
+        - name: merchantId
           in: header
-          description: Idempotent-Key
+          description: The applicable merchant
           required: true
           type: string
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CreateChargeResponseDto'
+            $ref: '#/definitions/Charge'
         '201':
           description: Created
           schema:
-            $ref: '#/definitions/CreateChargeResponseDto'
+            $ref: '#/definitions/Charge'
         '204':
           description: No Content (operation succeeded previously)
+          schema:
+            $ref: '#/definitions/Charge'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
@@ -265,14 +296,13 @@ paths:
           description: Service unavailable
         '504':
           description: Timeout
+      deprecated: false
   '/api/v1/charge/{agreementId}/{chargeId}':
     get:
       tags:
         - charge-controller
       summary: Fetch a Charge
       operationId: getUsingGET_1
-      consumes:
-        - application/json
       produces:
         - application/json;charset=UTF-8
       parameters:
@@ -286,11 +316,16 @@ paths:
           description: The charge identifier (id)
           required: true
           type: string
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/CreateChargeResponseDto'
+            $ref: '#/definitions/Charge'
         '404':
           description: The requested charge does not exist
         '500':
@@ -303,13 +338,12 @@ paths:
           description: Service unavailable
         '504':
           description: Timeout
+      deprecated: false
     delete:
       tags:
         - charge-controller
       summary: Cancel a Charge
       operationId: cancelUsingDELETE
-      consumes:
-        - application/json
       produces:
         - application/json;charset=UTF-8
       parameters:
@@ -323,13 +357,20 @@ paths:
           description: The charge identifier (id)
           required: true
           type: string
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/CreateChargeResponseDto'
+            $ref: '#/definitions/Charge'
         '204':
           description: No Content (operation succeeded previously)
+          schema:
+            $ref: '#/definitions/Charge'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
@@ -348,6 +389,7 @@ paths:
           description: Service unavailable
         '504':
           description: Timeout
+      deprecated: false
   '/api/v1/charge/{agreementId}/{chargeId}/refund':
     post:
       tags:
@@ -369,9 +411,16 @@ paths:
           description: The charge identifier (id)
           required: true
           type: string
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: Success
+          schema:
+            $ref: '#/definitions/ResponseEntity'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
@@ -394,6 +443,7 @@ paths:
           description: Service unavailable
         '504':
           description: Timeout
+      deprecated: false
   /api/v1/draftAgreement:
     post:
       tags:
@@ -411,6 +461,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DraftAgreement'
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: OK
@@ -440,21 +495,121 @@ paths:
           description: Service unavailable
         '504':
           description: Gateway Timeout
+      deprecated: false
+  '/api/v1/incoming/{agreementId}':
+    post:
+      tags:
+        - incoming-controller
+      summary: Transfer new customer to Vipps Recurring
+      operationId: postUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: Agreement ID
+          required: true
+          type: string
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/IncomingRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IncomingResponse'
+        '400':
+          description: Bad Request
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/IncomingError'
+        '404':
+          description: Agreement not found
+        '500':
+          description: Internal Server Error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Gateway Timeout
+      deprecated: false
+  '/api/v1/incoming/{agreementId}/status':
+    get:
+      tags:
+        - incoming-controller
+      summary: Transfer new customer to Vipps Recurring
+      operationId: getStatusUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agreementId
+          in: path
+          description: Agreement ID
+          required: true
+          type: string
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IncomingResponse'
+        '400':
+          description: Bad Request
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/IncomingError'
+        '404':
+          description: Agreement not found
+        '500':
+          description: Internal Server Error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ErrorDto'
+        '503':
+          description: Service unavailable
+        '504':
+          description: Gateway Timeout
+      deprecated: false
   /health:
     get:
       tags:
         - health-check-controller
       summary: heathCheck
       operationId: heathCheckUsingGET
-      consumes:
-        - application/json
       produces:
         - application/json;charset=UTF-8
+      parameters:
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/HealthCheckStatus'
+      deprecated: false
   /swagger.json:
     get:
       tags:
@@ -462,15 +617,20 @@ paths:
       summary: Export
       description: 'Download the latest version of the Swagger Documentation for this service, in json format'
       operationId: swaggerJsonSpecUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
+      parameters:
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: OK
           schema:
             type: string
+      deprecated: false
   /swagger.yaml:
     get:
       tags:
@@ -478,17 +638,22 @@ paths:
       summary: Export
       description: Download the latest version of the Swagger Documentation for this service
       operationId: swaggerYmlSpecUsingGET
-      consumes:
-        - application/json
       produces:
         - '*/*'
+      parameters:
+        - name: merchantId
+          in: header
+          description: The applicable merchant
+          required: true
+          type: string
       responses:
         '200':
           description: OK
           schema:
             type: string
+      deprecated: false
 definitions:
-  AgreementDto:
+  Agreement:
     type: object
     required:
       - interval
@@ -529,6 +694,8 @@ definitions:
         description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.'
         minimum: 1
         maximum: 31
+        exclusiveMinimum: false
+        exclusiveMaximum: false
       maxCharge:
         type: integer
         format: int32
@@ -554,237 +721,19 @@ definitions:
         readOnly: true
       status:
         type: string
-        example: stoppedByMerchant
+        example: ACTIVE
         description: Status of AgreementDto.
         enum:
-          - pendingUserApproval
-          - active
-          - stoppedByUser
-          - stoppedByMerchant
-          - stoppedByVipps
+          - PENDING
+          - ACTIVE
+          - STOPPED
       stopDate:
         type: string
         example: '2019-10-22'
         description: Date when agreement was stopped.
         readOnly: true
-  ApplicationFailOverRequestDTO:
-    type: object
-    properties:
-      operation:
-        type: string
-  CreateChargeOnRequestDtoFindABetterJson:
-    type: object
-    required:
-      - amount
-      - description
-      - hasPriceChanged
-      - type
-    properties:
-      amount:
-        type: integer
-        format: int32
-        example: 234
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
-      currency:
-        type: string
-        example: NOK
-        enum:
-          - NOK
-      description:
-        type: string
-        example: Månedsabonnement
-        description: This field is visible to the end user in-app
-      dueDate:
-        type: string
-        example: '2030-12-31'
-        description: yyyy-MM-dd
-      hasPriceChanged:
-        type: boolean
-        example: false
-        description: 'If the amount exceeds the amount specified on the agreement, this field must be true to indicate that there is an update price for the parent subscription'
-      retryDays:
-        type: integer
-        format: int32
-        example: 5
-        description: 'The service will attempt to charge the customer for N days [non inclusive], must be null or contain a value >= 0. If zero, no retries will be performed'
-      type:
-        type: string
-        enum:
-          - RECURRING
-  CreateChargeRequestDto:
-    type: object
-    required:
-      - amount
-      - description
-      - hasPriceChanged
-      - type
-    properties:
-      amount:
-        type: integer
-        format: int32
-        example: 234
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
-      currency:
-        type: string
-        example: NOK
-        enum:
-          - NOK
-      description:
-        type: string
-        example: Månedsabonnement
-        description: This field is visible to the end user in-app
-      dueDate:
-        type: string
-        example: '2030-12-31'
-        description: yyyy-MM-dd
-      hasPriceChanged:
-        type: boolean
-        example: false
-        description: 'If the amount exceeds the amount specified on the agreement, this field must be true to indicate that there is an update price for the parent subscription'
-      retryDays:
-        type: integer
-        format: int32
-        example: 5
-        description: 'The service will attempt to charge the customer for N days [non inclusive], must be null or contain a value >= 0. If zero, no retries will be performed'
-      type:
-        type: string
-        enum:
-          - RECURRING
-  CreateChargeResponseDto:
-    type: object
-    required:
-      - amount
-      - dueDate
-      - id
-      - status
-      - type
-    properties:
-      amount:
-        type: integer
-        format: int32
-        example: 234
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
-      dueDate:
-        type: string
-        example: '2030-12-31T00:00:00Z'
-      id:
-        type: string
-        example: chg_WCVbcAbRCmu2zk
-      status:
-        type: string
-        example: PENDING
-        enum:
-          - PENDING
-          - DUE
-          - REFUNDED
-          - CHARGED
-          - FAILED
-          - CANCELLED
-      transactionId:
-        type: string
-        description: Only present when status is CHARGED
-        readOnly: true
-      type:
-        type: string
-        example: RECURRING
-        enum:
-          - RECURRING
-          - ONEOFF
-  DraftAgreement:
-    type: object
-    required:
-      - currency
-      - interval
-      - intervalCount
-      - isApp
-      - merchantRedirectUrl
-      - price
-      - productDescription
-      - productName
-    properties:
-      charges:
-        type: array
-        description: 'A maximum of 12 charges can be created with the agreement, additional charges can be created using the `Charge API`'
-        items:
-          $ref: '#/definitions/CreateChargeOnRequestDtoFindABetterJson'
-      currency:
-        type: string
-        example: NOK
-        enum:
-          - NOK
-      customerPhoneNumber:
-        type: string
-        example: '+4740000000'
-        description: Customers phone number (if available). Used to simplify the following Vipps interaction
-      initialCharge:
-        $ref: '#/definitions/InitialChargeRequestDto'
-      interval:
-        type: string
-        example: WEEK
-        description: Interval for subscription
-        enum:
-          - WEEK
-          - YEAR
-          - MONTH
-          - DAY
-      intervalCount:
-        type: integer
-        format: int32
-        example: 2
-        description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year'
-        minimum: 1
-        maximum: 31
-      isApp:
-        type: boolean
-        example: true
-        description: If merchant is redirecting user from an app.
-      merchantRedirectUrl:
-        type: string
-        example: 'https://api.merchant.no/landing'
-      price:
-        type: integer
-        format: int32
-        example: 7900
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
-      productDescription:
-        type: string
-        example: Fin abonnementspakke
-      productName:
-        type: string
-        example: Pluss-abonnement
-        description: Name of the product being subscribed to.
-  DraftAgreementResponse:
-    type: object
-    properties:
-      agreementResource:
-        type: string
-        example: 'https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc'
-        description: 'Reference to AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
-        readOnly: true
-      redirectToVipps:
-        type: string
-        example: 'https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV'
-        description: Customer should be redirected to Vipps using this URL.
-        readOnly: true
-  ErrorDto:
-    type: object
-    properties:
-      description:
-        type: string
-      error:
-        type: string
-      field:
-        type: string
-  HealthCheckStatus:
-    type: object
-    properties:
-      application:
-        type: boolean
-      cosmosDb:
-        type: boolean
-      paymentDb:
-        type: boolean
-  InitialChargeRequestDto:
+    title: Agreement
+  Charge:
     type: object
     required:
       - amount
@@ -816,6 +765,141 @@ definitions:
         enum:
           - RECURRING
           - ONEOFF
+    title: Charge
+  DraftAgreement:
+    type: object
+    required:
+      - currency
+      - interval
+      - intervalCount
+      - isApp
+      - merchantRedirectUrl
+      - price
+      - productDescription
+      - productName
+    properties:
+      charges:
+        type: array
+        description: 'A maximum of 12 charges can be created with the agreement, additional charges can be created using the `Charge API`'
+        items:
+          $ref: '#/definitions/Charge'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      customerPhoneNumber:
+        type: string
+        example: '+4740000000'
+        description: Customers phone number (if available). Used to simplify the following Vipps interaction
+      initialCharge:
+        $ref: '#/definitions/Charge'
+      interval:
+        type: string
+        example: WEEK
+        description: Interval for subscription
+        enum:
+          - WEEK
+          - YEAR
+          - MONTH
+          - DAY
+      intervalCount:
+        type: integer
+        format: int32
+        example: 2
+        description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year'
+        minimum: 1
+        maximum: 31
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      isApp:
+        type: boolean
+        example: true
+        description: If merchant is redirecting user from an app.
+      merchantRedirectUrl:
+        type: string
+        example: 'https://api.merchant.no/landing'
+      price:
+        type: integer
+        format: int32
+        example: 7900
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      productDescription:
+        type: string
+        example: Fin abonnementspakke
+      productName:
+        type: string
+        example: Pluss-abonnement
+        description: Name of the product being subscribed to.
+    title: DraftAgreement
+  DraftAgreementResponse:
+    type: object
+    properties:
+      agreementResource:
+        type: string
+        example: 'https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc'
+        description: 'Reference to AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
+        readOnly: true
+      redirectToVipps:
+        type: string
+        example: 'https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV'
+        description: Customer should be redirected to Vipps using this URL.
+        readOnly: true
+    title: DraftAgreementResponse
+  ErrorDto:
+    type: object
+    properties:
+      description:
+        type: string
+      error:
+        type: string
+      field:
+        type: string
+    title: ErrorDto
+  HealthCheckStatus:
+    type: object
+    properties:
+      application:
+        type: boolean
+      cosmosDb:
+        type: boolean
+      paymentDb:
+        type: boolean
+    title: HealthCheckStatus
+  IncomingError:
+    type: object
+    properties:
+      description:
+        type: string
+      error:
+        type: string
+      field:
+        type: string
+    title: IncomingError
+  IncomingRequest:
+    type: object
+    properties:
+      gsmNumber:
+        type: string
+        example: 410 00 000
+        description: GSM number of vipps user
+    title: IncomingRequest
+  IncomingResponse:
+    type: object
+    properties:
+      errorMessage:
+        type: string
+        example: Invalid GSM number
+        description: Textual explanation in case of an error
+      merchantRedirectUrl:
+        type: string
+        example: 'http://merchanthost.invalid/handleReturn'
+        description: URL where customer should be redirected after subscription is accepted/denied
+      pollUrl:
+        type: string
+        example: 'https://hostname/api/v1/incoming/{agreementId}/status'
+        description: URL to poll for progress info
+    title: IncomingResponse
   ResponseEntity:
     type: object
     properties:
@@ -891,3 +975,4 @@ definitions:
       statusCodeValue:
         type: integer
         format: int32
+    title: ResponseEntity
