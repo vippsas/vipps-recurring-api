@@ -116,7 +116,7 @@ Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
 {
 	"client_id":"<client_id>",
 	"client_secret":"<client_secret>",
-	"resource":"https://testapivipps.no/7abc8823-85cc-4549-bb98-698233625162"
+	"resource":"https://testapivipps.no/vippsas/recurring-payment-service"
 }
 
 ```
