@@ -5,7 +5,7 @@ For more information about this product, please see
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett).
 
 **IMPORTANT:** This is a work in progress! We believe we are close to production quality.
-But the product is still being worked on! You can help shape it by giving us feedback
+But the product is still being worked on! This it not in production yet thought! You can help shape it by giving us feedback
 here directly by raising issue, or contacting us on alf.magnus.stalesen@vipps.no
 The official, stable developer resources for Vipps is still https://vipps.no/developer
 
