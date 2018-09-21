@@ -1,22 +1,9 @@
 swagger: '2.0'
 info:
-  description: |
-    # Recurring payments
-
-    Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
-
-    1. A a draft agreement is initialized and the user is redirected for approval.
-    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status
-    3. The merchant can start sending charges which will be charged the user in the future.
-
-    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
-
-    For information regarding authenthication please read:
-    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token
-
+  description: "# Recurring payments\r\n\r\nRecurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.\r\n\r\n1. A a draft agreement is initialized and the user is redirected for approval.\r\n2. The user approves the agreement and the merchant can call GET on the agreement to verify the status\r\n3. The merchant can start sending charges which will be charged the user in the future.\r\n\r\nThe merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)\r\n\r\n\r\n# Authenthication\r\n\r\nFor information regarding authenthication please read:\r\nhttps://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token"
   version: '1.0'
   title: Recurring Payments Merchant API
-basePath: /sit3/vipps-recurring-merchant-api
+basePath: /at3/vipps-recurring-merchant-api
 tags:
   - name: agreement-controller
     description: Agreement Controller
@@ -26,8 +13,6 @@ tags:
     description: Draft Agreement Controller
   - name: health-check-controller
     description: Health Check Controller
-  - name: incoming-controller
-    description: Incoming Controller
   - name: swagger-export-json-controller
     description: Swagger Export Json Controller
   - name: swagger-export-yaml-controller
@@ -42,9 +27,14 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
-        - name: merchantId
+        - name: Authorization
           in: header
-          description: The applicable merchant
+          description: Bearer 'auth token'
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
           required: true
           type: string
         - name: status
@@ -86,14 +76,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Authorization
+          in: header
+          description: Bearer 'auth token'
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
+          required: true
+          type: string
         - name: agreementId
           in: path
           description: Agreement ID
-          required: true
-          type: string
-        - name: merchantId
-          in: header
-          description: The applicable merchant
           required: true
           type: string
       responses:
@@ -132,6 +127,16 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Authorization
+          in: header
+          description: Bearer 'auth token'
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
+          required: true
+          type: string
         - in: body
           name: agreement
           description: agreement
@@ -141,11 +146,6 @@ paths:
         - name: agreementId
           in: path
           description: Agreement ID
-          required: true
-          type: string
-        - name: merchantId
-          in: header
-          description: The applicable merchant
           required: true
           type: string
       responses:
@@ -183,6 +183,16 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Authorization
+          in: header
+          description: Bearer 'auth token'
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
+          required: true
+          type: string
         - name: agreementId
           in: path
           description: The agreement identifier (id)
@@ -201,11 +211,6 @@ paths:
             - CHARGED
             - FAILED
             - CANCELLED
-        - name: merchantId
-          in: header
-          description: The applicable merchant
-          required: true
-          type: string
       responses:
         '200':
           description: Success
@@ -240,9 +245,19 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Authorization
+          in: header
+          description: Bearer 'auth token'
+          required: true
+          type: string
         - name: Idempotent-Key
           in: header
           description: Idempotent-Key
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
           required: true
           type: string
         - name: agreementId
@@ -256,11 +271,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Charge'
-        - name: merchantId
-          in: header
-          description: The applicable merchant
-          required: true
-          type: string
       responses:
         '200':
           description: OK
@@ -306,6 +316,16 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Authorization
+          in: header
+          description: Bearer 'auth token'
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
+          required: true
+          type: string
         - name: agreementId
           in: path
           description: agreementId
@@ -314,11 +334,6 @@ paths:
         - name: chargeId
           in: path
           description: The charge identifier (id)
-          required: true
-          type: string
-        - name: merchantId
-          in: header
-          description: The applicable merchant
           required: true
           type: string
       responses:
@@ -347,6 +362,16 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Authorization
+          in: header
+          description: Bearer 'auth token'
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
+          required: true
+          type: string
         - name: agreementId
           in: path
           description: The agreement identifier (id)
@@ -355,11 +380,6 @@ paths:
         - name: chargeId
           in: path
           description: The charge identifier (id)
-          required: true
-          type: string
-        - name: merchantId
-          in: header
-          description: The applicable merchant
           required: true
           type: string
       responses:
@@ -401,6 +421,16 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Authorization
+          in: header
+          description: Bearer 'auth token'
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
+          required: true
+          type: string
         - name: agreementId
           in: path
           description: The agreement identifier (id)
@@ -409,11 +439,6 @@ paths:
         - name: chargeId
           in: path
           description: The charge identifier (id)
-          required: true
-          type: string
-        - name: merchantId
-          in: header
-          description: The applicable merchant
           required: true
           type: string
       responses:
@@ -455,17 +480,22 @@ paths:
       produces:
         - application/json;charset=UTF-8
       parameters:
+        - name: Authorization
+          in: header
+          description: Bearer 'auth token'
+          required: true
+          type: string
+        - name: MerchantId
+          in: header
+          description: merchantId
+          required: true
+          type: string
         - in: body
           name: draftAgreement
           description: draftAgreement
           required: true
           schema:
             $ref: '#/definitions/DraftAgreement'
-        - name: merchantId
-          in: header
-          description: The applicable merchant
-          required: true
-          type: string
       responses:
         '200':
           description: OK
@@ -496,100 +526,6 @@ paths:
         '504':
           description: Gateway Timeout
       deprecated: false
-  '/api/v1/incoming/{agreementId}':
-    post:
-      tags:
-        - incoming-controller
-      summary: Transfer new customer to Vipps Recurring
-      operationId: postUsingPOST
-      consumes:
-        - application/json
-      produces:
-        - application/json;charset=UTF-8
-      parameters:
-        - name: agreementId
-          in: path
-          description: Agreement ID
-          required: true
-          type: string
-        - name: merchantId
-          in: header
-          description: The applicable merchant
-          required: true
-          type: string
-        - in: body
-          name: request
-          description: request
-          required: true
-          schema:
-            $ref: '#/definitions/IncomingRequest'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/IncomingResponse'
-        '400':
-          description: Bad Request
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/IncomingError'
-        '404':
-          description: Agreement not found
-        '500':
-          description: Internal Server Error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-      deprecated: false
-  '/api/v1/incoming/{agreementId}/status':
-    get:
-      tags:
-        - incoming-controller
-      summary: Transfer new customer to Vipps Recurring
-      operationId: getStatusUsingGET
-      produces:
-        - application/json;charset=UTF-8
-      parameters:
-        - name: agreementId
-          in: path
-          description: Agreement ID
-          required: true
-          type: string
-        - name: merchantId
-          in: header
-          description: The applicable merchant
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/IncomingResponse'
-        '400':
-          description: Bad Request
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/IncomingError'
-        '404':
-          description: Agreement not found
-        '500':
-          description: Internal Server Error
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/ErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-      deprecated: false
   /health:
     get:
       tags:
@@ -598,12 +534,6 @@ paths:
       operationId: heathCheckUsingGET
       produces:
         - application/json;charset=UTF-8
-      parameters:
-        - name: merchantId
-          in: header
-          description: The applicable merchant
-          required: true
-          type: string
       responses:
         '200':
           description: OK
@@ -619,12 +549,6 @@ paths:
       operationId: swaggerJsonSpecUsingGET
       produces:
         - '*/*'
-      parameters:
-        - name: merchantId
-          in: header
-          description: The applicable merchant
-          required: true
-          type: string
       responses:
         '200':
           description: OK
@@ -640,12 +564,6 @@ paths:
       operationId: swaggerYmlSpecUsingGET
       produces:
         - '*/*'
-      parameters:
-        - name: merchantId
-          in: header
-          description: The applicable merchant
-          required: true
-          type: string
       responses:
         '200':
           description: OK
@@ -721,12 +639,14 @@ definitions:
         readOnly: true
       status:
         type: string
-        example: ACTIVE
+        example: stoppedByMerchant
         description: Status of AgreementDto.
         enum:
-          - PENDING
-          - ACTIVE
-          - STOPPED
+          - pendingUserApproval
+          - active
+          - stoppedByUser
+          - stoppedByMerchant
+          - stoppedByVipps
       stopDate:
         type: string
         example: '2019-10-22'
@@ -739,6 +659,7 @@ definitions:
       - amount
       - description
       - type
+      - dueDate
     properties:
       amount:
         type: integer
@@ -754,6 +675,9 @@ definitions:
         type: string
         example: Månedsabonnement
         description: This field is visible to the end user in-app
+      dueDate:
+        type: string
+        example: "2020-12-31"
       retryDays:
         type: integer
         format: int32
@@ -866,40 +790,6 @@ definitions:
       paymentDb:
         type: boolean
     title: HealthCheckStatus
-  IncomingError:
-    type: object
-    properties:
-      description:
-        type: string
-      error:
-        type: string
-      field:
-        type: string
-    title: IncomingError
-  IncomingRequest:
-    type: object
-    properties:
-      gsmNumber:
-        type: string
-        example: 410 00 000
-        description: GSM number of vipps user
-    title: IncomingRequest
-  IncomingResponse:
-    type: object
-    properties:
-      errorMessage:
-        type: string
-        example: Invalid GSM number
-        description: Textual explanation in case of an error
-      merchantRedirectUrl:
-        type: string
-        example: 'http://merchanthost.invalid/handleReturn'
-        description: URL where customer should be redirected after subscription is accepted/denied
-      pollUrl:
-        type: string
-        example: 'https://hostname/api/v1/incoming/{agreementId}/status'
-        description: URL to poll for progress info
-    title: IncomingResponse
   ResponseEntity:
     type: object
     properties:

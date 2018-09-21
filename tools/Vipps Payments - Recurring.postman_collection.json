@@ -1,0 +1,469 @@
+{
+	"id": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+	"name": "Vipps Payments - Recurring",
+	"description": "This is a collection of tests intended to be run towards the MerchantTest (MT) environment for Vipps Recurring",
+	"order": [
+		"5437af80-0d72-9be3-588c-e6d9c78c6d14",
+		"8c84a263-3b69-eb61-864c-a15cadd59bdc",
+		"ca4c8b93-26b1-614f-2840-beb891e5f674",
+		"b7186a93-503f-802e-d7a1-b61b3ecac26d",
+		"a6699e60-a284-4532-f34b-4588a55da01f",
+		"73715e0c-1b75-b545-f36a-14d6f260abfc",
+		"eb9f245b-c508-ecff-ec32-2608d887542a",
+		"e99e4202-d106-84a9-5f23-a2ec3344a35b",
+		"5f9e58d2-e65b-d974-5be2-5949b8597cc9",
+		"1f5588a8-954a-fb8b-4145-58aa61766587"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1537170582594,
+	"owner": "1165829",
+	"public": false,
+	"requests": [
+		{
+			"folder": null,
+			"id": "1f5588a8-954a-fb8b-4145-58aa61766587",
+			"name": "Get Agreement copy",
+			"dataMode": "params",
+			"data": [],
+			"auth": null,
+			"events": null,
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "GET one agreement (script based on last created Agreement)",
+			"variables": null,
+			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"method": "GET",
+			"pathVariables": {},
+			"url": "https://apitest.vipps.no/recurring/api/v1/agreement/{{Agreement_ID}}",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": null,
+			"helperAttributes": null,
+			"queryParams": [],
+			"headerData": [
+				{
+					"key": "merchantId",
+					"value": "10089",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"enabled": true,
+					"description": ""
+				}
+			],
+			"pathVariableData": [],
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc"
+		},
+		{
+			"id": "5437af80-0d72-9be3-588c-e6d9c78c6d14",
+			"headers": "Ocp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true,
+					"description": ""
+				}
+			],
+			"url": "https://apitest.vipps.no/api/access-token/jwt-token",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"Access_Token\", jsonData.access_token);\n\n",
+			"currentHelper": "normal",
+			"helperAttributes": "{}",
+			"time": 1537199590867,
+			"name": "Get Access Token",
+			"description": "Retrives an authorization token that can be used in calling Vipps API's. Valid for 24 hours.",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "5437af80-0d72-9be3-588c-e6d9c78c6d14",
+			"timestamp": null,
+			"rawModeData": "{\n\t\"client_id\": \"{{Client_Id}}\",\n\t\"client_secret\":\"{{Client_Secret}}\",\n\t\"resource\":\"https://testapivipps.no/vippsas/recurring-payment-service\"\n}"
+		},
+		{
+			"id": "5f9e58d2-e65b-d974-5be2-5949b8597cc9",
+			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headerData": [
+				{
+					"key": "merchantId",
+					"value": "210489",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://apitest.vipps.no/recurring/api/v1/agreement/{{Agreement_ID}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537343680503,
+			"name": "Cancel Charge",
+			"description": "GET one agreement (script based on last created Agreement)",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": []
+		},
+		{
+			"id": "73715e0c-1b75-b545-f36a-14d6f260abfc",
+			"headers": "merchantId: 000\nContent-Type: application/json\nIdempotent-Key: VippsTest!\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headerData": [
+				{
+					"key": "merchantId",
+					"value": "210489",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Idempotent-Key",
+					"value": "VippsTest!",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"enabled": true,
+					"description": ""
+				}
+			],
+			"url": "https://apitest.vipps.no/recurring/api/v1/charge/{{Agreement_ID}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": "{}",
+			"time": 1537204160499,
+			"name": "Create Charge",
+			"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws.",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": [],
+			"isFromCollection": true,
+			"collectionRequestId": "73715e0c-1b75-b545-f36a-14d6f260abfc",
+			"timestamp": null,
+			"rawModeData": "{\r\n  \"amount\": 1000,\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"Månedsabonnement\",\r\n  \"dueDate\": \"2030-12-31\",\r\n  \"hasPriceChanged\": false,\r\n  \"retryDays\": 5,\r\n  \"type\": \"RECURRING\",\r\n  \"merchantSerialNumber\": \"2210489\"\r\n}"
+		},
+		{
+			"id": "8c84a263-3b69-eb61-864c-a15cadd59bdc",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nmerchantId: 000\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "MerchantId",
+					"value": "210489",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://apitest.vipps.no/recurring/api/v1/draftAgreement",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"Agreement_ID\", jsonData.agreementResource.split('/')[7])",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537343936946,
+			"name": "Draft Agreement",
+			"description": "Drafts an agreement that can be approved by end user",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": [],
+			"rawModeData": "{\r\n  \"charge\": {\r\n    \"amount\": 234,\r\n    \"currency\": \"NOK\",\r\n    \"description\": \"Månedsabonnement\",\r\n    \"retryDays\": 5,\r\n    \"type\": \"ONEOFF\"\r\n  },\r\n  \"currency\": \"NOK\",\r\n  \"customerPhoneNumber\": \"+4740000000\",\r\n  \"interval\": \"WEEK\",\r\n  \"intervalCount\": 2,\r\n  \"isApp\": true,\r\n  \"merchantRedirectUrl\": \"https://api.merchant.no/landing\",\r\n  \"price\": 7900,\r\n  \"productDescription\": \"Fin abonnementspakke\",\r\n  \"productName\": \"Pluss-abonnement\"\r\n}"
+		},
+		{
+			"id": "a6699e60-a284-4532-f34b-4588a55da01f",
+			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "merchantId",
+					"value": "210489",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://apitest.vipps.no/recurring/api/v1/agreement/{{Agreement_ID}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537343733149,
+			"name": "Update Agreement",
+			"description": "",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": [],
+			"rawModeData": "{\r\n\"currency\":\"NOK\",\r\n\"interval\":\"week\",\r\n\"intervalCount\":2,\r\n\"price\":7900,\r\n\"productDescription\":\"Fin abonnementspakke 2\",\r\n\"productName\":\"Pluss-abonnement\",\r\n\"status\":\"ACTIVE\"\r\n}"
+		},
+		{
+			"id": "b7186a93-503f-802e-d7a1-b61b3ecac26d",
+			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headerData": [
+				{
+					"key": "merchantId",
+					"value": "210489",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://apitest.vipps.no/recurring/api/v1/agreement/{{Agreement_ID}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537343661870,
+			"name": "Get Agreement",
+			"description": "GET one agreement (script based on last created Agreement)",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": []
+		},
+		{
+			"id": "ca4c8b93-26b1-614f-2840-beb891e5f674",
+			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headerData": [
+				{
+					"key": "merchantId",
+					"value": "210489",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://apitest.vipps.no/recurring/api/v1/agreement",
+			"queryParams": [
+				{
+					"key": "status",
+					"value": "ACTIVE",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537343665607,
+			"name": "Fetch Agreements",
+			"description": "Does a GET and retrieves all agreements based on the MerchantId in the header",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": []
+		},
+		{
+			"id": "e99e4202-d106-84a9-5f23-a2ec3344a35b",
+			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: Application/json\n",
+			"headerData": [
+				{
+					"key": "merchantId",
+					"value": "210489",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "Application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://apitest.vipps.no/recurring/api/v1/charge/{{Agreement_ID}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537343677780,
+			"name": "List Charges",
+			"description": "Lists all charges for an agreement",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": []
+		},
+		{
+			"id": "eb9f245b-c508-ecff-ec32-2608d887542a",
+			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headerData": [
+				{
+					"key": "merchantId",
+					"value": "210489",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{Access_Token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Ocp-Apim-Subscription-Key",
+					"value": "{{Ocp_Apim_Key}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "https://apitest.vipps.no/recurring/api/v1/charge/{{Agreement_ID}}/{{Charge_ID}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537343675275,
+			"name": "Get Charge",
+			"description": "GET one agreement (script based on last created Agreement)",
+			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
+			"responses": []
+		}
+	]
+}
