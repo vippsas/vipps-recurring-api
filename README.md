@@ -17,4 +17,7 @@ contribution guidelines,
 etc:
 https://github.com/vippsas/vipps-developers  
 
+For an overview of recurring business logic please see:
+https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md
+
 You can peruse the API docs at https://vippsas.github.io/vipps-recurring-api/
