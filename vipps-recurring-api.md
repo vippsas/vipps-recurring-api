@@ -53,11 +53,9 @@ To get a token, follow
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `pendingUserApproval`  | Agreement has been created, but not approved by the user in the app yet. |
+| 1 | `pending`  | Agreement has been created, but not approved by the user in the app yet. |
 | 2 | `active` | The Agreement has been confirmed by the end user in the app and can recieve charges                                      |
-| 3 | `stoppedByMerchant`  | Agreement has been stopped by the merchant                                   |
-| 4 | `stoppedByUser`  | Optional status where if the merchant wants to indicate the Agreement be stopped by user requests                                        |
-| 5 | `stoppedByVipps` | Optional status where for some reason Vipps needs to to stop the agreement, for exampel if a user terminates their Vipps Account                                                |
+| 3 | `stopped`  | Agreement has been stopped by the merchant most likely by the End User contacting the merchant to cancel the agreement
 
 See the detailed state descriptions, and state transitions, at the end of this document.
 
