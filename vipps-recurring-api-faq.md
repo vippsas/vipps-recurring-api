@@ -17,4 +17,4 @@ No, the user needs to contact the Merchant which can then cancel or modify the a
 By sending an update agreement call in test with the status "Active" the agreement can be turned to active. An example of this call can be seen in the postman collection.
 
 #How does a user see any charges I send?
-A charge will be displayed to the user 8 days before the money are reserved. The charge will then appear in the app.
+A charge will be displayed to the user 8 days before the money are reserved. The charge will then appear in the app. You can still retrieve all relevant charges through the API.
