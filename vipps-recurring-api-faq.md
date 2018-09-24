@@ -12,3 +12,9 @@ You can send charges once you have polled and found a valid agreement tied to th
 
 # Can a user cancel the agreement through the Vipps app
 No, the user needs to contact the Merchant which can then cancel or modify the agreement as they see fit.
+
+#I have not yet integrated with the app. How can I set an agreement to Active in test?
+By sending an update agreement call in test with the status "Active" the agreement can be turned to active. An example of this call can be seen in the postman collection.
+
+#How does a user see any charges I send?
+A charge will be displayed to the user 8 days before the money are reserved. The charge will then appear in the app.
