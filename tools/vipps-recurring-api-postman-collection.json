@@ -11,8 +11,7 @@
 		"73715e0c-1b75-b545-f36a-14d6f260abfc",
 		"eb9f245b-c508-ecff-ec32-2608d887542a",
 		"e99e4202-d106-84a9-5f23-a2ec3344a35b",
-		"5f9e58d2-e65b-d974-5be2-5949b8597cc9",
-		"1f5588a8-954a-fb8b-4145-58aa61766587"
+		"5f9e58d2-e65b-d974-5be2-5949b8597cc9"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -20,50 +19,6 @@
 	"owner": "1165829",
 	"public": false,
 	"requests": [
-		{
-			"folder": null,
-			"id": "1f5588a8-954a-fb8b-4145-58aa61766587",
-			"name": "Get Agreement copy",
-			"dataMode": "params",
-			"data": [],
-			"auth": null,
-			"events": null,
-			"rawModeData": null,
-			"descriptionFormat": null,
-			"description": "GET one agreement (script based on last created Agreement)",
-			"variables": null,
-			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
-			"method": "GET",
-			"pathVariables": {},
-			"url": "https://apitest.vipps.no/recurring/api/v1/agreement/{{Agreement_ID}}",
-			"preRequestScript": null,
-			"tests": null,
-			"currentHelper": null,
-			"helperAttributes": null,
-			"queryParams": [],
-			"headerData": [
-				{
-					"key": "merchantId",
-					"value": "10089",
-					"enabled": true,
-					"description": ""
-				},
-				{
-					"key": "Authorization",
-					"value": "Bearer {{Access_Token}}",
-					"enabled": true,
-					"description": ""
-				},
-				{
-					"key": "Ocp-Apim-Subscription-Key",
-					"value": "{{Ocp_Apim_Key}}",
-					"enabled": true,
-					"description": ""
-				}
-			],
-			"pathVariableData": [],
-			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc"
-		},
 		{
 			"id": "5437af80-0d72-9be3-588c-e6d9c78c6d14",
 			"headers": "Ocp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: application/json\n",
@@ -104,7 +59,7 @@
 		},
 		{
 			"id": "5f9e58d2-e65b-d974-5be2-5949b8597cc9",
-			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "merchantId: 210489\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "merchantId",
@@ -144,37 +99,37 @@
 		},
 		{
 			"id": "73715e0c-1b75-b545-f36a-14d6f260abfc",
-			"headers": "merchantId: 000\nContent-Type: application/json\nIdempotent-Key: VippsTest!\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "merchantId: 210489\nContent-Type: application/json\nIdempotent-Key: VippsTest!\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "merchantId",
 					"value": "210489",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				},
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				},
 				{
 					"key": "Idempotent-Key",
 					"value": "VippsTest!",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				},
 				{
 					"key": "Authorization",
 					"value": "Bearer {{Access_Token}}",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				},
 				{
 					"key": "Ocp-Apim-Subscription-Key",
 					"value": "{{Ocp_Apim_Key}}",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				}
 			],
 			"url": "https://apitest.vipps.no/recurring/api/v1/charge/{{Agreement_ID}}",
@@ -185,22 +140,19 @@
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
-			"tests": null,
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"Charge_ID\", jsonData.id);",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1537204160499,
+			"helperAttributes": {},
+			"time": 1538035157031,
 			"name": "Create Charge",
 			"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws.",
 			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
 			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "73715e0c-1b75-b545-f36a-14d6f260abfc",
-			"timestamp": null,
 			"rawModeData": "{\r\n  \"amount\": 1000,\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"Månedsabonnement\",\r\n  \"dueDate\": \"2030-12-31\",\r\n  \"hasPriceChanged\": false,\r\n  \"retryDays\": 5,\r\n  \"type\": \"RECURRING\",\r\n  \"merchantSerialNumber\": \"2210489\"\r\n}"
 		},
 		{
 			"id": "8c84a263-3b69-eb61-864c-a15cadd59bdc",
-			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nmerchantId: 000\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nMerchantId: 210489\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "Content-Type",
@@ -247,7 +199,7 @@
 		},
 		{
 			"id": "a6699e60-a284-4532-f34b-4588a55da01f",
-			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: application/json\n",
+			"headers": "merchantId: 210489\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: application/json\n",
 			"headerData": [
 				{
 					"key": "merchantId",
@@ -295,7 +247,7 @@
 		},
 		{
 			"id": "b7186a93-503f-802e-d7a1-b61b3ecac26d",
-			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "merchantId: 210489\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "merchantId",
@@ -335,7 +287,7 @@
 		},
 		{
 			"id": "ca4c8b93-26b1-614f-2840-beb891e5f674",
-			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "merchantId: 210489\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "merchantId",
@@ -381,7 +333,7 @@
 		},
 		{
 			"id": "e99e4202-d106-84a9-5f23-a2ec3344a35b",
-			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: Application/json\n",
+			"headers": "merchantId: 210489\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: Application/json\n",
 			"headerData": [
 				{
 					"key": "merchantId",
@@ -427,7 +379,7 @@
 		},
 		{
 			"id": "eb9f245b-c508-ecff-ec32-2608d887542a",
-			"headers": "merchantId: 000\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "merchantId: 210489\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "merchantId",
