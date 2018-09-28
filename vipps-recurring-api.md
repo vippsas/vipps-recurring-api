@@ -13,16 +13,16 @@ or contact us at integration@vipps.no.
 Document version: 0.1.0.
 
 # Table of Contents
-- [Abstract](#Abstract)
-- [Terminology](#Terminology)
-- [Core Functionality](#Core-Functionality)
-	- [Typical flow](#Typical-flow)
+- [Abstract](#abstract)
+- [Terminology](#terminology)
+- [Core Functionality](#core-functionality)
+	- [Typical flow](#typical-flow)
 	- [Agreement states](#agreement-states)
 	- [Charge states](#charge-states)
-	- [HTTP-responses](#HTTP-responses)
-- [Authentication](#Authentication-and-authorization)
-	- [API access token](#API-access-token)
-- [Questions or comments](#Questions-or-comments)
+	- [HTTP-responses](#http-responses)
+- [Authentication](#authentication-and-authorization)
+	- [API access token](#api-access-token)
+- [Questions or comments](#questions-or-comments)
 
 ## Abstract
 
