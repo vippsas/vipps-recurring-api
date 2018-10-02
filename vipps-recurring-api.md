@@ -154,7 +154,7 @@ HTTP 200 OK
 }
 ```
 
-Every request to the API, , needs to have an `Authorization` header with the generated token.
+Every request to the API, needs to have an `Authorization` header with the generated token.
 
 The header in the request to this API should look like this:
 
