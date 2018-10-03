@@ -690,6 +690,40 @@ definitions:
           - RECURRING
           - ONEOFF
     title: Charge
+  DraftAgreementCharge:
+    type: object
+    required:
+      - amount
+      - description
+      - type
+      - dueDate
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      currency:
+        type: string
+        example: NOK
+        enum:
+          - NOK
+      description:
+        type: string
+        example: Månedsabonnement
+        description: This field is visible to the end user in-app
+      retryDays:
+        type: integer
+        format: int32
+        example: 5
+        description: 'The service will attempt to charge the customer for N days [non inclusive]. Must be null (vipps decides a default value) or contain a value from 0 to 10. If zero, no retries will be performed. The retry period must not pass the charge date for the next charge.'
+      type:
+        type: string
+        description: Only ONEOFF is allowed for the initial optional charge
+        enum:
+          - RECURRING
+          - ONEOFF
+    title: Charge
   DraftAgreement:
     type: object
     required:
@@ -702,11 +736,11 @@ definitions:
       - productDescription
       - productName
     properties:
-      charges:
+      charge:
         type: array
         description: 'A maximum of 12 charges can be created with the agreement, additional charges can be created using the `Charge API`'
         items:
-          $ref: '#/definitions/Charge'
+          $ref: '#/definitions/DraftAgreementCharge'
       currency:
         type: string
         example: NOK
@@ -714,10 +748,8 @@ definitions:
           - NOK
       customerPhoneNumber:
         type: string
-        example: '+4740000000'
+        example: '40000000'
         description: Customers phone number (if available). Used to simplify the following Vipps interaction
-      initialCharge:
-        $ref: '#/definitions/Charge'
       interval:
         type: string
         example: WEEK
