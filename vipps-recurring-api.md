@@ -62,6 +62,16 @@ Vipps Recurring API is an API that delivers recurring functionality for a mercha
 
 *Vipps Recurring* offers the ability to facilitate a subscription based payment. We do not manage the subscription on behalf of the user, the merchant is responsible for checking the validity of their
 
+# Agreement initation
+
+There are 2 major optional components that go into the agreement creation. There are the fields: *initialCharge* and  and *oneOffCharge*. initialCharge indiciates the first payment in a subscription, starting upon the creation of the subscription. oneOffCharge represents a corresponding product
+
+| # | Agreement      | Description                                                                          |
+|:--|:-----------|:-------------------------------------------------------------------------------------|
+| 1 | `Agreement starting now`  | Agreement with an initialcharge, for example a newspaper subscription where the initial payment is today. |
+| 2 | `Agreement starting in future`  | Agreement without an initialcharge, for example a newspaper subscription where the initial payment is start of next week. |
+| 3 | `Agreement with product`  | Agreement with or without an initialcharge but with a oneOffCharge, this represents a product, such as a cell phone subscription with a cell phone purchase |
+
 
 # Agreement states
 
