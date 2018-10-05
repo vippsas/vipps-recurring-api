@@ -3,9 +3,7 @@ info:
   description: >+
     **IMPORTANT!!!!** We are preparing the documentation and will update this site
     regularly. This notice will remain until the site is ready for initial use.
-    Please refer to our current [portal for
-    developers](https://www.vipps.no/bedrift/utvikler) in the meantime.
-
+  
     # Recurring payments
 
     Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.1. A a draft agreement is initialized and the user is redirected for approval.rn2. The user approves the agreement and the merchant can call GET on the agreement to verify the statusrn3. The merchant can start sending charges which will be charged the user in the future.The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
