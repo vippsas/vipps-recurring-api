@@ -99,7 +99,7 @@ Vipps will retry 3 times a day. If a merchant has set 0 retry days we will fail 
 | 2 | `due` | The charge will be drawn in 8 days, and can now be viewed by the user in the app                                      |
 | 3 | `charged`  | Charge has been completed
 | 4 | `failed`  | Charge has failed for some reason. I.E Expired card, insufficient funds, etc.
-| 5 | `refunded` | Charge succesfully refunded
+| 5 | `refunded` | Charge successfully refunded
 
 # HTTP responses
 
