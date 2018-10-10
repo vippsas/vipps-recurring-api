@@ -153,31 +153,31 @@
 		},
 		{
 			"id": "8c84a263-3b69-eb61-864c-a15cadd59bdc",
-			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nMerchantId: 210489\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nMerchantId: {{MerchantId}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				},
 				{
 					"key": "Authorization",
 					"value": "Bearer {{Access_Token}}",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				},
 				{
 					"key": "MerchantId",
-					"value": "210489",
-					"enabled": true,
-					"description": ""
+					"value": "{{MerchantId}}",
+					"description": "",
+					"enabled": true
 				},
 				{
 					"key": "Ocp-Apim-Subscription-Key",
 					"value": "{{Ocp_Apim_Key}}",
-					"enabled": true,
-					"description": ""
+					"description": "",
+					"enabled": true
 				}
 			],
 			"url": "https://apitest.vipps.no/recurring/api/v1/draftAgreement",
@@ -190,29 +190,14 @@
 			"data": [],
 			"dataMode": "raw",
 			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"Agreement_ID\", jsonData.agreementResource.split('/')[7])",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"time": 1538126535612,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1539169536728,
 			"name": "Draft Agreement start now",
 			"description": "Drafts an agreement that can be approved by end user",
 			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
 			"responses": [],
-			"auth": null,
-			"events": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"var jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"Agreement_ID\", jsonData.agreementResource.split('/')[7])"
-						]
-					}
-				}
-			],
-			"descriptionFormat": "html",
-			"variables": null,
-			"rawModeData": "{\r\n  \"charge\": {\r\n    \"amount\": 234,\r\n    \"currency\": \"NOK\",\r\n    \"description\": \"Månedsabonnement\",\r\n    \"retryDays\": 5,\r\n    \"type\": \"RECURRING\"\r\n  },\r\n  \"currency\": \"NOK\",\r\n  \"customerPhoneNumber\": \"+4740000000\",\r\n  \"interval\": \"WEEK\",\r\n  \"intervalCount\": 2,\r\n  \"isApp\": true,\r\n  \"merchantRedirectUrl\": \"https://api.merchant.no/landing\",\r\n  \"price\": 7900,\r\n  \"productDescription\": \"Fin abonnementspakke\",\r\n  \"productName\": \"Pluss-abonnement\"\r\n}"
+			"rawModeData": "{\r\n  \"currency\": \"NOK\",\r\n  \"customerPhoneNumber\": \"+4740000000\",\r\n  \"initialCharge\": {\r\n    \"amount\": 234,\r\n    \"currency\": \"NOK\",\r\n    \"description\": \"Månedsabonnement\",\r\n    \"retryDays\": 5\r\n  },\r\n  \"interval\": \"WEEK\",\r\n  \"intervalCount\": 2,\r\n  \"isApp\": true,\r\n  \"merchantRedirectUrl\": \"https://api.merchant.no/landing\",\r\n  \"merchantSubscriptionUrl\": \"https://www.merchant.no/subscriptions/1234/\",\r\n  \"oneOffCharge\": {\r\n    \"amount\": 234,\r\n    \"currency\": \"NOK\",\r\n    \"description\": \"Månedsabonnement\"\r\n  },\r\n  \"price\": 7900,\r\n  \"productDescription\": \"Fin abonnementspakke\",\r\n  \"productName\": \"Pluss-abonnement\"\r\n}\r\n"
 		},
 		{
 			"id": "a5107f3e-ab11-726f-225e-7db11c8ecd96",
