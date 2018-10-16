@@ -24,6 +24,7 @@ Document version: 0.1.0.
 	- [HTTP-responses](#http-responses)
 - [Authentication](#authentication-and-authorization)
 	- [API access token](#api-access-token)
+- [Campaigns](#campaigns)
 - [Questions or comments](#questions-or-comments)
 
 ## Abstract
@@ -99,7 +100,8 @@ Vipps will retry 3 times a day. If a merchant has set 0 retry days we will fail 
 | 2 | `due` | The charge will be drawn in 8 days, and can now be viewed by the user in the app                                      |
 | 3 | `charged`  | Charge has been completed
 | 4 | `failed`  | Charge has failed for some reason. I.E Expired card, insufficient funds, etc.
-| 5 | `refunded` | Charge successfully refunded
+| 5 | `refunded` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured
+| 6 | `partially_refunded`| Charge successfully refunded, used if the refund is a partial ammount of the captured amount.
 
 # HTTP responses
 
@@ -182,6 +184,35 @@ The header in the request to this API should look like this:
 ```http
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>
 ```
+
+# Campaigns
+
+**Status:** 🛠 This functionality is in progress and will not be ready for release day.
+
+A campaign in recurring is a period where the price is lower than usual, and this communicated to the end user with the original price shown for comparison.
+
+As seen in the following image
+![Campaign](images/CampaignExample.PNG)
+
+In order to start a campaign the integrator will need to add the campaign field to either the [`POST:/api/v1/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or in a [`POST:/api/v1/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST) charge for an ongoing agreement.
+
+# Campaign fields
+
+These fields are optional fields can be added to get the campaign screen seen above the amount in the charge will need to be planned price during the campaign. Should only be sent in on the first agreement or in the first charge starting the campaign.                         
+
+```
+"campaign": {
+	"campaignChargesRemaining": 4,
+	"originalPrice": 249
+}
+```
+
+| Field         | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `campaignChargesRemaining`            | Used to calculate the time remaining time text |
+| `originalPrice`       | The price that will be shown for comparison   |
+
+
 
 # Questions or comments
 
