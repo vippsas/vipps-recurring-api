@@ -18,7 +18,9 @@ Document version: 0.1.0.
 - [Core Functionality](#core-functionality)
 	- [Typical flow](#typical-flow)
 	- [Agreement states](#agreement-states)
-	- [Charge states](#charge-states)
+	- [Charge](#charge)
+		- [Charge retries](#charge-retries)
+		- [Charge states](#charge-states)
 	- [HTTP-responses](#http-responses)
 - [Authentication](#authentication-and-authorization)
 	- [API access token](#api-access-token)
@@ -81,6 +83,14 @@ There are 2 major optional components that go into the agreement creation. There
 | 2 | `active` | The Agreement has been confirmed by the end user in the app and can recieve charges                                      |
 | 3 | `stopped`  | Agreement has been stopped by the merchant most likely by the End User contacting the merchant to cancel the agreement
 
+# Charge
+
+Once the intial agreement is completed a merchant can send in charges. The charges need to have a due date at least 8 days in the future. A merchant can set a price for each charge within the agreement interval. The price can change within 10X of the starting price. This is to take into account up sale and price adjustments.
+
+# Charge retries
+
+Vipps will retry 3 times a day. If a merchant has set 0 retry days we will fail the charge at the end of the day. NOTE: If you as a merchant contact your customer and decide to extend the subscription after a failed charge but you send in new charge, we will, per now not accept charges that are not at least 8 days in the future. For this reason we recommend not having 0 retry days to take into account network errors etc.
+
 # Charge states
 
 | # | State      | Description                                                                          |
@@ -89,6 +99,7 @@ There are 2 major optional components that go into the agreement creation. There
 | 2 | `due` | The charge will be drawn in 8 days, and can now be viewed by the user in the app                                      |
 | 3 | `charged`  | Charge has been completed
 | 4 | `failed`  | Charge has failed for some reason. I.E Expired card, insufficient funds, etc.
+| 5 | `refunded` | Charge successfully refunded
 
 # HTTP responses
 
