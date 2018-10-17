@@ -3,7 +3,7 @@ info:
   description: >+
     **IMPORTANT!!!!** We are preparing the documentation and will update this site
     regularly. This notice will remain until the site is ready for initial use.
-  
+
     # Recurring payments
 
     Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.1. A a draft agreement is initialized and the user is redirected for approval.rn2. The user approves the agreement and the merchant can call GET on the agreement to verify the statusrn3. The merchant can start sending charges which will be charged the user in the future.The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
@@ -285,15 +285,15 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Charge'
+            $ref: '#/definitions/ChargeResponse'
         '201':
           description: Created
           schema:
-            $ref: '#/definitions/Charge'
+            $ref: '#/definitions/ChargeResponse'
         '204':
           description: No Content (operation succeeded previously)
           schema:
-            $ref: '#/definitions/Charge'
+            $ref: '#/definitions/ChargeResponse'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
@@ -700,6 +700,40 @@ definitions:
           - RECURRING
           - ONEOFF
     title: Charge
+  ChargeResponse:
+    type: object
+    required:
+      - amount
+      - transactionId
+      - dueDate
+      - status
+      - id
+      - Description
+    properties:
+      amount:
+        type: integer
+        format: int32
+        example: 234
+        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+      description:
+        type: string
+        example: Månedsabonnement
+        description: This field is visible to the end user in-app
+      dueDate:
+        type: string
+        example: "2020-12-31"
+      id:
+        type: string
+        example: chr_4CUEXw8
+        description: 'Current state of the charge.'
+      status:
+        type: string
+        description: Only ONEOFF is allowed for the initial optional charge
+        enum:
+          - Pending
+          - Due
+          - Charged
+    title: Charge
   DraftAgreementCharge:
     type: object
     required:
@@ -733,7 +767,7 @@ definitions:
         enum:
           - RECURRING
           - ONEOFF
-    title: Charge
+    title: DraftAgreementCharge
   DraftAgreement:
     type: "object"
     required:
