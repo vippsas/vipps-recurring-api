@@ -12,8 +12,8 @@ info:
 
     For information regarding authenthication please read:https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token
   version: '1.0'
-  title: Vipps eCommerce APIs
-basePath: /at3/vipps-recurring-merchant-api
+  title: Vipps eCommerce Recurring APIs
+basePath: /recurring
 tags:
   - name: agreement-controller
     description: Agreement Controller
@@ -733,7 +733,7 @@ definitions:
           - Pending
           - Due
           - Charged
-    title: ChargeResponse
+    title: Charge
   DraftAgreementCharge:
     type: object
     required:
@@ -776,7 +776,7 @@ definitions:
     - "intervalCount"
     - "isApp"
     - "merchantRedirectUrl"
-    - "merchantAgreementUrl"
+    - "merchantSubscriptionUrl"
     - "price"
     - "productDescription"
     - "productName"
@@ -822,7 +822,7 @@ definitions:
         example: "https://api.merchant.no/landing"
         description: "URL where customer should be redirected after the agreement
            has been approved/rejected in the Vipps mobile application."
-      merchantAgreementUrl:
+      merchantSubscriptionUrl:
         type: "string"
         example: "https://www.merchant.no/subscriptions/1234/"
         description: "URL where Vipps can redirect the customer to view/administer
