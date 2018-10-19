@@ -733,7 +733,7 @@ definitions:
           - Pending
           - Due
           - Charged
-    title: Charge
+    title: ChargeResponse
   DraftAgreementCharge:
     type: object
     required:
@@ -776,7 +776,7 @@ definitions:
     - "intervalCount"
     - "isApp"
     - "merchantRedirectUrl"
-    - "merchantSubscriptionUrl"
+    - "merchantAgreementUrl"
     - "price"
     - "productDescription"
     - "productName"
@@ -822,7 +822,7 @@ definitions:
         example: "https://api.merchant.no/landing"
         description: "URL where customer should be redirected after the agreement
            has been approved/rejected in the Vipps mobile application."
-      merchantSubscriptionUrl:
+      merchantAgreementUrl:
         type: "string"
         example: "https://www.merchant.no/subscriptions/1234/"
         description: "URL where Vipps can redirect the customer to view/administer
