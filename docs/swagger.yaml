@@ -788,7 +788,7 @@ definitions:
         - "NOK"
       customerPhoneNumber:
         type: "string"
-        example: "+4740000000"
+        example: "40000000"
         description: "Customers phone number (if available). Used to simplify the
            following Vipps interaction"
       initialCharge:
