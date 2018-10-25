@@ -191,14 +191,16 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>
 
 A campaign in recurring is a period where the price is lower than usual, and this communicated to the end user with the original price shown for comparison.
 
-As seen in the following image
-![Campaign](images/CampaignExample.PNG)
+As seen in the following
+[Campaign image](images/CampaignExample.PNG)
+<img src="images/CampaignExample.PNG" width="185">
+
 
 In order to start a campaign the integrator will need to add the campaign field to either the [`POST:/api/v1/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or in a [`POST:/api/v1/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST) charge for an ongoing agreement.
 
 # Campaign fields
 
-These fields are optional fields can be added to get the campaign screen seen above the amount in the charge will need to be planned price during the campaign. Should only be sent in on the first agreement or in the first charge starting the campaign.                         
+These fields are optional fields can be added to get the campaign screen seen above the amount in the charge will need to be planned price during the campaign. Should only be sent in on the first agreement or in the first charge starting the campaign. The "blir betalt ukentlig" value of 200 in the image will be based on the price of the actual charge being processed.
 
 ```
 "campaign": {
