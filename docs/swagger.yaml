@@ -596,12 +596,6 @@ definitions:
         example: NOK
         enum:
           - NOK
-      customer:
-        type: integer
-        format: int64
-        example: 12345
-        description: Identifies the customer (Vipps-user)
-        readOnly: true
       id:
         type: string
         example: agr_5kSeqzFAMkfBbc
