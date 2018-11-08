@@ -147,20 +147,15 @@ Shortly summarized, you will have to make the following request
 (`client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` placeholders must be replaced with real values):
 
 ```http
-POST https://apitest.vipps.no/api/access-token/jwt-token HTTP/1.1
+POST https://apitest.vipps.no/accesstoken/get HTTP/1.1
 Host: apitest.vipps.no
-Content-Type: application/json
-Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
-
-{
-	"client_id":"<client_id>",
-	"client_secret":"<client_secret>",
-	"resource":"https://testapivipps.no/vippsas/recurring-payment-service"
-}
+client_id: "<client_id>""
+client_secret: "<client_secret>"
+Ocp-Apim-Subscription-Key:  <Ocp-Apim-Subscription-Key>
 
 ```
 
-
+The Ocp-Apim-Subscription-Key should be found in your profile in the developer portal under the "DEFAULT ACCESSTOKEN" field
 
 The request above will return a response similar to this, with the `access_token`:
 
