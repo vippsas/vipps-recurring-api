@@ -1,0 +1,13 @@
+@startuml
+skinparam monochrome true
+
+Title Charge states
+
+[Creation]  -> Pending
+Pending -> Due
+Pending -> Cancelled
+Due -> Charged
+Due -> Failed
+Due -> Cancelled
+Charged -> Refunded
+@enduml

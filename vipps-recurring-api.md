@@ -86,7 +86,11 @@ There are 2 major optional components that go into the agreement creation. There
 
 # Charge
 
-Once the intial agreement is completed a merchant can send in charges. The charges need to have a due date at least 8 days in the future. A merchant can set a price for each charge within the agreement interval. The price can change within 10X of the starting price. This is to take into account up sale and price adjustments.
+Once the intial agreement is completed a merchant can send in charges. The charges need to have a due date at least 8 days in the future. A merchant can set a price for each charge within the agreement interval. The price can change within 10X of the starting price. This is to take into account up sale and price adjustmentµs.
+
+# Charge states
+
+<img src="images/charge_state.png">
 
 # Charge retries
 
