@@ -60,11 +60,11 @@
 		},
 		{
 			"id": "5f9e58d2-e65b-d974-5be2-5949b8597cc9",
-			"headers": "merchantId: {{MerchantId}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Merchant-serial-number: {{Merchant-serial-number}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
-					"key": "merchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
@@ -100,11 +100,11 @@
 		},
 		{
 			"id": "73715e0c-1b75-b545-f36a-14d6f260abfc",
-			"headers": "merchantId: {{MerchantId}}\nContent-Type: application/json\nIdempotent-Key: VippsTest!\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Merchant-serial-number: {{Merchant-serial-number}}\nContent-Type: application/json\nIdempotent-Key: VippsTest!\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
-					"key": "merchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
@@ -153,7 +153,7 @@
 		},
 		{
 			"id": "8c84a263-3b69-eb61-864c-a15cadd59bdc",
-			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nMerchantId: {{MerchantId}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nMerchant-serial-number: {{Merchant-serial-number}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "Content-Type",
@@ -168,8 +168,8 @@
 					"enabled": true
 				},
 				{
-					"key": "MerchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
@@ -201,7 +201,7 @@
 		},
 		{
 			"id": "a5107f3e-ab11-726f-225e-7db11c8ecd96",
-			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nMerchantId: {{MerchantId}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{Access_Token}}\nMerchant-serial-number: {{Merchant-serial-number}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
 					"key": "Content-Type",
@@ -216,8 +216,8 @@
 					"enabled": true
 				},
 				{
-					"key": "MerchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
@@ -251,11 +251,11 @@
 		},
 		{
 			"id": "a6699e60-a284-4532-f34b-4588a55da01f",
-			"headers": "merchantId: {{MerchantId}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: application/json\n",
+			"headers": "Merchant-serial-number: {{Merchant-serial-number}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: application/json\n",
 			"headerData": [
 				{
-					"key": "merchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
@@ -299,11 +299,11 @@
 		},
 		{
 			"id": "b7186a93-503f-802e-d7a1-b61b3ecac26d",
-			"headers": "merchantId: {{MerchantId}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Merchant-serial-number: {{Merchant-serial-number}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
-					"key": "merchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
@@ -339,11 +339,11 @@
 		},
 		{
 			"id": "ca4c8b93-26b1-614f-2840-beb891e5f674",
-			"headers": "merchantId: {{MerchantId}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Merchant-serial-number: {{Merchant-serial-number}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
-					"key": "merchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
@@ -379,17 +379,17 @@
 			"helperAttributes": {},
 			"time": 1538465279577,
 			"name": "Fetch Agreements",
-			"description": "Does a GET and retrieves all agreements based on the MerchantId in the header",
+			"description": "Does a GET and retrieves all agreements based on the Merchant-serial-number in the header",
 			"collectionId": "539feafc-f26f-8cd4-5964-eef2cb5030bc",
 			"responses": []
 		},
 		{
 			"id": "e99e4202-d106-84a9-5f23-a2ec3344a35b",
-			"headers": "merchantId: {{MerchantId}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: Application/json\n",
+			"headers": "Merchant-serial-number: {{Merchant-serial-number}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\nContent-Type: Application/json\n",
 			"headerData": [
 				{
-					"key": "merchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
@@ -431,11 +431,11 @@
 		},
 		{
 			"id": "eb9f245b-c508-ecff-ec32-2608d887542a",
-			"headers": "merchantId: {{MerchantId}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
+			"headers": "Merchant-serial-number: {{Merchant-serial-number}}\nAuthorization: Bearer {{Access_Token}}\nOcp-Apim-Subscription-Key: {{Ocp_Apim_Key}}\n",
 			"headerData": [
 				{
-					"key": "merchantId",
-					"value": "{{MerchantId}}",
+					"key": "Merchant-serial-number",
+					"value": "{{Merchant-serial-number}}",
 					"description": "",
 					"enabled": true
 				},
