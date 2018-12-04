@@ -29,7 +29,7 @@ Document version: 0.1.0.
 
 ## Abstract
 
-Vipps Recurring API is an API that delivers recurring functionality for a merchant, for example but not limited to, a newspaper subscription or a smartphone sale with a corresponding cellphone subscription. This is done by requesting agreement on behalf of the user. The user then is then redirected to the App, where he gives consent to the terms of the agreement. The merchant can then send charges that will be automatically charged on the due date. The API documentation can be viewed [`here`](https://vippsas.github.io/vipps-recurring-api/)
+Vipps Recurring API is an API that delivers recurring payment functionality for a merchant to create a payment agreement with a customer for fixed interval payments. When the agreement is accepted by the end user the merchant can send charges that will be automatically charged on the due date. The API documentation can be viewed [`here`](https://vippsas.github.io/vipps-recurring-api/)
 
 ## Terminology
 
@@ -37,8 +37,6 @@ Vipps Recurring API is an API that delivers recurring functionality for a mercha
 |:-----|:----------------------------------------------- |
 | Agreement         | An agreement to a subscription with a set of conditions that a end user agrees to.  |
 | Charge         | A single payment within an agreement. |
-| NIN         | A national identification number, e.g. SSN in Norway ("fødselsnummer", 11 digits).   |
-| MSISDN      | A number uniquely identifying a subscription in a GSM or a UMTS mobile network. Simply put, it is the mapping of the telephone number to the SIM card in a mobile phone. See [MSISDN](https://en.wikipedia.org/wiki/MSISDN). |
 | Idempotency | The property of endpoints to be called multiple times without changing the result beyond the initial application. |
 
 # Core functionality
@@ -49,7 +47,7 @@ Vipps Recurring API is an API that delivers recurring functionality for a mercha
 
 1. A user requests a subscription from the merchant.
 
-2. An agreement is sent with [`POST:/api/v1/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST). In the  respons is a "agreementResource" field that can be used in step 4.
+2. An agreement is sent with [`POST:/api/v1/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST). In the  respons is an "agreementResource" field that can be used in step 4.
 
 3. The user approves the agreement.
 
@@ -57,21 +55,21 @@ Vipps Recurring API is an API that delivers recurring functionality for a mercha
  [`GET:/api/v1/agreement`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/listUsingGET) or the specific agreement
  [`GET:/api/v1/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) per now we do not send callback when the user accepts.
 
-5. The merchant is now free to post charges to the given charge using [`POST:/api/v1/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST)
+5. The merchant is now free to post charges to the given agreement using [`POST:/api/v1/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST)
 
 6. Later a merchant might want to check if a user has any failed charges and therefore terminate the subscription. This can be done by getting all charges on the users agreement on  [`GET:/api/v1/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/listUsingGET_1)
 
 ## Facilitation of user subscriptions through Vipps
 
-*Vipps Recurring* offers the ability to facilitate a subscription based payment. We do not manage the subscription on behalf of the user, the merchant is responsible for checking the validity of their
+*Vipps Recurring* offers the ability to facilitate a subscription based payment. We do not manage the subscription on behalf of the user, the merchant is responsible for checking the validity of their agreements and result of performed charges. 
 
 # Agreement initation
 
-There are 2 major optional components that go into the agreement creation. There are the fields: *initialCharge* and  and *oneOffCharge*. initialCharge indiciates the first payment in a subscription, starting upon the creation of the subscription. oneOffCharge represents a corresponding product
+There are 2 major optional components that go into the agreement creation. There are the fields: *initialCharge* and  and *oneOffCharge*. initialCharge indiciates the first payment in a subscription, starting upon the creation of the subscription. oneOffCharge represents a corresponding product payment done together with the agreement creation. 
 
 | # | Agreement      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `Agreement starting now`  | Agreement with an initialcharge, for example a newspaper subscription where the initial payment is today. |
+| 1 | `Agreement starting now`  | Agreement with an initialcharge, for example a newspaper subscription where the initial payment is now. |
 | 2 | `Agreement starting in future`  | Agreement without an initialcharge, for example a newspaper subscription where the initial payment is start of next week. |
 | 3 | `Agreement with product`  | Agreement with or without an initialcharge but with a oneOffCharge, this represents a product, such as a cell phone subscription with a cell phone purchase |
 
@@ -81,16 +79,16 @@ There are 2 major optional components that go into the agreement creation. There
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `pending`  | Agreement has been created, but not approved by the user in the app yet. |
-| 2 | `active` | The Agreement has been confirmed by the end user in the app and can recieve charges                                      |
+| 2 | `active` | The Agreement has been confirmed by the end user in the app and can recieve charges                                    |
 | 3 | `stopped`  | Agreement has been stopped by the merchant most likely by the End User contacting the merchant to cancel the agreement
 
 # Charge
 
-Once the intial agreement is completed a merchant can send in charges. The charges need to have a due date at least 8 days in the future. A merchant can set a price for each charge within the agreement interval. The price can change within 10X of the starting price. This is to take into account up sale and price adjustmentµs.
+Once the intial agreement is completed a merchant can send in charges. The charges need to have a due date at least 8 days in the future. A merchant can set a price for each charge but need to inform the customer before any price change. The price can change within 10X of the starting price. The agreement will be updated to the latest charged price. 
 
 # Charge retries
 
-Vipps will retry 3 times a day. If a merchant has set 0 retry days we will fail the charge at the end of the day. NOTE: If you as a merchant contact your customer and decide to extend the subscription after a failed charge but you send in new charge, we will, per now not accept charges that are not at least 8 days in the future. For this reason we recommend not having 0 retry days to take into account network errors etc.
+Vipps will retry charges according to the `retryDays` parameter. If a merchant has set 0 retry days we will fail the charge at the due day. NOTE: If you as a merchant contact your customer and decide to extend the subscription after a failed charge but you send in new charge, we will, per now not accept charges that are not at least 8 days in the future. For this reason we recommend not having 0 retry days to take into account network errors etc.
 
 # Charge flow
 
@@ -121,18 +119,11 @@ This API returns the following HTTP statuses in the responses:
 | `403 Forbidden`     | Authentication ok, but credentials lacks authorization  |
 | `404 Not Found`     | The resource was not found  |
 | `409 Conflict`      | Unsuccessful due to conflicting resource   |
+| `422 Unprocessable Entity`     |    |
 | `429 Too Many Requests`  | There is currently a limit of max 20 calls per second\*  |
 | `500 Server Error`  | An internal Vipps problem.                  |
 
 All error responses contains an `error` object in the body, with details of the problem.
-
-\*: The limit is cautiously set quite low in the production environment, as we want to
-monitor performance closely before increasing the limit.
-We count HTTP requests per `client_id` and product (ISP and IPP).
-For now, all HTTP requests are counted and rate-limited.
-We have previously requested data from integrators about volume, times, etc,
-but only received this from one integrator.
-If you are able to provide data for your solution, please let us know.
 
 # Authentication and authorization
 
@@ -159,7 +150,7 @@ Ocp-Apim-Subscription-Key:  <Ocp-Apim-Subscription-Key>
 
 ```
 
-The Ocp-Apim-Subscription-Key should be found in your profile in the developer portal under the "DEFAULT ACCESSTOKEN" field
+The Ocp-Apim-Subscription-Key should be found in your profile in the developer portal
 
 The request above will return a response similar to this, with the `access_token`:
 
