@@ -49,7 +49,7 @@ Agreements can be initiated with initial charges and/or one-time amounts
 
 **Intervals**\
 Intervals are defined with a interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count.\
-For a bi-weekly subscription:
+Example for a bi-weekly subscription:
 ```
 "interval": "WEEK",
 "intervalCount": 2,
