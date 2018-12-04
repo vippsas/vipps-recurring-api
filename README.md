@@ -2,6 +2,8 @@
 
 Vipps Recurring API delivers recurring payment functionality for a merchant to create a payment agreement with a customer for fixed interval payments. When the agreement is accepted by the end user the merchant can send charges that will be automatically processed on the due date.
 
+**API documentation:** https://vippsas.github.io/vipps-recurring-api/
+
 **Terminology**
 
 | Term |  Description                                    |
