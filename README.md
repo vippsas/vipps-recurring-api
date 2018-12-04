@@ -48,13 +48,13 @@ Agreements can be initiated with initial charges and/or one-time amounts
 | 3 | `Agreement with additional one-time amount`  | Agreement with an `oneOffCharge` will make an separate payment request together with the agreement approval to pay an additional amount. Can be used with or without an `initialcharge` |
 
 **Intervals**\
-Intervals are defined with a interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. For a bi-weekly subscription:
+Intervals are defined with a interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count.
+For a bi-weekly subscription:
 ```
 "interval": "WEEK",
 "intervalCount": 2,
 ```
 Example for a quarterly subscription
-
 ```
 "interval": "MONTH",
 "intervalCount": 4,
