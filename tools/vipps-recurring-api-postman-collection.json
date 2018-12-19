@@ -24,23 +24,33 @@
 				}
 			],
 			"request": {
-				"url": "https://apitest.vipps.no/api/access-token/jwt-token",
+				"url": "https://apitest.vipps.no/accesstoken/get",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
+						"value": "{{Ocp-Apim-Subscription-Key_token}}",
 						"description": ""
 					},
 					{
 						"key": "Content-Type",
 						"value": "application/json",
 						"description": ""
+					},
+					{
+						"key": "client_id",
+						"value": "{{client_id}}",
+						"description": ""
+					},
+					{
+						"key": "client_secret",
+						"value": "{{client_secret}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"client_id\": \"{{Client_Id}}\",\n\t\"client_secret\":\"{{Client_Secret}}\",\n\t\"resource\":\"https://testapivipps.no/vippsas/recurring-payment-service\"\n}"
+					"raw": ""
 				},
 				"description": "Retrives an authorization token that can be used in calling Vipps API's. Valid for 24 hours."
 			},
