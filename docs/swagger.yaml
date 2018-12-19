@@ -885,7 +885,7 @@ definitions:
       dueDate:
         type: string
         example: '2030-12-31'
-        description: yyyy-MM-dd
+        description: 'Date the charge is due. Must be set to at least the seventh day in the future from today's date. Format: yyyy-MM-dd'
       hasPriceChanged:
         type: boolean
         example: false
