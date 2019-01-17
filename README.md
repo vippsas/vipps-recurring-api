@@ -153,7 +153,7 @@ Manage charges and agreement
 | 6 | `partially_refunded`| Charge successfully refunded, used if the refund is a partial ammount of the captured amount.
 
 ## Campaigns
-A campaign in recurring is a period where the price is lower than usual, and this is communicated to the customer with the original price shown for comparison.
+A campaign in recurring is a period where the price is lower than usual, and this is communicated to the customer with the original price shown for comparison. This Functionality is currently being developed and is subject to change.
 
 <img src="images/CampaignExample.PNG" width="185">
 
