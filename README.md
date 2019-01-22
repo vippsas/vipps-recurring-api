@@ -157,17 +157,40 @@ A campaign in recurring is a period where the price is lower than usual, and thi
 
 <img src="images/CampaignExample.PNG" width="185">
 
-In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://) for a campaign in the start of an agreement or in a charge [`POST:/charge/{agreementId}`](https://) for an ongoing agreement.
+In order to communicate to a user that there is an active campaign, the campaign field needs to be included in an agreement [`POST:/draftAgreement`](https://). When a Charge is created in a campaign period, the difference will be visible in-app.
+
+The amount charged is specified when creating a Charge. In the example below, the user will know they will pay 25 NOK instead of 50 NOK from `2019-01-22 16:00` to `2019-01-22 16:00` UTC.
+
 ```
-"campaign": {
-	"campaignChargesRemaining": 4,
-	"originalPrice": 234
+{
+  "currency": "NOK",
+  "customerPhoneNumber":"90000000",
+  "interval": "WEEK",
+  "intervalCount": 2,
+  "isApp": false,
+  "merchantRedirectUrl": "https://vipps.no",
+  "merchantAgreementUrl": "https://vipps.io/terms",
+  "price": 2500,
+  "initialCharge": {
+    "amount": 2500,
+    "currency": "NOK",
+    "description": "Payment for September"
+  },
+  "productDescription": "Access to all games of English top football",
+  "productName": "Premier League Package"
+  "campaign": {
+    "start": "2019-01-22T16:00",
+    "end": "2019-03-22T16:00",
+    "originalPrice": 5000
+  }
 }
 ```
+It is possible to add a campaign to an existing agreement by updating the agreement: `POST:/agreement/{agreementId}`
 
 | Field         | Description                                 |
 | ------------------- | ------------------------------------------- |
-| `campaignChargesRemaining`            | Used to calculate the time remaining time text |
+| `start`            | The date and time the Campaign starts in UTC |
+| `end`            | The date and time the Campaign endsin UTC |
 | `originalPrice`       | The price that will be shown for comparison   |
 
 ## HTTP responses
