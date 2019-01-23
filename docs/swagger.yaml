@@ -18,7 +18,8 @@ info:
     https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token
   version: '1.0'
   title: Recurring Payments Merchant API
-basePath: /at3/vipps-recurring-merchant-api
+host: '10.78.12.69:10036'
+basePath: /mt1/vipps-recurring-merchant-api
 tags:
   - name: agreement-controller
     description: Agreement Controller
@@ -26,12 +27,14 @@ tags:
     description: Charge Controller
   - name: draft-agreement-controller
     description: Draft Agreement Controller
+  - name: environment-manager-mvc-endpoint
+    description: Environment Manager Mvc Endpoint
+  - name: generic-postable-mvc-endpoint
+    description: Generic Postable Mvc Endpoint
   - name: health-check-controller
     description: Health Check Controller
-  - name: swagger-export-json-controller
-    description: Swagger Export Json Controller
-  - name: swagger-export-yaml-controller
-    description: Swagger Export Yaml Controller
+  - name: restart-mvc-endpoint
+    description: Restart Mvc Endpoint
 paths:
   /api/v1/agreement:
     get:
@@ -63,15 +66,9 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Agreement'
-          responseSchema:
-            $ref: '#/definitions/Agreement'
         '400':
           description: Bad Request
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -80,10 +77,6 @@ paths:
         '500':
           description: Internal Server Error
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -121,15 +114,9 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Agreement'
-          responseSchema:
-            $ref: '#/definitions/Agreement'
         '400':
           description: Bad Request
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -140,10 +127,6 @@ paths:
         '500':
           description: Internal Server Error
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -188,15 +171,9 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Agreement'
-          responseSchema:
-            $ref: '#/definitions/Agreement'
         '400':
           description: Bad Request
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -207,10 +184,6 @@ paths:
         '500':
           description: Internal Server Error
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -264,27 +237,15 @@ paths:
             type: array
             items:
               $ref: '#/definitions/ChargeResponse'
-          responseSchema:
-            type: array
-            items:
-              $ref: '#/definitions/ChargeResponse'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
         '500':
           description: Internal server error
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -338,27 +299,17 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ChargeResponse'
-          responseSchema:
-            $ref: '#/definitions/ChargeResponse'
         '201':
           description: Created
           schema:
-            $ref: '#/definitions/ChargeResponse'
-          responseSchema:
             $ref: '#/definitions/ChargeResponse'
         '204':
           description: No Content (operation succeeded previously)
           schema:
             $ref: '#/definitions/ChargeResponse'
-          responseSchema:
-            $ref: '#/definitions/ChargeResponse'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -368,17 +319,9 @@ paths:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
         '500':
           description: Internal server error
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -421,17 +364,11 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ChargeResponse'
-          responseSchema:
-            $ref: '#/definitions/ChargeResponse'
         '400':
           description: The requested charge does not exist
         '500':
           description: Internal server error
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -473,21 +410,13 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ChargeResponse'
-          responseSchema:
-            $ref: '#/definitions/ChargeResponse'
         '204':
           description: No Content (operation succeeded previously)
           schema:
             $ref: '#/definitions/ChargeResponse'
-          responseSchema:
-            $ref: '#/definitions/ChargeResponse'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -496,10 +425,6 @@ paths:
         '500':
           description: Internal server error
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -559,15 +484,9 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ChargeResponse'
-          responseSchema:
-            $ref: '#/definitions/ChargeResponse'
         '400':
           description: 'Invalid request, check your parameters'
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -577,17 +496,9 @@ paths:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
         '500':
           description: Internal server error
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -628,21 +539,13 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/DraftAgreementResponse'
-          responseSchema:
-            $ref: '#/definitions/DraftAgreementResponse'
         '201':
           description: OK
           schema:
             $ref: '#/definitions/DraftAgreementResponse'
-          responseSchema:
-            $ref: '#/definitions/DraftAgreementResponse'
         '400':
           description: Bad Request
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
@@ -656,14 +559,62 @@ paths:
             type: array
             items:
               $ref: '#/definitions/FieldErrorDto'
-          responseSchema:
-            type: array
-            items:
-              $ref: '#/definitions/FieldErrorDto'
         '503':
           description: Service unavailable
         '504':
           description: Gateway Timeout
+      deprecated: false
+  /env:
+    post:
+      tags:
+        - environment-manager-mvc-endpoint
+      summary: value
+      operationId: valueUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Merchant-Serial-Number
+          in: header
+          description: The applicable merchant serial number currently being represented
+          required: true
+          type: string
+        - name: params
+          in: query
+          description: params
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      deprecated: false
+  /env/reset:
+    post:
+      tags:
+        - environment-manager-mvc-endpoint
+      summary: reset
+      operationId: resetUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Merchant-Serial-Number
+          in: header
+          description: The applicable merchant serial number currently being represented
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
       deprecated: false
   /health:
     get:
@@ -684,16 +635,15 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/HealthCheckStatus'
-          responseSchema:
-            $ref: '#/definitions/HealthCheckStatus'
       deprecated: false
-  /swagger.json:
-    get:
+  /pause:
+    post:
       tags:
-        - swagger-export-json-controller
-      summary: Export
-      description: 'Download the latest version of the Swagger Documentation for this service, in json format'
-      operationId: swaggerJsonSpecUsingGET
+        - generic-postable-mvc-endpoint
+      summary: invoke
+      operationId: invokeUsingPOST
+      consumes:
+        - application/json
       produces:
         - '*/*'
       parameters:
@@ -706,17 +656,16 @@ paths:
         '200':
           description: OK
           schema:
-            type: string
-          responseSchema:
-            type: string
+            type: object
       deprecated: false
-  /swagger.yaml:
-    get:
+  /pause.json:
+    post:
       tags:
-        - swagger-export-yaml-controller
-      summary: Export
-      description: Download the latest version of the Swagger Documentation for this service
-      operationId: swaggerYmlSpecUsingGET
+        - generic-postable-mvc-endpoint
+      summary: invoke
+      operationId: invokeUsingPOST_1
+      consumes:
+        - application/json
       produces:
         - '*/*'
       parameters:
@@ -729,9 +678,139 @@ paths:
         '200':
           description: OK
           schema:
-            type: string
-          responseSchema:
-            type: string
+            type: object
+      deprecated: false
+  /refresh:
+    post:
+      tags:
+        - generic-postable-mvc-endpoint
+      summary: invoke
+      operationId: invokeUsingPOST_2
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Merchant-Serial-Number
+          in: header
+          description: The applicable merchant serial number currently being represented
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      deprecated: false
+  /refresh.json:
+    post:
+      tags:
+        - generic-postable-mvc-endpoint
+      summary: invoke
+      operationId: invokeUsingPOST_3
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Merchant-Serial-Number
+          in: header
+          description: The applicable merchant serial number currently being represented
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      deprecated: false
+  /restart:
+    post:
+      tags:
+        - restart-mvc-endpoint
+      summary: invoke
+      operationId: invokeUsingPOST_6
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Merchant-Serial-Number
+          in: header
+          description: The applicable merchant serial number currently being represented
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      deprecated: false
+  /restart.json:
+    post:
+      tags:
+        - restart-mvc-endpoint
+      summary: invoke
+      operationId: invokeUsingPOST_7
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Merchant-Serial-Number
+          in: header
+          description: The applicable merchant serial number currently being represented
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      deprecated: false
+  /resume:
+    post:
+      tags:
+        - generic-postable-mvc-endpoint
+      summary: invoke
+      operationId: invokeUsingPOST_4
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Merchant-Serial-Number
+          in: header
+          description: The applicable merchant serial number currently being represented
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      deprecated: false
+  /resume.json:
+    post:
+      tags:
+        - generic-postable-mvc-endpoint
+      summary: invoke
+      operationId: invokeUsingPOST_5
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Merchant-Serial-Number
+          in: header
+          description: The applicable merchant serial number currently being represented
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
       deprecated: false
 definitions:
   Agreement:
@@ -791,11 +870,12 @@ definitions:
       status:
         type: string
         example: ACTIVE
-        description: Status of AgreementDto.
+        description: Status of the agreement.
         enum:
           - PENDING
           - ACTIVE
           - STOPPED
+          - EXPIRED
       stopDate:
         type: string
         example: '2019-10-22'
@@ -849,7 +929,7 @@ definitions:
           - REFUNDED
       transactionId:
         type: string
-        example: '5001419121'
+        example: 5001419121
         description: Contains null until the status has reached CHARGED
         readOnly: true
       type:
@@ -885,7 +965,7 @@ definitions:
       dueDate:
         type: string
         example: '2030-12-31'
-        description: 'Date the charge is due. Must be set to at least the seventh day in the future from today's date. Format: yyyy-MM-dd'
+        description: yyyy-MM-dd
       hasPriceChanged:
         type: boolean
         example: false
