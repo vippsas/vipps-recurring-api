@@ -61,7 +61,7 @@ Example for a bi-weekly subscription:
 Example for a quarterly subscription
 ```
 "interval": "MONTH",
-"intervalCount": 4,
+"intervalCount": 3,
 ```
 
 **Initial charge**\
