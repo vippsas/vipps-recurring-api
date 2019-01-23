@@ -1,6 +1,6 @@
 # Vipps Recurring API
 
-**Please note:** This API is not officially launched. 
+**Please note:** This API is not officially launched.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant to create a payment agreement with a customer for fixed interval payments. When the agreement is accepted by the end user the merchant can send charges that will be automatically processed on the due date.
 
@@ -155,19 +155,19 @@ Manage charges and agreement
 ## Campaigns
 A campaign in recurring is a period where the price is lower than usual, and this is communicated to the customer with the original price shown for comparison. This Functionality is currently being developed and is subject to change.
 
-<img src="images/CampaignExample.PNG" width="185">
-
-In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://) for a campaign in the start of an agreement or in a charge [`POST:/charge/{agreementId}`](https://) for an ongoing agreement.
+In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or update an agreement [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) for an ongoing agreement.
 ```
 "campaign": {
-	"campaignChargesRemaining": 4,
-	"originalPrice": 234
-}
+    "start": "2019-01-22T16:00",
+    "end": "2019-03-22T16:00",
+    "originalPrice": 5000
+  }
 ```
 
 | Field         | Description                                 |
 | ------------------- | ------------------------------------------- |
-| `campaignChargesRemaining`            | Used to calculate the time remaining time text |
+| `start`            | Start date of campaign offer |
+| `end`            | End date of campaign offer |
 | `originalPrice`       | The price that will be shown for comparison   |
 
 ## HTTP responses
@@ -231,7 +231,7 @@ Ocp-Apim-Subscription-Key:  <Ocp-Apim-Subscription-Key>
 
 # Questions?
 
-We're always happy to help with code or other questions you might have! 
-Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues), 
-a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls), 
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
+a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
