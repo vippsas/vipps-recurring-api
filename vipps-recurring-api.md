@@ -6,6 +6,99 @@ The Vipps Recurring API delivers recurring payment functionality for a merchant 
 
 **API documentation:** https://vippsas.github.io/vipps-recurring-api/
 
+## Authentication
+
+All API calls are authenticated and authorized based on the application access
+token (JWT bearer token) and a subscription key (`Ocp-Apim-Subscription-Key`),
+and these headers are required:
+
+| Header Name | Header Value | Description |
+| ----------- | ------------ | ----------- |
+| `Authorization` | `Bearer <JWT access token>` | Type: Authorization token. This is available in the Vipps Developer Portal. |
+| `Ocp-Apim-Subscription-Key` | Base 64 encoded string | The subscription key for the eCom API. This is available in the Vipps Developer Portal. |
+
+### Access token
+
+The Access Token API provides the JWT bearer token.
+
+**Request**
+
+[`POST:/accesstoken/get`]
+
+```http
+POST https://apitest.vipps.no/accessToken/get
+client_id: <ClientID>
+client_secret: <ClientSecret>
+Ocp-Apim-Subscription-Key: <Ocp-Apim-Subscription-Key>
+```
+All headers are per merchantSerialNumber and can be found in Vipps Developer Portal.
+
+| Header Name | Header Value | Description |
+| ----------- | ------------ | ----------- |
+| `client_id` | A GUID value | Client ID for the merchant |
+| `client_secret` | Base 64 encoded string | Client Secret for the merchant |
+| `Ocp-Apim-Subscription-Key` | Base 64 encoded string | Subscription key for the product |
+
+**Response**
+
+```json
+HTTP 200 OK
+{
+  "token_type": "Bearer",
+  "expires_in": "86398",
+  "ext_expires_in": "0",
+  "expires_on": "1495271273",
+  "not_before": "1495184574",
+  "resource": "00000002-0000-0000-c000-000000000000",
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <snip>"
+}
+```
+
+JWT properties:
+
+| Name                        | Description                                 |
+| --------------------------- | ------------------------------------------- |
+| `Bearer`                    | It’s a `Bearer` token. The word `Bearer` should be added before the token |
+| `expires_in`                | Token expiry duration in seconds. |
+| `ext_expires_in`            | Extra expiry time. This is always zero. |
+| `expires_on`                | Token expiry time in epoch time format. |
+| `not_before`                | Token creation time in epoch time format. |
+| `resource`                  | For the product for which token has been issued. |
+| `access_token`              | The actual access token that needs to be used in `Authorization` request header. |
+
+**Please note:** The access token is valid for 24 hours.
+
+Example of an error reponse body (formatted for readability):
+
+```json
+{
+  "error": "unauthorized_client",
+  "error_description":
+    "AADSTS70001: Application with identifier 'e9b6c99d-2442-4a5d-84a2-\
+     c53a807fe0c4' was not found in the directory testapivipps.no\
+     Trace ID: 3bc2b2a0-d9bb-4c2e-8367- 5633866f1300\r\nCorrelation ID:\
+     bb2f4093-70af-446a-a26d-ed8becca1a1a\r\nTimestamp: 2017-05-19 09:21:28Z",
+  "error_codes": [ 70001 ],
+  "timestamp": "2017-05-19 09:21:28Z",
+  "trace_id": "3bc2b2a0-d9bb-4c2e-8367-5633866f1300",
+  "correlation_id": "bb2f4093-70af-446a-a26d-ed8becca1a1a"
+}
+```
+
+#### HTTP response codes
+
+This API returns the following HTTP statuses in the responses:
+
+| HTTP status         | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `200 OK`            | Request successful.                          |
+| `400 Bad Request`   | Invalid request, see the `error` for details.  |
+| `401 Unauthorized`  | Invalid credentials.                         |
+| `403 Forbidden`     | Authentication ok, but credentials lacks authorization.  |
+| `500 Server Error`  | An internal Vipps problem.                  |
+
+
+
 **Terminology**
 
 | Term |  Description                                    |
