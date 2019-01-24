@@ -155,6 +155,8 @@ Manage charges and agreement
 ## Campaigns
 A campaign in recurring is a period where the price is lower than usual, and this is communicated to the customer with the original price shown for comparison. This Functionality is currently being developed and is subject to change.
 
+<img src="images/CampaignExample.PNG" width="185">
+
 In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or update an agreement [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) for an ongoing agreement.
 ```
 "campaign": {
