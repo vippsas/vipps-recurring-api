@@ -1,3 +1,5 @@
+# Vipps Recurring API FAQ
+
 # How do I check my customer's status?
 By using a GET towards /api/v1/agreement you can get an overview of all agreements, if you are uncertain about a specific customer's agreement you can do a GET towards /api/v1/charge/{agreementId}
 
