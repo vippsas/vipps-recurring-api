@@ -18,8 +18,8 @@ info:
     https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token
   version: '1.0'
   title: Recurring Payments Merchant API
-host: '10.78.12.69:10036'
-basePath: /mt1/vipps-recurring-merchant-api
+host: 'apitest.vipps.no'
+basePath: /recurring/api/v1
 tags:
   - name: agreement-controller
     description: Agreement Controller
@@ -222,6 +222,7 @@ paths:
             - CANCELLED
             - PARTIALLY_REFUNDED
             - REFUNDED
+            - PROCESSING
       responses:
         '200':
           description: Success
@@ -567,6 +568,9 @@ definitions:
       - productName
       - status
     properties:
+      campaign:
+        description: A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date
+        $ref: '#/definitions/campaign'
       currency:
         type: string
         example: NOK
@@ -608,7 +612,7 @@ definitions:
         description: Name of the product being subscribed to.
       startDate:
         type: string
-        example: '2018-10-22'
+        example: '2019-01-01T00:00:00Z'
         description: Date when agreement was started.
         readOnly: true
       status:
@@ -622,7 +626,7 @@ definitions:
           - EXPIRED
       stopDate:
         type: string
-        example: '2019-10-22'
+        example: '2019-01-01T00:00:00Z'
         description: Date when agreement was stopped.
         readOnly: true
     title: Agreement
@@ -631,11 +635,9 @@ definitions:
     required:
       - amount
       - amountRefunded
-      - description
       - dueDate
       - id
       - status
-      - type
     properties:
       amount:
         type: integer
@@ -671,6 +673,7 @@ definitions:
           - CANCELLED
           - PARTIALLY_REFUNDED
           - REFUNDED
+          - PROCESSING
       transactionId:
         type: string
         example: 5001419121
@@ -733,6 +736,9 @@ definitions:
       - productDescription
       - productName
     properties:
+      campaign:
+        description: A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date
+        $ref: '#/definitions/campaign'
       currency:
         type: string
         example: NOK
@@ -882,3 +888,16 @@ definitions:
         example: 'Forgot to apply discount, refunding 50%'
         description: 'A textual description of the operation, which will be displayed in the users app.'
     title: RefundRequestDto
+  campaign:
+    type: object
+    properties:
+      campaignPrice:
+        type: integer
+        format: int32
+        example: 1500
+        description: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+      end:
+        type: string
+        example: '2019-06-01T00:00:00:00Z'
+        description: The date and time the campaign ends. Needs to be UTC
+    title: campaign

@@ -160,15 +160,15 @@ A campaign in recurring is a period where the price is lower than usual, and thi
 In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or update an agreement [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) for an ongoing agreement.
 ```
 "campaign": {
-  "start": "2019-01-22T16:00",
-  "end": "2019-03-22T16:00",
-	"originalPrice": 234
+  "start": "2019-05-01T00:00:00:00Z",
+  "end": "2019-06-01T00:00:00:00Z",
+	"campaignPrice": 49900
 }
 ```
 
 | Field         | Description                                 |
 | ------------------- | ------------------------------------------- |
-| `start`            | Start date of campaign offer |
+| `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable |
 | `end`            | End date of campaign offer |
 | `originalPrice`       | The price that will be shown for comparison   |
 
