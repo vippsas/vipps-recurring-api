@@ -168,7 +168,7 @@ In order to start a campaign the campaign field has to be added either to the ag
 
 | Field         | Description                                 |
 | ------------------- | ------------------------------------------- |
-| `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable |
+| `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
 | `end`            | End date of campaign offer |
 | `originalPrice`       | The price that will be shown for comparison   |
 
