@@ -1,1036 +1,1230 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
-    "version": "1.0.0",
-    "title": "Swagger Petstore",
-    "termsOfService": "http://swagger.io/terms/",
-    "contact": {
-      "email": "apiteam@swagger.io"
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
+    "description": "# Recurring payments\n\nRecurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.\n\n1. A a draft agreement is initialized and the user is redirected for approval.\n2. The user approves the agreement and the merchant can call GET on the agreement to verify the status\n3. The merchant can start sending charges which will be charged the user in the future.\n\nThe merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)\n\n\n# Authenthication\n\nFor information regarding authenthication please read:\nhttps://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token",
+    "version": "1.0",
+    "title": "Recurring Payments Merchant API"
   },
-  "host": "petstore.swagger.io",
-  "basePath": "/v2",
+  "host": "10.78.12.69:10036",
+  "basePath": "/mt1/vipps-recurring-merchant-api",
   "tags": [
     {
-      "name": "pet",
-      "description": "Everything about your Pets",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
+      "name": "agreement-controller",
+      "description": "Agreement Controller"
     },
     {
-      "name": "store",
-      "description": "Access to Petstore orders"
+      "name": "charge-controller",
+      "description": "Charge Controller"
     },
     {
-      "name": "user",
-      "description": "Operations about user",
-      "externalDocs": {
-        "description": "Find out more about our store",
-        "url": "http://swagger.io"
-      }
+      "name": "draft-agreement-controller",
+      "description": "Draft Agreement Controller"
+    },
+    {
+      "name": "environment-manager-mvc-endpoint"
     }
-  ],
-  "schemes": [
-    "https",
-    "http"
   ],
   "paths": {
-    "/pet": {
-      "post": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Add a new pet to the store",
-        "description": "",
-        "operationId": "addPet",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Pet object that needs to be added to the store",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Pet"
-            }
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Update an existing pet",
-        "description": "",
-        "operationId": "updatePet",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Pet object that needs to be added to the store",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Pet"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      }
-    },
-    "/pet/findByStatus": {
+    "/api/v1/agreement": {
       "get": {
         "tags": [
-          "pet"
+          "agreement-controller"
         ],
-        "summary": "Finds Pets by status",
-        "description": "Multiple status values can be provided with comma separated strings",
-        "operationId": "findPetsByStatus",
+        "summary": "List Agreements",
+        "operationId": "listUsingGET",
         "produces": [
-          "application/xml",
-          "application/json"
+          "application/json;charset=UTF-8"
         ],
         "parameters": [
           {
-            "name": "status",
-            "in": "query",
-            "description": "Status values that need to be considered for filter",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "available",
-                "pending",
-                "sold"
-              ],
-              "default": "available"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Pet"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid status value"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      }
-    },
-    "/pet/findByTags": {
-      "get": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Finds Pets by tags",
-        "description": "Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing.",
-        "operationId": "findPetsByTags",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "tags",
-            "in": "query",
-            "description": "Tags to filter by",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Pet"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid tag value"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ],
-        "deprecated": true
-      }
-    },
-    "/pet/{petId}": {
-      "get": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Find pet by ID",
-        "description": "Returns a single pet",
-        "operationId": "getPetById",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Pet"
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Updates a pet in the store with form data",
-        "description": "",
-        "operationId": "updatePetWithForm",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet that needs to be updated",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "name",
-            "in": "formData",
-            "description": "Updated name of the pet",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "formData",
-            "description": "Updated status of the pet",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "pet"
-        ],
-        "summary": "Deletes a pet",
-        "description": "",
-        "operationId": "deletePet",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "api_key",
+            "name": "Authorization",
             "in": "header",
-            "required": false,
+            "description": "Bearer 'auth token'",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "petId",
-            "in": "path",
-            "description": "Pet id to delete",
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": false
           }
         ],
         "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Agreement"
+            }
           },
-          "404": {
-            "description": "Pet not found"
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
           }
         },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        "deprecated": false
       }
     },
-    "/pet/{petId}/uploadImage": {
+    "/api/v1/agreement/{agreementId}": {
+      "get": {
+        "tags": [
+          "agreement-controller"
+        ],
+        "summary": "Fetch an Agreement",
+        "operationId": "getUsingGET",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer 'auth token'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agreementId",
+            "in": "path",
+            "description": "Agreement ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Agreement"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Agreement not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        },
+        "deprecated": false
+      },
       "post": {
         "tags": [
-          "pet"
+          "agreement-controller"
         ],
-        "summary": "uploads an image",
-        "description": "",
-        "operationId": "uploadFile",
+        "summary": "Update an Agreement",
+        "operationId": "updateUsingPOST",
         "consumes": [
-          "multipart/form-data"
+          "application/json"
         ],
         "produces": [
-          "application/json"
+          "application/json;charset=UTF-8"
         ],
         "parameters": [
           {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet to update",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer 'auth token'",
             "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "additionalMetadata",
-            "in": "formData",
-            "description": "Additional data to pass to server",
-            "required": false,
             "type": "string"
           },
           {
-            "name": "file",
-            "in": "formData",
-            "description": "file to upload",
-            "required": false,
-            "type": "file"
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "agreement",
+            "description": "agreement",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agreement"
+            }
+          },
+          {
+            "name": "agreementId",
+            "in": "path",
+            "description": "Agreement ID",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ApiResponse"
+              "$ref": "#/definitions/Agreement"
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Agreement not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
           }
         },
-        "security": [
+        "deprecated": false
+      }
+    },
+    "/api/v1/charge/{agreementId}": {
+      "get": {
+        "tags": [
+          "charge-controller"
+        ],
+        "summary": "List Charges",
+        "operationId": "listUsingGET_1",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer 'auth token'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agreementId",
+            "in": "path",
+            "description": "The agreement identifier (id)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chargeStatus",
+            "in": "query",
+            "description": "The status of the charge",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": false,
+            "enum": [
+              "PENDING",
+              "DUE",
+              "CHARGED",
+              "FAILED",
+              "CANCELLED",
+              "PARTIALLY_REFUNDED",
+              "REFUNDED",
+              "PROCESSING"
             ]
           }
-        ]
-      }
-    },
-    "/store/inventory": {
-      "get": {
-        "tags": [
-          "store"
         ],
-        "summary": "Returns pet inventories by status",
-        "description": "Returns a map of status codes to quantities",
-        "operationId": "getInventory",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Success",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "integer",
-                "format": "int32"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ChargeResponse"
               }
             }
+          },
+          "400": {
+            "description": "Invalid request, check your parameters",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Timeout"
           }
         },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      }
-    },
-    "/store/order": {
-      "post": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Place an order for a pet",
-        "description": "",
-        "operationId": "placeOrder",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "order placed for purchasing the pet",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          },
-          "400": {
-            "description": "Invalid Order"
-          }
-        }
-      }
-    },
-    "/store/order/{orderId}": {
-      "get": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Find purchase order by ID",
-        "description": "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions",
-        "operationId": "getOrderById",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "description": "ID of pet that needs to be fetched",
-            "required": true,
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 1,
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Order not found"
-          }
-        }
+        "deprecated": false
       },
-      "delete": {
-        "tags": [
-          "store"
-        ],
-        "summary": "Delete purchase order by ID",
-        "description": "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors",
-        "operationId": "deleteOrder",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "description": "ID of the order that needs to be deleted",
-            "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Order not found"
-          }
-        }
-      }
-    },
-    "/user": {
       "post": {
         "tags": [
-          "user"
+          "charge-controller"
         ],
-        "summary": "Create user",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "createUser",
+        "summary": "Create a new charge for a given agreement and customer.\n\nAn idempotency key must be provided to ensure idempotent requests.\nKey size [1..30] characters.",
+        "operationId": "createUsingPOST",
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
         "produces": [
-          "application/xml",
-          "application/json"
+          "application/json;charset=UTF-8"
         ],
         "parameters": [
           {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer 'auth token'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Idempotent-Key",
+            "in": "header",
+            "description": "Idempotent-Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agreementId",
+            "in": "path",
+            "description": "Agreement ID",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
-            "name": "body",
-            "description": "Created user object",
+            "name": "charge",
+            "description": "charge",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/CreateCharge"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": "successful operation"
-          }
-        }
-      }
-    },
-    "/user/createWithArray": {
-      "post": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Creates list of users with given input array",
-        "description": "",
-        "operationId": "createUsersWithArrayInput",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "List of user object",
-            "required": true,
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ChargeResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ChargeResponse"
+            }
+          },
+          "204": {
+            "description": "No Content (operation succeeded previously)",
+            "schema": {
+              "$ref": "#/definitions/ChargeResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid request, check your parameters",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/FieldErrorDto"
               }
             }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "successful operation"
-          }
-        }
-      }
-    },
-    "/user/createWithList": {
-      "post": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Creates list of users with given input array",
-        "description": "",
-        "operationId": "createUsersWithListInput",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "List of user object",
-            "required": true,
+          },
+          "409": {
+            "description": "Conflict, retry in a moment. (simultaneous idempotent requests)",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/User"
+                "$ref": "#/definitions/FieldErrorDto"
               }
             }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "successful operation"
-          }
-        }
-      }
-    },
-    "/user/login": {
-      "get": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Logs user into the system",
-        "description": "",
-        "operationId": "loginUser",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "query",
-            "description": "The user name for login",
-            "required": true,
-            "type": "string"
           },
-          {
-            "name": "password",
-            "in": "query",
-            "description": "The password for login in clear text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
+          "500": {
+            "description": "Internal server error",
             "schema": {
-              "type": "string"
-            },
-            "headers": {
-              "X-Rate-Limit": {
-                "type": "integer",
-                "format": "int32",
-                "description": "calls per hour allowed by the user"
-              },
-              "X-Expires-After": {
-                "type": "string",
-                "format": "date-time",
-                "description": "date in UTC when token expires"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
               }
             }
           },
-          "400": {
-            "description": "Invalid username/password supplied"
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Timeout"
           }
-        }
+        },
+        "deprecated": false
       }
     },
-    "/user/logout": {
+    "/api/v1/charge/{agreementId}/{chargeId}": {
       "get": {
         "tags": [
-          "user"
+          "charge-controller"
         ],
-        "summary": "Logs out current logged in user session",
-        "description": "",
-        "operationId": "logoutUser",
+        "summary": "Fetch a Charge",
+        "operationId": "getUsingGET_1",
         "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "default": {
-            "description": "successful operation"
-          }
-        }
-      }
-    },
-    "/user/{username}": {
-      "get": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Get user by user name",
-        "description": "",
-        "operationId": "getUserByName",
-        "produces": [
-          "application/xml",
-          "application/json"
+          "application/json;charset=UTF-8"
         ],
         "parameters": [
           {
-            "name": "username",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer 'auth token'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agreementId",
             "in": "path",
-            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "description": "agreementId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chargeId",
+            "in": "path",
+            "description": "The charge identifier (id)",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/ChargeResponse"
             }
           },
           "400": {
-            "description": "Invalid username supplied"
+            "description": "The requested charge does not exist"
           },
-          "404": {
-            "description": "User not found"
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Timeout"
           }
-        }
+        },
+        "deprecated": false
       },
-      "put": {
+      "delete": {
         "tags": [
-          "user"
+          "charge-controller"
         ],
-        "summary": "Updated user",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "updateUser",
+        "summary": "Cancel a Charge",
+        "operationId": "cancelUsingDELETE",
         "produces": [
-          "application/xml",
-          "application/json"
+          "application/json;charset=UTF-8"
         ],
         "parameters": [
           {
-            "name": "username",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer 'auth token'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agreementId",
             "in": "path",
-            "description": "name that need to be updated",
+            "description": "The agreement identifier (id)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "chargeId",
+            "in": "path",
+            "description": "The charge identifier (id)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChargeResponse"
+            }
+          },
+          "204": {
+            "description": "No Content (operation succeeded previously)",
+            "schema": {
+              "$ref": "#/definitions/ChargeResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid request, check your parameters",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "409": {
+            "description": "This charge is not in a deletable state, it may have already been charged to the user."
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Timeout"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/v1/charge/{agreementId}/{chargeId}/refund": {
+      "post": {
+        "tags": [
+          "charge-controller"
+        ],
+        "summary": "Refund a charge\n\nAn idempotency key must be provided to ensure idempotent requests.\nKey size [1..30] characters.",
+        "operationId": "refundUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer 'auth token'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Idempotent-Key",
+            "in": "header",
+            "description": "Idempotent-Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agreementId",
+            "in": "path",
+            "description": "The agreement identifier (id)",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
-            "name": "body",
-            "description": "Updated user object",
+            "name": "charge",
+            "description": "charge",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "$ref": "#/definitions/RefundRequestDto"
             }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid user supplied"
           },
-          "404": {
-            "description": "User not found"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Delete user",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "deleteUser",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
           {
-            "name": "username",
+            "name": "chargeId",
             "in": "path",
-            "description": "The name that needs to be deleted",
+            "description": "The charge identifier (id)",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ChargeResponse"
+            }
+          },
           "400": {
-            "description": "Invalid username supplied"
+            "description": "Invalid request, check your parameters",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
           },
           "404": {
-            "description": "User not found"
+            "description": "Charge does not exist (and never has)",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Timeout"
           }
-        }
-      }
-    }
-  },
-  "securityDefinitions": {
-    "petstore_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-      "flow": "implicit",
-      "scopes": {
-        "write:pets": "modify pets in your account",
-        "read:pets": "read your pets"
+        },
+        "deprecated": false
       }
     },
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
+    "/api/v1/draftAgreement": {
+      "post": {
+        "tags": [
+          "draft-agreement-controller"
+        ],
+        "summary": "Send a new customer to Vipps in order to accept Agreement",
+        "operationId": "registerUsingPOST",
+        "consumes": [
+          "application/json;charset=UTF-8"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer 'auth token'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Merchant-Serial-Number",
+            "in": "header",
+            "description": "The applicable merchant serial number currently being represented",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "draftAgreement",
+            "description": "draftAgreement",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DraftAgreement"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DraftAgreementResponse"
+            }
+          },
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DraftAgreementResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity (invalid json)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FieldErrorDto"
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        },
+        "deprecated": false
+      }
     }
   },
   "definitions": {
-    "Order": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "petId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "shipDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "type": "string",
-          "description": "Order Status",
-          "enum": [
-            "placed",
-            "approved",
-            "delivered"
-          ]
-        },
-        "complete": {
-          "type": "boolean",
-          "default": false
-        }
-      },
-      "xml": {
-        "name": "Order"
-      }
-    },
-    "Category": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "xml": {
-        "name": "Category"
-      }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "username": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "userStatus": {
-          "type": "integer",
-          "format": "int32",
-          "description": "User Status"
-        }
-      },
-      "xml": {
-        "name": "User"
-      }
-    },
-    "Tag": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "xml": {
-        "name": "Tag"
-      }
-    },
-    "Pet": {
+    "Agreement": {
       "type": "object",
       "required": [
-        "name",
-        "photoUrls"
+        "interval",
+        "intervalCount",
+        "price",
+        "productDescription",
+        "productName",
+        "status"
       ],
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
+        "campaign": {
+          "description": "A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date",
+          "$ref": "#/definitions/campaign"
         },
-        "category": {
-          "$ref": "#/definitions/Category"
-        },
-        "name": {
+        "currency": {
           "type": "string",
-          "example": "doggie"
+          "example": "NOK",
+          "enum": [
+            "NOK"
+          ]
         },
-        "photoUrls": {
-          "type": "array",
-          "xml": {
-            "name": "photoUrl",
-            "wrapped": true
-          },
-          "items": {
-            "type": "string"
-          }
+        "id": {
+          "type": "string",
+          "example": "agr_5kSeqzFAMkfBbc",
+          "description": "Uniquely identifies this agreement",
+          "readOnly": true
         },
-        "tags": {
-          "type": "array",
-          "xml": {
-            "name": "tag",
-            "wrapped": true
-          },
-          "items": {
-            "$ref": "#/definitions/Tag"
-          }
+        "interval": {
+          "type": "string",
+          "example": "week",
+          "description": "Interval for subscription",
+          "enum": [
+            "day",
+            "week",
+            "month"
+          ]
+        },
+        "intervalCount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.",
+          "minimum": 1,
+          "maximum": 31,
+          "exclusiveMinimum": false,
+          "exclusiveMaximum": false
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7900,
+          "description": "Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
+        },
+        "productDescription": {
+          "type": "string",
+          "example": "Fin abonnementspakke"
+        },
+        "productName": {
+          "type": "string",
+          "example": "Pluss-abonnement",
+          "description": "Name of the product being subscribed to."
+        },
+        "startDate": {
+          "type": "string",
+          "example": "2019-01-01T00:00:00Z",
+          "description": "Date when agreement was started.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": "pet status in the store",
+          "example": "ACTIVE",
+          "description": "Status of the agreement.",
           "enum": [
-            "available",
-            "pending",
-            "sold"
+            "PENDING",
+            "ACTIVE",
+            "STOPPED",
+            "EXPIRED"
+          ]
+        },
+        "stopDate": {
+          "type": "string",
+          "example": "2019-01-01T00:00:00Z",
+          "description": "Date when agreement was stopped.",
+          "readOnly": true
+        }
+      },
+      "title": "Agreement"
+    },
+    "ChargeResponse": {
+      "type": "object",
+      "required": [
+        "amount",
+        "amountRefunded",
+        "dueDate",
+        "id",
+        "status"
+      ],
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 234,
+          "description": "Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
+        },
+        "amountRefunded": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "The total amount which has been refunded, in case of status refund/partial refund. \nTreated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
+        },
+        "description": {
+          "type": "string",
+          "example": "Bla bla bla",
+          "readOnly": true
+        },
+        "dueDate": {
+          "type": "string",
+          "example": "2030-12-31T00:00:00Z"
+        },
+        "id": {
+          "type": "string",
+          "example": "chg_WCVbcAbRCmu2zk",
+          "description": "Unique identifier for this charge, up to 15 characters."
+        },
+        "status": {
+          "type": "string",
+          "example": "PENDING",
+          "enum": [
+            "PENDING",
+            "DUE",
+            "CHARGED",
+            "FAILED",
+            "CANCELLED",
+            "PARTIALLY_REFUNDED",
+            "REFUNDED",
+            "PROCESSING"
+          ]
+        },
+        "transactionId": {
+          "type": "string",
+          "example": 5001419121,
+          "description": "Contains null until the status has reached CHARGED",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "example": "RECURRING",
+          "readOnly": true,
+          "enum": [
+            "INITIAL",
+            "RECURRING",
+            "ONEOFF"
           ]
         }
       },
-      "xml": {
-        "name": "Pet"
-      }
+      "title": "ChargeResponse"
     },
-    "ApiResponse": {
+    "CreateCharge": {
+      "type": "object",
+      "required": [
+        "amount",
+        "description",
+        "hasPriceChanged"
+      ],
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 234,
+          "description": "Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
+        },
+        "currency": {
+          "type": "string",
+          "example": "NOK",
+          "enum": [
+            "NOK"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "example": "Månedsabonnement",
+          "description": "This field is visible to the end user in-app"
+        },
+        "dueDate": {
+          "type": "string",
+          "example": "2030-12-31",
+          "description": "yyyy-MM-dd"
+        },
+        "hasPriceChanged": {
+          "type": "boolean",
+          "example": false,
+          "description": "If the amount exceeds the amount specified on the agreement, this field must be true to indicate that there is an update price for the parent subscription"
+        },
+        "retryDays": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "The service will attempt to charge the customer for N days [non inclusive], must be null or contain a value >= 0. If zero, no retries will be performed"
+        }
+      },
+      "title": "CreateCharge"
+    },
+    "DraftAgreement": {
+      "type": "object",
+      "required": [
+        "currency",
+        "interval",
+        "intervalCount",
+        "isApp",
+        "merchantAgreementUrl",
+        "merchantRedirectUrl",
+        "price",
+        "productDescription",
+        "productName"
+      ],
+      "properties": {
+        "campaign": {
+          "description": "A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date",
+          "$ref": "#/definitions/campaign"
+        },
+        "currency": {
+          "type": "string",
+          "example": "NOK",
+          "enum": [
+            "NOK"
+          ]
+        },
+        "customerPhoneNumber": {
+          "type": "string",
+          "example": "+4740000000",
+          "description": "Customers phone number (if available). Used to simplify the following Vipps interaction"
+        },
+        "initialCharge": {
+          "$ref": "#/definitions/InitialCharge"
+        },
+        "interval": {
+          "type": "string",
+          "example": "WEEK",
+          "description": "Interval for subscription",
+          "enum": [
+            "YEAR",
+            "MONTH",
+            "WEEK",
+            "DAY"
+          ]
+        },
+        "intervalCount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year",
+          "minimum": 1,
+          "maximum": 31,
+          "exclusiveMinimum": false,
+          "exclusiveMaximum": false
+        },
+        "isApp": {
+          "type": "boolean",
+          "example": true,
+          "description": "If merchant is redirecting user from an app."
+        },
+        "merchantAgreementUrl": {
+          "type": "string",
+          "example": "https://www.merchant.no/subscriptions/1234/",
+          "description": "URL where Vipps can redirect the customer to view/administer their subscription."
+        },
+        "merchantRedirectUrl": {
+          "type": "string",
+          "example": "https://api.merchant.no/landing",
+          "description": "URL where customer should be redirected after the agreement has been approved/rejected in the Vipps mobile application."
+        },
+        "oneOffCharge": {
+          "$ref": "#/definitions/OneOffCharge"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7900,
+          "description": "Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
+        },
+        "productDescription": {
+          "type": "string",
+          "example": "Fin abonnementspakke"
+        },
+        "productName": {
+          "type": "string",
+          "example": "Pluss-abonnement",
+          "description": "Name of the product being subscribed to."
+        }
+      },
+      "title": "DraftAgreement"
+    },
+    "DraftAgreementResponse": {
+      "type": "object",
+      "properties": {
+        "agreementResource": {
+          "type": "string",
+          "example": "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc",
+          "description": "Reference to AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.",
+          "readOnly": true
+        },
+        "redirectToVipps": {
+          "type": "string",
+          "example": "https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV",
+          "description": "Customer should be redirected to Vipps using this URL.",
+          "readOnly": true
+        }
+      },
+      "title": "DraftAgreementResponse"
+    },
+    "FieldErrorDto": {
       "type": "object",
       "properties": {
         "code": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         },
-        "type": {
+        "field": {
           "type": "string"
         },
         "message": {
           "type": "string"
         }
-      }
+      },
+      "title": "FieldErrorDto"
+    },
+    "HealthCheckStatus": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "type": "boolean"
+        },
+        "cosmosDb": {
+          "type": "boolean"
+        },
+        "paymentDb": {
+          "type": "boolean"
+        }
+      },
+      "title": "HealthCheckStatus"
+    },
+    "InitialCharge": {
+      "type": "object",
+      "required": [
+        "amount",
+        "currency",
+        "description"
+      ],
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 234,
+          "description": "Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
+        },
+        "currency": {
+          "type": "string",
+          "example": "NOK",
+          "enum": [
+            "NOK"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "example": "Månedsabonnement",
+          "description": "This field is visible to the end user in-app"
+        }
+      },
+      "title": "InitialCharge",
+      "description": "An initial charge for a new agreement. The charge will be executed immediately when the user approves the agreement."
+    },
+    "OneOffCharge": {
+      "type": "object",
+      "required": [
+        "amount",
+        "currency",
+        "description"
+      ],
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 234,
+          "description": "Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
+        },
+        "currency": {
+          "type": "string",
+          "example": "NOK",
+          "enum": [
+            "NOK"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "example": "Månedsabonnement",
+          "description": "This field is visible to the end user in-app"
+        }
+      },
+      "title": "OneOffCharge",
+      "description": "An one-off charge with this agreement. For example a bundles sale (product + subscription)."
+    },
+    "RefundRequestDto": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "format": "int32",
+          "example": 100,
+          "description": "The amount to refund"
+        },
+        "description": {
+          "type": "string",
+          "example": "Forgot to apply discount, refunding 50%",
+          "description": "A textual description of the operation, which will be displayed in the users app."
+        }
+      },
+      "title": "RefundRequestDto"
+    },
+    "campaign": {
+      "type": "object",
+      "properties": {
+        "campaignPrice": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1500,
+          "description": "The price of the agreement in the discount period. The lowering of the price will be displayed in-app."
+        },
+        "end": {
+          "type": "string",
+          "example": "2019-06-01T00:00:00Z",
+          "description": "The date and time the campaign ends. Needs to be UTC"
+        }
+      },
+      "title": "campaign"
     }
-  },
-  "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
   }
 }
