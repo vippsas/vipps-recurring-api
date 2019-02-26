@@ -10,7 +10,7 @@ The Vipps Recurring API delivers recurring payment functionality for a merchant 
 
 | Term |  Description                                    |
 |:-----|:----------------------------------------------- |
-| Agreement         | An payment subscription with a set of parameters that a customer agrees to  |
+| Agreement         | A payment subscription with a set of parameters that a customer agrees to  |
 | Charge         | A single payment within an agreement |
 | Idempotency | The property of endpoints to be called multiple times without changing the result beyond the initial application. |
 
@@ -160,8 +160,8 @@ A campaign in recurring is a period where the price is lower than usual, and thi
 In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or update an agreement [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) for an ongoing agreement.
 ```
 "campaign": {
-  "start": "2019-05-01T00:00:00:00Z",
-  "end": "2019-06-01T00:00:00:00Z",
+  "start": "2019-05-01T00:00:00Z",
+  "end": "2019-06-01T00:00:00Z",
 	"campaignPrice": 49900
 }
 ```
@@ -169,7 +169,7 @@ In order to start a campaign the campaign field has to be added either to the ag
 | Field         | Description                                 |
 | ------------------- | ------------------------------------------- |
 | `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
-| `end`            | End date of campaign offer |
+| `end`            | End date of campaign offer, can not be in the past |
 | `originalPrice`       | The price that will be shown for comparison   |
 
 ## HTTP responses
