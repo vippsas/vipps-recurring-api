@@ -1,403 +1,593 @@
 {
-	"variables": [],
 	"info": {
-		"name": "Vipps Payments - Recurring",
-		"_postman_id": "81c17431-cec2-7cc1-4591-2190abe16f3e",
-		"description": "This is a collection of tests intended to be run towards the MerchantTest (MT) environment for Vipps Recurring",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"_postman_id": "0acbf3d2-7339-4561-b407-f7faeb820b1c",
+		"name": "Recurring Payments v1 - Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get Access Token",
-			"event": [
+			"name": "Access Token",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"var jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"Access_Token\", jsonData.access_token);",
-							"",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "https://apitest.vipps.no/accesstoken/get",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp-Apim-Subscription-Key_token}}",
-						"description": ""
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					},
-					{
-						"key": "client_id",
-						"value": "{{client_id}}",
-						"description": ""
-					},
-					{
-						"key": "client_secret",
-						"value": "{{client_secret}}",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"description": "Retrives an authorization token that can be used in calling Vipps API's. Valid for 24 hours."
-			},
-			"response": []
-		},
-		{
-			"name": "Draft Agreement start now",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"var jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"Agreement_ID\", jsonData.agreementResource.split('/')[7])"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "https://apitest.vipps.no/recurring/api/v1/draftAgreement",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"currency\": \"NOK\",\r\n  \"customerPhoneNumber\": \"+4740000000\",\r\n  \"initialCharge\": {\r\n    \"amount\": 234,\r\n    \"currency\": \"NOK\",\r\n    \"description\": \"Månedsabonnement\",\r\n    \"retryDays\": 5\r\n  },\r\n  \"interval\": \"WEEK\",\r\n  \"intervalCount\": 2,\r\n  \"isApp\": true,\r\n  \"merchantRedirectUrl\": \"https://api.merchant.no/landing\",\r\n  \"merchantSubscriptionUrl\": \"https://www.merchant.no/subscriptions/1234/\",\r\n  \"oneOffCharge\": {\r\n    \"amount\": 234,\r\n    \"currency\": \"NOK\",\r\n    \"description\": \"Månedsabonnement\"\r\n  },\r\n  \"price\": 7900,\r\n  \"productDescription\": \"Fin abonnementspakke\",\r\n  \"productName\": \"Pluss-abonnement\"\r\n}\r\n"
-				},
-				"description": "Drafts an agreement that can be approved by end user"
-			},
-			"response": []
-		},
-		{
-			"name": "Fetch Agreements",
-			"request": {
-				"url": {
-					"raw": "https://apitest.vipps.no/recurring/api/v1/agreement",
-					"protocol": "https",
-					"host": [
-						"apitest",
-						"vipps",
-						"no"
-					],
-					"path": [
-						"recurring",
-						"api",
-						"v1",
-						"agreement"
-					],
-					"query": [
+					"name": "Get Access Token",
+					"event": [
 						{
-							"key": "status",
-							"value": "ACTIVE",
-							"disabled": true
+							"listen": "test",
+							"script": {
+								"id": "e82847b6-91eb-4ce3-9fb5-8198d399ff0a",
+								"exec": [
+									"pm.environment.set(\"access_token\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
-					"variable": []
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}"
+							},
+							{
+								"key": "client_secret",
+								"value": "{{client_secret}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Access-Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/accessToken/get",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accessToken",
+								"get"
+							]
+						}
 					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": "Does a GET and retrieves all agreements based on the Merchant-serial-number in the header"
-			},
-			"response": []
-		},
-		{
-			"name": "Get Agreement",
-			"request": {
-				"url": "https://apitest.vipps.no/recurring/api/v1/agreement/{{Agreement_ID}}",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": "GET one agreement (script based on last created Agreement)"
-			},
-			"response": []
-		},
-		{
-			"name": "Update Agreement",
-			"request": {
-				"url": "https://apitest.vipps.no/recurring/api/v1/agreement/{{Agreement_ID}}",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n\"currency\":\"NOK\",\r\n\"interval\":\"week\",\r\n\"intervalCount\":2,\r\n\"price\":7900,\r\n\"productDescription\":\"Fin abonnementspakke 2\",\r\n\"productName\":\"Pluss-abonnement\",\r\n\"status\":\"ACTIVE\"\r\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Create Charge",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"var jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"Charge_ID\", jsonData.id);"
-						]
-					}
+					"response": []
 				}
-			],
-			"request": {
-				"url": "https://apitest.vipps.no/recurring/api/v1/charge/{{Agreement_ID}}",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					},
-					{
-						"key": "Idempotent-Key",
-						"value": "VippsTest!",
-						"description": ""
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"amount\": 1001,\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"Månedsabonnement\",\r\n  \"dueDate\": \"2030-12-31\",\r\n  \"hasPriceChanged\": false,\r\n  \"retryDays\": 5,\r\n  \"type\": \"RECURRING\",\r\n  \"merchantSerialNumber\": \"2210489\"\r\n}"
-				},
-				"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Get Charge",
-			"request": {
-				"url": "https://apitest.vipps.no/recurring/api/v1/charge/{{Agreement_ID}}/{{Charge_ID}}",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": "GET one agreement (script based on last created Agreement)"
-			},
-			"response": []
-		},
-		{
-			"name": "List Charges",
-			"request": {
-				"url": "https://apitest.vipps.no/recurring/api/v1/charge/{{Agreement_ID}}",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					},
-					{
-						"key": "Content-Type",
-						"value": "Application/json",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": "Lists all charges for an agreement"
-			},
-			"response": []
-		},
-		{
-			"name": "Cancel Charge",
-			"request": {
-				"url": "https://apitest.vipps.no/recurring/api/v1/agreement/{{Agreement_ID}}",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": "GET one agreement (script based on last created Agreement)"
-			},
-			"response": []
-		},
-		{
-			"name": "Draft Agreement start now with Initial Charge copy",
-			"event": [
+			"name": "Agreement Controller",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"var jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"Agreement_ID\", jsonData.agreementResource.split('/')[7])"
-						]
-					}
-				}
-			],
-			"request": {
-				"url": "https://apitest.vipps.no/recurring/api/v1/draftAgreement",
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+					"name": "Draft Agreement - Minimal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
+								"exec": [
+									"//pm.environment.set(\"agreementResource\", pm.response.json().agreementResource);",
+									"var jsonData =  pm.response.json();",
+									"var agreementResourceArray = jsonData.agreementResource.split('/');",
+									"pm.environment.set(\"agreementId\", agreementResourceArray[agreementResourceArray.length - 1]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/draftAgreement",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"draftAgreement"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
 					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{Access_Token}}",
-						"description": ""
-					},
-					{
-						"key": "Merchant-serial-number",
-						"value": "{{Merchant-serial-number}}",
-						"description": ""
-					},
-					{
-						"key": "Ocp-Apim-Subscription-Key",
-						"value": "{{Ocp_Apim_Key}}",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"charge\": {\r\n    \"amount\": 234,\r\n    \"currency\": \"NOK\",\r\n    \"description\": \"Månedsabonnement\",\r\n    \"retryDays\": 5,\r\n    \"type\": \"RECURRING\"\r\n  },\r\n  \"initialCharge\": {\r\n    \"amount\": 234,\r\n    \"currency\": \"NOK\",\r\n    \"description\": \"Produkt\",\r\n    \"dueDate\": \"2020-12-31\",\r\n    \"retryDays\": 5\r\n  },\r\n  \"currency\": \"NOK\",\r\n  \"customerPhoneNumber\": \"+4740000000\",\r\n  \"interval\": \"WEEK\",\r\n  \"intervalCount\": 2,\r\n  \"isApp\": true,\r\n  \"merchantRedirectUrl\": \"https://api.merchant.no/landing\",\r\n  \"price\": 7900,\r\n  \"productDescription\": \"Fin abonnementspakke\",\r\n  \"productName\": \"Pluss-abonnement\"\r\n}"
+					"response": []
 				},
-				"description": "Drafts an agreement that can be approved by end user"
-			},
-			"response": []
+				{
+					"name": "Draft Agreement - Full",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"agreementId\", jsonData.agreementResource.split('/')[jsonData.length - 1]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"oneOffCharge\": {\n   \"amount\": {{amount_one}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_one}}\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/draftAgreement",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"draftAgreement"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Agreement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"currency\":\"NOK\",\r\n\"interval\":\"{{interval}}\",\r\n\"intervalCount\":{{intervalCount}},\r\n\"price\":{{price_updated}},\r\n\"productDescription\":\"{{productDescription_updated}}\",\r\n\"productName\":\"{{productName_updated}}\",\r\n\"status\":\"{{status_updated}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/agreement/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"agreement",
+								"{{agreementId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "571ec69e-2c13-4772-9bc8-ec98dd75da11",
+								"exec": [
+									"//pm.environment.set(\"agreementId\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/agreement/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"agreement",
+								"{{agreementId}}"
+							]
+						},
+						"description": "GET one agreement (script based on last created Agreement)"
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Agreements",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/agreement",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"agreement"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "{{filter_by_status_agreements}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Does a GET and retrieves all agreements based on the MerchantId in the header"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Charge Controller",
+			"item": [
+				{
+					"name": "Create Charge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"chargeId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotent-Key",
+								"value": "{{agreementId}}IK1"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"dueDate\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"charge",
+								"{{agreementId}}"
+							]
+						},
+						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
+					},
+					"response": []
+				},
+				{
+					"name": "Refund Charge",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Idempotent-Key",
+								"value": "{{chargeId}}{{Idempotent-Key_nr}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 100,\r\n  \"description\":\"description_refund\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}/{{chargeId}}/refund",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"charge",
+								"{{agreementId}}",
+								"{{chargeId}}",
+								"refund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Charge",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}/{{chargeId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"charge",
+								"{{agreementId}}",
+								"{{chargeId}}"
+							]
+						},
+						"description": "GET one agreement (script based on last created Agreement)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Charge",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}/{{chargeId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"charge",
+								"{{agreementId}}",
+								"{{chargeId}}"
+							]
+						},
+						"description": "GET one agreement (script based on last created Agreement)"
+					},
+					"response": []
+				},
+				{
+					"name": "List Charges",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "Application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}?",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"charge",
+								"{{agreementId}}"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "{{filter_by_status_charges}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Lists all charges for an agreement"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d6fc3a8b-3ce3-404d-9495-871a0b93b9c2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "22fe5330-e715-49f0-af9a-3ad23ef07572",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
