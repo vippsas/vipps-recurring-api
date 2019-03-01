@@ -102,20 +102,20 @@
 			"enabled": true
 		},
 		{
-			"key": "filter_by_status_agreements",
+			"key": "status_agreements",
 			"value": "ACTIVE",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "status_charges",
+			"value": "CHARGED",
 			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "status_updated",
 			"value": "ACTIVE",
-			"description": "",
-			"enabled": true
-		},
-		{
-			"key": "filter_by_status_charges",
-			"value": "CHARGED",
 			"description": "",
 			"enabled": true
 		},
@@ -212,6 +212,6 @@
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2019-03-01T13:00:13.558Z",
+	"_postman_exported_at": "2019-03-01T13:09:45.252Z",
 	"_postman_exported_using": "Postman/6.7.3"
 }

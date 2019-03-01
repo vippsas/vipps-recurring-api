@@ -301,7 +301,7 @@
 							"query": [
 								{
 									"key": "status",
-									"value": "{{filter_by_status_agreements}}",
+									"value": "{{status_agreements}}",
 									"disabled": true
 								}
 							]
@@ -556,7 +556,7 @@
 							"query": [
 								{
 									"key": "status",
-									"value": "{{filter_by_status_charges}}",
+									"value": "{{status_charges}}",
 									"disabled": true
 								}
 							]
