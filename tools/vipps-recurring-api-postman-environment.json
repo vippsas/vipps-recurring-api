@@ -126,14 +126,32 @@
 			"enabled": true
 		},
 		{
-			"key": "Idempotent-Key_nr",
-			"value": "1",
+			"key": "base_url",
+			"value": "https://apitest.vipps.no",
+			"enabled": true
+		},
+		{
+			"key": "agreementId",
+			"value": "<This value will be overwritten when you call Draft Agreement>",
 			"description": "",
 			"enabled": true
 		},
 		{
-			"key": "base_url",
-			"value": "https://apitest.vipps.no",
+			"key": "chargeId",
+			"value": "<This value will be overwritten when you call Create Charge>",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "Idempotent-Key-Create",
+			"value": "<This value will be overwritten when you call Create Charge>",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "Idempotent-Key-Refund",
+			"value": "<This value will be overwritten when you call Refund Charge>",
+			"description": "",
 			"enabled": true
 		},
 		{
@@ -189,29 +207,12 @@
 			"enabled": true
 		},
 		{
-			"key": "agreementId",
-			"value": "<This value will be overwritten when you call Draft Agreement>",
-			"description": "",
-			"enabled": true
-		},
-		{
-			"key": "orderId",
-			"value": "<This value will be overwritten on each Initiate Payment call with MSN + timestamp + random int>",
-			"enabled": true
-		},
-		{
 			"key": "access_token",
 			"value": "<This value will be overwritten when you call the Get Access Token API when having selected eCommerce v2 - MTE environment>",
-			"enabled": true
-		},
-		{
-			"key": "chargeId",
-			"value": "<This value will be overwritten when you call Create Charge>",
-			"description": "",
 			"enabled": true
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2019-03-01T13:09:45.252Z",
+	"_postman_exported_at": "2019-03-06T09:44:12.612Z",
 	"_postman_exported_using": "Postman/6.7.3"
 }

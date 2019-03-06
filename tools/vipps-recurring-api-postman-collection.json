@@ -316,7 +316,7 @@
 			"name": "Charge Controller",
 			"item": [
 				{
-					"name": "Create Charge",
+					"name": "Create Charge - Due tomorrow",
 					"event": [
 						{
 							"listen": "test",
@@ -325,6 +325,20 @@
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
 									"postman.setEnvironmentVariable(\"chargeId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6dcb97eb-eac4-47c7-b993-dcb90ab2303d",
+								"exec": [
+									"var tomorrow = new Date();\r",
+									"tomorrow.setDate(tomorrow.getDate() + 1);\r",
+									"tomorrowString = [tomorrow.getFullYear(), (\"0\" + (tomorrow.getMonth()+1)).slice(-2), (\"0\" + tomorrow.getDate()).slice(-2)].join('-');\r",
+									"pm.environment.set(\"dueDate\", tomorrowString);\r",
+									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
 								"type": "text/javascript"
 							}
@@ -343,7 +357,77 @@
 							},
 							{
 								"key": "Idempotent-Key",
-								"value": "{{agreementId}}IK1"
+								"value": "{{Idempotent-Key-Create}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"dueDate\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"api",
+								"v1",
+								"charge",
+								"{{agreementId}}"
+							]
+						},
+						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Charge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"chargeId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6dcb97eb-eac4-47c7-b993-dcb90ab2303d",
+								"exec": [
+									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{Merchant-Serial-Number}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotent-Key",
+								"value": "{{Idempotent-Key-Create}}"
 							},
 							{
 								"key": "Authorization",
@@ -377,6 +461,18 @@
 				},
 				{
 					"name": "Refund Charge",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "bcaca125-c4b6-4dc1-b214-ae32237168ef",
+								"exec": [
+									"pm.environment.set('Idempotent-Key-Refund',pm.environment.get('agreementId') + (new Date()).getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -393,7 +489,7 @@
 							},
 							{
 								"key": "Idempotent-Key",
-								"value": "{{chargeId}}{{Idempotent-Key_nr}}",
+								"value": "{{Idempotent-Key-Refund}}",
 								"type": "text"
 							},
 							{
