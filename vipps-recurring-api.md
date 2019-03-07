@@ -193,10 +193,9 @@ This API returns the following HTTP statuses in the responses:
 All error responses contains an `error` object in the body, with details of the problem.
 
 ## Authentication and authorization - API access token
+For all product request we require the use of a `Authorization` header. This header is required by making a Access Token request with the values `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`. See the [Access Token swagger](https://vippsas.github.io/vipps-accesstoken-api/#/Authorization_Service/fetchAuthorizationTokenUsingPost) and the [getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#step-3) for more information.
 
-Shortly summarized, you will have to make the following request
-(`client_id`, `client_secret` and `Ocp-Apim-Subscription-Key` placeholders must be replaced with real values):
-
+[`POST:/get`](https://vippsas.github.io/vipps-accesstoken-api/#/Authorization_Service/fetchAuthorizationTokenUsingPost)
 ```http
 POST https://apitest.vipps.no/accesstoken/get HTTP/1.1
 Host: apitest.vipps.no
@@ -212,6 +211,8 @@ The request above will return a response similar to this, with the `access_token
 
 ```http
 HTTP 200 OK
+```
+```json
 {
   "token_type": "Bearer",
   "expires_in": "86398",
