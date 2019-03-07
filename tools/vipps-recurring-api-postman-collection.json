@@ -505,7 +505,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": 100,\r\n  \"description\":\"description_refund\"\r\n}\r\n"
+							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}/{{chargeId}}/refund",
