@@ -135,9 +135,10 @@ Manage charges and agreement
 #### Agreement states
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `pending`  | Agreement has been created, but not approved by the user in the app yet |
-| 2 | `active` | The Agreement has been confirmed by the end user in the app and can receive charges |
-| 3 | `stopped`  | Agreement has been stopped by the merchant most, typically when the end user wants to cancel the payment agreement |
+| 1 | `PENDING`  | Agreement has been created, but not approved by the user in the app yet |
+| 2 | `ACTIVE` | The Agreement has been confirmed by the end user in the app and can receive charges |
+| 3 | `STOPPED`  | Agreement has been stopped by the merchant most, typically when the end user wants to cancel the payment agreement |
+| 4 | `EXPIRED` | The user did not accept the agreement within the app |
 
 #### Charge states
 
@@ -145,12 +146,12 @@ Manage charges and agreement
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `pending`  | Charge has been created. |
-| 2 | `due` | The charge will be drawn in 8 days, and can now be viewed by the user in the app                                      |
-| 3 | `charged`  | Charge has been completed
-| 4 | `failed`  | Charge has failed for some reason. I.E Expired card, insufficient funds, etc.
-| 5 | `refunded` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured
-| 6 | `partially_refunded`| Charge successfully refunded, used if the refund is a partial ammount of the captured amount.
+| 1 | `PENDING`  | Charge has been created. |
+| 2 | `DUE` | The charge will be drawn in 8 days, and can now be viewed by the user in the app                                      |
+| 3 | `CHARGED`  | Charge has been completed
+| 4 | `FAILED`  | Charge has failed for some reason. I.E Expired card, insufficient funds, etc.
+| 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured
+| 6 | `PARTIALLY_REFUNDED`| Charge successfully refunded, used if the refund is a partial ammount of the captured amount.
 
 ## Campaigns
 A campaign in recurring is a period where the price is lower than usual, and this is communicated to the customer with the original price shown for comparison. This Functionality is currently being developed and is subject to change.
