@@ -16,9 +16,9 @@ The Vipps Recurring API delivers recurring payment functionality for a merchant 
 
 ## How to perform recurring payments
 
-1. Draft an agreement to be approved with [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST). In the response an `agreementResource` is created with an `agreementId`
+1. Draft an agreement to be approved with [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST). In the response an `agreementResource` is created with an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) request. 
 
-2. The approved agreement is retrieved from [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) with `"status":"active"` when customer approves the agreement
+2. The approved agreement is retrieved from [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) with `"status":"active"` when customer approves the agreement.
 
 3. Create charges on the agreement with [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST)
 
@@ -28,7 +28,7 @@ The Vipps Recurring API delivers recurring payment functionality for a merchant 
 The following code illustrates how to create an agreement:
 
 [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST)
-```
+```json
 {
   "currency": "NOK",
   "customerPhoneNumber":"90000000",
@@ -64,7 +64,7 @@ Example for a quarterly subscription
 "intervalCount": 3,
 ```
 
-**Initial charge**\
+#### Initial charge
 Initial charge will be performed if the `initialcharge` is provided when creating an agreement. The `amount` has to correspond to the `price` of the agreement.
 
 ```
@@ -75,7 +75,7 @@ Initial charge will be performed if the `initialcharge` is provided when creatin
 },
 ```
 
-**One-time amount**\
+#### One-time amount
 An agreement can be created with an additional payment amount with the `oneOffCharge`
 
 ```
@@ -86,6 +86,25 @@ An agreement can be created with an additional payment amount with the `oneOffCh
 },
 ```
 
+#### Campaigns
+A campaign in recurring is a period where the price is lower than usual, and this is communicated to the customer with the original price shown for comparison. This Functionality is currently being developed and is subject to change.
+
+<img src="images/CampaignExample.PNG" width="185">
+
+In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or update an agreement [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) for an ongoing agreement.
+```
+"campaign": {
+  "start": "2019-05-01T00:00:00Z",
+  "end": "2019-06-01T00:00:00Z",
+  "campaignPrice": 49900
+}
+```
+
+| Field         | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
+| `end`            | End date of campaign offer, can not be in the past |
+| `originalPrice`       | The price that will be shown for comparison   |
 ### Step 2: Retrieve the approved agreement
 The agreement will be possible to accept for 5 minutes before it expires. When customer approves the agreement status will change to `active`
 
@@ -153,25 +172,6 @@ Manage charges and agreement
 | 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured
 | 6 | `PARTIALLY_REFUNDED`| Charge successfully refunded, used if the refund is a partial ammount of the captured amount.
 
-## Campaigns
-A campaign in recurring is a period where the price is lower than usual, and this is communicated to the customer with the original price shown for comparison. This Functionality is currently being developed and is subject to change.
-
-<img src="images/CampaignExample.PNG" width="185">
-
-In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or update an agreement [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) for an ongoing agreement.
-```
-"campaign": {
-  "start": "2019-05-01T00:00:00Z",
-  "end": "2019-06-01T00:00:00Z",
-	"campaignPrice": 49900
-}
-```
-
-| Field         | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
-| `end`            | End date of campaign offer, can not be in the past |
-| `originalPrice`       | The price that will be shown for comparison   |
 
 ## HTTP responses
 
