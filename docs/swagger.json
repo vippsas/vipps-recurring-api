@@ -19,9 +19,6 @@
     {
       "name": "draft-agreement-controller",
       "description": "Draft Agreement Controller"
-    },
-    {
-      "name": "environment-manager-mvc-endpoint"
     }
   ],
   "paths": {
@@ -900,7 +897,7 @@
           "type": "integer",
           "format": "int32",
           "example": 0,
-          "description": "The total amount which has been refunded, in case of status refund/partial refund. \nTreated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
+          "description": "The total amount which has been refunded, in case of status refund/partial refund.\nTreated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
         },
         "description": {
           "type": "string",
@@ -942,8 +939,7 @@
           "readOnly": true,
           "enum": [
             "INITIAL",
-            "RECURRING",
-            "ONEOFF"
+            "RECURRING"
           ]
         }
       },
@@ -1063,9 +1059,6 @@
           "example": "https://api.merchant.no/landing",
           "description": "URL where customer should be redirected after the agreement has been approved/rejected in the Vipps mobile application."
         },
-        "oneOffCharge": {
-          "$ref": "#/definitions/OneOffCharge"
-        },
         "price": {
           "type": "integer",
           "format": "int32",
@@ -1161,36 +1154,6 @@
       },
       "title": "InitialCharge",
       "description": "An initial charge for a new agreement. The charge will be executed immediately when the user approves the agreement."
-    },
-    "OneOffCharge": {
-      "type": "object",
-      "required": [
-        "amount",
-        "currency",
-        "description"
-      ],
-      "properties": {
-        "amount": {
-          "type": "integer",
-          "format": "int32",
-          "example": 234,
-          "description": "Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK"
-        },
-        "currency": {
-          "type": "string",
-          "example": "NOK",
-          "enum": [
-            "NOK"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "example": "Månedsabonnement",
-          "description": "This field is visible to the end user in-app"
-        }
-      },
-      "title": "OneOffCharge",
-      "description": "An one-off charge with this agreement. For example a bundles sale (product + subscription)."
     },
     "RefundRequestDto": {
       "type": "object",
