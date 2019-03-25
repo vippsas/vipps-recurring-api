@@ -686,7 +686,6 @@ definitions:
         enum:
           - INITIAL
           - RECURRING
-          - ONEOFF
     title: ChargeResponse
   CreateCharge:
     type: object
@@ -780,8 +779,6 @@ definitions:
         type: string
         example: 'https://api.merchant.no/landing'
         description: URL where customer should be redirected after the agreement has been approved/rejected in the Vipps mobile application.
-      oneOffCharge:
-        $ref: '#/definitions/OneOffCharge'
       price:
         type: integer
         format: int32
@@ -852,29 +849,6 @@ definitions:
         description: This field is visible to the end user in-app
     title: InitialCharge
     description: An initial charge for a new agreement. The charge will be executed immediately when the user approves the agreement.
-  OneOffCharge:
-    type: object
-    required:
-      - amount
-      - currency
-      - description
-    properties:
-      amount:
-        type: integer
-        format: int32
-        example: 234
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
-      currency:
-        type: string
-        example: NOK
-        enum:
-          - NOK
-      description:
-        type: string
-        example: Månedsabonnement
-        description: This field is visible to the end user in-app
-    title: OneOffCharge
-    description: An one-off charge with this agreement. For example a bundles sale (product + subscription).
   RefundRequestDto:
     type: object
     properties:

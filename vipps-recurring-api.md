@@ -16,7 +16,7 @@ The Vipps Recurring API delivers recurring payment functionality for a merchant 
 
 ## How to perform recurring payments
 
-1. Draft an agreement to be approved with [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST). In the response an `agreementResource` is created with an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) request. 
+1. Draft an agreement to be approved with [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST). In the response an `agreementResource` is created with an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) request.
 
 2. The approved agreement is retrieved from [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) with `"status":"active"` when customer approves the agreement.
 
@@ -43,13 +43,12 @@ The following code illustrates how to create an agreement:
 }
 ```
 
-Agreements can be initiated with initial charges and/or one-time amounts
+Agreements can be initiated with or i without an initial charge.
 
 | # | Agreement      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `Agreement starting now`  | Agreement with an `initialcharge` will only be `active` if the initial charge is processed successfully |
 | 2 | `Agreement starting in future`  | Agreement without an `initialcharge` can be approved but no payment will happen until the first charge is provided |
-| 3 | `Agreement with additional one-time amount`  | Agreement with an `oneOffCharge` will make an separate payment request together with the agreement approval to pay an additional amount. Can be used with or without an `initialcharge` |
 
 **Intervals**\
 Intervals are defined with a interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count.\
@@ -72,17 +71,6 @@ Initial charge will be performed if the `initialcharge` is provided when creatin
   "amount": 135,
   "currency": "NOK",
   "description": "Payment for September"
-},
-```
-
-#### One-time amount
-An agreement can be created with an additional payment amount with the `oneOffCharge`
-
-```
-"oneOffCharge": {
-  "amount": 330,
-  "currency": "NOK",
-  "description": "Payment for TV"
 },
 ```
 
