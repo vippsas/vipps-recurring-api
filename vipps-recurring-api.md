@@ -20,11 +20,15 @@ The Vipps Recurring API delivers recurring payment functionality for a merchant 
 
 2. The approved agreement is retrieved from [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) with `"status":"active"` when customer approves the agreement.
 
-3. Create charges on the agreement with [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST)
+3. Create charges on the agreement with [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST).
 
-4. Manage charges and agreements with [`DELETE:/charge/{agreementId}/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelUsingDELETE), [`POST:/charge/{agreementId}/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundUsingPOST) & [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST)
+4. Manage charges and agreements with:  
+* [`DELETE:/charge/{agreementId}/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelUsingDELETE)  
+* [`POST:/charge/{agreementId}/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundUsingPOST)  
+* [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST)
 
 ### Step 1: Draft an agreement
+
 The following code illustrates how to create an agreement:
 
 [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST)
@@ -53,12 +57,12 @@ Agreements can be initiated with or i without an initial charge.
 **Intervals**\
 Intervals are defined with a interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count.\
 Example for a bi-weekly subscription:
-```
+```json
 "interval": "WEEK",
 "intervalCount": 2,
 ```
 Example for a quarterly subscription
-```
+```json
 "interval": "MONTH",
 "intervalCount": 3,
 ```
@@ -66,7 +70,7 @@ Example for a quarterly subscription
 #### Initial charge
 Initial charge will be performed if the `initialcharge` is provided when creating an agreement. The `amount` has to correspond to the `price` of the agreement.
 
-```
+```json
 "initialCharge": {
   "amount": 135,
   "currency": "NOK",
@@ -80,7 +84,7 @@ A campaign in recurring is a period where the price is lower than usual, and thi
 <img src="images/CampaignExample.PNG" width="185">
 
 In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or update an agreement [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) for an ongoing agreement.
-```
+```json
 "campaign": {
   "start": "2019-05-01T00:00:00Z",
   "end": "2019-06-01T00:00:00Z",
@@ -97,7 +101,7 @@ In order to start a campaign the campaign field has to be added either to the ag
 The agreement will be possible to accept for 5 minutes before it expires. When customer approves the agreement status will change to `active`
 
 [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET)
-```
+```json
 {
   "currency": "NOK",
   "id": "agr_5kSeqzFAMkfBbc",
@@ -118,7 +122,7 @@ Create a charge for a given agreement. `dueDate` will define for which date the 
 **NOTE:** The charges need to have a due date at least 8 days in the future.
 
 [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST)
-```
+```json
 {
   "amount": 234,
   "currency": "NOK",
