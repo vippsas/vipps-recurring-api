@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0acbf3d2-7339-4561-b407-f7faeb820b1c",
+		"_postman_id": "76e14162-9045-48fc-b21d-2dcd9f7fdc84",
 		"name": "Recurring Payments v1 - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -154,7 +154,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"oneOffCharge\": {\n   \"amount\": {{amount_one}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_one}}\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/api/v1/draftAgreement",
@@ -638,7 +638,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}?",
+							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}",
 							"host": [
 								"{{base_url}}"
 							],
