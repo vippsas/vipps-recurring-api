@@ -35,8 +35,4 @@ The charge will then appear in the app. You can still retrieve all relevant
 charges through the API.
 
 # If a user changes the default payment card in Vipps, can new charges be made to that card?
-No, all charges will be made to the payment card.
-
-# Is is necessary to reserve 1 NOK to verify a card?
-Yes. The reservation should have an understandable description, like
-"Temporary reservation to confirm card for Acme Inc."
+No, currently the payment card tied to an agreement will not be updated automatically.
