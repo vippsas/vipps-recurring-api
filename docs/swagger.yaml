@@ -9,7 +9,7 @@ info:
     \ which will be charged the user in the future.\n\nThe merchant is responsible\
     \ for checking the status of charges, and cancelling any user access if charges\
     \ are failing (or contacting the user)\n\n\n# Authenthication\n\nFor information\
-    \ regarding authenthication please read:\nhttps://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token"
+    \ regarding authenthication please read:\nhttps://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token"
   version: "1.0"
   title: "Recurring Payments Merchant API"
 host: "10.78.12.69:10036"
@@ -51,7 +51,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         401:
           description: "Unauthorized"
         500:
@@ -59,7 +59,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -93,7 +93,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         401:
           description: "Unauthorized"
         404:
@@ -103,7 +103,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -143,7 +143,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         401:
           description: "Unauthorized"
         404:
@@ -153,7 +153,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -209,13 +209,13 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         500:
           description: "Internal server error"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -269,19 +269,19 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         409:
           description: "Conflict, retry in a moment. (simultaneous idempotent requests)"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         500:
           description: "Internal server error"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -323,7 +323,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -360,7 +360,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         409:
           description: "This charge is not in a deletable state, it may have already\
             \ been charged to the user."
@@ -369,7 +369,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -416,7 +416,7 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/RefundRequestDto"
+          $ref: "#/definitions/RefundRequest"
       responses:
         200:
           description: "Success"
@@ -427,19 +427,19 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         404:
           description: "Charge does not exist (and never has)"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         500:
           description: "Internal server error"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -495,7 +495,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         401:
           description: "Unauthorized"
         422:
@@ -505,7 +505,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldErrorDto"
+              $ref: "#/definitions/FieldError"
         503:
           description: "Service unavailable"
         504:
@@ -525,47 +525,65 @@ definitions:
         $ref: "#/definitions/campaign"
       currency:
         type: "string"
+        description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
+        default: "NOK"
         enum:
         - "NOK"
+        minLength: 3
+        maxLength: 3
+        pattern: "^[A-Z[3]$"
         example: "NOK"
       id:
         type: "string"
         description: "Uniquely identifies this agreement"
+        maxLength: 36
         example: "agr_5kSeqzFAMkfBbc"
       interval:
         type: "string"
         description: "Interval for subscription"
+        default: "MONTH"
         enum:
-        - "day"
-        - "week"
-        - "month"
-        example: "week"
+        - "DAY"
+        - "WEEK"
+        - "MONTH"
+        pattern: "^[A-Z]+$"
+        example: "WEEK"
       intervalCount:
         type: "integer"
         format: "int32"
         description: "Number of intervals between charges. Example: interval=week,\
           \ intervalCount=2 to be able to charge every two weeks. Charges should occur\
           \ at least once a year."
+        default: 1
         minimum: 1
         maximum: 31
-        example: 2
+        example: 1
       price:
         type: "integer"
         format: "int32"
         description: "Treated as a whole sum postfixed with two decimals for cents,\
           \ eg 234 = 2.34 NOK"
         example: 7900
-      productDescription:
-        type: "string"
-        example: "Fin abonnementspakke"
       productName:
         type: "string"
-        description: "Name of the product being subscribed to."
-        example: "Pluss-abonnement"
-      startDate:
+        description: "Product name (short)"
+        maxLength: 32
+        example: "Premier League subscription"
+      productDescription:
         type: "string"
+        description: "Product description (longer)"
+        maxLength: 256
+        example: "Access to all games of English top football"
+      start:
+        type: "string"
+        format: "date"
         description: "Date when agreement was started."
-        example: "2019-01-01T00:00:00Z"
+        example: "2019-01-01"
+      stop:
+        type: "string"
+        format: "date"
+        description: "Date when agreement was stopped."
+        example: "2019-12-31"
       status:
         type: "string"
         description: "Status of the agreement."
@@ -575,16 +593,12 @@ definitions:
         - "STOPPED"
         - "EXPIRED"
         example: "ACTIVE"
-      stopDate:
-        type: "string"
-        description: "Date when agreement was stopped."
-        example: "2019-01-01T00:00:00Z"
   ChargeResponse:
     type: "object"
     required:
     - "amount"
     - "amountRefunded"
-    - "dueDate"
+    - "due"
     - "id"
     - "status"
     properties:
@@ -593,26 +607,31 @@ definitions:
         format: "int32"
         description: "Treated as a whole sum postfixed with two decimals for cents,\
           \ eg 234 = 2.34 NOK"
-        example: 234
+        example: 49900
       amountRefunded:
         type: "integer"
         format: "int32"
         description: "The total amount which has been refunded, in case of status\
           \ refund/partial refund.\nTreated as a whole sum postfixed with two decimals\
           \ for cents, eg 234 = 2.34 NOK"
-        example: 0
+        example: 49900
       description:
         type: "string"
-        example: "Bla bla bla"
-      dueDate:
+        description: "Description of the charge"
+        example: "Premier League subscription: September"
+      due:
         type: "string"
-        example: "2030-12-31T00:00:00Z"
+        format: "date"
+        description: "The due date for this charge"
+        example: "2030-12-31"
       id:
         type: "string"
         description: "Unique identifier for this charge, up to 15 characters."
+        maxLength: 15
         example: "chg_WCVbcAbRCmu2zk"
       status:
         type: "string"
+        default: "PENDING"
         enum:
         - "PENDING"
         - "DUE"
@@ -626,9 +645,11 @@ definitions:
       transactionId:
         type: "string"
         description: "Contains null until the status has reached CHARGED"
+        maxLength: 36
         example: "5001419121"
       type:
         type: "string"
+        default: "RECURRING"
         enum:
         - "INITIAL"
         - "RECURRING"
@@ -655,15 +676,17 @@ definitions:
         type: "string"
         description: "This field is visible to the end user in-app"
         example: "Månedsabonnement"
-      dueDate:
+      due:
         type: "string"
-        description: "yyyy-MM-dd"
+        format: "date"
+        description: "YYYY-MM-DD"
         example: "2030-12-31"
       hasPriceChanged:
         type: "boolean"
         description: "If the amount exceeds the amount specified on the agreement,\
           \ this field must be true to indicate that there is an update price for\
           \ the parent subscription"
+        default: false
         example: false
       retryDays:
         type: "integer"
@@ -671,6 +694,7 @@ definitions:
         description: "The service will attempt to charge the customer for N days [non\
           \ inclusive], must be null or contain a value >= 0. If zero, no retries\
           \ will be performed"
+        default: 5
         example: 5
   DraftAgreement:
     type: "object"
@@ -689,19 +713,24 @@ definitions:
         $ref: "#/definitions/campaign"
       currency:
         type: "string"
+        description: "ISO-4217"
+        default: "NOK"
         enum:
         - "NOK"
+        pattern: "^[A-Z][3]$"
         example: "NOK"
-      customerPhoneNumber:
+      customerMsisdn:
         type: "string"
         description: "Customers phone number (if available). Used to simplify the\
-          \ following Vipps interaction"
-        example: "+4740000000"
+          \ following Vipps interaction. MSISDN: http://www.msisdn.org"
+        maxLength: 15
+        example: "4740000000"
       initialCharge:
         $ref: "#/definitions/InitialCharge"
       interval:
         type: "string"
         description: "Interval for subscription"
+        default: "MONTH"
         enum:
         - "YEAR"
         - "MONTH"
@@ -725,45 +754,52 @@ definitions:
         type: "string"
         description: "URL where Vipps can redirect the customer to view/administer\
           \ their subscription."
-        example: "https://www.merchant.no/subscriptions/1234/"
+        example: "https://www.example.com/vipps-subscriptions/1234/"
       merchantRedirectUrl:
         type: "string"
         description: "URL where customer should be redirected after the agreement\
           \ has been approved/rejected in the Vipps mobile application."
-        example: "https://api.merchant.no/landing"
+        example: "https://api.example.com/vipps-landing"
       price:
         type: "integer"
         format: "int32"
         description: "Treated as a whole sum postfixed with two decimals for cents,\
           \ eg 234 = 2.34 NOK"
         example: 7900
-      productDescription:
-        type: "string"
-        example: "Fin abonnementspakke"
       productName:
         type: "string"
-        description: "Name of the product being subscribed to."
-        example: "Pluss-abonnement"
+        description: "Product name (short)"
+        maxLength: 32
+        example: "Premier League subscription"
+      productDescription:
+        type: "string"
+        description: "Product description (longer)"
+        maxLength: 256
+        example: "Access to all games of English top football"
   DraftAgreementResponse:
     type: "object"
+    required:
+    - "agreementId"
+    - "agreementResource"
+    - "redirectToVippsUrl"
     properties:
       agreementResource:
         type: "string"
-        description: "Reference to AgreementDto which user may agree to. Initially\
-          \ the AgreementDto is in a pendingUserApproval state, and it enters active\
-          \ state once user has approved in the Vipps application."
+        description: "Reference to Agreement which user may agree to. Initially the\
+          \ AgreementDto is in a pendingUserApproval state, and it enters active state\
+          \ once user has approved in the Vipps application."
         example: "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc"
       agreementId:
         type: "string"
         description: "Id of a AgreementDto which user may agree to. Initially the\
           \ AgreementDto is in a pendingUserApproval state, and it enters active state\
           \ once user has approved in the Vipps application."
-        example: "agr_5kSeqzFAMkfBbc"
-      redirectToVipps:
+        example: "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc"
+      redirectToVippsUrl:
         type: "string"
         description: "Customer should be redirected to Vipps using this URL."
         example: "https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV"
-  FieldErrorDto:
+  FieldError:
     type: "object"
     properties:
       code:
@@ -774,6 +810,10 @@ definitions:
         type: "string"
   HealthCheckStatus:
     type: "object"
+    required:
+    - "application"
+    - "cosmosDb"
+    - "paymentDb"
     properties:
       application:
         type: "boolean"
@@ -796,16 +836,19 @@ definitions:
         example: 234
       currency:
         type: "string"
+        description: "ISO-4217"
+        default: "EUR"
         enum:
         - "NOK"
+        pattern: "^[A-Z]{3}$"
         example: "NOK"
       description:
         type: "string"
         description: "This field is visible to the end user in-app"
-        example: "Månedsabonnement"
+        example: "Premier League subscription"
     description: "An initial charge for a new agreement. The charge will be executed\
       \ immediately when the user approves the agreement."
-  RefundRequestDto:
+  RefundRequest:
     type: "object"
     properties:
       amount:
@@ -817,6 +860,7 @@ definitions:
         type: "string"
         description: "A textual description of the operation, which will be displayed\
           \ in the users app."
+        maxLength: 256
         example: "Forgot to apply discount, refunding 50%"
   campaign:
     type: "object"
@@ -829,5 +873,6 @@ definitions:
         example: 1500
       end:
         type: "string"
+        format: "date-time"
         description: "The date and time the campaign ends. Needs to be UTC"
         example: "2019-06-01T00:00:00Z"
