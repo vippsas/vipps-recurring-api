@@ -23,9 +23,14 @@ that will be automatically processed on the due date.
 
 2. The approved agreement is retrieved from [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) with `"status":"active"` when customer has approved the agreement.
 
-3. Create a new on the agreement with [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST). Note that charges are automatic, the merchant must actively create each charge. For every subsequent charge after the initial one:
-* Check that the agreement is still active (`"status":"active"`): [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET)
-* Create a new charge: [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST)
+3. Charge the customer for each period with [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST).<br>
+Each specific charge on an agreement must be scheduled by the merchant, a minimum of two days before the payment will occur. <br>
+**Note:** Vipps will *only* perform a payment transaction on an agreement after being told by the merchant through this endpoint.
+
+4. Manage charges and agreements with:  
+* [`DELETE:/charge/{agreementId}/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelUsingDELETE)  
+* [`POST:/charge/{agreementId}/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundUsingPOST)  
+* [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST)
 
 ### Step 1: Draft an agreement
 
