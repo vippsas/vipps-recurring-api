@@ -1,21 +1,33 @@
 ---
 swagger: "2.0"
 info:
-  description: "# Recurring payments\n\nRecurring payments is used for subscription\
-    \ payments such as weekly dues for newspaper access, monthly dues for public transportation,\
-    \ etc.\n\n1. A a draft agreement is initialized and the user is redirected for\
-    \ approval.\n2. The user approves the agreement and the merchant can call GET\
-    \ on the agreement to verify the status\n3. The merchant can start sending charges\
-    \ which will be charged the user in the future.\n\nThe merchant is responsible\
-    \ for checking the status of charges, and cancelling any user access if charges\
-    \ are failing (or contacting the user)\n\n\n# Authenthication\n\nFor information\
-    \ regarding authenthication please read:\nhttps://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token"
-  version: "1.0"
-  title: "Recurring Payments Merchant API"
-host: "10.78.12.69:10036"
-basePath: "/mt1/vipps-recurring-merchant-api"
-schemes:
-- "http"
+  description: |-
+    # Recurring payments
+
+    Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
+
+    1. A a draft agreement is initialized and the user is redirected for approval.
+    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status
+    3. The merchant can start sending charges which will be charged the user in the future.
+
+    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
+
+
+    # Authenthication
+
+    For information regarding authenthication please read:
+    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token
+  version: '1.0'
+  title: Recurring Payments Merchant API
+host: '10.78.12.69:10036'
+basePath: /mt1/vipps-recurring-merchant-api
+tags:
+  - name: agreement-controller
+    description: Agreement Controller
+  - name: charge-controller
+    description: Charge Controller
+  - name: draft-agreement-controller
+    description: Draft Agreement Controller
 paths:
   /api/v1/agreement:
     get:
@@ -790,17 +802,18 @@ definitions:
           \ once user has approved in the Vipps application."
         example: "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc"
       agreementId:
-        type: "string"
-        description: "Id of a AgreementDto which user may agree to. Initially the\
-          \ AgreementDto is in a pendingUserApproval state, and it enters active state\
-          \ once user has approved in the Vipps application."
-        example: "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc"
-      redirectToVippsUrl:
-        type: "string"
-        description: "Customer should be redirected to Vipps using this URL."
-        example: "https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV"
-  FieldError:
-    type: "object"
+        type: string
+        example: 'agr_5kSeqzFAMkfBbc'
+        description: 'Id of a AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
+        readOnly: true
+      redirectToVipps:
+        type: string
+        example: 'https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV'
+        description: Customer should be redirected to Vipps using this URL.
+        readOnly: true
+    title: DraftAgreementResponse
+  FieldErrorDto:
+    type: object
     properties:
       code:
         type: "string"
