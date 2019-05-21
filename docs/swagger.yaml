@@ -15,7 +15,7 @@ info:
     # Authenthication
 
     For information regarding authenthication please read:
-    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token
+    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token
   version: '1.0'
   title: Recurring Payments Merchant API
 host: '10.78.12.69:10036'
