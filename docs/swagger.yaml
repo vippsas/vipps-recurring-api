@@ -1,23 +1,33 @@
----
 swagger: "2.0"
 info:
-  description: "# Recurring payments\n\nRecurring payments is used for subscription\
-    \ payments such as weekly dues for newspaper access, monthly dues for public transportation,\
-    \ etc.\n\n1. A a draft agreement is initialized and the user is redirected for\
-    \ approval.\n2. The user approves the agreement and the merchant can call GET\
-    \ on the agreement to verify the status\n3. The merchant can start sending charges\
-    \ which will be charged the user in the future.\n\nThe merchant is responsible\
-    \ for checking the status of charges, and cancelling any user access if charges\
-    \ are failing (or contacting the user)\n\n\n# Authenthication\n\nFor information\
-    \ regarding authenthication please read:\nhttps://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#api-access-token"
-  version: "1.0"
-  title: "Recurring Payments Merchant API"
-host: "10.78.12.69:10036"
-basePath: "/mt1/vipps-recurring-merchant-api"
-schemes:
-- "http"
+  description: |-
+    # Recurring payments
+
+    Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
+
+    1. A a draft agreement is initialized and the user is redirected for approval.
+    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status
+    3. The merchant can start sending charges which will be charged the user in the future.
+
+    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
+
+    # Authenthication
+
+    For information regarding authenthication please read:
+    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token
+  version: '1.1.0'
+  title: Recurring Payments Merchant API
+host: '10.78.12.69:10036'
+basePath: /mt1/vipps-recurring-merchant-api
+tags:
+  - name: agreement-controller
+    description: Agreement Controller
+  - name: charge-controller
+    description: Charge Controller
+  - name: draft-agreement-controller
+    description: Draft Agreement Controller
 paths:
-  /api/v1/agreement:
+  /api/v1/agreements:
     get:
       tags:
       - "agreement-controller"
@@ -51,7 +61,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         401:
           description: "Unauthorized"
         500:
@@ -59,12 +69,12 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
           description: "Gateway Timeout"
-  /api/v1/agreement/{agreementId}:
+  /api/v1/agreements/{agreementId}:
     get:
       tags:
       - "agreement-controller"
@@ -93,7 +103,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         401:
           description: "Unauthorized"
         404:
@@ -103,7 +113,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
@@ -143,7 +153,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         401:
           description: "Unauthorized"
         404:
@@ -153,7 +163,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
@@ -164,7 +174,7 @@ paths:
       required: true
       type: "string"
       description: "Agreement ID"
-  /api/v1/charge/{agreementId}:
+  /api/v1/charges/{agreementId}:
     get:
       tags:
       - "charge-controller"
@@ -203,19 +213,19 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/ChargeResponse"
+              $ref: "#/definitions/Charge"
         400:
           description: "Invalid request, check your parameters"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         500:
           description: "Internal server error"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
@@ -250,38 +260,38 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/CreateCharge"
+          $ref: "#/definitions/ChargeRequest"
       responses:
         200:
           description: "OK"
           schema:
-            $ref: "#/definitions/ChargeResponse"
+            $ref: "#/definitions/Charge"
         201:
           description: "Created"
           schema:
-            $ref: "#/definitions/ChargeResponse"
+            $ref: "#/definitions/Charge"
         204:
           description: "No Content (operation succeeded previously)"
           schema:
-            $ref: "#/definitions/ChargeResponse"
+            $ref: "#/definitions/Charge"
         400:
           description: "Invalid request, check your parameters"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         409:
           description: "Conflict, retry in a moment. (simultaneous idempotent requests)"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         500:
           description: "Internal server error"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
@@ -292,7 +302,7 @@ paths:
       required: true
       type: "string"
       description: "The agreement identifier (id)"
-  /api/v1/charge/{agreementId}/{chargeId}:
+  /api/v1/charges/{agreementId}/{chargeId}:
     get:
       tags:
       - "charge-controller"
@@ -315,7 +325,7 @@ paths:
         200:
           description: "Success"
           schema:
-            $ref: "#/definitions/ChargeResponse"
+            $ref: "#/definitions/Charge"
         400:
           description: "The requested charge does not exist"
         500:
@@ -323,7 +333,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
@@ -350,17 +360,17 @@ paths:
         200:
           description: "Success"
           schema:
-            $ref: "#/definitions/ChargeResponse"
+            $ref: "#/definitions/Charge"
         204:
           description: "No Content (operation succeeded previously)"
           schema:
-            $ref: "#/definitions/ChargeResponse"
+            $ref: "#/definitions/Charge"
         400:
           description: "Invalid request, check your parameters"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         409:
           description: "This charge is not in a deletable state, it may have already\
             \ been charged to the user."
@@ -369,7 +379,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
@@ -385,7 +395,7 @@ paths:
       required: true
       type: "string"
       description: "The charge identifier (id)"
-  /api/v1/charge/{agreementId}/{chargeId}/refund:
+  /api/v1/charges/{agreementId}/{chargeId}/refund:
     post:
       tags:
       - "charge-controller"
@@ -421,25 +431,25 @@ paths:
         200:
           description: "Success"
           schema:
-            $ref: "#/definitions/ChargeResponse"
+            $ref: "#/definitions/Charge"
         400:
           description: "Invalid request, check your parameters"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         404:
           description: "Charge does not exist (and never has)"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         500:
           description: "Internal server error"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
@@ -455,7 +465,7 @@ paths:
       required: true
       type: "string"
       description: "The charge identifier (id)"
-  /api/v1/draftAgreement:
+  /api/v1/agreements/draft:
     post:
       tags:
       - "draft-agreement-controller"
@@ -485,17 +495,17 @@ paths:
         200:
           description: "OK"
           schema:
-            $ref: "#/definitions/DraftAgreementResponse"
+            $ref: "#/definitions/DraftAgreementReference"
         201:
           description: "OK"
           schema:
-            $ref: "#/definitions/DraftAgreementResponse"
+            $ref: "#/definitions/DraftAgreementReference"
         400:
           description: "Bad Request"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         401:
           description: "Unauthorized"
         422:
@@ -505,7 +515,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/FieldError"
+              $ref: "#/definitions/Error"
         503:
           description: "Service unavailable"
         504:
@@ -522,7 +532,7 @@ definitions:
     - "status"
     properties:
       campaign:
-        $ref: "#/definitions/campaign"
+        $ref: "#/definitions/Campaign"
       currency:
         type: "string"
         description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
@@ -593,7 +603,7 @@ definitions:
         - "STOPPED"
         - "EXPIRED"
         example: "ACTIVE"
-  ChargeResponse:
+  Charge:
     type: "object"
     required:
     - "amount"
@@ -654,7 +664,7 @@ definitions:
         - "INITIAL"
         - "RECURRING"
         example: "RECURRING"
-  CreateCharge:
+  ChargeRequest:
     type: "object"
     required:
     - "amount"
@@ -710,7 +720,7 @@ definitions:
     - "productName"
     properties:
       campaign:
-        $ref: "#/definitions/campaign"
+        $ref: "#/definitions/Campaign"
       currency:
         type: "string"
         description: "ISO-4217"
@@ -776,7 +786,7 @@ definitions:
         description: "Product description (longer)"
         maxLength: 256
         example: "Access to all games of English top football"
-  DraftAgreementResponse:
+  DraftAgreementReference:
     type: "object"
     required:
     - "agreementId"
@@ -786,21 +796,21 @@ definitions:
       agreementResource:
         type: "string"
         description: "Reference to Agreement which user may agree to. Initially the\
-          \ AgreementDto is in a pendingUserApproval state, and it enters active state\
+          \ Agreement is in a pendingUserApproval state, and it enters active state\
           \ once user has approved in the Vipps application."
-        example: "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc"
+        example: "https://api.vipps.no/api/v1/agreements/agr_5kSeqzFAMkfBbc"
       agreementId:
-        type: "string"
-        description: "Id of a AgreementDto which user may agree to. Initially the\
-          \ AgreementDto is in a pendingUserApproval state, and it enters active state\
-          \ once user has approved in the Vipps application."
-        example: "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc"
-      redirectToVippsUrl:
-        type: "string"
-        description: "Customer should be redirected to Vipps using this URL."
-        example: "https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV"
-  FieldError:
-    type: "object"
+        type: string
+        example: 'agr_5kSeqzFAMkfBbc'
+        description: 'Id of a Agreement which user may agree to. Initially the Agreement is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
+      redirectToVipps:
+        type: string
+        example: 'https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV'
+        description: Customer should be redirected to Vipps using this URL.
+        readOnly: true
+    title: DraftAgreementReference
+  Error:
+    type: object
     properties:
       code:
         type: "string"
@@ -862,7 +872,7 @@ definitions:
           \ in the users app."
         maxLength: 256
         example: "Forgot to apply discount, refunding 50%"
-  campaign:
+  Campaign:
     type: "object"
     properties:
       campaignPrice:
