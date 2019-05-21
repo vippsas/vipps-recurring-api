@@ -796,13 +796,13 @@ definitions:
       agreementResource:
         type: "string"
         description: "Reference to Agreement which user may agree to. Initially the\
-          \ AgreementDto is in a pendingUserApproval state, and it enters active state\
+          \ Agreement is in a pendingUserApproval state, and it enters active state\
           \ once user has approved in the Vipps application."
         example: "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc"
       agreementId:
         type: string
         example: 'agr_5kSeqzFAMkfBbc'
-        description: 'Id of a AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
+        description: 'Id of a Agreement which user may agree to. Initially the Agreement is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
       redirectToVipps:
         type: string
         example: 'https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV'
