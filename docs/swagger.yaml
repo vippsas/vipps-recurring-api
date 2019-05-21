@@ -1,4 +1,5 @@
-swagger: '2.0'
+---
+swagger: "2.0"
 info:
   description: |-
     # Recurring payments
@@ -31,775 +32,775 @@ paths:
   /api/v1/agreement:
     get:
       tags:
-        - agreement-controller
-      summary: List Agreements
-      operationId: listUsingGET
+      - "agreement-controller"
+      summary: "List Agreements"
+      operationId: "listUsingGET"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - name: status
-          in: query
-          description: Filter by status
-          required: false
-          type: string
-          allowEmptyValue: false
+      - name: "status"
+        in: "query"
+        required: false
+        type: "string"
+        description: "Filter by status"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
-            $ref: '#/definitions/Agreement'
-        '400':
-          description: Bad Request
+            $ref: "#/definitions/Agreement"
+        400:
+          description: "Bad Request"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '401':
-          description: Unauthorized
-        '500':
-          description: Internal Server Error
+              $ref: "#/definitions/FieldError"
+        401:
+          description: "Unauthorized"
+        500:
+          description: "Internal Server Error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-      deprecated: false
-  '/api/v1/agreement/{agreementId}':
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Gateway Timeout"
+  /api/v1/agreement/{agreementId}:
     get:
       tags:
-        - agreement-controller
-      summary: Fetch an Agreement
-      operationId: getUsingGET
+      - "agreement-controller"
+      summary: "Fetch an Agreement"
+      operationId: "getUsingGET"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - name: agreementId
-          in: path
-          description: Agreement ID
-          required: true
-          type: string
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
-            $ref: '#/definitions/Agreement'
-        '400':
-          description: Bad Request
+            $ref: "#/definitions/Agreement"
+        400:
+          description: "Bad Request"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '401':
-          description: Unauthorized
-        '404':
-          description: Agreement not found
-        '500':
-          description: Internal Server Error
+              $ref: "#/definitions/FieldError"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Agreement not found"
+        500:
+          description: "Internal Server Error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-      deprecated: false
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Gateway Timeout"
     post:
       tags:
-        - agreement-controller
-      summary: Update an Agreement
-      operationId: updateUsingPOST
+      - "agreement-controller"
+      summary: "Update an Agreement"
+      operationId: "updateUsingPOST"
       consumes:
-        - application/json
+      - "application/json"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - in: body
-          name: agreement
-          description: agreement
-          required: true
-          schema:
-            $ref: '#/definitions/Agreement'
-        - name: agreementId
-          in: path
-          description: Agreement ID
-          required: true
-          type: string
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Agreement"
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
-            $ref: '#/definitions/Agreement'
-        '400':
-          description: Bad Request
+            $ref: "#/definitions/Agreement"
+        400:
+          description: "Bad Request"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '401':
-          description: Unauthorized
-        '404':
-          description: Agreement not found
-        '500':
-          description: Internal Server Error
+              $ref: "#/definitions/FieldError"
+        401:
+          description: "Unauthorized"
+        404:
+          description: "Agreement not found"
+        500:
+          description: "Internal Server Error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-      deprecated: false
-  '/api/v1/charge/{agreementId}':
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Gateway Timeout"
+    parameters:
+    - name: "agreementId"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Agreement ID"
+  /api/v1/charge/{agreementId}:
     get:
       tags:
-        - charge-controller
-      summary: List Charges
-      operationId: listUsingGET_1
+      - "charge-controller"
+      summary: "List Charges"
+      operationId: "listUsingGET_1"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - name: agreementId
-          in: path
-          description: The agreement identifier (id)
-          required: true
-          type: string
-        - name: chargeStatus
-          in: query
-          description: The status of the charge
-          required: false
-          type: string
-          allowEmptyValue: false
-          enum:
-            - PENDING
-            - DUE
-            - CHARGED
-            - FAILED
-            - CANCELLED
-            - PARTIALLY_REFUNDED
-            - REFUNDED
-            - PROCESSING
+      - name: "chargeStatus"
+        in: "query"
+        required: false
+        type: "string"
+        description: "The status of the charge"
+        enum:
+        - "PENDING"
+        - "DUE"
+        - "CHARGED"
+        - "FAILED"
+        - "CANCELLED"
+        - "PARTIALLY_REFUNDED"
+        - "REFUNDED"
+        - "PROCESSING"
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
       responses:
-        '200':
-          description: Success
+        200:
+          description: "Success"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/ChargeResponse'
-        '400':
-          description: 'Invalid request, check your parameters'
+              $ref: "#/definitions/ChargeResponse"
+        400:
+          description: "Invalid request, check your parameters"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '500':
-          description: Internal server error
+              $ref: "#/definitions/FieldError"
+        500:
+          description: "Internal server error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Timeout
-      deprecated: false
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Timeout"
     post:
       tags:
-        - charge-controller
-      summary: |-
-        Create a new charge for a given agreement and customer.
-
-        An idempotency key must be provided to ensure idempotent requests.
-        Key size [1..30] characters.
-      operationId: createUsingPOST
+      - "charge-controller"
+      summary: "Create a new charge for a given agreement and customer.\n\nAn idempotency\
+        \ key must be provided to ensure idempotent requests.\nKey size [1..30] characters."
+      operationId: "createUsingPOST"
       consumes:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Idempotent-Key
-          in: header
-          description: Idempotent-Key
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - name: agreementId
-          in: path
-          description: Agreement ID
-          required: true
-          type: string
-        - in: body
-          name: charge
-          description: charge
-          required: true
-          schema:
-            $ref: '#/definitions/CreateCharge'
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Idempotent-Key"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Idempotent-Key"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateCharge"
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
-            $ref: '#/definitions/ChargeResponse'
-        '201':
-          description: Created
+            $ref: "#/definitions/ChargeResponse"
+        201:
+          description: "Created"
           schema:
-            $ref: '#/definitions/ChargeResponse'
-        '204':
-          description: No Content (operation succeeded previously)
+            $ref: "#/definitions/ChargeResponse"
+        204:
+          description: "No Content (operation succeeded previously)"
           schema:
-            $ref: '#/definitions/ChargeResponse'
-        '400':
-          description: 'Invalid request, check your parameters'
+            $ref: "#/definitions/ChargeResponse"
+        400:
+          description: "Invalid request, check your parameters"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '409':
-          description: 'Conflict, retry in a moment. (simultaneous idempotent requests)'
+              $ref: "#/definitions/FieldError"
+        409:
+          description: "Conflict, retry in a moment. (simultaneous idempotent requests)"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '500':
-          description: Internal server error
+              $ref: "#/definitions/FieldError"
+        500:
+          description: "Internal server error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Timeout
-      deprecated: false
-  '/api/v1/charge/{agreementId}/{chargeId}':
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Timeout"
+    parameters:
+    - name: "agreementId"
+      in: "path"
+      required: true
+      type: "string"
+      description: "The agreement identifier (id)"
+  /api/v1/charge/{agreementId}/{chargeId}:
     get:
       tags:
-        - charge-controller
-      summary: Fetch a Charge
-      operationId: getUsingGET_1
+      - "charge-controller"
+      summary: "Fetch a Charge"
+      operationId: "getUsingGET_1"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - name: agreementId
-          in: path
-          description: agreementId
-          required: true
-          type: string
-        - name: chargeId
-          in: path
-          description: The charge identifier (id)
-          required: true
-          type: string
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
       responses:
-        '200':
-          description: Success
+        200:
+          description: "Success"
           schema:
-            $ref: '#/definitions/ChargeResponse'
-        '400':
-          description: The requested charge does not exist
-        '500':
-          description: Internal server error
+            $ref: "#/definitions/ChargeResponse"
+        400:
+          description: "The requested charge does not exist"
+        500:
+          description: "Internal server error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Timeout
-      deprecated: false
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Timeout"
     delete:
       tags:
-        - charge-controller
-      summary: Cancel a Charge
-      operationId: cancelUsingDELETE
+      - "charge-controller"
+      summary: "Cancel a Charge"
+      operationId: "cancelUsingDELETE"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - name: agreementId
-          in: path
-          description: The agreement identifier (id)
-          required: true
-          type: string
-        - name: chargeId
-          in: path
-          description: The charge identifier (id)
-          required: true
-          type: string
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
       responses:
-        '200':
-          description: Success
+        200:
+          description: "Success"
           schema:
-            $ref: '#/definitions/ChargeResponse'
-        '204':
-          description: No Content (operation succeeded previously)
+            $ref: "#/definitions/ChargeResponse"
+        204:
+          description: "No Content (operation succeeded previously)"
           schema:
-            $ref: '#/definitions/ChargeResponse'
-        '400':
-          description: 'Invalid request, check your parameters'
+            $ref: "#/definitions/ChargeResponse"
+        400:
+          description: "Invalid request, check your parameters"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '409':
-          description: 'This charge is not in a deletable state, it may have already been charged to the user.'
-        '500':
-          description: Internal server error
+              $ref: "#/definitions/FieldError"
+        409:
+          description: "This charge is not in a deletable state, it may have already\
+            \ been charged to the user."
+        500:
+          description: "Internal server error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Timeout
-      deprecated: false
-  '/api/v1/charge/{agreementId}/{chargeId}/refund':
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Timeout"
+    parameters:
+    - name: "agreementId"
+      in: "path"
+      required: true
+      type: "string"
+      description: "agreementId"
+    - name: "chargeId"
+      in: "path"
+      required: true
+      type: "string"
+      description: "The charge identifier (id)"
+  /api/v1/charge/{agreementId}/{chargeId}/refund:
     post:
       tags:
-        - charge-controller
-      summary: |-
-        Refund a charge
-
-        An idempotency key must be provided to ensure idempotent requests.
-        Key size [1..30] characters.
-      operationId: refundUsingPOST
+      - "charge-controller"
+      summary: "Refund a charge\n\nAn idempotency key must be provided to ensure idempotent\
+        \ requests.\nKey size [1..30] characters."
+      operationId: "refundUsingPOST"
       consumes:
-        - application/json
+      - "application/json"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Idempotent-Key
-          in: header
-          description: Idempotent-Key
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - name: agreementId
-          in: path
-          description: The agreement identifier (id)
-          required: true
-          type: string
-        - in: body
-          name: charge
-          description: charge
-          required: true
-          schema:
-            $ref: '#/definitions/RefundRequestDto'
-        - name: chargeId
-          in: path
-          description: The charge identifier (id)
-          required: true
-          type: string
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Idempotent-Key"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Idempotent-Key"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/RefundRequest"
       responses:
-        '200':
-          description: Success
+        200:
+          description: "Success"
           schema:
-            $ref: '#/definitions/ChargeResponse'
-        '400':
-          description: 'Invalid request, check your parameters'
+            $ref: "#/definitions/ChargeResponse"
+        400:
+          description: "Invalid request, check your parameters"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '404':
-          description: Charge does not exist (and never has)
+              $ref: "#/definitions/FieldError"
+        404:
+          description: "Charge does not exist (and never has)"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '500':
-          description: Internal server error
+              $ref: "#/definitions/FieldError"
+        500:
+          description: "Internal server error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Timeout
-      deprecated: false
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Timeout"
+    parameters:
+    - name: "agreementId"
+      in: "path"
+      required: true
+      type: "string"
+      description: "The agreement identifier (id)"
+    - name: "chargeId"
+      in: "path"
+      required: true
+      type: "string"
+      description: "The charge identifier (id)"
   /api/v1/draftAgreement:
     post:
       tags:
-        - draft-agreement-controller
-      summary: Send a new customer to Vipps in order to accept Agreement
-      operationId: registerUsingPOST
+      - "draft-agreement-controller"
+      summary: "Send a new customer to Vipps in order to accept Agreement"
+      operationId: "registerUsingPOST"
       consumes:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       produces:
-        - application/json;charset=UTF-8
+      - "application/json;charset=UTF-8"
       parameters:
-        - name: Authorization
-          in: header
-          description: Bearer 'auth token'
-          required: true
-          type: string
-        - name: Merchant-Serial-Number
-          in: header
-          description: The applicable merchant serial number currently being represented
-          required: true
-          type: string
-        - in: body
-          name: draftAgreement
-          description: draftAgreement
-          required: true
-          schema:
-            $ref: '#/definitions/DraftAgreement'
+      - name: "Authorization"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Bearer 'auth token'"
+      - name: "Merchant-Serial-Number"
+        in: "header"
+        required: true
+        type: "string"
+        description: "The applicable merchant serial number currently being represented"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/DraftAgreement"
       responses:
-        '200':
-          description: OK
+        200:
+          description: "OK"
           schema:
-            $ref: '#/definitions/DraftAgreementResponse'
-        '201':
-          description: OK
+            $ref: "#/definitions/DraftAgreementResponse"
+        201:
+          description: "OK"
           schema:
-            $ref: '#/definitions/DraftAgreementResponse'
-        '400':
-          description: Bad Request
+            $ref: "#/definitions/DraftAgreementResponse"
+        400:
+          description: "Bad Request"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '401':
-          description: Unauthorized
-        '422':
-          description: Unprocessable Entity (invalid json)
-        '500':
-          description: Internal Server Error
+              $ref: "#/definitions/FieldError"
+        401:
+          description: "Unauthorized"
+        422:
+          description: "Unprocessable Entity (invalid json)"
+        500:
+          description: "Internal Server Error"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/FieldErrorDto'
-        '503':
-          description: Service unavailable
-        '504':
-          description: Gateway Timeout
-      deprecated: false
+              $ref: "#/definitions/FieldError"
+        503:
+          description: "Service unavailable"
+        504:
+          description: "Gateway Timeout"
 definitions:
   Agreement:
-    type: object
+    type: "object"
     required:
-      - interval
-      - intervalCount
-      - price
-      - productDescription
-      - productName
-      - status
+    - "interval"
+    - "intervalCount"
+    - "price"
+    - "productDescription"
+    - "productName"
+    - "status"
     properties:
       campaign:
-        description: A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date
-        $ref: '#/definitions/campaign'
+        $ref: "#/definitions/campaign"
       currency:
-        type: string
-        example: NOK
+        type: "string"
+        description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
+        default: "NOK"
         enum:
-          - NOK
+        - "NOK"
+        minLength: 3
+        maxLength: 3
+        pattern: "^[A-Z[3]$"
+        example: "NOK"
       id:
-        type: string
-        example: agr_5kSeqzFAMkfBbc
-        description: Uniquely identifies this agreement
-        readOnly: true
+        type: "string"
+        description: "Uniquely identifies this agreement"
+        maxLength: 36
+        example: "agr_5kSeqzFAMkfBbc"
       interval:
-        type: string
-        example: week
-        description: Interval for subscription
+        type: "string"
+        description: "Interval for subscription"
+        default: "MONTH"
         enum:
-          - day
-          - week
-          - month
+        - "DAY"
+        - "WEEK"
+        - "MONTH"
+        pattern: "^[A-Z]+$"
+        example: "WEEK"
       intervalCount:
-        type: integer
-        format: int32
-        example: 2
-        description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.'
+        type: "integer"
+        format: "int32"
+        description: "Number of intervals between charges. Example: interval=week,\
+          \ intervalCount=2 to be able to charge every two weeks. Charges should occur\
+          \ at least once a year."
+        default: 1
         minimum: 1
         maximum: 31
-        exclusiveMinimum: false
-        exclusiveMaximum: false
+        example: 1
       price:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
+        description: "Treated as a whole sum postfixed with two decimals for cents,\
+          \ eg 234 = 2.34 NOK"
         example: 7900
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
-      productDescription:
-        type: string
-        example: Fin abonnementspakke
       productName:
-        type: string
-        example: Pluss-abonnement
-        description: Name of the product being subscribed to.
-      startDate:
-        type: string
-        example: '2019-01-01T00:00:00Z'
-        description: Date when agreement was started.
-        readOnly: true
+        type: "string"
+        description: "Product name (short)"
+        maxLength: 32
+        example: "Premier League subscription"
+      productDescription:
+        type: "string"
+        description: "Product description (longer)"
+        maxLength: 256
+        example: "Access to all games of English top football"
+      start:
+        type: "string"
+        format: "date"
+        description: "Date when agreement was started."
+        example: "2019-01-01"
+      stop:
+        type: "string"
+        format: "date"
+        description: "Date when agreement was stopped."
+        example: "2019-12-31"
       status:
-        type: string
-        example: ACTIVE
-        description: Status of the agreement.
+        type: "string"
+        description: "Status of the agreement."
         enum:
-          - PENDING
-          - ACTIVE
-          - STOPPED
-          - EXPIRED
-      stopDate:
-        type: string
-        example: '2019-01-01T00:00:00Z'
-        description: Date when agreement was stopped.
-        readOnly: true
-    title: Agreement
+        - "PENDING"
+        - "ACTIVE"
+        - "STOPPED"
+        - "EXPIRED"
+        example: "ACTIVE"
   ChargeResponse:
-    type: object
+    type: "object"
     required:
-      - amount
-      - amountRefunded
-      - dueDate
-      - id
-      - status
+    - "amount"
+    - "amountRefunded"
+    - "due"
+    - "id"
+    - "status"
     properties:
       amount:
-        type: integer
-        format: int32
-        example: 234
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
+        type: "integer"
+        format: "int32"
+        description: "Treated as a whole sum postfixed with two decimals for cents,\
+          \ eg 234 = 2.34 NOK"
+        example: 49900
       amountRefunded:
-        type: integer
-        format: int32
-        example: 0
-        description: |-
-          The total amount which has been refunded, in case of status refund/partial refund.
-          Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+        type: "integer"
+        format: "int32"
+        description: "The total amount which has been refunded, in case of status\
+          \ refund/partial refund.\nTreated as a whole sum postfixed with two decimals\
+          \ for cents, eg 234 = 2.34 NOK"
+        example: 49900
       description:
-        type: string
-        example: Bla bla bla
-        readOnly: true
-      dueDate:
-        type: string
-        example: '2030-12-31T00:00:00Z'
+        type: "string"
+        description: "Description of the charge"
+        example: "Premier League subscription: September"
+      due:
+        type: "string"
+        format: "date"
+        description: "The due date for this charge"
+        example: "2030-12-31"
       id:
-        type: string
-        example: chg_WCVbcAbRCmu2zk
-        description: 'Unique identifier for this charge, up to 15 characters.'
+        type: "string"
+        description: "Unique identifier for this charge, up to 15 characters."
+        maxLength: 15
+        example: "chg_WCVbcAbRCmu2zk"
       status:
-        type: string
-        example: PENDING
+        type: "string"
+        default: "PENDING"
         enum:
-          - PENDING
-          - DUE
-          - CHARGED
-          - FAILED
-          - CANCELLED
-          - PARTIALLY_REFUNDED
-          - REFUNDED
-          - PROCESSING
+        - "PENDING"
+        - "DUE"
+        - "CHARGED"
+        - "FAILED"
+        - "CANCELLED"
+        - "PARTIALLY_REFUNDED"
+        - "REFUNDED"
+        - "PROCESSING"
+        example: "PENDING"
       transactionId:
-        type: string
-        example: 5001419121
-        description: Contains null until the status has reached CHARGED
-        readOnly: true
+        type: "string"
+        description: "Contains null until the status has reached CHARGED"
+        maxLength: 36
+        example: "5001419121"
       type:
-        type: string
-        example: RECURRING
-        readOnly: true
+        type: "string"
+        default: "RECURRING"
         enum:
-          - INITIAL
-          - RECURRING
-    title: ChargeResponse
+        - "INITIAL"
+        - "RECURRING"
+        example: "RECURRING"
   CreateCharge:
-    type: object
+    type: "object"
     required:
-      - amount
-      - description
-      - hasPriceChanged
+    - "amount"
+    - "description"
+    - "hasPriceChanged"
     properties:
       amount:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
+        description: "Treated as a whole sum postfixed with two decimals for cents,\
+          \ eg 234 = 2.34 NOK"
         example: 234
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
       currency:
-        type: string
-        example: NOK
+        type: "string"
         enum:
-          - NOK
+        - "NOK"
+        example: "NOK"
       description:
-        type: string
-        example: Månedsabonnement
-        description: This field is visible to the end user in-app
-      dueDate:
-        type: string
-        example: '2030-12-31'
-        description: yyyy-MM-dd
+        type: "string"
+        description: "This field is visible to the end user in-app"
+        example: "Månedsabonnement"
+      due:
+        type: "string"
+        format: "date"
+        description: "YYYY-MM-DD"
+        example: "2030-12-31"
       hasPriceChanged:
-        type: boolean
+        type: "boolean"
+        description: "If the amount exceeds the amount specified on the agreement,\
+          \ this field must be true to indicate that there is an update price for\
+          \ the parent subscription"
+        default: false
         example: false
-        description: 'If the amount exceeds the amount specified on the agreement, this field must be true to indicate that there is an update price for the parent subscription'
       retryDays:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
+        description: "The service will attempt to charge the customer for N days [non\
+          \ inclusive], must be null or contain a value >= 0. If zero, no retries\
+          \ will be performed"
+        default: 5
         example: 5
-        description: 'The service will attempt to charge the customer for N days [non inclusive], must be null or contain a value >= 0. If zero, no retries will be performed'
-    title: CreateCharge
   DraftAgreement:
-    type: object
+    type: "object"
     required:
-      - currency
-      - interval
-      - intervalCount
-      - isApp
-      - merchantAgreementUrl
-      - merchantRedirectUrl
-      - price
-      - productDescription
-      - productName
+    - "currency"
+    - "interval"
+    - "intervalCount"
+    - "isApp"
+    - "merchantAgreementUrl"
+    - "merchantRedirectUrl"
+    - "price"
+    - "productDescription"
+    - "productName"
     properties:
       campaign:
-        description: A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date
-        $ref: '#/definitions/campaign'
+        $ref: "#/definitions/campaign"
       currency:
-        type: string
-        example: NOK
+        type: "string"
+        description: "ISO-4217"
+        default: "NOK"
         enum:
-          - NOK
-      customerPhoneNumber:
-        type: string
-        example: '+4740000000'
-        description: Customers phone number (if available). Used to simplify the following Vipps interaction
+        - "NOK"
+        pattern: "^[A-Z][3]$"
+        example: "NOK"
+      customerMsisdn:
+        type: "string"
+        description: "Customers phone number (if available). Used to simplify the\
+          \ following Vipps interaction. MSISDN: http://www.msisdn.org"
+        maxLength: 15
+        example: "4740000000"
       initialCharge:
-        $ref: '#/definitions/InitialCharge'
+        $ref: "#/definitions/InitialCharge"
       interval:
-        type: string
-        example: WEEK
-        description: Interval for subscription
+        type: "string"
+        description: "Interval for subscription"
+        default: "MONTH"
         enum:
-          - YEAR
-          - MONTH
-          - WEEK
-          - DAY
+        - "YEAR"
+        - "MONTH"
+        - "WEEK"
+        - "DAY"
+        example: "WEEK"
       intervalCount:
-        type: integer
-        format: int32
-        example: 2
-        description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year'
+        type: "integer"
+        format: "int32"
+        description: "Number of intervals between charges. Example: interval=week,\
+          \ intervalCount=2 to be able to charge every two weeks. Charges should occur\
+          \ at least once a year"
         minimum: 1
         maximum: 31
-        exclusiveMinimum: false
-        exclusiveMaximum: false
+        example: 2
       isApp:
-        type: boolean
+        type: "boolean"
+        description: "If merchant is redirecting user from an app."
         example: true
-        description: If merchant is redirecting user from an app.
       merchantAgreementUrl:
-        type: string
-        example: 'https://www.merchant.no/subscriptions/1234/'
-        description: URL where Vipps can redirect the customer to view/administer their subscription.
+        type: "string"
+        description: "URL where Vipps can redirect the customer to view/administer\
+          \ their subscription."
+        example: "https://www.example.com/vipps-subscriptions/1234/"
       merchantRedirectUrl:
-        type: string
-        example: 'https://api.merchant.no/landing'
-        description: URL where customer should be redirected after the agreement has been approved/rejected in the Vipps mobile application.
+        type: "string"
+        description: "URL where customer should be redirected after the agreement\
+          \ has been approved/rejected in the Vipps mobile application."
+        example: "https://api.example.com/vipps-landing"
       price:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
+        description: "Treated as a whole sum postfixed with two decimals for cents,\
+          \ eg 234 = 2.34 NOK"
         example: 7900
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
-      productDescription:
-        type: string
-        example: Fin abonnementspakke
       productName:
-        type: string
-        example: Pluss-abonnement
-        description: Name of the product being subscribed to.
-    title: DraftAgreement
+        type: "string"
+        description: "Product name (short)"
+        maxLength: 32
+        example: "Premier League subscription"
+      productDescription:
+        type: "string"
+        description: "Product description (longer)"
+        maxLength: 256
+        example: "Access to all games of English top football"
   DraftAgreementResponse:
-    type: object
+    type: "object"
+    required:
+    - "agreementId"
+    - "agreementResource"
+    - "redirectToVippsUrl"
     properties:
       agreementResource:
-        type: string
-        example: 'https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc'
-        description: 'Reference to AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
-        readOnly: true
+        type: "string"
+        description: "Reference to Agreement which user may agree to. Initially the\
+          \ AgreementDto is in a pendingUserApproval state, and it enters active state\
+          \ once user has approved in the Vipps application."
+        example: "https://api.vipps.no/api/v1/agreement/agr_5kSeqzFAMkfBbc"
       agreementId:
         type: string
         example: 'agr_5kSeqzFAMkfBbc'
@@ -815,68 +816,76 @@ definitions:
     type: object
     properties:
       code:
-        type: string
+        type: "string"
       field:
-        type: string
+        type: "string"
       message:
-        type: string
-    title: FieldErrorDto
+        type: "string"
   HealthCheckStatus:
-    type: object
+    type: "object"
+    required:
+    - "application"
+    - "cosmosDb"
+    - "paymentDb"
     properties:
       application:
-        type: boolean
+        type: "boolean"
       cosmosDb:
-        type: boolean
+        type: "boolean"
       paymentDb:
-        type: boolean
-    title: HealthCheckStatus
+        type: "boolean"
   InitialCharge:
-    type: object
+    type: "object"
     required:
-      - amount
-      - currency
-      - description
+    - "amount"
+    - "currency"
+    - "description"
     properties:
       amount:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
+        description: "Treated as a whole sum postfixed with two decimals for cents,\
+          \ eg 234 = 2.34 NOK"
         example: 234
-        description: 'Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK'
       currency:
-        type: string
-        example: NOK
+        type: "string"
+        description: "ISO-4217"
+        default: "EUR"
         enum:
-          - NOK
+        - "NOK"
+        pattern: "^[A-Z]{3}$"
+        example: "NOK"
       description:
-        type: string
-        example: Månedsabonnement
-        description: This field is visible to the end user in-app
-    title: InitialCharge
-    description: An initial charge for a new agreement. The charge will be executed immediately when the user approves the agreement.
-  RefundRequestDto:
-    type: object
+        type: "string"
+        description: "This field is visible to the end user in-app"
+        example: "Premier League subscription"
+    description: "An initial charge for a new agreement. The charge will be executed\
+      \ immediately when the user approves the agreement."
+  RefundRequest:
+    type: "object"
     properties:
       amount:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
+        description: "The amount to refund"
         example: 100
-        description: The amount to refund
       description:
-        type: string
-        example: 'Forgot to apply discount, refunding 50%'
-        description: 'A textual description of the operation, which will be displayed in the users app.'
-    title: RefundRequestDto
+        type: "string"
+        description: "A textual description of the operation, which will be displayed\
+          \ in the users app."
+        maxLength: 256
+        example: "Forgot to apply discount, refunding 50%"
   campaign:
-    type: object
+    type: "object"
     properties:
       campaignPrice:
-        type: integer
-        format: int32
+        type: "integer"
+        format: "int32"
+        description: "The price of the agreement in the discount period. The lowering\
+          \ of the price will be displayed in-app."
         example: 1500
-        description: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
       end:
-        type: string
-        example: '2019-06-01T00:00:00Z'
-        description: The date and time the campaign ends. Needs to be UTC
-    title: campaign
+        type: "string"
+        format: "date-time"
+        description: "The date and time the campaign ends. Needs to be UTC"
+        example: "2019-06-01T00:00:00Z"
