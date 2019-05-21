@@ -1,31 +1,21 @@
+---
 swagger: "2.0"
 info:
-  description: |-
-    # Recurring payments
-
-    Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
-
-    1. A a draft agreement is initialized and the user is redirected for approval.
-    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status
-    3. The merchant can start sending charges which will be charged the user in the future.
-
-    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
-
-    # Authenthication
-
-    For information regarding authenthication please read:
-    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token
-  version: '1.1.0'
-  title: Recurring Payments Merchant API
-host: '10.78.12.69:10036'
-basePath: /mt1/vipps-recurring-merchant-api
-tags:
-  - name: agreement-controller
-    description: Agreement Controller
-  - name: charge-controller
-    description: Charge Controller
-  - name: draft-agreement-controller
-    description: Draft Agreement Controller
+  description: "# Recurring payments\n\nRecurring payments is used for subscription\
+    \ payments such as weekly dues for newspaper access, monthly dues for public transportation,\
+    \ etc.\n\n1. A a draft agreement is initialized and the user is redirected for\
+    \ approval.\n2. The user approves the agreement and the merchant can call GET\
+    \ on the agreement to verify the status\n3. The merchant can start sending charges\
+    \ which will be charged the user in the future.\n\nThe merchant is responsible\
+    \ for checking the status of charges, and cancelling any user access if charges\
+    \ are failing (or contacting the user)\n\n# Authenthication\n\nFor information\
+    \ regarding authenthication please read:\nhttps://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token"
+  version: "1.1.0"
+  title: "Recurring Payments Merchant API"
+host: "10.78.12.69:10036"
+basePath: "/mt1/vipps-recurring-merchant-api"
+schemes:
+- "http"
 paths:
   /api/v1/agreements:
     get:
@@ -41,16 +31,31 @@ paths:
         required: false
         type: "string"
         description: "Filter by status"
+        enum:
+        - "PENDING"
+        - "DUE"
+        - "CHARGED"
+        - "FAILED"
+        - "CANCELLED"
+        - "PARTIALLY_REFUNDED"
+        - "REFUNDED"
+        - "PROCESSING"
       - name: "Authorization"
         in: "header"
         required: true
         type: "string"
-        description: "Bearer 'auth token'"
+        description: "Bearer  'auth token'"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
       responses:
         200:
           description: "OK"
@@ -87,12 +92,18 @@ paths:
         in: "header"
         required: true
         type: "string"
-        description: "Bearer 'auth token'"
+        description: "Bearer  'auth token'"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
       responses:
         200:
           description: "OK"
@@ -132,12 +143,26 @@ paths:
         in: "header"
         required: true
         type: "string"
-        description: "Bearer 'auth token'"
+        description: "Bearer  'auth token'"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+      - name: "Idempotency-Key"
+        in: "header"
+        required: true
+        type: "string"
+        description: "Idempotency key"
+        maxLength: 256
+        pattern: "^[a-zA-Z0-9]*$"
+        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
       - name: "body"
         in: "body"
         required: true
@@ -202,11 +227,17 @@ paths:
         required: true
         type: "string"
         description: "Bearer 'auth token'"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
       responses:
         200:
           description: "Success"
@@ -233,8 +264,7 @@ paths:
     post:
       tags:
       - "charge-controller"
-      summary: "Create a new charge for a given agreement and customer.\n\nAn idempotency\
-        \ key must be provided to ensure idempotent requests.\nKey size [1..30] characters."
+      summary: "Create a new charge"
       operationId: "createUsingPOST"
       consumes:
       - "application/json;charset=UTF-8"
@@ -246,16 +276,25 @@ paths:
         required: true
         type: "string"
         description: "Bearer 'auth token'"
-      - name: "Idempotent-Key"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+      - name: "Idempotency-Key"
         in: "header"
         required: true
         type: "string"
-        description: "Idempotent-Key"
+        description: "Idempotency-Key"
+        maxLength: 256
+        pattern: "^[a-zA-Z0-9]*$"
+        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
       - name: "body"
         in: "body"
         required: true
@@ -316,11 +355,17 @@ paths:
         required: true
         type: "string"
         description: "Bearer 'auth token'"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
       responses:
         200:
           description: "Success"
@@ -350,21 +395,30 @@ paths:
         in: "header"
         required: true
         type: "string"
-        description: "Bearer 'auth token'"
+        description: "Bearer  'auth token'"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
+      - name: "Idempotency-Key"
+        in: "header"
+        required: false
+        type: "string"
+        description: "Idempotency key"
+        maxLength: 256
+        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       responses:
         200:
           description: "Success"
-          schema:
-            $ref: "#/definitions/Charge"
         204:
           description: "No Content (operation succeeded previously)"
-          schema:
-            $ref: "#/definitions/Charge"
         400:
           description: "Invalid request, check your parameters"
           schema:
@@ -399,8 +453,7 @@ paths:
     post:
       tags:
       - "charge-controller"
-      summary: "Refund a charge\n\nAn idempotency key must be provided to ensure idempotent\
-        \ requests.\nKey size [1..30] characters."
+      summary: "Refund a charge"
       operationId: "refundUsingPOST"
       consumes:
       - "application/json"
@@ -412,16 +465,25 @@ paths:
         required: true
         type: "string"
         description: "Bearer 'auth token'"
-      - name: "Idempotent-Key"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+      - name: "Idempotency-Key"
         in: "header"
         required: true
         type: "string"
-        description: "Idempotent-Key"
+        description: "Idempotency key"
+        maxLength: 256
+        pattern: "^[a-zA-Z0-9]*$"
+        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
       - name: "body"
         in: "body"
         required: true
@@ -430,8 +492,6 @@ paths:
       responses:
         200:
           description: "Success"
-          schema:
-            $ref: "#/definitions/Charge"
         400:
           description: "Invalid request, check your parameters"
           schema:
@@ -469,7 +529,7 @@ paths:
     post:
       tags:
       - "draft-agreement-controller"
-      summary: "Send a new customer to Vipps in order to accept Agreement"
+      summary: "Create a new Agreement"
       operationId: "registerUsingPOST"
       consumes:
       - "application/json;charset=UTF-8"
@@ -480,26 +540,40 @@ paths:
         in: "header"
         required: true
         type: "string"
-        description: "Bearer 'auth token'"
+        description: "Bearer  'auth token'"
+        maxLength: 512
+        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+      - name: "Idempotency-Key"
+        in: "header"
+        required: false
+        type: "string"
+        description: "Idempotency key"
+        maxLength: 256
+        pattern: "^[a-zA-Z0-9]*$"
+        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
       - name: "Merchant-Serial-Number"
         in: "header"
         required: true
         type: "string"
         description: "The applicable merchant serial number currently being represented"
+        minLength: 4
+        maxLength: 10
+        pattern: "^\\d{4,}$"
+        x-example: "123456"
       - name: "body"
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/DraftAgreement"
+          $ref: "#/definitions/AgreementRequest"
       responses:
         200:
           description: "OK"
           schema:
-            $ref: "#/definitions/DraftAgreementReference"
+            $ref: "#/definitions/AgreementReference"
         201:
           description: "OK"
           schema:
-            $ref: "#/definitions/DraftAgreementReference"
+            $ref: "#/definitions/AgreementReference"
         400:
           description: "Bad Request"
           schema:
@@ -521,6 +595,86 @@ paths:
         504:
           description: "Gateway Timeout"
 definitions:
+  AgreementRequest:
+    type: "object"
+    required:
+    - "currency"
+    - "interval"
+    - "intervalCount"
+    - "isApp"
+    - "merchantAgreementUrl"
+    - "merchantRedirectUrl"
+    - "price"
+    - "productDescription"
+    - "productName"
+    properties:
+      campaign:
+        $ref: "#/definitions/Campaign"
+      currency:
+        type: "string"
+        description: "ISO-4217"
+        default: "NOK"
+        enum:
+        - "NOK"
+        pattern: "^[A-Z][3]$"
+        example: "NOK"
+      customerPhone:
+        type: "string"
+        description: "Customers phone number (if available). Used to simplify the\
+          \ following Vipps interaction. MSISDN: http://www.msisdn.org"
+        maxLength: 15
+        example: "4740000000"
+      initialCharge:
+        $ref: "#/definitions/InitialCharge"
+      interval:
+        type: "string"
+        description: "Interval for subscription"
+        default: "MONTH"
+        enum:
+        - "YEAR"
+        - "MONTH"
+        - "WEEK"
+        - "DAY"
+        example: "WEEK"
+      intervalCount:
+        type: "integer"
+        format: "int32"
+        description: "Number of intervals between charges. Example: interval=week,\
+          \ intervalCount=2 to be able to charge every two weeks. Charges should occur\
+          \ at least once a year"
+        minimum: 1
+        maximum: 31
+        example: 2
+      isApp:
+        type: "boolean"
+        description: "If merchant is redirecting user from an app or a mobile device."
+        example: true
+      merchantAgreementUrl:
+        type: "string"
+        description: "URL where Vipps can redirect the customer to view/administer\
+          \ their subscription."
+        example: "https://www.example.com/vipps-subscriptions/1234/"
+      merchantRedirectUrl:
+        type: "string"
+        description: "URL where customer should be redirected after the agreement\
+          \ has been approved/rejected in the Vipps mobile application."
+        example: "https://api.example.com/vipps-landing"
+      price:
+        type: "integer"
+        format: "int32"
+        description: "Treated as a whole sum postfixed with two decimals for cents,\
+          \ eg 234 = 2.34 NOK"
+        example: 7900
+      productName:
+        type: "string"
+        description: "Product name (short)"
+        maxLength: 32
+        example: "Premier League subscription"
+      productDescription:
+        type: "string"
+        description: "Product description (longer)"
+        maxLength: 256
+        example: "Access to all games of English top football"
   Agreement:
     type: "object"
     required:
@@ -603,6 +757,113 @@ definitions:
         - "STOPPED"
         - "EXPIRED"
         example: "ACTIVE"
+  AgreementReference:
+    type: "object"
+    required:
+    - "agreementId"
+    - "agreementResource"
+    properties:
+      agreementResource:
+        type: "string"
+        description: "Reference to Agreement which user may agree to. Initially the\
+          \ Agreement is in a pendingUserApproval state, and it enters active state\
+          \ once user has approved in the Vipps application."
+        example: "https://api.vipps.no/api/v1/agreements/agr_5kSeqzFAMkfBbc"
+      agreementId:
+        type: "string"
+        description: "Id of a Agreement which user may agree to. Initially the Agreement\
+          \ is in a pendingUserApproval state, and it enters active state once user\
+          \ has approved in the Vipps application."
+        example: "agr_5kSeqzFAMkfBbc"
+      redirectToVippsUrl:
+        type: "string"
+        description: "Customer should be redirected to Vipps using this URL."
+        example: "https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV"
+  Campaign:
+    type: "object"
+    properties:
+      campaignPrice:
+        type: "integer"
+        format: "int32"
+        description: "The price of the agreement in the discount period. The lowering\
+          \ of the price will be displayed in-app."
+        example: 1500
+      end:
+        type: "string"
+        format: "date-time"
+        description: "The date and time the campaign ends. Needs to be UTC"
+        example: "2019-06-01T00:00:00Z"
+  InitialCharge:
+    type: "object"
+    required:
+    - "amount"
+    - "currency"
+    - "description"
+    properties:
+      amount:
+        type: "integer"
+        format: "int32"
+        description: "Treated as a whole sum postfixed with two decimals for cents,\
+          \ eg 234 = 2.34 NOK"
+        example: 234
+      currency:
+        type: "string"
+        description: "ISO-4217"
+        default: "EUR"
+        enum:
+        - "NOK"
+        pattern: "^[A-Z]{3}$"
+        example: "NOK"
+      description:
+        type: "string"
+        description: "This field is visible to the end user in-app"
+        example: "Premier League subscription"
+    description: "An initial charge for a new agreement. The charge will be executed\
+      \ immediately when the user approves the agreement."
+  ChargeRequest:
+    type: "object"
+    required:
+    - "amount"
+    - "description"
+    - "hasPriceChanged"
+    properties:
+      amount:
+        type: "integer"
+        format: "int32"
+        description: "Treated as a whole sum postfixed with two decimals for cents,\
+          \ eg 234 = 2.34 NOK"
+        example: 234
+      currency:
+        type: "string"
+        enum:
+        - "NOK"
+        example: "NOK"
+      description:
+        type: "string"
+        description: "This field is visible to the end user in-app"
+        example: "Premier League subscription"
+      due:
+        type: "string"
+        format: "date"
+        description: "YYYY-MM-DD"
+        example: "2030-12-31"
+      hasPriceChanged:
+        type: "boolean"
+        description: "If the amount exceeds the amount specified on the agreement,\
+          \ this field must be true to indicate that there is an update price for\
+          \ the parent subscription"
+        default: false
+        example: false
+      retryDays:
+        type: "integer"
+        format: "int32"
+        description: "The service will attempt to charge the customer for N days [non\
+          \ inclusive], must be null or contain a value >= 0. If zero, no retries\
+          \ will be performed"
+        default: 5
+        minimum: 0
+        maximum: 100
+        example: 5
   Charge:
     type: "object"
     required:
@@ -636,7 +897,8 @@ definitions:
         example: "2030-12-31"
       id:
         type: "string"
-        description: "Unique identifier for this charge, up to 15 characters."
+        description: "Identifier for this charge (for this customer's subscription)."
+        default: "NOT_SET"
         maxLength: 15
         example: "chg_WCVbcAbRCmu2zk"
       status:
@@ -664,153 +926,10 @@ definitions:
         - "INITIAL"
         - "RECURRING"
         example: "RECURRING"
-  ChargeRequest:
-    type: "object"
-    required:
-    - "amount"
-    - "description"
-    - "hasPriceChanged"
-    properties:
-      amount:
-        type: "integer"
-        format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        example: 234
-      currency:
-        type: "string"
-        enum:
-        - "NOK"
-        example: "NOK"
-      description:
-        type: "string"
-        description: "This field is visible to the end user in-app"
-        example: "Månedsabonnement"
-      due:
-        type: "string"
-        format: "date"
-        description: "YYYY-MM-DD"
-        example: "2030-12-31"
-      hasPriceChanged:
-        type: "boolean"
-        description: "If the amount exceeds the amount specified on the agreement,\
-          \ this field must be true to indicate that there is an update price for\
-          \ the parent subscription"
-        default: false
-        example: false
-      retryDays:
-        type: "integer"
-        format: "int32"
-        description: "The service will attempt to charge the customer for N days [non\
-          \ inclusive], must be null or contain a value >= 0. If zero, no retries\
-          \ will be performed"
-        default: 5
-        example: 5
-  DraftAgreement:
-    type: "object"
-    required:
-    - "currency"
-    - "interval"
-    - "intervalCount"
-    - "isApp"
-    - "merchantAgreementUrl"
-    - "merchantRedirectUrl"
-    - "price"
-    - "productDescription"
-    - "productName"
-    properties:
-      campaign:
-        $ref: "#/definitions/Campaign"
-      currency:
-        type: "string"
-        description: "ISO-4217"
-        default: "NOK"
-        enum:
-        - "NOK"
-        pattern: "^[A-Z][3]$"
-        example: "NOK"
-      customerMsisdn:
-        type: "string"
-        description: "Customers phone number (if available). Used to simplify the\
-          \ following Vipps interaction. MSISDN: http://www.msisdn.org"
-        maxLength: 15
-        example: "4740000000"
-      initialCharge:
-        $ref: "#/definitions/InitialCharge"
-      interval:
-        type: "string"
-        description: "Interval for subscription"
-        default: "MONTH"
-        enum:
-        - "YEAR"
-        - "MONTH"
-        - "WEEK"
-        - "DAY"
-        example: "WEEK"
-      intervalCount:
-        type: "integer"
-        format: "int32"
-        description: "Number of intervals between charges. Example: interval=week,\
-          \ intervalCount=2 to be able to charge every two weeks. Charges should occur\
-          \ at least once a year"
-        minimum: 1
-        maximum: 31
-        example: 2
-      isApp:
-        type: "boolean"
-        description: "If merchant is redirecting user from an app."
-        example: true
-      merchantAgreementUrl:
-        type: "string"
-        description: "URL where Vipps can redirect the customer to view/administer\
-          \ their subscription."
-        example: "https://www.example.com/vipps-subscriptions/1234/"
-      merchantRedirectUrl:
-        type: "string"
-        description: "URL where customer should be redirected after the agreement\
-          \ has been approved/rejected in the Vipps mobile application."
-        example: "https://api.example.com/vipps-landing"
-      price:
-        type: "integer"
-        format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        example: 7900
-      productName:
-        type: "string"
-        description: "Product name (short)"
-        maxLength: 32
-        example: "Premier League subscription"
-      productDescription:
-        type: "string"
-        description: "Product description (longer)"
-        maxLength: 256
-        example: "Access to all games of English top football"
-  DraftAgreementReference:
-    type: "object"
-    required:
-    - "agreementId"
-    - "agreementResource"
-    - "redirectToVippsUrl"
-    properties:
-      agreementResource:
-        type: "string"
-        description: "Reference to Agreement which user may agree to. Initially the\
-          \ Agreement is in a pendingUserApproval state, and it enters active state\
-          \ once user has approved in the Vipps application."
-        example: "https://api.vipps.no/api/v1/agreements/agr_5kSeqzFAMkfBbc"
-      agreementId:
-        type: string
-        example: 'agr_5kSeqzFAMkfBbc'
-        description: 'Id of a Agreement which user may agree to. Initially the Agreement is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.'
-      redirectToVipps:
-        type: string
-        example: 'https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV'
-        description: Customer should be redirected to Vipps using this URL.
-        readOnly: true
-    title: DraftAgreementReference
   Error:
-    type: object
+    type: "object"
+    required:
+    - "message"
     properties:
       code:
         type: "string"
@@ -831,58 +950,21 @@ definitions:
         type: "boolean"
       paymentDb:
         type: "boolean"
-  InitialCharge:
+  RefundRequest:
     type: "object"
     required:
     - "amount"
-    - "currency"
     - "description"
     properties:
       amount:
         type: "integer"
         format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        example: 234
-      currency:
-        type: "string"
-        description: "ISO-4217"
-        default: "EUR"
-        enum:
-        - "NOK"
-        pattern: "^[A-Z]{3}$"
-        example: "NOK"
-      description:
-        type: "string"
-        description: "This field is visible to the end user in-app"
-        example: "Premier League subscription"
-    description: "An initial charge for a new agreement. The charge will be executed\
-      \ immediately when the user approves the agreement."
-  RefundRequest:
-    type: "object"
-    properties:
-      amount:
-        type: "integer"
-        format: "int32"
-        description: "The amount to refund"
-        example: 100
+        description: "The amount to refund, in øre."
+        minimum: 100
+        example: 9900
       description:
         type: "string"
         description: "A textual description of the operation, which will be displayed\
           \ in the users app."
         maxLength: 256
         example: "Forgot to apply discount, refunding 50%"
-  Campaign:
-    type: "object"
-    properties:
-      campaignPrice:
-        type: "integer"
-        format: "int32"
-        description: "The price of the agreement in the discount period. The lowering\
-          \ of the price will be displayed in-app."
-        example: 1500
-      end:
-        type: "string"
-        format: "date-time"
-        description: "The date and time the campaign ends. Needs to be UTC"
-        example: "2019-06-01T00:00:00Z"
