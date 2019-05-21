@@ -1086,6 +1086,12 @@
           "description": "Reference to AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.",
           "readOnly": true
         },
+        "agreementId": {
+          "type": "string",
+          "example": "agr_5kSeqzFAMkfBbc",
+          "description": "Id of a AgreementDto which user may agree to. Initially the AgreementDto is in a pendingUserApproval state, and it enters active state once user has approved in the Vipps application.",
+          "readOnly": true
+        },
         "redirectToVipps": {
           "type": "string",
           "example": "https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV",
