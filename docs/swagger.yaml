@@ -1,957 +1,968 @@
----
-swagger: "2.0"
+openapi: 3.0.0
 info:
-  description: "# Recurring payments\n\nRecurring payments is used for subscription\
-    \ payments such as weekly dues for newspaper access, monthly dues for public transportation,\
-    \ etc.\n\n1. A a draft agreement is initialized and the user is redirected for\
-    \ approval.\n2. The user approves the agreement and the merchant can call GET\
-    \ on the agreement to verify the status\n3. The merchant can start sending charges\
-    \ which will be charged the user in the future.\n\nThe merchant is responsible\
-    \ for checking the status of charges, and cancelling any user access if charges\
-    \ are failing (or contacting the user)\n\n# Authenthication\n\nFor information\
-    \ regarding authenthication please read:\nhttps://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token"
-  version: "1.1.0"
-  title: "Recurring Payments Merchant API"
-host: "api.vipps.no"
-basePath: "/mt1/vipps-recurring-merchant-api"
-schemes:
-- "https"
+  description: >-
+    # Recurring payments
+
+
+    Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
+
+
+    1. A a draft agreement is initialized and the user is redirected for approval.
+
+    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status
+
+    3. The merchant can start sending charges which will be charged the user in the future.
+
+
+    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
+
+
+    # Authenthication
+
+
+    For information regarding authenthication please read:
+
+    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token
+  version: 1.1.0
+  title: Recurring Payments Merchant API
 paths:
   /api/v1/agreements:
     get:
       tags:
-      - "agreement-controller"
-      summary: "List Agreements"
-      operationId: "listUsingGET"
-      produces:
-      - "application/json;charset=UTF-8"
+        - agreement-controller
+      summary: List Agreements
+      operationId: listUsingGET
       parameters:
-      - name: "status"
-        in: "query"
-        required: false
-        type: "string"
-        description: "Filter by status"
-        enum:
-          - PENDING
-          - ACTIVE
-          - STOPPED
-          - EXPIRED
-      - name: "Authorization"
-        in: "header"
-        required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+        - name: status
+          in: query
+          required: false
+          description: Filter by status
+          schema:
+            $ref: "#/components/schemas/AgreementStatus"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
       responses:
-        200:
-          description: "OK"
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Agreement"
-        400:
-          description: "Bad Request"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        500:
-          description: "Internal Server Error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Gateway Timeout"
+        "200":
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Agreement"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Gateway Timeout
     post:
       tags:
-      - "draft-agreement-controller"
-      summary: "Create a new Agreement, to be confirmed in Vipps"
-      operationId: "registerUsingPOST"
-      consumes:
-      - "application/json;charset=UTF-8"
-      produces:
-      - "application/json;charset=UTF-8"
+        - draft-agreement-controller
+      summary: Create a new Agreement, to be confirmed in Vipps
+      operationId: registerUsingPOST
       parameters:
-      - name: "Authorization"
-        in: "header"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: "#/components/schemas/AgreementRequest"
         required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "Idempotency-Key"
-        in: "header"
-        required: false
-        type: "string"
-        description: "Idempotency key"
-        maxLength: 256
-        pattern: "^[a-zA-Z0-9]*$"
-        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/AgreementRequest"
       responses:
-        201:
-          description: "OK"
-          schema:
-            $ref: "#/definitions/AgreementReference"
-        400:
-          description: "Bad Request"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        422:
-          description: "Unprocessable Entity (invalid json)"
-        500:
-          description: "Internal Server Error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Gateway Timeout"
-  /api/v1/agreements/{agreementId}:
+        "201":
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/AgreementReference"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable Entity (invalid json)
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Gateway Timeout
+  "/api/v1/agreements/{agreementId}":
     get:
       tags:
-      - "agreement-controller"
-      summary: "Fetch an Agreement"
-      operationId: "getUsingGET"
-      produces:
-      - "application/json;charset=UTF-8"
+        - agreement-controller
+      summary: Fetch an Agreement
+      operationId: getUsingGET
       parameters:
-      - name: "Authorization"
-        in: "header"
-        required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
       responses:
-        200:
-          description: "OK"
-          schema:
-            $ref: "#/definitions/Agreement"
-        400:
-          description: "Bad Request"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        404:
-          description: "Agreement not found"
-        500:
-          description: "Internal Server Error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Gateway Timeout"
+        "200":
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Agreement"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Agreement not found
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Gateway Timeout
     post:
       tags:
-      - "agreement-controller"
-      summary: "Update an Agreement"
-      operationId: "updateUsingPOST"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json;charset=UTF-8"
+        - agreement-controller
+      summary: Update an Agreement
+      operationId: updateUsingPOST
       parameters:
-      - name: "Authorization"
-        in: "header"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgreementUpdate"
         required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "Idempotency-Key"
-        in: "header"
-        required: true
-        type: "string"
-        description: "Idempotency key"
-        maxLength: 256
-        pattern: "^[a-zA-Z0-9]*$"
-        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/AgreementUpdate"
       responses:
-        201:
-          description: "OK"
-          schema:
-            $ref: "#/definitions/AgreementReference"
-        400:
-          description: "Bad Request"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        404:
-          description: "Agreement not found"
-        500:
-          description: "Internal Server Error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Gateway Timeout"
+        "201":
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/AgreementReference"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Agreement not found
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Gateway Timeout
     parameters:
-    - name: "agreementId"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Agreement ID"
-  /api/v1/agreements/{agreementId}/charges:
+      - name: agreementId
+        in: path
+        required: true
+        description: Agreement ID
+        schema:
+          type: string
+  "/api/v1/agreements/{agreementId}/charges":
     get:
       tags:
-      - "charge-controller"
-      summary: "List Charges"
-      operationId: "listUsingGET_1"
-      produces:
-      - "application/json;charset=UTF-8"
+        - charge-controller
+      summary: List Charges
+      operationId: listUsingGET_1
       parameters:
-      - name: "chargeStatus"
-        in: "query"
-        required: false
-        type: "string"
-        description: "The status of the charge"
-        enum:
-          - "PENDING"
-          - "DUE"
-          - "CHARGED" 
-          - "FAILED"
-          - "CANCELLED"
-          - "PARTIALLY_REFUNDED"
-          - "REFUNDED"
-          - "PROCESSING"
-      - name: "Authorization"
-        in: "header"
-        required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+        - name: chargeStatus
+          in: query
+          required: false
+          description: The status of the charge
+          schema:
+            $ref: "#/components/schemas/ChargeStatus"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
       responses:
-        200:
-          description: "Success"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Charge"
-        400:
-          description: "Invalid request, check your parameters"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        500:
-          description: "Internal server error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Timeout"
+        "200":
+          description: Success
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Charge"
+        "400":
+          description: Invalid request, check your parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Timeout
     post:
       tags:
-      - "charge-controller"
-      summary: "Create a new charge"
-      operationId: "createUsingPOST"
-      consumes:
-      - "application/json;charset=UTF-8"
-      produces:
-      - "application/json;charset=UTF-8"
+        - charge-controller
+      summary: Create a new charge
+      operationId: createUsingPOST
       parameters:
-      - name: "Authorization"
-        in: "header"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Idempotency-Key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: "#/components/schemas/ChargeRequest"
         required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "Idempotency-Key"
-        in: "header"
-        required: true
-        type: "string"
-        description: "Idempotency-Key"
-        maxLength: 256
-        pattern: "^[a-zA-Z0-9]*$"
-        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/ChargeRequest"
       responses:
-        201:
-          description: "Created"
-          schema:
-            $ref: "#/definitions/ChargeReference"
-        400:
-          description: "Invalid request, check your parameters"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        500:
-          description: "Internal server error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Timeout"
+        "201":
+          description: Created
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/ChargeReference"
+        "400":
+          description: Invalid request, check your parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Timeout
     parameters:
-    - name: "agreementId"
-      in: "path"
-      required: true
-      type: "string"
-      description: "The agreement identifier (id)"
-  /api/v1/agreements/{agreementId}/charges/{chargeId}:
+      - name: agreementId
+        in: path
+        required: true
+        description: The agreement identifier (id)
+        schema:
+          type: string
+  "/api/v1/agreements/{agreementId}/charges/{chargeId}":
     get:
       tags:
-      - "charge-controller"
-      summary: "Fetch a Charge"
-      operationId: "getUsingGET_1"
-      produces:
-      - "application/json;charset=UTF-8"
+        - charge-controller
+      summary: Fetch a Charge
+      operationId: getUsingGET_1
       parameters:
-      - name: "Authorization"
-        in: "header"
-        required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
       responses:
-        200:
-          description: "Success"
-          schema:
-            $ref: "#/definitions/Charge"
-        400:
-          description: "Invalid request, check your parameters"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        404:
-          description: "The requested charge does not exist"
-        500:
-          description: "Internal server error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Timeout"
+        "200":
+          description: Success
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Charge"
+        "400":
+          description: Invalid request, check your parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "404":
+          description: The requested charge does not exist
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Timeout
     delete:
       tags:
-      - "charge-controller"
-      summary: "Cancel a Charge"
-      operationId: "cancelUsingDELETE"
-      produces:
-      - "application/json;charset=UTF-8"
+        - charge-controller
+      summary: Cancel a Charge
+      operationId: cancelUsingDELETE
       parameters:
-      - name: "Authorization"
-        in: "header"
-        required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "Idempotency-Key"
-        in: "header"
-        required: false
-        type: "string"
-        description: "Idempotency key"
-        maxLength: 256
-        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
       responses:
-        200:
-          description: "Success"
-        400:
-          description: "Invalid request, check your parameters"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        404:
-          description: "The requested charge does not exist"
-        409:
-          description: "This charge is not in a deletable state, it may have already\
-            \ been charged to the user."
-        500:
-          description: "Internal server error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Timeout"
+        "200":
+          description: Success
+        "400":
+          description: Invalid request, check your parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "404":
+          description: The requested charge does not exist
+        "409":
+          description: This charge is not in a deletable state, it may have already been
+            charged to the user.
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Timeout
     parameters:
-    - name: "agreementId"
-      in: "path"
-      required: true
-      type: "string"
-      description: "agreementId"
-    - name: "chargeId"
-      in: "path"
-      required: true
-      type: "string"
-      description: "The charge identifier (id)"
-  /api/v1/agreements/{agreementId}/charges/{chargeId}/refund:
+      - name: agreementId
+        in: path
+        required: true
+        description: agreementId
+        schema:
+          type: string
+      - name: chargeId
+        in: path
+        required: true
+        description: The charge identifier (id)
+        schema:
+          type: string
+  "/api/v1/agreements/{agreementId}/charges/{chargeId}/refund":
     post:
       tags:
-      - "charge-controller"
-      summary: "Refund a charge"
-      operationId: "refundUsingPOST"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json;charset=UTF-8"
+        - charge-controller
+      summary: Refund a charge
+      operationId: refundUsingPOST
       parameters:
-      - name: "Authorization"
-        in: "header"
+        - name: Authorization
+          in: header
+          required: true
+          description: Bearer 'auth token'
+          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefundRequest"
         required: true
-        type: "string"
-        description: "Bearer 'auth token'"
-        x-example: "Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "Idempotency-Key"
-        in: "header"
-        required: true
-        type: "string"
-        description: "Idempotency key"
-        maxLength: 256
-        pattern: "^[a-zA-Z0-9]*$"
-        x-example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/RefundRequest"
       responses:
-        200:
-          description: "Success"
-        400:
-          description: "Invalid request, check your parameters"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        401:
-          description: "Unauthorized"
-        404:
-          description: "Charge does not exist (and never has)"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        500:
-          description: "Internal server error"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Error"
-        503:
-          description: "Service unavailable"
-        504:
-          description: "Timeout"
+        "200":
+          description: Success
+        "400":
+          description: Invalid request, check your parameters
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized
+        "404":
+          description: Charge does not exist (and never has)
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Error"
+        "503":
+          description: Service unavailable
+        "504":
+          description: Timeout
     parameters:
-    - name: "agreementId"
-      in: "path"
-      required: true
-      type: "string"
-      description: "The agreement identifier (id)"
-    - name: "chargeId"
-      in: "path"
-      required: true
-      type: "string"
-      description: "The charge identifier (id)"
-definitions:
-  AgreementRequest:
-    type: "object"
-    required:
-    - "currency"
-    - "interval"
-    - "intervalCount"
-    - "isApp"
-    - "merchantAgreementUrl"
-    - "merchantRedirectUrl"
-    - "price"
-    - "productDescription"
-    - "productName"
-    properties:
-      campaign:
-        $ref: "#/definitions/Campaign"
-      currency:
-        type: "string"
-        description: "ISO-4217"
-        default: "NOK"
-        enum:
-        - "NOK"
-        pattern: "^[A-Z][3]$"
-        example: "NOK"
-      customerPhone:
-        type: "string"
-        description: "Customers phone number (if available). Used to simplify the\
-          \ following Vipps interaction. MSISDN: http://www.msisdn.org"
-        maxLength: 15
-        example: "4740000000"
-      initialCharge:
-        $ref: "#/definitions/InitialCharge"
-      interval:
-        type: "string"
-        description: "Interval for subscription"
-        default: "MONTH"
-        enum:
-        - "YEAR"
-        - "MONTH"
-        - "WEEK"
-        - "DAY"
-        example: "WEEK"
-      intervalCount:
-        type: "integer"
-        format: "int32"
-        description: "Number of intervals between charges. Example: interval=week,\
-          \ intervalCount=2 to be able to charge every two weeks. Charges should occur\
-          \ at least once a year"
-        minimum: 1
-        maximum: 31
-        example: 2
-      isApp:
-        type: "boolean"
-        description: "If merchant is redirecting user from an app or a mobile device."
-        example: true
-      merchantAgreementUrl:
-        type: "string"
-        description: "URL where Vipps can redirect the customer to view/administer\
-          \ their subscription."
-        example: "https://www.example.com/vipps-subscriptions/1234/"
-      merchantRedirectUrl:
-        type: "string"
-        description: "URL where customer should be redirected after the agreement\
-          \ has been approved/rejected in the Vipps mobile application."
-        example: "https://api.example.com/vipps-landing"
-      price:
-        type: "integer"
-        format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        minimum: 100
-        example: 39900
-      productName:
-        type: "string"
-        description: "Product name (short)"
-        maxLength: 45
-        example: "Premier League subscription"
-      productDescription:
-        type: "string"
-        description: "Product description (longer)"
-        maxLength: 100
-        example: "Access to all games of English top football"
-  AgreementUpdate:
-    type: "object"
-    required:
-    - "status"
-    - "price"
-    - "productDescription"
-    - "productName"
-    properties:
-      campaign:
-        $ref: "#/definitions/Campaign"
-      price:
-        type: "integer"
-        format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        minimum: 100
-        example: 39900
-      productName:
-        type: "string"
-        description: "Product name (short)"
-        maxLength: 45
-        example: "Premier League subscription"
-      productDescription:
-        type: "string"
-        description: "Product description (longer)"
-        maxLength: 100
-        example: "Access to all games of English top football"
-      status:
-        type: "string"
-        description: "Status of the agreement."
-        enum:
-          - PENDING
-          - ACTIVE
-          - STOPPED
-          - EXPIRED
-        example: "ACTIVE"
-  Agreement:
-    type: "object"
-    required:
-    - "interval"
-    - "intervalCount"
-    - "price"
-    - "productDescription"
-    - "productName"
-    - "status"
-    properties:
-      campaign:
-        $ref: "#/definitions/Campaign"
-      currency:
-        type: "string"
-        description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
-        default: "NOK"
-        enum:
-        - "NOK"
-        minLength: 3
-        maxLength: 3
-        pattern: "^[A-Z[3]$"
-        example: "NOK"
-      id:
-        type: "string"
-        description: "Uniquely identifies this agreement"
-        maxLength: 36
-        example: "agr_5kSeqzFAMkfBbc"
-      interval:
-        type: "string"
-        description: "Interval for subscription"
-        default: "MONTH"
-        enum:
-        - "DAY"
-        - "WEEK"
-        - "MONTH"
-        pattern: "^[A-Z]+$"
-        example: "WEEK"
-      intervalCount:
-        type: "integer"
-        format: "int32"
-        description: "Number of intervals between charges. Example: interval=week,\
-          \ intervalCount=2 to be able to charge every two weeks. Charges should occur\
-          \ at least once a year."
-        default: 1
-        minimum: 1
-        maximum: 31
-        example: 1
-      price:
-        type: "integer"
-        format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        minimum: 100
-        example: 39900
-      productName:
-        type: "string"
-        description: "Product name (short)"
-        maxLength: 45
-        example: "Premier League subscription"
-      productDescription:
-        type: "string"
-        description: "Product description (longer)"
-        maxLength: 100
-        example: "Access to all games of English top football"
-      start:
-        type: "string"
-        format: "date-time"
-        description: "Date when agreement was started."
-        example: "2019-01-01T00:00:00Z"
-      stop:
-        type: "string"
-        format: "date-time"
-        description: "Date when agreement was stopped."
-        example: "2019-12-31T00:00:00Z"
-      status:
-        type: "string"
-        description: "Status of the agreement."
-        enum:
-          - PENDING
-          - ACTIVE
-          - STOPPED
-          - EXPIRED
-        example: "ACTIVE"
-  AgreementReference:
-    type: "object"
-    required:
-    - "agreementId"
-    - "agreementResource"
-    - "vippsConfirmationUrl"
-    properties:
-      agreementResource:
-        type: "string"
-        description: "Reference to Agreement which user may agree to. Initially the\
-          \ Agreement is in a pendingUserApproval state, and it enters active state\
-          \ once user has approved in the Vipps application."
-        example: "https://api.vipps.no/api/v1/agreements/agr_5kSeqzFAMkfBbc"
-      agreementId:
-        type: "string"
-        description: "Id of a Agreement which user may agree to. Initially the Agreement\
-          \ is in a pendingUserApproval state, and it enters active state once user\
-          \ has approved in the Vipps application."
-        example: "agr_5kSeqzFAMkfBbc"
-      vippsConfirmationUrl:
-        type: "string"
-        description: "Customer should be redirected to Vipps using this URL."
-        example: "https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV"
-  Campaign:
-    type: "object"
-    required:
-      - campaignPrice
-      - end
-    properties:
-      campaignPrice:
-        type: "integer"
-        format: "int32"
-        description: "The price of the agreement in the discount period. The lowering\
-          \ of the price will be displayed in-app."
-        minimum: 100
-        example: 1500
-      end:
-        type: "string"
-        format: "date-time"
-        description: "The date and time the campaign ends. Needs to be UTC"
-        example: "2019-06-01T00:00:00Z"
-  InitialCharge:
-    type: "object"
-    required:
-    - "amount"
-    - "currency"
-    - "description"
-    properties:
-      amount:
-        type: "integer"
-        format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        example: 49900
-        minimum: 100
-      currency:
-        type: "string"
-        description: "ISO-4217"
-        default: "EUR"
-        enum:
-        - "NOK"
-        pattern: "^[A-Z]{3}$"
-        example: "NOK"
-      description:
-        type: "string"
-        description: "This field is visible to the end user in-app"
-        example: "Premier League subscription"
-        maxLength: 45
-    description: "An initial charge for a new agreement. The charge will be executed\
-      \ immediately when the user approves the agreement."
-  ChargeRequest:
-    type: "object"
-    required:
-    - "amount"
-    - "description"
-    - "hasPriceChanged"
-    - "due"
-    properties:
-      amount:
-        type: "integer"
-        format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        example: 49900
-        minimum: 100
-      currency:
-        type: "string"
-        enum:
-        - "NOK"
-        example: "NOK"
-      description:
-        type: "string"
-        description: "This field is visible to the end user in-app"
-        example: "Premier League subscription"
-        maxLength: 45
-      due:
-        type: "string"
-        format: "date"
-        description: "YYYY-MM-DD"
-        example: "2030-12-31"
-      hasPriceChanged:
-        type: "boolean"
-        description: "If the amount exceeds the amount specified on the agreement,\
-          \ this field must be true to indicate that there is an update price for\
-          \ the parent subscription"
-        default: false
-        example: false
-      retryDays:
-        type: "integer"
-        format: "int32"
-        description: "The service will attempt to charge the customer for N days [non\
-          \ inclusive], must be null or contain a value >= 0. If zero, no retries\
-          \ will be performed"
-        default: 5
-        minimum: 0
-        maximum: 14
-        example: 5
-  ChargeReference:
-    type: "object"
-    required:
-      - "chargeId"
-    properties: 
-      chargeId:
-        type: string
-        description: ID of the created charge
-  Charge:
-    type: "object"
-    required:
-    - "transactionId"
-    - "description"
-    - "type"
-    - "amount"
-    - "amountRefunded"
-    - "due"
-    - "id"
-    - "status"
-    properties:
-      amount:
-        type: "integer"
-        format: "int32"
-        description: "Treated as a whole sum postfixed with two decimals for cents,\
-          \ eg 234 = 2.34 NOK"
-        example: 39900
-      amountRefunded:
-        type: "integer"
-        format: "int32"
-        description: "The total amount which has been refunded, in case of status\
-          \ refund/partial refund.\nTreated as a whole sum postfixed with two decimals\
-          \ for cents, eg 234 = 2.34 NOK"
-        example: 39900
-      description:
-        type: "string"
-        description: "Description of the charge"
-        example: "Premier League subscription: September"
-      due:
-        type: "string"
-        format: "date-time"
-        description: "The due date for this charge"
-        example: "2019-06-01T00:00:00Z"
-      id:
-        type: "string"
-        description: "Identifier for this charge (for this customer's subscription)."
-        default: "NOT_SET"
-        maxLength: 15
-        example: "chg_WCVbcAbRCmu2zk"
-      status:
-        type: "string"
-        default: "PENDING"
-        enum:
-          - "PENDING"
-          - "DUE"
-          - "CHARGED"
-          - "FAILED"
-          - "CANCELLED"
-          - "PARTIALLY_REFUNDED"
-          - "REFUNDED"
-          - "PROCESSING"
-        example: "PENDING"
-      transactionId:
-        type: "string"
-        description: "Contains null until the status has reached CHARGED"
-        maxLength: 36
-        example: "5001419121"
-      type:
-        type: "string"
-        default: "RECURRING"
-        enum:
-        - "INITIAL"
-        - "RECURRING"
-        example: "RECURRING"
-  Error:
-    type: "object"
-    required:
-    - "contextId"
-    - "message"
-    properties:
-      code:
-        type: "string"
-      field:
-        type: "string"
-      message:
-        type: "string"
-      contextId:
-        type: "string"
-  HealthCheckStatus:
-    type: "object"
-    required:
-    - "application"
-    - "cosmosDb"
-    - "paymentDb"
-    properties:
-      application:
-        type: "boolean"
-      cosmosDb:
-        type: "boolean"
-      paymentDb:
-        type: "boolean"
-  RefundRequest:
-    type: "object"
-    required:
-    - "amount"
-    - "description"
-    properties:
-      amount:
-        type: "integer"
-        format: "int32"
-        description: "The total amount which has been refunded, in case of status\
-          \ refund/partial refund.\nTreated as a whole sum postfixed with two decimals\
-          \ for cents, eg 234 = 2.34 NOK"
-        minimum: 100
-        example: 49900
-      description:
-        type: "string"
-        description: "A textual description of the operation, which will be displayed\
-          \ in the users app."
-        maxLength: 45
-        example: "Forgot to apply discount, refunding 50%"
-  AgreementStatus:
-    type: string
-    enum: &AGREEMENTSTATUS
-      - PENDING
-      - ACTIVE
-      - STOPPED
-      - EXPIRED
-  ChargeStatus:
-    type: string
-    enum: &ChargeStatus
-      - "PENDING"
-      - "DUE"
-      - "CHARGED"
-      - "FAILED"
-      - "CANCELLED"
-      - "PARTIALLY_REFUNDED"
-      - "REFUNDED"
-      - "PROCESSING"
+      - name: agreementId
+        in: path
+        required: true
+        description: The agreement identifier (id)
+        schema:
+          type: string
+      - name: chargeId
+        in: path
+        required: true
+        description: The charge identifier (id)
+        schema:
+          type: string
+servers:
+  - url: https://api.vipps.no/mt1/vipps-recurring-merchant-api
+components:
+  schemas:
+    AgreementRequest:
+      type: object
+      required:
+        - currency
+        - interval
+        - intervalCount
+        - isApp
+        - merchantAgreementUrl
+        - merchantRedirectUrl
+        - price
+        - productDescription
+        - productName
+      properties:
+        campaign:
+          $ref: "#/components/schemas/Campaign"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        customerPhone:
+          type: string
+          description: "Customers phone number (if available). Used to simplify the
+            following Vipps interaction. MSISDN: http://www.msisdn.org"
+          maxLength: 15
+          example: "4740000000"
+        initialCharge:
+          $ref: "#/components/schemas/InitialCharge"
+        interval:
+          $ref: '#/components/schemas/Interval'
+        intervalCount:
+          type: integer
+          format: int32
+          description: "Number of intervals between charges. Example: interval=week,
+            intervalCount=2 to be able to charge every two weeks. Charges should
+            occur at least once a year"
+          minimum: 1
+          maximum: 31
+          example: 2
+        isApp:
+          type: boolean
+          description: If merchant is redirecting user from an app or a mobile device.
+          example: true
+        merchantAgreementUrl:
+          type: string
+          description: URL where Vipps can redirect the customer to view/administer their
+            subscription.
+          example: https://www.example.com/vipps-subscriptions/1234/
+        merchantRedirectUrl:
+          type: string
+          description: URL where customer should be redirected after the agreement has been
+            approved/rejected in the Vipps mobile application.
+          example: https://api.example.com/vipps-landing
+        price:
+          type: integer
+          format: int32
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
+            = 2.34 NOK
+          minimum: 100
+          example: 39900
+        productName:
+          type: string
+          description: Product name (short)
+          maxLength: 45
+          example: Premier League subscription
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
+          example: Access to all games of English top football
+    AgreementUpdate:
+      type: object
+      required:
+        - status
+        - price
+        - productDescription
+        - productName
+      properties:
+        campaign:
+          $ref: "#/components/schemas/Campaign"
+        price:
+          type: integer
+          format: int32
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
+            = 2.34 NOK
+          minimum: 100
+          example: 39900
+        productName:
+          type: string
+          description: Product name (short)
+          maxLength: 45
+          example: Premier League subscription
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
+          example: Access to all games of English top football
+        status:
+          $ref: "#/components/schemas/AgreementStatus"
+    Agreement:
+      type: object
+      required:
+        - interval
+        - intervalCount
+        - price
+        - productDescription
+        - productName
+        - status
+      properties:
+        campaign:
+          $ref: "#/components/schemas/Campaign"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        id:
+          type: string
+          description: Uniquely identifies this agreement
+          maxLength: 36
+          example: agr_5kSeqzFAMkfBbc
+        interval:
+          $ref: "#/components/schemas/Interval"
+        intervalCount:
+          type: integer
+          format: int32
+          description: "Number of intervals between charges. Example: interval=week,
+            intervalCount=2 to be able to charge every two weeks. Charges should
+            occur at least once a year."
+          default: 1
+          minimum: 1
+          maximum: 31
+          example: 1
+        price:
+          type: integer
+          format: int32
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
+            = 2.34 NOK
+          minimum: 100
+          example: 39900
+        productName:
+          type: string
+          description: Product name (short)
+          maxLength: 45
+          example: Premier League subscription
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
+          example: Access to all games of English top football
+        start:
+          type: string
+          format: date-time
+          description: Date when agreement was started.
+          example: 2019-01-01T00:00:00Z
+        stop:
+          type: string
+          format: date-time
+          description: Date when agreement was stopped.
+          example: 2019-12-31T00:00:00Z
+        status:
+          $ref: "#/components/schemas/AgreementStatus"
+    AgreementReference:
+      type: object
+      required:
+        - agreementId
+        - agreementResource
+        - vippsConfirmationUrl
+      properties:
+        agreementResource:
+          type: string
+          description: Reference to Agreement which user may agree to. Initially the
+            Agreement is in a pendingUserApproval state, and it enters active
+            state once user has approved in the Vipps application.
+          example: https://api.vipps.no/api/v1/agreements/agr_5kSeqzFAMkfBbc
+        agreementId:
+          type: string
+          description: Id of a Agreement which user may agree to. Initially the Agreement
+            is in a pendingUserApproval state, and it enters active state once
+            user has approved in the Vipps application.
+          example: agr_5kSeqzFAMkfBbc
+        vippsConfirmationUrl:
+          type: string
+          description: Customer should be redirected to Vipps using this URL.
+          example: https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV
+    Campaign:
+      type: object
+      required:
+        - campaignPrice
+        - end
+      properties:
+        campaignPrice:
+          type: integer
+          format: int32
+          description: The price of the agreement in the discount period. The lowering of
+            the price will be displayed in-app.
+          minimum: 100
+          example: 1500
+        end:
+          type: string
+          format: date-time
+          description: The date and time the campaign ends. Needs to be UTC
+          example: 2019-06-01T00:00:00Z
+    InitialCharge:
+      type: object
+      required:
+        - amount
+        - currency
+        - description
+      properties:
+        amount:
+          type: integer
+          format: int32
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
+            = 2.34 NOK
+          example: 49900
+          minimum: 100
+        currency:
+          $ref: "#/components/schemas/Currency"
+        description:
+          type: string
+          description: This field is visible to the end user in-app
+          example: Premier League subscription
+          maxLength: 45
+      description: An initial charge for a new agreement. The charge will be executed
+        immediately when the user approves the agreement.
+    ChargeRequest:
+      type: object
+      required:
+        - amount
+        - description
+        - hasPriceChanged
+        - due
+      properties:
+        amount:
+          type: integer
+          format: int32
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
+            = 2.34 NOK
+          example: 49900
+          minimum: 100
+        currency:
+          $ref: "#/components/schemas/Currency"
+        description:
+          type: string
+          description: This field is visible to the end user in-app
+          example: Premier League subscription
+          maxLength: 45
+        due:
+          type: string
+          format: date
+          description: YYYY-MM-DD
+          example: 2030-12-31
+        hasPriceChanged:
+          type: boolean
+          description: If the amount exceeds the amount specified on the agreement, this
+            field must be true to indicate that there is an update price for the
+            parent subscription
+          default: false
+          example: false
+        retryDays:
+          type: integer
+          format: int32
+          description: The service will attempt to charge the customer for N days [non
+            inclusive], must be null or contain a value >= 0. If zero, no
+            retries will be performed
+          default: 5
+          minimum: 0
+          maximum: 14
+          example: 5
+    ChargeReference:
+      type: object
+      required:
+        - chargeId
+      properties:
+        chargeId:
+          type: string
+          description: ID of the created charge
+    Charge:
+      type: object
+      required:
+        - transactionId
+        - description
+        - type
+        - amount
+        - amountRefunded
+        - due
+        - id
+        - status
+      properties:
+        amount:
+          type: integer
+          format: int32
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
+            = 2.34 NOK
+          example: 39900
+        amountRefunded:
+          type: integer
+          format: int32
+          description: >-
+            The total amount which has been refunded, in case of status
+            refund/partial refund.
+
+            Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+          example: 39900
+        description:
+          type: string
+          description: Description of the charge
+          example: "Premier League subscription: September"
+        due:
+          type: string
+          format: date-time
+          description: The due date for this charge
+          example: 2019-06-01T00:00:00Z
+        id:
+          type: string
+          description: Identifier for this charge (for this customer's subscription).
+          default: NOT_SET
+          maxLength: 15
+          example: chg_WCVbcAbRCmu2zk
+        status:
+          $ref: "#/components/schemas/ChargeStatus"
+        transactionId:
+          type: string
+          description: Contains null until the status has reached CHARGED
+          maxLength: 36
+          example: "5001419121"
+        type:
+          $ref: "#/components/schemas/ChargeType"
+    Error:
+      type: object
+      required:
+        - contextId
+        - message
+      properties:
+        code:
+          type: string
+        field:
+          type: string
+        message:
+          type: string
+        contextId:
+          type: string
+    HealthCheckStatus:
+      type: object
+      required:
+        - application
+        - cosmosDb
+        - paymentDb
+      properties:
+        application:
+          type: boolean
+        cosmosDb:
+          type: boolean
+        paymentDb:
+          type: boolean
+    RefundRequest:
+      type: object
+      required:
+        - amount
+        - description
+      properties:
+        amount:
+          type: integer
+          format: int32
+          description: >-
+            The total amount which has been refunded, in case of status
+            refund/partial refund.
+
+            Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+          minimum: 100
+          example: 49900
+        description:
+          type: string
+          description: A textual description of the operation, which will be displayed in
+            the users app.
+          maxLength: 45
+          example: Forgot to apply discount, refunding 50%
+    AgreementStatus:
+      type: string
+      description: Status of the agreement.
+      example: ACTIVE
+      enum:
+        - PENDING
+        - ACTIVE
+        - STOPPED
+        - EXPIRED
+    ChargeStatus:
+      type: string
+      default: PENDING
+      example: PENDING
+      enum:
+        - PENDING
+        - DUE
+        - CHARGED
+        - FAILED
+        - CANCELLED
+        - PARTIALLY_REFUNDED
+        - REFUNDED
+        - PROCESSING
+    Currency:
+      type: string
+      description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
+      default: NOK
+      enum:
+        - NOK
+      minLength: 3
+      maxLength: 3
+      pattern: ^[A-Z[3]$
+      example: NOK
+    ChargeType:
+      type: string
+      default: RECURRING
+      enum:
+        - INITIAL
+        - RECURRING
+      example: RECURRING
+    Interval:
+      type: string
+      description: Interval for subscription
+      default: MONTH
+      pattern: ^[A-Z]+$
+      enum:
+        - MONTH
+        - WEEK
+        - DAY
+      example: WEEK
+    IdempotencyKeyFormat:
+      type: string
+      maxLength: 256
+      pattern: ^[a-zA-Z0-9]*$
