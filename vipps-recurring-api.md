@@ -2,7 +2,10 @@
 
 **Please note:** This API is not officially launched.
 
-The Vipps Recurring API delivers recurring payment functionality for a merchant to create a payment agreement with a customer for fixed interval payments. When the agreement is accepted by the end user the merchant can send charges that will be automatically processed on the due date.
+The Vipps Recurring API delivers recurring payment functionality for a merchant
+to create a payment agreement with a customer for fixed interval payments.
+When the agreement is accepted by the end user the merchant can send charges
+that will be automatically processed on the due date.
 
 **API documentation:** https://vippsas.github.io/vipps-recurring-api/
 
@@ -16,11 +19,13 @@ The Vipps Recurring API delivers recurring payment functionality for a merchant 
 
 ## How to perform recurring payments
 
-1. Draft an agreement to be approved with [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST). In the response an `agreementResource` is created with an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) request.
+1. Draft a new agreement to be approved with [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST). In the response an `agreementResource` is created with an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) request.
 
-2. The approved agreement is retrieved from [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) with `"status":"active"` when customer approves the agreement.
+2. The approved agreement is retrieved from [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET) with `"status":"active"` when customer has approved the agreement.
 
-3. Create charges on the agreement with [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST).
+3. Charge the customer for each period with [`POST:/charge/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createUsingPOST).<br>
+Each specific charge on an agreement must be scheduled by the merchant, a minimum of two days before the payment will occur. <br>
+**Note:** Vipps will *only* perform a payment transaction on an agreement after being told by the merchant through this endpoint.
 
 4. Manage charges and agreements with:  
 * [`DELETE:/charge/{agreementId}/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelUsingDELETE)  
@@ -43,11 +48,11 @@ The following code illustrates how to create an agreement:
   "merchantAgreementUrl": "https://vipps.io/terms",
   "price": 135,
   "productDescription": "Access to all games of English top football",
-  "productName": "Premier League Package"
+  "productName": "Premier League subscription"
 }
 ```
 
-Agreements can be initiated with or i without an initial charge.
+Agreements may be initiated with or without an initial charge.
 
 | # | Agreement      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
@@ -56,34 +61,46 @@ Agreements can be initiated with or i without an initial charge.
 
 **Intervals**\
 Intervals are defined with a interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count.\
+
 Example for a bi-weekly subscription:
 ```json
 "interval": "WEEK",
 "intervalCount": 2,
 ```
+
 Example for a quarterly subscription
 ```json
 "interval": "MONTH",
 "intervalCount": 3,
 ```
 
+Example for a yearly subscription
+```json
+"interval": "YEAR",
+"intervalCount": 1,
+```
+
 #### Initial charge
-Initial charge will be performed if the `initialcharge` is provided when creating an agreement. The `amount` has to correspond to the `price` of the agreement.
+Initial charge will be performed if the `initialcharge` is provided when
+creating an agreement. The `amount` has to correspond to the `price` of the agreement.
 
 ```json
 "initialCharge": {
-  "amount": 135,
+  "amount": 19900,
   "currency": "NOK",
-  "description": "Payment for September"
+  "description": "Premier League subscription: September"
 },
 ```
 
 #### Campaigns
-A campaign in recurring is a period where the price is lower than usual, and this is communicated to the customer with the original price shown for comparison. This Functionality is currently being developed and is subject to change.
+A campaign in recurring is a period where the price is lower than usual, and
+this is communicated to the customer with the original price shown for comparison.
+_This Functionality is currently being developed and is subject to change._
 
 <img src="images/CampaignExample.PNG" width="185">
 
 In order to start a campaign the campaign field has to be added either to the agreement [`POST:/draftAgreement`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/registerUsingPOST) for a campaign in the start of an agreement or update an agreement [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) for an ongoing agreement.
+
 ```json
 "campaign": {
   "start": "2019-05-01T00:00:00Z",
@@ -97,8 +114,11 @@ In order to start a campaign the campaign field has to be added either to the ag
 | `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
 | `end`            | End date of campaign offer, can not be in the past |
 | `originalPrice`       | The price that will be shown for comparison   |
+
+
 ### Step 2: Retrieve the approved agreement
-The agreement will be possible to accept for 5 minutes before it expires. When customer approves the agreement status will change to `active`
+The agreement will be possible to accept for 5 minutes before it expires.
+When the customer approves, the agreement status will change to `active`.
 
 [`GET:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getUsingGET)
 ```json
@@ -110,14 +130,21 @@ The agreement will be possible to accept for 5 minutes before it expires. When c
   "price": 135,
   "merchantAgreementUrl": "https://vipps.io/terms",
   "productDescription": "Access to all games of English top football",
-  "productName": "Premier League Package",
+  "productName": "Premier League subscription",
   "startDate": "2018-08-22",
   "status": "ACTIVE",
 }
 ```
+#### Pausing an agreement
+If there should be a pause in an agreement, like a temporary stop of a
+subscription: Simply do not create any charges during the pause.
+
+#### 
 
 ### Step 3: Create a charge
-Create a charge for a given agreement. `dueDate` will define for which date the charge will be performed. `hasPriceChanged` must be `true` if the amount for the charge is different from price of the agreement.
+Create a charge for a given agreement. `dueDate` will define for which date
+the charge will be performed. `hasPriceChanged` must be `true` if the amount
+for the charge is different from price of the agreement.
 
 **NOTE:** The charges need to have a due date at least 8 days in the future.
 
@@ -134,16 +161,17 @@ Create a charge for a given agreement. `dueDate` will define for which date the 
 ```
 
 #### Charge retries
-Vipps will retry the charge for the number of days specified in `retryDays`. If `retryDays=0` it will be failed after the first attempt.
+Vipps will retry the charge for the number of days specified in `retryDays`.
+If `retryDays=0` it will be failed after the first attempt.
 
 ### Step 4: Manage charges and agreements
-Manage charges and agreement
 
 * Cancel charges with [`DELETE:/charge/{agreementId}/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelUsingDELETE).
 * Refund performed charges with [`POST:/charge/{agreementId}/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundUsingPOST).
 * Update agreements with [`POST:/agreement/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateUsingPOST) in case there are any changes.
 
 #### Agreement states
+
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Agreement has been created, but not approved by the user in the app yet |
@@ -186,9 +214,11 @@ This API returns the following HTTP statuses in the responses:
 All error responses contains an `error` object in the body, with details of the problem.
 
 ## Authentication and authorization - API access token
+
 For all product request we require the use of a `Authorization` header. This header is required by making a Access Token request with the values `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`. See the [Access Token swagger](https://vippsas.github.io/vipps-accesstoken-api/#/Authorization_Service/fetchAuthorizationTokenUsingPost) and the [getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#step-3) for more information.
 
 [`POST:/get`](https://vippsas.github.io/vipps-accesstoken-api/#/Authorization_Service/fetchAuthorizationTokenUsingPost)
+
 ```http
 POST https://apitest.vipps.no/accesstoken/get HTTP/1.1
 Host: apitest.vipps.no
@@ -198,7 +228,8 @@ Ocp-Apim-Subscription-Key:  <Ocp-Apim-Subscription-Key>
 
 ```
 
-The Ocp-Apim-Subscription-Key can be found in Vipps developer portal
+The `Ocp-Apim-Subscription-Key` can be found in Vipps developer portal.
+See the [Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md).
 
 The request above will return a response similar to this, with the `access_token`:
 
@@ -217,7 +248,9 @@ HTTP 200 OK
 }
 ```
 
-Every request to the API, needs to have the `Authorization` header with the generated token and the `Ocp-Apim-Subscription-Key`. The header in the request to this API should look like this:
+Every request to the API, needs to have the `Authorization` header with the
+generated token and the `Ocp-Apim-Subscription-Key`. The header in the request
+to this API should look like this:
 
 ```http
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>
