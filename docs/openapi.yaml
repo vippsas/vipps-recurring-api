@@ -553,7 +553,7 @@ components:
         - productName
       properties:
         campaign:
-          $ref: "#/components/schemas/Campaign"
+          $ref: "#/components/schemas/CampaignRequest"
         currency:
           $ref: "#/components/schemas/Currency"
         customerPhone:
@@ -718,7 +718,7 @@ components:
           type: string
           description: Customer should be redirected to Vipps using this URL.
           example: https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV
-    Campaign:
+    CampaignRequest:
       type: object
       required:
         - campaignPrice
@@ -736,6 +736,18 @@ components:
           format: date-time
           description: The date and time the campaign ends. Needs to be UTC
           example: 2019-06-01T00:00:00Z
+    Campaign:
+      allOf:
+        - $ref: "#/components/schemas/CampaignRequest"
+        - type: object
+          required:
+          - start
+          properties:
+            start:
+              type: string
+              format: date-time
+              description: The date and time the campaign starts. Needs to be UTC
+              example: 2019-06-01T00:00:00Z
     InitialCharge:
       type: object
       required:
