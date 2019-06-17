@@ -17,12 +17,10 @@ info:
     The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
 
 
-    # Authenthication
+    # Authentication
 
 
-    For information regarding authenthication please read:
-
-    https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token
+    For information regarding authentication please read [our +guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
   version: 2.0.0
   title: Recurring Payments Merchant API
 paths:
@@ -31,7 +29,7 @@ paths:
       tags:
         - agreement-controller
       summary: List Agreements
-      operationId: listUsingGET
+      operationId: listAgreements
       parameters:
         - name: status
           in: query
@@ -81,7 +79,7 @@ paths:
       tags:
         - draft-agreement-controller
       summary: Create a new Agreement, to be confirmed in Vipps
-      operationId: registerUsingPOST
+      operationId: draftAgreement
       parameters:
         - name: Authorization
           in: header
@@ -139,7 +137,7 @@ paths:
       tags:
         - agreement-controller
       summary: Fetch an Agreement
-      operationId: getUsingGET
+      operationId: getAgreement
       parameters:
         - name: Authorization
           in: header
@@ -179,11 +177,11 @@ paths:
           description: Service unavailable
         "504":
           description: Gateway Timeout
-    post:
+    put:
       tags:
         - agreement-controller
       summary: Update an Agreement
-      operationId: updateUsingPOST
+      operationId: updateAgreement
       parameters:
         - name: Authorization
           in: header
@@ -248,7 +246,7 @@ paths:
       tags:
         - charge-controller
       summary: List Charges
-      operationId: listUsingGET_1
+      operationId: listCharges
       parameters:
         - name: chargeStatus
           in: query
@@ -298,7 +296,7 @@ paths:
       tags:
         - charge-controller
       summary: Create a new charge
-      operationId: createUsingPOST
+      operationId: createCharge
       parameters:
         - name: Authorization
           in: header
@@ -361,7 +359,7 @@ paths:
       tags:
         - charge-controller
       summary: Fetch a Charge
-      operationId: getUsingGET_1
+      operationId: getCharge
       parameters:
         - name: Authorization
           in: header
@@ -405,7 +403,7 @@ paths:
       tags:
         - charge-controller
       summary: Cancel a Charge
-      operationId: cancelUsingDELETE
+      operationId: cancelCharge
       parameters:
         - name: Authorization
           in: header
@@ -469,7 +467,7 @@ paths:
       tags:
         - charge-controller
       summary: Refund a charge
-      operationId: refundUsingPOST
+      operationId: refundCharge
       parameters:
         - name: Authorization
           in: header
@@ -744,6 +742,7 @@ components:
         - amount
         - currency
         - description
+        - transactionType
       properties:
         amount:
           type: integer
@@ -759,6 +758,8 @@ components:
           description: This field is visible to the end user in-app
           example: Premier League subscription
           maxLength: 45
+        transactionType:
+          $ref: "#/components/schemas/TransactionType"
       description: An initial charge for a new agreement. The charge will be executed
         immediately when the user approves the agreement.
     ChargeRequest:
@@ -945,6 +946,13 @@ components:
       maxLength: 3
       pattern: ^[A-Z[3]$
       example: NOK
+    TransactionType:
+      type: string
+      description: Type of transaction, either direct capture, or reserve then capture
+      enum:
+        - DIRECT_CAPTURE
+        - RESERVE_CAPTURE
+      example: DIRECT_CAPTURE
     ChargeType:
       type: string
       default: RECURRING
