@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "76e14162-9045-48fc-b21d-2dcd9f7fdc84",
-		"name": "Recurring Payments v1 - Collection",
+		"name": "Recurring Payments v2 - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -68,10 +68,7 @@
 							"script": {
 								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
 								"exec": [
-									"//pm.environment.set(\"agreementResource\", pm.response.json().agreementResource);",
-									"var jsonData =  pm.response.json();",
-									"var agreementResourceArray = jsonData.agreementResource.split('/');",
-									"pm.environment.set(\"agreementId\", agreementResourceArray[agreementResourceArray.length - 1]);"
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
 								],
 								"type": "text/javascript"
 							}
@@ -102,15 +99,14 @@
 							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/draftAgreement",
+							"raw": "{{base_url}}/recurring/v2/agreements",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"draftAgreement"
+								"v2",
+								"agreements"
 							]
 						},
 						"description": "Drafts an agreement that can be approved by end user"
@@ -125,8 +121,7 @@
 							"script": {
 								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"agreementId\", jsonData.agreementResource.split('/')[jsonData.length - 1]);"
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
 								],
 								"type": "text/javascript"
 							}
@@ -154,18 +149,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/draftAgreement",
+							"raw": "{{base_url}}/recurring/v2/agreements",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"draftAgreement"
+								"v2",
+								"agreements"
 							]
 						},
 						"description": "Drafts an agreement that can be approved by end user"
@@ -175,7 +169,7 @@
 				{
 					"name": "Update Agreement",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Merchant-Serial-Number",
@@ -196,18 +190,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"currency\":\"NOK\",\r\n\"interval\":\"{{interval}}\",\r\n\"intervalCount\":{{intervalCount}},\r\n\"price\":{{price_updated}},\r\n\"productDescription\":\"{{productDescription_updated}}\",\r\n\"productName\":\"{{productName_updated}}\",\r\n\"status\":\"{{status_updated}}\"\r\n}"
+							"raw": "{\r\n\t\"price\":{{price_updated}},\r\n\t\"productName\":\"{{productName_updated}}\",\r\n\t\"productDescription\":\"{{productDescription_updated}}\",\r\n\t\"status\": \"{{status_updated}}\"\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/agreement/{{agreementId}}",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"agreement",
+								"v2",
+								"agreements",
 								"{{agreementId}}"
 							]
 						}
@@ -244,20 +237,15 @@
 								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/agreement/{{agreementId}}",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"agreement",
+								"v2",
+								"agreements",
 								"{{agreementId}}"
 							]
 						},
@@ -283,20 +271,15 @@
 								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/agreement",
+							"raw": "{{base_url}}/recurring/v2/agreements",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"agreement"
+								"v2",
+								"agreements"
 							],
 							"query": [
 								{
@@ -324,7 +307,7 @@
 								"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"chargeId\", jsonData.id);"
+									"postman.setEnvironmentVariable(\"chargeId\", jsonData.chargeId);"
 								],
 								"type": "text/javascript"
 							}
@@ -337,7 +320,7 @@
 									"var tomorrow = new Date();\r",
 									"tomorrow.setDate(tomorrow.getDate() + 1);\r",
 									"tomorrowString = [tomorrow.getFullYear(), (\"0\" + (tomorrow.getMonth()+1)).slice(-2), (\"0\" + tomorrow.getDate()).slice(-2)].join('-');\r",
-									"pm.environment.set(\"dueDate\", tomorrowString);\r",
+									"pm.environment.set(\"due\", tomorrowString);\r",
 									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
 								"type": "text/javascript"
@@ -370,19 +353,19 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"dueDate\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"charge",
-								"{{agreementId}}"
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges"
 							]
 						},
 						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
@@ -398,7 +381,7 @@
 								"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"chargeId\", jsonData.id);"
+									"postman.setEnvironmentVariable(\"chargeId\", jsonData.chargeId);"
 								],
 								"type": "text/javascript"
 							}
@@ -440,19 +423,19 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"dueDate\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"charge",
-								"{{agreementId}}"
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges"
 							]
 						},
 						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
@@ -508,16 +491,16 @@
 							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}/{{chargeId}}/refund",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"charge",
+								"v2",
+								"agreements",
 								"{{agreementId}}",
+								"charges",
 								"{{chargeId}}",
 								"refund"
 							]
@@ -554,16 +537,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}/{{chargeId}}",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"charge",
+								"v2",
+								"agreements",
 								"{{agreementId}}",
+								"charges",
 								"{{chargeId}}"
 							]
 						},
@@ -589,21 +572,17 @@
 								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}/{{chargeId}}",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"charge",
+								"v2",
+								"agreements",
 								"{{agreementId}}",
+								"charges",
 								"{{chargeId}}"
 							]
 						},
@@ -633,21 +612,17 @@
 								"value": "Application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
-							"raw": "{{base_url}}/recurring/api/v1/charge/{{agreementId}}",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"api",
-								"v1",
-								"charge",
-								"{{agreementId}}"
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges"
 							],
 							"query": [
 								{
