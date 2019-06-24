@@ -3,17 +3,22 @@
 	"name": "Recurring Payments v2 - Environment",
 	"values": [
 		{
-			"key": "client_id",
+			"key": "url",
+			"value": "Vipps Test or Production base url",
+			"enabled": true
+		},
+		{
+			"key": "merchant_client_id",
 			"value": "<Go To Developer Portal->Select the Applications tab->Select View secret for the application you registered for eCommerce InApp Alignment product->copy the Client Id here>",
 			"enabled": true
 		},
 		{
-			"key": "client_secret",
+			"key": "merchant_client_secret",
 			"value": "<Go To Developer Portal->Select the Applications tab->Select View secret for the application you registered for eCommerce InApp Alignment product->copy the Client secret here>",
 			"enabled": true
 		},
 		{
-			"key": "Ocp-Apim-Subscription-Key-Access-Token",
+			"key": "Ocp-Apim-Subscription-Key_token",
 			"value": "<Go To Developer Portal->Click on your name on top right->select profile->find subscription named DEFAULT_ACCESSTOKEN and copy the value from Primary key here>",
 			"enabled": true
 		},
@@ -23,7 +28,7 @@
 			"enabled": true
 		},
 		{
-			"key": "Ocp-Apim-Subscription-Key-Ecom",
+			"key": "Ocp-Apim-Subscription-Key",
 			"value": "<Go To Developer Portal->Click on your name on top right->select profile->find subscription relevant to your eCommerce InApp Alignment Product and copy the Primary key here>",
 			"enabled": true
 		},
@@ -123,23 +128,18 @@
 			"enabled": true
 		},
 		{
-			"key": "agreementId",
+			"key": "agreement_id",
 			"value": "<This value will be overwritten when you call Draft Agreement>",
 			"enabled": true
 		},
 		{
-			"key": "chargeId",
+			"key": "charge_id",
 			"value": "<This value will be overwritten when you call Create Charge>",
 			"enabled": true
 		},
 		{
-			"key": "Idempotent-Key-Create",
-			"value": "<This value will be overwritten when you call Create Charge>",
-			"enabled": true
-		},
-		{
-			"key": "Idempotent-Key-Refund",
-			"value": "<This value will be overwritten when you call Refund Charge>",
+			"key": "Idempotent-Key",
+			"value": "<This value will be overwritten when you call charge apis>",
 			"enabled": true
 		},
 		{
@@ -183,7 +183,7 @@
 			"enabled": true
 		},
 		{
-			"key": "access_token",
+			"key": "token",
 			"value": "<This value will be overwritten when you call the Get Access Token API when having selected eCommerce v2 - MTE environment>",
 			"enabled": true
 		}

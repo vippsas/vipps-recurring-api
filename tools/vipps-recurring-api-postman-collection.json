@@ -6,659 +6,453 @@
 	},
 	"item": [
 		{
-			"name": "Access Token",
-			"item": [
+			"name": "Get Access Token",
+			"event": [
 				{
-					"name": "Get Access Token",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "e82847b6-91eb-4ce3-9fb5-8198d399ff0a",
-								"exec": [
-									"pm.environment.set(\"access_token\", pm.response.json().access_token);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "client_id",
-								"value": "{{client_id}}"
-							},
-							{
-								"key": "client_secret",
-								"value": "{{client_secret}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Access-Token}}"
-							}
+					"listen": "test",
+					"script": {
+						"id": "bf09a3c7-63e3-4dce-9e50-42800f602bc6",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);",
+							"",
+							""
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/accessToken/get",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"accessToken",
-								"get"
-							]
-						}
-					},
-					"response": []
+						"type": "text/javascript"
+					}
 				}
-			]
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "client_id",
+						"value": "{{merchant_client_id}}",
+						"type": "text"
+					},
+					{
+						"key": "client_secret",
+						"value": "{{merchant_client_secret}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{url}}/accesstoken/get",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"accesstoken",
+						"get"
+					]
+				},
+				"description": "Retrives an authorization token that can be used in calling Vipps API's. Valid for 24 hours."
+			},
+			"response": []
 		},
 		{
-			"name": "Agreement Controller",
-			"item": [
+			"name": "Draft Agreement",
+			"event": [
 				{
-					"name": "Draft Agreement - Minimal",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
-								"exec": [
-									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "bearer {{access_token}}"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							}
+					"listen": "test",
+					"script": {
+						"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"agreement_id\", jsonData.agreementId)"
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements"
-							]
-						},
-						"description": "Drafts an agreement that can be approved by end user"
-					},
-					"response": []
-				},
-				{
-					"name": "Draft Agreement - Full",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
-								"exec": [
-									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "bearer {{access_token}}"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements"
-							]
-						},
-						"description": "Drafts an agreement that can be approved by end user"
-					},
-					"response": []
-				},
-				{
-					"name": "Update Agreement",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"price\":{{price_updated}},\r\n\t\"productName\":\"{{productName_updated}}\",\r\n\t\"productDescription\":\"{{productDescription_updated}}\",\r\n\t\"status\": \"{{status_updated}}\"\r\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Agreement",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "571ec69e-2c13-4772-9bc8-ec98dd75da11",
-								"exec": [
-									"//pm.environment.set(\"agreementId\", pm.response.json().id);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}"
-							]
-						},
-						"description": "GET one agreement (script based on last created Agreement)"
-					},
-					"response": []
-				},
-				{
-					"name": "Fetch Agreements",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements"
-							],
-							"query": [
-								{
-									"key": "status",
-									"value": "{{status_agreements}}",
-									"disabled": true
-								}
-							]
-						},
-						"description": "Does a GET and retrieves all agreements based on the MerchantId in the header"
-					},
-					"response": []
+						"type": "text/javascript"
+					}
 				}
-			]
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"currency\": \"NOK\",\n  \"initialCharge\": {\n    \"amount\": 1337,\n    \"currency\": \"NOK\",\n    \"description\": \"Initial Charge\",\n    \"transactionType\": \"DIRECT_CAPTURE\"\n  },\n  \"interval\": \"WEEK\",\n  \"intervalCount\": 1,\n  \"isApp\": false,\n  \"merchantRedirectUrl\": \"https://www.google.com\",\n  \"merchantAgreementUrl\": \"https://www.merchant.no/subscriptions/1234/\",\n  \"customerPhoneNumber\": \"96533245\",\n  \"price\": 1337,\n  \"productDescription\": \"Product Description\",\n  \"productName\": \"Subscription Product\"\n}"
+				},
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements"
+					]
+				},
+				"description": "Drafts an agreement that can be approved by end user"
+			},
+			"response": []
 		},
 		{
-			"name": "Charge Controller",
-			"item": [
+			"name": "Create Charge",
+			"event": [
 				{
-					"name": "Create Charge - Due tomorrow",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"chargeId\", jsonData.chargeId);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "6dcb97eb-eac4-47c7-b993-dcb90ab2303d",
-								"exec": [
-									"var tomorrow = new Date();\r",
-									"tomorrow.setDate(tomorrow.getDate() + 1);\r",
-									"tomorrowString = [tomorrow.getFullYear(), (\"0\" + (tomorrow.getMonth()+1)).slice(-2), (\"0\" + tomorrow.getDate()).slice(-2)].join('-');\r",
-									"pm.environment.set(\"due\", tomorrowString);\r",
-									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Idempotent-Key",
-								"value": "{{Idempotent-Key-Create}}"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							}
+					"listen": "test",
+					"script": {
+						"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"charge_id\", jsonData.chargeId);"
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges"
-							]
-						},
-						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
-					},
-					"response": []
-				},
-				{
-					"name": "Create Charge",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"chargeId\", jsonData.chargeId);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "6dcb97eb-eac4-47c7-b993-dcb90ab2303d",
-								"exec": [
-									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Idempotent-Key",
-								"value": "{{Idempotent-Key-Create}}"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges"
-							]
-						},
-						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
-					},
-					"response": []
-				},
-				{
-					"name": "Refund Charge",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "bcaca125-c4b6-4dc1-b214-ae32237168ef",
-								"exec": [
-									"pm.environment.set('Idempotent-Key-Refund',pm.environment.get('agreementId') + (new Date()).getTime());"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Idempotent-Key",
-								"value": "{{Idempotent-Key-Refund}}",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges",
-								"{{chargeId}}",
-								"refund"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cancel Charge",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							},
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges",
-								"{{chargeId}}"
-							]
-						},
-						"description": "GET one agreement (script based on last created Agreement)"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Charge",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges",
-								"{{chargeId}}"
-							]
-						},
-						"description": "GET one agreement (script based on last created Agreement)"
-					},
-					"response": []
-				},
-				{
-					"name": "List Charges",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "Application/json"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges"
-							],
-							"query": [
-								{
-									"key": "status",
-									"value": "{{status_charges}}",
-									"disabled": true
-								}
-							]
-						},
-						"description": "Lists all charges for an agreement"
-					},
-					"response": []
+						"type": "text/javascript"
+					}
 				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "d6fc3a8b-3ce3-404d-9495-871a0b93b9c2",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Idempotent-Key",
+						"value": "{{$timestamp}}",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 1337,\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"A charge from Postman\",\r\n  \"due\": \"2019-07-18\",\r\n  \"retryDays\": 0,\r\n  \"type\": \"RECURRING\"\r\n}"
+				},
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements/{{agreement_id}}/charges",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements",
+						"{{agreement_id}}",
+						"charges"
+					]
+				},
+				"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
+			},
+			"response": []
 		},
 		{
-			"listen": "test",
-			"script": {
-				"id": "22fe5330-e715-49f0-af9a-3ad23ef07572",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
+			"name": "Get Charge",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements/{{agreement_id}}/charges/{{charge_id}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements",
+						"{{agreement_id}}",
+						"charges",
+						"{{charge_id}}"
+					]
+				},
+				"description": "GET one agreement (script based on last created Agreement)"
+			},
+			"response": []
+		},
+		{
+			"name": "List Charges",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements/{{agreement_id}}/charges",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements",
+						"{{agreement_id}}",
+						"charges"
+					]
+				},
+				"description": "Lists all charges for an agreement"
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Charge",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements/{{agreement_id}}/charges/{{charge_id}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements",
+						"{{agreement_id}}",
+						"charges",
+						"{{charge_id}}"
+					]
+				},
+				"description": "GET one agreement (script based on last created Agreement)"
+			},
+			"response": []
+		},
+		{
+			"name": "List Agreements",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements?status=ACTIVE",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "ACTIVE"
+						}
+					]
+				},
+				"description": "Does a GET and retrieves all agreements based on the MerchantId in the header"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Agreement",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements/{{agreement_id}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements",
+						"{{agreement_id}}"
+					]
+				},
+				"description": "GET one agreement (script based on last created Agreement)"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Agreement",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"ACTIVE\",\n    \"productName\": \"Subscription Product\",\n    \"price\": 1337,\n    \"productDescription\": \"Product Description\",\n    \"campaign\": null\n}"
+				},
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements/{{agreement_id}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements",
+						"{{agreement_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refund Charge",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Idempotent-Key",
+						"value": "{{$randomInt}}",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 500,\r\n  \"description\":\"A Refund\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://{{url}}/recurring/v2/agreements/{{agreement_id}}/charges/{{charge_id}}/refund",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recurring",
+						"v2",
+						"agreements",
+						"{{agreement_id}}",
+						"charges",
+						"{{charge_id}}",
+						"refund"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
