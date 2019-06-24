@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "76e14162-9045-48fc-b21d-2dcd9f7fdc84",
+		"_postman_id": "aff232e9-571d-4d16-bce0-0636acb1955d",
 		"name": "Recurring Payments v2 - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -86,10 +86,6 @@
 								"value": "bearer {{access_token}}"
 							},
 							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
 							}
@@ -139,10 +135,6 @@
 								"value": "bearer {{access_token}}"
 							},
 							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
 							}
@@ -171,10 +163,6 @@
 					"request": {
 						"method": "PUT",
 						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
 							{
 								"key": "Authorization",
 								"value": "Bearer {{access_token}}"
@@ -225,10 +213,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
 								"key": "Authorization",
 								"value": "Bearer {{access_token}}"
 							},
@@ -258,10 +242,6 @@
 					"request": {
 						"method": "GET",
 						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
 							{
 								"key": "Authorization",
 								"value": "Bearer {{access_token}}"
@@ -331,10 +311,6 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json"
 							},
@@ -401,10 +377,6 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json"
 							},
@@ -460,11 +432,6 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}",
-								"type": "text"
-							},
-							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
@@ -514,10 +481,6 @@
 						"method": "DELETE",
 						"header": [
 							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
 								"key": "Authorization",
 								"value": "Bearer {{access_token}}"
 							},
@@ -560,10 +523,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
-							{
 								"key": "Authorization",
 								"value": "Bearer {{access_token}}"
 							},
@@ -595,10 +554,6 @@
 					"request": {
 						"method": "GET",
 						"header": [
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{Merchant-Serial-Number}}"
-							},
 							{
 								"key": "Authorization",
 								"value": "Bearer {{access_token}}"

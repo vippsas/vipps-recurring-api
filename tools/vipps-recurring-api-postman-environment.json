@@ -18,11 +18,6 @@
 			"enabled": true
 		},
 		{
-			"key": "Merchant-Serial-Number",
-			"value": "<Go To Developer Portal->Select the Applications tab->Copy the Saleunit Serial Number from the application you registered for eCommerce InApp Alignment product here>",
-			"enabled": true
-		},
-		{
 			"key": "Ocp-Apim-Subscription-Key-Ecom",
 			"value": "<Go To Developer Portal->Click on your name on top right->select profile->find subscription relevant to your eCommerce InApp Alignment Product and copy the Primary key here>",
 			"enabled": true
