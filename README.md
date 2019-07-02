@@ -1,6 +1,6 @@
 # Vipps Recurring API
 
-**Please note:** THIS REPO WAS CREATED AS PART OF A PILOT PROJECT THE REPO WILL BE DELETED SHORTLY BUT IS KEPT FOR REFERENCE. PLEASE CONSULT https://github.com/vippsas/vipps-psp-api FOR NEWEST INFORMATION.
+**Please note:** This API is not officially launched.
 
 This repository contains developer resources for the Vipps Recurring API.
 For more information about this product, please see
