@@ -24,7 +24,7 @@ info:
   version: 2.0.0
   title: Recurring Payments Merchant API
 paths:
-  /api/v1/agreements:
+  /v2/agreements:
     get:
       tags:
         - agreement-controller
@@ -132,7 +132,7 @@ paths:
           description: Service unavailable
         "504":
           description: Gateway Timeout
-  "/api/v1/agreements/{agreementId}":
+  "/v2/agreements/{agreementId}":
     get:
       tags:
         - agreement-controller
@@ -241,7 +241,7 @@ paths:
         description: Agreement ID
         schema:
           type: string
-  "/api/v1/agreements/{agreementId}/charges":
+  "/v2/agreements/{agreementId}/charges":
     get:
       tags:
         - charge-controller
@@ -354,7 +354,7 @@ paths:
         description: The agreement identifier (id)
         schema:
           type: string
-  "/api/v1/agreements/{agreementId}/charges/{chargeId}":
+  "/v2/agreements/{agreementId}/charges/{chargeId}":
     get:
       tags:
         - charge-controller
@@ -462,7 +462,7 @@ paths:
         description: The charge identifier (id)
         schema:
           type: string
-  "/api/v1/agreements/{agreementId}/charges/{chargeId}/refund":
+  "/v2/agreements/{agreementId}/charges/{chargeId}/refund":
     post:
       tags:
         - charge-controller
@@ -707,7 +707,7 @@ components:
           description: Reference to Agreement which user may agree to. Initially the
             Agreement is in a pendingUserApproval state, and it enters active
             state once user has approved in the Vipps application.
-          example: https://api.vipps.no/api/v1/agreements/agr_5kSeqzFAMkfBbc
+          example: https://api.vipps.no/v2/agreements/agr_5kSeqzFAMkfBbc
         agreementId:
           type: string
           description: Id of a Agreement which user may agree to. Initially the Agreement
@@ -717,7 +717,7 @@ components:
         vippsConfirmationUrl:
           type: string
           description: Customer should be redirected to Vipps using this URL.
-          example: https://api.vipps.no/api/v1/register/U6JUjQXq8HQmmV
+          example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
     CampaignRequest:
       type: object
       required:
