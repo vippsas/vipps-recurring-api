@@ -1,6 +1,6 @@
 {
-	"id": "58c8b80a-6309-4a8e-ac5f-4144374baff5",
-	"name": "Recurring Payments v1 - Environment",
+	"id": "06124433-3824-4f61-b4f7-dd20d57a2947",
+	"name": "Recurring Payments v2 - Environment",
 	"values": [
 		{
 			"key": "client_id",
@@ -15,11 +15,6 @@
 		{
 			"key": "Ocp-Apim-Subscription-Key-Access-Token",
 			"value": "<Go To Developer Portal->Click on your name on top right->select profile->find subscription named DEFAULT_ACCESSTOKEN and copy the value from Primary key here>",
-			"enabled": true
-		},
-		{
-			"key": "Merchant-Serial-Number",
-			"value": "<Go To Developer Portal->Select the Applications tab->Copy the Saleunit Serial Number from the application you registered for eCommerce InApp Alignment product here>",
 			"enabled": true
 		},
 		{
@@ -45,13 +40,11 @@
 		{
 			"key": "price",
 			"value": "1000",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "price_updated",
 			"value": "7000",
-			"description": "",
 			"enabled": true
 		},
 		{
@@ -62,73 +55,61 @@
 		{
 			"key": "campaignPrice",
 			"value": "500",
-			"description": "",
-			"enabled": true
-		},
-		{
-			"key": "amount_one",
-			"value": "2000",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "amount_charge",
 			"value": "1000",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "amount_refund",
 			"value": "200",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "interval",
 			"value": "WEEK",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "intervalCount",
 			"value": "2",
-			"description": "",
-			"enabled": true
-		},
-		{
-			"key": "dueDate",
-			"value": "2040-01-01",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "retryDays",
 			"value": "0",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "status_agreements",
 			"value": "ACTIVE",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "status_charges",
 			"value": "CHARGED",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "status_updated",
 			"value": "ACTIVE",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "hasPriceChanged",
 			"value": "false",
-			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "transactionType",
+			"value": "DIRECT_CAPTURE",
+			"enabled": true
+		},
+		{
+			"key": "due",
+			"value": "2040-01-01",
 			"enabled": true
 		},
 		{
@@ -139,25 +120,21 @@
 		{
 			"key": "agreementId",
 			"value": "<This value will be overwritten when you call Draft Agreement>",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "chargeId",
 			"value": "<This value will be overwritten when you call Create Charge>",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "Idempotent-Key-Create",
 			"value": "<This value will be overwritten when you call Create Charge>",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "Idempotent-Key-Refund",
 			"value": "<This value will be overwritten when you call Refund Charge>",
-			"description": "",
 			"enabled": true
 		},
 		{
@@ -173,43 +150,31 @@
 		{
 			"key": "productDescription_updated",
 			"value": "Updated product created through Postman",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "productDescription",
 			"value": "Product created through Postman",
-			"description": "",
-			"enabled": true
-		},
-		{
-			"key": "description_one",
-			"value": "One off charged through Postman",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "description_refund",
 			"value": "Charge refunded through Postman",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "productName_updated",
 			"value": "Updated postman test product",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "productName",
 			"value": "Postman test product",
-			"description": "",
 			"enabled": true
 		},
 		{
 			"key": "agreementResource",
 			"value": "<This value will be overwritten when you call Get Agreement>",
-			"description": "",
 			"enabled": true
 		},
 		{
@@ -219,6 +184,6 @@
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2019-03-07T14:43:56.554Z",
-	"_postman_exported_using": "Postman/6.7.3"
+	"_postman_exported_at": "2019-06-21T14:22:44.846Z",
+	"_postman_exported_using": "Postman/7.2.1"
 }
