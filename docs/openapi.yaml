@@ -21,7 +21,7 @@ info:
 
 
     For information regarding authentication please read [our +guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
-  version: 2.0.0
+  version: 2.0.1
   title: Recurring Payments Merchant API
 paths:
   /v2/agreements:
@@ -536,7 +536,7 @@ paths:
         schema:
           type: string
 servers:
-  - url: https://api.vipps.no/mt1/vipps-recurring-merchant-api
+  - url: https://apitest.vipps.no/recurring/v2/agreements
 components:
   schemas:
     AgreementRequest:
