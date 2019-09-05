@@ -556,7 +556,7 @@ components:
           $ref: "#/components/schemas/CampaignRequest"
         currency:
           $ref: "#/components/schemas/Currency"
-        customerPhone:
+        customerPhoneNumber:
           type: string
           description: "Customers phone number (if available). Used to simplify the
             following Vipps interaction. MSISDN: http://www.msisdn.org"
