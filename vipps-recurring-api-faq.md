@@ -1,14 +1,13 @@
 # Vipps Recurring API FAQ
 
 # How do I check my customer's status?
-By using a `GET:/api/v1/agreement` you can get an overview of all agreements,
+By using a `GET:/v2/agreements` you can get an overview of all agreements,
 if you are uncertain about a specific customer's agreement you can do  
-`GET:/api/v1/charge/{agreementId}`.
+`GET:/v2/agreements/{agreementId}`.
 
 # A customer's charge failed but I did not receive any warning
-As per right now there is no warning or callback tied to charges, a merchant
-has to poll to check their user's status. A warning on a failed charge will
-quite likely be implemented shortly based on feedback.
+The customer does not have notification turned on,
+or they have not upgraded to the app version that supports it.
 
 # I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)
 The field "retryDays" in Agreement allows for this functionality, Vipps will
