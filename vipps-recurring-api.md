@@ -1,7 +1,5 @@
 # Vipps Recurring API
 
-**Please note:** This API is not officially launched.
-
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
@@ -113,7 +111,7 @@ this is communicated to the customer with the original price shown for compariso
 
 <img src="images/CampaignExample.PNG" width="185">
 
-In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PUT:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign 
+In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PUT:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign
 while drafting a new agreement the start date is ignored and the current date-time is used. All dates must be in date-time format as according to [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
 
 ```json
@@ -155,7 +153,7 @@ When the customer approves, the agreement status will change to `active`.
 If there should be a pause in an agreement, like a temporary stop of a
 subscription: Simply do not create any charges during the pause.
 
-#### 
+####
 
 ### Step 3: Create a charge
 Create a charge for a given agreement. `due` will define for which date
@@ -242,7 +240,7 @@ For all product request we require the use of a `Authorization` header. This hea
 ```http
 POST https://apitest.vipps.no/accesstoken/get HTTP/1.1
 Host: apitest.vipps.no
-client_id: "<client_id>""
+client_id: "<client_id>"
 client_secret: "<client_secret>"
 Ocp-Apim-Subscription-Key:  <Ocp-Apim-Subscription-Key>
 
