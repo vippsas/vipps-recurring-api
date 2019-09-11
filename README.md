@@ -12,7 +12,7 @@ To get preview access, please
 [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md)
 and provide: Organization number and MSN.
 
-Until the Vipps Recurring API is officially launched, please use
+Until the Vipps Recurring API is officially launched, please
 create an [issue](https://github.com/vippsas/vipps-recurring-api/issues)
 or a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls)
 if you have questions, suggestions, etc. We do not have the capacity
