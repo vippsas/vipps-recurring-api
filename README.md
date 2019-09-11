@@ -12,7 +12,7 @@ However since Vipps Recurring places some demands on merchant side functionality
 are required to review before getting production access. This is because we want to ensure that our user experience is
 maintained.
 
-Please review our [checklist](https://github.com/vippsas/vipps-recurring-api/vipps-recurring-api-checklist.md)).
+Please review our [checklist](https://github.com/vippsas/vipps-recurring-api/vipps-recurring-api-checklist.md).
 
 To get full access, once you are ready, please
 [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md)
