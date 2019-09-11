@@ -1,4 +1,4 @@
-# Vipps eCommerce API Checklist
+# Vipps Recurring API Checklist
 
 API version: 2.0
 
