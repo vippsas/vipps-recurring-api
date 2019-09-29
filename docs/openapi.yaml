@@ -37,13 +37,6 @@ paths:
           description: Filter by status
           schema:
             $ref: "#/components/schemas/AgreementStatus"
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
       responses:
         "200":
           description: OK
@@ -81,13 +74,6 @@ paths:
       summary: Create a new Agreement, to be confirmed in Vipps
       operationId: draftAgreement
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: false
@@ -132,20 +118,26 @@ paths:
           description: Service unavailable
         "504":
           description: Gateway Timeout
+    parameters:
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        required: true
+        example: c4d82fb224c2418dfa8e84e0ba81b37d
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        description: Bearer 'auth token'
+        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+        schema:
+          type: string
   "/v2/agreements/{agreementId}":
     get:
       tags:
         - agreement-controller
       summary: Fetch an Agreement
       operationId: getAgreement
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
       responses:
         "200":
           description: OK
@@ -177,19 +169,12 @@ paths:
           description: Service unavailable
         "504":
           description: Gateway Timeout
-    put:
+    patch:
       tags:
         - agreement-controller
       summary: Update an Agreement
       operationId: updateAgreement
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: true
@@ -209,7 +194,7 @@ paths:
           content:
             application/json;charset=UTF-8:
               schema:
-                $ref: "#/components/schemas/AgreementReference"
+                $ref: "#/components/schemas/AgreementUpdateReference"
         "400":
           description: Bad Request
           content:
@@ -241,6 +226,19 @@ paths:
         description: Agreement ID
         schema:
           type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        required: true
+        example: c4d82fb224c2418dfa8e84e0ba81b37d
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        description: Bearer 'auth token'
+        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+        schema:
+          type: string
   "/v2/agreements/{agreementId}/charges":
     get:
       tags:
@@ -254,13 +252,6 @@ paths:
           description: The status of the charge
           schema:
             $ref: "#/components/schemas/ChargeStatus"
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
       responses:
         "200":
           description: Success
@@ -298,13 +289,6 @@ paths:
       summary: Create a new charge
       operationId: createCharge
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: true
@@ -354,6 +338,19 @@ paths:
         description: The agreement identifier (id)
         schema:
           type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        required: true
+        example: c4d82fb224c2418dfa8e84e0ba81b37d
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        description: Bearer 'auth token'
+        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+        schema:
+          type: string
   "/v2/agreements/{agreementId}/charges/{chargeId}":
     get:
       tags:
@@ -361,13 +358,6 @@ paths:
       summary: Fetch a Charge
       operationId: getCharge
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
       responses:
         "200":
           description: Success
@@ -405,13 +395,6 @@ paths:
       summary: Cancel a Charge
       operationId: cancelCharge
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: false
@@ -462,6 +445,19 @@ paths:
         description: The charge identifier (id)
         schema:
           type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        required: true
+        example: c4d82fb224c2418dfa8e84e0ba81b37d
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        description: Bearer 'auth token'
+        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+        schema:
+          type: string
   "/v2/agreements/{agreementId}/charges/{chargeId}/refund":
     post:
       tags:
@@ -469,13 +465,6 @@ paths:
       summary: Refund a charge
       operationId: refundCharge
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: true
@@ -535,8 +524,24 @@ paths:
         description: The charge identifier (id)
         schema:
           type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        required: true
+        example: c4d82fb224c2418dfa8e84e0ba81b37d
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        description: Bearer 'auth token'
+        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+        schema:
+          type: string
 servers:
-  - url: https://api.vipps.no/mt1/vipps-recurring-merchant-api
+  - url: https://apitest.vipps.no/recurring
+    description: Merchant Test environment
+  - url: https://api.vipps.no/recurring
+    description: Production environment
 components:
   schemas:
     AgreementRequest:
@@ -608,11 +613,6 @@ components:
           example: Access to all games of English top football
     AgreementUpdate:
       type: object
-      required:
-        - status
-        - price
-        - productDescription
-        - productName
       properties:
         campaign:
           $ref: "#/components/schemas/Campaign"
@@ -718,6 +718,17 @@ components:
           type: string
           description: Customer should be redirected to Vipps using this URL.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
+    AgreementUpdateReference:
+      type: object
+      required:
+        - agreementId
+      properties:
+        agreementId:
+          type: string
+          description: Id of a Agreement which user may agree to. Initially the Agreement
+            is in a pendingUserApproval state, and it enters active state once
+            user has approved in the Vipps application.
+          example: agr_5kSeqzFAMkfBbc
     CampaignRequest:
       type: object
       required:
@@ -814,7 +825,7 @@ components:
           description: The service will attempt to charge the customer for N days [non
             inclusive], must be null or contain a value >= 0. If zero, no
             retries will be performed
-          default: 5
+          default: 0
           minimum: 0
           maximum: 14
           example: 5
