@@ -1,11 +1,15 @@
 # Vipps Recurring API
 
-**Please note:** This API is not officially launched.
-
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
 that will be automatically processed on the due date.
+
+If you have an issues or suggestions please 
+create an [issue](https://github.com/vippsas/vipps-recurring-api/issues)
+or a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls). 
+If it is a critical issue, or involves sensitive information please send an
+email to integration@vipps.no
 
 **API documentation:** https://vippsas.github.io/vipps-recurring-api/
 
@@ -88,13 +92,14 @@ Example for a yearly subscription
 
 #### Initial charge
 Initial charge will be performed if the `initialcharge` is provided when
-creating an agreement. The `amount` has to correspond to the `price` of the agreement.
+creating an agreement.
 
 See [Charge Titles](#charge-title) for explanation of how the charge description is shown to the user.
 
 The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.  
 
-`DIRECT_CAPTURE` processes the payment imediately, while `RESERVE_CAPTURE` reserves the payment for capturing at a later date, this can be used when selling phyisical goods, such as a phone, when subscribing to a agreement for example.
+`DIRECT_CAPTURE` processes the payment imediately, while `RESERVE_CAPTURE` reserves the payment for capturing at a later date, 
+this must be used when selling phyisical goods bundled with an agreement. Such as a phone, when subscribing to a agreement for example.
 
 **Note:** `RESERVE_CAPTURE` is not yet implemented and is a currently a no-op.
 
@@ -113,7 +118,7 @@ this is communicated to the customer with the original price shown for compariso
 
 <img src="images/CampaignExample.PNG" width="185">
 
-In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PUT:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign 
+In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PUT:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign
 while drafting a new agreement the start date is ignored and the current date-time is used. All dates must be in date-time format as according to [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
 
 ```json
@@ -132,8 +137,9 @@ while drafting a new agreement the start date is ignored and the current date-ti
 
 
 ### Step 2: Retrieve the approved agreement
-The agreement will be possible to accept for 5 minutes before it expires.
-When the customer approves, the agreement status will change to `active`.
+The agreement will be in status `PENDING` for 5 minutes before it expires.
+If the customer approves the agreement, and the initialCharge (if provided) is successfully 
+processed, the agreement status will change to `active`.
 
 [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement)
 ```json
@@ -155,7 +161,7 @@ When the customer approves, the agreement status will change to `active`.
 If there should be a pause in an agreement, like a temporary stop of a
 subscription: Simply do not create any charges during the pause.
 
-#### 
+####
 
 ### Step 3: Create a charge
 Create a charge for a given agreement. `due` will define for which date
@@ -207,7 +213,7 @@ If `retryDays=0` it will be failed after the first attempt.
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Charge has been created. |
-| 2 | `DUE` | The charge will be drawn in 8 days, and can now be viewed by the user in the app                                      |
+| 2 | `DUE` | The charge will be drawn in 6 days, and can now be viewed by the user in the app                                      |
 | 3 | `CHARGED`  | Charge has been completed
 | 4 | `FAILED`  | Charge has failed for some reason. I.E Expired card, insufficient funds, etc.
 | 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured
@@ -242,7 +248,7 @@ For all product request we require the use of a `Authorization` header. This hea
 ```http
 POST https://apitest.vipps.no/accesstoken/get HTTP/1.1
 Host: apitest.vipps.no
-client_id: "<client_id>""
+client_id: "<client_id>"
 client_secret: "<client_secret>"
 Ocp-Apim-Subscription-Key:  <Ocp-Apim-Subscription-Key>
 
