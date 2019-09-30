@@ -908,7 +908,7 @@ components:
       example: WEEK
     IdempotencyKeyFormat:
       type: string
-      maxLength: 256
+      maxLength: 40
       pattern: ^[a-zA-Z0-9]*$
     AccessTokenResponse:
       type: object
