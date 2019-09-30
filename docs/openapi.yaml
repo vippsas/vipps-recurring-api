@@ -299,7 +299,6 @@ paths:
         - Charge Controller
       summary: Fetch a Charge
       operationId: getCharge
-      parameters:
       responses:
         "200":
           description: Success
