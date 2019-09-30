@@ -20,7 +20,7 @@ info:
     # Authentication
 
 
-    For information regarding authentication please read [our +guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
+    For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
   version: 2.0.1
   title: Recurring Payments Merchant API
 paths:
@@ -70,7 +70,7 @@ paths:
           description: Gateway Timeout
     post:
       tags:
-        - draft-agreement-controller
+        - agreement-controller
       summary: Create a new Agreement, to be confirmed in Vipps
       operationId: draftAgreement
       parameters:
@@ -119,19 +119,8 @@ paths:
         "504":
           description: Gateway Timeout
     parameters:
-      - name: Ocp-Apim-Subscription-Key
-        in: header
-        required: true
-        example: c4d82fb224c2418dfa8e84e0ba81b37d
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        required: true
-        description: Bearer 'auth token'
-        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-        schema:
-          type: string
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+      - $ref: "#/components/parameters/Authorization"
   "/v2/agreements/{agreementId}":
     get:
       tags:
@@ -220,25 +209,9 @@ paths:
         "504":
           description: Gateway Timeout
     parameters:
-      - name: agreementId
-        in: path
-        required: true
-        description: Agreement ID
-        schema:
-          type: string
-      - name: Ocp-Apim-Subscription-Key
-        in: header
-        required: true
-        example: c4d82fb224c2418dfa8e84e0ba81b37d
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        required: true
-        description: Bearer 'auth token'
-        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-        schema:
-          type: string
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+      - $ref: "#/components/parameters/Authorization"
   "/v2/agreements/{agreementId}/charges":
     get:
       tags:
@@ -332,25 +305,9 @@ paths:
         "504":
           description: Timeout
     parameters:
-      - name: agreementId
-        in: path
-        required: true
-        description: The agreement identifier (id)
-        schema:
-          type: string
-      - name: Ocp-Apim-Subscription-Key
-        in: header
-        required: true
-        example: c4d82fb224c2418dfa8e84e0ba81b37d
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        required: true
-        description: Bearer 'auth token'
-        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-        schema:
-          type: string
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+      - $ref: "#/components/parameters/Authorization"
   "/v2/agreements/{agreementId}/charges/{chargeId}":
     get:
       tags:
@@ -433,31 +390,10 @@ paths:
         "504":
           description: Timeout
     parameters:
-      - name: agreementId
-        in: path
-        required: true
-        description: agreementId
-        schema:
-          type: string
-      - name: chargeId
-        in: path
-        required: true
-        description: The charge identifier (id)
-        schema:
-          type: string
-      - name: Ocp-Apim-Subscription-Key
-        in: header
-        required: true
-        example: c4d82fb224c2418dfa8e84e0ba81b37d
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        required: true
-        description: Bearer 'auth token'
-        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-        schema:
-          type: string
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/ChargeId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+      - $ref: "#/components/parameters/Authorization"
   "/v2/agreements/{agreementId}/charges/{chargeId}/refund":
     post:
       tags:
@@ -512,37 +448,46 @@ paths:
         "504":
           description: Timeout
     parameters:
-      - name: agreementId
-        in: path
-        required: true
-        description: The agreement identifier (id)
-        schema:
-          type: string
-      - name: chargeId
-        in: path
-        required: true
-        description: The charge identifier (id)
-        schema:
-          type: string
-      - name: Ocp-Apim-Subscription-Key
-        in: header
-        required: true
-        example: c4d82fb224c2418dfa8e84e0ba81b37d
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        required: true
-        description: Bearer 'auth token'
-        example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-        schema:
-          type: string
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/ChargeId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+      - $ref: "#/components/parameters/Authorization"
 servers:
   - url: https://apitest.vipps.no/recurring
     description: Merchant Test environment
   - url: https://api.vipps.no/recurring
     description: Production environment
 components:
+  parameters:
+    AgreementId:
+      name: agreementId
+      in: path
+      required: true
+      description: The agreement identifier (id)
+      schema:
+        type: string
+    ChargeId:
+      name: chargeId
+      in: path
+      required: true
+      description: The charge identifier (id)
+      schema:
+        type: string
+    Ocp-Apim-Subscription-Key:
+      name: Ocp-Apim-Subscription-Key
+      in: header
+      required: true
+      example: c4d82fb224c2418dfa8e84e0ba81b37d
+      schema:
+        type: string
+    Authorization:
+      name: Authorization
+      in: header
+      required: true
+      description: Bearer 'auth token'
+      example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+      schema:
+        type: string
   schemas:
     AgreementRequest:
       type: object
@@ -790,7 +735,6 @@ components:
       required:
         - amount
         - description
-        - hasPriceChanged
         - due
       properties:
         amount:
@@ -812,13 +756,6 @@ components:
           format: date
           description: YYYY-MM-DD
           example: 2030-12-31
-        hasPriceChanged:
-          type: boolean
-          description: If the amount exceeds the amount specified on the agreement, this
-            field must be true to indicate that there is an update price for the
-            parent subscription
-          default: false
-          example: false
         retryDays:
           type: integer
           format: int32
