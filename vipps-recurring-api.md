@@ -34,7 +34,7 @@ Each specific charge on an agreement must be scheduled by the merchant, a minimu
 4. Manage charges and agreements with:  
 * [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelCharge)  
 * [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundCharge)  
-* [`PUT:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement)
+* [`PATCH:`/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement)
 
 ### Step 1: Draft an agreement
 
@@ -45,8 +45,8 @@ The following code illustrates how to create an agreement:
 {
   "currency": "NOK",
   "customerPhoneNumber":"90000000",
-  "interval": "WEEK",
-  "intervalCount": 2,
+  "interval": "MONTH",
+  "intervalCount": 1,
   "isApp": false,
   "merchantRedirectUrl": "https://vipps.no",
   "merchantAgreementUrl": "https://vipps.io/terms",
@@ -91,8 +91,10 @@ Example for a yearly subscription
 ```
 
 #### Initial charge
-Initial charge will be performed if the `initialcharge` is provided when
-creating an agreement.
+Initial charge will be performed if the `initialcharge` is provided when creating an agreement.
+Unlike regular (or `RECURRING`) charges, there is no price limit on an `initialCharge`. This 
+allows for products to be bundled with agreements as one transaction (for example a phone). The user 
+will be clearly informed when an `initialCharge` is included in the agreement they are accepting.
 
 See [Charge Titles](#charge-title) for explanation of how the charge description is shown to the user.
 
@@ -118,7 +120,7 @@ this is communicated to the customer with the original price shown for compariso
 
 <img src="images/CampaignExample.PNG" width="185">
 
-In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PUT:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign
+In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign
 while drafting a new agreement the start date is ignored and the current date-time is used. All dates must be in date-time format as according to [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
 
 ```json
@@ -165,8 +167,13 @@ subscription: Simply do not create any charges during the pause.
 
 ### Step 3: Create a charge
 Create a charge for a given agreement. `due` will define for which date
-the charge will be performed. `hasPriceChanged` must be `true` if the amount
-for the charge is different from price of the agreement.
+the charge will be performed. The `amount` of a charge is flexible and does not 
+have to match the `price` of the agreement. 
+
+A limit is in place however, which is 10 times the agreement `price` during the span of the last `interval`. 
+For example, in the agreement [above](#step-2-retrieve-the-approved-agreement) a limit of 4990NOK over the last
+single `MONTH` period would be in place. If this limit becomes a hinderence the agreement `price` can be 
+[updated](#updating-an-agreement).
 
 #### Charge Title
 The title of the charge shown to a user in the Vipps app is in the format `{agreement.ProductName} - {charge.description}`. For example, with the charge below, and the *Premier League* agreement, the app title would read `Premier League subscription - October`
@@ -195,7 +202,7 @@ If `retryDays=0` it will be failed after the first attempt.
 
 * Cancel charges with [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelCharge).
 * Refund performed charges with [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundCharge).
-* Update agreements with [`PUT:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) in case there are any changes.
+* Update agreements with [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) in case there are any changes. See [Updateing an Agreement](#updating-an-agreement)
 
 #### Agreement states
 
@@ -204,7 +211,7 @@ If `retryDays=0` it will be failed after the first attempt.
 | 1 | `PENDING`  | Agreement has been created, but not approved by the user in the app yet |
 | 2 | `ACTIVE` | The Agreement has been confirmed by the end user in the app and can receive charges |
 | 3 | `STOPPED`  | Agreement has been stopped by the merchant most, typically when the end user wants to cancel the payment agreement |
-| 4 | `EXPIRED` | The user did not accept the agreement within the app |
+| 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement within the app |
 
 #### Charge states
 
@@ -219,6 +226,27 @@ If `retryDays=0` it will be failed after the first attempt.
 | 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured
 | 6 | `PARTIALLY_REFUNDED`| Charge successfully refunded, used if the refund is a partial ammount of the captured amount.
 
+
+### Updating an Agreement
+
+A merchant can update an agreement by calling [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement). The following properties are available for updating:
+
+```json
+{
+  "productName": "A new name",
+  "productDescription": "A new description",
+  "price": 25000,
+  "status": "ACTIVE",
+  "campaign": {
+    "start": "2019-10-01T00:00:00Z",
+    "end": "2019-12-01T00:00:00Z",
+    "campaignPrice": 10000
+  }
+}
+```
+
+As a `PATCH` operation all parameters are optional. However when setting an agreement status to `STOPPED` no other changes are allowed. 
+Attempts at changing other properties while stopping an agreement will result in a `400 Bad Request` response.
 
 ## HTTP responses
 
