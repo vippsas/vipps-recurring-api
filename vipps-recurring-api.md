@@ -23,9 +23,9 @@ email to integration@vipps.no
 
 ## How to perform recurring payments
 
-1. Draft a new agreement to be approved with [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement). The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement) request. The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing page on a Desktop flow, or Vipps app in a mobile flow. Where the user can then approve the agreement.
+1. Draft a new agreement to be approved with [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/draftAgreement). The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement) request. The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing page on a Desktop flow, or Vipps app in a mobile flow. Where the user can then approve the agreement.
 
-2. The approved agreement is retrieved from [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement) with `"status":"active"` when customer has approved the agreement.
+2. The approved agreement is retrieved from [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement) with `"status":"ACTIVE"` when customer has approved the agreement.
 
 3. Charge the customer for each period with [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createCharge).<br>
 Each specific charge on an agreement must be scheduled by the merchant, a minimum of six days before the payment will occur. <br>
@@ -34,13 +34,13 @@ Each specific charge on an agreement must be scheduled by the merchant, a minimu
 4. Manage charges and agreements with:  
 * [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelCharge)  
 * [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundCharge)  
-* [`PATCH:`/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement)
+* [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement)
 
 ### Step 1: Draft an agreement
 
 The following code illustrates how to create an agreement:
 
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement)
+[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/draftAgreement)
 ```json
 {
   "currency": "NOK",
@@ -63,10 +63,35 @@ The following size limits are inplace on certain variables:
 
 Agreements may be initiated with or without an initial charge.
 
+Agreement price is given in Øre, the centesimal subdivision of the Norwegian Kroner (NOK).
+
 | # | Agreement      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `Agreement starting now`  | Agreement with an `initialcharge` will only be `active` if the initial charge is processed successfully |
 | 2 | `Agreement starting in future`  | Agreement without an `initialcharge` can be approved but no payment will happen until the first charge is provided |
+
+**Accepting the agreement**
+
+[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/draftAgreement) will return the following JSON structure.
+
+```json
+{
+  {
+    "vippsConfirmationUrl": "https://api.vipps.no/dwo-api-application/v1/deeplink/vippsgateway?v=2/token=eyJraWQiOiJqd3RrZXkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDE0MmIxYy02YjI",
+    "agreementResource": "https://api.vipps.no-recurring/v2/agreements/agr_TGSuPyV",
+    "agreementId": "agr_TGSuPyV"
+}
+}
+```
+
+The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing 
+page. The user can then confirm their identity, and recieve a prompt to accept the 
+agreement within the Vipps app.
+
+The `isApp` property can be used to receive a Deeplink URL, which in a mobile context, 
+can be used to perform an App Switch, which removes the landing page step. This will only 
+work if the user has the Vipps App installed on the same device as they are initiating 
+the agreement from.
 
 **Intervals**
 
@@ -120,7 +145,7 @@ this is communicated to the customer with the original price shown for compariso
 
 <img src="images/CampaignExample.PNG" width="185">
 
-In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign
+In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign
 while drafting a new agreement the start date is ignored and the current date-time is used. All dates must be in date-time format as according to [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
 
 ```json
