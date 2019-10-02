@@ -16,11 +16,11 @@ retry once each day until the value is reached. The valid values are none
 to account for possible networking issues etc.
 
 ## Are there any limits on charging a user?
-Yes, within the Interval period of the agreement the merchant can charge at most 10 
-times the agreement price cummulatively. There is no limit on the number of charges 
-which can be sent in the Interval period. For example, a monthly agreement of 500NOK, 
+Yes, within the Interval period of the agreement the merchant can charge at most 10
+times the agreement price cumulatively. There is no limit on the number of charges
+which can be sent in the Interval period. For example, a monthly agreement of 500NOK,
 can have at most 5000NOK charged in that month, either through one 5000NOK charge,
-5000 1NOK charges, or anywhere inbetween. 
+5000 1NOK charges, or anywhere in between. 
 
 ## When can I send charges for a user?
 You can send charges once you have polled and found a valid agreement tied to
