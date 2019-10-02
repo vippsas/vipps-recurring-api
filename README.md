@@ -1,6 +1,6 @@
 # Vipps Recurring API
 
-This repository contains developer resources for the Vipps Recurring API. This API is now offically launched.
+This repository contains developer resources for the Vipps Recurring API. This API is now officially launched.
 For more information about this product, please see
 [Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett).
 

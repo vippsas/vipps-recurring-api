@@ -5,9 +5,9 @@ to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
 that will be automatically processed on the due date.
 
-If you have an issues or suggestions please 
+If you have an issues or suggestions please
 create an [issue](https://github.com/vippsas/vipps-recurring-api/issues)
-or a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls). 
+or a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls).
 If it is a critical issue, or involves sensitive information please send an
 email to integration@vipps.no
 
@@ -23,24 +23,24 @@ email to integration@vipps.no
 
 ## How to perform recurring payments
 
-1. Draft a new agreement to be approved with [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/draftAgreement). The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement) request. The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing page on a Desktop flow, or Vipps app in a mobile flow. Where the user can then approve the agreement.
+1. Draft a new agreement to be approved with [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement). The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) request. The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing page on a Desktop flow, or Vipps app in a mobile flow. Where the user can then approve the agreement.
 
-2. The approved agreement is retrieved from [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement) with `"status":"ACTIVE"` when customer has approved the agreement.
+2. The approved agreement is retrieved from [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) with `"status":"ACTIVE"` when customer has approved the agreement.
 
-3. Charge the customer for each period with [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createCharge).<br>
+3. Charge the customer for each period with [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).<br>
 Each specific charge on an agreement must be scheduled by the merchant, a minimum of six days before the payment will occur. <br>
 **Note:** Vipps will *only* perform a payment transaction on an agreement after being told by the merchant through this endpoint.
 
 4. Manage charges and agreements with:  
-* [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelCharge)  
-* [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundCharge)  
-* [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement)
+* [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)  
+* [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)  
+* [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)
 
 ### Step 1: Draft an agreement
 
 The following code illustrates how to create an agreement:
 
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/draftAgreement)
+[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
 ```json
 {
   "currency": "NOK",
@@ -56,7 +56,7 @@ The following code illustrates how to create an agreement:
 }
 ```
 
-The following size limits are inplace on certain variables:
+The following size limits are in place on certain variables:
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
 * `price`: Greater than 100
@@ -72,25 +72,23 @@ Agreement price is given in Øre, the centesimal subdivision of the Norwegian Kr
 
 **Accepting the agreement**
 
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/draftAgreement) will return the following JSON structure.
+[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement) will return the following JSON structure.
 
 ```json
 {
-  {
-    "vippsConfirmationUrl": "https://api.vipps.no/dwo-api-application/v1/deeplink/vippsgateway?v=2/token=eyJraWQiOiJqd3RrZXkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDE0MmIxYy02YjI",
-    "agreementResource": "https://api.vipps.no-recurring/v2/agreements/agr_TGSuPyV",
-    "agreementId": "agr_TGSuPyV"
-}
+  "vippsConfirmationUrl": "https://api.vipps.no/dwo-api-application/v1/deeplink/vippsgateway?v=2/token=eyJraWQiOiJqd3RrZXkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDE0MmIxYy02YjI",
+  "agreementResource": "https://api.vipps.no-recurring/v2/agreements/agr_TGSuPyV",
+  "agreementId": "agr_TGSuPyV"
 }
 ```
 
-The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing 
-page. The user can then confirm their identity, and recieve a prompt to accept the 
+The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing
+page. The user can then confirm their identity, and recieve a prompt to accept the
 agreement within the Vipps app.
 
-The `isApp` property can be used to receive a Deeplink URL, which in a mobile context, 
-can be used to perform an App Switch, which removes the landing page step. This will only 
-work if the user has the Vipps App installed on the same device as they are initiating 
+The `isApp` property can be used to receive a Deeplink URL, which in a mobile context,
+can be used to perform an App Switch, which removes the landing page step. This will only
+work if the user has the Vipps App installed on the same device as they are initiating
 the agreement from.
 
 **Intervals**
@@ -117,15 +115,15 @@ Example for a yearly subscription
 
 #### Initial charge
 Initial charge will be performed if the `initialcharge` is provided when creating an agreement.
-Unlike regular (or `RECURRING`) charges, there is no price limit on an `initialCharge`. This 
-allows for products to be bundled with agreements as one transaction (for example a phone). The user 
+Unlike regular (or `RECURRING`) charges, there is no price limit on an `initialCharge`. This
+allows for products to be bundled with agreements as one transaction (for example a phone). The user
 will be clearly informed when an `initialCharge` is included in the agreement they are accepting.
 
 See [Charge Titles](#charge-title) for explanation of how the charge description is shown to the user.
 
 The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.  
 
-`DIRECT_CAPTURE` processes the payment imediately, while `RESERVE_CAPTURE` reserves the payment for capturing at a later date, 
+`DIRECT_CAPTURE` processes the payment imediately, while `RESERVE_CAPTURE` reserves the payment for capturing at a later date,
 this must be used when selling phyisical goods bundled with an agreement. Such as a phone, when subscribing to a agreement for example.
 
 **Note:** `RESERVE_CAPTURE` is not yet implemented and is a currently a no-op.
@@ -145,7 +143,7 @@ this is communicated to the customer with the original price shown for compariso
 
 <img src="images/CampaignExample.PNG" width="185">
 
-In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) for an ongoing agreement. When adding a campaign
+In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement) for an ongoing agreement. When adding a campaign
 while drafting a new agreement the start date is ignored and the current date-time is used. All dates must be in date-time format as according to [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
 
 ```json
@@ -165,10 +163,10 @@ while drafting a new agreement the start date is ignored and the current date-ti
 
 ### Step 2: Retrieve the approved agreement
 The agreement will be in status `PENDING` for 5 minutes before it expires.
-If the customer approves the agreement, and the initialCharge (if provided) is successfully 
+If the customer approves the agreement, and the initialCharge (if provided) is successfully
 processed, the agreement status will change to `active`.
 
-[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement)
+[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
 ```json
 {
   "id": "agr_5kSeqzFAMkfBbc",
@@ -192,12 +190,12 @@ subscription: Simply do not create any charges during the pause.
 
 ### Step 3: Create a charge
 Create a charge for a given agreement. `due` will define for which date
-the charge will be performed. The `amount` of a charge is flexible and does not 
-have to match the `price` of the agreement. 
+the charge will be performed. The `amount` of a charge is flexible and does not
+have to match the `price` of the agreement.
 
-A limit is in place however, which is 10 times the agreement `price` during the span of the last `interval`. 
+A limit is in place however, which is 10 times the agreement `price` during the span of the last `interval`.
 For example, in the agreement [above](#step-2-retrieve-the-approved-agreement) a limit of 4990NOK over the last
-single `MONTH` period would be in place. If this limit becomes a hinderence the agreement `price` can be 
+single `MONTH` period would be in place. If this limit becomes a hindrance the agreement `price` can be
 [updated](#updating-an-agreement).
 
 #### Charge Title
@@ -205,7 +203,7 @@ The title of the charge shown to a user in the Vipps app is in the format `{agre
 
 **NOTE:** The charges need to have a due date at least 6 days in the future.
 
-[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createCharges)
+[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
 ```json
 {
   "amount": 49900,
@@ -225,9 +223,9 @@ If `retryDays=0` it will be failed after the first attempt.
 
 ### Step 4: Manage charges and agreements
 
-* Cancel charges with [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelCharge).
-* Refund performed charges with [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundCharge).
-* Update agreements with [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement) in case there are any changes. See [Updateing an Agreement](#updating-an-agreement)
+* Cancel charges with [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge).
+* Refund performed charges with [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge).
+* Update agreements with [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement) in case there are any changes. See [Updating an Agreement](#updating-an-agreement)
 
 #### Agreement states
 
@@ -254,7 +252,7 @@ If `retryDays=0` it will be failed after the first attempt.
 
 ### Updating an Agreement
 
-A merchant can update an agreement by calling [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement). The following properties are available for updating:
+A merchant can update an agreement by calling [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement). The following properties are available for updating:
 
 ```json
 {
@@ -270,7 +268,7 @@ A merchant can update an agreement by calling [`PATCH:/agreements/{agreementId}`
 }
 ```
 
-As a `PATCH` operation all parameters are optional. However when setting an agreement status to `STOPPED` no other changes are allowed. 
+As a `PATCH` operation all parameters are optional. However when setting an agreement status to `STOPPED` no other changes are allowed.
 Attempts at changing other properties while stopping an agreement will result in a `400 Bad Request` response.
 
 ## HTTP responses
