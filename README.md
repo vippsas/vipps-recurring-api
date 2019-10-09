@@ -37,3 +37,6 @@ contribution guidelines,
 etc.
 
 You can peruse the API reference documentation here: https://vippsas.github.io/vipps-recurring-api/
+
+<img src="./images/RecurringOverview.png">
+

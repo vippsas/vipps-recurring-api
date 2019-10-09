@@ -22,6 +22,8 @@ email to integration@vipps.no
 | Idempotency | The property of endpoints to be called multiple times without changing the result beyond the initial application. |
 
 ## How to perform recurring payments
+<img src="./images/VippsRecurringMerchantFlow.svg">
+
 
 1. Draft a new agreement to be approved with [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement). The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) request. The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing page on a Desktop flow, or Vipps app in a mobile flow. Where the user can then approve the agreement.
 
@@ -141,7 +143,7 @@ this must be used when selling phyisical goods bundled with an agreement. Such a
 A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
 
-<img src="images/CampaignExample.PNG" width="185">
+<img src="./images/CampaignExample.PNG" width="185">
 
 In order to start a campaign the campaign field has to be added either to the agreement draft [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement) for a campaign in the start of an agreement or update an agreement [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement) for an ongoing agreement. When adding a campaign
 while drafting a new agreement the start date is ignored and the current date-time is used. All dates must be in date-time format as according to [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
@@ -238,7 +240,7 @@ If `retryDays=0` it will be failed after the first attempt.
 
 #### Charge states
 
-<img src="images/charge_state.png">
+<img src="./images/VippsRecurringChargeStates.svg">
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
