@@ -8,8 +8,8 @@ that will be automatically processed on the due date.
 If you have an issues or suggestions please
 create an [issue](https://github.com/vippsas/vipps-recurring-api/issues)
 or a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls).
-If it is a critical issue, or involves sensitive information please send an
-email to integration@vipps.no
+If it is a critical issue, or involves sensitive information please
+[contact us directly](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 **API documentation:** https://vippsas.github.io/vipps-recurring-api/
 
@@ -21,7 +21,27 @@ email to integration@vipps.no
 | Charge         | A single payment within an agreement |
 | Idempotency | The property of endpoints to be called multiple times without changing the result beyond the initial application. |
 
-## How to perform recurring payments
+# Table of Contents
+
+- [How to perform recurring payments](#how-to-perform-recurring-payments)
+  * [Vipps screenshots](#vipps-screenshots)
+  * [Step 1: Draft an agreement](#step-1--draft-an-agreement)
+    + [Initial charge](#initial-charge)
+    + [Campaigns](#campaigns)
+  * [Step 2: Retrieve the approved agreement](#step-2--retrieve-the-approved-agreement)
+    + [Pausing an agreement](#pausing-an-agreement)
+  * [Step 3: Create a charge](#step-3--create-a-charge)
+    + [Charge Title](#charge-title)
+    + [Charge retries](#charge-retries)
+  * [Step 4: Manage charges and agreements](#step-4--manage-charges-and-agreements)
+    + [Agreement states](#agreement-states)
+    + [Charge states](#charge-states)
+    + [Updating an Agreement](#updating-an-agreement)
+- [HTTP responses](#http-responses)
+- [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
+- [Questions?](#questions-)
+
+# How to perform recurring payments
 <img src="./images/VippsRecurringMerchantFlow.svg">
 
 
@@ -38,11 +58,11 @@ Each specific charge on an agreement must be scheduled by the merchant, a minimu
 * [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)  
 * [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)
 
-### Vipps screenshots
+## Vipps screenshots
 
 ![Vipps screenshots](images/RecurringOverview.png)
 
-### Step 1: Draft an agreement
+## Step 1: Draft an agreement
 
 The following code illustrates how to create an agreement:
 
@@ -119,7 +139,7 @@ Example for a yearly subscription
 "intervalCount": 12,
 ```
 
-#### Initial charge
+### Initial charge
 Initial charge will be performed if the `initialcharge` is provided when creating an agreement.
 Unlike regular (or `RECURRING`) charges, there is no price limit on an `initialCharge`. This
 allows for products to be bundled with agreements as one transaction (for example a phone). The user
@@ -143,7 +163,7 @@ this must be used when selling phyisical goods bundled with an agreement. Such a
 },
 ```
 
-#### Campaigns
+### Campaigns
 A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
 
@@ -167,7 +187,7 @@ while drafting a new agreement the start date is ignored and the current date-ti
 | `campaignPrice`       | The price that will be shown for comparison   |
 
 
-### Step 2: Retrieve the approved agreement
+## Step 2: Retrieve the approved agreement
 The agreement will be in status `PENDING` for 5 minutes before it expires.
 If the customer approves the agreement, and the initialCharge (if provided) is successfully
 processed, the agreement status will change to `active`.
@@ -188,13 +208,11 @@ processed, the agreement status will change to `active`.
   "campaign": null,
 }
 ```
-#### Pausing an agreement
+### Pausing an agreement
 If there should be a pause in an agreement, like a temporary stop of a
 subscription: Simply do not create any charges during the pause.
 
-####
-
-### Step 3: Create a charge
+## Step 3: Create a charge
 Create a charge for a given agreement. `due` will define for which date
 the charge will be performed. The `amount` of a charge is flexible and does not
 have to match the `price` of the agreement.
@@ -204,7 +222,7 @@ For example, in the agreement [above](#step-2-retrieve-the-approved-agreement) a
 single `MONTH` period would be in place. If this limit becomes a hindrance the agreement `price` can be
 [updated](#updating-an-agreement).
 
-#### Charge Title
+### Charge Title
 The title of the charge shown to a user in the Vipps app is in the format `{agreement.ProductName} - {charge.description}`. For example, with the charge below, and the *Premier League* agreement, the app title would read `Premier League subscription - October`
 
 **NOTE:** The charges need to have a due date at least 6 days in the future.
@@ -223,17 +241,17 @@ The title of the charge shown to a user in the Vipps app is in the format `{agre
 
 **Note** `description` cannot be longer than 45 characters.
 
-#### Charge retries
+### Charge retries
 Vipps will retry the charge for the number of days specified in `retryDays`.
 If `retryDays=0` it will be failed after the first attempt.
 
-### Step 4: Manage charges and agreements
+## Step 4: Manage charges and agreements
 
 * Cancel charges with [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge).
 * Refund performed charges with [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge).
 * Update agreements with [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement) in case there are any changes. See [Updating an Agreement](#updating-an-agreement)
 
-#### Agreement states
+### Agreement states
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
@@ -242,7 +260,7 @@ If `retryDays=0` it will be failed after the first attempt.
 | 3 | `STOPPED`  | Agreement has been stopped by the merchant most, typically when the end user wants to cancel the payment agreement |
 | 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement within the app |
 
-#### Charge states
+### Charge states
 
 <img src="./images/VippsRecurringChargeStates.svg">
 
@@ -277,7 +295,7 @@ A merchant can update an agreement by calling [`PATCH:/agreements/{agreementId}`
 As a `PATCH` operation all parameters are optional. However when setting an agreement status to `STOPPED` no other changes are allowed.
 Attempts at changing other properties while stopping an agreement will result in a `400 Bad Request` response.
 
-## HTTP responses
+# HTTP responses
 
 This API returns the following HTTP statuses in the responses:
 
@@ -296,50 +314,16 @@ This API returns the following HTTP statuses in the responses:
 
 All error responses contains an `error` object in the body, with details of the problem.
 
-## Authentication and authorization - API access token
+# Authentication and authorization - API access token
 
-For all product request we require the use of a `Authorization` header. This header is required by making a Access Token request with the values `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`. See the [Access Token swagger](https://vippsas.github.io/vipps-accesstoken-api/#/Authorization_Service/fetchAuthorizationTokenUsingPost) and the [getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#step-3) for more information.
+For all product request we require the use of a `Authorization` header.
+This header is required by making a Access Token request with the values
+`client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`.
 
-[`POST:/get`](https://vippsas.github.io/vipps-accesstoken-api/#/Authorization_Service/fetchAuthorizationTokenUsingPost)
-
-```http
-POST https://apitest.vipps.no/accesstoken/get HTTP/1.1
-Host: apitest.vipps.no
-client_id: "<client_id>"
-client_secret: "<client_secret>"
-Ocp-Apim-Subscription-Key:  <Ocp-Apim-Subscription-Key>
-
-```
-
-The `Ocp-Apim-Subscription-Key` can be found in Vipps developer portal.
-See the [Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md).
-
-The request above will return a response similar to this, with the `access_token`:
-
-```http
-HTTP 200 OK
-```
-```json
-{
-  "token_type": "Bearer",
-  "expires_in": "86398",
-  "ext_expires_in": "0",
-  "expires_on": "1495271273",
-  "not_before": "1495184574",
-  "resource": "00000002-0000-0000-c000-000000000000",
-  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>"
-}
-```
-
-Every request to the API, needs to have the `Authorization` header with the
-generated token and the `Ocp-Apim-Subscription-Key`. The header in the request
-to this API should look like this:
-
-```http
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <continued>
-Ocp-Apim-Subscription-Key:  <Ocp-Apim-Subscription-Key>
-...
-```
+See [Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
+in the
+[Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
+for more information.
 
 # Questions?
 
