@@ -38,6 +38,10 @@ Each specific charge on an agreement must be scheduled by the merchant, a minimu
 * [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)  
 * [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)
 
+### Vipps screenshots
+
+![Vipps screenshots](images/RecurringOverview.png)
+
 ### Step 1: Draft an agreement
 
 The following code illustrates how to create an agreement:
