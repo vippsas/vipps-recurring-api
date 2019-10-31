@@ -18,7 +18,9 @@ Document version: 1.1.0.
 - [Invoicing](#invoicing)
 
 # How do I check my customer's status?
-By using a `GET:/v2/agreements` you can get an overview of all agreements,
+By using a
+[`GET:/v2/agreements`]()
+you can get an overview of all agreements,
 if you are uncertain about a specific customer's agreement you can do  
 `GET:/v2/agreements/{agreementId}`.
 
@@ -76,5 +78,5 @@ The merchant does not need any other partner or agreement.
 
 # Invoicing
 Merchants with a "net settlement" contract receive the users' payments excluding the Vipps fees.
-Merchants with a "gross settlement" contract eceive the users' payments including the Vipps fees,
+Merchants with a "gross settlement" contract receive the users' payments including the Vipps fees,
 and are then invoiced for the Vipps fees.
