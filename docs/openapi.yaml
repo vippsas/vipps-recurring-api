@@ -484,7 +484,7 @@ components:
         customerPhoneNumber:
           type: string
           description: "Customers phone number (if available). Used to simplify the
-            following Vipps interaction. MSISDN: http://www.msisdn.org"
+            following Vipps interaction. MSISDN: https://www.msisdn.org"
           maxLength: 15
           example: "4740000000"
         initialCharge:
