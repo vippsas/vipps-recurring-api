@@ -102,8 +102,8 @@ There are 100 øre in 1 krone.
 
 | # | Agreement      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `Agreement starting now`  | Agreement with an `initialcharge` will only be `active` if the initial charge is processed successfully |
-| 2 | `Agreement starting in future`  | Agreement without an `initialcharge` can be approved but no payment will happen until the first charge is provided |
+| 1 | `Agreement starting now`  | Agreement with an `initialcharge` that uses `DIRECT_CAPTURE` will only be `active` if the initial charge is processed successfully |
+| 2 | `Agreement starting in future`  | Agreement without an `initialcharge`, or with `initialcharge` that uses `RESERVE_CAPTURE` can be approved but no payment will happen until the first charge is provided |
 
 **Accepting the agreement**
 
@@ -161,8 +161,6 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 `DIRECT_CAPTURE` processes the payment imediately, while `RESERVE_CAPTURE` reserves the payment for capturing at a later date,
 this must be used when selling phyisical goods bundled with an agreement. Such as a phone, when subscribing to a agreement for example.
 
-**Note:** `RESERVE_CAPTURE` is not yet implemented and is a currently a no-op.
-
 This example shows the same agreement as above, with an `initialCharge`
 of 499 NOK:
 
@@ -185,6 +183,18 @@ of 499 NOK:
   "productName": "Premier League subscription"
 }
 ```   
+```json
+
+Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initialcharge.
+```json
+"initialCharge": {
+  "transactionType": "RESERVE_CAPTURE",
+  "amount": 19900,
+  "currency": "NOK",
+  "description": "Phone"
+},
+```
+A reserved charge can be captured with [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge) when the product is shipped.
 
 ### Campaigns
 A campaign in recurring is a period where the price is lower than usual, and
@@ -257,7 +267,6 @@ The title of the charge shown to a user in the Vipps app is in the format `{agre
   "currency": "NOK",
   "description": "October",
   "due": "2030-10-28",
-  "hasPriceChanged": true,
   "retryDays": 5
 }
 ```
@@ -299,6 +308,7 @@ If `retryDays=0` it will be failed after the first attempt.
 | 4 | `FAILED`  | Charge has failed for some reason. I.E Expired card, insufficient funds, etc.
 | 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured
 | 6 | `PARTIALLY_REFUNDED`| Charge successfully refunded, used if the refund is a partial ammount of the captured amount.
+| 7 | `RESERVED` | Initial charge with `transactionType` set to `RESERVE_CAPTURE`, changes state to `CHARGED` when captured successfully.
 
 
 ### Updating an Agreement
