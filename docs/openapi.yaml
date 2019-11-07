@@ -18,12 +18,12 @@ info:
 
     ## Authentication
 
-    See <a href="#/Access%20Controller/getAccessToken" target="_blank">Get Access Token</a>  
+    See <a href="#/Access%20Controller/getAccessToken" target="_blank">Get Access Token</a>
 
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
   version: 2.0.2
   title: Recurring Payments Merchant API
-tags: 
+tags:
   - name: Access Controller
     description: Access Token Controller
   - name: Agreement Controller
@@ -506,8 +506,8 @@ components:
           example: true
         merchantAgreementUrl:
           type: string
-          description: URL where Vipps can redirect the customer to view/administer their
-            subscription.
+          description: URL where Vipps can send the customer to view/manage their
+            subscription. Typically a "My page" where the user can change, pause, cancel, etc.
           example: https://www.example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
@@ -912,24 +912,24 @@ components:
     AccessTokenResponse:
       type: object
       properties:
-        token_type: 
+        token_type:
           type: string
           example: Bearer
-        expires_in: 
+        expires_in:
           type: string
           example: "3600"
-        ext_expires_in: 
+        ext_expires_in:
           type: string
           example: "3600"
-        expires_on: 
+        expires_on:
           type: string
           example: "1569831424"
-        not_before: 
+        not_before:
           type: string
           example: "1569827524"
-        resource: 
+        resource:
           type: string
           example: 00000003-0000-0000-d000-000000000000
-        access_token: 
+        access_token:
           type: string
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
