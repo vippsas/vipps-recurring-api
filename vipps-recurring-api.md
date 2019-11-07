@@ -23,7 +23,23 @@ If it is a critical issue, or involves sensitive information please
 
 # Table of Contents
 
-
+- [How to perform recurring payments](#how-to-perform-recurring-payments)
+  * [Vipps screenshots](#vipps-screenshots)
+  * [Step 1: Draft an agreement](#step-1--draft-an-agreement)
+    + [Initial charge](#initial-charge)
+    + [Campaigns](#campaigns)
+  * [Step 2: Retrieve the approved agreement](#step-2--retrieve-the-approved-agreement)
+    + [Pausing an agreement](#pausing-an-agreement)
+  * [Step 3: Create a charge](#step-3--create-a-charge)
+    + [Charge Title](#charge-title)
+    + [Charge retries](#charge-retries)
+  * [Step 4: Manage charges and agreements](#step-4--manage-charges-and-agreements)
+    + [Agreement states](#agreement-states)
+    + [Charge states](#charge-states)
+    + [Updating an Agreement](#updating-an-agreement)
+- [HTTP responses](#http-responses)
+- [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
+- [Questions?](#questions-)
 
 # How to perform recurring payments
 <img src="./images/VippsRecurringMerchantFlow.svg">
