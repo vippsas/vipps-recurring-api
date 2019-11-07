@@ -93,29 +93,7 @@ for more details):
 * `productDescription`: Max length 100 characters
 * `price`: Greater than 100
 
-Agreements may be initiated with or without an initial charge,
-this example shows the same agreement as above, with an `initialCharge`
-of 499 NOK:
-
-```
-{
-  "currency": "NOK",
-  "customerPhoneNumber":"90000000",
-  "initialCharge": {
-     "amount": 49900,
-     "currency": "NOK",
-     "description": "Premier League subscription",
-     "transactionType": "DIRECT_CAPTURE"
-  "interval": "MONTH",
-  "intervalCount": 1,
-  "isApp": false,
-  "merchantRedirectUrl": "https://example.com/confirmation",
-  "merchantAgreementUrl": "https://example.com/my-customer-agreement",
-  "price": 49900,
-  "productDescription": "Access to all games of English top football",
-  "productName": "Premier League subscription"
-}
-```   
+Agreements may be initiated with or without an [initial charge](#initial-charge),
 
 The agreement price, and the amount for the initial charge, is given in øre,
 the centesimal subdivision of the Norwegian kroner (NOK).
@@ -184,14 +162,28 @@ this must be used when selling phyisical goods bundled with an agreement. Such a
 
 **Note:** `RESERVE_CAPTURE` is not yet implemented and is a currently a no-op.
 
-```json
-"initialCharge": {
-  "transactionType": "DIRECT_CAPTURE",
-  "amount": 19900,
-  "currency": "NOK",
-  "description": "September"
-},
+This example shows the same agreement as above, with an `initialCharge`
+of 499 NOK:
+
 ```
+{
+  "currency": "NOK",
+  "customerPhoneNumber":"90000000",
+  "initialCharge": {
+     "amount": 49900,
+     "currency": "NOK",
+     "description": "Premier League subscription",
+     "transactionType": "DIRECT_CAPTURE"
+  "interval": "MONTH",
+  "intervalCount": 1,
+  "isApp": false,
+  "merchantRedirectUrl": "https://example.com/confirmation",
+  "merchantAgreementUrl": "https://example.com/my-customer-agreement",
+  "price": 49900,
+  "productDescription": "Access to all games of English top football",
+  "productName": "Premier League subscription"
+}
+```   
 
 ### Campaigns
 A campaign in recurring is a period where the price is lower than usual, and
