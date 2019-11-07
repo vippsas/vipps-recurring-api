@@ -69,15 +69,40 @@ The following code illustrates how to create an agreement:
 The `merchantAgreementUrl` is a link to a "My page", where the customer
 can manage the agreement: Change, pause, cancel, etc.
 
-The following size limits are in place on certain variables
-(see the Swagger file for more details):
+The request parameters have the following size limits
+(see
+[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
+for more details):
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
 * `price`: Greater than 100
 
-Agreements may be initiated with or without an initial charge.
+Agreements may be initiated with or without an initial charge,
+this example shows the same agreement as above, with an `initialCharge`
+of 499 NOK:
 
-Agreement price is given in øre, the centesimal subdivision of the Norwegian kroner (NOK).
+```
+{
+  "currency": "NOK",
+  "customerPhoneNumber":"90000000",
+  "initialCharge": {
+     "amount": 49900,
+     "currency": "NOK",
+     "description": "Premier League subscription",
+     "transactionType": "DIRECT_CAPTURE"
+  "interval": "MONTH",
+  "intervalCount": 1,
+  "isApp": false,
+  "merchantRedirectUrl": "https://example.com/confirmation",
+  "merchantAgreementUrl": "https://example.com/my-customer-agreement",
+  "price": 49900,
+  "productDescription": "Access to all games of English top football",
+  "productName": "Premier League subscription"
+}
+```   
+
+The agreement price, and the amount for the initial charge, is given in øre,
+the centesimal subdivision of the Norwegian kroner (NOK).
 There are 100 øre in 1 krone.
 
 | # | Agreement      | Description                                                                          |
