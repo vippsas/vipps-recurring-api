@@ -31,7 +31,8 @@ If it is a critical issue, or involves sensitive information please
   * [Step 2: Retrieve the approved agreement](#step-2--retrieve-the-approved-agreement)
     + [Pausing an agreement](#pausing-an-agreement)
   * [Step 3: Create a charge](#step-3--create-a-charge)
-    + [Charge Title](#charge-title)
+    + [Charge title](#charge-title)
+    + [Charge times](#charge-times)
     + [Charge retries](#charge-retries)
   * [Step 4: Manage charges and agreements](#step-4--manage-charges-and-agreements)
     + [Agreement states](#agreement-states)
@@ -244,7 +245,7 @@ For example, in the agreement [above](#step-2-retrieve-the-approved-agreement) a
 single `MONTH` period would be in place. If this limit becomes a hindrance the agreement `price` can be
 [updated](#updating-an-agreement).
 
-### Charge Title
+### Charge title
 The title of the charge shown to a user in the Vipps app is in the format `{agreement.ProductName} - {charge.description}`. For example, with the charge below, and the *Premier League* agreement, the app title would read `Premier League subscription - October`
 
 **NOTE:** The charges need to have a due date at least 6 days in the future.
