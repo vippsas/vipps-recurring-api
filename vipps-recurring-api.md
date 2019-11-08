@@ -263,6 +263,10 @@ The title of the charge shown to a user in the Vipps app is in the format `{agre
 
 **Note** `description` cannot be longer than 45 characters.
 
+### Charge times
+Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
+Subsequent attempts are made according to the `retryDays` specified.
+
 ### Charge retries
 Vipps will retry the charge for the number of days specified in `retryDays`.
 If `retryDays=0` it will be failed after the first attempt.

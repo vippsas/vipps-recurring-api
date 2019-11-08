@@ -1,9 +1,10 @@
 # Vipps Recurring API FAQ
 
-Document version: 1.1.0.
+Document version: 1.1.1.
 
 # Table of Contents
 
+- [At what time during the day charges made](#At-what-time-during-the day-charges-made)
 - [How do I check my customer's status?](#how-do-i-check-my-customer-s-status-)
 - [A customer's charge failed but I did not receive any warning](#a-customer-s-charge-failed-but-i-did-not-receive-any-warning)
 - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-don-t-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds---networking-issues-etc-)
@@ -16,6 +17,10 @@ Document version: 1.1.0.
 - [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge-)
 - [Settlement](#settlement)
 - [Invoicing](#invoicing)
+
+# At what time during the day charges made
+Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
+Subsequent attempts are made accoring to the `retryDays` specified.
 
 # How do I check my customer's status?
 By using a
