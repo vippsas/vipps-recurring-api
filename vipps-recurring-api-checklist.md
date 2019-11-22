@@ -16,6 +16,7 @@ For examples of requests and responses, see the Postman collection in [tools](to
     - [ ] GET Charge [`GET:/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/getCharge)
     - [ ] Cancel Charge [`DELETE:/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)
     - [ ] Refund Charge [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)
+    - [ ] Capture reserved initial Charge [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)
 - [ ] Avoid Integration pitfalls
     - [ ] The Merchant _must not_ rely on `Redirect` alone
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)

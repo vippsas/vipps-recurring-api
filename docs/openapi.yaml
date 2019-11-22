@@ -396,6 +396,31 @@ paths:
       - $ref: "#/components/parameters/AgreementId"
       - $ref: "#/components/parameters/ChargeId"
       - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+  "/v2/agreements/{agreementId}/charges/{chargeId}/capture":
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Charge Controller
+      summary: Capture a reserved charge
+      operationId: captureCharge
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+      responses:
+        "200":
+          description: Success
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+    parameters:
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/ChargeId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
 servers:
   - url: https://api.vipps.no/recurring
     description: Production environment
