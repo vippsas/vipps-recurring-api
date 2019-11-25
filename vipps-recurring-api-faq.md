@@ -4,7 +4,7 @@ Document version: 1.1.2.
 
 # Table of Contents
 
-- [At what time during the day charges made](#at-what-time-during-the-are-day-charges-made)
+- [At what time during the day charges made?](#at-what-time-during-the-are-day-charges-made)
 - [How do I check my customer's status?](#how-do-i-check-my-customer-s-status-)
 - [A customer's charge failed but I did not receive any warning](#a-customer-s-charge-failed-but-i-did-not-receive-any-warning)
 - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-don-t-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds---networking-issues-etc-)
