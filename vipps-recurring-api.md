@@ -51,7 +51,7 @@ If it is a critical issue, or involves sensitive information please
 2. The approved agreement is retrieved from [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) with `"status":"ACTIVE"` when customer has approved the agreement.
 
 3. Charge the customer for each period with [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).<br>
-Each specific charge on an agreement must be scheduled by the merchant, a minimum of six days before the payment will occur. <br>
+Each specific charge on an agreement must be scheduled by the merchant, a minimum of two days before the payment will occur. <br>
 **Note:** Vipps will *only* perform a payment transaction on an agreement after being told by the merchant through this endpoint.
 
 4. Manage charges and agreements with:  
@@ -183,9 +183,8 @@ of 499 NOK:
   "productName": "Premier League subscription"
 }
 ```   
-```json
 
-Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initialcharge.
+Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial charge.
 ```json
 "initialCharge": {
   "transactionType": "RESERVE_CAPTURE",
@@ -247,7 +246,7 @@ subscription: Simply do not create any charges during the pause.
 
 ## Step 3: Create a charge
 Create a charge for a given agreement. `due` will define for which date
-the charge will be performed. The `amount` of a charge is flexible and does not
+the charge will be performed. This date have to be at a minimum two days in the future. The `amount` of a charge is flexible and does not
 have to match the `price` of the agreement.
 
 A limit is in place however, which is 10 times the agreement `price` during the span of the last `interval`.
