@@ -246,7 +246,7 @@ subscription: Simply do not create any charges during the pause.
 
 ## Step 3: Create a charge
 Create a charge for a given agreement. `due` will define for which date
-the charge will be performed. This date have to be at a minimum two days in the future. The `amount` of a charge is flexible and does not
+the charge will be performed. This date has to be at a minimum two days in the future. The `amount` of a charge is flexible and does not
 have to match the `price` of the agreement.
 
 A limit is in place however, which is 10 times the agreement `price` during the span of the last `interval`.
