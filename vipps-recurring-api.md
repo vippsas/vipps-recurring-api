@@ -257,8 +257,6 @@ single `MONTH` period would be in place. If this limit becomes a hindrance the a
 ### Charge title
 The title of the charge shown to a user in the Vipps app is in the format `{agreement.ProductName} - {charge.description}`. For example, with the charge below, and the *Premier League* agreement, the app title would read `Premier League subscription - October`
 
-**NOTE:** The charges need to have a due date at least 6 days in the future.
-
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
 ```json
 {
