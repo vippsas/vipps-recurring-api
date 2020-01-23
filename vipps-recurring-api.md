@@ -19,7 +19,7 @@ If it is a critical issue, or involves sensitive information please
 |:-----|:----------------------------------------------- |
 | Agreement         | A payment subscription with a set of parameters that a customer agrees to  |
 | Charge         | A single payment within an agreement |
-| Idempotency | The property of endpoints to be called multiple times without changing the result beyond the initial application. |
+| Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
 
 # Table of Contents
 
@@ -83,9 +83,6 @@ The following code illustrates how to create an agreement:
 }
 ```
 
-The `merchantAgreementUrl` is a link to a "My page", where the customer
-can manage the agreement: Change, pause, cancel, etc.
-
 The request parameters have the following size limits
 (see
 [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
@@ -104,6 +101,13 @@ There are 100 øre in 1 krone.
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `Agreement starting now`  | Agreement with an `initialcharge` that uses `DIRECT_CAPTURE` will only be `active` if the initial charge is processed successfully |
 | 2 | `Agreement starting in future`  | Agreement without an `initialcharge`, or with `initialcharge` that uses `RESERVE_CAPTURE` can be approved but no payment will happen until the first charge is provided |
+
+
+### Merchant Agreement Url
+
+The `merchantAgreementUrl` is a link to a "My page", where the customer
+can manage the agreement: Change, pause, cancel, etc. NOTE: This needs to be a link to actual agreement management or customer page, not a general link to a merchant's page.
+
 
 **Accepting the agreement**
 
