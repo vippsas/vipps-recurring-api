@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aff232e9-571d-4d16-bce0-0636acb1955d",
+		"_postman_id": "ae523e6b-c570-42e2-9afc-b4f5e9a17846",
 		"name": "Recurring Payments v2 - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -42,20 +42,12 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": {
-							"raw": "{{base_url}}/accessToken/get",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"accessToken",
-								"get"
-							]
-						}
+						"url": "{{base_url}}/accessToken/get"
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Agreement Controller",
@@ -94,17 +86,7 @@
 							"mode": "raw",
 							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements"
-							]
-						},
+						"url": "{{base_url}}/recurring/v2/agreements",
 						"description": "Drafts an agreement that can be approved by end user"
 					},
 					"response": []
@@ -143,17 +125,46 @@
 							"mode": "raw",
 							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements"
-							]
+						"url": "{{base_url}}/recurring/v2/agreements",
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
+					"name": "Draft Agreement - Reserved Charge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
+								"exec": [
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
+						"url": "{{base_url}}/recurring/v2/agreements",
 						"description": "Drafts an agreement that can be approved by end user"
 					},
 					"response": []
@@ -180,18 +191,7 @@
 							"mode": "raw",
 							"raw": "{\r\n\t\"price\":{{price_updated}},\r\n\t\"productName\":\"{{productName_updated}}\",\r\n\t\"productDescription\":\"{{productDescription_updated}}\",\r\n\t\"status\": \"{{status_updated}}\"\r\n}"
 						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}"
-							]
-						}
+						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}"
 					},
 					"response": []
 				},
@@ -221,18 +221,7 @@
 								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}"
-							]
-						},
+						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
 						"description": "GET one agreement (script based on last created Agreement)"
 					},
 					"response": []
@@ -252,7 +241,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements",
+							"raw": "{{base_url}}/recurring/v2/agreements?",
 							"host": [
 								"{{base_url}}"
 							],
@@ -273,7 +262,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Charge Controller",
@@ -331,19 +321,7 @@
 							"mode": "raw",
 							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
 						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges"
-							]
-						},
+						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
 						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
 					},
 					"response": []
@@ -397,19 +375,7 @@
 							"mode": "raw",
 							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
 						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges"
-							]
-						},
+						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
 						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
 					},
 					"response": []
@@ -457,21 +423,54 @@
 							"mode": "raw",
 							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
 						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges",
-								"{{chargeId}}",
-								"refund"
-							]
+						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund"
+					},
+					"response": []
+				},
+				{
+					"name": "Capture reserved charge",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "bcaca125-c4b6-4dc1-b214-ae32237168ef",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Idempotent-Key",
+								"value": "{{Idempotent-Key-Refund}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/capture"
 					},
 					"response": []
 				},
@@ -499,20 +498,7 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges",
-								"{{chargeId}}"
-							]
-						},
+						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
 						"description": "GET one agreement (script based on last created Agreement)"
 					},
 					"response": []
@@ -531,20 +517,7 @@
 								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
 							}
 						],
-						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v2",
-								"agreements",
-								"{{agreementId}}",
-								"charges",
-								"{{chargeId}}"
-							]
-						},
+						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
 						"description": "GET one agreement (script based on last created Agreement)"
 					},
 					"response": []
@@ -568,7 +541,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges?",
 							"host": [
 								"{{base_url}}"
 							],
@@ -591,7 +564,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -615,5 +589,6 @@
 				]
 			}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

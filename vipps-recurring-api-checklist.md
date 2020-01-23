@@ -9,13 +9,14 @@ For examples of requests and responses, see the Postman collection in [tools](to
 # Checklist
 
 - [ ] Integrate _all_ the [API endpoints](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md) described in out guide:
-    - [ ] Initiate [`POST:/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/draft-agreement-controller/draftAgreement)
-    - [ ] Check status of agreement [`POST:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/getAgreement)
-    - [ ] Update an agreement [`PUT:/v2/agreements/{agreementId`](https://vippsas.github.io/vipps-recurring-api/#/agreement-controller/updateAgreement)
-    - [ ] Create Charge [`POST:/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/createCharge)
-    - [ ] GET Charge [`GET:/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/getCharge)
-    - [ ] Cancel Charge [`DELETE:/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/cancelCharge)
-    - [ ] Refund Charge [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/charge-controller/refundCharge)
+    - [ ] Initiate [`POST:/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
+    - [ ] Check status of agreement [`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
+    - [ ] Update an agreement [`PATCH:/v2/agreements/{agreementId`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)
+    - [ ] Create Charge [`POST:/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
+    - [ ] GET Charge [`GET:/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/getCharge)
+    - [ ] Cancel Charge [`DELETE:/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)
+    - [ ] Refund Charge [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)
+    - [ ] Capture reserved initial Charge [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)
 - [ ] Avoid Integration pitfalls
     - [ ] The Merchant _must not_ rely on `Redirect` alone
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)

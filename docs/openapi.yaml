@@ -7,27 +7,75 @@ info:
     Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
 
 
-    1. A a draft agreement is initialized and the user is redirected for approval.
+    1. A draft agreement is initialized and the user is redirected for approval.
 
-    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status
+    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status.
 
     3. The merchant can start sending charges which will be charged the user in the future.
 
 
-    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user)
+    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user).
 
+    ## Authentication
 
-    # Authentication
+    See <a href="#/Access%20Controller/getAccessToken" target="_blank">Get Access Token</a>
 
-
-    For information regarding authentication please read [our +guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
-  version: 2.0.1
+    For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
+  version: 2.0.2
   title: Recurring Payments Merchant API
+tags:
+  - name: Access Controller
+    description: Access Token Controller
+  - name: Agreement Controller
+    description: Agreement Token Controller
+  - name: Charge Controller
+    description: Charge Token Controller
 paths:
+  /accesstoken/get:
+    post:
+      servers:
+        - url: https://api.vipps.no
+        - url: https://apitest.vipps.no
+      tags:
+        - Access Controller
+      summary: Get Access Token
+      operationId: getAccessToken
+      parameters:
+        - name: client_id
+          in: header
+          required: true
+          description: Provided Client ID
+          schema:
+            type: string
+        - name: client_secret
+          in: header
+          required: true
+          description: Provided Client Secret
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+          description: Provided access token subscription key
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/AccessTokenResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
   /v2/agreements:
     get:
+      security:
+        - bearerAuth: []
       tags:
-        - agreement-controller
+        - Agreement Controller
       summary: List Agreements
       operationId: listAgreements
       parameters:
@@ -37,13 +85,6 @@ paths:
           description: Filter by status
           schema:
             $ref: "#/components/schemas/AgreementStatus"
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
       responses:
         "200":
           description: OK
@@ -54,40 +95,23 @@ paths:
                 items:
                   $ref: "#/components/schemas/Agreement"
         "400":
-          description: Bad Request
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "500":
-          description: Internal Server Error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Gateway Timeout
+          $ref: "#/components/responses/TimeoutError"
     post:
+      security:
+        - bearerAuth: []
       tags:
-        - draft-agreement-controller
+        - Agreement Controller
       summary: Create a new Agreement, to be confirmed in Vipps
       operationId: draftAgreement
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: false
@@ -109,43 +133,27 @@ paths:
               schema:
                 $ref: "#/components/schemas/AgreementReference"
         "400":
-          description: Bad Request
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "422":
           description: Unprocessable Entity (invalid json)
         "500":
-          description: Internal Server Error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Gateway Timeout
+          $ref: "#/components/responses/TimeoutError"
+    parameters:
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
   "/v2/agreements/{agreementId}":
     get:
+      security:
+        - bearerAuth: []
       tags:
-        - agreement-controller
+        - Agreement Controller
       summary: Fetch an Agreement
       operationId: getAgreement
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
       responses:
         "200":
           description: OK
@@ -154,42 +162,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/Agreement"
         "400":
-          description: Bad Request
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          description: Agreement not found
+          $ref: "#/components/responses/NotFoundError"
         "500":
-          description: Internal Server Error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Gateway Timeout
-    put:
+          $ref: "#/components/responses/TimeoutError"
+    patch:
+      security:
+        - bearerAuth: []
       tags:
-        - agreement-controller
+        - Agreement Controller
       summary: Update an Agreement
       operationId: updateAgreement
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: true
@@ -209,42 +200,28 @@ paths:
           content:
             application/json;charset=UTF-8:
               schema:
-                $ref: "#/components/schemas/AgreementReference"
+                $ref: "#/components/schemas/AgreementUpdateReference"
         "400":
-          description: Bad Request
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          description: Agreement not found
+          $ref: "#/components/responses/NotFoundError"
         "500":
-          description: Internal Server Error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Gateway Timeout
+          $ref: "#/components/responses/TimeoutError"
     parameters:
-      - name: agreementId
-        in: path
-        required: true
-        description: Agreement ID
-        schema:
-          type: string
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
   "/v2/agreements/{agreementId}/charges":
     get:
+      security:
+        - bearerAuth: []
       tags:
-        - charge-controller
+        - Charge Controller
       summary: List Charges
       operationId: listCharges
       parameters:
@@ -254,13 +231,6 @@ paths:
           description: The status of the charge
           schema:
             $ref: "#/components/schemas/ChargeStatus"
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
       responses:
         "200":
           description: Success
@@ -271,40 +241,23 @@ paths:
                 items:
                   $ref: "#/components/schemas/Charge"
         "400":
-          description: Invalid request, check your parameters
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "500":
-          description: Internal server error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Timeout
+          $ref: "#/components/responses/TimeoutError"
     post:
+      security:
+        - bearerAuth: []
       tags:
-        - charge-controller
+        - Charge Controller
       summary: Create a new charge
       operationId: createCharge
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: true
@@ -326,48 +279,26 @@ paths:
               schema:
                 $ref: "#/components/schemas/ChargeReference"
         "400":
-          description: Invalid request, check your parameters
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "500":
-          description: Internal server error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Timeout
+          $ref: "#/components/responses/TimeoutError"
     parameters:
-      - name: agreementId
-        in: path
-        required: true
-        description: The agreement identifier (id)
-        schema:
-          type: string
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
   "/v2/agreements/{agreementId}/charges/{chargeId}":
     get:
+      security:
+        - bearerAuth: []
       tags:
-        - charge-controller
+        - Charge Controller
       summary: Fetch a Charge
       operationId: getCharge
-      parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
       responses:
         "200":
           description: Success
@@ -376,42 +307,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/Charge"
         "400":
-          description: Invalid request, check your parameters
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          description: The requested charge does not exist
+          $ref: "#/components/responses/NotFoundError"
         "500":
-          description: Internal server error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Timeout
+          $ref: "#/components/responses/TimeoutError"
     delete:
+      security:
+        - bearerAuth: []
       tags:
-        - charge-controller
+        - Charge Controller
       summary: Cancel a Charge
       operationId: cancelCharge
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: false
@@ -423,59 +337,33 @@ paths:
         "200":
           description: Success
         "400":
-          description: Invalid request, check your parameters
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          description: The requested charge does not exist
+          $ref: "#/components/responses/NotFoundError"
         "409":
           description: This charge is not in a deletable state, it may have already been
             charged to the user.
         "500":
-          description: Internal server error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Timeout
+          $ref: "#/components/responses/TimeoutError"
     parameters:
-      - name: agreementId
-        in: path
-        required: true
-        description: agreementId
-        schema:
-          type: string
-      - name: chargeId
-        in: path
-        required: true
-        description: The charge identifier (id)
-        schema:
-          type: string
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/ChargeId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
   "/v2/agreements/{agreementId}/charges/{chargeId}/refund":
     post:
+      security:
+        - bearerAuth: []
       tags:
-        - charge-controller
+        - Charge Controller
       summary: Refund a charge
       operationId: refundCharge
       parameters:
-        - name: Authorization
-          in: header
-          required: true
-          description: Bearer 'auth token'
-          example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            type: string
         - name: Idempotency-Key
           in: header
           required: true
@@ -493,51 +381,113 @@ paths:
         "200":
           description: Success
         "400":
-          description: Invalid request, check your parameters
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequestError"
         "401":
-          description: Unauthorized
+          $ref: "#/components/responses/UnauthorizedError"
         "404":
-          description: Charge does not exist (and never has)
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/NotFoundError"
         "500":
-          description: Internal server error
-          content:
-            application/json;charset=UTF-8:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/ServerError"
         "503":
-          description: Service unavailable
+          $ref: "#/components/responses/UnavailableError"
         "504":
-          description: Timeout
+          $ref: "#/components/responses/TimeoutError"
     parameters:
-      - name: agreementId
-        in: path
-        required: true
-        description: The agreement identifier (id)
-        schema:
-          type: string
-      - name: chargeId
-        in: path
-        required: true
-        description: The charge identifier (id)
-        schema:
-          type: string
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/ChargeId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+  "/v2/agreements/{agreementId}/charges/{chargeId}/capture":
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Charge Controller
+      summary: Capture a reserved charge
+      operationId: captureCharge
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+      responses:
+        "200":
+          description: Success
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+    parameters:
+      - $ref: "#/components/parameters/AgreementId"
+      - $ref: "#/components/parameters/ChargeId"
+      - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
 servers:
-  - url: https://apitest.vipps.no/recurring/v2/agreements
+  - url: https://api.vipps.no/recurring
+    description: Production environment
+  - url: https://apitest.vipps.no/recurring
+    description: Merchant Test environment
 components:
+  parameters:
+    AgreementId:
+      name: agreementId
+      in: path
+      required: true
+      description: The agreement identifier (id)
+      schema:
+        type: string
+    ChargeId:
+      name: chargeId
+      in: path
+      required: true
+      description: The charge identifier (id)
+      schema:
+        type: string
+    Ocp-Apim-Subscription-Key:
+      name: Ocp-Apim-Subscription-Key
+      in: header
+      required: true
+      example: c4d82fb224c2418dfa8e84e0ba81b37d
+      schema:
+        type: string
+    Authorization:
+      name: Authorization
+      in: header
+      required: true
+      description: Bearer 'auth token'
+      example: Bearer aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer 'auth token', from /accesstoken/get
+      bearerFormat: JWT
+  responses:
+    BadRequestError: #400
+      description: Invalid request, check your parameters
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
+    UnauthorizedError: #401
+      description: Access token is missing or invalid
+    NotFoundError: #404
+      description: Item does not exist (and never has)
+    ServerError: #500
+      description: Internal server error
+      content:
+        application/json;charset=UTF-8:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
+    UnavailableError: #503
+      description: Service unavailable
+    TimeoutError: #504
+      description: Timeout
   schemas:
     AgreementRequest:
       type: object
@@ -559,7 +509,7 @@ components:
         customerPhoneNumber:
           type: string
           description: "Customers phone number (if available). Used to simplify the
-            following Vipps interaction. MSISDN: http://www.msisdn.org"
+            following Vipps interaction. MSISDN: https://www.msisdn.org"
           maxLength: 15
           example: "4740000000"
         initialCharge:
@@ -581,8 +531,8 @@ components:
           example: true
         merchantAgreementUrl:
           type: string
-          description: URL where Vipps can redirect the customer to view/administer their
-            subscription.
+          description: URL where Vipps can send the customer to view/manage their
+            subscription. Typically a "My page" where the user can change, pause, cancel, etc.
           example: https://www.example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
@@ -608,11 +558,6 @@ components:
           example: Access to all games of English top football
     AgreementUpdate:
       type: object
-      required:
-        - status
-        - price
-        - productDescription
-        - productName
       properties:
         campaign:
           $ref: "#/components/schemas/Campaign"
@@ -718,6 +663,17 @@ components:
           type: string
           description: Customer should be redirected to Vipps using this URL.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
+    AgreementUpdateReference:
+      type: object
+      required:
+        - agreementId
+      properties:
+        agreementId:
+          type: string
+          description: Id of a Agreement which user may agree to. Initially the Agreement
+            is in a pendingUserApproval state, and it enters active state once
+            user has approved in the Vipps application.
+          example: agr_5kSeqzFAMkfBbc
     CampaignRequest:
       type: object
       required:
@@ -779,7 +735,6 @@ components:
       required:
         - amount
         - description
-        - hasPriceChanged
         - due
       properties:
         amount:
@@ -801,20 +756,13 @@ components:
           format: date
           description: YYYY-MM-DD
           example: 2030-12-31
-        hasPriceChanged:
-          type: boolean
-          description: If the amount exceeds the amount specified on the agreement, this
-            field must be true to indicate that there is an update price for the
-            parent subscription
-          default: false
-          example: false
         retryDays:
           type: integer
           format: int32
           description: The service will attempt to charge the customer for N days [non
             inclusive], must be null or contain a value >= 0. If zero, no
             retries will be performed
-          default: 5
+          default: 0
           minimum: 0
           maximum: 14
           example: 5
@@ -877,7 +825,7 @@ components:
           example: "5001419121"
         type:
           $ref: "#/components/schemas/ChargeType"
-    Error:
+    VippsApiError:
       type: object
       required:
         - contextId
@@ -984,5 +932,29 @@ components:
       example: WEEK
     IdempotencyKeyFormat:
       type: string
-      maxLength: 256
+      maxLength: 40
       pattern: ^[a-zA-Z0-9]*$
+    AccessTokenResponse:
+      type: object
+      properties:
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: string
+          example: "3600"
+        ext_expires_in:
+          type: string
+          example: "3600"
+        expires_on:
+          type: string
+          example: "1569831424"
+        not_before:
+          type: string
+          example: "1569827524"
+        resource:
+          type: string
+          example: 00000003-0000-0000-d000-000000000000
+        access_token:
+          type: string
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
