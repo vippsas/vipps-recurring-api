@@ -21,3 +21,5 @@ was any other resource.
 4. Retrieve the Users personal information.
 
 5. Store safely and responsibly.
+
+Scope: "Subscription, Persondetails"
