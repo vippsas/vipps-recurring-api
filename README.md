@@ -2,7 +2,7 @@
 
 This repository contains developer resources for the Vipps Recurring API. This API is now officially launched.
 For more information about this product, please see
-[Vipps på Nett](https://www.vipps.no/bedrift/vipps-pa-nett).
+[Faste betalinger med Vipps](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
 **IMPORTANT:** Integration Access is available for existing customers that have
 "Vipps på Nett" and a direct integration with the
