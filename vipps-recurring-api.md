@@ -331,7 +331,7 @@ Attempts at changing other properties while stopping an agreement will result in
 
 ### Agreement life cycle recommendations
 
-As seen in the section [Updating an Agreement](#Updating-an-Agreement), merchants can update agreements through our API. It's is always the merchant's responsiblity to manage and update agreements, since users are unable to make changes to their agreements directly in the Vipps app. Users will most likely request changes to their subscriptions through the merchant's channels. Here are some typical change scenarios, and corresponding reccomendations:
+As seen in the section [Updating an Agreement](#Updating-an-Agreement), merchants can update agreements through our API. It is always the merchant's responsiblity to manage and update agreements, since users are unable to make changes to their agreements directly in the Vipps app. Users will most likely request changes to their subscriptions through the merchant's channels. Here are some typical change scenarios, and corresponding reccomendations:
 
 #### Stopping a recurring payment
 
