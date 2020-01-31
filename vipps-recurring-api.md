@@ -19,8 +19,7 @@ If it is a critical issue, or involves sensitive information please
 |:-----|:----------------------------------------------- |
 | Agreement         | A payment subscription with a set of parameters that a customer agrees to  |
 | Charge         | A single payment within an agreement |
-| Idempotency | The property of endpoints to be called multiple times without changing the result beyond the initial application. |
-
+| Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
 # Table of Contents
 
 - [How to perform recurring payments](#how-to-perform-recurring-payments)
