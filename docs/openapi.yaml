@@ -890,6 +890,7 @@ components:
       enum:
         - PENDING
         - DUE
+        - RESERVED
         - CHARGED
         - FAILED
         - CANCELLED
