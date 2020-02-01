@@ -20,7 +20,6 @@ If it is a critical issue, or involves sensitive information please
 | Agreement         | A payment subscription with a set of parameters that a customer agrees to  |
 | Charge         | A single payment within an agreement |
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
-
 # Table of Contents
 
 - [How to perform recurring payments](#how-to-perform-recurring-payments)
@@ -38,6 +37,7 @@ If it is a critical issue, or involves sensitive information please
     + [Agreement states](#agreement-states)
     + [Charge states](#charge-states)
     + [Updating an Agreement](#updating-an-agreement)
+    + [Agreement life cycle recommendation](#Agreement-life-cycle-recommendations)
 - [HTTP responses](#http-responses)
 - [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
 - [Questions?](#questions-)
@@ -83,6 +83,9 @@ The following code illustrates how to create an agreement:
 }
 ```
 
+The `merchantAgreementUrl` is a link to a "My page", where the customer
+can manage the agreement: Change, pause, cancel, etc.
+
 The request parameters have the following size limits
 (see
 [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
@@ -101,13 +104,6 @@ There are 100 øre in 1 krone.
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `Agreement starting now`  | Agreement with an `initialcharge` that uses `DIRECT_CAPTURE` will only be `active` if the initial charge is processed successfully |
 | 2 | `Agreement starting in future`  | Agreement without an `initialcharge`, or with `initialcharge` that uses `RESERVE_CAPTURE` can be approved but no payment will happen until the first charge is provided |
-
-
-### Merchant Agreement Url
-
-The `merchantAgreementUrl` is a link to a "My page", where the customer
-can manage the agreement: Change, pause, cancel, etc. NOTE: This needs to be a link to actual agreement management or customer page, not a general link to a merchant's page.
-
 
 **Accepting the agreement**
 
@@ -332,6 +328,23 @@ A merchant can update an agreement by calling [`PATCH:/agreements/{agreementId}`
 
 As a `PATCH` operation all parameters are optional. However when setting an agreement status to `STOPPED` no other changes are allowed.
 Attempts at changing other properties while stopping an agreement will result in a `400 Bad Request` response.
+
+### Agreement life cycle recommendations
+
+As seen in the section [Updating an Agreement](#Updating-an-Agreement), merchants can update agreements through our API. It is always the merchant's responsiblity to manage and update agreements, since users are unable to make changes to their agreements directly in the Vipps app. Users will most likely request changes to their subscriptions through the merchant's channels. Here are some typical change scenarios, and corresponding reccomendations:
+
+#### Stopping a recurring payment
+
+When a user notifies the merchant that they want to cancel a subscription or service, the merchant must ensure that the status of the recurring agreement is set to `STOPPED` at a suitable time.
+
+We recommend that the recurring agreement remains `ACTIVE` for as long as the user has access to the service. For example, if the user cancels their subscription but they are still able to use the service until the end of the billing cycle, the agreement should only be set to `STOPPED` at the end of the billing cycle.  In this case we also recommend updating the `productDescription` field of the agreement so that the user can see that the subscription is cancelled or due to be cancelled at a given time.
+
+Since `STOPPED` agreements cannot be reactivated, a benefit of waiting until the "end of service" before setting the agreement status to `STOPPED` is that the merchant will be able to reactivate the user's subscription without having to set up a new agreement. 
+
+#### Pausing a recurring payment
+
+It's recommended not to *stop* the agreement, but rather stop sending charges until the user wishes to resume the subscription. It's also recommended to update the `productDescription` field of the agreement so the user can see that the subscription is paused in the Vipps app.
+
 
 # HTTP responses
 
