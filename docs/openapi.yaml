@@ -728,6 +728,11 @@ components:
           maxLength: 45
         transactionType:
           $ref: "#/components/schemas/TransactionType"
+        orderId:
+          type: string
+          description: Optional orderId, will be auto generated if not provided
+          example: Order123
+          maxLength: 15
       description: An initial charge for a new agreement. The charge will be executed
         immediately when the user approves the agreement.
     ChargeRequest:
@@ -766,6 +771,11 @@ components:
           minimum: 0
           maximum: 14
           example: 5
+        orderId:
+          type: string
+          description: Optional orderId, will be auto generated if not provided
+          example: Order123
+          maxLength: 15
     ChargeReference:
       type: object
       required:
