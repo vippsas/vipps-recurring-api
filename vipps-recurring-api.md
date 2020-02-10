@@ -254,6 +254,12 @@ For example, in the agreement [above](#step-2-retrieve-the-approved-agreement) a
 single `MONTH` period would be in place. If this limit becomes a hindrance the agreement `price` can be
 [updated](#updating-an-agreement).
 
+An optional `orderId` field can be set in the request, if used this will be the id used to identify the charge
+throughout its payment history, including in settlement files. This `orderId` must be unique across all Recurring
+and eCom transactions for the given `merchantSerialNumber`. If the field is not given a unique id will be generated
+in the form `chr_xxxxxxx` (where x is a alphanumeric character). In settlements this auto generated Id is presented as
+`chrULxxxxxxx`.
+
 ### Charge title
 The title of the charge shown to a user in the Vipps app is in the format `{agreement.ProductName} - {charge.description}`. For example, with the charge below, and the *Premier League* agreement, the app title would read `Premier League subscription - October`
 
