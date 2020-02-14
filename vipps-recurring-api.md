@@ -20,7 +20,7 @@ If it is a critical issue, or involves sensitive information please
 | Agreement         | A payment subscription with a set of parameters that a customer agrees to  |
 | Charge         | A single payment within an agreement |
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
-# Table of Contents
+## Table of Contents
 
 - [How to perform recurring payments](#how-to-perform-recurring-payments)
   * [Vipps screenshots](#vipps-screenshots)
@@ -42,7 +42,7 @@ If it is a critical issue, or involves sensitive information please
 - [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
 - [Questions?](#questions-)
 
-# How to perform recurring payments
+## How to perform recurring payments
 <img src="./images/VippsRecurringMerchantFlow.svg">
 
 
@@ -59,7 +59,7 @@ Each specific charge on an agreement must be scheduled by the merchant, a minimu
 * [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)  
 * [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)
 
-## Vipps screenshots
+### Vipps screenshots
 
 ![Vipps screenshots](images/RecurringOverview.png)
 
@@ -335,11 +335,11 @@ A merchant can update an agreement by calling [`PATCH:/agreements/{agreementId}`
 As a `PATCH` operation all parameters are optional. However when setting an agreement status to `STOPPED` no other changes are allowed.
 Attempts at changing other properties while stopping an agreement will result in a `400 Bad Request` response.
 
-### Agreement life cycle recommendations
+## Agreement life cycle recommendations
 
 As seen in the section [Updating an Agreement](#Updating-an-Agreement), merchants can update agreements through our API. It is always the merchant's responsiblity to manage and update agreements, since users are unable to make changes to their agreements directly in the Vipps app. Users will most likely request changes to their subscriptions through the merchant's channels. Here are some typical change scenarios, and corresponding reccomendations:
 
-#### Stopping a recurring payment
+### Stopping a recurring payment
 
 When a user notifies the merchant that they want to cancel a subscription or service, the merchant must ensure that the status of the recurring agreement is set to `STOPPED` at a suitable time.
 
@@ -347,12 +347,12 @@ We recommend that the recurring agreement remains `ACTIVE` for as long as the us
 
 Since `STOPPED` agreements cannot be reactivated, a benefit of waiting until the "end of service" before setting the agreement status to `STOPPED` is that the merchant will be able to reactivate the user's subscription without having to set up a new agreement. 
 
-#### Pausing a recurring payment
+### Pausing a recurring payment
 
 It's recommended not to *stop* the agreement, but rather stop sending charges until the user wishes to resume the subscription. It's also recommended to update the `productDescription` field of the agreement so the user can see that the subscription is paused in the Vipps app.
 
 
-# HTTP responses
+## HTTP responses
 
 This API returns the following HTTP statuses in the responses:
 
@@ -371,7 +371,7 @@ This API returns the following HTTP statuses in the responses:
 
 All error responses contains an `error` object in the body, with details of the problem.
 
-# Authentication and authorization - API access token
+## Authentication and authorization - API access token
 
 For all product request we require the use of a `Authorization` header.
 This header is required by making a Access Token request with the values
@@ -382,7 +382,7 @@ in the
 [Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 for more information.
 
-# Questions?
+## Questions?
 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
