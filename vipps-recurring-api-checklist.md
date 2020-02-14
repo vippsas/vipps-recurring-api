@@ -6,7 +6,7 @@ Document version 1.1.1
 
 For examples of requests and responses, see the Postman collection in [tools](tools/)
 
-# Checklist
+## Checklist
 
 - [ ] Integrate _all_ the [API endpoints](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md) described in out guide:
     - [ ] Initiate [`POST:/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
@@ -23,7 +23,7 @@ For examples of requests and responses, see the Postman collection in [tools](to
     - [ ] The merchant must have a way for the user to manage and stop subscription in merchantAgreementUrl in their Agreement. This should result in a timely update of the Vipps Agreement.
     - [ ] Vipps never generates charges automatically on behalf of the Merchant. Every charge is the responsibility of the Merchant.
 
-# Flow to go live for direct integrations
+## Flow to go live for direct integrations
 
 1. The merchant orders [Vipps på Nett](https://www.vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/).
 2. Vipps completes customer control (KYC, PEP, AML, etc).
