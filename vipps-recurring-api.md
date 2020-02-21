@@ -5,13 +5,40 @@ to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
 that will be automatically processed on the due date.
 
-If you have an issues or suggestions please
-create an [issue](https://github.com/vippsas/vipps-recurring-api/issues)
-or a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls).
-If it is a critical issue, or involves sensitive information please
-[contact us directly](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+**IMPORTANT:** Integration Access is available for existing customers that have
+"Vipps på Nett" and a direct integration with the
+[Vipps eCom API](https://github.com/vippsas/vipps-ecom-api).
 
-**API documentation:** https://vippsas.github.io/vipps-recurring-api/
+However since Vipps Recurring places some demands on merchant side functionality we have a [checklist](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api-checklist.md) that all merchants
+are required to review before getting production access. This is because we want to ensure that our user experience is
+maintained.
+
+To get full access, once you are ready, please
+[contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md)
+and provide: Organization number and MSN.
+
+
+## Table of Contents
+
+- [How to perform recurring payments](#how-to-perform-recurring-payments)
+  * [Vipps screenshots](#vipps-screenshots)
+  * [Step 1: Draft an agreement](#step-1-draft-an-agreement)
+    + [Initial charge](#initial-charge)
+    + [Campaigns](#campaigns)
+  * [Step 2: Retrieve the approved agreement](#step-2-retrieve-the-approved-agreement)
+    + [Pausing an agreement](#pausing-an-agreement)
+  * [Step 3: Create a charge](#step-3-create-a-charge)
+    + [Charge title](#charge-title)
+    + [Charge times](#charge-times)
+    + [Charge retries](#charge-retries)
+  * [Step 4: Manage charges and agreements](#step-4-manage-charges-and-agreements)
+    + [Agreement states](#agreement-states)
+    + [Charge states](#charge-states)
+    + [Updating an Agreement](#updating-an-agreement)
+    + [Agreement life cycle recommendation](#Agreement-life-cycle-recommendations)
+- [HTTP responses](#http-responses)
+- [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
+- [Questions?](#questions-)
 
 **Terminology**
 
@@ -20,27 +47,6 @@ If it is a critical issue, or involves sensitive information please
 | Agreement         | A payment subscription with a set of parameters that a customer agrees to  |
 | Charge         | A single payment within an agreement |
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
-## Table of Contents
-
-- [How to perform recurring payments](#how-to-perform-recurring-payments)
-  * [Vipps screenshots](#vipps-screenshots)
-  * [Step 1: Draft an agreement](#step-1--draft-an-agreement)
-    + [Initial charge](#initial-charge)
-    + [Campaigns](#campaigns)
-  * [Step 2: Retrieve the approved agreement](#step-2--retrieve-the-approved-agreement)
-    + [Pausing an agreement](#pausing-an-agreement)
-  * [Step 3: Create a charge](#step-3--create-a-charge)
-    + [Charge title](#charge-title)
-    + [Charge times](#charge-times)
-    + [Charge retries](#charge-retries)
-  * [Step 4: Manage charges and agreements](#step-4--manage-charges-and-agreements)
-    + [Agreement states](#agreement-states)
-    + [Charge states](#charge-states)
-    + [Updating an Agreement](#updating-an-agreement)
-    + [Agreement life cycle recommendation](#Agreement-life-cycle-recommendations)
-- [HTTP responses](#http-responses)
-- [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
-- [Questions?](#questions-)
 
 ## How to perform recurring payments
 <img src="./images/VippsRecurringMerchantFlow.svg">
