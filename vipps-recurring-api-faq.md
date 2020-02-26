@@ -1,6 +1,6 @@
 # Vipps Recurring API FAQ
 
-Document version: 1.1.2.
+Document version: 1.1.3.
 
 ## Table of Contents
 
@@ -62,6 +62,15 @@ the user.
 ## Can a user cancel the agreement through the Vipps app
 No, the user needs to contact the Merchant which can then cancel or modify the
 agreement as they see fit.
+
+## What happens to charges if the user cancels the agreement?
+All charges in a `PENDING` or `DUE` state will be cancelled if the agreement is stopped.
+
+## What happens to pending charges if the user deletes the payment card?
+The user is responsible for keeping their payment sources update. The user will
+receive a push notification if a payment fails which informs them to update
+their payment source (the user also automatically receives a push notification
+when a card that is _not_ used for recurring payments expire). 
 
 ## How does a user see any charges I send?
 A charge will be displayed to the user 6 days before the charge is due to be processed.
