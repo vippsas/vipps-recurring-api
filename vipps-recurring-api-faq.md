@@ -4,21 +4,19 @@ Document version: 1.1.3.
 
 ## Table of Contents
 
-* [At what time during the day are charges made](#at-what-time-during-the-day-are-charges-made)
-* [How do I check my customer's status?](#how-do-i-check-my-customer-s-status-)
-* [A customer's charge failed but I did not receive any warning](#a-customer-s-charge-failed-but-i-did-not-receive-any-warning)
-* [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-don-t-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds---networking-issues-etc-)
-* [Can the charge for an agreement be changed?](#can-the-charge-for-an-agreement-be-changed-)
-* [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user-)
-* [When can I send charges for a user?](#when-can-i-send-charges-for-a-user-)
-* [Can a user cancel the agreement through the Vipps app](#can-a-user-cancel-the-agreement-through-the-vipps-app)
-* [What happens to charges if the user cancels the agreement?](#what-happens-to-charges-if-the-user-cancels-the-agreement-)
-* [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card-)
-* [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send-)
-* [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps--can-new-charges-be-made-to-that-card-)
-* [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge-)
-* [Settlement](#settlement)
-* [Invoicing](#invoicing)
+- [At what time during the day are charges made](#at-what-time-during-the-day-are-charges-made)
+- [How do I check my customer's status?](#how-do-i-check-my-customer-s-status-)
+- [A customer's charge failed but I did not receive any warning](#a-customer-s-charge-failed-but-i-did-not-receive-any-warning)
+- [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-don-t-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds---networking-issues-etc-)
+- [Can the charge for an agreement be changed?](#can-the-charge-for-an-agreement-be-changed-)
+- [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user-)
+- [When can I send charges for a user?](#when-can-i-send-charges-for-a-user-)
+- [Can a user cancel the agreement through the Vipps app](#can-a-user-cancel-the-agreement-through-the-vipps-app)
+- [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send-)
+- [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps--can-new-charges-be-made-to-that-card-)
+- [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge-)
+- [Settlement](#settlement)
+- [Invoicing](#invoicing)
 
 ## At what time during the day are charges made
 Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
@@ -69,9 +67,10 @@ agreement as they see fit.
 All charges in a `PENDING` or `DUE` state will be cancelled if the agreement is stopped.
 
 ## What happens to pending charges if the user deletes the payment card?
-We are going to update the card handling logic on our side and won't let a user
-delete a card if there are recurring agreements attached to it. This is not
-implemented yet (2020-02-28) but the UX flows are ready.
+The user is responsible for keeping their payment sources update. The user will
+receive a push notification if a payment fails which informs them to update
+their payment source (the user also automatically receives a push notification
+when a card that is _not_ used for recurring payments expire). 
 
 ## How does a user see any charges I send?
 A charge will be displayed to the user 6 days before the charge is due to be processed.
