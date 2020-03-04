@@ -4,22 +4,17 @@
 	"values": [
 		{
 			"key": "client_id",
-			"value": "<Go To Developer Portal->Select the Applications tab->Select View secret for the application you registered for eCommerce InApp Alignment product->copy the Client Id here>",
+			"value": "<https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md>",
 			"enabled": true
 		},
 		{
 			"key": "client_secret",
-			"value": "<Go To Developer Portal->Select the Applications tab->Select View secret for the application you registered for eCommerce InApp Alignment product->copy the Client secret here>",
+			"value": "<https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md>",
 			"enabled": true
 		},
 		{
-			"key": "Ocp-Apim-Subscription-Key-Access-Token",
-			"value": "<Go To Developer Portal->Click on your name on top right->select profile->find subscription named DEFAULT_ACCESSTOKEN and copy the value from Primary key here>",
-			"enabled": true
-		},
-		{
-			"key": "Ocp-Apim-Subscription-Key-Ecom",
-			"value": "<Go To Developer Portal->Click on your name on top right->select profile->find subscription relevant to your eCommerce InApp Alignment Product and copy the Primary key here>",
+			"key": "Ocp-Apim-Subscription-Key",
+			"value": "<https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md>",
 			"enabled": true
 		},
 		{
