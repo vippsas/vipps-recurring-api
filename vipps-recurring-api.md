@@ -49,8 +49,8 @@ and provide: Organization number and MSN.
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
 
 ## How to perform recurring payments
- ![Recurring merchant flow](/images/VippsRecurringMerchantFlow.svg)
-
+ ![Recurring agreement flow](/images/Recurring-createagreement.svg)
+Flow chart that shows how to create an agreement
 
 1. Draft a new agreement to be approved with [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement). The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`. This `agreementResource` is a complete URL for performing a [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) request. The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing page on a Desktop flow, or Vipps app in a mobile flow. Where the user can then approve the agreement.
 
@@ -307,7 +307,7 @@ If `retryDays=0` it will be failed after the first attempt.
 
 ### Charge states
 
-![Recurring charge states](images/VippsRecurringChargeStates.svg)
+![Recurring charge states](images/Recurring-chargestates.svg)
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
