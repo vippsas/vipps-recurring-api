@@ -93,11 +93,6 @@
 			"enabled": true
 		},
 		{
-			"key": "hasPriceChanged",
-			"value": "false",
-			"enabled": true
-		},
-		{
 			"key": "transactionType",
 			"value": "DIRECT_CAPTURE",
 			"enabled": true
