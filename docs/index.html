@@ -29,14 +29,28 @@
 
 <div id="swagger-ui"></div>
 
-  
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.23.11/swagger-ui-bundle.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.23.11/swagger-ui-standalone-preset.js"> </script>
+
 <script>
+
+const DisableTryItOutPlugin = function() {
+  return {
+    statePlugins: {
+      spec: {
+        wrapSelectors: {
+          allowTryItOutFor: () => () => false
+        }
+      }
+    }
+  }
+}
+
 window.onload = function() {
   // Build a system,
   const ui = SwaggerUIBundle({
-    url: 'https://vippsas.github.io/vipps-recurring-api/openapi.yaml',
+    url: 'https://vippsas.github.io/vipps-ecom-api/swagger.yaml',
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
@@ -44,7 +58,8 @@ window.onload = function() {
       SwaggerUIStandalonePreset
     ],
     plugins: [
-      SwaggerUIBundle.plugins.DownloadUrl
+      SwaggerUIBundle.plugins.DownloadUrl,
+      DisableTryItOutPlugin
     ],
     layout: "StandaloneLayout"
   })
