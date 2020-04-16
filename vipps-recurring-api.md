@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.0.1.
+Document version 1.1.0.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -46,7 +46,7 @@ This is because we want to ensure that our user experience is maintained.
 | Term |  Description                                    |
 |:-----|:----------------------------------------------- |
 | Agreement         | A payment subscription with a set of parameters that a customer agrees to  |
-| Charge         | A single payment within an agreement |
+| Charge         | A single payment within an Agreement |
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
 
 ## How to perform recurring payments
@@ -68,10 +68,10 @@ where the user can then approve the agreement.
 3. Charge the customer for each period with [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur.
-Example: If the charge is created on the 25th, the earliest the charge can be
-made is the 27th (25+2).
+Example: If the charge is _created_ on the 25th, the earliest the charge can be
+_made_ is the 27th (25+2).
 
-**Note:** Vipps will *only* perform a payment transaction on an agreement after
+**Note:** Vipps will *only* perform a payment transaction on an Agreement after
 being told by the merchant through this endpoint. Vipps does not automatically
 perform payments.
 
@@ -107,6 +107,9 @@ The following code illustrates how to create an agreement:
 
 The `merchantAgreementUrl` is a link to a "My page", where the customer
 can manage the agreement: Change, pause, cancel, etc.
+Vipps does not offer any form of Agreement management, as this may be
+quite complex operations, like changing subscription types,
+temporary address change, etc.
 
 The request parameters have the following size limits
 (see
@@ -115,7 +118,7 @@ for more details):
 
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
-* `price`: Greater than 100
+* `price`: Greater than 100, meaning 1 NOK.
 
 Agreements may be initiated with or without an [initial charge](#initial-charge),
 
@@ -141,12 +144,12 @@ There are 100 øre in 1 krone.
 ```
 
 The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing
-page. The user can then confirm their identity, and recieve a prompt to accept the
+page. The user can then confirm their identity, and receive a prompt to accept the
 agreement within the Vipps app.
 
-The `isApp` property can be used to receive a Deeplink URL, which in a mobile context,
-can be used to perform an App Switch, which removes the landing page step. This will only
-work if the user has the Vipps App installed on the same device as they are initiating
+The `isApp` property can be used to receive a deeplink URL, which in a mobile context,
+can be used to perform an app-switch, which removes the landing page step. This will only
+work if the user has Vipps installed on the same device as they are initiating
 the agreement from.
 
 ### Intervals
@@ -222,7 +225,9 @@ Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial c
   "description": "Phone"
 },
 ```
-A reserved charge can be captured with [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge) when the product is shipped.
+A reserved charge can be captured with
+[`POST:/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)
+when the product is shipped.
 
 ### Campaigns
 A campaign in recurring is a period where the price is lower than usual, and
@@ -290,16 +295,16 @@ future. The `amount` of a charge is flexible and does not have to match the
 
 A limit is in place however, which is 10 times the agreement `price` during the
 span of the last `interval`. For example, in the agreement
-[above](#step-2-retrieve-the-approved-agreement) a limit of 4990NOK over the last
-single `MONTH` period would be in place. If this limit becomes a hindrance the
-agreement `price` can be [updated](#updating-an-agreement).
+[above](#step-2-retrieve-the-approved-agreement) a limit of 4990 NOK (499 x 10)
+over the last single `MONTH` period would be in place. If this limit becomes a
+hindrance the agreement `price` can be [updated](#updating-an-agreement).
 
 An optional `orderId` field can be set in the request, if used this will be the
 id used to identify the charge throughout its payment history, including in
 settlement files. This `orderId` must be unique across all Recurring and eCom
 transactions for the given `merchantSerialNumber`. If the field is not given a
 unique id will be generated in the form `chr_xxxxxxx` (where x is a alphanumeric
-  character). In settlements this auto generated Id is presented as `chrULxxxxxxx`.
+character). In settlements this auto generated Id is presented as `chrULxxxxxxx`.
 
 ### Charge title
 
@@ -353,12 +358,12 @@ If `retryDays=0` it will be failed after the first attempt.
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Charge has been created. |
-| 2 | `DUE` | The charge will be drawn in 6 days, and can now be viewed by the user in the app                                      |
-| 3 | `CHARGED`  | Charge has been completed
-| 4 | `FAILED`  | Charge has failed for some reason. I.E Expired card, insufficient funds, etc.
-| 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured
-| 6 | `PARTIALLY_REFUNDED`| Charge successfully refunded, used if the refund is a partial ammount of the captured amount.
-| 7 | `RESERVED` | Initial charge with `transactionType` set to `RESERVE_CAPTURE`, changes state to `CHARGED` when captured successfully.
+| 2 | `DUE` | The charge will be made in the next 30 days (this was previously 6, and the image above will be updated soon), and can now be viewed by the user in the app |
+| 3 | `CHARGED`  | Charge has been completed |
+| 4 | `FAILED`  | Charge has failed for some reason, i.e. Expired card, insufficient funds, etc. |
+| 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured |
+| 6 | `PARTIALLY_REFUNDED`| Charge successfully refunded, used if the refund is a partial amount of the captured amount. |
+| 7 | `RESERVED` | Initial charge with `transactionType` set to `RESERVE_CAPTURE`, changes state to `CHARGED` when captured successfully. |
 
 
 ### Updating an Agreement
@@ -435,7 +440,7 @@ This API returns the following HTTP statuses in the responses:
 | `403 Forbidden`     | Authentication ok, but credentials lacks authorization  |
 | `404 Not Found`     | The resource was not found  |
 | `409 Conflict`      | Unsuccessful due to conflicting resource   |
-| `422 Unprocessable Entity`     |    |
+| `422 Unprocessable Entity`     | Vipps could not process  |
 | `429 Too Many Requests`  | There is currently a limit of max 20 calls per second\*  |
 | `500 Server Error`  | An internal Vipps problem.                  |
 
