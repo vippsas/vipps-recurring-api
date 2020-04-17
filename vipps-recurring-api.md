@@ -353,7 +353,7 @@ If `retryDays=0` it will be failed after the first attempt.
 
 ### Charge states
 
-![Recurring charge states](images/Recurring-chargestates.svg)
+![Recurring charge states](images/Recurring-chargestates-new.svg)
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
