@@ -96,3 +96,12 @@ The merchant does not need any other partner or agreement.
 Merchants with a "net settlement" contract receive the users' payments excluding the Vipps fees.
 Merchants with a "gross settlement" contract receive the users' payments including the Vipps fees,
 and are then invoiced for the Vipps fees.
+
+## Questions?
+
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
+a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).

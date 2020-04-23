@@ -19,8 +19,6 @@ To get full access, once you are ready, please
 [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md)
 and provide: Organization number and MSN.
 
-&nbsp;
-
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): information about API keys, product activation, etc please see the guide.
 
 [Vipps Recurring API guide](vipps-recurring-api.md): API documentation and guide for developers.
@@ -31,19 +29,19 @@ You can peruse the API reference documentation here: https://vippsas.github.io/v
 
 [Frequently Asked Questions](vipps-recurring-api-faq.md): Questions and answers.
 
-&nbsp;
-
 See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
 for
 contact information,
 contribution guidelines,
 etc.
 
-Please
-create an [issue](https://github.com/vippsas/vipps-recurring-api/issues)
-or a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls)
-if you have questions, suggestions, etc. We do not have the capacity
-to reply to individual suggestions by email.
+## Questions?
+
+We're always happy to help with code or other questions you might have!
+Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
+a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
+or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
 <img src="./images/RecurringOverview.png">
-

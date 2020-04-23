@@ -19,7 +19,7 @@ A user chooses Vipps as payment method for a subscription on a merchant’s webs
 ## 2. The Vipps landing page
 
 If the payment was started on a desktop device the user will be sent to the Vipps landing page.
-The user confirms their number, and is prompted to log in to Vipps. 
+The user confirms their number, and is prompted to log in to Vipps.
 
 If the payment was started from a mobile device, the app wil automatically switch over to Vipps.
 
@@ -27,7 +27,7 @@ If the payment was started from a mobile device, the app wil automatically switc
 
 ## 3. Accept agreement in Vipps
 
-The user receives a push notification on their phone. They log in to Vipps, and accept the agreement. 
+The user receives a push notification on their phone. They log in to Vipps, and accept the agreement.
 
 If there is an initial charge to be made, the user confirms the payment in this step as well
 
@@ -56,3 +56,5 @@ We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
 a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
