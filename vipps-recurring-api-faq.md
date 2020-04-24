@@ -1,26 +1,45 @@
 # Vipps Recurring API FAQ
 
-Document version: 1.1.4.
+Document version: 1.2.0.
 
 ## Table of Contents
 
-- [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made-)
-- [How do I check my customer's status?](#how-do-i-check-my-customer-s-status-)
-- [A customer's charge failed but I did not receive any warning?](#a-customer-s-charge-failed-but-i-did-not-receive-any-warning-)
-- [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-don-t-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds---networking-issues-etc-)
-- [Can the charge for an agreement be changed?](#can-the-charge-for-an-agreement-be-changed-)
-- [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user-)
-- [When can I send charges for a user?](#when-can-i-send-charges-for-a-user-)
-- [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app-)
-- [What happens to charges if the user cancels the agreement?](#what-happens-to-charges-if-the-user-cancels-the-agreement-)
-- [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card-)
-- [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send-)
-- [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps--can-new-charges-be-made-to-that-card-)
-- [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge-)
+- [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
+- [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
+- [How do I check my customer's status?](#how-do-i-check-my-customer-s-status)
+- [A customer's charge failed but I did not receive any warning?](#a-customer-s-charge-failed-but-i-did-not-receive-any-warning)
+- [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-don-t-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds---networking-issues-etc)
+- [Can the charge for an agreement be changed?](#can-the-charge-for-an-agreement-be-changed)
+- [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
+- [When can I send charges for a user?](#when-can-i-send-charges-for-a-user)
+- [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
+- [What happens to charges if the user cancels the agreement?](#what-happens-to-charges-if-the-user-cancels-the-agreement)
+- [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
+- [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
+- [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps--can-new-charges-be-made-to-that-card)
+- [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge)
 - [Settlement](#settlement)
 - [Invoicing](#invoicing)
 
-## At what time during the day are charges made
+## How can I convert existing agreements to Vipps agreements?
+
+If you have existing agreements or subscriptions that use eFaktura, AvtaleGiro,
+PDF invoices by email or other payment methods, you can let your customers
+change to Vipps in different ways:
+
+* Email: Send an email to your customers and inform them that they can change
+  to Vipps. The email should contain a unique URL that leads directly to a
+  webpage with a Vipps payment for that customer. The customer may have to
+  log in
+  ([Vipps Logg Inn](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
+  may be useful for this).
+* PDF invoice: Include a unique URL for the customer, same as above. You can
+  use both a URL and a QR code containing the same URL. Keep in mind that some
+  users will see the PDF invoice on their phone, and can not easily scan the QR.
+* Paper invoice: Include a QR code with unique URL for the customer, same as
+  above.
+
+## At what time during the day are charges made?
 Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
 Subsequent attempts are made accoring to the `retryDays` specified.
 
@@ -61,7 +80,7 @@ the price of the agreement.
 You can send charges once you have polled and found a valid agreement tied to
 the user.
 
-## Can a user cancel the agreement through the Vipps app
+## Can a user cancel the agreement through the Vipps app?
 No, the user needs to contact the Merchant which can then cancel or modify the
 agreement as they see fit.
 
