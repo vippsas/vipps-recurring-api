@@ -32,15 +32,15 @@ For examples of requests and responses, see the Postman collection in [tools](to
 5. The merchant [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with test IDs for agreeement(`agreementId`) and charges (`chargeId`) in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt), showing that all checklist items have been fulfilled.
     - A complete Agreement ending in `ACTIVE`.
     - A complete Agreement ending in `STOPPED`.
-    - A complete Charge ending in  `CHARGED`.
-    - A complete Charge ending in  `REFUNDED`.
+    - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
+    - A complete `"type":"RECURRING"` Charge ending in  `REFUNDED`.
 6. The merchant receives an email from Vipps saying that the orders are OK.
 7. The recurring functionality is activated in production.
 8. The Merchant [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) to verify the integration in the production environment:
     - A complete Agreement ending in `ACTIVE`.
     - A complete Agreement ending in `STOPPED`.
-    - A complete Charge ending in  `CHARGED`.
-    - A complete Charge ending in  `REFUNDED`.
+    - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
+    - A complete `"type":"RECURRING"` Charge ending in  `REFUNDED`.
 9. The Merchant goes live 🎉
 
 ## Questions?
