@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.1.0.
+Document version 1.2.0.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -110,6 +110,15 @@ can manage the agreement: Change, pause, cancel, etc.
 Vipps does not offer any form of Agreement management, as this may be
 quite complex operations, like changing subscription types,
 temporary address change, etc.
+The URL is opened in a webview in the Vipps app.
+
+The `merchantAgreementUrl` is just a normal link to a page where the customer
+can log in and manage the agreement. We strongly recommend to use
+[Vipps Logg Inn](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
+so the user does not have to use a username and password, but is logged
+in automatically through Vipps. See the
+[API documentation](https://github.com/vippsas/vipps-login-api)
+for more details.
 
 The request parameters have the following size limits
 (see
