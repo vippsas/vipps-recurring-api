@@ -183,6 +183,12 @@ Example for a yearly subscription
 "intervalCount": 12,
 ```
 
+Example for a subscription every 100th day:
+```json
+"interval": "DAY",
+"intervalCount": 100,
+```
+
 ### Initial charge
 
 Initial charge will be performed if the `initialcharge` is provided when
