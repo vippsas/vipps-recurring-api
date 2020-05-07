@@ -11,7 +11,7 @@ For examples of requests and responses, see the Postman collection in [tools](to
 - [ ] Integrate _all_ the [API endpoints](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md) described in out guide:
     - [ ] Initiate [`POST:/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
     - [ ] Check status of agreement [`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
-    - [ ] Update an agreement [`PATCH:/v2/agreements/{agreementId`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)
+    - [ ] Update an agreement [`PATCH:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)
     - [ ] Create Charge [`POST:/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
     - [ ] GET Charge [`GET:/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/getCharge)
     - [ ] Cancel Charge [`DELETE:/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)
