@@ -45,6 +45,12 @@ The user can see their active subscriptions, as well as stopped subscriptions, a
 
 ![Overview of agreements](images/vipps-recurring-step5.svg)
 
+## 6. Manage agreements
+
+If the user click on “Administer agreement” in the previous step, they will be sent to the merchant’s site and the user can manage their subscriptions. We recommend using [Vipps Login](https://github.com/vippsas/vipps-login-api) to make login to the merchant’s site go smoothly.
+
+![Manage agreements](images/vipps-recurring-step6.svg)
+
 ## Great! Now you know how the Vipps Recurring payment process works.
 
 Take a look at the technical documentation in the [Vipps Recurring API Guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md)
