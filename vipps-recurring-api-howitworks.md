@@ -31,7 +31,7 @@ The user receives a push notification on their phone. They log in to Vipps, and 
 
 If there is an initial charge to be made, the user confirms the payment in this step as well
 
-![Accept agreement](images/vipps-recurring-step3.svg)
+![Accept agreement](images/vipps-recurring-step3-v2.svg)
 
 ## 4. Confirmation of subscription
 
