@@ -110,7 +110,7 @@ can manage the agreement: Change, pause, cancel, etc.
 Vipps does not offer any form of Agreement management, as this may be
 quite complex operations, like changing subscription types,
 temporary address change, etc.
-The URL is opened in a webview in the Vipps app.
+The URL is opened in the standard web browser.
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement. We strongly recommend to use
