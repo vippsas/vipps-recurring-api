@@ -325,7 +325,7 @@ character). In settlements this auto generated Id is presented as `chrULxxxxxxx`
 
 When charges are shown to users in the Vipps app, they will have a title, and a description. The title of a charge is derived directly from `{agreement.ProductName}` whereas the description is set per charge, ie. `{charge.description}`. For example, a charge on an agreement with product name *Premier League subscription* with description *October* would look like the following screen shot:
 
-![Charge description example](images/charge_descriptions_example.PNG)
+![Charge description example](images/charge_descriptions_example.png)
 
 When the charge is processed, the payment will show up in the users's payment history. In the payment history a charge from Vipps recurring payment will have a description with follow format `{agreement.ProductName} - {charge.description}`.
  
