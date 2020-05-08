@@ -35,7 +35,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Access-Token}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"body": {
@@ -79,7 +79,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"body": {
@@ -118,7 +118,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"body": {
@@ -157,7 +157,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"body": {
@@ -180,7 +180,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
 								"key": "Content-Type",
@@ -218,7 +218,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
@@ -237,7 +237,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"url": {
@@ -314,12 +314,12 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
 						},
 						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
 						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
@@ -368,12 +368,12 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"hasPriceChanged\": {{hasPriceChanged}}\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
 						},
 						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
 						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
@@ -415,7 +415,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}",
+								"value": "{{Ocp-Apim-Subscription-Key}}",
 								"type": "text"
 							}
 						],
@@ -462,7 +462,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}",
+								"value": "{{Ocp-Apim-Subscription-Key}}",
 								"type": "text"
 							}
 						],
@@ -485,7 +485,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
 								"key": "Content-Type",
@@ -514,7 +514,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
 						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
@@ -533,7 +533,7 @@
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key-Ecom}}"
+								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
 								"key": "Content-Type",
