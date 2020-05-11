@@ -5,8 +5,8 @@ For more information about this product, please see
 [Faste betalinger med Vipps](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
 > **IMPORTANT:** The Vipps Recurring API is available for existing customers that
-> have "Vipps på Nett" and a direct integration with the
-> [Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
+> have "Vipps på Nett", a direct integration with the
+> [Vipps eCom API](https://github.com/vippsas/vipps-recurring-api),
 > and have completed some additional KYC checks required by Finanstilsynet.
 > Vipps is required to perform some extra compliance checks before
 > activating the Vipps Recurring API, please
