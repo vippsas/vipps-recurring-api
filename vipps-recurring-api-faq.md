@@ -4,7 +4,7 @@ Document version: 1.3.0.
 
 ## Table of Contents
 
-- [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchant.not.allowed.for.recurring.operation)
+- [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
 - [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
 - [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
 - [How do I check my customer's status?](#how-do-i-check-my-customer-s-status)
