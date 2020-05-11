@@ -9,18 +9,16 @@ For more information about this product, please see
 > [Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
 > and have completed some additional KYC checks required by Finanstilsynet.
 > Vipps is required to perform some extra compliance checks before
-> activating the Vipps Recurring API,
+> activating the Vipps Recurring API, please
 > [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 > to get access to the Recurring API in production.
 
-
-* [How It Works](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api-howitworks.md): An overview of how the eCommerce API works.
+* [How It Works](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api-howitworks.md): An overview of how the Recurring API works.
 * [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): Information about API keys, product activation.
-* [Vipps Recurring API guide](vipps-recurring-api.md): Developer guide for Vipps eCom API.
+* [Vipps Recurring API guide](vipps-recurring-api.md): Developer guide for Vipps Recurring API.
 * [Vipps Recurring API Checklist](vipps-recurring-api-checklist.md): For direct and POS integrations.
 * [Frequently Asked Questions](vipps-recurring-api-faq.md): Questions and answers.
 * [Postman collection](tools/)
-
 
 You can peruse the API reference documentation as:
 * [Swagger](https://vippsas.github.io/vipps-recurring-api/)
@@ -28,9 +26,6 @@ You can peruse the API reference documentation as:
 
 The flow of settlements and how to retrieve them are described in
 [Settlements](https://github.com/vippsas/vipps-developers/tree/master/settlements).
-
-See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
-for contact information, contribution guidelines, etc.
 
 See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
 for contact information, contribution guidelines, etc.
