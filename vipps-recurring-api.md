@@ -28,7 +28,7 @@ that will be automatically processed on the due date.
   * [Step 2: Retrieve the approved agreement](#step-2-retrieve-the-approved-agreement)
     + [Pausing an agreement](#pausing-an-agreement)
   * [Step 3: Create a charge](#step-3-create-a-charge)
-    + [Charge title](#charge-title)
+    + [Charge descriptions](#charge-descriptions)
     + [Charge times](#charge-times)
     + [Charge retries](#charge-retries)
   * [Step 4: Manage charges and agreements](#step-4-manage-charges-and-agreements)
@@ -304,7 +304,7 @@ subscription: Simply do not create any charges during the pause.
 
 Create a charge for a given agreement. `due` will define for which date
 the charge will be performed. This date has to be at a minimum two days in the
-future. The `amount` of a charge is flexible and does not have to match the
+future, and all charges `due` in 30 days or less are visible for users in the Vipps app. The `amount` of a charge is flexible and does not have to match the
 `price` of the agreement.
 
 A limit is in place however, which is 10 times the agreement `price` during the
@@ -320,12 +320,14 @@ transactions for the given `merchantSerialNumber`. If the field is not given a
 unique id will be generated in the form `chr_xxxxxxx` (where x is a alphanumeric
 character). In settlements this auto generated Id is presented as `chrULxxxxxxx`.
 
-### Charge title
+### Charge descriptions
 
-The title of the charge shown to a user in the Vipps app is in the format
-`{agreement.ProductName} - {charge.description}`. For example, with the charge
-below, and the *Premier League* agreement, the app title would read
-`Premier League subscription - October`.
+When charges are shown to users in the Vipps app, they will have a title, and a description. The title of a charge is derived directly from `{agreement.ProductName}` whereas the description is set per charge, ie. `{charge.description}`. For example, a charge on an agreement with product name *Premier League subscription* with description *October* would look like the following screen shot:
+
+![Charge description example](images/charge_descriptions_example.png)
+
+When the charge is processed, the payment will show up in the users's payment history. In the payment history a charge from Vipps recurring payment will have a description with follow format `{agreement.ProductName} - {charge.description}`.
+ 
 
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
 ```json
@@ -333,7 +335,7 @@ below, and the *Premier League* agreement, the app title would read
   "amount": 49900,
   "currency": "NOK",
   "description": "October",
-  "due": "2030-10-28",
+  "due": "2018-09-01",
   "retryDays": 5
 }
 ```
