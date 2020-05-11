@@ -9,15 +9,14 @@ to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
 that will be automatically processed on the due date.
 
-**IMPORTANT:** Integration access is available for existing customers that have
-"Vipps på Nett" and a direct integration with the
-[Vipps eCom API](https://github.com/vippsas/vipps-ecom-api).
-
-Since Vipps Recurring places some demands on the merchant-side functionality, we have a
-[checklist](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api-checklist.md)
-that all merchants are required to review before getting production access.
-This is because we want to ensure that our user experience is maintained.
-
+> **IMPORTANT:** The Vipps Recurring API is available for existing customers that
+> have "Vipps på Nett" and a direct integration with the
+> [Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
+> and have completed some additional KYC checks required by Finanstilsynet.
+> Vipps is required to perform some extra compliance checks before
+> activating the Vipps Recurring API, please
+> [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
+> to get access to the Recurring API in production.
 
 ## Table of Contents
 

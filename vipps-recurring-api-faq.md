@@ -1,9 +1,10 @@
 # Vipps Recurring API FAQ
 
-Document version: 1.2.1.
+Document version: 1.3.0.
 
 ## Table of Contents
 
+- [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchant.not.allowed.for.recurring.operation)
 - [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
 - [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
 - [How do I check my customer's status?](#how-do-i-check-my-customer-s-status)
@@ -20,6 +21,23 @@ Document version: 1.2.1.
 - [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps--can-new-charges-be-made-to-that-card)
 - [Settlement](#settlement)
 - [Invoicing](#invoicing)
+
+## Why do I get the error `merchant.not.allowed.for.recurring.operation`?
+
+The `merchant.not.allowed.for.recurring.operation` error indicates
+that the Vipps Recurring API is not yet activated for this sale unit.
+
+The Vipps Recurring API is available for existing customers that
+have "Vipps på Nett" and a direct integration with the
+[Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
+and have completed some additional KYC checks required by Finanstilsynet.
+
+Vipps is required to perform some extra compliance checks before
+activating the Vipps Recurring API.
+
+Please
+[contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
+to get access to the Recurring API in production.
 
 ## How can I convert existing agreements to Vipps agreements?
 
