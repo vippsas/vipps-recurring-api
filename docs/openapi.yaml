@@ -647,6 +647,7 @@ components:
         - agreementId
         - agreementResource
         - vippsConfirmationUrl
+        - chargeId
       properties:
         agreementResource:
           type: string
@@ -664,6 +665,11 @@ components:
           type: string
           description: Customer should be redirected to Vipps using this URL.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
+        chargeId:
+          type: string
+          description: The Id of the initialCharge if given, otherwise `null`.
+            If an `orderId` is specified this is used as the `chargeId` otherwise it is auto generated.
+          example: chr_abcd123
     AgreementUpdateReference:
       type: object
       required:
