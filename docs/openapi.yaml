@@ -21,7 +21,7 @@ info:
     See <a href="#/Access%20Controller/getAccessToken" target="_blank">Get Access Token</a>
 
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
-  version: 2.0.3
+  version: 2.0.4
   title: Recurring Payments Merchant API
 tags:
   - name: Access Controller
@@ -47,12 +47,14 @@ paths:
           description: Provided Client ID
           schema:
             type: string
+          example: fb492b5e-7907-4d83-ba20-c7fb60ca35de
         - name: client_secret
           in: header
           required: true
           description: Provided Client Secret
           schema:
             type: string
+          example: Y8Kteew6GE2ZmeycEt6egg==
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
           description: Provided access token subscription key
       responses:
@@ -435,6 +437,7 @@ components:
       description: The agreement identifier (id)
       schema:
         type: string
+      example: agr_5kSeqzFAMkfBbc
     ChargeId:
       name: chargeId
       in: path
@@ -442,11 +445,12 @@ components:
       description: The charge identifier (id)
       schema:
         type: string
+      example: chr_123abc456
     Ocp-Apim-Subscription-Key:
       name: Ocp-Apim-Subscription-Key
       in: header
       required: true
-      example: c4d82fb224c2418dfa8e84e0ba81b37d
+      example: 0f14ebcab0ec4b29ae0cb90d91b4a84a
       schema:
         type: string
     Authorization:
@@ -511,7 +515,7 @@ components:
           description: "Customers phone number (if available). Used to simplify the
             following Vipps interaction. MSISDN: https://www.msisdn.org"
           maxLength: 15
-          example: "4740000000"
+          example: "4791234567"
         initialCharge:
           $ref: "#/components/schemas/InitialCharge"
         interval:
@@ -669,7 +673,7 @@ components:
           type: string
           description: The Id of the initialCharge if given, otherwise `null`.
             If an `orderId` is specified this is used as the `chargeId` otherwise it is auto generated.
-          example: chr_abcd123
+          example: chr_123abc456
     AgreementUpdateReference:
       type: object
       required:
@@ -738,7 +742,7 @@ components:
         orderId:
           type: string
           description: Optional orderId, will be auto generated if not provided
-          example: Order123
+          example: order123abc
           maxLength: 15
       description: An initial charge for a new agreement. The charge will be executed
         immediately when the user approves the agreement.
@@ -781,7 +785,7 @@ components:
         orderId:
           type: string
           description: Optional orderId, will be auto generated if not provided
-          example: Order123
+          example: order123a´bc
           maxLength: 15
     ChargeReference:
       type: object
@@ -791,6 +795,7 @@ components:
         chargeId:
           type: string
           description: ID of the created charge
+          example: chr_123abc456
     Charge:
       type: object
       required:
@@ -854,8 +859,10 @@ components:
           type: string
         message:
           type: string
+          example: Description of the error
         contextId:
           type: string
+          example: 0b7a2d85-8233-4a0f-867b-fa77a8cdf8de
     HealthCheckStatus:
       type: object
       required:
@@ -881,7 +888,6 @@ components:
           description: >-
             The total amount which has been refunded, in case of status
             refund/partial refund.
-
             Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
           minimum: 100
           example: 49900
@@ -926,7 +932,7 @@ components:
       example: NOK
     TransactionType:
       type: string
-      description: Type of transaction, either direct capture, or reserve then capture
+      description: Type of transaction, either direct capture or reserve capture
       enum:
         - DIRECT_CAPTURE
         - RESERVE_CAPTURE
@@ -952,6 +958,7 @@ components:
       type: string
       maxLength: 40
       pattern: ^[a-zA-Z0-9]*$
+      example: kRk3uEeiogxLu1yGSZRlNgsIv3TuNS
     AccessTokenResponse:
       type: object
       properties:
