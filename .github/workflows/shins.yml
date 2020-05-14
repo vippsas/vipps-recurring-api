@@ -5,9 +5,9 @@ on:
     branches: [ master ]
     paths: 
     - '.github/workflows/shins.yml' 
-    - './docs/swagger.yaml'
-    - './docs/openapi.yaml'
-    - './docs/shins/resources/**'
+    - 'docs/swagger.yaml'
+    - 'docs/openapi.yaml'
+    - 'docs/shins/resources/**'
 
 jobs:
   shins-builder:
