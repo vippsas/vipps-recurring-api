@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.2.0.
+Document version 1.2.1.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -66,7 +66,7 @@ where the user can then approve the agreement.
 
 3. Charge the customer for each period with [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
 Each specific charge on an agreement must be scheduled by the merchant, a
-minimum of two days before the payment will occur.
+minimum of two days before the payment will occur (it is minimum one day in the test environment).
 Example: If the charge is _created_ on the 25th, the earliest the charge can be
 _made_ is the 27th (25+2).
 
@@ -304,7 +304,9 @@ subscription: Simply do not create any charges during the pause.
 
 Create a charge for a given agreement. `due` will define for which date
 the charge will be performed. This date has to be at a minimum two days in the
-future, and all charges `due` in 30 days or less are visible for users in the Vipps app. The `amount` of a charge is flexible and does not have to match the
+future (it is minimum one day in the test environment), and all charges `due` in
+30 days or less are visible for users in the
+Vipps app. The `amount` of a charge is flexible and does not have to match the
 `price` of the agreement.
 
 A limit is in place however, which is 10 times the agreement `price` during the
@@ -327,7 +329,7 @@ When charges are shown to users in the Vipps app, they will have a title, and a 
 ![Charge description example](images/charge_descriptions_example.png)
 
 When the charge is processed, the payment will show up in the users's payment history. In the payment history a charge from Vipps recurring payment will have a description with follow format `{agreement.ProductName} - {charge.description}`.
- 
+
 
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
 ```json
@@ -374,7 +376,7 @@ If `retryDays=0` it will be failed after the first attempt.
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Charge has been created. |
-| 2 | `DUE` | The charge will be made in the next 30 days (this was previously 6, and the image above will be updated soon), and can now be viewed by the user in the app |
+| 2 | `DUE` | The charge will be made in the next 30 days (this was previously 6), and can now be viewed by the user in the app |
 | 3 | `CHARGED`  | Charge has been completed |
 | 4 | `FAILED`  | Charge has failed for some reason, i.e. Expired card, insufficient funds, etc. |
 | 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured |
