@@ -23,7 +23,7 @@ For more information about this product, please see
 You can peruse the API reference documentation as:
 * [Swagger](https://vippsas.github.io/vipps-recurring-api/)
 * [ReDoc](https://vippsas.github.io/vipps-recurring-api/redoc.html)
-* [Shins](https://vippsas.github.io/vipps-recurring-api/shins)
+* [Shins](https://vippsas.github.io/vipps-recurring-api/shins/index.html)
 
 The flow of settlements and how to retrieve them are described in
 [Settlements](https://github.com/vippsas/vipps-developers/tree/master/settlements).
