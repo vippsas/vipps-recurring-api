@@ -1,7 +1,7 @@
 # Vipps Recurring API FAQ
 
 See the
-[Vipps Recurring API](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-recurring-api.md)
+[Vipps Recurring API](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md)
 for all the details.
 
 See also:
@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.3.2.
+Document version: 1.3.3.
 
 ## Table of Contents
 
