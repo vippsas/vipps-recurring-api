@@ -19,6 +19,7 @@ For more information about this product, please see
 * [Vipps Recurring API Checklist](vipps-recurring-api-checklist.md): For direct and POS integrations.
 * [Frequently Asked Questions](vipps-recurring-api-faq.md): Questions and answers.
 * [Postman collection](tools/)
+* [Vipps Login + Vipps Recurring](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-login-recurring-howitworks.md): Learn how you can use Login and Recurring together.
 
 You can peruse the API reference documentation as:
 * [Swagger](https://vippsas.github.io/vipps-recurring-api/)
