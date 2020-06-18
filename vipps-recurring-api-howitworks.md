@@ -33,6 +33,8 @@ If there is an initial charge to be made, the user confirms the payment in this 
 
 ![Accept agreement](images/vipps-recurring-step3-v2.svg)
 
+_Please note: If using a PSP (Payment Service Provider) the user can not choose to get a notigication for each payment_.
+
 ## 4. Confirmation of subscription
 
 The user is redirected back to the merchant’s web site or app, and the subscription is confirmed on the merchant’s page.
