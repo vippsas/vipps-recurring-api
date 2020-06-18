@@ -33,7 +33,7 @@ If there is an initial charge to be made, the user confirms the payment in this 
 
 ![Accept agreement](images/vipps-recurring-step3-v2.svg)
 
-_Please note: If using a PSP (Payment Service Provider) the user can not choose to get a notigication for each payment_.
+_Please note: If using a PSP (Payment Service Provider) the user can not choose to get a notification for each payment_.
 
 ## 4. Confirmation of subscription
 
