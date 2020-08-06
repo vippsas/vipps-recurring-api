@@ -87,24 +87,6 @@ paths:
           description: Filter by status
           schema:
             $ref: "#/components/schemas/AgreementStatus"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
       responses:
         "200":
           description: OK
@@ -139,24 +121,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -226,24 +190,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
       requestBody:
         content:
           application/json:
@@ -287,24 +233,6 @@ paths:
           description: The status of the charge
           schema:
             $ref: "#/components/schemas/ChargeStatus"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
       responses:
         "200":
           description: Success
@@ -339,24 +267,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -398,24 +308,6 @@ paths:
             application/json;charset=UTF-8:
               schema:
                 $ref: "#/components/schemas/Charge"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
         "400":
           $ref: "#/components/responses/BadRequestError"
         "401":
@@ -443,24 +335,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
       responses:
         "200":
           description: Success
@@ -499,24 +373,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
       requestBody:
         content:
           application/json:
@@ -558,24 +414,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - in: header
-          name: Authorization
-          description: >-
-            The access token is a base64-encoded string that is required for all API calls.
-            It is a JWT (JSON Web Token).
-            The access token is fetched from the `POST:/accesstoken/get` endpoint.
-            It is valid for 1 hour in the test environment and 24 hours in the production environment.
-          required: true
-          schema:
-            type: string
-          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
-        - in: header
-          name: Content-Type
-          description: "The content type must be `application/json`"
-          required: true
-          schema:
-            type: string
-          example: application/json
       responses:
         "200":
           description: Success
