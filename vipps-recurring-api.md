@@ -494,7 +494,7 @@ processed. Unless the whole flow is completed, this will be handled as regular
 a failed Agreement by the recurring APIs
 
 Once the user completes the session a unique identifier `sub` can be retrieved in the agreement details
-[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint.
+[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint. 
 
 Example `sub` format:
 
@@ -505,6 +505,9 @@ Example `sub` format:
 This `sub` is a link between the merchant and the user and can used to retrieve
 the user's details from Vipps Login:
 [`GET:/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
+You also get the `userinfoUrl` value which can be used as a direct url to retrive the userdata. in the agreement details
+[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) 
+that you can use directly.
 
 **Please note:** accessing the Login `userinfo` endpoint requires the
 Vipps Login access token:
