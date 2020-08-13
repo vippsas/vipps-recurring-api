@@ -20,25 +20,33 @@ that will be automatically processed on the due date.
 
 ## Table of Contents
 
-- [How to perform recurring payments](#how-to-perform-recurring-payments)
-  * [Vipps screenshots](#vipps-screenshots)
-  * [Step 1: Draft an agreement](#step-1-draft-an-agreement)
-    + [Initial charge](#initial-charge)
-    + [Campaigns](#campaigns)
-  * [Step 2: Retrieve the approved agreement](#step-2-retrieve-the-approved-agreement)
-    + [Pausing an agreement](#pausing-an-agreement)
-  * [Step 3: Create a charge](#step-3-create-a-charge)
-    + [Charge descriptions](#charge-descriptions)
-    + [Charge times](#charge-times)
-    + [Charge retries](#charge-retries)
-  * [Step 4: Manage charges and agreements](#step-4-manage-charges-and-agreements)
-    + [Agreement states](#agreement-states)
-    + [Charge states](#charge-states)
-    + [Updating an Agreement](#updating-an-agreement)
-    + [Agreement life cycle recommendation](#Agreement-life-cycle-recommendations)
-- [HTTP responses](#http-responses)
-- [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
-- [Questions?](#questions-)
+- [Vipps Recurring API](#vipps-recurring-api)
+  - [Table of Contents](#table-of-contents)
+    - [Terminology](#terminology)
+  - [How to perform recurring payments](#how-to-perform-recurring-payments)
+    - [Vipps screenshots](#vipps-screenshots)
+  - [Step 1: Draft an agreement](#step-1-draft-an-agreement)
+    - [Accepting the agreement](#accepting-the-agreement)
+    - [Intervals](#intervals)
+    - [Initial charge](#initial-charge)
+    - [Campaigns](#campaigns)
+  - [Step 2: Retrieve the approved agreement](#step-2-retrieve-the-approved-agreement)
+    - [Pausing an agreement](#pausing-an-agreement)
+  - [Step 3: Create a charge](#step-3-create-a-charge)
+    - [Charge descriptions](#charge-descriptions)
+    - [Charge times](#charge-times)
+    - [Charge retries](#charge-retries)
+  - [Step 4: Manage charges and agreements](#step-4-manage-charges-and-agreements)
+    - [Agreement states](#agreement-states)
+    - [Charge states](#charge-states)
+    - [Updating an Agreement](#updating-an-agreement)
+  - [Agreement life cycle recommendations](#agreement-life-cycle-recommendations)
+    - [Stopping a recurring payment](#stopping-a-recurring-payment)
+    - [Pausing a recurring payment](#pausing-a-recurring-payment)
+  - [Userinfo](#userinfo)
+  - [HTTP responses](#http-responses)
+  - [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
+  - [Questions?](#questions)
 
 ### Terminology
 
@@ -444,6 +452,68 @@ until the user wishes to resume the subscription. It's also recommended to updat
 the `productDescription` field of the agreement so the user can see that the
 subscription is paused in the Vipps app.
 
+## Userinfo
+
+**Important:** This is an early draft, this should be considered pilot
+functionality that we are currently rolling out in our test environemnt.
+Swagger will be fully updated
+shortly
+
+Vipps offers a functionality to ask for a generic consent to access Userinfo.
+This is based on the
+[Vipps Login](https://github.com/vippsas/vipps-login-api)
+solution, but merchants can seamlessly combine the two functionalites
+in a single user session. Combining both the userinfo and payment elements
+requires the merchant to be registered with both Vipps Login and
+Vipps Recurring APIs.
+
+When you initiate a payment add the parameter `scope` to ask for a user's
+consent to share these details, such as email, address and name.
+The scopes are based 
+
+| Scopes      | Description                                    | User consent required  |
+| ------------| -----------------------------------------------|-------- |
+| address     | List containing the users addresses. Will always contain home, but can also include work and other.    |   yes   |
+| birthDate   | User birth date (BankID verified)                               |   yes   |
+| email       | User email (verified), the flag "email_verified : true" in the response can be used by merchant to confirm for each request that the email actually is verified                                   |   yes   |
+| name        | User first, middle and given name (verified with National Population Register)              |   yes   |
+| phoneNumber | Verified phone number (verfied - the number used with Vipps)                          |   yes   |
+| nin        | Norwegian national identity number (verified with BankID). NB: merchants need to apply for access to NIN. Go to [Who can get access to NIN and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-nin-and-how) For more information |   yes      |
+| accountNumbers | User bank account numbers. NB: merchants need to apply for access to accountNumbers. Go to [Who can get access to account numbers and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-accountnumbers-and-how) For more information |   yes      |
+
+
+To request these scopes add the scopes to the initial call to
+[`POST:​/v2​/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
+
+The user then consents and pays in the app.
+
+**Please note:** This operation has an all or nothing approach, a user must
+complete a valid Agreement and consent to all values in order to complete the
+session. If a user chooses to reject the terms the payment will not be
+processed. Unless the whole flow is completed, this will be handled as regular
+a failed Agreement by the recurring APIs
+
+Once the user completes the session a unique identifier `sub` can be retrieved in the agreement details
+[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint. 
+
+Example `sub` format:
+
+```
+"sub": "c06c4afe-d9e1-4c5d-939a-177d752a0944",
+```
+
+This `sub` is a link between the merchant and the user and can used to retrieve
+the user's details from Vipps Login:
+[`GET:/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
+You also get the `userinfoUrl` value which can be used as a direct url to retrive the userdata. in the agreement details
+[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) 
+that you can use directly.
+
+**Please note:** accessing the Login `userinfo` endpoint requires the
+Vipps Login access token:
+[`POST:/oauth2/token`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/oauth2Token).
+
+![Userinfo sequence](images/userinfo-direct.png)
 
 ## HTTP responses
 
