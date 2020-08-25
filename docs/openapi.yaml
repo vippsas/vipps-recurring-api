@@ -21,7 +21,7 @@ info:
     See <a href="#/Access%20Controller/getAccessToken" target="_blank">Get Access Token</a>
 
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
-  version: 2.1.0
+  version: 2.1.1
   title: Recurring Payments Merchant API
 tags:
   - name: Access Controller
@@ -948,12 +948,12 @@ components:
       type: string
       description: Interval for subscription
       default: MONTH
-      pattern: ^\b(MONTH|WEEK|DAY)\b$
+      pattern: ^(MONTH|WEEK|DAY)$
       enum:
         - MONTH
         - WEEK
         - DAY
-      example: WEEK
+      example: MONTH
     IdempotencyKeyFormat:
       type: string
       maxLength: 40
