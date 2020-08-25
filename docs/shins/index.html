@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.1.0</title>
+    <title>Recurring Payments Merchant API v2.1.1</title>
 
     <style>
     </style>
@@ -2329,7 +2329,7 @@ System.out.println(response.toString());
     },
     <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
     <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
-    <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
     <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">1</span>,
     <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">39900</span>,
     <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
@@ -2742,7 +2742,7 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
     &quot;transactionType&quot;: &quot;DIRECT_CAPTURE&quot;,
     &quot;orderId&quot;: &quot;order123abc&quot;
   },
-  &quot;interval&quot;: &quot;WEEK&quot;,
+  &quot;interval&quot;: &quot;MONTH&quot;,
   &quot;intervalCount&quot;: 2,
   &quot;isApp&quot;: true,
   &quot;merchantAgreementUrl&quot;: &quot;https://www.example.com/vipps-subscriptions/1234/&quot;,
@@ -2892,7 +2892,7 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
     <span class="hljs-attr">&quot;orderId&quot;</span>: <span class="hljs-string">&quot;order123abc&quot;</span>
   },
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
@@ -3451,7 +3451,7 @@ System.out.println(response.toString());
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">1</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">39900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
@@ -6407,7 +6407,7 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
     <span class="hljs-attr">&quot;orderId&quot;</span>: <span class="hljs-string">&quot;order123abc&quot;</span>
   },
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
@@ -6596,7 +6596,7 @@ System.out.println(response.toString());
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">1</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">39900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
@@ -7559,7 +7559,7 @@ System.out.println(response.toString());
 <a id="schema_Interval"></a>
 <a id="tocSinterval"></a>
 <a id="tocsinterval"></a></p>
-<pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;WEEK&quot;</span>
+<pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;MONTH&quot;</span>
 
 </code></pre>
 <p>Interval for subscription</p>
