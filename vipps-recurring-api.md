@@ -537,9 +537,9 @@ All error responses contains an `error` object in the body, with details of the
 problem.
 
 ## Rate limiting
-We have added rate limit to our apis (http:429) to prevent fradulent and wrongful behaviour and increase stability and security of our apis. Theese shouldn't affect normal behaviour at all, but feel free to contact us if you notice any weird behaviour.
+We have added rate limit to our apis (http:429) to prevent fradulent and wrongful behaviour and increase stability and security of our APIs. These shouldn't affect normal behaviour at all, but feel free to contact us if you notice any weird behaviour.
 
-| Api             | Limit          | Key used                                          | 
+| API             | Limit          | Key used                                          | 
 |-----------------|----------------|---------------------------------------------------|
 | CreateCharge    | 2 per minute   | agreementId + chargeId (based on idempotency key) | 
 | CancelCharge    | 5 per minute   | agreementId + chargeId                            | 
