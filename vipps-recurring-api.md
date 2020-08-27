@@ -45,6 +45,7 @@ that will be automatically processed on the due date.
     - [Pausing a recurring payment](#pausing-a-recurring-payment)
   - [Userinfo](#userinfo)
   - [HTTP responses](#http-responses)
+  - [Rate limiting](#rate-limiting)
   - [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
   - [Questions?](#questions)
 
@@ -529,11 +530,28 @@ This API returns the following HTTP statuses in the responses:
 | `404 Not Found`     | The resource was not found  |
 | `409 Conflict`      | Unsuccessful due to conflicting resource   |
 | `422 Unprocessable Entity`     | Vipps could not process  |
-| `429 Too Many Requests`  | There is currently a limit of max 20 calls per second\*  |
+| `429 Too Many Requests`  | Look at table below to view current rate limits  |
 | `500 Server Error`  | An internal Vipps problem.                  |
 
 All error responses contains an `error` object in the body, with details of the
 problem.
+
+## Rate limiting
+We have added rate limit to our apis (http:429) to prevent fradulent and wrongful behaviour and increase stability and security of our apis. Theese shouldn't affect normal behaviour at all, but feel free to contact us if you notice any weird behaviour.
+
+| Api             | Limit          | Key used                                          | 
+|-----------------|----------------|---------------------------------------------------|
+| CreateCharge    | 2 per minute   | agreementId + chargeId (based on idempotency key) | 
+| CancelCharge    | 5 per minute   | agreementId + chargeId                            | 
+| CaptureCharge   | 5 per minute   | agreementId + chargeId                            | 
+| RefundCharge    | 5 per minute   | agreementId + chargeId                            |
+| ListAgreements  | 5 per minute   | (per merchant)                                    | 
+| UpdateAgreement | 5 per minute   | agreementId                                       | 
+| FetchCharge     | 10 per minute  | agreementId + chargeId                            | 
+| ListCharges     | 10 per minute  | agreementId                                       | 
+| FetchAgreement  | 120 per minute | agreementId                                       | 
+| DraftAgreement  | 300 per minute | (per merchant)                                    | 
+
 
 ## Authentication and authorization - API access token
 
