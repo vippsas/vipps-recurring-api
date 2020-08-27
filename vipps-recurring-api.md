@@ -45,6 +45,7 @@ that will be automatically processed on the due date.
     - [Pausing a recurring payment](#pausing-a-recurring-payment)
   - [Userinfo](#userinfo)
   - [HTTP responses](#http-responses)
+  - [Rate limiting](#rate-limiting)
   - [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
   - [Questions?](#questions)
 
@@ -519,21 +520,38 @@ Vipps Login access token:
 
 This API returns the following HTTP statuses in the responses:
 
-| HTTP status         | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `200 OK`            | Request successful                          |
-| `201 Created`       | Request successful, resource created        |
-| `400 Bad Request`   | Invalid request, see the error for details  |
-| `401 Unauthorized`  | Invalid credentials                         |
-| `403 Forbidden`     | Authentication ok, but credentials lacks authorization  |
-| `404 Not Found`     | The resource was not found  |
-| `409 Conflict`      | Unsuccessful due to conflicting resource   |
-| `422 Unprocessable Entity`     | Vipps could not process  |
-| `429 Too Many Requests`  | There is currently a limit of max 20 calls per second\*  |
-| `500 Server Error`  | An internal Vipps problem.                  |
+| HTTP status                 | Description                                 |
+| --------------------------- | ------------------------------------------- |
+| `200 OK`                    | Request successful                          |
+| `201 Created`               | Request successful, resource created        |
+| `400 Bad Request`           | Invalid request, see the error for details  |
+| `401 Unauthorized`          | Invalid credentials                         |
+| `403 Forbidden`             | Authentication ok, but credentials lacks authorization  |
+| `404 Not Found`             | The resource was not found                  |
+| `409 Conflict`              | Unsuccessful due to conflicting resource    |
+| `422 Unprocessable Entity`  | Vipps could not process                     |
+| `429 Too Many Requests`     | Look at [table below to view current rate limits](#rate-limiting)   |
+| `500 Server Error`          | An internal Vipps problem.                  |
 
 All error responses contains an `error` object in the body, with details of the
 problem.
+
+## Rate limiting
+
+We have added rate limit to our apis (http:429) to prevent fradulent and wrongful behaviour and increase stability and security of our APIs. These shouldn't affect normal behaviour at all, but feel free to contact us if you notice any weird behaviour.
+
+| API                                                                                                      | Limit          | Key used                                          |
+|----------------------------------------------------------------------------------------------------------|----------------|---------------------------------------------------|
+| [CreateCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)         | 2 per minute   | agreementId + chargeId (based on idempotency key) |
+| [CancelCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)         | 5 per minute   | agreementId + chargeId                            |
+| [CaptureCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)       | 5 per minute   | agreementId + chargeId                            |
+| [RefundCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)         | 5 per minute   | agreementId + chargeId                            |
+| [ListAgreements](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/listAgreements)  | 5 per minute   | (per merchant)                                    |
+| [UpdateAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)| 5 per minute   | agreementId                                       |
+| [FetchCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/getCharge)             | 10 per minute  | agreementId + chargeId                            |
+| [ListCharges](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/listCharges)           | 10 per minute  | agreementId                                       |
+| [FetchAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)    | 120 per minute | agreementId                                       |
+| [DraftAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)  | 300 per minute | (per merchant)                                    |
 
 ## Authentication and authorization - API access token
 
