@@ -70,7 +70,8 @@ change to Vipps in different ways:
 
 ## At what time during the day are charges made?
 Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
-Subsequent attempts are made according to the `retryDays` specified.
+Subsequent attempts are made according to the `retryDays` specified.  
+This applies for both our production and test environment (MT).
 
 ## How do I check my customer's status?
 Get all Agreements for a customer:
