@@ -391,7 +391,8 @@ If `retryDays=0` it will be failed after the first attempt.
 | 5 | `REFUNDED` | Charge successfully refunded. Timeframe for issuing a refund for a payment is 365 days from the date payment has been captured |
 | 6 | `PARTIALLY_REFUNDED`| Charge successfully refunded, used if the refund is a partial amount of the captured amount. |
 | 7 | `RESERVED` | Initial charge with `transactionType` set to `RESERVE_CAPTURE`, changes state to `CHARGED` when captured successfully. |
-
+| 8 | `CANCELLED` | Charge has been cancelled [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge) |
+| 9 | `PROCESSING` | The charge is currently being processed by Vipps. |
 
 ### Updating an Agreement
 
