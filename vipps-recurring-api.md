@@ -454,18 +454,11 @@ subscription is paused in the Vipps app.
 
 ## Userinfo
 
-**Important:** This is an early draft, this should be considered pilot
-functionality that we are currently rolling out in our test environemnt.
-Swagger will be fully updated
-shortly
+**Important:** This functionality is currently being rolled out in all environments.
+Swagger will be fully updated shortly
 
-Vipps offers a functionality to ask for a generic consent to access Userinfo.
-This is based on the
-[Vipps Login](https://github.com/vippsas/vipps-login-api)
-solution, but merchants can seamlessly combine the two functionalites
-in a single user session. Combining both the userinfo and payment elements
-requires the merchant to be registered with both Vipps Login and
-Vipps Recurring APIs.
+Vipps offers the possibility for merchants to ask for the users profile information as part of the payment flow. If the enduser has not already consented to sharing information from Vipps to the merchant the user will be asked for such consent before completing the payment flow. Once the payment flow is completed the merchant can get the profile information from our Userinfo endpoint. The Userinfo endpoint is shared with [Vipps login](https://github.com/vippsas/vipps-login-api) and the merchant needs to have activated Vipps login to use this feature. You find more information on how to activate Vipps login[here](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#how-can-i-activate-and-set-up-vipps-login).
+A users consent to share information with a merchant applies accross our services. Thus, if the merchant implements Vipps login in addition to profile information as part of the payment flow, the merchant can also use Vipps to log the user in without the need for additional consents.
 
 When you initiate a payment add the parameter `scope` to ask for a user's
 consent to share these details, such as email, address and name.
@@ -494,7 +487,7 @@ processed. Unless the whole flow is completed, this will be handled as regular
 a failed Agreement by the recurring APIs
 
 Once the user completes the session a unique identifier `sub` can be retrieved in the agreement details
-[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint. 
+[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint.
 
 Example `sub` format:
 
@@ -505,13 +498,10 @@ Example `sub` format:
 This `sub` is a link between the merchant and the user and can used to retrieve
 the user's details from Vipps Login:
 [`GET:/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
-You also get the `userinfoUrl` value which can be used as a direct url to retrive the userdata. in the agreement details
-[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) 
-that you can use directly.
 
 **Please note:** accessing the Login `userinfo` endpoint requires the
 Vipps Login access token:
-[`POST:/oauth2/token`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/oauth2Token).
+[`POST:/oauth2/token`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/oauth2Token) this is described in detail in [login's documentation](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api.md#access-token)
 
 ![Userinfo sequence](images/userinfo-direct.png)
 
