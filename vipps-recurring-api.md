@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.2.1.
+Document version 1.2.2.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -79,8 +79,7 @@ minimum of two days before the payment will occur (it is minimum one day in the 
 Example: If the charge is _created_ on the 25th, the earliest the charge can be
 _made_ is the 27th (25+2).
 
-**Note:** Vipps will *only* perform a payment transaction on an Agreement after
-being told by the merchant through this endpoint. Vipps does not automatically
+**Note:** Vipps will *only* perform a payment transaction on an Agreement when the merchant calls [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge). Vipps does _not_ automatically
 perform payments.
 
 4. Manage charges and agreements with:  
