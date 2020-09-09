@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.2.2.
+Document version 1.2.3.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -118,6 +118,11 @@ Vipps does not offer any form of Agreement management, as this may be
 quite complex operations, like changing subscription types,
 temporary address change, etc.
 The URL is opened in the standard web browser.
+
+**Please note:** If the user closes Vipps before the redirect is done,
+the `merchantRedirectUrl` will not be used. It is therefore impretant that you
+actively check the payment with
+[`GET:/v2/agreements/{agreementId}](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement).
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement. We strongly recommend to use
@@ -463,7 +468,7 @@ A users consent to share information with a merchant applies accross our service
 
 When you initiate a payment add the parameter `scope` to ask for a user's
 consent to share these details, such as email, address and name.
-The scopes are based 
+The scopes are based
 
 | Scopes      | Description                                    | User consent required  |
 | ------------| -----------------------------------------------|-------- |
