@@ -46,6 +46,10 @@ that will be automatically processed on the due date.
   - [Userinfo](#userinfo)
   - [HTTP responses](#http-responses)
   - [Rate limiting](#rate-limiting)
+  - [Polling guidelines](#polling-guidelines)
+  - [Timeouts](#timeouts)
+    - [Using a phone](#using-a-phone)
+    - [Using a laptop/desktop](#using-a-laptopdesktop)
   - [Authentication and authorization - API access token](#authentication-and-authorization---api-access-token)
   - [Questions?](#questions)
 
@@ -359,7 +363,8 @@ When the charge is processed, the payment will show up in the users's payment hi
 
 ### Charge times
 
-Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
+Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.  
+This is the same both for our production and test environment.  
 Subsequent attempts are made according to the `retryDays` specified.
 
 ### Charge retries
@@ -547,6 +552,45 @@ We have added rate limit to our apis (http:429) to prevent fradulent and wrongfu
 | [ListCharges](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/listCharges)           | 10 per minute  | agreementId                                       |
 | [FetchAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)    | 120 per minute | agreementId                                       |
 | [DraftAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)  | 300 per minute | (per merchant)                                    |
+
+## Polling guidelines
+
+General guidelines for When to start polling with
+[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement):
+
+1. Start after 5 seconds
+2. Check every 2 seconds
+
+These are reasonable values, but different merchants have different use cases,
+and values should be adapted to the specific case.
+
+See [Timeouts](#timeouts) for details about timeouts.
+
+## Timeouts
+
+### Using a phone
+
+Both the deeplink URL, which causes the app-switch to Vipps, and the landing
+page displayed in browsers, is valid for 5 minutes.
+
+If the user does not act on the app-switch (such as not attempting to log into
+Vipps) within 5 minutes, the payment times out.
+
+After the app-switch to Vipps, the user has another 5 minutes to complete the
+payment in Vipps.
+
+This means that the user has a total of 10 minutes to complete the payment.
+
+### Using a laptop/desktop
+
+If the user is using a laptop/desktop device, and the user must confirm or
+enter the phone number on the landing page within 5 minutes.
+If the user does not do so, the payment times out.
+
+After the user has clicked "OK" on the landing page, the user
+has an additional 5 minutes to complete the payment in Vipps.
+
+This means that the user has a total of 10 minutes to complete the payment.
 
 ## Authentication and authorization - API access token
 
