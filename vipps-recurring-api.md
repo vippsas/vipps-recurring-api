@@ -468,7 +468,7 @@ subscription is paused in the Vipps app.
 **Important:** This functionality is currently being rolled out in all environments.
 Swagger will be fully updated shortly
 
-Vipps offers the possibility for merchants to ask for the users profile information as part of the payment flow. If the enduser has not already consented to sharing information from Vipps to the merchant the user will be asked for such consent before completing the payment flow. Once the payment flow is completed the merchant can get the profile information from our Userinfo endpoint. The Userinfo endpoint is shared with [Vipps login](https://github.com/vippsas/vipps-login-api) and the merchant needs to have activated Vipps login to use this feature. You find more information on how to activate Vipps login[here](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#how-can-i-activate-and-set-up-vipps-login).
+Vipps offers the possibility for merchants to ask for the users profile information as part of the payment flow. If the enduser has not already consented to sharing information from Vipps to the merchant the user will be asked for such consent before completing the payment flow. Once the payment flow is completed the merchant can get the profile information from our Userinfo endpoint. The Userinfo endpoint is shared with [Vipps login](https://github.com/vippsas/vipps-login-api) and the merchant needs to have activated Vipps login to use this feature. You find more information on how to activate Vipps login [here](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#how-can-i-activate-and-set-up-vipps-login).
 A users consent to share information with a merchant applies accross our services. Thus, if the merchant implements Vipps login in addition to profile information as part of the payment flow, the merchant can also use Vipps to log the user in without the need for additional consents.
 
 When you initiate a payment add the parameter `scope` to ask for a user's
@@ -489,6 +489,24 @@ The scopes are based
 To request these scopes add the scopes to the initial call to
 [`POST:​/v2​/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
 
+Example of request with scope:
+
+```json
+{
+  "currency": "NOK",
+  "customerPhoneNumber":"90000000",
+  "interval": "MONTH",
+  "intervalCount": 1,
+  "isApp": false,
+  "merchantRedirectUrl": "https://example.com/confirmation",
+  "merchantAgreementUrl": "https://example.com/my-customer-agreement",
+  "price": 49900,
+  "productDescription": "Access to all games of English top football",
+  "productName": "Premier League subscription",
+  "scope": "address name email birthDate phoneNumber"
+}
+```
+
 The user then consents and pays in the app.
 
 **Please note:** This operation has an all or nothing approach, a user must
@@ -498,12 +516,13 @@ processed. Unless the whole flow is completed, this will be handled as regular
 a failed Agreement by the recurring APIs
 
 Once the user completes the session a unique identifier `sub` can be retrieved in the agreement details
-[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint.
+[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint alongside the full URL to Userinfo.
 
-Example `sub` format:
+Example `sub` and `userinfoUrl` format:
 
 ```
 "sub": "c06c4afe-d9e1-4c5d-939a-177d752a0944",
+"userinfoUrl": "https://api.vipps.no/vipps-userinfo-api/userinfo/c06c4afe-d9e1-4c5d-939a-177d752a0944"
 ```
 
 This `sub` is a link between the merchant and the user and can used to retrieve
