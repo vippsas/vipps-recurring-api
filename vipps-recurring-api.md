@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.2.3.
+Document version 1.2.4.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -557,7 +557,7 @@ problem.
 
 ## Rate limiting
 
-We have added rate limit to our apis (http:429) to prevent fradulent and wrongful behaviour and increase stability and security of our APIs. These shouldn't affect normal behaviour at all, but feel free to contact us if you notice any weird behaviour.
+We have added a rate limit to our API (HTTP 429 Too Many Requests) to prevent fradulent and wrongful behaviour, and increase the stability and security of our API. The limits should not affect normal behaviour, but please contact us if you notice any unexpected behaviour.
 
 | API                                                                                                      | Limit          | Key used                                          |
 |----------------------------------------------------------------------------------------------------------|----------------|---------------------------------------------------|
