@@ -30,6 +30,7 @@ Document version: 1.3.4.
 - [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 - [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
 - [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps--can-new-charges-be-made-to-that-card)
+- [Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?](#does-the-recent-24092020-changes-in-terms-regarding-valid-reservations-affect-my-agreements)
 - [Settlement](#settlement)
 - [Invoicing](#invoicing)
 
@@ -157,6 +158,10 @@ Users may want to charge different Agreements to different cards, and we do
 not want to automatically make changes to payment sources. Instead we notify
 users, as described in
 [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
+
+## Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?
+
+If you are using reserve-capture on your initial charge, then capture will only be possible withinn the first 30 days.
 
 ## Settlement
 The settlements are done trough Vipps.
