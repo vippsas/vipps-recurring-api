@@ -15,23 +15,27 @@ Document version: 1.3.4.
 
 ## Table of Contents
 
-- [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
-- [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
-- [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
-- [How do I check my customer's status?](#how-do-i-check-my-customer-s-status)
-- [A customer's charge failed but I did not receive any warning?](#a-customer-s-charge-failed-but-i-did-not-receive-any-warning)
-- [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-don-t-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds---networking-issues-etc)
-- [Can the charge for an agreement be changed?](#can-the-charge-for-an-agreement-be-changed)
-- [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
-- [When can I send charges for a user?](#when-can-i-send-charges-for-a-user)
-- [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
-- [What happens to charges if the user cancels the agreement?](#what-happens-to-charges-if-the-user-cancels-the-agreement)
-- [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge)
-- [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
-- [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
-- [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps--can-new-charges-be-made-to-that-card)
-- [Settlement](#settlement)
-- [Invoicing](#invoicing)
+- [Vipps Recurring API: Frequently Asked Questions](#vipps-recurring-api-frequently-asked-questions)
+  - [Table of Contents](#table-of-contents)
+  - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
+  - [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
+  - [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
+  - [How do I check my customer's status?](#how-do-i-check-my-customers-status)
+  - [A customer's charge failed but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
+  - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
+  - [Can the charge for an Agreement be changed?](#can-the-charge-for-an-agreement-be-changed)
+  - [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
+  - [When can I send charges for a user?](#when-can-i-send-charges-for-a-user)
+  - [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
+  - [What happens to charges if the user cancels the agreement?](#what-happens-to-charges-if-the-user-cancels-the-agreement)
+  - [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
+  - [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
+  - [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
+  - [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps-can-new-charges-be-made-to-that-card)
+  - [Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?](#does-the-recent-24092020-changes-in-terms-regarding-valid-reservations-affect-my-agreements)
+  - [Settlement](#settlement)
+  - [Invoicing](#invoicing)
+  - [Questions?](#questions)
 
 ## Why do I get the error `merchant.not.allowed.for.recurring.operation`?
 
@@ -69,11 +73,13 @@ change to Vipps in different ways:
   above.
 
 ## At what time during the day are charges made?
+
 Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
 Subsequent attempts are made according to the `retryDays` specified.  
 This applies for both our production and test environment (MT).
 
 ## How do I check my customer's status?
+
 Get all Agreements for a customer:
 [`GET:/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
 
@@ -81,20 +87,24 @@ Get details about a specific Agreement:
 [`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement).
 
 ## A customer's charge failed but I did not receive any warning
+
 The customer may not have notifications turned on,
 or they have not upgraded to the Vipps version that supports it.
 
 ## I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)
+
 The field `retryDays` in an Agreement allows for this functionality, Vipps will
 retry once each day until the value is reached. The valid values are none
 (defaulting to 0) or 0-14. We strongly recommend having more than 1 retry day
 to account for possible networking issues etc.
 
 ## Can the charge for an Agreement be changed?
+
 Yes. See
 [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
 
 ## Are there any limits on charging a user?
+
 Yes, within the `interval` period of the Agreement the merchant can charge at
 most **10 times** the Agreement price cumulatively. There is no limit on the
 number of charges which can be sent in the `interval` period.
@@ -108,12 +118,14 @@ It is the merchant's responsibility to make sure the user is informed and unders
 the price of the Agreement.
 
 ## When can I send charges for a user?
+
 You can send charges once you have polled and found a valid Agreement tied to
 the user.
 
 See [How do I check my customer's status?](#how-do-i-check-my-customer-s-status)
 
 ## Can a user cancel the agreement through the Vipps app?
+
 No, the user needs to contact the Merchant which can then cancel or modify the
 agreement as they see fit.
 
@@ -125,9 +137,11 @@ approach is therefore to send the user to the merchant for managing the
 Agreement.
 
 ## What happens to charges if the user cancels the agreement?
+
 All charges in a `PENDING` or `DUE` state will be cancelled if the Agreement is stopped.
 
 ## If a user's card expires: What happens on the next charge?
+
 The user is responsible for keeping their payment sources update.
 
 If a payment fails the user will receive a push notification, informing them to
@@ -144,6 +158,7 @@ notification when a card that is _not_ used for recurring payments expires.
 See [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge)
 
 ## How does a user see any charges I send?
+
 A charge will be displayed to the user 6 days before the charge is due to be processed.
 The charge will then appear in the app.
 
@@ -151,6 +166,7 @@ You can still retrieve all relevant charges through the API:
 [`GET:/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/listCharges).
 
 ## If a user changes the default payment card in Vipps, can new charges be made to that card?
+
 No, currently the payment card tied to an agreement will not be updated automatically.
 
 Users may want to charge different Agreements to different cards, and we do
@@ -158,11 +174,17 @@ not want to automatically make changes to payment sources. Instead we notify
 users, as described in
 [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 
+## Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?
+
+If you are using reserve-capture on your initial charge, then capture will only be possible withinn the first 30 days.
+
 ## Settlement
+
 The settlements are done trough Vipps.
 The merchant does not need any other partner or agreement.
 
 ## Invoicing
+
 Merchants with a "net settlement" contract receive the users' payments excluding the Vipps fees.
 Merchants with a "gross settlement" contract receive the users' payments including the Vipps fees,
 and are then invoiced for the Vipps fees.
