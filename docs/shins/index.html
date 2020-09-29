@@ -2414,7 +2414,9 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
     <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-string">&quot;2019-12-31T00:00:00Z&quot;</span>,
-    <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>
+    <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
+    <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
+    <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>
   }
 ]
 </code></pre>
@@ -2641,6 +2643,20 @@ System.out.println(response.toString());
 <td>none</td>
 <td>Status of the agreement.</td>
 </tr>
+<tr>
+<td>» sub</td>
+<td>string(uuid)</td>
+<td>false</td>
+<td>none</td>
+<td>User identifier (subject). Will be null if profile data was not requested.</td>
+</tr>
+<tr>
+<td>» userinfoUrl</td>
+<td>string(uri)</td>
+<td>false</td>
+<td>none</td>
+<td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
+</tr>
 </tbody>
 </table>
 <h4 id="enumerated-values-2">Enumerated Values</h4>
@@ -2838,7 +2854,8 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
   &quot;merchantRedirectUrl&quot;: &quot;https://api.example.com/vipps-landing&quot;,
   &quot;price&quot;: 39900,
   &quot;productName&quot;: &quot;Premier League subscription&quot;,
-  &quot;productDescription&quot;: &quot;Access to all games of English top football&quot;
+  &quot;productDescription&quot;: &quot;Access to all games of English top football&quot;,
+  &quot;scope&quot;: &quot;address name email birthDate phoneNumber&quot;
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
@@ -3013,7 +3030,8 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.example.com/vipps-landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">39900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
+  <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>
 }
 </code></pre>
 <h3 id="create-a-new-agreement--to-be-confirmed-in-vipps-parameters">Parameters</h3>
@@ -3223,6 +3241,13 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>Product description (longer)</td>
+</tr>
+<tr>
+<td>» scope</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Space separated list of the user profile-data scopes to require for the agreement.</td>
 </tr>
 </tbody>
 </table>
@@ -3573,7 +3598,9 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-string">&quot;2019-12-31T00:00:00Z&quot;</span>,
-  <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>
+  <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
+  <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
+  <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>
 }
 </code></pre>
 <h3 id="fetch-an-agreement-responses">Responses</h3>
@@ -6942,7 +6969,8 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.example.com/vipps-landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">39900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
+  <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>
 }
 
 </code></pre>
@@ -7042,6 +7070,13 @@ System.out.println(response.toString());
 <td>none</td>
 <td>Product description (longer)</td>
 </tr>
+<tr>
+<td>scope</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Space separated list of the user profile-data scopes to require for the agreement.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="tocs_agreementupdate">AgreementUpdate</h2>
@@ -7131,7 +7166,9 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-string">&quot;2019-12-31T00:00:00Z&quot;</span>,
-  <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>
+  <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
+  <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
+  <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>
 }
 
 </code></pre>
@@ -7223,6 +7260,20 @@ System.out.println(response.toString());
 <td>true</td>
 <td>none</td>
 <td>Status of the agreement.</td>
+</tr>
+<tr>
+<td>sub</td>
+<td>string(uuid)</td>
+<td>false</td>
+<td>none</td>
+<td>User identifier (subject). Will be null if profile data was not requested.</td>
+</tr>
+<tr>
+<td>userinfoUrl</td>
+<td>string(uri)</td>
+<td>false</td>
+<td>none</td>
+<td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
 </tr>
 </tbody>
 </table>
