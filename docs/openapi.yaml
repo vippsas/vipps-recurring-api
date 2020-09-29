@@ -561,6 +561,10 @@ components:
           description: Product description (longer)
           maxLength: 100
           example: Access to all games of English top football
+        scope:
+          type: string
+          description: Space separated list of the user profile-data scopes to require for the agreement.
+          example: address name email birthDate phoneNumber
     AgreementUpdate:
       type: object
       properties:
@@ -645,6 +649,17 @@ components:
           example: 2019-12-31T00:00:00Z
         status:
           $ref: "#/components/schemas/AgreementStatus"
+        sub:
+          type: string
+          format: uuid
+          description: User identifier (subject). Will be null if profile data was not requested.
+          example: 8d7de74e-0243-11eb-adc1-0242ac120002
+        userinfoUrl:
+          type: string
+          format: uri
+          description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
+          example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
+          
     AgreementReference:
       type: object
       required:
