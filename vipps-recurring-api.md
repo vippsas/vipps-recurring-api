@@ -370,6 +370,7 @@ Subsequent attempts are made according to the `retryDays` specified.
 ### Charge retries
 
 Vipps will retry the charge for the number of days specified in `retryDays`.
+So if `retryDays=0` that would a maximum of 6 retries (two initial day, and two each for the subsequent days).
 If `retryDays=0` it will be failed after the first attempt.
 
 ## Step 4: Manage charges and agreements
