@@ -46,6 +46,7 @@ that will be automatically processed on the due date.
   - [Userinfo](#userinfo)
     - [Vipps Login access token](#vipps-login-access-token)
     - [Userinfo call](#userinfo-call)
+    - [Consent](#consent)
   - [HTTP responses](#http-responses)
   - [Rate limiting](#rate-limiting)
   - [Polling guidelines](#polling-guidelines)
@@ -641,6 +642,24 @@ The access token is received on a successful request to the token endpoint descr
 **Please note:** More documentation about the token and userinfo endpoint can be found [here](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api.md#access-token).
 
 ![Userinfo sequence](images/userinfo-direct.png)
+
+### Consent
+
+A user's consent to share information with a merchant applies across all Vipps
+services. Thus, if the merchant implements Vipps Login in addition to profile
+information as part of the agreement flow, the merchant can also use Vipps to
+log the user in without the need for additional consent.
+
+The user is presented with a consents card that must be accepted before
+approving the payment in the Vipps app. The following screens shows an examples
+of a consent cards for Android(left) and iOS(right):
+
+![Consent card](images/share-user-info.png)
+
+**Please note:** This operation has an "all or nothing" approach, so a user must accept the agreement and consent to _all_ values in order to complete the
+session. If a user chooses to reject the terms the agreement will not be
+activated. Unless the whole flow is completed, this will be handled as a
+failed agreemnet by the Recurring API.
 
 ## HTTP responses
 
