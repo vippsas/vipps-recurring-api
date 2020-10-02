@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ae523e6b-c570-42e2-9afc-b4f5e9a17846",
+		"_postman_id": "a2c85cec-7f04-4c26-a911-6b45413e4406",
 		"name": "Recurring Payments v2 - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e82847b6-91eb-4ce3-9fb5-8198d399ff0a",
+								"id": "5c4cbd37-7629-4f89-a15b-2d809866275b",
 								"exec": [
 									"pm.environment.set(\"access_token\", pm.response.json().access_token);"
 								],
@@ -42,7 +42,16 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": "{{base_url}}/accessToken/get"
+						"url": {
+							"raw": "{{base_url}}/accessToken/get",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accessToken",
+								"get"
+							]
+						}
 					},
 					"response": []
 				}
@@ -58,7 +67,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
+								"id": "424672e8-6b97-4ebd-9679-a36d5ac3bdd4",
 								"exec": [
 									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
 								],
@@ -86,7 +95,17 @@
 							"mode": "raw",
 							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
-						"url": "{{base_url}}/recurring/v2/agreements",
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements"
+							]
+						},
 						"description": "Drafts an agreement that can be approved by end user"
 					},
 					"response": []
@@ -97,7 +116,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
+								"id": "bf858185-c65f-47bf-ba1c-13145a9f1710",
 								"exec": [
 									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
 								],
@@ -125,7 +144,17 @@
 							"mode": "raw",
 							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
-						"url": "{{base_url}}/recurring/v2/agreements",
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements"
+							]
+						},
 						"description": "Drafts an agreement that can be approved by end user"
 					},
 					"response": []
@@ -136,7 +165,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8b5ebbe7-d6e8-40c8-bc7a-c9407ef980c5",
+								"id": "8f6ba85d-b914-44b7-88a5-77add3109aa6",
 								"exec": [
 									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
 								],
@@ -164,7 +193,85 @@
 							"mode": "raw",
 							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
-						"url": "{{base_url}}/recurring/v2/agreements",
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
+					"name": "Draft Agreement - Profile flow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6099d44d-4ebc-49eb-91ee-fb2c8557d028",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"agreement_id\", jsonData.agreementId)",
+									"var str = jsonData.vippsConfirmationUrl",
+									"var str2 = str.split('=', 3)[2]",
+									"postman.setEnvironmentVariable(\"landing_page_url\", str2);",
+									"console.log(jsonData.access_token);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"currency\": \"NOK\",\n\t\"interval\": \"WEEK\",\n\t\"intervalCount\": 1,\n\t\"isApp\": false,\n\t\"merchantRedirectUrl\": \"https://netthandel-mock-server.azurewebsites.net/ecom/echo\",\n\t\"merchantAgreementUrl\": \"https://www.nrk.no\",\n\t\"customerPhoneNumber\": \"{{user_mobile_number}}\",\n\t\"price\": \"500\",\n\t\"productDescription\": \"Dataleak\",\n\t\"productName\": \"Userinfo\",\n\t\"scope\": \"address name email birthDate phoneNumber\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{url}}/recurring/v2/agreements",
+							"protocol": "https",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements"
+							]
+						},
 						"description": "Drafts an agreement that can be approved by end user"
 					},
 					"response": []
@@ -191,7 +298,18 @@
 							"mode": "raw",
 							"raw": "{\r\n\t\"price\":{{price_updated}},\r\n\t\"productName\":\"{{productName_updated}}\",\r\n\t\"productDescription\":\"{{productDescription_updated}}\",\r\n\t\"status\": \"{{status_updated}}\"\r\n}"
 						},
-						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}"
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{{agreementId}}"
+							]
+						}
 					},
 					"response": []
 				},
@@ -201,8 +319,10 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "571ec69e-2c13-4772-9bc8-ec98dd75da11",
+								"id": "8b799d7f-6848-4572-a3f1-7e7e23d5292b",
 								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"sub\", jsonData.sub);",
 									"//pm.environment.set(\"agreementId\", pm.response.json().id);"
 								],
 								"type": "text/javascript"
@@ -221,7 +341,18 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
-						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{{agreementId}}"
+							]
+						},
 						"description": "GET one agreement (script based on last created Agreement)"
 					},
 					"response": []
@@ -241,7 +372,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements?",
+							"raw": "{{base_url}}/recurring/v2/agreements",
 							"host": [
 								"{{base_url}}"
 							],
@@ -274,7 +405,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
+								"id": "59768e1c-d507-474c-9a26-f254f04ee890",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
 									"postman.setEnvironmentVariable(\"chargeId\", jsonData.chargeId);"
@@ -285,7 +416,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "6dcb97eb-eac4-47c7-b993-dcb90ab2303d",
+								"id": "d223c50d-baba-40a2-84f5-7994206f1aab",
 								"exec": [
 									"var tomorrow = new Date();\r",
 									"tomorrow.setDate(tomorrow.getDate() + 1);\r",
@@ -321,7 +452,19 @@
 							"mode": "raw",
 							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
 						},
-						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges"
+							]
+						},
 						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
 					},
 					"response": []
@@ -332,7 +475,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0e9346c6-6b9e-40be-a42a-3f7870aa9d48",
+								"id": "5cf3b961-6c69-40ab-8e60-58c660f7cbee",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
 									"postman.setEnvironmentVariable(\"chargeId\", jsonData.chargeId);"
@@ -343,7 +486,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "6dcb97eb-eac4-47c7-b993-dcb90ab2303d",
+								"id": "6aef85bc-c3a5-4f4a-847f-524877ef5746",
 								"exec": [
 									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
@@ -375,7 +518,19 @@
 							"mode": "raw",
 							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
 						},
-						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges"
+							]
+						},
 						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
 					},
 					"response": []
@@ -386,7 +541,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "bcaca125-c4b6-4dc1-b214-ae32237168ef",
+								"id": "609e8ea9-5e6f-45e6-a541-c87fd635549f",
 								"exec": [
 									"pm.environment.set('Idempotent-Key-Refund',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
@@ -423,7 +578,21 @@
 							"mode": "raw",
 							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
 						},
-						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund"
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges",
+								"{{chargeId}}",
+								"refund"
+							]
+						}
 					},
 					"response": []
 				},
@@ -433,7 +602,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "bcaca125-c4b6-4dc1-b214-ae32237168ef",
+								"id": "ac4db01d-8709-4df2-a04d-b0f74f298958",
 								"exec": [
 									""
 								],
@@ -470,7 +639,21 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/capture"
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/capture",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges",
+								"{{chargeId}}",
+								"capture"
+							]
+						}
 					},
 					"response": []
 				},
@@ -498,7 +681,20 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges",
+								"{{chargeId}}"
+							]
+						},
 						"description": "GET one agreement (script based on last created Agreement)"
 					},
 					"response": []
@@ -517,7 +713,20 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							}
 						],
-						"url": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{{agreementId}}",
+								"charges",
+								"{{chargeId}}"
+							]
+						},
 						"description": "GET one agreement (script based on last created Agreement)"
 					},
 					"response": []
@@ -541,7 +750,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges?",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
@@ -566,13 +775,108 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Vipps Login",
+			"item": [
+				{
+					"name": "Create Vipps Login Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "408f156c-efea-46c6-ad86-9c78bdfcdb48",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"login_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{client_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/access-management-1.0/access/oauth2/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"access-management-1.0",
+								"access",
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Userinfo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{login_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vipps-userinfo-api/userinfo/{{sub}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vipps-userinfo-api",
+								"userinfo",
+								"{{sub}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "d6fc3a8b-3ce3-404d-9495-871a0b93b9c2",
+				"id": "564fa0cb-58cc-4a67-abbe-a818a51b5ce4",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -582,7 +886,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "22fe5330-e715-49f0-af9a-3ad23ef07572",
+				"id": "c11bd633-13d0-4593-9b30-ec1b08224b45",
 				"type": "text/javascript",
 				"exec": [
 					""
