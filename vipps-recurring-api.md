@@ -537,7 +537,7 @@ Example `sub` and `userinfoUrl` format:
 
 This `sub` is a link between the merchant and the user and can used to retrieve
 the user's details from Vipps Login:
-[`GET:/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
+[`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
 
 ### Vipps Login access token
 
