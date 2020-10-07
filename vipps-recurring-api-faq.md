@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.3.4.
+Document version: 1.4.0.
 
 ## Table of Contents
 
@@ -30,6 +30,7 @@ Document version: 1.3.4.
 - [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 - [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
 - [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps--can-new-charges-be-made-to-that-card)
+- [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
 - [Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?](#does-the-recent-24092020-changes-in-terms-regarding-valid-reservations-affect-my-agreements)
 - [Settlement](#settlement)
 - [Invoicing](#invoicing)
@@ -159,9 +160,42 @@ not want to automatically make changes to payment sources. Instead we notify
 users, as described in
 [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 
+## Is there an API for retrieving information about a Vipps user?
+
+Yes.
+
+Vipps now offers the possibility for merchants to as part of the payment flow in the
+[Vipps eCom API v2](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
+and
+[Vipps Recurring API](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#userinfo).
+
+This is done by adding a `scope` parameter to the initiate calls:
+[`POST:/ecomm/v2/payments`](https://vippsas.github.io/vipps-ecom-api/#/Vipps%20eCom%20API/initiatePaymentV3UsingPOST) (eCom)
+and
+[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement) (Recurring):
+
+- address
+- birthDate
+- email
+- name
+- phoneNumber
+- nin (fødselsnummer)
+- accountNumbers
+
+The userinfo endpoint is shared with
+[Vipps Login](https://github.com/vippsas/vipps-login-api)
+and the merchant needs to have activated Vipps Login on their account to use
+this feature. Information on how to do this can be found
+[here](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#how-can-i-activate-and-set-up-vipps-login).
+Using the Vipps Login service itself is optional.
+
+**Please note:** Vipps users have not consented to Vipps providing any
+information to third parties, and Vipps does not allow it. There is no
+other API to look up a user's address, retrieve a user's purchases, etc.
+
 ## Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?
 
-If you are using reserve-capture on your initial charge, then capture will only be possible withinn the first 30 days.
+If you are using reserve-capture on your initial charge, then capture will only be possible within the first 30 days.
 
 ## Settlement
 The settlements are done trough Vipps.
