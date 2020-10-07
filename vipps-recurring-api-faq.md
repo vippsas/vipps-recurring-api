@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.4.0.
+Document version: 1.4.1.
 
 ## Table of Contents
 
@@ -24,6 +24,7 @@ Document version: 1.4.0.
 - [Can the charge for an agreement be changed?](#can-the-charge-for-an-agreement-be-changed)
 - [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
 - [When can I send charges for a user?](#when-can-i-send-charges-for-a-user)
+- [How can I delete an agreement?](#how-can-i-delete-an-agreement)
 - [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
 - [What happens to charges if the user cancels the agreement?](#what-happens-to-charges-if-the-user-cancels-the-agreement)
 - [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge)
@@ -114,6 +115,12 @@ You can send charges once you have polled and found a valid Agreement tied to
 the user.
 
 See [How do I check my customer's status?](#how-do-i-check-my-customer-s-status)
+
+## How can I delete an agreement?
+
+Agreements are marked as deleted by
+[updating the Agreement](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#updating-an-agreement)
+to `STOPPED` or `EXPIRED`.
 
 ## Can a user cancel the agreement through the Vipps app?
 No, the user needs to contact the Merchant which can then cancel or modify the
