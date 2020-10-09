@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.2.5.
+Document version 1.3.0.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -23,6 +23,7 @@ that will be automatically processed on the due date.
 - [Vipps Recurring API](#vipps-recurring-api)
   - [Table of Contents](#table-of-contents)
     - [Terminology](#terminology)
+  - [Optional Vipps HTTP headers](#optional-vipps-http-headers)
   - [How to perform recurring payments](#how-to-perform-recurring-payments)
     - [Vipps screenshots](#vipps-screenshots)
   - [Step 1: Draft an agreement](#step-1-draft-an-agreement)
@@ -63,6 +64,24 @@ that will be automatically processed on the due date.
 | Agreement         | A payment subscription with a set of parameters that a customer agrees to  |
 | Charge         | A single payment within an Agreement |
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
+
+## Optional Vipps HTTP headers
+
+We recommend using the following _optional_ HTTP headers for all requests to the
+Vipps Recurring API. These headers provide useful metadata about the merchant's system,
+which help Vipps improve our services, and also help in investigating problems.   
+
+| Header                        | Description                                  | Example value        |
+| ----------------------------- | -------------------------------------------- | -------------------- |
+| `Merchant-Serial-Number`      | The merchant serial number                   | `123456`             |
+| `Vipps-System-Name`           | The name of the ecommerce solution           | `woocommerce`        |
+| `Vipps-System-Version`        | The version number of the ecommerce solution | `5.4`                |
+| `Vipps-System-Plugin-Name`    | The name of the ecommerce plugin             | `vipps-woocommerce`  |
+| `Vipps-System-Plugin-Version` | The version number of the ecommerce plugin   | `1.4.1`              |
+
+These headers are required for plugins and partners and sent by the recent versions of
+[the official Vipps plugins](https://github.com/vippsas/vipps-developers#plugins)
+and we recommend all customers with direct integration with the API to also do so.
 
 ## How to perform recurring payments
 
