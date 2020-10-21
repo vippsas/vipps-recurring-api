@@ -112,7 +112,8 @@ Flowchart that shows how to create an agreement
   upcoming charge.
 
 **Note:** Vipps will *only* perform a payment transaction on an Agreement when the merchant calls [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge). Vipps does _not_ automatically
-perform payments.
+perform payments. One reason for this is that the user may go to the "my page"
+at the merchant to manage the agreement, and skip, postpone or otherwise change a payment.
 
 4. Manage charges and agreements with:  
 * [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)  

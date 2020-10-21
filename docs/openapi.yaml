@@ -745,9 +745,9 @@ components:
         vippsConfirmationUrl:
           type: string
           description: The `vippsConfirmationUrl` should be used to redirect the
-            user to the Vipps landing page (with `https://`) in a desktop flow,
-            or to the Vipps app (with `vipps://`) in a mobile flow, where the
-            user can then approve the agreement.
+          user to the Vipps landing page in a desktop flow (with `https://`),
+          or to the Vipps app in a mobile flow (with `vipps://`), where the
+          user can then approve the agreement.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
         chargeId:
           type: string
