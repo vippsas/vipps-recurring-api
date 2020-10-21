@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.3.0.
+Document version 1.3.1.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -90,21 +90,26 @@ and we recommend all customers with direct integration with the API to also do s
 Flowchart that shows how to create an agreement
 
 1. Draft a new agreement to be approved with
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
-The response contains an `agreementResource`, a `vippsConfirmationUrl` and an
-`agreementId`. This `agreementResource` is a complete URL for performing a
-[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
-request. The `vippsConfirmationUrl` should be used to redirect the user to the
-Vipps landing page on a Desktop flow, or Vipps app in a mobile flow,
-where the user can then approve the agreement.
+  [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
+  The response contains an `agreementResource`, a `vippsConfirmationUrl` and an
+  `agreementId`. This `agreementResource` is a complete URL for performing a
+  [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
+  request. The `vippsConfirmationUrl` should be used to redirect the
+  user to the Vipps landing page (with `https://`) in a desktop flow,
+  or to the Vipps app (with `vipps://`) in a mobile flow, where the
+  user can then approve the agreement.
 
-2. The approved agreement is retrieved from [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) with `"status":"ACTIVE"` when the customer has approved the agreement.
+2. The approved agreement is retrieved from
+   [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
+   with `"status":"ACTIVE"` when the customer has approved the agreement.
 
-3. Charge the customer for each period with [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
-Each specific charge on an agreement must be scheduled by the merchant, a
-minimum of two days before the payment will occur (it is minimum one day in the test environment).
-Example: If the charge is _created_ on the 25th, the earliest the charge can be
-_made_ is the 27th (25+2).
+3. Charge the customer for each period with
+   [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
+  Each specific charge on an agreement must be scheduled by the merchant, a
+  minimum of two days before the payment will occur (it is minimum one day in the test environment).
+  Example: If the charge is _created_ on the 25th, the earliest the charge can be
+  _made_ is the 27th (25+2). This is so that the user can be informed about the
+  upcoming charge.
 
 **Note:** Vipps will *only* perform a payment transaction on an Agreement when the merchant calls [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge). Vipps does _not_ automatically
 perform payments.
@@ -704,7 +709,7 @@ failed agreement by the Recurring API.
 
 Scenario: You want to complete a payment and get the name and phoneNumber of Customer X.
 
-1. Retrieve the eCom access token by calling. 
+1. Retrieve the eCom access token by calling.
 [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Controller/getAccessToken).
 2. Add scope to the transaction object and include the scope's you wish to get access to (valid scopes) before calling.
 [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
