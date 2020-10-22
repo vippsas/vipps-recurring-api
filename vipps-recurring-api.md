@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.3.1.
+Document version 1.3.2.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -95,8 +95,8 @@ Flowchart that shows how to create an agreement
   `agreementId`. This `agreementResource` is a complete URL for performing a
   [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
   request. The `vippsConfirmationUrl` should be used to redirect the
-  user to the Vipps landing page (with `https://`) in a desktop flow,
-  or to the Vipps app (with `vipps://`) in a mobile flow, where the
+  user to the Vipps landing page in a desktop flow (with `https://`),
+  or to the Vipps app in a mobile flow (with `vipps://`), where the
   user can then approve the agreement.
 
 2. The approved agreement is retrieved from
@@ -109,7 +109,8 @@ Flowchart that shows how to create an agreement
   minimum of two days before the payment will occur (it is minimum one day in the test environment).
   Example: If the charge is _created_ on the 25th, the earliest the charge can be
   _made_ is the 27th (25+2). This is so that the user can be informed about the
-  upcoming charge.
+  upcoming charge. The user is only shown one charge per agreement, in order to
+  not overwhelm the user when doing daily or weekly charges.
 
 **Note:** Vipps will *only* perform a payment transaction on an Agreement when the merchant calls [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge). Vipps does _not_ automatically
 perform payments. One reason for this is that the user may go to the "my page"
@@ -520,7 +521,7 @@ The scopes are based
 | birthDate   | User birth date (BankID verified)                               |   yes   |
 | email       | User email (verified), the flag "email_verified : true" in the response can be used by merchant to confirm for each request that the email actually is verified                                   |   yes   |
 | name        | User first, middle and given name (verified with National Population Register)              |   yes   |
-| phoneNumber | Verified phone number (verfied - the number used with Vipps)                          |   yes   |
+| phoneNumber | Verified phone number (verified - the number used with Vipps)                          |   yes   |
 | nin        | Norwegian national identity number (verified with BankID). NB: merchants need to apply for access to NIN. Go to [Who can get access to NIN and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-nin-and-how) For more information |   yes      |
 | accountNumbers | User bank account numbers. NB: merchants need to apply for access to accountNumbers. Go to [Who can get access to account numbers and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-accountnumbers-and-how) For more information |   yes      |
 
