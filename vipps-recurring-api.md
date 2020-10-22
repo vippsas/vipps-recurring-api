@@ -87,7 +87,6 @@ and we recommend all customers with direct integration with the API to also do s
 ## How to perform recurring payments
 
 ![Recurring agreement flow](/images/Recurring-createagreement.svg)
-Flowchart that shows how to create an agreement
 
 1. Draft a new agreement to be approved with
   [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
