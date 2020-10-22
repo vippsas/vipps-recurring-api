@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.4.1.
+Document version: 1.4.2.
 
 ## Table of Contents
 
@@ -123,8 +123,11 @@ Agreements are marked as deleted by
 to `STOPPED` or `EXPIRED`.
 
 ## Can a user cancel the agreement through the Vipps app?
-No, the user needs to contact the Merchant which can then cancel or modify the
+No, the user needs to contact the merchant which can then cancel or modify the
 agreement as they see fit.
+
+There is a link in Vipps to "my page" on the merchant's website, where the
+user can manage the agreement.
 
 Users may want to make other changes to the Agreement than to simply cancel it.
 A subscription may be paused for a period, it may be changed to a lower
