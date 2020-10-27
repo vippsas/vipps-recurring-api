@@ -392,7 +392,7 @@ When the charge is processed, the payment will show up in the users's payment hi
 
 ### Charge times
 
-Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.  
+Charge _attempts_ are made two times during the day: 08:00 and 16:00 UTC.  
 This is the same both for our production and test environment.  
 Subsequent attempts are made according to the `retryDays` specified.
 
