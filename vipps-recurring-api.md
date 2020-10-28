@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.3.4.
+Document version 1.3.5.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -534,17 +534,25 @@ confirmation link sent to the email address.
 
 ### Userinfo call by call guide
 
-Scenario: You want to complete a payment and get the name and phoneNumber of Customer X.
+Scenario: You want to complete a payment and get the name and phone number of
+a customer.
 
-1. Retrieve the eCom access token by calling.
-[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Controller/getAccessToken).
-2. Add scope to the transaction object and include the scopes you wish to get access to (valid scopes) before calling.
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
-3. Consent to the information sharing and perform the payment in the Vipps App.
+1. Retrieve the access token:
+   [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Controller/getAccessToken).
+2. Add scope to the transaction object and include the scopes you wish to get
+   access to (valid scopes) before calling
+   [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
+3. The user consents to the information sharing and perform the payment in the Vipps app.
 4. Retrieve the `sub` by calling
-[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint.
-5. Generate an Oauth 2 access Token with a call to  [`POST:/oauth2/token`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/oauth2Token), using the clientId:client_secret as base 64 as described in [Vipps Login access token](#vipps-login-access-token). With the Grant Type set to `"client_credentials"`.
-6. Using the access token from 5. do a call to [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo) to retrieve the user information.
+   [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
+5. Generate an OAuth 2 access token with
+   [`POST:/oauth2/token`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/oauth2Token),
+   using the `clientId:client_secret` as base64 as described in
+   [Vipps Login access token](#vipps-login-access-token),
+   with the `grant_type` set to `"client_credentials"`.
+6. Using the access token from step 5, call
+   [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
+   to retrieve the user's information.
 
 **Important note:** The API call to
 [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
