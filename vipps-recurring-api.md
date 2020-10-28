@@ -2,21 +2,21 @@
 
 API version: 1.0
 
-Document version 1.3.3.
+Document version 1.3.4.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
 that will be automatically processed on the due date.
 
-> **IMPORTANT:** The Vipps Recurring API is available for existing customers that
-> have "Vipps på Nett" and a direct integration with the
-> [Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
-> and have completed some additional KYC checks required by Finanstilsynet.
-> Vipps is required to perform some extra compliance checks before
-> activating the Vipps Recurring API, please
-> [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
-> to get access to the Recurring API in production.
+**IMPORTANT:** The Vipps Recurring API is available for existing customers that
+have "Vipps på Nett" and a direct integration with the
+[Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
+and have completed some additional KYC checks required by Finanstilsynet.
+Vipps is required to perform some extra compliance checks before
+activating the Vipps Recurring API, please
+[contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
+to get access to the Recurring API in production.
 
 ## Table of Contents
 
@@ -46,11 +46,11 @@ that will be automatically processed on the due date.
     - [Pausing a recurring payment](#pausing-a-recurring-payment)
   - [Userinfo](#userinfo)
     - [Scopes](#scopes)
+  - - [Userinfo call by call guide](#userinfo-call-by-call-guide)
     - [Example calls](#example-calls)
     - [Vipps Login access token](#vipps-login-access-token)
     - [Userinfo call](#userinfo-call)
     - [Consent](#consent)
-    - [Userinfo call by call guide](#userinfo-call-by-call-guide)
   - [HTTP responses](#http-responses)
   - [Rate limiting](#rate-limiting)
   - [Polling guidelines](#polling-guidelines)
@@ -532,6 +532,26 @@ further authentication. Such authentication could be to prompt the user to
 login to the original account or confirm the account linking by having a
 confirmation link sent to the email address.
 
+### Userinfo call by call guide
+
+Scenario: You want to complete a payment and get the name and phoneNumber of Customer X.
+
+1. Retrieve the eCom access token by calling.
+[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Controller/getAccessToken).
+2. Add scope to the transaction object and include the scopes you wish to get access to (valid scopes) before calling.
+[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
+3. Consent to the information sharing and perform the payment in the Vipps App.
+4. Retrieve the `sub` by calling
+[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint.
+5. Generate an Oauth 2 access Token with a call to  [`POST:/oauth2/token`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/oauth2Token), using the clientId:client_secret as base 64 as described in [Vipps Login access token](#vipps-login-access-token). With the Grant Type set to `"client_credentials"`.
+6. Using the access token from 5. do a call to [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo) to retrieve the user information.
+
+**Important note:** The API call to
+[`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
+must _not_ include the subscription key used for the Recurring API as Login
+is _not_ under the same subscription, and will result in a
+`HTTP Unauthorized 401` error.
+
 ### Example calls
 
 To request these scopes add the scopes to the initial call to
@@ -712,23 +732,6 @@ of consent cards for Android(left) and iOS(right):
 session. If a user chooses to reject the terms the agreement will not be
 activated. Unless the whole flow is completed, this will be handled as a
 failed agreement by the Recurring API.
-
-
-### Userinfo call by call guide
-
-
-Scenario: You want to complete a payment and get the name and phoneNumber of Customer X.
-
-1. Retrieve the eCom access token by calling.
-[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Controller/getAccessToken).
-2. Add scope to the transaction object and include the scopes you wish to get access to (valid scopes) before calling.
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
-3. Consent to the information sharing and perform the payment in the Vipps App.
-4. Retrieve the `sub` by calling
-[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) endpoint.
-5. Generate an Oauth 2 access Token with a call to  [`POST:/oauth2/token`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/oauth2Token), using the clientId:client_secret as base 64 as described in [Vipps Login access token](#vipps-login-access-token). With the Grant Type set to `"client_credentials"`.
-6. Using the access token from 5. do a call to [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo) to retrieve the user information.
-
 
 ## HTTP responses
 
