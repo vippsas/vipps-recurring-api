@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.3.2.
+Document version 1.3.3.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -45,6 +45,8 @@ that will be automatically processed on the due date.
     - [Stopping a recurring payment](#stopping-a-recurring-payment)
     - [Pausing a recurring payment](#pausing-a-recurring-payment)
   - [Userinfo](#userinfo)
+    - [Scopes](#scopes)
+    - [Example calls](#example-calls)
     - [Vipps Login access token](#vipps-login-access-token)
     - [Userinfo call](#userinfo-call)
     - [Consent](#consent)
@@ -510,20 +512,27 @@ To activate for Vipps Login - go to the developer section under https://portal.v
 
 A users consent to share information with a merchant applies accross our services. Thus, if the merchant implements Vipps login in addition to profile information as part of the payment flow, the merchant can also use Vipps to log the user in without the need for additional consents.
 
-When you initiate a payment add the parameter `scope` to ask for a user's
-consent to share these details, such as email, address and name.
-The scopes are based
+### Scopes
 
 | Scopes      | Description                                    | User consent required  |
 | ------------| -----------------------------------------------|-------- |
-| address     | List containing the users addresses. Will always contain home, but can also include work and other.    |   yes   |
-| birthDate   | User birth date (BankID verified)                               |   yes   |
-| email       | User email (verified), the flag "email_verified : true" in the response can be used by merchant to confirm for each request that the email actually is verified                                   |   yes   |
-| name        | User first, middle and given name (verified with National Population Register)              |   yes   |
-| phoneNumber | Verified phone number (verified - the number used with Vipps)                          |   yes   |
-| nin        | Norwegian national identity number (verified with BankID). NB: merchants need to apply for access to NIN. Go to [Who can get access to NIN and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-nin-and-how) For more information |   yes      |
-| accountNumbers | User bank account numbers. NB: merchants need to apply for access to accountNumbers. Go to [Who can get access to account numbers and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-accountnumbers-and-how) For more information |   yes      |
+| `address`     | List containing the user's addresses. Will always contain the home address, but can also include work and other.    |   yes   |
+| `birthDate`   | Birth date (BankID verified)                               |   yes   |
+| `email`       | Email address (verified), the flag "email_verified : true" in the response indicates whether the email address is verified                                   |   yes   |
+| `name`        | First, middle and given name (verified with National Population Register)              |   yes   |
+| `phoneNumber` | Phone number (verified - the number used when creating the Vipps account)                          |   yes   |
+| `nin`        | Norwegian national identity number (verified with BankID). **NB:** Merchants need to apply for access to NIN. See: [Who can get access to NIN and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-nin-and-how) |   yes      |
+| `accountNumbers` | User bank account numbers. **NB:** Merchants need to apply for access to accountNumbers. See: [Who can get access to account numbers and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-accountnumbers-and-how) |   yes      |
 
+See the API specification for the formats and other details for each scope.
+
+**Please note:** If the e-mail address that is delivered has the flag `email_verified : false`
+this address should not be used to link the user to an existing account without
+further authentication. Such authentication could be to prompt the user to
+login to the original account or confirm the account linking by having a
+confirmation link sent to the email address.
+
+### Example calls
 
 To request these scopes add the scopes to the initial call to
 [`POST:​/v2​/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)
@@ -608,7 +617,7 @@ Which results in the base64 client secret: `MTIzNDU2LXRlc3QtNGEzZC1hNDdjLTQxMjEz
 ```json
 {
   "access_token": "hel39XaKjGH5tkCvIENGPNbsSHz1DLKluOat4qP-A4.WyV61hCK1E2snVs1aOvjOWZOXOayZad0K-Qfo3lLzus",
-  "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzo4MGYzYzM0YS05Nzc5LTRlMWUtYjY0NS0xMTdmM2I3NzFhZjgiLCJ0eXAiOiJKV1QifQ.eyJhdF9oYXNoIjoidHlGbkgyMFRPbVBaa2dKVThlNWlLdyIsImF1ZCI6WyJ2aXBwcy1pbnRlZ3JhdGlvbiJdLCJhdXRoX3RpbWUiOjE1NTczMTkyOTYsImV4cCI6MTU1NzMyMjkzOCwiaWF0IjoxNTU3MzE5MzM4LCJpc3MiOiJodHRwczovL2FwaXRlc3QudmlwcHMubm8vYWNjZXNzLW1hbmFnZW1lbnQtMS4wL2FjY2Vzcy8iLCJqdGkiOiI2MmE4NWU1Ni0zZDQ1LTRjN2UtYTA1NS00NjkzMjA5MzI1N2EiLCJub25jZSI6IiIsInJhdCI6MTU1NzMxOTI1NSwic3ViIjoiYzA2YzRhZmUtZDllMS00YzVkLTkzOWEtMTc3ZDc1MmEwOTQ0In0.OljG0W_TCfxkrRntj_5He3U0PH94SDZvlK-dvUJe8H5jj8QSiSnqiv65kyzxdr8Bq1MwG7a6Mtlnn4MoL8AyxKUVe6s81CNaYmwaHsWLw2Z2JmiPn5_X4lEy1nHVDX3R7lFKDQqFLSGnGNPU9bACj-Si18LBR-qv060wEj3b1ShrVeUIZCL1Yhxb6cIGl_8RivRto9dBrzggyOlVTtmoPrm9TLYF7UGWjlbmHTqpBWsCQIOeQqgs7RmSBt5k3O9nmP7guVxo5MWv_2Z0XuCqobLDDXJ29Rk_W6d79y-lPzq_TedNb_lCdVJF7u9qDYFbIPuQwXp26CeIJcR-nc-t0qEoNmLru_x-9Z8dCjjzkZbWqyNsNedQU1zt0WFbHjRkodVoHNcRZVT5W5hCe54lmZ6lUqyKwHW0_3Rpd2CI6lPdCOhC-Tze5cUDfb8jT_0OZqCI_wAuWvb6_4VeHqhvUav6Mh6d7AxNJQYG6BAJo9TzyrG7ho4mSpb2wWMr8gmRi8pTQbqa40whPqptpiz_j4AHcsrRckjYONU0USKlnNcBGc24M4sprcLZ6vxFqDYmDoZwUDRdZWRpUbqm_nCmCKb20Z6l5O7h32KvOApopJe2NIeAynli3Nl05QVGOdoT1mZDLYXbtyb0b_4qhRflySr6gaczcf2ovUKAToKNs_4",
+  "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzo4MGYzYzM0YS05Nzc5LT <snip>",
   "expires_in": 3599,
   "scope": "openid",
   "token_type": "bearer"
@@ -712,7 +721,7 @@ Scenario: You want to complete a payment and get the name and phoneNumber of Cus
 
 1. Retrieve the eCom access token by calling.
 [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Controller/getAccessToken).
-2. Add scope to the transaction object and include the scope's you wish to get access to (valid scopes) before calling.
+2. Add scope to the transaction object and include the scopes you wish to get access to (valid scopes) before calling.
 [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
 3. Consent to the information sharing and perform the payment in the Vipps App.
 4. Retrieve the `sub` by calling
