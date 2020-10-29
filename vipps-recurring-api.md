@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.3.7.
+Document version 1.3.8.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -112,11 +112,17 @@ and we recommend all customers with direct integration with the API to also do s
    _made_ is the 27th (25+2). This is so that the user can be informed about the
    upcoming charge. The user is only shown one charge per agreement, in order to
    not overwhelm the user when doing daily or weekly charges.
-   Every charge must be captured with
+   The initial charge may be "direct capture"
+   (see  
+   [What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+   in the eCom FAQ), but every regular charge must be captured with
    [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge).
 
-**Note:** Vipps will *only* perform a payment transaction on an Agreement when the merchant calls [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge). Vipps does _not_ automatically
-perform payments. One reason for this is that the user may go to the "my page"
+**Note:** Vipps will *only* perform a payment transaction on an Agreement when the merchant calls
+[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
+and
+[`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge).
+Vipps does _not_ automatically perform payments. One reason for this is that the user may go to the "my page"
 at the merchant to manage the agreement, and skip, postpone or otherwise change a payment.
 
 4. Manage charges and agreements with:  
