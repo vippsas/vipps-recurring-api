@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.3.5.
+Document version 1.3.7.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -106,12 +106,14 @@ and we recommend all customers with direct integration with the API to also do s
 
 3. Charge the customer for each period with
    [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
-  Each specific charge on an agreement must be scheduled by the merchant, a
-  minimum of two days before the payment will occur (it is minimum one day in the test environment).
-  Example: If the charge is _created_ on the 25th, the earliest the charge can be
-  _made_ is the 27th (25+2). This is so that the user can be informed about the
-  upcoming charge. The user is only shown one charge per agreement, in order to
-  not overwhelm the user when doing daily or weekly charges.
+   Each specific charge on an agreement must be scheduled by the merchant, a
+   minimum of two days before the payment will occur (it is minimum one day in the test environment).
+   Example: If the charge is _created_ on the 25th, the earliest the charge can be
+   _made_ is the 27th (25+2). This is so that the user can be informed about the
+   upcoming charge. The user is only shown one charge per agreement, in order to
+   not overwhelm the user when doing daily or weekly charges.
+   Every charge must be captured with
+   [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge).
 
 **Note:** Vipps will *only* perform a payment transaction on an Agreement when the merchant calls [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge). Vipps does _not_ automatically
 perform payments. One reason for this is that the user may go to the "my page"
