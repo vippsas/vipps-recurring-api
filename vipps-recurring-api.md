@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 1.3.8.
+Document version 1.3.9.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -467,10 +467,10 @@ The following properties are available for updating:
 See
 [Agreement states](#agreement-states).
 
-As a `PATCH` operation all parameters are optional. However when setting an
-agreement status to `STOPPED` no other changes are allowed. Attempts at changing
-other properties while stopping an agreement will result in a
-`400 Bad Request` response.
+**Please note:** As a `PATCH` operation all parameters are optional. However
+when setting an agreement status to `STOPPED` no other changes are allowed.
+Attempts at changing other properties while stopping an agreement will result
+in a `400 Bad Request` response.
 
 ## Agreement life cycle recommendations
 
