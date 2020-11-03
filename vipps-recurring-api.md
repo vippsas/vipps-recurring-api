@@ -827,9 +827,11 @@ This means that the user has a total of 10 minutes to complete the payment.
 
 ## Authentication and authorization - API access token
 
-For all product request we require the use of a `Authorization` header.
-This header is required by making a Access Token request with the values
-`client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`.
+All Vipps API requests must include an `Authorization` header with
+a JSON Web Token (JWT), which we call the _access token_.
+The access token is obtained by calling
+[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-ecom-api/#/Authorization_Service/fetchAuthorizationTokenUsingPost)
+and passing the `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`.
 
 See [Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
 in the
