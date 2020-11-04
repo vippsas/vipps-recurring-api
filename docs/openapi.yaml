@@ -177,6 +177,8 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
+      parameters: 
+        - $ref: "#/components/parameters/AgreementId"
     patch:
       tags:
         - Agreement Controller
@@ -233,6 +235,7 @@ paths:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/AgreementId"
         - name: chargeStatus
           in: query
           required: false
@@ -331,6 +334,9 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
+      parameters:
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId" 
     delete:
       tags:
         - Charge Controller
