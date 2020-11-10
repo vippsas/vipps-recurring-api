@@ -365,10 +365,8 @@ future (it is minimum one day in the test environment), and all charges `due` in
 Vipps app. The `amount` of a charge is flexible and does not have to match the
 `price` of the agreement.
 
-A limit is in place however, which is 10 times the agreement `price` during the
-span of the last `interval`. For example, in the agreement
-[above](#step-2-retrieve-the-approved-agreement) a limit of 4990 NOK (499 x 10)
-over the last single `MONTH` period would be in place. If this limit becomes a
+A limit is in place however, which is 5 times the agreement `price`. For example, in the agreement
+[above](#step-2-retrieve-the-approved-agreement) a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
 hindrance the agreement `price` can be [updated](#updating-an-agreement).
 
 An optional `orderId` field can be set in the request, if used this will be the
