@@ -224,6 +224,51 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
+  "/v2/agreements/{agreementId}/accept":
+    patch:
+      tags:
+        - Agreement Controller
+      summary: "** EXPERIMENTAL ** Force accept an Agreement in test environment ** EXPERIMENTAL **"
+      operationId: acceptUsingPATCH
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - name: Merchant-Serial-Number
+          in: header
+          description: "The applicable merchant serial number currently being represented"
+          required: true
+          schema:
+            $ref: "#/components/schemas/MerchantSerialNumber"
+        - name: agreementId
+          in: path
+          description: "Agreement ID"
+          required: true
+          schema:
+            $ref: "#/components/parameters/AgreementId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ForceAcceptAgreement"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                type: array
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+      deprecated: false
   "/v2/agreements/{agreementId}/charges":
     get:
       tags:
@@ -947,6 +992,15 @@ components:
         contextId:
           type: string
           example: 0b7a2d85-8233-4a0f-867b-fa77a8cdf8de
+    ForceAcceptAgreement:
+      type: object
+      required:
+        - customerPhoneNumber
+      properties:
+        customerPhoneNumber:
+          type: string
+          example: "*96969696"
+      title: ForceAcceptAgreement
     HealthCheckStatus:
       type: object
       required:
@@ -1038,6 +1092,11 @@ components:
         - WEEK
         - DAY
       example: MONTH
+    MerchantSerialNumber:
+      type: string
+      maxLength: 40
+      pattern: ^[0-9]*$
+      example: 123456
     IdempotencyKeyFormat:
       type: string
       maxLength: 40
