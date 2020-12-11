@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 2.0.2.
+Document version 2.0.3.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -108,13 +108,15 @@ have all information needed to integrate with Vipps.
 | Operation           | Description         | Endpoint          |
 | -------------------- | ------------------- | ----------------- |
 | [Create an agreement](#create-an-agreement)  | Create a new, draft agreement.  | [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)  |
-| [Retrieve an agreement](#retrieve-an-agreement)  | Retrieve the details of an agreement.  |  [`GET:/v2/agreements/{agreementId}](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) |
+| [Retrieve an agreement](#retrieve-an-agreement)  | Retrieve the details of an agreement.  |  [`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement) |
 | [Update an agreement]()   |  Update an agreement with new details. |  [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement) |
 | [Stop an agreement](#stop-an-agreement) | Update the status to `STOPPED`.  | [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)  |
+| List all charges  | Get all charges for an agreement.  | [`GET:/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/listCharges)  |
 | [Create a charge](#create-a-charge)   |  Create a new charge for an agreement. |  [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge) |
-| [Capture a charge]()  | Each charge must first be created, then captured.  | [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)  |
-| [Cancel a charge]() | Cancel an existing charge before the user is charged. | ([`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)) |
-| [Refund a charge]()    | Refund a charge that has been performed.   | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)  |
+| [Retrieve a charge]  | Retrieve all details of a charge.  | [`GET:/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/getCharge)  |
+| Capture a charge  | Each charge must first be created, then captured.  | [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)  |
+| Cancel a charge | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge) |
+| Refund a charge    | Refund a charge that has been performed.   | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)  |
 
 See [Authentication and authorization](#authentication-and-authorization).
 
