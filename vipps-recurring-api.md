@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 2.0.0.
+Document version 2.0.2.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -86,6 +86,8 @@ The normal "happy day" flow for a new agreement and a charge is:
 3. Create a charge for the agreement:
    [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
    See [Create a charge](#create-a-charge).
+4. Capture the charge:
+  [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)  
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement when the merchant calls
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
@@ -359,6 +361,8 @@ processed, the agreement status will change to `ACTIVE`.
 The approved agreement is retrieved from
 [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)
 with `"status":"ACTIVE"` when the customer has approved the agreement.
+
+See [Agreement states](#agreement-states).
 
 This is an example request to
 [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement):
