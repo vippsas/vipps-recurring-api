@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 2.0.4.
+Document version 2.0.5.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -26,14 +26,16 @@ to get access to the Recurring API in production.
 * [API endpoints](#api-endpoints)
 * [Optional Vipps HTTP headers](#optional-vipps-http-headers)
 * [Vipps screenshots](#vipps-screenshots)
-* [Create an agreement](#create-an-agreement)
+* [Agreements](#agreements)
+  + [Create an agreement](#create-an-agreement)
   + [Accept an agreement](#accept-an-agreement)
   + [Intervals](#intervals)
   + [Initial charge](#initial-charge)
   + [Campaigns](#campaigns)
-* [Retrieve an agreement](#retrieve-an-agreement)
-* [Create a charge](#create-a-charge)
-  * [Amount changes](#amount-changes)
+  + [Retrieve an agreement](#retrieve-an-agreement)
+* [Charges](#charges)
+  + [Create a charge](#create-a-charge)
+  + [Amount changes](#amount-changes)
   + [Charge descriptions](#charge-descriptions)
   + [Charge times](#charge-times)
   + [Charge retries](#charge-retries)
@@ -146,7 +148,9 @@ and we recommend all customers with direct integration with the API to also do s
 
 ![Vipps screenshots](images/RecurringOverview.png)
 
-## Create an agreement
+## Agreements
+
+### Create an agreement
 
 Create an agreement:
 [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
@@ -358,7 +362,7 @@ date-time is used. All dates must be in date-time format as according to
 | `campaignPrice`       | The price that will be shown for comparison   |
 
 
-## Retrieve an agreement
+### Retrieve an agreement
 
 A newly created agreement will be in status `PENDING` for 5 minutes before it expires.
 If the customer approves the agreement, and the initialCharge (if provided) is successfully
@@ -389,7 +393,9 @@ This is an example response from a call to
 }
 ```
 
-## Create a charge
+## Charges
+
+### Create a charge
 
 Charge the customer for each period with
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
