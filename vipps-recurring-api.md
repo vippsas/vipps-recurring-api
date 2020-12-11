@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 2.0.6.
+Document version 2.0.7.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -149,6 +149,11 @@ These headers are required for plugins and partners and sent by the recent versi
 and we recommend all customers with direct integration with the API to also do so.
 
 ## Agreements
+
+An agreement is between the Vipps user and the merchant.
+Think of it as a subscription.
+An agreement has payments, called charges.
+See [Charges](#charges).
 
 ### Create an agreement
 
@@ -394,6 +399,8 @@ This is an example response from a call to
 ```
 
 ## Charges
+
+An [agreement](#agreements) has payments, called charges.
 
 ### Create a charge
 
