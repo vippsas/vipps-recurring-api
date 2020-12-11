@@ -2,7 +2,7 @@
 
 API version: 1.0
 
-Document version 2.0.5.
+Document version 2.0.6.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -23,9 +23,9 @@ to get access to the Recurring API in production.
 * [Terminology](#terminology)
 * [Flow diagram](#flow-diagram)
 * [Call by call guide](#call-by-call-guide)
+* [Vipps screenshots](#vipps-screenshots)
 * [API endpoints](#api-endpoints)
 * [Optional Vipps HTTP headers](#optional-vipps-http-headers)
-* [Vipps screenshots](#vipps-screenshots)
 * [Agreements](#agreements)
   + [Create an agreement](#create-an-agreement)
   + [Accept an agreement](#accept-an-agreement)
@@ -106,6 +106,10 @@ There is, of course, much more to this.
 We have done our best to document everything about this API, and you _should_
 have all information needed to integrate with Vipps.
 
+### Vipps screenshots
+
+![Vipps screenshots](images/RecurringOverview.png)
+
 ## API endpoints
 
 | Operation           | Description         | Endpoint          |
@@ -143,10 +147,6 @@ which help Vipps improve our services, and also help in investigating problems.
 These headers are required for plugins and partners and sent by the recent versions of
 [the official Vipps plugins](https://github.com/vippsas/vipps-developers#plugins)
 and we recommend all customers with direct integration with the API to also do so.
-
-### Vipps screenshots
-
-![Vipps screenshots](images/RecurringOverview.png)
 
 ## Agreements
 
