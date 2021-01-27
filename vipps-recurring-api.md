@@ -20,46 +20,49 @@ to get access to the Recurring API in production.
 
 ## Table of Contents
 
-* [Terminology](#terminology)
-* [Flow diagram](#flow-diagram)
-* [Call by call guide](#call-by-call-guide)
-* [Vipps screenshots](#vipps-screenshots)
-* [API endpoints](#api-endpoints)
-* [Optional Vipps HTTP headers](#optional-vipps-http-headers)
-* [Agreements](#agreements)
-  + [Create an agreement](#create-an-agreement)
-  + [Accept an agreement](#accept-an-agreement)
-  + [Intervals](#intervals)
-  + [Initial charge](#initial-charge)
-  + [Campaigns](#campaigns)
-  + [Retrieve an agreement](#retrieve-an-agreement)
-* [Charges](#charges)
-  + [Create a charge](#create-a-charge)
-  + [Amount changes](#amount-changes)
-  + [Charge descriptions](#charge-descriptions)
-  + [Charge times](#charge-times)
-  + [Charge retries](#charge-retries)
-* [Manage charges and agreements](#manage-charges-and-agreements)
-  + [Agreement states](#agreement-states)
-  + [Update an agreement](#update-an-agreement)
-  + [Pause an agreement](#pause-an-agreement)
-  + [Stop an agreement](#stop-an-agreement)
-  + [Charge states](#charge-states)
-* [Userinfo](#userinfo)
-  + [Scopes](#scopes)
-  + [Userinfo call by call guide](#userinfo-call-by-call-guide)
-  + [Example calls](#example-calls)
-  + [Vipps Login access token](#vipps-login-access-token)
-  + [Userinfo call](#userinfo-call)
-  + [Consent](#consent)
-* [HTTP responses](#http-responses)
-* [Rate-limiting](#rate-limiting)
-* [Polling guidelines](#polling-guidelines)
-* [Timeouts](#timeouts)
-  + [Using a phone](#using-a-phone)
-  + [Using a laptop/desktop](#using-a-laptop-desktop)
-* [Authentication and authorization](#authentication-and-authorization)
-* [Questions?](#questions-)
+- [Vipps Recurring API](#vipps-recurring-api)
+  - [Table of Contents](#table-of-contents)
+  - [Terminology](#terminology)
+  - [Flow diagram](#flow-diagram)
+  - [Call by call guide](#call-by-call-guide)
+    - [Vipps screenshots](#vipps-screenshots)
+  - [API endpoints](#api-endpoints)
+  - [Optional Vipps HTTP headers](#optional-vipps-http-headers)
+  - [Agreements](#agreements)
+    - [Create an agreement](#create-an-agreement)
+    - [Accept an agreement](#accept-an-agreement)
+    - [Intervals](#intervals)
+    - [Initial charge](#initial-charge)
+    - [Campaigns](#campaigns)
+    - [Retrieve an agreement](#retrieve-an-agreement)
+  - [Charges](#charges)
+    - [Create a charge](#create-a-charge)
+    - [Amount changes](#amount-changes)
+    - [Charge descriptions](#charge-descriptions)
+    - [Charge times](#charge-times)
+    - [Charge retries](#charge-retries)
+  - [Manage charges and agreements](#manage-charges-and-agreements)
+    - [Agreement states](#agreement-states)
+    - [Update an agreement](#update-an-agreement)
+    - [Pause an agreement](#pause-an-agreement)
+    - [Stop an agreement](#stop-an-agreement)
+    - [Charge states](#charge-states)
+  - [Userinfo](#userinfo)
+    - [Scopes](#scopes)
+    - [Userinfo call by call guide](#userinfo-call-by-call-guide)
+    - [Example calls](#example-calls)
+    - [Vipps Login access token](#vipps-login-access-token)
+    - [Userinfo call](#userinfo-call)
+    - [Consent](#consent)
+  - [HTTP responses](#http-responses)
+  - [Rate-limiting](#rate-limiting)
+  - [Polling guidelines](#polling-guidelines)
+  - [Timeouts](#timeouts)
+    - [Using a phone](#using-a-phone)
+    - [Using a laptop/desktop](#using-a-laptopdesktop)
+  - [Authentication and authorization](#authentication-and-authorization)
+  - [Recomendations regarding handling redirects](#recomendations-regarding-handling-redirects)
+  - [Questions?](#questions)
 
 ## Terminology
 
@@ -907,6 +910,26 @@ See [Get an access token](https://github.com/vippsas/vipps-developers/blob/maste
 in the
 [Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 for more information.
+
+## Recomendations regarding handling redirects
+
+Since Vipps is a mobile entity the amount of control Vipps have over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
+
+Examples of some, but not all, factors outside of Vipps control.
+- Configurations set by the OS itself, for example the default browser.
+- User configurations of browsers.
+- Users closing app immediately upon purchase.
+
+Therefore Vipps recommends having a stateless approach in the site that is supposed to be the end session. An example would a polling based result handling from a value in the redirect url.
+
+Example for demonstration purposes that should be handled.
+
+- User starts is in web session in a Chrome Browser.
+- A Vipps purchase is started, a redirect URL is defined by the Merchant.
+- The user completes the purchase.
+- The Vipps app redirects the user.
+- The OS defaults to a Safari Browser for the redirect.
+- The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
 
 ## Questions?
 
