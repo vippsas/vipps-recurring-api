@@ -2,8 +2,6 @@
 
 API version: 1.0
 
-Document version 2.0.7.
-
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
@@ -17,6 +15,8 @@ Vipps is required to perform some extra compliance checks before
 activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
+
+Document version 2.1.0.
 
 ## Table of Contents
 
@@ -132,6 +132,21 @@ See [Authentication and authorization](#authentication-and-authorization).
 
 See the Postman collection available on https://github.com/vippsas/vipps-recurring-api
 for en easy way to test the API.
+
+## Authentication
+
+All Vipps API calls are authenticated and authorized with an access token
+(JWT bearer token) and an API subscription key:
+
+| Header Name | Header Value | Description |
+| ----------- | ------------ | ----------- |
+| `Authorization` | `Bearer <JWT access token>` | Type: Authorization token. This is available on [portal.vipps.no](https://portal.vipps.no). |
+| `Ocp-Apim-Subscription-Key` | Base 64 encoded string | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no). |
+
+For more information about how to obtain an access token and all details around this, please see:
+[Quick overview of how to make an API call](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#quick-overview-of-how-to-make-an-api-call)
+in the
+[Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md).
 
 ## Optional Vipps HTTP headers
 
