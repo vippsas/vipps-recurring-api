@@ -128,7 +128,7 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
-          application/json;charset=UTF-8:
+          application/json:
             schema:
               $ref: "#/components/schemas/AgreementRequest"
         required: true
@@ -286,7 +286,7 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
-          application/json;charset=UTF-8:
+          application/json:
             schema:
               $ref: "#/components/schemas/ChargeRequest"
         required: true
