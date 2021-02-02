@@ -37,6 +37,8 @@ paths:
         - Access Controller
       summary: Get Access Token
       operationId: getAccessToken
+      security:
+        - ocpSubscriptionKey: []
       parameters:
         - name: client_id
           in: header
@@ -52,7 +54,6 @@ paths:
           schema:
             type: string
           example: Y8Kteew6GE2ZmeycEt6egg==
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
       responses:
         "200":
           description: OK
@@ -74,9 +75,10 @@ paths:
         - Agreement Controller
       summary: List Agreements
       operationId: listAgreements
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - name: status
           in: query
           required: false
@@ -111,10 +113,10 @@ paths:
         - Agreement Controller
       summary: Create a new Agreement, to be confirmed in Vipps
       operationId: draftAgreement
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Content-Type"
         - name: Idempotency-Key
           in: header
           required: false
@@ -157,6 +159,9 @@ paths:
         - Agreement Controller
       summary: Fetch an Agreement
       operationId: getAgreement
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       responses:
         "200":
           description: OK
@@ -182,11 +187,11 @@ paths:
       tags:
         - Agreement Controller
       summary: Update an Agreement
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       operationId: updateAgreement
       parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Content-Type"
         - name: Idempotency-Key
           in: header
           required: true
@@ -229,10 +234,11 @@ paths:
       tags:
         - Charge Controller
       summary: List Charges
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       operationId: listCharges
       parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/AgreementId"
         - name: chargeStatus
           in: query
@@ -267,11 +273,11 @@ paths:
       tags:
         - Charge Controller
       summary: Create a new charge
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       operationId: createCharge
       parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Content-Type"
         - name: Idempotency-Key
           in: header
           required: true
@@ -312,6 +318,9 @@ paths:
       tags:
         - Charge Controller
       summary: Fetch a Charge
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       operationId: getCharge
       responses:
         "200":
@@ -339,11 +348,11 @@ paths:
       tags:
         - Charge Controller
       summary: Cancel a Charge
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       operationId: cancelCharge
       parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Content-Type"
         - name: Idempotency-Key
           in: header
           required: false
@@ -380,11 +389,11 @@ paths:
       tags:
         - Charge Controller
       summary: Refund a charge
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       operationId: refundCharge
       parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Content-Type"
         - name: Idempotency-Key
           in: header
           required: true
@@ -424,11 +433,11 @@ paths:
       tags:
         - Charge Controller
       summary: Capture a reserved charge
+      security:
+        - bearerAuth: []
+          ocpSubscriptionKey: []
       operationId: captureCharge
       parameters:
-        - $ref: "#/components/parameters/Authorization"
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Content-Type"
         - name: Idempotency-Key
           in: header
           required: true
@@ -470,27 +479,6 @@ components:
       schema:
         type: string
       example: chr_123abc456
-    Ocp-Apim-Subscription-Key:
-      in: header
-      name: Ocp-Apim-Subscription-Key
-      description: >-
-        The subscription key for your API product is available on portal.vipps.no, under the 'Utvikler' tab.
-        Keep it secret.
-      required: true
-      schema:
-        type: string
-      example: 0f14ebcab0ec4b29ae0cb90d91b4a84a
-    Authorization:
-      in: header
-      name: Authorization
-      description: >-
-        The access token is a base64-encoded string that is required for all API calls.
-        It is a JWT (JSON Web Token).
-        The access token is fetched from the `POST:/accesstoken/get` endpoint.
-        It is valid for 1 hour in the test environment and 24 hours in the production environment.
-      required: true
-      schema:
-        type: string
     Vipps-System-Name:
       name: Vipps-System-Name
       in: header
@@ -531,8 +519,19 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Bearer 'auth token', from /accesstoken/get
+      description: >-
+        The access token is a base64-encoded string that is required for all API calls.
+        It is a JWT (JSON Web Token).
+        The access token is fetched from the `POST:/accesstoken/get` endpoint.
+        It is valid for 1 hour in the test environment and 24 hours in the production environment.
       bearerFormat: JWT
+    ocpSubscriptionKey:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: >-
+        The subscription key for your API product is available on portal.vipps.no, under the 'Utvikler' tab.
+        Keep it secret.
   responses:
     BadRequestError: #400
       description: Invalid request, check your parameters
