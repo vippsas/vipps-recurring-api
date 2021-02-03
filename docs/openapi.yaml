@@ -176,7 +176,7 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-      parameters: 
+      parameters:
         - $ref: "#/components/parameters/AgreementId"
     patch:
       tags:
@@ -334,7 +334,7 @@ paths:
           $ref: "#/components/responses/TimeoutError"
       parameters:
         - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeId" 
+        - $ref: "#/components/parameters/ChargeId"
     delete:
       tags:
         - Charge Controller
@@ -826,7 +826,7 @@ components:
         orderId:
           type: string
           description: Optional orderId, will be auto generated if not provided
-          example: order123abc
+          example: acme-shop-123-order123abc
           maxLength: 15
       description: An initial charge for a new agreement. The charge will be executed
         immediately when the user approves the agreement.
@@ -869,7 +869,7 @@ components:
         orderId:
           type: string
           description: Optional orderId, will be auto generated if not provided
-          example: order123abc
+          example: acme-shop-123-order123abc
           maxLength: 15
     ChargeReference:
       type: object
