@@ -77,7 +77,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Content-Type"
         - name: status
           in: query
           required: false
@@ -177,6 +176,8 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
+      parameters:
+        - $ref: "#/components/parameters/AgreementId"
     patch:
       tags:
         - Agreement Controller
@@ -232,7 +233,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/AgreementId"
         - name: chargeStatus
           in: query
           required: false
@@ -331,6 +332,9 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
+      parameters:
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
     delete:
       tags:
         - Charge Controller
@@ -822,7 +826,7 @@ components:
         orderId:
           type: string
           description: Optional orderId, will be auto generated if not provided
-          example: order123abc
+          example: acme-shop-123-order123abc
           maxLength: 15
       description: An initial charge for a new agreement. The charge will be executed
         immediately when the user approves the agreement.
@@ -865,7 +869,7 @@ components:
         orderId:
           type: string
           description: Optional orderId, will be auto generated if not provided
-          example: order123abc
+          example: acme-shop-123-order123abc
           maxLength: 15
     ChargeReference:
       type: object
