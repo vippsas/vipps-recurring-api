@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.1.0.
+Document version 2.1.1.
 
 ## Table of Contents
 
@@ -55,7 +55,7 @@ Document version 2.1.0.
     - [Userinfo call](#userinfo-call)
     - [Consent](#consent)
   - [HTTP responses](#http-responses)
-  - [Rate-limiting](#rate-limiting)
+  - [Rate limiting](#rate-limiting)
   - [Polling guidelines](#polling-guidelines)
   - [Timeouts](#timeouts)
     - [Using a phone](#using-a-phone)
@@ -857,12 +857,15 @@ This API returns the following HTTP statuses in the responses:
 All error responses contains an `error` object in the body, with details of the
 problem.
 
-## Rate-limiting
+## Rate limiting
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
 fraudulent and wrongful behaviour, and increase the stability and security of
 our API. The limits should not affect normal behaviour, but please contact us
 if you notice any unexpected behaviour.
+
+The "Key" column specifies what we consider to be the unique identifier, and
+what we "use to count". The limits are of course not _total_ limits.
 
 | API                                                                                                      | Limit          | Key used                                          |
 |----------------------------------------------------------------------------------------------------------|----------------|---------------------------------------------------|
