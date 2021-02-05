@@ -99,12 +99,8 @@ Yes. See
 
 ## Are there any limits on charging a user?
 Yes, within the `interval` period of the Agreement the merchant can charge at
-most **10 times** the Agreement price cumulatively. There is no limit on the
+most **5 times** the Agreement price cumulatively. There is no limit on the
 number of charges which can be sent in the `interval` period.
-
-For example, a monthly agreement of 500 NOK, can have at most 5000 NOK charged
-in that month, either through one 5000 NOK charge, 5000 1NOK charges, or
-anywhere in between.
 
 Vipps recommends creating a new Agreement if there is a significant price change.
 It is the merchant's responsibility to make sure the user is informed and understands
