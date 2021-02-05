@@ -169,7 +169,7 @@ and we recommend all customers with direct integration with the API to also do s
 
 ## orderId recommendations
 
-A `orderId` must be unique. 
+A `orderId` must be unique.
 
 If you ever have a problem that requires us to search in our logs, we need
 `orderId`s that are "unique enough" to actually find them. An `orderId` that
@@ -179,7 +179,7 @@ While the minimum length for `orderId` _technically_ is just one character,
 we strongly recommend using at least 6 characters, and a combination of numbers
 and characters.
 
-The maximum length of an `orderId` is 50 alphanumeric characters:
+The maximum length of an `orderId` is 40 alphanumeric characters:
 a-z, A-Z, 0-9 and '-'.
 
 A good starting point is to use UUID,
