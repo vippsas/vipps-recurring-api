@@ -931,6 +931,26 @@ components:
           example: "5001419121"
         type:
           $ref: "#/components/schemas/ChargeType"
+        failureReason:
+          type: string
+          enum:
+            - internal_error
+            - insufficient_funds
+            - invalid_card
+            - verification_required
+            - invalid_payment_source
+          example: "insufficient_funds"
+          description: >
+            Identifies the reason why the charged has been marked as `FAILED`:
+              * `internal_error` - Something went wrong and the error couldn't be categorized.
+              * `insufficient_funds` - Payment was declined by the payer bank due to lack of funds.
+              * `invalid_card` - The user tried to pay using a card that has either expired or is disabled by the issuer.
+              * `verification_required` - Payment declined because the issuing bank requires verification, e.g. BankID/3DS.
+              * `invalid_payment_source` - The provided payment source is disabled or does not exist.
+        failureDescription:
+          type: string
+          description: Description for the failure reason
+          example: "Payment was declined by the payer bank due to lack of funds"
     VippsApiError:
       type: object
       required:
