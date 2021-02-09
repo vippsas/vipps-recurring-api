@@ -4613,7 +4613,9 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;chg_WCVbcAbRCmu2zk&quot;</span>,
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;PENDING&quot;</span>,
     <span class="hljs-attr">&quot;transactionId&quot;</span>: <span class="hljs-string">&quot;5001419121&quot;</span>,
-    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>
+    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
+    <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;insufficient_funds&quot;</span>,
+    <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;Payment was declined by the payer bank due to lack of funds&quot;</span>
   }
 ]
 </code></pre>
@@ -4742,6 +4744,20 @@ System.out.println(response.toString());
 <td>none</td>
 <td>none</td>
 </tr>
+<tr>
+<td>» failureReason</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>internal_error</code> - Something went wrong and the error couldn't be categorized.<br />  * <code>insufficient_funds</code> - Payment was declined by the payer bank due to lack of funds.<br />  * <code>invalid_card</code> - The user tried to pay using a card that has either expired or is disabled by the issuer.<br />  * <code>verification_required</code> - Payment declined because the issuing bank requires verification, e.g. BankID/3DS.<br />  * <code>invalid_payment_source</code> - The provided payment source is disabled or does not exist.</td>
+</tr>
+<tr>
+<td>» failureDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Description for the failure reason</td>
+</tr>
 </tbody>
 </table>
 <h4 id="enumerated-values-6">Enumerated Values</h4>
@@ -4796,6 +4812,26 @@ System.out.println(response.toString());
 <tr>
 <td>type</td>
 <td>RECURRING</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>internal_error</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>insufficient_funds</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>invalid_card</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>verification_required</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>invalid_payment_source</td>
 </tr>
 </tbody>
 </table>
@@ -5560,7 +5596,9 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;chg_WCVbcAbRCmu2zk&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;PENDING&quot;</span>,
   <span class="hljs-attr">&quot;transactionId&quot;</span>: <span class="hljs-string">&quot;5001419121&quot;</span>,
-  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
+  <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;insufficient_funds&quot;</span>,
+  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;Payment was declined by the payer bank due to lack of funds&quot;</span>
 }
 </code></pre>
 <h3 id="fetch-a-charge-responses">Responses</h3>
@@ -7671,7 +7709,9 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;chg_WCVbcAbRCmu2zk&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;PENDING&quot;</span>,
   <span class="hljs-attr">&quot;transactionId&quot;</span>: <span class="hljs-string">&quot;5001419121&quot;</span>,
-  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
+  <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;insufficient_funds&quot;</span>,
+  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;Payment was declined by the payer bank due to lack of funds&quot;</span>
 }
 
 </code></pre>
@@ -7742,6 +7782,51 @@ System.out.println(response.toString());
 <td>true</td>
 <td>none</td>
 <td>none</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>internal_error</code> - Something went wrong and the error couldn't be categorized.<br />  * <code>insufficient_funds</code> - Payment was declined by the payer bank due to lack of funds.<br />  * <code>invalid_card</code> - The user tried to pay using a card that has either expired or is disabled by the issuer.<br />  * <code>verification_required</code> - Payment declined because the issuing bank requires verification, e.g. BankID/3DS.<br />  * <code>invalid_payment_source</code> - The provided payment source is disabled or does not exist.</td>
+</tr>
+<tr>
+<td>failureDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Description for the failure reason</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-8">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>failureReason</td>
+<td>internal_error</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>insufficient_funds</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>invalid_card</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>verification_required</td>
+</tr>
+<tr>
+<td>failureReason</td>
+<td>invalid_payment_source</td>
 </tr>
 </tbody>
 </table>
@@ -7916,7 +8001,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-8">Enumerated Values</h4>
+<h4 id="enumerated-values-9">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -7972,7 +8057,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-9">Enumerated Values</h4>
+<h4 id="enumerated-values-10">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -8049,7 +8134,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-10">Enumerated Values</h4>
+<h4 id="enumerated-values-11">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -8094,7 +8179,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-11">Enumerated Values</h4>
+<h4 id="enumerated-values-12">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -8142,7 +8227,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-12">Enumerated Values</h4>
+<h4 id="enumerated-values-13">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -8191,7 +8276,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-13">Enumerated Values</h4>
+<h4 id="enumerated-values-14">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
