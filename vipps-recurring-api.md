@@ -94,7 +94,7 @@ The normal "happy day" flow for a new agreement and a charge is:
    [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
    See [Create a charge](#create-a-charge).
 4. Capture the charge:
-  [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)  
+  [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement when the merchant calls
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
@@ -153,7 +153,7 @@ in the
 
 We recommend using the following _optional_ HTTP headers for all requests to the
 Vipps Recurring API. These headers provide useful metadata about the merchant's system,
-which help Vipps improve our services, and also help in investigating problems.   
+which help Vipps improve our services, and also help in investigating problems.
 
 | Header                        | Description                                  | Example value        |
 | ----------------------------- | -------------------------------------------- | -------------------- |
@@ -340,7 +340,7 @@ informed when an `initialCharge` is included in the agreement they are accepting
 See [Charge Titles](#charge-title) for explanation of how the charge description
 is shown to the user.
 
-The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.  
+The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
 See:
 [What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the eCom FAQ).
@@ -371,7 +371,7 @@ of 499 NOK:
   "productDescription": "Access to all games of English top football",
   "productName": "Premier League subscription"
 }
-```   
+```
 
 Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial charge.
 
@@ -529,8 +529,8 @@ a description with follow format `{agreement.ProductName} - {charge.description}
 
 ### Charge times
 
-Charge _attempts_ are made two times during the day: 08:00 and 16:00 UTC.  
-This is the same both for our production and test environment.  
+Charge _attempts_ are made two times during the day: 08:00 and 16:00 UTC.
+This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
 
 ### Charge retries
@@ -544,6 +544,8 @@ If `retryDays=0` it will try two times on the initial day.
 
 Be aware that if you check the status of the charge within the retry period, it
 might have status `FAILED`, also after the first attempt on the first and only day.
+
+> For getting possible failure reason of the charge, read: [Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons).
 
 ## Manage charges and agreements
 
@@ -621,12 +623,35 @@ to set up a new agreement.
 | 1 | `PENDING`  | The charge has been created, but has not yet been approved by the user. |
 | 2 | `DUE`      | The charge is now visible in Vipps, and will be made in the next 30 days (this was previously 6). |
 | 3 | `CHARGED`  | The charge has been completed. |
-| 4 | `FAILED`   | The charge has failed for some reason, i.e. expired card, insufficient funds, etc. |
+| 4 | `FAILED`   | The charge has failed for some reason, i.e. expired card, insufficient funds, etc. Read the [Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons) section for more details. |
 | 5 | `REFUNDED` | The charge has been refunded. The timeframe for issuing a refund is 365 days from the date of capture. |
 | 6 | `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. |
 | 7 | `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. |
 | 8 | `CANCELLED` | The charge has been cancelled. |
 | 9 | `PROCESSING` | The charge is currently being processed by Vipps. |
+
+### Charge failure reasons
+
+When fetching a charge through the API, you can find two fields in the response body to identify why the charge failed `failureReason` and `failureDescription`:
+
+```json
+{
+  "status": "FAILED",
+  "type": "RECURRING",
+  "failureReason": "insufficient_funds",
+  "failureDescription": "Payment was declined by the payer bank due to lack of funds"
+}
+```
+
+Here is a list of possible values for `failureReason`, their respective descriptions and possible actions that the user/merchant could take.
+
+| Reason | Description | Action |
+| ---- | ----------- | ------ |
+| insufficient_funds | Payment was declined by the payer bank due to lack of funds. | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
+| invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
+| verification_required | Payment declined because the issuing bank requires verification. | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue. |
+| invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. | User must change payment source
+| internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
 
 ## Userinfo
 
