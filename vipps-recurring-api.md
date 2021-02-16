@@ -651,7 +651,7 @@ Here is a list of possible values for `failureReason`, their respective descript
 | invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
 | verification_required | Payment declined because the issuing bank requires verification. | |
 | invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. | User must change payment source
-| internal_error | Internal Error / Something went wrong | The error couldn not be identified as one of the above. Contact Vipps for more information. |
+| internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
 
 ## Userinfo
 
