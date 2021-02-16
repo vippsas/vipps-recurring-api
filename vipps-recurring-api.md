@@ -651,7 +651,7 @@ Here is a list of possible values for `failureReason`, their respective descript
 | insufficient_funds | Payment was declined by the payer bank due to lack of funds. | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
 | invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
 | verification_required | Payment declined because the issuing bank requires verification. | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue. |
-| invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. | User must change payment source
+| invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. |
 | internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
 
 ## Userinfo
