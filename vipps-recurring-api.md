@@ -48,6 +48,7 @@ Document version 2.2.0.
     - [Pause an agreement](#pause-an-agreement)
     - [Stop an agreement](#stop-an-agreement)
     - [Charge states](#charge-states)
+    - [Charge failure reasons](#charge-failure-reasons)
   - [Userinfo](#userinfo)
     - [Scopes](#scopes)
     - [Userinfo call by call guide](#userinfo-call-by-call-guide)
