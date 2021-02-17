@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.0.
+Document version 2.2.1.
 
 ## Table of Contents
 
@@ -546,7 +546,8 @@ If `retryDays=0` it will try two times on the initial day.
 Be aware that if you check the status of the charge within the retry period, it
 might have status `FAILED`, also after the first attempt on the first and only day.
 
-> For getting possible failure reason of the charge, read: [Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons).
+If a charge fails, you will get information about the reason:
+[Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons).
 
 ## Manage charges and agreements
 
