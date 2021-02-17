@@ -634,7 +634,7 @@ to set up a new agreement.
 
 ### Charge failure reasons
 
-> This is an experimental feature. The design has not been finalized and only applies to Vipps Recurring API.
+> This is an experimental feature. The design has not been finalized and it only applies to Vipps Recurring API.
 
 When fetching a charge through the API, you can find two fields in the response body to identify why the charge failed `failureReason` and `failureDescription`:
 
