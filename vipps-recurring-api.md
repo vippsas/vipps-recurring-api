@@ -87,7 +87,7 @@ The normal "happy day" flow for a new agreement and a charge is:
 1. Create a (draft) agreement:
    [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
    The user can now confirm the agreement in Vipps.
-   See [Create a new agreement](#create-a-new-agreement).
+   See [Create a new agreement](#create-an-agreement).
 2. Retrieve the (hopefully approved) agreement:
    [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement).
    See [Retrieve an agreement](#retrieve-an-agreement).
