@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.1.
+Document version 2.2.2.
 
 ## Table of Contents
 
@@ -763,7 +763,14 @@ This `sub` is a link between the merchant and the user and can used to retrieve
 the user's details from Vipps Login:
 [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-login-api/#/Vipps%20Log%20In%20API/userinfo)
 
-**Please note:** It is recommended to get the user's information directly after completing the transaction. There is a however a **time limit of 168 hours** (one week) to retrieve the consented profile data from the userinfo endpoint to better support merchants that depend on manual steps/checks in their process of fetching the profile data. The merchant will get the information that is in the user profile at the time when they actually fetch the information. This means that the information might have changed from the time the user completed the transaction and the fetching of the profile data.
+**Please note:** It is recommended to get the user's information directly after
+completing the transaction. There is however a _time limit of 168 hours_
+(one week) to retrieve the consented profile data from the `/userinfo` endpoint to
+better support merchants that depend on manual steps/checks in their process of
+fetching the profile data. The merchant will get the information that is in the
+user profile at the time when they actually fetch the information. This means
+that the information might have changed from the time the user completed the
+transaction and the fetching of the profile data.
 
 ### Vipps Login access token
 
