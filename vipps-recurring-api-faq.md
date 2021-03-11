@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.4.2.
+Document version: 1.4.3.
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ Document version: 1.4.2.
 - [When can I send charges for a user?](#when-can-i-send-charges-for-a-user)
 - [How can I delete an agreement?](#how-can-i-delete-an-agreement)
 - [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
-- [What happens to charges if the user cancels the agreement?](#what-happens-to-charges-if-the-user-cancels-the-agreement)
+- [What happens to charges if the corresponding agreement is cancelled?](#what-happens-to-charges-if-the-corresponding-agreement-is-cancelled)
 - [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge)
 - [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 - [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
@@ -132,8 +132,9 @@ This can add more complexity than Vipps can present in a good way, and our
 approach is therefore to send the user to the merchant for managing the
 Agreement.
 
-## What happens to charges if the user cancels the agreement?
-All charges in a `PENDING` or `DUE` state will be cancelled if the Agreement is stopped.
+## What happens to charges if the corresponding agreement is cancelled?
+All charges in a `PENDING`, `DUE` or `RESERVED` state will be cancelled if the Agreement is stopped.  
+**Note**: This also includes the `initial charge` if it's currently `RESERVED`. So if the merchant needs to charge the user for the initial charge; then this needs to be done before the agreement is stopped.
 
 ## If a user's card expires: What happens on the next charge?
 The user is responsible for keeping their payment sources update.
