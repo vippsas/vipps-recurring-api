@@ -7,7 +7,7 @@ See the [Postman documentation](https://www.getpostman.com/docs/) for more infor
 By following the steps below, you can make calls to all the
 endpoints, and see the full `request` and `response` for each call.
 
-We also have a short [getting started guide to Postman](https://github.com/vippsas/vipps-developers/blob/master/postman-guide.md)
+We also have a short [getting started guide to Postman](https://github.com/vippsas/vipps-developers/blob/master/postman-guide.md).
 
 ## Setting up Postman
 
@@ -16,12 +16,12 @@ We also have a short [getting started guide to Postman](https://github.com/vipps
 Import the collection by following the steps below:
 
 1. Click `Import` in the upper left corner.
-2. Import the [vipps-recurring-api-postman-collection.json](https://raw.githubusercontent.com/vippsas/vipps-recurring-api/master/tools/vipps-recurring-api-postman-collection.json) file
+2. Import the [vipps-recurring-api-postman-collection.json](https://raw.githubusercontent.com/vippsas/vipps-recurring-api/master/tools/vipps-recurring-api-postman-collection.json) file.
 
 ### Step 2: Import the Postman Environment
 
 1. Click `Import` in the upper left corner.
-2. Import the [vipps-recurring-api-postman-enviroment.json](https://raw.githubusercontent.com/vippsas/vipps-recurring-api/master/tools/vipps-recurring-api-postman-environment.json) file
+2. Import the [vipps-recurring-api-postman-enviroment.json](https://raw.githubusercontent.com/vippsas/vipps-recurring-api/master/tools/vipps-recurring-api-postman-environment.json) file.
 
 ### Step 3: Setup Postman Environment
 
