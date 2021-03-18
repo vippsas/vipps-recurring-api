@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.3.
+Document version 2.2.4.
 
 ## Table of Contents
 
@@ -82,61 +82,58 @@ This diagram shows a simplified payment flow:
 
 ## Call by call guide
 
-There are two happy-flows based on how the sale unit is set up.
+There are two happy-flows based on how the sale unit is set up:
+One for "direct capture" and one for "reserve capture".
 
-For a `DIRECT_CAPTURE` setup the normal flow would be 
+For a `DIRECT_CAPTURE` setup the normal flow would be:
 
 1. Create a (draft) agreement:
    [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
-   The user can now confirm the agreement in Vipps.
+   The user can now confirm the agreement in Vipps (the app).
    See [Create a new agreement](#create-an-agreement).
-2. User approves agreement in the app:
-   This will result in capture of the initial charge (if one was defined in the first step).
+2. The user approves the agreement in Vipps:
+   This will result in a capture of the initial charge (if one was defined in the first step).
 3. Retrieve the (hopefully approved) agreement:
    [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement).
-   See [Retrieve an agreement](#retrieve-an-agreement). 
-   
-   *----- At this point the agreement will be `ACTIVE` if the user completed step 2 -----*    
-   
+   See [Retrieve an agreement](#retrieve-an-agreement).
+   **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. For all future charges, you must create a charge:
    [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
    See [Create a charge](#create-a-charge).
    Based on the `dueDate` set in the request, our batch job will try to process the charge on that day.
-   If for some reason, a charge fails to be processed, 
-   we will retry up to twice a day for the amount of days provided by the `retryDays` value. 
+   If for some reason, a charge fails to be processed,
+   we will retry up to twice a day for the amount of days provided by the `retryDays` value.
    We recommend at least 2 days retry.
-   
-   
-For a `RESERVE_CAPTURE` setup the normal flow would be 
+
+### Reserve capture
+
+For a `RESERVE_CAPTURE` setup the normal flow would be
 
 1. Create a (draft) agreement:
    [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
-   The user can now confirm the agreement in Vipps.
+   The user can now confirm the agreement in Vipps (the app).
    See [Create a new agreement](#create-an-agreement).
-2. User approves agreement in the app:
-   This will result in capture of the initial charge (if one was defined in the first step).
+2. The user approves the agreement in Vipps:
+   This will result in a capture of the initial charge (if one was defined in the first step).
 3. Retrieve the (hopefully approved) agreement:
    [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement).
    See [Retrieve an agreement](#retrieve-an-agreement).  
-   
-   *----- At this point the agreement will be `ACTIVE` if the user completed step 2 -----*    
-  
+   **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. If there is a product that is shipped to the customer, the initial charge should be captured at this point.
-    Capture the charge:
-    [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)
+   Capture the charge:
+   [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)
    If there is no product being shipped, or a need to provide access at a later point - the merchant should change the
    merchant sale unit setup to use `DIRECT CAPTURE` instead.
 5. For all future charges, you must create a charge:
    [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
    See [Create a charge](#create-a-charge).
    Based on the `dueDate` set in the request, our batch job will try to process the charge on that day.
-   If for some reason, a charge fails to be processed, 
-   we will retry up to twice a day for the amount of days provided by the `retryDays` value. 
+   If for some reason, a charge fails to be processed,
+   we will retry up to twice a day for the amount of days provided by the `retryDays` value.
    We recommend at least 2 days retry.
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that the merchant has created
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
-
 
 You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
