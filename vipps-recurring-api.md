@@ -87,8 +87,9 @@ This diagram shows a simplified payment flow:
 There are two happy-flows based on how the sale unit is set up:
 One for "direct capture" and one for "reserve capture".
 
-**Note:** Vipps will *only* perform a payment transaction on an agreement that the merchant has created
-[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
+**Note:** Vipps will *only* perform a payment transaction on an agreement that
+the merchant has created a charge for with
+[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
 You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
