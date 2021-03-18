@@ -86,7 +86,8 @@ This diagram shows a simplified payment flow:
 
 There are two happy-flows based on how the sale unit is set up:
 One for "direct capture" and one for "reserve capture".
-This is specified with the `transactionType`.
+This is specified with the `transactionType`, and for "direct capture"
+the sale unit must be configured for this by Vipps.
 See the eCom FAQ for the difference:
 [What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
 
@@ -97,7 +98,7 @@ You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
 
-For a `DIRECT_CAPTURE` setup the normal flow would be:
+For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
 
 1. Create a (draft) agreement:
    [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
@@ -119,7 +120,7 @@ For a `DIRECT_CAPTURE` setup the normal flow would be:
 
 ### Reserve capture
 
-For a `RESERVE_CAPTURE` setup the normal flow would be
+For a `"transactionType": "RESERVE_CAPTURE"` setup the normal flow would be
 
 1. Create a (draft) agreement:
    [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement).
