@@ -104,7 +104,7 @@ For a `DIRECT_CAPTURE` setup the normal flow would be:
    This will result in a capture of the initial charge (if one was defined in the first step).
 3. Retrieve the (hopefully approved) agreement:
    [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement).
-   See [Retrieve an agreement](#retrieve-an-agreement).
+   See [Retrieve an agreement](#retrieve-an-agreement).  
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. For all future charges, you must create a charge:
    [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge).
