@@ -86,6 +86,9 @@ This diagram shows a simplified payment flow:
 
 There are two happy-flows based on how the sale unit is set up:
 One for "direct capture" and one for "reserve capture".
+This is specified with the `transactionType`.
+See the eCom FAQ for the difference:
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with
