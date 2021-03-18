@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.4.
+Document version 2.2.5.
 
 ## Table of Contents
 
@@ -25,6 +25,8 @@ Document version 2.2.4.
   - [Terminology](#terminology)
   - [Flow diagram](#flow-diagram)
   - [Call by call guide](#call-by-call-guide)
+    - [Direct capture](#direct-capture)
+    - [Reserve capture](#reserve-capture)
     - [Vipps screenshots](#vipps-screenshots)
   - [API endpoints](#api-endpoints)
   - [Optional Vipps HTTP headers](#optional-vipps-http-headers)
@@ -84,6 +86,8 @@ This diagram shows a simplified payment flow:
 
 There are two happy-flows based on how the sale unit is set up:
 One for "direct capture" and one for "reserve capture".
+
+### Direct capture
 
 For a `DIRECT_CAPTURE` setup the normal flow would be:
 
