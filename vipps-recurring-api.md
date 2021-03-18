@@ -87,6 +87,10 @@ This diagram shows a simplified payment flow:
 There are two happy-flows based on how the sale unit is set up:
 One for "direct capture" and one for "reserve capture".
 
+**Note:** Vipps will *only* perform a payment transaction on an agreement that the merchant has created
+[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
+You can also [Manage charges and agreements](#manage-charges-and-agreements).
+
 ### Direct capture
 
 For a `DIRECT_CAPTURE` setup the normal flow would be:
@@ -135,16 +139,6 @@ For a `RESERVE_CAPTURE` setup the normal flow would be
    If for some reason, a charge fails to be processed,
    we will retry up to twice a day for the amount of days provided by the `retryDays` value.
    We recommend at least 2 days retry.
-
-**Note:** Vipps will *only* perform a payment transaction on an agreement that the merchant has created
-[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)
-
-You can also [Manage charges and agreements](#manage-charges-and-agreements).
-
-That's the basics.
-There is, of course, much more to this.
-We have done our best to document everything about this API, and you _should_
-have all information needed to integrate with Vipps.
 
 ### Vipps screenshots
 
