@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.7.
+Document version 2.2.8.
 
 ## Table of Contents
 
@@ -967,16 +967,21 @@ what we "use to count". The limits are of course not _total_ limits.
 
 | API                                                                                                      | Limit          | Key used                                          | Explanation |
 |----------------------------------------------------------------------------------------------------------|----------------|---------------------------------------------------| --- |
-| [CreateCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)         | 2 per minute   | agreementId + chargeId (based on idempotency key) | Two calls per minute per unique chargeId |
-| [CancelCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)         | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique chargeId |
-| [CaptureCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)       | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique chargeId |
-| [RefundCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)         | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique chargeId |
+| [CreateCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/createCharge)         | 2 per minute   | agreementId + chargeId (based on idempotency key) | Two calls per minute per unique agreementId and chargeId |
+| [CancelCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/cancelCharge)         | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
+| [CaptureCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/captureCharge)       | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
+| [RefundCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/refundCharge)         | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
 | [ListAgreements](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/listAgreements)  | 5 per minute   | (per merchant)                                    | Five calls per minute per merchant |
 | [UpdateAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/updateAgreement)| 5 per minute   | agreementId                                       | Five calls per minute per unique agreementId |
-| [FetchCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/getCharge)             | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId |
+| [FetchCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/getCharge)             | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId |
 | [ListCharges](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Controller/listCharges)           | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId |
 | [FetchAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/getAgreement)    | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId |
 | [DraftAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Controller/draftAgreement)  | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant |
+
+**Please note:** The "Key" column is important. The above means that we allow two
+CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
+too many CreateCharge calls for the same charge. The overall limit for number of
+different payments is far higher than 2.
 
 ## Polling guidelines
 
