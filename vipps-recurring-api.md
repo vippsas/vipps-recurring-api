@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.5.
+Document version 2.2.6.
 
 ## Table of Contents
 
@@ -215,15 +215,10 @@ we strongly recommend using at least 6 characters, and a combination of numbers
 and characters.
 
 The maximum length of an `orderId` is 40 alphanumeric characters:
-a-z, A-Z, 0-9 and '-'.
-
-A good starting point is to use UUID,
-[universally unique identifiers](https://en.wikipedia.org/wiki/Universally_unique_identifier),
-on the format `123e4567-e89b-12d3-a456-426614174000`.
-UUIDs are not always the most human-friendly, so see the other tips below too.
+a-z, A-Z, 0-9.
 
 We _strongly_ recommend to use `orderId` format that makes it easy to
-search for them in logs. This means that `abc-123-def-456` is a better
+search for them in logs. This means that `abc123def456` is a better
 format than `123456`.
 
 Leading zeros should be avoided, as some applications (like Excel)
@@ -231,7 +226,7 @@ tend to remove them, and this may cause misunderstandings.
 
 With multiple sale units, prefixing the `orderId` with the MSN
 for each sale unit is recommended: If the MSN is `654321`, the
-`orderId`s could start at `654321-0000-0000-0001` and increment by 1
+`orderId`s could start at `654321000000000001` and increment by 1
 for each order, or some similar, unique and readable pattern.
 
 ## Agreements
