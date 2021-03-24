@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.8.
+Document version 2.2.9.
 
 ## Table of Contents
 
@@ -59,7 +59,7 @@ Document version 2.2.8.
     - [Userinfo call](#userinfo-call)
     - [Consent](#consent)
   - [HTTP responses](#http-responses)
-  - [xting](#rate-limiting)
+  - [Rate-limiting](#rate-limiting)
   - [Polling guidelines](#polling-guidelines)
   - [Timeouts](#timeouts)
     - [Using a phone](#using-a-phone)
