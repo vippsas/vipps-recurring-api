@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.9.
+Document version 2.2.10.
 
 ## Table of Contents
 
@@ -663,9 +663,16 @@ to set up a new agreement.
 
 ### Charge failure reasons
 
-> This is an experimental feature. The design has not been finalized and it only applies to Vipps Recurring API.
+When fetching a charge through the API, you can find two fields in the response
+body to identify why the charge failed `failureReason` and `failureDescription`
 
-When fetching a charge through the API, you can find two fields in the response body to identify why the charge failed `failureReason` and `failureDescription`:
+**Important:** This is an experimental feature. The design has not been finalized
+and it only applies to Vipps Recurring API. You may use `failureReason` and
+`failureDescription` when the fields are available in the response, but do
+not depend on them, and be aware that they may only contain `None` if there
+are no further details available for the failure.
+
+An example from a response:
 
 ```json
 {
