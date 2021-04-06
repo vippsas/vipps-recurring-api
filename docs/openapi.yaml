@@ -18,7 +18,7 @@ info:
     See <a href="#/Access%20Controller/getAccessToken" target="_blank">Get Access Token</a>
 
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
-  version: 2.2.1
+  version: 2.2.2
   title: Recurring Payments Merchant API
 tags:
   - name: Access Controller
@@ -780,7 +780,6 @@ components:
           description: The Id of the initialCharge if given, otherwise `null`.
             If an `orderId` is specified this is used as the `chargeId` otherwise it is auto generated.
           example: chr_123abc456
-          maxlength: 40
           pattern: '^[a-zA-Z0-9-]{1,40}$'
     AgreementUpdateReference:
       type: object
