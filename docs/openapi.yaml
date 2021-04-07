@@ -18,7 +18,7 @@ info:
     See <a href="#/Access%20Controller/getAccessToken" target="_blank">Get Access Token</a>
 
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
-  version: 2.2.2
+  version: 2.3.0
   title: Recurring Payments Merchant API
 tags:
   - name: Access Controller
@@ -79,16 +79,24 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
         - name: status
           in: query
           required: false
           description: Filter by status
           schema:
             $ref: "#/components/schemas/AgreementStatus"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       responses:
         "200":
           description: OK
@@ -119,6 +127,10 @@ paths:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - name: Idempotency-Key
           in: header
           required: false
@@ -126,10 +138,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -163,6 +171,15 @@ paths:
         - Agreement Controller
       summary: Fetch an Agreement
       operationId: getAgreement
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
       responses:
         "200":
           description: OK
@@ -184,8 +201,6 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-      parameters:
-        - $ref: "#/components/parameters/AgreementId"
     patch:
       tags:
         - Agreement Controller
@@ -327,6 +342,16 @@ paths:
         - Charge Controller
       summary: Fetch a Charge
       operationId: getCharge
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
       responses:
         "200":
           description: Success
@@ -348,9 +373,6 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-      parameters:
-        - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeId"
     delete:
       tags:
         - Charge Controller
@@ -360,6 +382,12 @@ paths:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
         - name: Idempotency-Key
           in: header
           required: false
@@ -367,12 +395,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeId"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       responses:
         "200":
           description: Success
@@ -403,6 +425,12 @@ paths:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
         - name: Idempotency-Key
           in: header
           required: true
@@ -410,12 +438,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeId"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
           application/json:
@@ -449,6 +471,12 @@ paths:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
         - name: Idempotency-Key
           in: header
           required: true
@@ -456,12 +484,6 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
-        - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeId"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       responses:
         "200":
           description: Success
