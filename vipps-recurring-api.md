@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.10.
+Document version 2.2.11.
 
 ## Table of Contents
 
@@ -360,6 +360,12 @@ Example for a subscription every 100th day:
 ```
 
 ### Initial charge
+
+**Please note:** Use
+[Campaigns](#campaigns)
+if the subscription is cheaper in the beginning.
+If you use `initialcharge`, users will be confused by how it appears in Vipps,
+as it looks like the full price period starts immediately.
 
 Initial charge will be performed if the `initialcharge` is provided when
 creating an agreement. Unlike regular (or `RECURRING`) charges, there is no
