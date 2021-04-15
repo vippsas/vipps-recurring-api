@@ -2,7 +2,7 @@
 
 API version: 2.0
 
-Document version 1.1.1
+Document version 1.1.2”
 
 For examples of requests and responses, see the Postman collection in [tools](tools/)
 

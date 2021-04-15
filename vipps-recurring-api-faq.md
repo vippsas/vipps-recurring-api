@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.4.3.
+Document version: 1.4.4
 
 ## Table of Contents
 
@@ -174,7 +174,7 @@ users, as described in
 
 Yes.
 
-Vipps now offers the possibility for merchants to as part of the payment flow in the
+Vipps offers the possibility for merchants to as part of the payment flow in the
 [Vipps eCom API v2](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
 and
 [Vipps Recurring API](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#userinfo).
