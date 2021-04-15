@@ -60,6 +60,7 @@ Document version 2.2.12.
     - [Consent](#consent)
   - [HTTP responses](#http-responses)
   - [Rate limiting](#rate-limiting)
+  - [Partner Keys](#partner-keys)
   - [Polling guidelines](#polling-guidelines)
   - [Timeouts](#timeouts)
     - [Using a phone](#using-a-phone)
@@ -941,6 +942,32 @@ what we "use to count". The limits are of course not _total_ limits.
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
 too many CreateCharge calls for the same charge. The overall limit for number of
 different payments is far higher than 2.
+
+## Partner Keys
+
+In addition to the normal [Authentication](#authentication) we offer _partner keys, which let a partner make API cals on behalf of a merchant.
+
+If you are a Vipps Partner that is managing agreements on behalf of other
+Vipps Merchants you can use your own credentials to authenticate, and then send the `Merchant-Serial-Number` to identify which of your Vipps Merchant you are acting on behalf of. The `Merchant-Serial-Number` must be sent in the header of all requests.
+
+Including the [Optional HTTP Headers](#optional-vipps-http-headers) too will make it easier to investigate problems, if anything unexpected happens. Partners may re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in the plugins headers if having different values do not make sense.
+
+Here's an example of headers (please refer to the
+[OpenAPI/Swagger specification](https://vippsas.github.io/vipps-recurring-api/)
+for all the details):
+
+```http
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <snip>
+Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a
+Merchant-Serial-Number: 123456
+Vipps-System-Name: Acme Enterprises Ecommerce DeLuxe
+Vipps-System-Version: 3.1.2
+Vipps-System-Plugin-Name: Point Of Sale Excellence
+Vipps-System-Plugin-Version: 4.5.6
+Content-Type: application/json
+```
+
+**Please note:** The Merchant Serial Number (MSN) is a unique id for the sale unit that this agreement is made for. This is a required parameter if you are a Vipps Recurring partner making agreements on behalf of a merchant. The partner must use the merchant's MSN (not the partner's MSN. This parameter is optional, and recommended, for regular Vipps merchants making agreements for themselves.
 
 ## Polling guidelines
 
