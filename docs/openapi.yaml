@@ -15,18 +15,18 @@ info:
 
     ## Authentication
 
-    See <a href="#/Access%20Controller/getAccessToken" target="_blank">Get Access Token</a>
-
-    For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication-and-authorization---api-access-token)
-  version: 2.3.0
+    See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a>
+        
+    For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
+    
+    
+  version: 2.4.0
   title: Recurring Payments Merchant API
 tags:
-  - name: Access Controller
-    description: Access Token Controller
-  - name: Agreement Controller
-    description: Agreement Token Controller
-  - name: Charge Controller
-    description: Charge Token Controller
+  - name: Authorization Service
+  - name: Agreement Endpoints
+  - name: Charge Endpoints
+  - name: Userinfo Endpoint
 paths:
   /accesstoken/get:
     post:
@@ -34,21 +34,31 @@ paths:
         - url: https://api.vipps.no
         - url: https://apitest.vipps.no
       tags:
-        - Access Controller
-      summary: Get Access Token
+        - Authorization Service
+      summary: Fetch authorization token
       operationId: getAccessToken
+      description: >-
+        The access token endpoint is used to get the JWT (JSON Web Token) that
+        must be passed in every API request in the Authorization header.
+        The access token is a base64-encoded string value that must be
+        aquired first before making any Vipps api calls.
+        The access token is valid for 1 hour in the test environment
+        and 24 hours in the production environment.
       parameters:
         - name: client_id
           in: header
           required: true
-          description: Provided Client ID
+          description: >-
+            The `client_id` is available on portal.vipps.no, under the 'Utvikler' tab.
           schema:
             type: string
           example: fb492b5e-7907-4d83-ba20-c7fb60ca35de
         - name: client_secret
           in: header
           required: true
-          description: Provided Client Secret
+          description: >-
+            The `client_secret` is available on portal.vipps.no, under the 'Utvikler' tab.
+            Keep it secret.
           schema:
             type: string
           example: Y8Kteew6GE2ZmeycEt6egg==
@@ -70,31 +80,28 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-  /v2/agreements:
+          
+  "/recurring/v2/agreements":
     get:
       tags:
-        - Agreement Controller
+        - Agreement Endpoints
       summary: List Agreements
       operationId: listAgreements
+      description: >-
+        The API call allows merchant to fetch all agreements. If no query status is supplied it will default to only retrieving active agreements.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Idempotency key
-          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            $ref: "#/components/schemas/IdempotencyKeyFormat"
         - name: status
           in: query
           required: false
-          description: Filter by status
+          description: Filter by status of the agreement.
           schema:
             $ref: "#/components/schemas/AgreementStatus"
       responses:
@@ -120,24 +127,24 @@ paths:
           $ref: "#/components/responses/TimeoutError"
     post:
       tags:
-        - Agreement Controller
+        - Agreement Endpoints
       summary: Create a new Agreement, to be confirmed in Vipps
       operationId: draftAgreement
+      description: >-
+        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used. 
+          </br>
+          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+          </br> 
+          Please note the different use cases for `initialCharge` and `compaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Idempotency key
-          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            $ref: "#/components/schemas/IdempotencyKeyFormat"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -165,16 +172,19 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-  "/v2/agreements/{agreementId}":
+  "/recurring/v2/agreements/{agreementId}":
     get:
       tags:
-        - Agreement Controller
+        - Agreement Endpoints
       summary: Fetch an Agreement
       operationId: getAgreement
+      description: >-
+        Fetch a single agreement for a user. Recomended to use when polling for status changes after sending an agreement to a user.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
@@ -203,25 +213,21 @@ paths:
           $ref: "#/components/responses/TimeoutError"
     patch:
       tags:
-        - Agreement Controller
+        - Agreement Endpoints
       summary: Update an Agreement
       operationId: updateAgreement
+      description: >-
+        Updates the agreement. Note that when updating the status to "STOPPED", you can not re-activate it. If you want to pause an agreement, we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - $ref: "#/components/parameters/AgreementId"
-        - name: Idempotency-Key
-          in: header
-          required: true
-          description: Idempotency key
-          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
-          schema:
-            $ref: "#/components/schemas/IdempotencyKeyFormat"
       requestBody:
         content:
           application/json:
@@ -249,15 +255,19 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-  "/v2/agreements/{agreementId}/charges":
+          
+  "/recurring/v2/agreements/{agreementId}/charges":
     get:
       tags:
-        - Charge Controller
+        - Charge Endpoints
       summary: List Charges
       operationId: listCharges
+      description: >-
+        Fetches all charges for a single agreement.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
@@ -266,7 +276,7 @@ paths:
         - name: chargeStatus
           in: query
           required: false
-          description: The status of the charge
+          description: Filter by status of the charge.
           schema:
             $ref: "#/components/schemas/ChargeStatus"
       responses:
@@ -292,17 +302,14 @@ paths:
           $ref: "#/components/responses/TimeoutError"
     post:
       tags:
-        - Charge Controller
+        - Charge Endpoints
       summary: Create a new charge
       operationId: createCharge
+      description: >-
+        Creates a new recurring charge *(payment)* that will charge the user on the date specified. If the payment fails, the charge will be retried based on `retryDays`.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
-        - $ref: "#/components/parameters/AgreementId"
         - name: Idempotency-Key
           in: header
           required: true
@@ -310,6 +317,12 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
       requestBody:
         content:
           application/json;charset=UTF-8:
@@ -335,16 +348,19 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-  "/v2/agreements/{agreementId}/charges/{chargeId}":
+  "/recurring/v2/agreements/{agreementId}/charges/{chargeId}":
     get:
       tags:
-        - Charge Controller
+        - Charge Endpoints
       summary: Fetch a Charge
       operationId: getCharge
+      description: >-
+        Fetch a single charge for a user. If the payment has failed you can view the failure reason here. 
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
@@ -374,19 +390,15 @@ paths:
           $ref: "#/components/responses/TimeoutError"
     delete:
       tags:
-        - Charge Controller
+        - Charge Endpoints
       summary: Cancel a Charge
       operationId: cancelCharge
+      description: >-
+        Cancels a due or reserved charge. Note if you cancels an agreement, there is no need to cancel the charges that belongs to the agreement. This will be done automatically by Vipps.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
-        - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeId"
         - name: Idempotency-Key
           in: header
           required: false
@@ -394,6 +406,13 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
       responses:
         "200":
           description: Success
@@ -414,22 +433,18 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-  "/v2/agreements/{agreementId}/charges/{chargeId}/refund":
+  "/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund":
     post:
       tags:
-        - Charge Controller
+        - Charge Endpoints
       summary: Refund a charge
       operationId: refundCharge
+      description: >-
+        Refunds a charge, can also do a partial refund (refunding a smaller part of the payment).
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
-        - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeId"
         - name: Idempotency-Key
           in: header
           required: true
@@ -437,6 +452,13 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
       requestBody:
         content:
           application/json:
@@ -460,22 +482,18 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-  "/v2/agreements/{agreementId}/charges/{chargeId}/capture":
+  "/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture":
     post:
       tags:
-        - Charge Controller
+        - Charge Endpoints
       summary: Capture a reserved charge
       operationId: captureCharge
+      description: >-
+        Captures an `initialCharge` with type `RESERVE_CAPTURE`.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
-        - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeId"
         - name: Idempotency-Key
           in: header
           required: true
@@ -483,15 +501,87 @@ paths:
           example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
           schema:
             $ref: "#/components/schemas/IdempotencyKeyFormat"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
       responses:
         "200":
           description: Success
         "400":
           $ref: "#/components/responses/BadRequestError"
+          
+  "/vipps-userinfo-api/userinfo/{sub}":
+    get:
+      tags:
+        - Userinfo Endpoint
+      summary: Get Userinfo
+      description: >-
+        This endpoint returns the payload with the information that the user has consented to share. Find more info on the `/userinfo` endpoint at the OIDC Standard https://openid.net/specs/openid-connect-core-1_0.html#UserInfo
+      operationId: getUserinfo
+      parameters:
+        - name: sub
+          in: path
+          description: The `sub` is specified when fetching the agreement
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Authorization
+          description: >-
+            The access token is a base64-encoded string that is required for all API calls.
+            It is a JWT (JSON Web Token).
+            The access token is fetched from the `POST:/accesstoken/get` endpoint.
+            It is valid for 1 hour in the test environment and 24 hours in the production environment.
+          required: true
+          schema:
+            type: string
+          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni..."
+      responses:
+        "200":
+          description: Get Userinfo
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/Userinfo"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/UserinfoError"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/UserinfoError"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/UserinfoError"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/UserinfoError"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: "#/components/schemas/UserinfoError"
+                
 servers:
-  - url: https://api.vipps.no/recurring
+  - url: https://api.vipps.no
     description: Production environment
-  - url: https://apitest.vipps.no/recurring
+  - url: https://apitest.vipps.no
     description: Merchant Test environment
 components:
   parameters:
@@ -532,6 +622,20 @@ components:
       required: true
       schema:
         type: string
+    Merchant-Serial-Number:
+      name: Merchant-Serial-Number
+      in: header
+      description: >-
+        The Merchant Serial Number (MSN) is a unique id for the sale unit
+        that this payment is made for.
+        This is a required parameter if you are a Vipps Recurring partner
+        making payments on behalf of a merchant.
+        The partner must use the merchant's MSN (not the partner's MSN).
+        This parameter is optional, and recommended, for regular Vipps
+        merchants making payments for themselves.
+      schema:
+        type: string
+      example: 123456
     Vipps-System-Name:
       name: Vipps-System-Name
       in: header
@@ -601,6 +705,7 @@ components:
       description: Timeout
     RateLimitError: #429
       description: Too Many Requests
+      
   schemas:
     AgreementRequest:
       type: object
@@ -701,12 +806,12 @@ components:
     Agreement:
       type: object
       required:
-        - interval
-        - intervalCount
-        - price
-        - productDescription
-        - productName
-        - status
+          - interval
+          - intervalCount
+          - price
+          - productDescription
+          - productName
+          - status
       properties:
         campaign:
           $ref: "#/components/schemas/Campaign"
@@ -749,13 +854,13 @@ components:
         start:
           type: string
           format: date-time
-          description: Date when agreement was started.
-          example: 2019-01-01T00:00:00Z
+          description: Date when agreement was started in ISO 8601 format.
+          example: "2019-01-01T00:00:00Z"
         stop:
           type: string
           format: date-time
-          description: Date when agreement was stopped.
-          example: 2019-12-31T00:00:00Z
+          description: Date when agreement was stopped in ISO 8601 format.
+          example: "null"
         status:
           $ref: "#/components/schemas/AgreementStatus"
         sub:
@@ -768,6 +873,12 @@ components:
           format: uri
           description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags agreement if payments fail in a way that implies that the users payment source needs to be updated.
+          example: ["payment-source-issue"]
 
     AgreementReference:
       type: object
@@ -829,8 +940,8 @@ components:
         end:
           type: string
           format: date-time
-          description: The date and time the campaign ends. Needs to be UTC
-          example: 2019-06-01T00:00:00Z
+          description: The date and time the campaign ends in ISO 8601 format. Needs to be UTC
+          example: "2019-06-01T00:00:00Z"
     Campaign:
       allOf:
         - $ref: "#/components/schemas/CampaignRequest"
@@ -841,8 +952,8 @@ components:
             start:
               type: string
               format: date-time
-              description: The date and time the campaign starts. Needs to be UTC
-              example: 2019-06-01T00:00:00Z
+              description: The date and time the campaign starts in ISO 8601 format. Needs to be UTC.
+              example: "2019-06-01T00:00:00Z"
     InitialCharge:
       type: object
       required:
@@ -902,7 +1013,7 @@ components:
           description: YYYY-MM-DD. Each specific charge on an agreement must
             be scheduled by the merchant, a minimum of two days before the
             payment will occur (it is minimum one day in the test environment).
-          example: 2030-12-31
+          example: "2030-12-31"
         retryDays:
           type: integer
           format: int32
@@ -963,7 +1074,7 @@ components:
           type: string
           format: date-time
           description: The due date for this charge
-          example: 2019-06-01T00:00:00Z
+          example: "2019-06-01T00:00:00Z"
         id:
           type: string
           description: Identifier for this charge (for this customer's subscription).
@@ -1015,19 +1126,6 @@ components:
         contextId:
           type: string
           example: 0b7a2d85-8233-4a0f-867b-fa77a8cdf8de
-    HealthCheckStatus:
-      type: object
-      required:
-        - application
-        - cosmosDb
-        - paymentDb
-      properties:
-        application:
-          type: boolean
-        cosmosDb:
-          type: boolean
-        paymentDb:
-          type: boolean
     RefundRequest:
       type: object
       required:
@@ -1052,6 +1150,7 @@ components:
     AgreementStatus:
       type: string
       description: Status of the agreement.
+      default: ACTIVE
       example: ACTIVE
       enum:
         - PENDING
@@ -1060,7 +1159,6 @@ components:
         - EXPIRED
     ChargeStatus:
       type: string
-      default: PENDING
       example: PENDING
       enum:
         - PENDING
@@ -1134,4 +1232,141 @@ components:
           example: 00000003-0000-0000-d000-000000000000
         access_token:
           type: string
-          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK..."
+    Userinfo:
+      type: object
+      properties:
+        accounts:
+          description: 'Contains an array with the end user''s accounts registered in the Vipps app'
+          type: array
+          items:
+            $ref: '#/components/schemas/UserinfoAccountInfo'
+        address:
+          description: 'Contains the end user''s preferred addresses.'
+          items:
+            $ref: '#/components/schemas/UserinfoAddress'
+        other_addresses:
+          description: 'Contains an array with the end user''s none default addresses, if any. This list can contain an address with the address_type home, work, and/or other, if the user has registered them in the Vipps app'
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        birthdate:
+          description: 'End-User''s birthday formatted as YYYY-MM-DD'
+          type: string
+          example: '2000-12-31'
+        email:
+          description: 'End user''s email address.'
+          type: string
+        email_verified:
+          description: 'Boolean value if the End user''s email address is verified.'
+          type: boolean
+        family_name:
+          description: 'Surname(s) or last name(s) of the end user.'
+          type: string
+        given_name:
+          description: 'Given name(s) or first name(s) of the end user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.'
+          type: string
+        name:
+          description: 'End user''s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User''s locale and preferences.'
+          type: string
+        nin:
+          description: 'National identity number'
+          type: string
+          example: '09057517287'
+          pattern: '^\d{11}$'
+        phone_number:
+          description: 'End-User''s telephone number on MSISDN format, up to 15 digits.'
+          type: string
+          example: '47912345678'
+          pattern: '^\d{15}$'
+        sid:
+          description: 'Session identifier - This represents a Session of a User Agent or device. Currently not in use'
+          type: string
+          example: '7d78a726-af92-499e-b857-de263ef9a969'
+        sub:
+          description: 'Subject - Identifier for the end user'
+          type: string
+          example: 'c06c4afe-d9e1-4c5d-939a-177d752a0944'
+    UserinfoAccountInfo:
+      type: object
+      properties:
+        account_name:
+          description: "User''s defined name for account"
+          type: string
+        account_number:
+          description: "User''s account number"
+          type: string
+        bank_name:
+          description: "Bank connected to the account number"
+          type: string
+    UserinfoAddress:
+      type: object
+      properties:
+        address_type:
+          description: 'Address type is either home, work or other'
+          type: string
+        country:
+          description: 'Two letter country code'
+          type: string
+        default:
+          description: 'If this is default address'
+          type: boolean
+        formatted:
+          description: 'End user address as a formatted string'
+          type: string
+        postal_code:
+          description: 'Postal code'
+          type: string
+        region:
+          description: 'End user region'
+          type: string
+        street_address:
+          description: 'End user street address'
+          type: string
+    Address:
+      type: object
+      required:
+        - addressLine1
+        - city
+        - country
+        - postCode
+      properties:
+        addressLine1:
+          type: string
+          description: Address Line 1
+          example: Robert Levins gate 5
+        addressLine2:
+          type: string
+          description: Address Line 2
+          example: 'Att: Rune Garborg'
+        city:
+          type: string
+          description: City
+          example: Oslo
+        country:
+          type: string
+          description: 'Country'
+          example: 'Norway'
+          enum:
+            - Norway
+        postCode:
+          type: string
+          description: Post Code
+          example: '0154'
+    UserinfoError:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+        extraInfo:
+          type: object
+          additionalProperties:
+            type: object
