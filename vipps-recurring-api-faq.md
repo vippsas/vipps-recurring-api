@@ -174,8 +174,7 @@ users, as described in
 
 Yes.
 
-Vipps offers the possibility for merchants to as part of the payment flow in the
-[Vipps eCom API v2](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
+Vipps offers the possibility for merchants to as part of the payment flow to request the user's information. For example if you wish to retrieve the user's email as part of a User profile setup. This is supported in both [Vipps eCom API v2](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
 and
 [Vipps Recurring API](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#userinfo).
 
