@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.11.
+Document version 2.2.12.
 
 ## Table of Contents
 
@@ -514,7 +514,7 @@ history, including in settlement files.
 This `orderId` must be unique across all Recurring and eCom
 transactions for the given `merchantSerialNumber`.
 See
-[orderId recommendations](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#orderid-recommendations).
+[orderId recommendations](#orderid-recommendations).
 
 If the field is not given a
 unique id will be generated in the form `chr_xxxxxxx` (where each x is an alphanumeric
@@ -1070,7 +1070,7 @@ Example for demonstration purposes that should be handled.
 
 ### When to use campaigns or initial charge
 
-Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilising the normal agreements, initial charges, campaigns, or a combination of those. 
+Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilising the normal agreements, initial charges, campaigns, or a combination of those.
 
 This can be a bit confusing when deciding on which implementation to go for.
 In short our advice is to implement support for all our flows, and also implement features in your own systems for moving between the flows depending on the use case.
