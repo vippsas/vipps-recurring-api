@@ -946,15 +946,15 @@ different payments is far higher than 2.
 ## Partner keys
 
 In addition to the normal [Authentication](#authentication) we offer _partner keys_,
-which let a partner make API cals on behalf of a merchant.
+which let a partner make API calls on behalf of a merchant.
 
-If you are a Vipps Partner that is managing agreements on behalf of other
-Vipps Merchants you can use your own credentials to authenticate, and then send
-the `Merchant-Serial-Number` header to identify which of your Vipps Merchant you
+If you are a Vipps partner managing agreements on behalf of Vipps merchants you
+can use your own API credentials to authenticate, and then send
+the `Merchant-Serial-Number` header to identify which of your merchants you
 are acting on behalf of. The `Merchant-Serial-Number` must be sent in the header
-of all requests.
+of all API requests.
 
-Including the [Optional HTTP Headers](#optional-vipps-http-headers) too will make
+By including the [Optional HTTP Headers](#optional-vipps-http-headers) you will make
 it easier to investigate problems, if anything unexpected happens. Partners may
 re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
@@ -976,9 +976,9 @@ Content-Type: application/json
 
 **Please note:** The Merchant Serial Number (MSN) is a unique id for the sale
 unit that this agreement is made for. This is a required parameter if you are a
-Vipps Recurring partner making agreements on behalf of a merchant. The partner
-must use the merchant's MSN (not the partner's MSN. This parameter is optional,
-and recommended, for regular Vipps merchants making agreements for themselves.
+Vipps partner making API requests on behalf of a merchant. The partner
+must use the _merchant's_ MSN, not the partner's MSN. This parameter is optional,
+and recommended, for regular Vipps merchants making API calls for themselves.
 
 ## Polling guidelines
 
