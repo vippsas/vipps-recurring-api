@@ -45,7 +45,7 @@ Document version 2.3.1.
     - [Charge descriptions](#charge-descriptions)
     - [Charge times](#charge-times)
     - [Charge retries](#charge-retries)
-    - [Retrieve a charge](#retrieve-a charge)
+    - [Retrieve a charge](#retrieve-a-charge)
   - [Manage charges and agreements](#manage-charges-and-agreements)
     - [Agreement states](#agreement-states)
     - [Update an agreement](#update-an-agreement)
