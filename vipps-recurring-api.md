@@ -66,8 +66,8 @@ Document version 2.2.12.
     - [Using a phone](#using-a-phone)
     - [Using a laptop/desktop](#using-a-laptopdesktop)
   - [Authentication and authorization](#authentication-and-authorization)
-  - [Recomendations regarding handling redirects](#recomendations-regarding-handling-redirects)
-  - [When to use campaigns or initial charge (#when to use campaigns or initial charge)
+  - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
+  - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
   - [Questions?](#questions)
 
 ## Terminology
@@ -1021,7 +1021,7 @@ in the
 [Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 for more information.
 
-## Recomendations regarding handling redirects
+## Recommendations regarding handling redirects
 
 Since Vipps is a mobile entity the amount of control Vipps have over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
 
