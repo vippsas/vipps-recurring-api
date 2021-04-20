@@ -945,12 +945,19 @@ different payments is far higher than 2.
 
 ## Partner keys
 
-In addition to the normal [Authentication](#authentication) we offer _partner keys, which let a partner make API cals on behalf of a merchant.
+In addition to the normal [Authentication](#authentication) we offer _partner keys_,
+which let a partner make API cals on behalf of a merchant.
 
 If you are a Vipps Partner that is managing agreements on behalf of other
-Vipps Merchants you can use your own credentials to authenticate, and then send the `Merchant-Serial-Number` to identify which of your Vipps Merchant you are acting on behalf of. The `Merchant-Serial-Number` must be sent in the header of all requests.
+Vipps Merchants you can use your own credentials to authenticate, and then send
+the `Merchant-Serial-Number` header to identify which of your Vipps Merchant you
+are acting on behalf of. The `Merchant-Serial-Number` must be sent in the header
+of all requests.
 
-Including the [Optional HTTP Headers](#optional-vipps-http-headers) too will make it easier to investigate problems, if anything unexpected happens. Partners may re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in the plugins headers if having different values do not make sense.
+Including the [Optional HTTP Headers](#optional-vipps-http-headers) too will make
+it easier to investigate problems, if anything unexpected happens. Partners may
+re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
+the plugins headers if having different values do not make sense.
 
 Here's an example of headers (please refer to the
 [OpenAPI/Swagger specification](https://vippsas.github.io/vipps-recurring-api/)
@@ -967,7 +974,11 @@ Vipps-System-Plugin-Version: 4.5.6
 Content-Type: application/json
 ```
 
-**Please note:** The Merchant Serial Number (MSN) is a unique id for the sale unit that this agreement is made for. This is a required parameter if you are a Vipps Recurring partner making agreements on behalf of a merchant. The partner must use the merchant's MSN (not the partner's MSN. This parameter is optional, and recommended, for regular Vipps merchants making agreements for themselves.
+**Please note:** The Merchant Serial Number (MSN) is a unique id for the sale
+unit that this agreement is made for. This is a required parameter if you are a
+Vipps Recurring partner making agreements on behalf of a merchant. The partner
+must use the merchant's MSN (not the partner's MSN. This parameter is optional,
+and recommended, for regular Vipps merchants making agreements for themselves.
 
 ## Polling guidelines
 
