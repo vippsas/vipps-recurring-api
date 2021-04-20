@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.12.
+Document version 2.2.13.
 
 ## Table of Contents
 
@@ -60,7 +60,7 @@ Document version 2.2.12.
     - [Consent](#consent)
   - [HTTP responses](#http-responses)
   - [Rate limiting](#rate-limiting)
-  - [Partner Keys](#partner-keys)
+  - [Partner keys](#partner-keys)
   - [Polling guidelines](#polling-guidelines)
   - [Timeouts](#timeouts)
     - [Using a phone](#using-a-phone)
@@ -703,8 +703,8 @@ Here is a list of possible values for `failureReason`, their respective descript
 
 ## Userinfo
 
-Vipps offers the possibility for merchants to ask for the user's profile information as part of the payment flow. 
-This is done through Vipps Userinfo which 
+Vipps offers the possibility for merchants to ask for the user's profile information as part of the payment flow.
+This is done through Vipps Userinfo which
 You can learn more at the [OIDC Standard](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
 To enable the posibility to fetch profile information for a user the merchant can add a `scope`
@@ -943,7 +943,7 @@ CreateCharge calls per minute per unique agreementId and chargeId. This is to pr
 too many CreateCharge calls for the same charge. The overall limit for number of
 different payments is far higher than 2.
 
-## Partner Keys
+## Partner keys
 
 In addition to the normal [Authentication](#authentication) we offer _partner keys, which let a partner make API cals on behalf of a merchant.
 
