@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.2.14.
+Document version 2.3.0.
 
 ## Table of Contents
 
@@ -45,6 +45,7 @@ Document version 2.2.14.
     - [Charge descriptions](#charge-descriptions)
     - [Charge times](#charge-times)
     - [Charge retries](#charge-retries)
+    - [Retrieve a charge](#retrieve-a charge)
   - [Manage charges and agreements](#manage-charges-and-agreements)
     - [Agreement states](#agreement-states)
     - [Update an agreement](#update-an-agreement)
@@ -585,6 +586,28 @@ might have status `FAILED`, also after the first attempt on the first and only d
 
 If a charge fails, you will get information about the reason:
 [Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons).
+
+### Retrieve a charge
+
+A charge can be retrieved with
+[`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge).
+
+Example response:
+
+```
+{
+  "amount": 39900,
+  "amountRefunded": 39900,
+  "description": "Premier League subscription: September",
+  "due": "2019-06-01T00:00:00Z",
+  "id": "chg_WCVbcAbRCmu2zk",
+  "status": "PENDING",
+  "transactionId": "5001419121",
+  "type": "RECURRING",
+  "failureReason": "insufficient_funds",
+  "failureDescription": "Payment was declined by the payer bank due to lack of funds"
+}
+```
 
 ## Manage charges and agreements
 
