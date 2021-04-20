@@ -66,6 +66,7 @@ Document version 2.2.12.
     - [Using a laptop/desktop](#using-a-laptopdesktop)
   - [Authentication and authorization](#authentication-and-authorization)
   - [Recomendations regarding handling redirects](#recomendations-regarding-handling-redirects)
+  - [When to use campaigns or initial charge (#when to use campaigns or initial charge)
   - [Questions?](#questions)
 
 ## Terminology
@@ -1068,7 +1069,7 @@ Example for demonstration purposes that should be handled.
 - The OS defaults to a Safari Browser for the redirect.
 - The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
 
-### When to use campaigns or initial charge
+## When to use campaigns or initial charge
 
 Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilising the normal agreements, initial charges, campaigns, or a combination of those.
 
@@ -1077,15 +1078,19 @@ In short our advice is to implement support for all our flows, and also implemen
 
 First a short description on the flows.
 
-## Normal agreement
+### Normal agreement
+
 ![flow_Normal_agreement](images/flow-Normal-agreement.png)
+
 In the normal agreement, the user gets presented with the agreement, agrees to that, and gets sent to a confirmation screen.
 On the agreement we present start date, intervall, the price of the agreements, as well as `productName` and `productDescription`, the latter of which can be used to describe the agreement to the user and can be defined by the merchant.
 
 This is the preferred flow whenever there is no campaigns or similar present.
 
-## Initial charge
+### Initial charge
+
 ![flow_Initial_charge](images/flow-Initial-charge.png)
+
 When an initial charge is present, the flow in Vipps will change. First the user gets presented with an overview over both the agreement as well as the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
 
 Here we also show `productName` and `productDescription` on the agreement, as well as `description` on the initial charge. All of which are defined by the merchant.
@@ -1095,15 +1100,19 @@ Initial charges are designed to be used whenever there is an additional cost in 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, as well as having to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be payed upon entering the agreement. If used for campaigns, be sure to have good descriptions in `productName` and `productDescription` on the agreement, as well as `description` on the initial charge.
 
 
-## Campaign
+### Campaign
+
 ![flow_Campaign](images/flow-Campaign.png)
+
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. Here as well you have options of setting `productName` and `productDescription` to even further explain to the user.
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain intervall or time, before it switches over to ordinary price.
 
 
-## Initial charge and campaign
+### Initial charge and campaign
+
 ![flow_initial_charge_campaign](images/flow-Initial-charge-and-campaign.png)
+
 In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
 Ideally this flow is intended for when you have a combination of an additional cost when setting up the agreement, presented as the initial charge, as well as having a limited time offer on the actual subscription.
