@@ -16,10 +16,10 @@ info:
     ## Authentication
 
     See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a>
-        
+
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
-    
-    
+
+
   version: 2.4.0
   title: Recurring Payments Merchant API
 tags:
@@ -80,7 +80,7 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-          
+
   "/recurring/v2/agreements":
     get:
       tags:
@@ -131,10 +131,10 @@ paths:
       summary: Create a new Agreement, to be confirmed in Vipps
       operationId: draftAgreement
       description: >-
-        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used. 
+        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
           </br>
           If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
-          </br> 
+          </br>
           Please note the different use cases for `initialCharge` and `compaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -255,7 +255,7 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
-          
+
   "/recurring/v2/agreements/{agreementId}/charges":
     get:
       tags:
@@ -355,7 +355,7 @@ paths:
       summary: Fetch a Charge
       operationId: getCharge
       description: >-
-        Fetch a single charge for a user. If the payment has failed you can view the failure reason here. 
+        Fetch a single charge for a user. If the payment has failed you can view the failure reason here.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
@@ -513,7 +513,7 @@ paths:
           description: Success
         "400":
           $ref: "#/components/responses/BadRequestError"
-          
+
   "/vipps-userinfo-api/userinfo/{sub}":
     get:
       tags:
@@ -577,7 +577,7 @@ paths:
             application/json;charset=UTF-8:
               schema:
                 $ref: "#/components/schemas/UserinfoError"
-                
+
 servers:
   - url: https://api.vipps.no
     description: Production environment
@@ -705,7 +705,7 @@ components:
       description: Timeout
     RateLimitError: #429
       description: Too Many Requests
-      
+
   schemas:
     AgreementRequest:
       type: object
@@ -1253,21 +1253,26 @@ components:
         birthdate:
           description: 'End-User''s birthday formatted as YYYY-MM-DD'
           type: string
-          example: '2000-12-31'
+          example: '1985-12-31'
         email:
           description: 'End user''s email address.'
+          example: 'user@example.com'
           type: string
         email_verified:
           description: 'Boolean value if the End user''s email address is verified.'
+          example: true
           type: boolean
         family_name:
           description: 'Surname(s) or last name(s) of the end user.'
+          example: 'Garborg'
           type: string
         given_name:
           description: 'Given name(s) or first name(s) of the end user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.'
+          example: 'Rune'
           type: string
         name:
           description: 'End user''s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User''s locale and preferences.'
+          example: 'Rune Garborg'
           type: string
         nin:
           description: 'National identity number'
