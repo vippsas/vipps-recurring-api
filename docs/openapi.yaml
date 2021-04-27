@@ -668,7 +668,6 @@ components:
       in: header
       name: Content-Type
       description: "The content type must be `application/json`"
-      required: true
       schema:
         type: string
       example: application/json
