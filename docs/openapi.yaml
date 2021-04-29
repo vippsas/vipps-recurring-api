@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.4.0
+  version: 2.4.1
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -776,7 +776,7 @@ components:
           example: Access to all games of English top football
         scope:
           type: string
-          description: Space separated list of the user profile-data scopes to require for the agreement.
+          description: Space separated list of the user profile-data scope to require for the agreement.
           example: address name email birthDate phoneNumber
     AgreementUpdate:
       type: object
