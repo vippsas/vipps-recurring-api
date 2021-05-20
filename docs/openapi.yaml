@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.4.1
+  version: 2.4.2
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -750,7 +750,8 @@ components:
           type: string
           description: URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users logg inn with Vipps, not with username and password.
+            We recommend letting users log in with Vipps, not with username and password.
+            We do not have any specific rewuirements for the security of the page.
           example: https://www.example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string

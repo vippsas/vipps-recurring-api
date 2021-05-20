@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.3.2.
+Document version 2.3.3.
 
 ## Table of Contents
 
@@ -276,7 +276,9 @@ actively check the payment with
 [`GET:/v2/agreements/{agreementId}](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
-can log in and manage the agreement. We strongly recommend to use
+can log in and manage the agreement.
+We do not have any specific rewuirements for the security of the page, but
+we strongly recommend to use
 [Vipps Logg Inn](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not have to use a username and password, but is logged
 in automatically through Vipps. See the
