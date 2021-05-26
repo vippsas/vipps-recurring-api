@@ -600,7 +600,7 @@ components:
       description: The charge identifier (id)
       schema:
         type: string
-      example: chr_123abc456
+      example: chr-123abc456
     Ocp-Apim-Subscription-Key:
       in: header
       name: Ocp-Apim-Subscription-Key
@@ -911,8 +911,8 @@ components:
           type: string
           description: The Id of the initialCharge if given, otherwise `null`.
             If an `orderId` is specified this is used as the `chargeId` otherwise it is auto generated.
-          example: chr_123abc456
-          pattern: '^[a-zA-Z0-9-]{1,40}$'
+          example: chr-123abc456
+          pattern: '^[a-zA-Z0-9-]{1,50}$'
     AgreementUpdateReference:
       type: object
       required:
@@ -982,8 +982,8 @@ components:
           type: string
           description: Optional orderId, will be auto generated if not provided
           example: acmeshop123order123abc
-          maxLength: 40
-          pattern: '^[a-zA-Z0-9]{1,40}$'
+          maxLength: 50
+          pattern: '^[a-zA-Z0-9-]{1,50}$'
       description: An initial charge for a new agreement. The charge will be executed
         immediately when the user approves the agreement.
     ChargeRequest:
@@ -1028,8 +1028,8 @@ components:
           type: string
           description: Optional orderId, will be auto generated if not provided
           example: acmeshop123order123abc
-          maxLength: 40
-          pattern: '^[a-zA-Z0-9]{1,40}$'
+          maxLength: 50
+          pattern: '^[a-zA-Z0-9-]{1,50}$'
     ChargeReference:
       type: object
       required:
@@ -1038,7 +1038,7 @@ components:
         chargeId:
           type: string
           description: ID of the created charge
-          example: chr_123abc456
+          example: chr-123abc456
     Charge:
       type: object
       required:
