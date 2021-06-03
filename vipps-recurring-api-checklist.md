@@ -2,7 +2,7 @@
 
 API version: 2.0
 
-Document version 1.1.2”
+Document version 1.2.0.
 
 For examples of requests and responses, see the Postman collection in [tools](tools/)
 
@@ -29,18 +29,19 @@ For examples of requests and responses, see the Postman collection in [tools](to
 2. Vipps completes customer control (KYC, PEP, AML, etc).
 3. The merchant receives an email from Vipps saying that they can log in with bankID on [portal.vipps.no](https://portal.vipps.no) and retrieve API keys.
 4. The merchant completes all checklist items.
-5. The merchant [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with test IDs for agreeement(`agreementId`) and charges (`chargeId`) in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt), showing that all checklist items have been fulfilled.
+5. The merchant [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with the MSN to check.
+   Vipps will check agreements and charges in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt), showing that all checklist items have been fulfilled:
     - A complete Agreement ending in `ACTIVE`.
     - A complete Agreement ending in `STOPPED`.
     - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
     - A complete `"type":"RECURRING"` Charge ending in  `REFUNDED`.
-6. The merchant receives an email from Vipps saying that the orders are OK.
-7. The recurring functionality is activated in production.
-8. The Merchant [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) to verify the integration in the production environment:
-    - A complete Agreement ending in `ACTIVE`.
-    - A complete Agreement ending in `STOPPED`.
-    - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
-    - A complete `"type":"RECURRING"` Charge ending in  `REFUNDED`.
+6. The merchant receives an email from Vipps saying that the MSN is OK.
+7. The recurring merchant starts using the MSN and API keys for the production environment.
+8. The merchant verifies that what worked in the test environment also work in the production environment.
+   **Please note:** Vipps does not do any kind of activation or make any changes based on this checklist.
+   The API keys for the production environment are made available on
+   [portal.vipps.no](https://portal.vipps.no)
+   as soon as the customer control (see step 2) is completed, independently of this checklist.
 9. The Merchant goes live 🎉
 
 ## Questions?
