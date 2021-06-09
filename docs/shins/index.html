@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.4.2</title>
+    <title>Recurring Payments Merchant API v2.5.0</title>
 
     <style>
     </style>
@@ -2471,7 +2471,7 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
     <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
     <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
-    <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-string">&quot;null&quot;</span>,
+    <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
     <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
     <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
@@ -3816,7 +3816,7 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
   <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
-  <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-string">&quot;null&quot;</span>,
+  <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
   <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
   <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
@@ -4379,7 +4379,7 @@ System.out.println(response.toString());
 <p>Example responses</p>
 </blockquote>
 <blockquote>
-<p>201 Response</p>
+<p>200 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;agreementId&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>
@@ -4397,8 +4397,8 @@ System.out.println(response.toString());
 </thead>
 <tbody>
 <tr>
-<td>201</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>OK</td>
 <td><a href="#schemaagreementupdatereference">AgreementUpdateReference</a></td>
 </tr>
@@ -4888,6 +4888,12 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>Item does not exist (and never has)</td>
 <td>None</td>
 </tr>
 <tr>
@@ -5562,6 +5568,12 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>Item does not exist (and never has)</td>
 <td>None</td>
 </tr>
 <tr>
@@ -7387,6 +7399,12 @@ System.out.println(response.toString());
 <td>Invalid request, check your parameters</td>
 <td>Inline</td>
 </tr>
+<tr>
+<td>404</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
+<td>Item does not exist (and never has)</td>
+<td>None</td>
+</tr>
 </tbody>
 </table>
 <h3 id="capture-a-reserved-charge-responseschema">Response Schema</h3>
@@ -7914,7 +7932,7 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
   <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
-  <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-string">&quot;null&quot;</span>,
+  <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
   <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
   <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
