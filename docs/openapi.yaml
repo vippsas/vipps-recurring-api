@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.4.2
+  version: 2.5.0
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -235,7 +235,7 @@ paths:
               $ref: "#/components/schemas/AgreementUpdate"
         required: true
       responses:
-        "201":
+        "200":
           description: OK
           content:
             application/json;charset=UTF-8:
@@ -292,6 +292,8 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
         "429":
           $ref: "#/components/responses/RateLimitError"
         "500":
@@ -340,6 +342,8 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
         "429":
           $ref: "#/components/responses/RateLimitError"
         "500":
@@ -513,6 +517,8 @@ paths:
           description: Success
         "400":
           $ref: "#/components/responses/BadRequestError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
 
   "/vipps-userinfo-api/userinfo/{sub}":
     get:
@@ -860,7 +866,7 @@ components:
           type: string
           format: date-time
           description: Date when agreement was stopped in ISO 8601 format.
-          example: "null"
+          example: null
         status:
           $ref: "#/components/schemas/AgreementStatus"
         sub:
