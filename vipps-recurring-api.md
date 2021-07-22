@@ -567,9 +567,10 @@ a description with follow format `{agreement.ProductName} - {charge.description}
 
 ### Charge times
 
-Charge _attempts_ are made two times during the day: 08:00 and 16:00 UTC.
+Charge _attempts_ are primarily made two times during the day: 08:00 and 16:00 UTC in winter, and 07:00 and 15:00 UTC in summer.
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
+**Note:** Payments _might_ get processed any time during the day (07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
 
 ### Charge retries
 
