@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.3.3.
+Document version 2.3.4.
 
 ## Table of Contents
 
@@ -59,6 +59,13 @@ Document version 2.3.3.
     - [Example calls](#example-calls)
     - [Userinfo call](#userinfo-call)
     - [Consent](#consent)
+  - [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)
+    - [How it works](#how-it-works)
+      - [Create agreement](#create-agreement)
+      - [Get agreement](#get-agreement)
+      - [Change suggestedMaxAmount](#change-suggestedmaxamount)
+      - [Create charge](#create-charge)
+      - [Charge amount higher than the users max amount](#charge-amount-higher-than-the-users-max-amount)
   - [HTTP responses](#http-responses)
   - [Rate limiting](#rate-limiting)
   - [Partner keys](#partner-keys)
@@ -69,6 +76,10 @@ Document version 2.3.3.
   - [Authentication and authorization](#authentication-and-authorization)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
   - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
+    - [Normal agreement](#normal-agreement)
+    - [Initial charge](#initial-charge-1)
+    - [Campaign](#campaign)
+    - [Initial charge and campaign](#initial-charge-and-campaign)
   - [Questions?](#questions)
 
 ## Terminology
@@ -263,6 +274,8 @@ This code illustrates how to create an agreement:
 }
 ```
 
+**Note:** To create agreements with support for variable amounts on charges, see [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).
+
 The `merchantAgreementUrl` is a link to a "My page", where the customer
 can manage the agreement: Change,  an, cancel, etc.
 Vipps does not offer any form of agreement management, as this may be
@@ -394,7 +407,7 @@ when subscribing to an agreement.
 This example shows the same agreement as above, with an `initialCharge`
 of 499 NOK:
 
-```
+```json
 {
   "currency": "NOK",
   "customerPhoneNumber":"90000000",
@@ -424,6 +437,7 @@ Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial c
   "description": "Phone"
 },
 ```
+
 A reserved charge can be captured with
 [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
 when the product is shipped.
@@ -457,7 +471,6 @@ date-time is used. All dates must be in date-time format as according to
 | `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
 | `end`            | End date of campaign offer, can not be in the past |
 | `campaignPrice`       | The price that will be shown for comparison   |
-
 
 ### Retrieve an agreement
 
@@ -553,6 +566,7 @@ history. In the payment history a charge from Vipps recurring payment will have
 a description with follow format `{agreement.ProductName} - {charge.description}`.
 
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge)
+
 ```json
 {
   "amount": 49900,
@@ -593,7 +607,7 @@ A charge can be retrieved with
 
 Example response:
 
-```
+```json
 {
   "amount": 39900,
   "amountRefunded": 39900,
@@ -721,6 +735,7 @@ Here is a list of possible values for `failureReason`, their respective descript
 | invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
 | verification_required | Payment declined because the issuing bank requires verification. | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue. |
 | invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. |
+| charge_amount_too_high | Amount is higher than the users specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
 | internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
 
 ## Userinfo
@@ -917,6 +932,146 @@ session. If a user chooses to reject the terms the agreement will not be
 activated. Unless the whole flow is completed, this will be handled as a
 failed agreement by the Recurring API.
 
+## Recurring agreements with variable amount
+
+Recurring with variable amounts offer merchants a way to charge users a different amount each interval, based on the users specified max amount.
+
+Instead of setting a price when drafting a new agreement, the new `suggestedMaxAmount` field is set to what the maximum price could be each interval.
+The user chooses a max amount themself when accepting the agreement, but it's recomended to choose the same amount as `suggestedMaxAmount`. The max amount can at any time be changed by the user. What the user has picked as their max amount will be available in the `GET agreement` response.
+
+### How it works
+
+#### Create agreement
+
+Create an agreement and specify that it's with `variableAmount` and set a `suggestedMaxAmount` (in øre).
+
+Create agreement request:
+
+```json
+{
+  "variableAmount": {
+    "suggestedMaxAmount": 200000
+  },
+  "currency": "NOK",
+  "interval": "MONTH",
+  "intervalCount": 1,
+  "isApp": false,
+  "merchantRedirectUrl": "https://example.com/confirmation",
+  "merchantAgreementUrl": "https://example.com/my-customer-agreement",
+  "customerPhoneNumber": "90000000",
+  "productDescription": "Access to subscription",
+  "productName": "Power company A"
+}
+```
+
+**Note:** There is no need to supply the agreement with a `price` field, this will be ignored since the user picks the allowed max amount themself.
+
+**Restrictions when using variable amount:**
+
+- There is currently a limit of 5 000 NOK for the `suggestedMaxAmount`.
+- `Campaign` can not be used when the agreement has `variableAmount`.
+
+#### Get agreement
+
+Retrieving the agreement shows the `maxAmount` that was picked by the user.
+
+GET agreement response:
+
+```json
+{
+    "id": "agr_Yv2zYk3",
+    "start": "2021-06-18T19:56:22Z",
+    "stop": null,
+    "status": "ACTIVE",
+    "productName": "Power company A",
+    "price": 0,
+    "productDescription": "Access to subscription",
+    "interval": "MONTH",
+    "intervalCount": 1,
+    "currency": "NOK",
+    "campaign": null,
+    "sub": null,
+    "userinfoUrl": null,
+    "tags": [],
+    "variableAmount": {
+        "suggestedMaxAmount": 200000,
+        "maxAmount": 180000
+    }
+}
+```
+
+#### Change suggestedMaxAmount
+
+It's possible to change the suggestedMaxAmount on the agreement by calling the update agreement endpoint with the PATCH request below.
+
+```json
+{
+    "suggestedMaxAmount": 300000
+}
+```
+
+**Note:** The user will not be allerted by this change by Vipps.
+
+#### Create charge
+
+There are changes in how the interval and amount calculation works for agreements with `variable amount`. The amount of the charge/charges in the interval can not be higher than either the `suggestedMaxAmount` or `maxAmount` field, based on whichever is highest.
+
+Changes in how interval works:
+
+**Yearly:**
+
+Can be charged once a year, regardless of the day in the year.
+
+Example:
+
+- First charge can be 02.06.2022
+- Second could be any date in 2023, for example 01.01.2023
+
+**Monthly:**
+
+Can be charged once a calender month, regardless of the day in the month.
+
+Example:
+
+- First charge can be 03.03.2022
+- Second could be any day the next month, for example 04.20.2022
+
+**Weekly:**
+
+Can be charged once a week, regardless of the day in the week.
+
+Example:
+
+- First charge can be on a Wednesday
+- Second charge could be on a Monday the next week
+
+**Daily:**
+
+Once a day, same as without variable amount.
+
+**Note:** In the examples above the `intervalCount` is 1. This can be changed as described in the [Intervals](#intervals) section.
+
+#### Charge amount higher than the users max amount
+
+If the created charge is above the users `max amount`, the charge will be set to `DUE` with a `failureReason`. If the user does not update their maxAmount to the same or a higher amount than the charge, it will fail when `dueDate` + `retryDays` is reached.
+
+The user will aslo see a failure description on the charge in the app and a push notification will be sent if enabled.
+
+```json
+{
+    "id": "chr-ZZt75qs",
+    "status": "DUE",
+    "due": "2021-06-19T00:01:00Z",
+    "amount": 190000,
+    "amountRefunded": 0,
+    "transactionId": null,
+    "description": "Monthly payment",
+    "type": "RECURRING",
+    "failureReason": "charge_amount_too_high",
+    "failureDescription": "Amount is higher than the users specified max amount"
+}
+```
+
 ## HTTP responses
 
 This API returns the following HTTP statuses in the responses:
@@ -1104,7 +1259,6 @@ Initial charges are designed to be used whenever there is an additional cost in 
 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, as well as having to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be payed upon entering the agreement. If used for campaigns, be sure to have good descriptions in `productName` and `productDescription` on the agreement, as well as `description` on the initial charge.
 
-
 ### Campaign
 
 ![flow_Campaign](images/flow-Campaign.png)
@@ -1113,7 +1267,6 @@ When setting a campaign, this follows the normal agreement flow - with some chan
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain intervall or time, before it switches over to ordinary price.
 
-
 ### Initial charge and campaign
 
 ![flow_initial_charge_campaign](images/flow-Initial-charge-and-campaign.png)
@@ -1121,7 +1274,6 @@ This is the preferred flow whenever you have a type of campaign where the subscr
 In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
 Ideally this flow is intended for when you have a combination of an additional cost when setting up the agreement, presented as the initial charge, as well as having a limited time offer on the actual subscription.
-
 
 ## Questions?
 
