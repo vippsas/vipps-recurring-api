@@ -446,6 +446,7 @@ when the product is shipped.
 
 A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
+Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
 
 ![Campaign example](images/CampaignExample.PNG)
 
@@ -508,6 +509,8 @@ This is an example response from a call to
 An [agreement](#agreements) has payments, called charges.
 
 ### Create a charge
+
+*Recurring has functionality to charge a variable amount each interval, more information about recurring agreements with variable amount can be found [here](#Recurring-agreements-with-variable-amount).*
 
 Charge the customer for each period with
 [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
@@ -971,6 +974,9 @@ Create agreement request:
 - There is currently a limit of 5 000 NOK for the `suggestedMaxAmount`.
 - `Campaign` can not be used when the agreement has `variableAmount`.
 
+Accepting agreement in Vipps
+![variable_amount_accept](images/variable_amount_accept.png)
+
 #### Get agreement
 
 Retrieving the agreement shows the `maxAmount` that was picked by the user.
@@ -1071,6 +1077,9 @@ The user will aslo see a failure description on the charge in the app and a push
     "failureDescription": "Amount is higher than the users specified max amount"
 }
 ```
+
+Display of ChargeFailure and changing maxAmount in Vipps
+![variable_amount_charge](images/variable_amount_charge.png)
 
 ## HTTP responses
 
@@ -1266,6 +1275,8 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. Here as well you have options of setting `productName` and `productDescription` to even further explain to the user.
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain intervall or time, before it switches over to ordinary price.
+
+**Note:** Campaign is not supported for `variableAmount` agreements.
 
 ### Initial charge and campaign
 
