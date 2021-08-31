@@ -936,7 +936,6 @@ activated. Unless the whole flow is completed, this will be handled as a
 failed agreement by the Recurring API.
 
 ## Recurring agreements with variable amount
-
 Recurring with variable amounts offer merchants a way to charge users a different amount each interval, based on the users specified max amount.
 
 Instead of setting a price when drafting a new agreement, the new `suggestedMaxAmount` field is set to what the maximum price could be each interval.
@@ -973,6 +972,8 @@ Create agreement request:
 
 - There is currently a limit of 5 000 NOK for the `suggestedMaxAmount`.
 - `Campaign` can not be used when the agreement has `variableAmount`.
+
+The user will be presented with the variable agreement in the app. Here they can change the max amount they allow to be charged each interval.
 
 Accepting agreement in Vipps
 ![variable_amount_accept](images/variable_amount_accept.png)
@@ -1061,7 +1062,7 @@ Once a day, same as without variable amount.
 
 If the created charge is above the users `max amount`, the charge will be set to `DUE` with a `failureReason`. If the user does not update their maxAmount to the same or a higher amount than the charge, it will fail when `dueDate` + `retryDays` is reached.
 
-The user will aslo see a failure description on the charge in the app and a push notification will be sent if enabled.
+GET charge response where amount is higher than the users max amount:
 
 ```json
 {
@@ -1077,6 +1078,8 @@ The user will aslo see a failure description on the charge in the app and a push
     "failureDescription": "Amount is higher than the users specified max amount"
 }
 ```
+
+The user will aslo see a failure description on the charge in the app and a push notification will be sent if enabled.
 
 Display of ChargeFailure and changing maxAmount in Vipps
 ![variable_amount_charge](images/variable_amount_charge.png)
