@@ -978,6 +978,9 @@ The user will be presented with the variable agreement in the app. Here they can
 Accepting agreement in Vipps
 ![variable_amount_accept](images/variable_amount_accept.png)
 
+Variable amount and initial charge can be combined
+![variable_amount_accept_initial](images/variable_amount_accept_initial.png)
+
 #### Get agreement
 
 Retrieving the agreement shows the `maxAmount` that was picked by the user.
