@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.5.0
+  version: 2.5.1
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -725,6 +725,8 @@ components:
         - productDescription
         - productName
       properties:
+        variableAmount:
+          $ref: "#/components/schemas/VariableAmountRequest"
         campaign:
           $ref: "#/components/schemas/CampaignRequest"
         currency:
@@ -819,6 +821,8 @@ components:
           - productName
           - status
       properties:
+        variableAmount:
+          $ref: "#/components/schemas/VariableAmount"
         campaign:
           $ref: "#/components/schemas/Campaign"
         currency:
@@ -930,6 +934,18 @@ components:
             is in a pendingUserApproval state, and it enters active state once
             user has approved in the Vipps application.
           example: agr_5kSeqzFAMkfBbc
+    VariableAmountRequest:
+      type: object
+      required:
+       - suggestedMaxAmount
+      description: VariableAmount can not be used togheter with campaign. See the documentation for more information about agreement with variable amount.
+      properties:
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          description: The suggested max amount of a charge each interval.
+          minimum: 100
+          example: 40000
     CampaignRequest:
       type: object
       required:
@@ -948,6 +964,18 @@ components:
           format: date-time
           description: The date and time the campaign ends in ISO 8601 format. Needs to be UTC
           example: "2019-06-01T00:00:00Z"
+    VariableAmount:
+      allOf:
+        - $ref: "#/components/schemas/VariableAmountRequest"
+        - type: object
+          required:
+          - maxAmount
+          properties:
+            maxAmount:
+              type: integer
+              format: int32
+              description: The user chosen maximum amount that they allow to be charged each interval.
+              example: 40000
     Campaign:
       allOf:
         - $ref: "#/components/schemas/CampaignRequest"
