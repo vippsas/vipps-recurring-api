@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.5.0</title>
+    <title>Recurring Payments Merchant API v2.5.1</title>
 
     <style>
     </style>
@@ -1538,6 +1538,8 @@ Darkula color scheme from the JetBrains family of IDEs
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;php&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -1736,7 +1738,17 @@ Darkula color scheme from the JetBrains family of IDEs
                   </li>
                 
                   <li>
+                    <a href="#tocs_variableamountrequest" class="toc-h2 toc-link" data-title="">VariableAmountRequest</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocs_campaignrequest" class="toc-h2 toc-link" data-title="">CampaignRequest</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_variableamount" class="toc-h2 toc-link" data-title="">VariableAmount</a>
                     
                   </li>
                 
@@ -2458,6 +2470,10 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-json"><code>[
   {
+    <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
+      <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">40000</span>,
+      <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">40000</span>
+    },
     <span class="hljs-attr">&quot;campaign&quot;</span>: {
       <span class="hljs-attr">&quot;campaignPrice&quot;</span>: <span class="hljs-number">1500</span>,
       <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
@@ -2556,6 +2572,83 @@ System.out.println(response.toString());
 <td>none</td>
 <td>none</td>
 </tr>
+<tr>
+<td>» variableAmount</td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p><em>allOf</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»» <em>anonymous</em></td>
+<td><a href="#schemavariableamountrequest">VariableAmountRequest</a></td>
+<td>false</td>
+<td>none</td>
+<td>VariableAmount can not be used togheter with campaign. See the documentation for more information about agreement with variable amount.</td>
+</tr>
+<tr>
+<td>»»» suggestedMaxAmount</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The suggested max amount of a charge each interval.</td>
+</tr>
+</tbody>
+</table>
+<p><em>and</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»» <em>anonymous</em></td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» maxAmount</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The user chosen maximum amount that they allow to be charged each interval.</td>
+</tr>
+</tbody>
+</table>
+<p><em>continued</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>» campaign</td>
 <td>any</td>
@@ -2908,6 +3001,9 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
+  &quot;variableAmount&quot;: {
+    &quot;suggestedMaxAmount&quot;: 40000
+  },
   &quot;campaign&quot;: {
     &quot;campaignPrice&quot;: 1500,
     &quot;end&quot;: &quot;2019-06-01T00:00:00Z&quot;
@@ -3089,6 +3185,9 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <p>Body parameter</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
+    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">40000</span>
+  },
   <span class="hljs-attr">&quot;campaign&quot;</span>: {
     <span class="hljs-attr">&quot;campaignPrice&quot;</span>: <span class="hljs-number">1500</span>,
     <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
@@ -3187,6 +3286,20 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td><a href="#schemaagreementrequest">AgreementRequest</a></td>
 <td>true</td>
 <td>none</td>
+</tr>
+<tr>
+<td>» variableAmount</td>
+<td>body</td>
+<td><a href="#schemavariableamountrequest">VariableAmountRequest</a></td>
+<td>false</td>
+<td>VariableAmount can not be used togheter with campaign. See the documentation for more information about agreement with variable amount.</td>
+</tr>
+<tr>
+<td>»» suggestedMaxAmount</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>The suggested max amount of a charge each interval.</td>
 </tr>
 <tr>
 <td>» campaign</td>
@@ -3803,6 +3916,10 @@ System.out.println(response.toString());
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
+    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">40000</span>,
+    <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">40000</span>
+  },
   <span class="hljs-attr">&quot;campaign&quot;</span>: {
     <span class="hljs-attr">&quot;campaignPrice&quot;</span>: <span class="hljs-number">1500</span>,
     <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
@@ -7716,6 +7833,9 @@ System.out.println(response.toString());
 <a id="tocSagreementrequest"></a>
 <a id="tocsagreementrequest"></a></p>
 <pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
+    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">40000</span>
+  },
   <span class="hljs-attr">&quot;campaign&quot;</span>: {
     <span class="hljs-attr">&quot;campaignPrice&quot;</span>: <span class="hljs-number">1500</span>,
     <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
@@ -7753,6 +7873,13 @@ System.out.println(response.toString());
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>variableAmount</td>
+<td><a href="#schemavariableamountrequest">VariableAmountRequest</a></td>
+<td>false</td>
+<td>none</td>
+<td>VariableAmount can not be used togheter with campaign. See the documentation for more information about agreement with variable amount.</td>
+</tr>
 <tr>
 <td>campaign</td>
 <td><a href="#schemacampaignrequest">CampaignRequest</a></td>
@@ -7919,6 +8046,10 @@ System.out.println(response.toString());
 <a id="tocSagreement"></a>
 <a id="tocsagreement"></a></p>
 <pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
+    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">40000</span>,
+    <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">40000</span>
+  },
   <span class="hljs-attr">&quot;campaign&quot;</span>: {
     <span class="hljs-attr">&quot;campaignPrice&quot;</span>: <span class="hljs-number">1500</span>,
     <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
@@ -7954,6 +8085,13 @@ System.out.println(response.toString());
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>variableAmount</td>
+<td><a href="#schemavariableamount">VariableAmount</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
 <tr>
 <td>campaign</td>
 <td><a href="#schemacampaign">Campaign</a></td>
@@ -8140,6 +8278,38 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_variableamountrequest">VariableAmountRequest</h2>
+<p><a id="schemavariableamountrequest"></a>
+<a id="schema_VariableAmountRequest"></a>
+<a id="tocSvariableamountrequest"></a>
+<a id="tocsvariableamountrequest"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">40000</span>
+}
+
+</code></pre>
+<p>VariableAmount can not be used togheter with campaign. See the documentation for more information about agreement with variable amount.</p>
+<h3 id="properties-6">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>suggestedMaxAmount</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The suggested max amount of a charge each interval.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_campaignrequest">CampaignRequest</h2>
 <p><a id="schemacampaignrequest"></a>
 <a id="schema_CampaignRequest"></a>
@@ -8151,7 +8321,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-6">Properties</h3>
+<h3 id="properties-7">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8179,6 +8349,67 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_variableamount">VariableAmount</h2>
+<p><a id="schemavariableamount"></a>
+<a id="schema_VariableAmount"></a>
+<a id="tocSvariableamount"></a>
+<a id="tocsvariableamount"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">40000</span>,
+  <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">40000</span>
+}
+
+</code></pre>
+<h3 id="properties-8">Properties</h3>
+<p>allOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemavariableamountrequest">VariableAmountRequest</a></td>
+<td>false</td>
+<td>none</td>
+<td>VariableAmount can not be used togheter with campaign. See the documentation for more information about agreement with variable amount.</td>
+</tr>
+</tbody>
+</table>
+<p>and</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» maxAmount</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The user chosen maximum amount that they allow to be charged each interval.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_campaign">Campaign</h2>
 <p><a id="schemacampaign"></a>
 <a id="schema_Campaign"></a>
@@ -8191,7 +8422,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-7">Properties</h3>
+<h3 id="properties-9">Properties</h3>
 <p>allOf</p>
 <table>
 <thead>
@@ -8256,7 +8487,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>An initial charge for a new agreement. The charge will be executed immediately when the user approves the agreement.</p>
-<h3 id="properties-8">Properties</h3>
+<h3 id="properties-10">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8320,7 +8551,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-9">Properties</h3>
+<h3 id="properties-11">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8386,7 +8617,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-10">Properties</h3>
+<h3 id="properties-12">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8426,7 +8657,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-11">Properties</h3>
+<h3 id="properties-13">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8554,7 +8785,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-12">Properties</h3>
+<h3 id="properties-14">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8607,7 +8838,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-13">Properties</h3>
+<h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8644,7 +8875,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Status of the agreement.</p>
-<h3 id="properties-14">Properties</h3>
+<h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8700,7 +8931,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;PENDING&quot;</span>
 
 </code></pre>
-<h3 id="properties-15">Properties</h3>
+<h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8777,7 +9008,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></p>
-<h3 id="properties-16">Properties</h3>
+<h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8822,7 +9053,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Type of transaction, either direct capture or reserve capture</p>
-<h3 id="properties-17">Properties</h3>
+<h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8870,7 +9101,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;RECURRING&quot;</span>
 
 </code></pre>
-<h3 id="properties-18">Properties</h3>
+<h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8919,7 +9150,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Interval for subscription</p>
-<h3 id="properties-19">Properties</h3>
+<h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -8971,7 +9202,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&quot;</span>
 
 </code></pre>
-<h3 id="properties-20">Properties</h3>
+<h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9008,7 +9239,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-21">Properties</h3>
+<h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9117,7 +9348,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-22">Properties</h3>
+<h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9234,7 +9465,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-23">Properties</h3>
+<h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9285,7 +9516,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-24">Properties</h3>
+<h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9362,7 +9593,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-25">Properties</h3>
+<h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9444,7 +9675,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-26">Properties</h3>
+<h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -9509,6 +9740,8 @@ System.out.println(response.toString());
 </table>
 <!-- Renderer: Shins v2.6.0 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
