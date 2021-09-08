@@ -938,8 +938,8 @@ failed agreement by the Recurring API.
 ## Recurring agreements with variable amount
 Recurring with variable amounts offer merchants a way to charge users a different amount each interval, based on the users specified max amount.
 
-Instead of setting a price when drafting a new agreement, the new `suggestedMaxAmount` field is set to what the maximum price could be each interval.
-The user chooses a max amount themself when accepting the agreement, but it's recomended to choose the same amount as `suggestedMaxAmount`. The max amount can at any time be changed by the user. What the user has picked as their max amount will be available in the `GET agreement` response.
+Instead of setting a price when drafting a new agreement, the new `suggestedMaxAmount` field is set to what the maximum price could be each interval. `suggestedMaxAmount` is then presented to the user when accepting an agreement, as a suggestion that indicates the maxmium price that could potentially be charged within each intervall.
+The user chooses a max amount themself when accepting the agreement, but we recomended the user to choose the same amount as `suggestedMaxAmount`. The max amount can at any time be changed by the user. What the user has picked as their max amount will be available in the `GET agreement` response. Its recommended that when you set the `suggestedMaxAmount`, that you set a realistic amount - as setting it to unrealistic amounts might scare of the user when they accept the agreement.
 
 ### How it works
 
@@ -1063,7 +1063,7 @@ Once a day, same as without variable amount.
 
 #### Charge amount higher than the users max amount
 
-If the created charge is above the users `max amount`, the charge will be set to `DUE` with a `failureReason`. If the user does not update their maxAmount to the same or a higher amount than the charge, it will fail when `dueDate` + `retryDays` is reached.
+If the created charge is above the users `max amount`, the charge will be set to `DUE` with a `failureReason` as shown below. If the user does not update their maxAmount to the same or a higher amount than the charge, it will fail when `dueDate` + `retryDays` is reached.
 
 GET charge response where amount is higher than the users max amount:
 
