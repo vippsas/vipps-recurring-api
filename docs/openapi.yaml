@@ -797,7 +797,7 @@ components:
           format: int32
           description: Treated as a whole sum postfixed with two decimals for cents, eg 234
             = 2.34 NOK
-          minimum: 100
+          minimum: 0
           example: 39900
         productName:
           type: string
@@ -957,7 +957,7 @@ components:
           format: int32
           description: The price of the agreement in the discount period. The lowering of
             the price will be displayed in-app.
-          minimum: 100
+          minimum: 0
           example: 1500
         end:
           type: string
