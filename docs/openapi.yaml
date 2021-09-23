@@ -162,6 +162,8 @@ paths:
           $ref: "#/components/responses/BadRequestError"
         "401":
           $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/UnsupportedFeatureError"
         "422":
           description: Unprocessable Entity (invalid json)
         "429":
@@ -751,6 +753,14 @@ components:
       description: Timeout
     RateLimitError: #429
       description: Too Many Requests
+    UnsupportedFeatureError:
+      description: Feature is not supported for the given sale unit
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
 
   schemas:
     AgreementRequest:
@@ -828,6 +838,13 @@ components:
           type: string
           description: Space separated list of the user profile-data scope to require for the agreement.
           example: address name email birthDate phoneNumber
+        skipLandingPage:
+          type: boolean
+          description: >-
+            If the property is set to `true`, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
+            This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps. If the sale unit is not whitelisted,
+            the request will fail and an error message will be returned (statusCode=403).
+          example: false
     AgreementUpdate:
       type: object
       properties:

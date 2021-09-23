@@ -66,6 +66,7 @@ Document version 2.3.6.
       - [Change suggestedMaxAmount](#change-suggestedmaxamount)
       - [Create charge](#create-charge)
       - [Charge amount higher than the users max amount](#charge-amount-higher-than-the-users-max-amount)
+  - [Skip landing page](#skip-landing-page)
   - [HTTP responses](#http-responses)
   - [Rate limiting](#rate-limiting)
   - [Partner keys](#partner-keys)
@@ -114,10 +115,8 @@ You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
 For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
 
-1. Create a (draft) agreement:
-   [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
-   The user can now confirm the agreement in Vipps (the app).
-   See [Create a new agreement](#create-an-agreement).
+1. Create a (draft) agreement: [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
+   The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture of the initial charge (if one was defined in the first step).
 3. Retrieve the (hopefully approved) agreement:
@@ -136,10 +135,8 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
 
 For a `"transactionType": "RESERVE_CAPTURE"` setup the normal flow would be
 
-1. Create a (draft) agreement:
-   [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
-   The user can now confirm the agreement in Vipps (the app).
-   See [Create a new agreement](#create-an-agreement).
+1. Create a (draft) agreement: [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
+   The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture of the initial charge (if one was defined in the first step).
 3. Retrieve the (hopefully approved) agreement:
@@ -167,7 +164,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup the normal flow would be
 
 | Operation           | Description         | Endpoint          |
 | -------------------- | ------------------- | ----------------- |
-| [Create an agreement](#create-an-agreement)  | Create a new, draft agreement.  | [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)  |
+| [Create an agreement](#create-an-agreement)  | Create a new, draft agreement.  | [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]  |
 | [Retrieve an agreement](#retrieve-an-agreement)  | Retrieve the details of an agreement.  |  [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) |
 | [Update an agreement]()   |  Update an agreement with new details. |  [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement) |
 | [Stop an agreement](#stop-an-agreement) | Update the status to `STOPPED`.  | [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)  |
@@ -253,11 +250,11 @@ See [Charges](#charges).
 ### Create an agreement
 
 Create an agreement:
-[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
+[`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
 
 This code illustrates how to create an agreement:
 
-[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
+[`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
 
 ```json
 {
@@ -299,9 +296,7 @@ in automatically through Vipps. See the
 for more details.
 
 The request parameters have the following size limits
-(see
-[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
-for more details):
+(see [`POST:/recurring/v2/agreements`][draft-agreement-endpoint] for more details):
 
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
@@ -330,7 +325,7 @@ user can then approve the agreement.
 
 ### Accept an agreement
 
-[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement) will return the following JSON structure.
+[`POST:/recurring/v2/agreements`][draft-agreement-endpoint] will return the following JSON structure.
 
 ```json
 {
@@ -451,7 +446,7 @@ Campaigns can not be used in combination with variable amount, see more about va
 ![Campaign example](images/CampaignExample.PNG)
 
 In order to start a campaign the campaign field has to be added either to the agreement draft
-[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
+[`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
 for a campaign in the start of an agreement or update an agreement
 [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)
 for an ongoing agreement. When adding a campaign
@@ -750,7 +745,7 @@ You can learn more at the [OIDC Standard](https://openid.net/specs/openid-connec
 
 To enable the posibility to fetch profile information for a user the merchant can add a `scope`
 parameter to the draft agreement call:
-[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
+[`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
 
 If the enduser has not already consented to sharing information from Vipps to the merchant the user will be asked for such consent before activating the agreement. Once the agreement has been accepted the merchant can get the profile information from our Userinfo endpoint.
 
@@ -784,8 +779,7 @@ a customer.
 1. Retrieve the access token:
    [`POST:/recurring/v2/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Endpoints/getAccessToken).
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
-   access to (valid scope) before calling
-   [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
+   access to (valid scope) before calling [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
 3. The user consents to the information sharing and accepts the agreement in Vipps.
 4. Retrieve the `sub` by calling
    [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
@@ -800,7 +794,7 @@ must _not_ include the subscription key used for the Recurring API. This is beca
 ### Example calls
 
 To request this scope add the scope to the initial call to
-[`POST:​/v2​/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
+[`POST:​/v2​/agreements`][draft-agreement-endpoint]
 
 Example of request with scope:
 
@@ -1088,6 +1082,30 @@ The user will aslo see a failure description on the charge in the app and a push
 Display of ChargeFailure and changing maxAmount in Vipps
 ![variable_amount_charge](images/variable_amount_charge.png)
 
+## Skip landing page
+
+_This functionality is only available for special cases._
+
+Skipping the landing page is only reserved for physical points of sale and vending machines, when there is no display available.
+
+This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
+
+If the `skipLandingPage` property is set to `true` in the [`POST:/recurring/v2/agreements`][draft-agreement-endpoint] call, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
+
+If the sale unit is not whitelisted, the request will fail and an error message will be returned.
+
+If you want to check if a sale unit is allowed to use `skipLandingPage`:
+
+1. Draft an agreement with `"skipLandingPage": true`.
+2. Check the response code and message. The API will return an error if attempting to use `skipLandingPage` without being whitelisted.
+
+If you need to skip the landing page for a different reason: contact your Key Account Manager. If you do not have a KAM:
+Please log in on [portal.vipps.no](https://portal.vipps.no), find the right sale unit and click the email link under the
+"i" information bubble. Include a detailed description of why it is not possible to display the landing page.
+
+**Please note:** When using `skipLandingPage`, the user is not sent to a URL after complation of the payment. The "result page" is just
+the confirmation in Vipps. The `fallback` URL sent in the API request can therefore be the merchant's main URL, like `https://example.com`, etc.
+
 ## HTTP responses
 
 This API returns the following HTTP statuses in the responses:
@@ -1129,7 +1147,7 @@ what we "use to count". The limits are of course not _total_ limits.
 | [FetchCharge](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge)             | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId |
 | [ListCharges](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges)           | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId |
 | [FetchAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)    | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId |
-| [DraftAgreement](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)  | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant |
+| [DraftAgreement][draft-agreement-endpoint]  | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant |
 
 **Please note:** The "Key" column is important. The above means that we allow two
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
@@ -1301,3 +1319,5 @@ a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+
+[draft-agreement-endpoint][https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement]
