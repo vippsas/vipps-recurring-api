@@ -1111,7 +1111,7 @@ Please log in on [portal.vipps.no](https://portal.vipps.no), find the right sale
 "i" information bubble. Include a detailed description of why it is not possible to display the landing page.
 
 **Please note:** When using `skipLandingPage`, the user is not sent to a URL after complation of the payment. The "result page" is just
-the confirmation in Vipps. The `fallback` URL send in the API request can therefore be the merchant's main URL, like `https://example.com`, etc.
+the confirmation in Vipps. The `fallback` URL sent in the API request can therefore be the merchant's main URL, like `https://example.com`, etc.
 
 ## HTTP responses
 
