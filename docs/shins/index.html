@@ -3036,7 +3036,8 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
   &quot;price&quot;: 39900,
   &quot;productName&quot;: &quot;Premier League subscription&quot;,
   &quot;productDescription&quot;: &quot;Access to all games of English top football&quot;,
-  &quot;scope&quot;: &quot;address name email birthDate phoneNumber&quot;
+  &quot;scope&quot;: &quot;address name email birthDate phoneNumber&quot;,
+  &quot;skipLandingPage&quot;: false
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3220,7 +3221,8 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">39900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
   <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
-  <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>
+  <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>,
+  <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">false</span>
 }
 </code></pre>
 <h3 id="create-a-new-agreement--to-be-confirmed-in-vipps-parameters">Parameters</h3>
@@ -3452,6 +3454,13 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td>false</td>
 <td>Space separated list of the user profile-data scope to require for the agreement.</td>
 </tr>
+<tr>
+<td>» skipLandingPage</td>
+<td>body</td>
+<td>boolean</td>
+<td>false</td>
+<td>If the property is set to <code>true</code>, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page. This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps. If the sale unit is not whitelisted, the request will fail and an error message will be returned (statusCode=403).</td>
+</tr>
 </tbody>
 </table>
 <h4 id="enumerated-values-3">Enumerated Values</h4>
@@ -3536,6 +3545,12 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td>None</td>
 </tr>
 <tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Feature is not supported for the given sale unit</td>
+<td>Inline</td>
+</tr>
+<tr>
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>Unprocessable Entity (invalid json)</td>
@@ -3569,6 +3584,55 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 </table>
 <h3 id="create-a-new-agreement--to-be-confirmed-in-vipps-responseschema">Response Schema</h3>
 <p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>403</strong></p>
 <table>
 <thead>
 <tr>
@@ -8370,7 +8434,8 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">39900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
   <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Access to all games of English top football&quot;</span>,
-  <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>
+  <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>,
+  <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">false</span>
 }
 
 </code></pre>
@@ -8483,6 +8548,13 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Space separated list of the user profile-data scope to require for the agreement.</td>
+</tr>
+<tr>
+<td>skipLandingPage</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>If the property is set to <code>true</code>, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page. This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps. If the sale unit is not whitelisted, the request will fail and an error message will be returned (statusCode=403).</td>
 </tr>
 </tbody>
 </table>
