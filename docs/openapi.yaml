@@ -352,6 +352,47 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
+  "/recurring/v2/agreements/{agreementId}/accept":
+    patch:
+      tags:
+        - Agreement Endpoints
+      summary: Force accept an agreement (Only available in test environment)
+      operationId: forceAcceptAgreement
+      description: >-
+        Forces an agreement to be accepted by the given customer phone number. This endpoint
+        can only be used in the test environment.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgreementForceAccept"
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "409":
+          $ref: "#/components/responses/ServerError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+
   "/recurring/v2/agreements/{agreementId}/charges/{chargeId}":
     get:
       tags:
@@ -384,7 +425,7 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
         "404":
           $ref: "#/components/responses/NotFoundError"
-        "429":
+        "409":
           $ref: "#/components/responses/RateLimitError"
         "500":
           $ref: "#/components/responses/ServerError"
@@ -811,6 +852,17 @@ components:
           example: Access to all games of English top football
         status:
           $ref: "#/components/schemas/AgreementStatus"
+    AgreementForceAccept:
+      type: object
+      required:
+        - customerPhoneNumber
+      properties:
+        customerPhoneNumber:
+          type: string
+          description: "Customer's phone number"
+          minLength: 8
+          maxLength: 16
+          example: "91234567"
     Agreement:
       type: object
       required:
