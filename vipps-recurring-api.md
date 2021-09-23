@@ -107,7 +107,7 @@ See the eCom FAQ for the difference:
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with
-[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+[`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
 You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
@@ -115,17 +115,17 @@ You can also [Manage charges and agreements](#manage-charges-and-agreements).
 For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
 
 1. Create a (draft) agreement:
-   [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
+   [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
    The user can now confirm the agreement in Vipps (the app).
    See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture of the initial charge (if one was defined in the first step).
 3. Retrieve the (hopefully approved) agreement:
-   [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
+   [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. For all future charges, you must create a charge:
-   [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+   [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
    See [Create a charge](#create-a-charge).
    Based on the `dueDate` set in the request, our batch job will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
@@ -137,22 +137,22 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
 For a `"transactionType": "RESERVE_CAPTURE"` setup the normal flow would be
 
 1. Create a (draft) agreement:
-   [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
+   [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
    The user can now confirm the agreement in Vipps (the app).
    See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture of the initial charge (if one was defined in the first step).
 3. Retrieve the (hopefully approved) agreement:
-   [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
+   [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. If there is a product that is shipped to the customer, the initial charge should be captured at this point.
    Capture the charge:
-   [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
+   [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
    If there is no product being shipped, or a need to provide access at a later point - the merchant should change the
    merchant sale unit setup to use `DIRECT CAPTURE` instead.
 5. For all future charges, you must create a charge:
-   [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+   [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
    See [Create a charge](#create-a-charge).
    Based on the `dueDate` set in the request, our batch job will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
@@ -167,16 +167,16 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup the normal flow would be
 
 | Operation           | Description         | Endpoint          |
 | -------------------- | ------------------- | ----------------- |
-| [Create an agreement](#create-an-agreement)  | Create a new, draft agreement.  | [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)  |
-| [Retrieve an agreement](#retrieve-an-agreement)  | Retrieve the details of an agreement.  |  [`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) |
-| [Update an agreement]()   |  Update an agreement with new details. |  [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement) |
-| [Stop an agreement](#stop-an-agreement) | Update the status to `STOPPED`.  | [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)  |
-| List all charges  | Get all charges for an agreement.  | [`GET:/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges)  |
-| [Create a charge](#create-a-charge)   |  Create a new charge for an agreement. |  [`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge) |
-| Retrieve a charge  | Retrieve all details of a charge.  | [`GET:/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge)  |
-| Capture a charge  | Each charge must first be created, then captured.  | [`POST:/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)  |
-| Cancel a charge | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/cancelCharge) |
-| Refund a charge    | Refund a charge that has been performed.   | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/refundCharge)  |
+| [Create an agreement](#create-an-agreement)  | Create a new, draft agreement.  | [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)  |
+| [Retrieve an agreement](#retrieve-an-agreement)  | Retrieve the details of an agreement.  |  [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) |
+| [Update an agreement]()   |  Update an agreement with new details. |  [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement) |
+| [Stop an agreement](#stop-an-agreement) | Update the status to `STOPPED`.  | [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)  |
+| List all charges  | Get all charges for an agreement.  | [`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges)  |
+| [Create a charge](#create-a-charge)   |  Create a new charge for an agreement. |  [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge) |
+| Retrieve a charge  | Retrieve all details of a charge.  | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge)  |
+| Capture a charge  | Each charge must first be created, then captured.  | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)  |
+| Cancel a charge | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/cancelCharge) |
+| Refund a charge    | Refund a charge that has been performed.   | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/refundCharge)  |
 
 See [Authentication and authorization](#authentication-and-authorization).
 
@@ -253,11 +253,11 @@ See [Charges](#charges).
 ### Create an agreement
 
 Create an agreement:
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
+[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
 
 This code illustrates how to create an agreement:
 
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
+[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
 
 ```json
 {
@@ -286,7 +286,7 @@ The URL is opened in the standard web browser.
 **Please note:** If the user closes Vipps before the redirect is done,
 the `merchantRedirectUrl` will not be used. It is therefore impretant that you
 actively check the payment with
-[`GET:/v2/agreements/{agreementId}](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
+[`GET:/recurring/v2/agreements/{agreementId}](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement.
@@ -300,7 +300,7 @@ for more details.
 
 The request parameters have the following size limits
 (see
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
+[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
 for more details):
 
 * `productName`: Max length 45 characters
@@ -320,7 +320,7 @@ There are 100 øre in 1 krone.
 
 The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`.
 This `agreementResource` is a complete URL for performing a
-[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
+[`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
 request.
 
 The `vippsConfirmationUrl` should be used to redirect the
@@ -330,7 +330,7 @@ user can then approve the agreement.
 
 ### Accept an agreement
 
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement) will return the following JSON structure.
+[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement) will return the following JSON structure.
 
 ```json
 {
@@ -439,7 +439,7 @@ Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial c
 ```
 
 A reserved charge can be captured with
-[`POST:/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
+[`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
 when the product is shipped.
 
 ### Campaigns
@@ -451,9 +451,9 @@ Campaigns can not be used in combination with variable amount, see more about va
 ![Campaign example](images/CampaignExample.PNG)
 
 In order to start a campaign the campaign field has to be added either to the agreement draft
-[`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
+[`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
 for a campaign in the start of an agreement or update an agreement
-[`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)
+[`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)
 for an ongoing agreement. When adding a campaign
 while drafting a new agreement the start date is ignored and the current
 date-time is used. All dates must be in date-time format as according to
@@ -480,13 +480,13 @@ If the customer approves the agreement, and the initialCharge (if provided) is s
 processed, the agreement status will change to `ACTIVE`.
 
 The approved agreement is retrieved from
-[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
+[`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
 with `"status":"ACTIVE"` when the customer has approved the agreement.
 
 See [Agreement states](#agreement-states).
 
 This is an example response from a call to
-[`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement):
+[`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement):
 
 ```json
 {
@@ -513,7 +513,7 @@ An [agreement](#agreements) has payments, called charges.
 *Recurring has functionality to charge a variable amount each interval, more information about recurring agreements with variable amount can be found [here](#Recurring-agreements-with-variable-amount).*
 
 Charge the customer for each period with
-[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+[`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
 
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur (it is minimum one day in the test environment).
@@ -568,7 +568,7 @@ When the charge is processed, the payment will show up in the users's payment
 history. In the payment history a charge from Vipps recurring payment will have
 a description with follow format `{agreement.ProductName} - {charge.description}`.
 
-[`POST:/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge)
+[`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge)
 
 ```json
 {
@@ -637,13 +637,13 @@ and to use the API to make sure everything is in sync.
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Agreement has been created, but not approved by the user in Vipps yet |
 | 2 | `ACTIVE` | The agreement has been confirmed by the end user in Vipps and can receive charges |
-| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement), or by the user by cancelling or rejecting the agreement. |
+| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement), or by the user by cancelling or rejecting the agreement. |
 | 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in Vipps |
 
 ### Update an agreement
 
 A merchant can update an agreement by calling
-[`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement).
+[`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement).
 The following properties are available for updating:
 
 ```json
@@ -782,13 +782,13 @@ Scenario: You want to complete a payment and get the name and phone number of
 a customer.
 
 1. Retrieve the access token:
-   [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Endpoints/getAccessToken).
+   [`POST:/recurring/v2/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Endpoints/getAccessToken).
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
    access to (valid scope) before calling
-   [`POST:/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
+   [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement).
 3. The user consents to the information sharing and accepts the agreement in Vipps.
 4. Retrieve the `sub` by calling
-   [`GET:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
+   [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
 5. Using the sub from step 4, call
    [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-recurring-api/#/Userinfo%20Endpoint/getUserinfo)
    to retrieve the user's information.
@@ -827,7 +827,7 @@ complete a valid agreement and consent to all values in order to complete the
 session. If a user chooses to reject the terms the agreement will not be
 processed. Unless the whole flow is completed, this will be handled as a regular failed agreement by the recurring APIs.
 
-Once the user completes the session a unique identifier `sub` can be retrieved in the agreement details [`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) endpoint alongside the full URL to Userinfo.
+Once the user completes the session a unique identifier `sub` can be retrieved in the agreement details [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) endpoint alongside the full URL to Userinfo.
 
 Example `sub` and `userinfoUrl` format:
 
@@ -1176,7 +1176,7 @@ merchants making API calls for themselves.
 ## Polling guidelines
 
 General guidelines for When to start polling with
-[`GET:/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement):
+[`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement):
 
 1. Start after 5 seconds
 2. Check every 2 seconds
