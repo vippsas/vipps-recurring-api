@@ -1,6 +1,6 @@
 # Vipps Recurring API
 
-API version: 1.0
+API version: 1.0.0.
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.3.4.
+Document version 2.3.5.
 
 ## Table of Contents
 
@@ -637,7 +637,7 @@ and to use the API to make sure everything is in sync.
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Agreement has been created, but not approved by the user in Vipps yet |
 | 2 | `ACTIVE` | The agreement has been confirmed by the end user in Vipps and can receive charges |
-| 3 | `STOPPED`  | Agreement has been stopped by the merchant most, typically when the end user wants to cancel the payment agreement |
+| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by [`PATCH:/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement), or by the user by cancelling or rejecting a charge. |
 | 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in Vipps |
 
 ### Update an agreement
