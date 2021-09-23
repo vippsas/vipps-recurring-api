@@ -1895,7 +1895,7 @@ For information regarding authentication please read <a href="https://github.com
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X POST https://api.vipps.no/accesstoken/get \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;client_id: fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span> \
   -H <span class="hljs-string">&#x27;client_secret: Y8Kteew6GE2ZmeycEt6egg==&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>
@@ -1903,7 +1903,7 @@ curl -X POST https://api.vipps.no/accesstoken/get \
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">https://api.vipps.no/accesstoken/get</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">client_id</span>: fb492b5e-7907-4d83-ba20-c7fb60ca35de
 <span class="hljs-attribute">client_secret</span>: Y8Kteew6GE2ZmeycEt6egg==
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
@@ -1911,7 +1911,7 @@ curl -X POST https://api.vipps.no/accesstoken/get \
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;client_id&#x27;</span>:<span class="hljs-string">&#x27;fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span>,
   <span class="hljs-string">&#x27;client_secret&#x27;</span>:<span class="hljs-string">&#x27;Y8Kteew6GE2ZmeycEt6egg==&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>
@@ -1934,7 +1934,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/accesstoken/get&#x27;
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;client_id&#x27;</span> =&gt; <span class="hljs-string">&#x27;fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span>,
   <span class="hljs-string">&#x27;client_secret&#x27;</span> =&gt; <span class="hljs-string">&#x27;Y8Kteew6GE2ZmeycEt6egg==&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>
@@ -1949,7 +1949,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;client_id&#x27;</span>: <span class="hljs-string">&#x27;fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span>,
   <span class="hljs-string">&#x27;client_secret&#x27;</span>: <span class="hljs-string">&#x27;Y8Kteew6GE2ZmeycEt6egg==&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>
@@ -1960,7 +1960,7 @@ r = requests.post(<span class="hljs-string">&#x27;https://api.vipps.no/accesstok
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;client_id&#x27;</span> =&gt; <span class="hljs-string">&#x27;fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span>,
     <span class="hljs-string">&#x27;client_secret&#x27;</span> =&gt; <span class="hljs-string">&#x27;Y8Kteew6GE2ZmeycEt6egg==&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
@@ -2012,7 +2012,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;client_id&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;fb492b5e-7907-4d83-ba20-c7fb60ca35de&quot;</span>},
         <span class="hljs-string">&quot;client_secret&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;Y8Kteew6GE2ZmeycEt6egg==&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
@@ -2188,7 +2188,7 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X GET https://api.vipps.no/recurring/v2/agreements \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -2201,7 +2201,7 @@ curl -X GET https://api.vipps.no/recurring/v2/agreements \
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -2214,7 +2214,7 @@ curl -X GET https://api.vipps.no/recurring/v2/agreements \
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -2242,7 +2242,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -2262,7 +2262,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -2278,7 +2278,7 @@ r = requests.get(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -2335,7 +2335,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -2974,8 +2974,8 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X POST https://api.vipps.no/recurring/v2/agreements \
-  -H <span class="hljs-string">&#x27;Content-Type: application/json;charset=UTF-8&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -2988,8 +2988,8 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Content-Type</span>: application/json;charset=UTF-8
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Content-Type</span>: application/json
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -3028,8 +3028,8 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
   &quot;scope&quot;: &quot;address name email birthDate phoneNumber&quot;
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3057,8 +3057,8 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3078,8 +3078,8 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3095,8 +3095,8 @@ r = requests.post(<span class="hljs-string">&#x27;https://api.vipps.no/recurring
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
-    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
+    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3153,8 +3153,8 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -3662,7 +3662,7 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId} \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -3675,7 +3675,7 @@ curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId} \
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements/{agreementId}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -3688,7 +3688,7 @@ curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId} \
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3716,7 +3716,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3736,7 +3736,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3752,7 +3752,7 @@ r = requests.get(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3809,7 +3809,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -4110,7 +4110,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X PATCH https://api.vipps.no/recurring/v2/agreements/{agreementId} \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -4124,7 +4124,7 @@ curl -X PATCH https://api.vipps.no/recurring/v2/agreements/{agreementId} \
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">PATCH</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements/{agreementId}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
 <span class="hljs-attribute">Content-Type</span>: application/json
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -4148,7 +4148,7 @@ curl -X PATCH https://api.vipps.no/recurring/v2/agreements/{agreementId} \
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -4177,7 +4177,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 
 headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -4198,7 +4198,7 @@ p JSON.parse(result)
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -4215,7 +4215,7 @@ print(r.json())
 
 </code></pre>
 <pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -4273,7 +4273,7 @@ System.out.println(response.toString());
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -4670,7 +4670,7 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Merchant-Serial-Number: 123456&#x27;</span> \
@@ -4682,7 +4682,7 @@ curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges \
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Merchant-Serial-Number</span>: 123456
@@ -4694,7 +4694,7 @@ curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges \
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span>:<span class="hljs-string">&#x27;123456&#x27;</span>,
@@ -4721,7 +4721,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span> =&gt; <span class="hljs-string">&#x27;123456&#x27;</span>,
@@ -4740,7 +4740,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span>: <span class="hljs-string">&#x27;123456&#x27;</span>,
@@ -4755,7 +4755,7 @@ r = requests.get(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span> =&gt; <span class="hljs-string">&#x27;123456&#x27;</span>,
@@ -4811,7 +4811,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Merchant-Serial-Number&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;123456&quot;</span>},
@@ -5311,8 +5311,8 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges \
-  -H <span class="hljs-string">&#x27;Content-Type: application/json;charset=UTF-8&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Idempotency-Key: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK&#x27;</span> \
@@ -5325,8 +5325,8 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Content-Type</span>: application/json;charset=UTF-8
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Content-Type</span>: application/json
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Idempotency-Key</span>: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
@@ -5346,8 +5346,8 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges 
   &quot;orderId&quot;: &quot;acmeshop123order123abc&quot;
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span>:<span class="hljs-string">&#x27;aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK&#x27;</span>,
@@ -5375,8 +5375,8 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK&#x27;</span>,
@@ -5396,8 +5396,8 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span>: <span class="hljs-string">&#x27;aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK&#x27;</span>,
@@ -5413,8 +5413,8 @@ r = requests.post(<span class="hljs-string">&#x27;https://api.vipps.no/recurring
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
-    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
+    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK&#x27;</span>,
@@ -5471,8 +5471,8 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Idempotency-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK&quot;</span>},
@@ -5825,7 +5825,7 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{chargeId} \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -5838,7 +5838,7 @@ curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{chargeId}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -5851,7 +5851,7 @@ curl -X GET https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -5879,7 +5879,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -5899,7 +5899,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -5915,7 +5915,7 @@ r = requests.get(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -5972,7 +5972,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -6265,7 +6265,7 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X DELETE https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{chargeId} \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -6279,7 +6279,7 @@ curl -X DELETE https://api.vipps.no/recurring/v2/agreements/{agreementId}/charge
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">DELETE</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{chargeId}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -6293,7 +6293,7 @@ curl -X DELETE https://api.vipps.no/recurring/v2/agreements/{agreementId}/charge
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6322,7 +6322,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6343,7 +6343,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6360,7 +6360,7 @@ r = requests.delete(<span class="hljs-string">&#x27;https://api.vipps.no/recurri
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6418,7 +6418,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -6722,7 +6722,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -6737,7 +6737,7 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
 <span class="hljs-attribute">Content-Type</span>: application/json
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -6755,7 +6755,7 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6785,7 +6785,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 
 headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6807,7 +6807,7 @@ p JSON.parse(result)
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6825,7 +6825,7 @@ print(r.json())
 
 </code></pre>
 <pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6884,7 +6884,7 @@ System.out.println(response.toString());
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -7210,7 +7210,7 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -7224,7 +7224,7 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -7238,7 +7238,7 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements/{agreementId}/charges/
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -7267,7 +7267,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v2/agreemen
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -7288,7 +7288,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -7305,7 +7305,7 @@ r = requests.post(<span class="hljs-string">&#x27;https://api.vipps.no/recurring
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -7363,7 +7363,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -7582,19 +7582,19 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X GET https://api.vipps.no/vipps-userinfo-api/userinfo/{sub} \
-  -H <span class="hljs-string">&#x27;Accept: application/json;charset=UTF-8&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...&#x27;</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.vipps.no/vipps-userinfo-api/userinfo/{sub}</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
-<span class="hljs-attribute">Accept</span>: application/json;charset=UTF-8
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...
 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
 <span class="hljs-keyword">const</span> headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...&#x27;</span>
 };
 
@@ -7615,7 +7615,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/vipps-userinfo-api/us
 <span class="hljs-keyword">require</span> <span class="hljs-string">&#x27;json&#x27;</span>
 
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...&#x27;</span>
 }
 
@@ -7628,7 +7628,7 @@ p JSON.parse(result)
 </code></pre>
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...&#x27;</span>
 }
 
@@ -7637,7 +7637,7 @@ r = requests.get(<span class="hljs-string">&#x27;https://api.vipps.no/vipps-user
 print(r.json())
 
 </code></pre>
-<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json;charset=UTF-8&#x27;</span>,
+<pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...&#x27;</span>,
 );
 
@@ -7687,7 +7687,7 @@ System.out.println(response.toString());
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json;charset=UTF-8&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni...&quot;</span>},
     }
 
