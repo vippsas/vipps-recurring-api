@@ -67,7 +67,7 @@ paths:
         "200":
           description: OK
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/AccessTokenResponse"
         "401":
@@ -108,7 +108,7 @@ paths:
         "200":
           description: OK
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 type: array
                 items:
@@ -147,7 +147,7 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       requestBody:
         content:
-          application/json;charset=UTF-8:
+          application/json:
             schema:
               $ref: "#/components/schemas/AgreementRequest"
         required: true
@@ -155,7 +155,7 @@ paths:
         "201":
           description: OK
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/AgreementReference"
         "400":
@@ -194,7 +194,7 @@ paths:
         "200":
           description: OK
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/Agreement"
         "400":
@@ -238,7 +238,7 @@ paths:
         "200":
           description: OK
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/AgreementUpdateReference"
         "400":
@@ -283,7 +283,7 @@ paths:
         "200":
           description: Success
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 type: array
                 items:
@@ -327,7 +327,7 @@ paths:
         - $ref: "#/components/parameters/AgreementId"
       requestBody:
         content:
-          application/json;charset=UTF-8:
+          application/json:
             schema:
               $ref: "#/components/schemas/ChargeRequest"
         required: true
@@ -335,7 +335,7 @@ paths:
         "201":
           description: Created
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/ChargeReference"
         "400":
@@ -375,7 +375,7 @@ paths:
         "200":
           description: Success
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/Charge"
         "400":
@@ -550,37 +550,37 @@ paths:
         "200":
           description: Get Userinfo
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/Userinfo"
         "400":
           description: Bad Request
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserinfoError"
         "401":
           description: Unauthorized
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserinfoError"
         "403":
           description: Forbidden
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserinfoError"
         "404":
           description: Not Found
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserinfoError"
         "500":
           description: Internal Server Error
           content:
-            application/json;charset=UTF-8:
+            application/json:
               schema:
                 $ref: "#/components/schemas/UserinfoError"
 
@@ -687,7 +687,7 @@ components:
     BadRequestError: #400
       description: Invalid request, check your parameters
       content:
-        application/json;charset=UTF-8:
+        application/json:
           schema:
             type: array
             items:
@@ -699,7 +699,7 @@ components:
     ServerError: #500
       description: Internal server error
       content:
-        application/json;charset=UTF-8:
+        application/json:
           schema:
             type: array
             items:
