@@ -1320,4 +1320,4 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
-[draft-agreement-endpoint][https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement]
+[draft-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement
