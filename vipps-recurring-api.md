@@ -74,6 +74,7 @@ Document version 2.3.6.
     - [Using a phone](#using-a-phone)
     - [Using a laptop/desktop](#using-a-laptopdesktop)
   - [Authentication and authorization](#authentication-and-authorization)
+  - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
   - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
     - [Normal agreement](#normal-agreement)
@@ -1225,6 +1226,14 @@ in the
 [Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 for more information.
 
+# Testing
+
+To facilitate automated testing in [The Vipps Test Environment (MT)][vipps-test-environment], the Vipps Recurring API provides a
+"force accept" endpoint to avoid manual agreement acceptance in the Vipps app: [`POST:/recurring/v2/agreements/{agreementId}/accept`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/forceAcceptAgreement).
+
+The "force approve" endpoint allows developers to approve a payment through the Vipps Recurring API without the use of Vipps.
+This is useful for automated testing. The endpoint is only available in our test environment.
+
 ## Recommendations regarding handling redirects
 
 Since Vipps is a mobile entity the amount of control Vipps have over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
@@ -1301,3 +1310,5 @@ a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+
+[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md
