@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.3.6.
+Document version 2.3.7.
 
 ## Table of Contents
 
@@ -790,7 +790,9 @@ a customer.
 
 **Important note:** The API call to
 [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-recurring-api/#/Userinfo%20Endpoint/getUserinfo)
-must _not_ include the subscription key used for the Recurring API. This is because userinfo is part of Vipps Login and is therefore _not_ under the same subscription, and will result in a `HTTP Unauthorized 401` error.
+must _not_ include the subscription key (the `Ocp-Apim-Subscription-Key` header) used for the Recurring API.
+This is because userinfo is part of Vipps Login and is therefore _not_ under the same subscription,
+and will result in a `HTTP Unauthorized 401` error.
 
 ### Example calls
 
