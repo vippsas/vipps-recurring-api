@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.3.7.
+Document version 2.3.8.
 
 ## Table of Contents
 
@@ -693,6 +693,10 @@ to set up a new agreement.
 
 ![Recurring charge states](images/Recurring-chargestates-new.svg)
 
+The illustration above is a simplification. This table has all the details for
+the charge states returned by
+[`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge):
+
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | The charge has been created, but has not yet been approved by the user. |
@@ -703,7 +707,7 @@ to set up a new agreement.
 | 6 | `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. |
 | 7 | `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. |
 | 8 | `CANCELLED` | The charge has been cancelled. |
-| 9 | `PROCESSING` | The charge is currently being processed by Vipps. |
+| 9 | `PROCESSING` | The charge is currently being processed by Vipps. Normal processing takes less than 1 second, but in some cases they can stay in this status for several minutes |
 
 ### Charge failure reasons
 
