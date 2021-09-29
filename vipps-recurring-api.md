@@ -707,7 +707,7 @@ the charge states returned by
 | 6 | `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. |
 | 7 | `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. |
 | 8 | `CANCELLED` | The charge has been cancelled. |
-| 9 | `PROCESSING` | The charge is currently being processed by Vipps. Normal processing takes less than 1 second. |
+| 9 | `PROCESSING` | The charge is currently being processed by Vipps. Normal processing takes less than 1 second, but in some cases they can stay in this status for several minutes |
 
 ### Charge failure reasons
 
