@@ -717,7 +717,7 @@ Scenario: retryDays = 0, user does not have funds:
 Scenario: user does not have funds on first attempt, but second attempt is successful:
 `PENDING` -> `DUE` -> `PROCESSING` -> `DUE` -> `PROCESSING` -> `CHARGED`
 
-**Please note:** Since charges are polled, it is possible that the charge status can appear to perform strange transitions, e.g `PROCESSING` -> `CHARGED` or even `PROCESSING` -> `REFUNDED` depending on your systems. Usually `PROCESSING` is not seen as a charge usually only has this status for a brief period of time.
+**Please note:** Since charges are polled, it is possible that the charge status can appear to perform strange transitions, e.g `PROCESSING` -> `CHARGED` or even `PROCESSING` -> `REFUNDED` depending on your systems. Usually `PROCESSING` is not seen as a charge usually only has this status for a brief period of time, but merchants should always make sure they can handle this status.
  
 ### Charge failure reasons
 
