@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.3.8.
+Document version 2.3.9.
 
 ## Table of Contents
 
@@ -581,6 +581,7 @@ a description with follow format `{agreement.ProductName} - {charge.description}
 ### Charge times
 
 Charge _attempts_ are primarily made two times during the day: 07:00 and 15:00 UTC.
+The processing of charges typically takes around one hour, but varies and we do not guarantee any time.
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
 **Note:** Payments _might_ get processed any time during the day (07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
