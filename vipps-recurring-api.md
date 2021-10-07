@@ -278,8 +278,9 @@ The `merchantAgreementUrl` is a link to a "My page", where the customer
 can manage the agreement: Change,  an, cancel, etc.
 Vipps does not offer any form of agreement management, as this may be
 quite complex operations, like changing subscription types,
-temporary address change, etc.
-The URL is opened in the standard web browser.
+temporary address change, etc.  
+The URL is opened in the standard web browser.  
+The integrator ***must*** implement such functionality for the customer to manage the agreement in their system.
 
 **Please note:** If the user closes Vipps before the redirect is done,
 the `merchantRedirectUrl` will not be used. It is therefore important that you
