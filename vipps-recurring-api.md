@@ -16,7 +16,7 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.3.9.
+Document version 2.3.10.
 
 ## Table of Contents
 
@@ -282,7 +282,7 @@ temporary address change, etc.
 The URL is opened in the standard web browser.
 
 **Please note:** If the user closes Vipps before the redirect is done,
-the `merchantRedirectUrl` will not be used. It is therefore impretant that you
+the `merchantRedirectUrl` will not be used. It is therefore important that you
 actively check the payment with
 [`GET:/recurring/v2/agreements/{agreementId}](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
 
