@@ -407,12 +407,13 @@ of 499 NOK:
 ```json
 {
   "currency": "NOK",
-  "customerPhoneNumber":"90000000",
+  "customerPhoneNumber": "90000000",
   "initialCharge": {
      "amount": 49900,
      "currency": "NOK",
      "description": "Premier League subscription",
      "transactionType": "DIRECT_CAPTURE"
+  },
   "interval": "MONTH",
   "intervalCount": 1,
   "isApp": false,
