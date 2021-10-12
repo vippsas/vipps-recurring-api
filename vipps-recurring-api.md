@@ -1,7 +1,5 @@
 # Vipps Recurring API
 
-API version: 1.0.0.
-
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
@@ -16,7 +14,21 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-Document version 2.3.10.
+See: [How it works](vipps-login-recurring-howitworks.md).
+
+These Swagger/OpenAPI representations may be useful to get a quick overview:
+* [Swagger](https://vippsas.github.io/vipps-recurring-api/)
+* [ReDoc](https://vippsas.github.io/vipps-recurring-api/redoc.html)
+* [Shins](https://vippsas.github.io/vipps-recurring-api/shins/index.html)
+
+See: Vipps Recurring [GitHub repository](https://github.com/vippsas/vipps-recurring-api/),
+with [Postman collection](tools/),
+[Integration checklist](vipps-recurring-api-checklist.md),
+[FAQ](vipps-recurring-api-faq.md).
+
+API version: 1.0.0.
+
+Document version 2.3.11.
 
 ## Table of Contents
 
