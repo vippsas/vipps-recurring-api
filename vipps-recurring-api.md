@@ -10,8 +10,8 @@ have "Vipps på Nett" and a direct integration with the
 [Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
 and have completed some additional KYC checks required by Finanstilsynet.
 Vipps is required to perform some extra compliance checks before
-activating the Vipps Recurring API, please
-[contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
+activating the Vipps Recurring API, please order Vipps Faste betalinger on
+[portal.vipps.no](https://portal.vipps.no)
 to get access to the Recurring API in production.
 
 See: [How it works](vipps-login-recurring-howitworks.md).
@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.11.
+Document version 2.3.12.
 
 ## Table of Contents
 
