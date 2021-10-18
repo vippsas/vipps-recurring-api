@@ -602,7 +602,7 @@ Subsequent attempts are made according to the `retryDays` specified.
 
 ### Charge retries
 
-Vipps will retry the charge for the number of days specified in `retryDays`.
+Vipps will retry the charge for the number of days specified in `retryDays`. The maximum number of retryDays is currently set to 14 days
 
 So if `retryDays=2` that would mean a maximum of 6 retries:
 Two on the initial day, and two each for the subsequent days.
