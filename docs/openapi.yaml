@@ -867,6 +867,13 @@ components:
           description: Product description (longer)
           maxLength: 100
           example: Access to all games of English top football
+        merchantAgreementUrl:
+          type: string
+          description: URL where Vipps can send the customer to view/manage their
+            subscription. Typically a "My page" where the user can change, pause, cancel, etc.
+            We recommend letting users log in with Vipps, not with username and password.
+            We do not have any specific requirements for the security of the page.
+          example: https://www.example.com/vipps-subscriptions/1234/
         status:
           $ref: "#/components/schemas/AgreementStatus"
     AgreementForceAccept:
@@ -958,6 +965,13 @@ components:
             type: string
           description: Tags agreement if payments fail in a way that implies that the users payment source needs to be updated.
           example: ["payment-source-issue"]
+        merchantAgreementUrl:
+          type: string
+          description: URL where Vipps can send the customer to view/manage their
+            subscription. Typically a "My page" where the user can change, pause, cancel, etc.
+            We recommend letting users log in with Vipps, not with username and password.
+            We do not have any specific requirements for the security of the page.
+          example: https://www.example.com/vipps-subscriptions/1234/
 
     AgreementReference:
       type: object
