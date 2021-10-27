@@ -287,7 +287,7 @@ This code illustrates how to create an agreement:
 **Note:** To create agreements with support for variable amounts on charges, see [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).
 
 The `merchantAgreementUrl` is a link to a "My page", where the customer
-can manage the agreement: Change,  an, cancel, etc.
+can manage the agreement: Change, pause, cancel, etc.
 Vipps does not offer any form of agreement management, as this may be
 quite complex operations, like changing subscription types,
 temporary address change, etc.  
