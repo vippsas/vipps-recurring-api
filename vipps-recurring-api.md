@@ -90,8 +90,8 @@ Document version 2.3.12.
   - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
   - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
-    - [Normal agreement](#normal-agreement)
-    - [Initial charge](#initial-charge-1)
+    - [Normal agreement](#normal-agreement-flow)
+    - [Initial charge](#initial-charge-flow)
     - [Campaign](#campaign)
     - [Initial charge and campaign](#initial-charge-and-campaign)
   - [Questions?](#questions)
@@ -400,7 +400,7 @@ price limit on an `initialCharge`. This allows for products to be bundled with
 agreements as one transaction (for example a phone). The user will be clearly
 informed when an `initialCharge` is included in the agreement they are accepting.
 
-See [Charge Titles](#charge-title) for explanation of how the charge description
+See [Charge Titles](#charge-descriptions) for explanation of how the charge description
 is shown to the user.
 
 The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
@@ -555,9 +555,9 @@ The `amount` of a charge is flexible and does not have to match the
 
 A limit is in place however, which is 5 times the agreement `price`.
 For example, in the agreement
-[above](#step-2-retrieve-the-approved-agreement)
+[above](#retrieve-an-agreement)
 a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
-hindrance the agreement `price` can be [updated](#updating-an-agreement).
+hindrance the agreement `price` can be [updated](#update-an-agreement).
 
 **Note:** Although it is _technically_ possible to increase the price 10
 times, we **strongly** recommend to be as user-friendly as possible, and
@@ -1302,7 +1302,7 @@ In short our advice is to implement support for all our flows, and also implemen
 
 First a short description on the flows.
 
-### Normal agreement
+### Normal agreement flow
 
 ![flow_Normal_agreement](images/flow-Normal-agreement.png)
 
@@ -1311,7 +1311,7 @@ On the agreement we present start date, intervall, the price of the agreements, 
 
 This is the preferred flow whenever there is no campaigns or similar present.
 
-### Initial charge
+### Initial charge flow
 
 ![flow_Initial_charge](images/flow-Initial-charge.png)
 
