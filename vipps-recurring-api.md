@@ -364,26 +364,34 @@ Intervals are defined with a interval type `MONTH`, `WEEK`, or `DAY` and frequen
 
 Example for a bi-weekly subscription:
 ```json
-"interval": "WEEK",
-"intervalCount": 2,
+{
+  "interval": "WEEK",
+  "intervalCount": 2
+}
 ```
 
 Example for a quarterly subscription
 ```json
-"interval": "MONTH",
-"intervalCount": 3,
+{
+  "interval": "MONTH",
+  "intervalCount": 3
+}
 ```
 
 Example for a yearly subscription
 ```json
-"interval": "MONTH",
-"intervalCount": 12,
+{
+  "interval": "MONTH",
+  "intervalCount": 12
+}
 ```
 
 Example for a subscription every 100th day:
 ```json
-"interval": "DAY",
-"intervalCount": 100,
+{
+  "interval": "DAY",
+  "intervalCount": 100
+}
 ```
 
 ### Initial charge
@@ -440,12 +448,14 @@ of 499 NOK:
 Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial charge.
 
 ```json
-"initialCharge": {
-  "transactionType": "RESERVE_CAPTURE",
-  "amount": 19900,
-  "currency": "NOK",
-  "description": "Phone"
-},
+{
+  "initialCharge": {
+    "transactionType": "RESERVE_CAPTURE",
+    "amount": 19900,
+    "currency": "NOK",
+    "description": "Phone"
+  }
+}
 ```
 
 A reserved charge can be captured with
@@ -470,10 +480,12 @@ date-time is used. All dates must be in date-time format as according to
 [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
 
 ```json
-"campaign": {
-  "start": "2019-05-01T00:00:00Z",
-  "end": "2019-06-01T00:00:00Z",
-  "campaignPrice": 49900
+{
+  "campaign": {
+    "start": "2019-05-01T00:00:00Z",
+    "end": "2019-06-01T00:00:00Z",
+    "campaignPrice": 49900
+  }
 }
 ```
 
@@ -510,7 +522,7 @@ This is an example response from a call to
   "interval": "MONTH",
   "intervalCount": 1,
   "currency": "NOK",
-  "campaign": null,
+  "campaign": null
 }
 ```
 
@@ -848,8 +860,10 @@ Once the user completes the session a unique identifier `sub` can be retrieved i
 Example `sub` and `userinfoUrl` format:
 
 ```json
-"sub": "c06c4afe-d9e1-4c5d-939a-177d752a0944",
-"userinfoUrl": "https://api.vipps.no/vipps-userinfo-api/userinfo/c06c4afe-d9e1-4c5d-939a-177d752a0944"
+{
+  "sub": "c06c4afe-d9e1-4c5d-939a-177d752a0944",
+  "userinfoUrl": "https://api.vipps.no/vipps-userinfo-api/userinfo/c06c4afe-d9e1-4c5d-939a-177d752a0944"
+}
 ```
 
 This `sub` is a link between the merchant and the user and can used to retrieve
