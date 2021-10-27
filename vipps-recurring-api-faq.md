@@ -21,7 +21,7 @@ Document version: 1.4.4
   - [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
   - [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
   - [How do I check my customer's status?](#how-do-i-check-my-customers-status)
-  - [A customer's charge failed but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
+  - [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
   - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
   - [Can the charge for an Agreement be changed?](#can-the-charge-for-an-agreement-be-changed)
   - [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
@@ -62,7 +62,7 @@ If you have existing agreements or subscriptions that use eFaktura, AvtaleGiro,
 PDF invoices by email or other payment methods, you can let your customers
 change to Vipps in different ways:
 
-* Email: Send an email to your customers and inform them that they can change
+* Email: Email your customers and inform them that they can change
   to Vipps. The email should contain a unique URL that leads directly to a
   webpage with a Vipps payment for that customer. The customer may have to
   log in
@@ -86,7 +86,7 @@ Get all Agreements for a customer:
 Get details about a specific Agreement:
 [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
 
-## A customer's charge failed but I did not receive any warning
+## A customer's charge failed, but I did not receive any warning
 The customer may not have notifications turned on,
 or they have not upgraded to the Vipps version that supports it.
 
@@ -113,7 +113,7 @@ the price of the Agreement.
 You can send charges once you have polled and found a valid Agreement tied to
 the user.
 
-See [How do I check my customer's status?](#how-do-i-check-my-customer-s-status)
+See [How do I check my customer's status?](#how-do-i-check-my-customers-status)
 
 ## How can I delete an agreement?
 
@@ -153,7 +153,7 @@ notification when a card that is _not_ used for recurring payments expires.
 
 ## What happens to pending charges if the user deletes the payment card?
 
-See [If a user's card expires: What happens on the next charge?](#if-a-user-s-card-expires--what-happens-on-the-next-charge)
+See [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
 
 ## How does a user see any charges I send?
 A charge will be displayed to the user 6 days before the charge is due to be processed.
@@ -166,8 +166,8 @@ You can still retrieve all relevant charges through the API:
 No, currently the payment card tied to an agreement will not be updated automatically.
 
 Users may want to charge different Agreements to different cards, and we do
-not want to automatically make changes to payment sources. Instead we notify
-users, as described in
+not want to automatically make changes to payment sources. Instead, we notify
+users as described in
 [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 
 ## Is there an API for retrieving information about a Vipps user?
