@@ -704,12 +704,12 @@ service, the merchant must ensure that the status of the recurring agreement is
 set to `STOPPED` at a suitable time.
 
 We recommend that the recurring agreement remains `ACTIVE` for as long as the
-user has access to the service. For example, if the user cancels their
-subscription but they are still able to use the service until the end of the
-billing cycle, the agreement should only be set to `STOPPED` at the end of the
-billing cycle.  In this case we also recommend updating the `productDescription`
-field of the agreement so that the user can see that the subscription is
-cancelled or due to be cancelled at a given time.
+user has access to the service.    
+For example; if the user cancels their subscription, but they are still able to 
+use the service until the end of the billing cycle, the agreement should only be 
+set to `STOPPED` at the end of the billing cycle. In this case we also recommend 
+updating the `productDescription` field of the agreement so that the user can see 
+that the subscription is cancelled or due to be cancelled at a given time.
 
 Since `STOPPED` agreements cannot be reactivated, a benefit of waiting until
 the "end of service" before setting the agreement status to `STOPPED` is that
