@@ -126,7 +126,7 @@ You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
 
-For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
+For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement: [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
@@ -146,7 +146,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
 
 ### Reserve capture
 
-For a `"transactionType": "RESERVE_CAPTURE"` setup the normal flow would be
+For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement: [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
