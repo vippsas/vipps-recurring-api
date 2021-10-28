@@ -360,7 +360,7 @@ the agreement from.
 
 ### Intervals
 
-Intervals are defined with an interval type `MONTH`, `WEEK`, or `DAY` and frequency as a count.
+Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count.
 
 Example for a bi-weekly subscription:
 ```json
@@ -378,7 +378,14 @@ Example for a quarterly subscription
 }
 ```
 
-Example for a yearly subscription
+Examples for a yearly subscription
+```json
+{
+  "interval": "YEAR",
+  "intervalCount": 1
+}
+```
+OR
 ```json
 {
   "interval": "MONTH",
