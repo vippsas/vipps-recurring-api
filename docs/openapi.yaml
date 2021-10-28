@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.5.1
+  version: 2.5.2
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -1315,8 +1315,9 @@ components:
       type: string
       description: Interval for subscription
       default: MONTH
-      pattern: ^(MONTH|WEEK|DAY)$
+      pattern: ^(YEAR|MONTH|WEEK|DAY)$
       enum:
+        - YEAR
         - MONTH
         - WEEK
         - DAY
