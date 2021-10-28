@@ -90,8 +90,8 @@ Document version 2.3.12.
   - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
   - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
-    - [Normal agreement](#normal-agreement)
-    - [Initial charge](#initial-charge-1)
+    - [Normal agreement](#normal-agreement-flow)
+    - [Initial charge](#initial-charge-flow)
     - [Campaign](#campaign)
     - [Initial charge and campaign](#initial-charge-and-campaign)
   - [Questions?](#questions)
@@ -126,7 +126,7 @@ You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
 
-For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
+For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement: [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
@@ -146,7 +146,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup the normal flow would be:
 
 ### Reserve capture
 
-For a `"transactionType": "RESERVE_CAPTURE"` setup the normal flow would be
+For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement: [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
@@ -287,7 +287,7 @@ This code illustrates how to create an agreement:
 **Note:** To create agreements with support for variable amounts on charges, see [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).
 
 The `merchantAgreementUrl` is a link to a "My page", where the customer
-can manage the agreement: Change,  an, cancel, etc.
+can manage the agreement: Change, pause, cancel, etc.
 Vipps does not offer any form of agreement management, as this may be
 quite complex operations, like changing subscription types,
 temporary address change, etc.  
@@ -360,30 +360,38 @@ the agreement from.
 
 ### Intervals
 
-Intervals are defined with a interval type `MONTH`, `WEEK`, or `DAY` and frequency as a count.
+Intervals are defined with an interval type `MONTH`, `WEEK`, or `DAY` and frequency as a count.
 
 Example for a bi-weekly subscription:
 ```json
-"interval": "WEEK",
-"intervalCount": 2,
+{
+  "interval": "WEEK",
+  "intervalCount": 2
+}
 ```
 
 Example for a quarterly subscription
 ```json
-"interval": "MONTH",
-"intervalCount": 3,
+{
+  "interval": "MONTH",
+  "intervalCount": 3
+}
 ```
 
 Example for a yearly subscription
 ```json
-"interval": "MONTH",
-"intervalCount": 12,
+{
+  "interval": "MONTH",
+  "intervalCount": 12
+}
 ```
 
 Example for a subscription every 100th day:
 ```json
-"interval": "DAY",
-"intervalCount": 100,
+{
+  "interval": "DAY",
+  "intervalCount": 100
+}
 ```
 
 ### Initial charge
@@ -400,13 +408,13 @@ price limit on an `initialCharge`. This allows for products to be bundled with
 agreements as one transaction (for example a phone). The user will be clearly
 informed when an `initialCharge` is included in the agreement they are accepting.
 
-See [Charge Titles](#charge-title) for explanation of how the charge description
+See [Charge Titles](#charge-descriptions) for explanation of how the charge description
 is shown to the user.
 
 The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
 See:
 [What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the eCom FAQ).
+in the eCom FAQ.
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. `RESERVE_CAPTURE` must be
@@ -440,12 +448,14 @@ of 499 NOK:
 Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial charge.
 
 ```json
-"initialCharge": {
-  "transactionType": "RESERVE_CAPTURE",
-  "amount": 19900,
-  "currency": "NOK",
-  "description": "Phone"
-},
+{
+  "initialCharge": {
+    "transactionType": "RESERVE_CAPTURE",
+    "amount": 19900,
+    "currency": "NOK",
+    "description": "Phone"
+  }
+}
 ```
 
 A reserved charge can be captured with
@@ -470,10 +480,12 @@ date-time is used. All dates must be in date-time format as according to
 [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
 
 ```json
-"campaign": {
-  "start": "2019-05-01T00:00:00Z",
-  "end": "2019-06-01T00:00:00Z",
-  "campaignPrice": 49900
+{
+  "campaign": {
+    "start": "2019-05-01T00:00:00Z",
+    "end": "2019-06-01T00:00:00Z",
+    "campaignPrice": 49900
+  }
 }
 ```
 
@@ -510,7 +522,7 @@ This is an example response from a call to
   "interval": "MONTH",
   "intervalCount": 1,
   "currency": "NOK",
-  "campaign": null,
+  "campaign": null
 }
 ```
 
@@ -555,9 +567,9 @@ The `amount` of a charge is flexible and does not have to match the
 
 A limit is in place however, which is 5 times the agreement `price`.
 For example, in the agreement
-[above](#step-2-retrieve-the-approved-agreement)
+[above](#retrieve-an-agreement)
 a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
-hindrance the agreement `price` can be [updated](#updating-an-agreement).
+hindrance the agreement `price` can be [updated](#update-an-agreement).
 
 **Note:** Although it is _technically_ possible to increase the price 10
 times, we **strongly** recommend to be as user-friendly as possible, and
@@ -567,7 +579,7 @@ to make sure the user understands any changes and get updated information.
 
 When charges are shown to users in Vipps, they will have a title, and a
 description. The title of a charge is derived directly from
-`{agreement.ProductName}` whereas the description is set per charge, ie.
+`{agreement.ProductName}` whereas the description is set per charge, i.e.
 `{charge.description}`. For example, a charge on an agreement with product
 name *Premier League subscription* with description *October* would look like
 the following screenshot:
@@ -595,7 +607,7 @@ a description with follow format `{agreement.ProductName} - {charge.description}
 ### Charge times
 
 Charge _attempts_ are primarily made two times during the day: 07:00 and 15:00 UTC.
-The processing of charges typically takes around one hour, but varies and we do not guarantee any time.
+The processing of charges typically takes around one hour, however this varies and we do not guarantee any time.
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
 **Note:** Payments _might_ get processed any time during the day (07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
@@ -692,12 +704,12 @@ service, the merchant must ensure that the status of the recurring agreement is
 set to `STOPPED` at a suitable time.
 
 We recommend that the recurring agreement remains `ACTIVE` for as long as the
-user has access to the service. For example, if the user cancels their
-subscription but they are still able to use the service until the end of the
-billing cycle, the agreement should only be set to `STOPPED` at the end of the
-billing cycle.  In this case we also recommend updating the `productDescription`
-field of the agreement so that the user can see that the subscription is
-cancelled or due to be cancelled at a given time.
+user has access to the service.    
+For example; if the user cancels their subscription, but they are still able to 
+use the service until the end of the billing cycle, the agreement should only be 
+set to `STOPPED` at the end of the billing cycle. In this case we also recommend 
+updating the `productDescription` field of the agreement so that the user can see 
+that the subscription is cancelled or due to be cancelled at a given time.
 
 Since `STOPPED` agreements cannot be reactivated, a benefit of waiting until
 the "end of service" before setting the agreement status to `STOPPED` is that
@@ -848,8 +860,10 @@ Once the user completes the session a unique identifier `sub` can be retrieved i
 Example `sub` and `userinfoUrl` format:
 
 ```json
-"sub": "c06c4afe-d9e1-4c5d-939a-177d752a0944",
-"userinfoUrl": "https://api.vipps.no/vipps-userinfo-api/userinfo/c06c4afe-d9e1-4c5d-939a-177d752a0944"
+{
+  "sub": "c06c4afe-d9e1-4c5d-939a-177d752a0944",
+  "userinfoUrl": "https://api.vipps.no/vipps-userinfo-api/userinfo/c06c4afe-d9e1-4c5d-939a-177d752a0944"
+}
 ```
 
 This `sub` is a link between the merchant and the user and can used to retrieve
@@ -955,8 +969,8 @@ failed agreement by the Recurring API.
 ## Recurring agreements with variable amount
 Recurring with variable amounts offer merchants a way to charge users a different amount each interval, based on the users specified max amount.
 
-Instead of setting a price when drafting a new agreement, the new `suggestedMaxAmount` field is set to what the maximum price could be each interval. `suggestedMaxAmount` is then presented to the user when accepting an agreement, as a suggestion that indicates the maxmium price that could potentially be charged within each intervall.
-The user chooses a max amount themself when accepting the agreement, but we recomended the user to choose the same amount as `suggestedMaxAmount`. The max amount can at any time be changed by the user. What the user has picked as their max amount will be available in the `GET agreement` response. Its recommended that when you set the `suggestedMaxAmount`, that you set a realistic amount - as setting it to unrealistic amounts might scare of the user when they accept the agreement.
+Instead of setting a price when drafting a new agreement, the new `suggestedMaxAmount` field is set to what the maximum price could be each interval. `suggestedMaxAmount` is then presented to the user when accepting an agreement, as a suggestion that indicates the maxmium price that could potentially be charged within each interval.
+The user chooses a max amount themselves when accepting the agreement, but we recomended the user to choose the same amount as `suggestedMaxAmount`. The max amount can at any time be changed by the user. What the user has picked as their max amount will be available in the `GET agreement` response. Its recommended that when you set the `suggestedMaxAmount`, that you set a realistic amount - as setting it to unrealistic amounts might scare of the user when they accept the agreement.
 
 ### How it works
 
@@ -983,7 +997,7 @@ Create agreement request:
 }
 ```
 
-**Note:** There is no need to supply the agreement with a `price` field, this will be ignored since the user picks the allowed max amount themself.
+**Note:** There is no need to supply the agreement with a `price` field, this will be ignored since the user picks the allowed max amount themselves.
 
 **Restrictions when using variable amount:**
 
@@ -1056,7 +1070,7 @@ Example:
 
 **Monthly:**
 
-Can be charged once a calender month, regardless of the day in the month.
+Can be charged once a calendar month, regardless of the day in the month.
 
 Example:
 
@@ -1282,7 +1296,7 @@ Examples of some, but not all, factors outside of Vipps control.
 - User configurations of browsers.
 - Users closing app immediately upon purchase.
 
-Therefore Vipps recommends having a stateless approach in the site that is supposed to be the end session. An example would a polling based result handling from a value in the redirect url.
+Therefore, Vipps recommends having a stateless approach in the site that is supposed to be the end session. An example would a polling based result handling from a value in the redirect url.
 
 Example for demonstration purposes that should be handled.
 
@@ -1302,20 +1316,20 @@ In short our advice is to implement support for all our flows, and also implemen
 
 First a short description on the flows.
 
-### Normal agreement
+### Normal agreement flow
 
 ![flow_Normal_agreement](images/flow-Normal-agreement.png)
 
 In the normal agreement, the user gets presented with the agreement, agrees to that, and gets sent to a confirmation screen.
-On the agreement we present start date, intervall, the price of the agreements, as well as `productName` and `productDescription`, the latter of which can be used to describe the agreement to the user and can be defined by the merchant.
+On the agreement we present start date, interval, the price of the agreements, as well as `productName` and `productDescription`, the latter of which can be used to describe the agreement to the user and can be defined by the merchant.
 
 This is the preferred flow whenever there is no campaigns or similar present.
 
-### Initial charge
+### Initial charge flow
 
 ![flow_Initial_charge](images/flow-Initial-charge.png)
 
-When an initial charge is present, the flow in Vipps will change. First the user gets presented with an overview over both the agreement as well as the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
+When an initial charge is present, the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
 
 Here we also show `productName` and `productDescription` on the agreement, as well as `description` on the initial charge. All of which are defined by the merchant.
 
@@ -1329,7 +1343,7 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. Here as well you have options of setting `productName` and `productDescription` to even further explain to the user.
 
-This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain intervall or time, before it switches over to ordinary price.
+This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
 **Note:** Campaign is not supported for `variableAmount` agreements.
 
