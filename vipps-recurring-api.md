@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.13.
+Document version 2.3.14.
 
 ## Table of Contents
 
