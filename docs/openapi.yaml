@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.5.2
+  version: 2.5.3
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -88,7 +88,9 @@ paths:
       summary: List Agreements
       operationId: listAgreements
       description: >-
-        The API call allows merchant to fetch all agreements. If no query status is supplied it will default to only retrieving active agreements.
+        The API call allows merchant to fetch all agreements.
+        If no query status is supplied it will default to only retrieving active agreements.
+        There is no way to list all Agreements with all statuses, this is due to performance.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
