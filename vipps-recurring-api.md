@@ -701,7 +701,7 @@ the charge states returned by
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | The charge has been created, but is not yet visible to the user in Vipps. |
-| 2 | `DUE`      | The charge is now visible in Vipps and will be processed. |
+| 2 | `DUE`      | The charge is now visible in Vipps and will be processed on the due date. |
 | 3 | `CHARGED`  | The charge has been completed. |
 | 4 | `FAILED`   | The charge has failed for some reason, i.e. expired card, insufficient funds, etc. Read the [Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons) section for more details. |
 | 5 | `REFUNDED` | The charge has been refunded. The timeframe for issuing a refund is 365 days from the date of capture. |
