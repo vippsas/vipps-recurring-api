@@ -618,6 +618,7 @@ The processing of charges typically takes around one hour, however this varies a
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
 **Note:** Payments _might_ get processed any time during the day (07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
+**Note:** Since payments _can_ be processed any time (07:00UTC - 23:59 UTC) it is advisable to fetch the charge at/after 00:00 UTC the day after the last retry day to be sure you get the last status.
 
 ### Charge retries
 
@@ -733,8 +734,8 @@ the charge states returned by
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `PENDING`  | The charge has been created, but has not yet been approved by the user. |
-| 2 | `DUE`      | The charge is now visible in Vipps, and will be made in the next 30 days (this was previously 6). |
+| 1 | `PENDING`  | The charge has been created, but is not yet visible to the user in Vipps. |
+| 2 | `DUE`      | The charge is now visible in Vipps and will be processed on the due date. |
 | 3 | `CHARGED`  | The charge has been completed. |
 | 4 | `FAILED`   | The charge has failed for some reason, i.e. expired card, insufficient funds, etc. Read the [Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons) section for more details. |
 | 5 | `REFUNDED` | The charge has been refunded. The timeframe for issuing a refund is 365 days from the date of capture. |
@@ -743,6 +744,15 @@ the charge states returned by
 | 8 | `CANCELLED` | The charge has been cancelled. |
 | 9 | `PROCESSING` | The charge is currently being processed by Vipps. Normal processing takes less than 1 second, but in some cases they can stay in this status for several minutes |
 
+### Example charge flows
+Scenario: retryDays = 0, user does not have funds:
+`PENDING` -> `DUE` -> `PROCESSING` -> `DUE` -> `PROCESSING` -> `FAILED`
+
+Scenario: user does not have funds on first attempt, but second attempt is successful:
+`PENDING` -> `DUE` -> `PROCESSING` -> `DUE` -> `PROCESSING` -> `CHARGED`
+
+**Please note:** Since charges are polled, it is possible that the charge status can appear to perform strange transitions, e.g `PROCESSING` -> `CHARGED` or even `PROCESSING` -> `REFUNDED` depending on your systems. Usually `PROCESSING` is not seen as a charge usually only has this status for a brief period of time, but merchants should always make sure they can handle this status.
+ 
 ### Charge failure reasons
 
 When fetching a charge through the API, you can find two fields in the response
