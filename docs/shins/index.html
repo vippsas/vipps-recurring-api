@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.5.2</title>
+    <title>Recurring Payments Merchant API v2.5.3</title>
 
     <style>
     </style>
@@ -2368,7 +2368,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /recurring/v2/agreements</code></p>
-<p>The API call allows merchant to fetch all agreements. If no query status is supplied it will default to only retrieving active agreements.</p>
+<p>The API call allows merchant to fetch all agreements. If no query status is supplied it will default to only retrieving active agreements. There is no way to list all Agreements with all statuses, this is due to performance.</p>
 <h3 id="list-agreements-parameters">Parameters</h3>
 <table>
 <thead>
