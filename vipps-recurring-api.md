@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.15.
+Document version 2.3.16.
 
 ## Table of Contents
 
@@ -745,13 +745,19 @@ the charge states returned by
 | 9 | `PROCESSING` | The charge is currently being processed by Vipps. Normal processing takes less than 1 second, but in some cases they can stay in this status for several minutes |
 
 ### Example charge flows
-Scenario: retryDays = 0, user does not have funds:
+
+Scenario: The user does not have funds and `retryDays = 0`,
 `PENDING` -> `DUE` -> `PROCESSING` -> `DUE` -> `PROCESSING` -> `FAILED`
 
-Scenario: user does not have funds on first attempt, but second attempt is successful:
+Scenario: The user does not have funds on the first attempt, but the second attempt is successful:
 `PENDING` -> `DUE` -> `PROCESSING` -> `DUE` -> `PROCESSING` -> `CHARGED`
 
-**Please note:** Since charges are polled, it is possible that the charge status can appear to perform strange transitions, e.g `PROCESSING` -> `CHARGED` or even `PROCESSING` -> `REFUNDED` depending on your systems. Usually `PROCESSING` is not seen as a charge usually only has this status for a brief period of time, but merchants should always make sure they can handle this status.
+**Please note:** Since charges are polled by the merchant, it is possible that
+the charge status appears to "skip" a transition, e.g. moving directly from
+`PROCESSING` to `CHARGED`, or even from `PROCESSING` to `REFUNDED`
+depending on your systems. `PROCESSING` is not normally seen, as a charge usually
+only has this status for a very brief period of time, but merchants must
+still make sure they can handle this status.
 
 ### Charge failure reasons
 
