@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.16.
+Document version 2.3.17.
 
 ## Table of Contents
 
@@ -409,9 +409,11 @@ as it looks like the full price period starts immediately.
 
 Initial charge will be performed if the `initialcharge` is provided when
 creating an agreement. Unlike regular (or `RECURRING`) charges, there is no
-price limit on an `initialCharge`. This allows for products to be bundled with
-agreements as one transaction (for example a phone). The user will be clearly
-informed when an `initialCharge` is included in the agreement they are accepting.
+price limit on an `initialCharge` - it may be `0`.
+
+This allows for products to be bundled with agreements as one transaction
+(for example a phone). The user will be clearly informed when an `initialCharge`
+is included in the agreement they are accepting.
 
 See [Charge Titles](#charge-descriptions) for explanation of how the charge description
 is shown to the user.
