@@ -28,73 +28,71 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.14.
+Document version 2.3.15.
 
 ## Table of Contents
 
-- [Vipps Recurring API](#vipps-recurring-api)
-  - [Table of Contents](#table-of-contents)
-  - [Terminology](#terminology)
-  - [Flow diagram](#flow-diagram)
-  - [Call by call guide](#call-by-call-guide)
-    - [Direct capture](#direct-capture)
-    - [Reserve capture](#reserve-capture)
-    - [Vipps screenshots](#vipps-screenshots)
-  - [API endpoints](#api-endpoints)
-  - [Authentication](#authentication)
-  - [Optional Vipps HTTP headers](#optional-vipps-http-headers)
-  - [orderId recommendations](#orderid-recommendations)
-  - [Agreements](#agreements)
-    - [Create an agreement](#create-an-agreement)
-    - [Accept an agreement](#accept-an-agreement)
-    - [Intervals](#intervals)
-    - [Initial charge](#initial-charge)
-    - [Campaigns](#campaigns)
-    - [Retrieve an agreement](#retrieve-an-agreement)
-  - [Charges](#charges)
-    - [Create a charge](#create-a-charge)
-    - [Amount changes](#amount-changes)
-    - [Charge descriptions](#charge-descriptions)
-    - [Charge times](#charge-times)
-    - [Charge retries](#charge-retries)
-    - [Retrieve a charge](#retrieve-a-charge)
-  - [Manage charges and agreements](#manage-charges-and-agreements)
-    - [Agreement states](#agreement-states)
-    - [Update an agreement](#update-an-agreement)
-    - [Pause an agreement](#pause-an-agreement)
-    - [Stop an agreement](#stop-an-agreement)
-    - [Charge states](#charge-states)
-    - [Charge failure reasons](#charge-failure-reasons)
-  - [Userinfo](#userinfo)
-    - [Scope](#scope)
-    - [Userinfo call by call guide](#userinfo-call-by-call-guide)
-    - [Example calls](#example-calls)
-    - [Userinfo call](#userinfo-call)
-    - [Consent](#consent)
-  - [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)
-    - [How it works](#how-it-works)
-      - [Create agreement](#create-agreement)
-      - [Get agreement](#get-agreement)
-      - [Change suggestedMaxAmount](#change-suggestedmaxamount)
-      - [Create charge](#create-charge)
-      - [Charge amount higher than the users max amount](#charge-amount-higher-than-the-users-max-amount)
-  - [Skip landing page](#skip-landing-page)
-  - [HTTP responses](#http-responses)
-  - [Rate limiting](#rate-limiting)
-  - [Partner keys](#partner-keys)
-  - [Polling guidelines](#polling-guidelines)
-  - [Timeouts](#timeouts)
-    - [Using a phone](#using-a-phone)
-    - [Using a laptop/desktop](#using-a-laptopdesktop)
-  - [Authentication and authorization](#authentication-and-authorization)
-  - [Testing](#testing)
-  - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
-  - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
-    - [Normal agreement](#normal-agreement-flow)
-    - [Initial charge](#initial-charge-flow)
-    - [Campaign](#campaign)
-    - [Initial charge and campaign](#initial-charge-and-campaign)
-  - [Questions?](#questions)
+- [Terminology](#terminology)
+- [Flow diagram](#flow-diagram)
+- [Call by call guide](#call-by-call-guide)
+  - [Direct capture](#direct-capture)
+  - [Reserve capture](#reserve-capture)
+  - [Vipps screenshots](#vipps-screenshots)
+- [API endpoints](#api-endpoints)
+- [Authentication](#authentication)
+- [Optional Vipps HTTP headers](#optional-vipps-http-headers)
+- [orderId recommendations](#orderid-recommendations)
+- [Agreements](#agreements)
+  - [Create an agreement](#create-an-agreement)
+  - [Accept an agreement](#accept-an-agreement)
+  - [Intervals](#intervals)
+  - [Initial charge](#initial-charge)
+  - [Campaigns](#campaigns)
+  - [Retrieve an agreement](#retrieve-an-agreement)
+- [Charges](#charges)
+  - [Create a charge](#create-a-charge)
+  - [Amount changes](#amount-changes)
+  - [Charge descriptions](#charge-descriptions)
+  - [Charge times](#charge-times)
+  - [Charge retries](#charge-retries)
+  - [Retrieve a charge](#retrieve-a-charge)
+- [Manage charges and agreements](#manage-charges-and-agreements)
+  - [Agreement states](#agreement-states)
+  - [Update an agreement](#update-an-agreement)
+  - [Pause an agreement](#pause-an-agreement)
+  - [Stop an agreement](#stop-an-agreement)
+  - [Charge states](#charge-states)
+  - [Charge failure reasons](#charge-failure-reasons)
+- [Userinfo](#userinfo)
+  - [Scope](#scope)
+  - [Userinfo call by call guide](#userinfo-call-by-call-guide)
+  - [Example calls](#example-calls)
+  - [Userinfo call](#userinfo-call)
+  - [Consent](#consent)
+- [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)
+  - [How it works](#how-it-works)
+    - [Create agreement](#create-agreement)
+    - [Get agreement](#get-agreement)
+    - [Change suggestedMaxAmount](#change-suggestedmaxamount)
+    - [Create charge](#create-charge)
+    - [Charge amount higher than the users max amount](#charge-amount-higher-than-the-users-max-amount)
+- [Skip landing page](#skip-landing-page)
+- [HTTP responses](#http-responses)
+- [Rate limiting](#rate-limiting)
+- [Partner keys](#partner-keys)
+- [Polling guidelines](#polling-guidelines)
+- [Timeouts](#timeouts)
+  - [Using a phone](#using-a-phone)
+  - [Using a laptop/desktop](#using-a-laptopdesktop)
+- [Authentication and authorization](#authentication-and-authorization)
+- [Testing](#testing)
+- [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
+- [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
+  - [Normal agreement](#normal-agreement-flow)
+  - [Initial charge](#initial-charge-flow)
+  - [Campaign](#campaign)
+  - [Initial charge and campaign](#initial-charge-and-campaign)
+- [Questions?](#questions)
 
 ## Terminology
 
@@ -617,7 +615,9 @@ Charge _attempts_ are primarily made two times during the day: 07:00 and 15:00 U
 The processing of charges typically takes around one hour, however this varies and we do not guarantee any time.
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
+
 **Note:** Payments _might_ get processed any time during the day (07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
+
 **Note:** Since payments _can_ be processed any time (07:00UTC - 23:59 UTC) it is advisable to fetch the charge at/after 00:00 UTC the day after the last retry day to be sure you get the last status.
 
 ### Charge retries
@@ -713,10 +713,10 @@ set to `STOPPED` at a suitable time.
 
 We recommend that the recurring agreement remains `ACTIVE` for as long as the
 user has access to the service.    
-For example; if the user cancels their subscription, but they are still able to 
-use the service until the end of the billing cycle, the agreement should only be 
-set to `STOPPED` at the end of the billing cycle. In this case we also recommend 
-updating the `productDescription` field of the agreement so that the user can see 
+For example; if the user cancels their subscription, but they are still able to
+use the service until the end of the billing cycle, the agreement should only be
+set to `STOPPED` at the end of the billing cycle. In this case we also recommend
+updating the `productDescription` field of the agreement so that the user can see
 that the subscription is cancelled or due to be cancelled at a given time.
 
 Since `STOPPED` agreements cannot be reactivated, a benefit of waiting until
@@ -752,7 +752,7 @@ Scenario: user does not have funds on first attempt, but second attempt is succe
 `PENDING` -> `DUE` -> `PROCESSING` -> `DUE` -> `PROCESSING` -> `CHARGED`
 
 **Please note:** Since charges are polled, it is possible that the charge status can appear to perform strange transitions, e.g `PROCESSING` -> `CHARGED` or even `PROCESSING` -> `REFUNDED` depending on your systems. Usually `PROCESSING` is not seen as a charge usually only has this status for a brief period of time, but merchants should always make sure they can handle this status.
- 
+
 ### Charge failure reasons
 
 When fetching a charge through the API, you can find two fields in the response
