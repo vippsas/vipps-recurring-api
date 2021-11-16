@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.17.
+Document version 2.3.18.
 
 ## Table of Contents
 
@@ -403,14 +403,15 @@ Example for a subscription every 100th day:
 
 **Please note:** Use
 [Campaigns](#campaigns)
-if the subscription is cheaper in the beginning.
-If you use `initialcharge`, users will be confused by how it appears in Vipps,
+if the subscription is cheaper in the beginning than the normal price later.
+If you use `initialcharge` for campaigns, users will be confused by how it appears in Vipps,
 as it looks like the full price period starts immediately.
 
 Initial charge will be performed if the `initialcharge` is provided when
-creating an agreement. Unlike regular (or `RECURRING`) charges, there is no
-price limit on an `initialCharge` - it may be `0`.
+creating an agreement. If there is no initial charge: Don't sent `initialcharge`
+when creating the new agreement.
 
+Unlike regular (or `RECURRING`) charges, there is no price limit on an `initialCharge`.
 This allows for products to be bundled with agreements as one transaction
 (for example a phone). The user will be clearly informed when an `initialCharge`
 is included in the agreement they are accepting.
