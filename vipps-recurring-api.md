@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.18.
+Document version 2.3.19.
 
 ## Table of Contents
 
@@ -690,7 +690,8 @@ The following properties are available for updating:
     "start": "2019-10-01T00:00:00Z",
     "end": "2019-12-01T00:00:00Z",
     "campaignPrice": 10000
-  }
+  },
+  "suggestedMaxAmount": 300000
 }
 ```
 
