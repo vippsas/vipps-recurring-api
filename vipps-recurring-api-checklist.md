@@ -2,7 +2,7 @@
 
 API version: 2.0
 
-Document version 1.2.1.
+Document version 1.2.2.
 
 For examples of requests and responses, see the Postman collection in [tools](tools/)
 
@@ -22,6 +22,11 @@ For examples of requests and responses, see the Postman collection in [tools](to
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
     - [ ] The merchant must have a way for the user to manage and stop subscription in merchantAgreementUrl in their Agreement. This should result in a timely update of the Vipps Agreement.
     - [ ] Vipps never generates charges automatically on behalf of the Merchant. Every charge is the responsibility of the Merchant.
+    - [ ] Make sure your customer service, etc has all the tools and information they need
+          available in _your_ system, through the APIs listed in the first item in this checklist,
+          and that they do not need to visit
+          [portal.vipps.no](https://portal.vipps.no)
+          for normal work.
 
 ## Flow to go live for direct integrations
 
