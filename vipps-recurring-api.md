@@ -236,6 +236,7 @@ the headers should be:
 
 | Header                        | Example value for POS | Example value for webshop | Example value for Vending machines |
 | ----------------------------- | --------------------- | ------------------- | ------------------- |
+| `Merchant-Serial-Number`      | `123456`              | `123456`            | `123456`            |
 | `Vipps-System-Name`           | `acme`                | `acme`              | `acme`              |
 | `Vipps-System-Version`        | `1.7`                 | `2.6`               | `2.6`               |
 | `Vipps-System-Plugin-Name`    | `acme-pos`            | `acme-webshop`      | `acme-vending`      |
