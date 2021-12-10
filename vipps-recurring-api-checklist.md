@@ -3,11 +3,6 @@
 API version: 2.0
 
 Document version 1.2.4.
-<<<<<<< HEAD
-=======
-
-For examples of requests and responses, see the Postman collection in [tools](tools/)
->>>>>>> 625ffc01682cc4acdffc4b7b7804cda2642799fa
 
 ## Checklist
 
