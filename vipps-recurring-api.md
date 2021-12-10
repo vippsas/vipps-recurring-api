@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.21.
+Document version 2.3.22.
 
 ## Table of Contents
 
@@ -209,7 +209,7 @@ in the
 
 ## Vipps HTTP headers
 
-We recommend using the following (optional) HTTP headers for all requests to the
+Please use the following Vipps HTTP headers for all requests to the
 Vipps eCom API. These headers provide useful metadata about the merchant's system,
 which help Vipps improve our services, and also help in investigating problems.
 
