@@ -2,9 +2,7 @@
 
 API version: 2.0
 
-Document version 1.2.3.
-
-For examples of requests and responses, see the Postman collection in [tools](tools/)
+Document version 1.2.4.
 
 ## Checklist
 
@@ -18,6 +16,7 @@ For examples of requests and responses, see the Postman collection in [tools](to
     - [ ] Charge: Cancel a charge [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/cancelCharge)
     - [ ] Charge: Refund a charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/refundCharge)
     - [ ] Charge: Capture a reserved initial charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
+    - For examples of requests and responses, see the Postman collection in [tools](tools/).
   - [ ] Send the [Vipps HTTP headers](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#vipps-http-headers)
         in all API requests for better tracking and troubleshooting (mandatory for partners and platforms):
       - [ ] `Vipps-System-Name`
