@@ -1272,7 +1272,7 @@ Content-Type: application/json
 **Please note:** The Merchant Serial Number (MSN) is a unique id for the sale
 unit. This is a required parameter if you are a Vipps partner making API requests
 on behalf of a merchant. The partner must use the _merchant's_ MSN, not the
-partner's MSN. This parameter is optional, and recommended, for regular Vipps
+partner's MSN. This parameter is also recommended for regular Vipps
 merchants making API calls for themselves.
 
 ## Polling guidelines
