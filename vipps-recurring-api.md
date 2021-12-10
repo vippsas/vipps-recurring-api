@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.22.
+Document version 2.3.23.
 
 ## Table of Contents
 
@@ -85,7 +85,6 @@ Document version 2.3.22.
 - [Timeouts](#timeouts)
   - [Using a phone](#using-a-phone)
   - [Using a laptop/desktop](#using-a-laptopdesktop)
-- [Authentication and authorization](#authentication-and-authorization)
 - [Testing](#testing)
 - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
 - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
@@ -1313,19 +1312,6 @@ After the user has clicked "OK" on the landing page, the user
 has an additional 5 minutes to complete the payment in Vipps.
 
 This means that the user has a total of 10 minutes to complete the payment.
-
-## Authentication and authorization
-
-All Vipps API requests must include an `Authorization` header with
-a JSON Web Token (JWT), which we call the _access token_.
-The access token is obtained by calling
-[`POST:/accesstoken/get`](https://vippsas.github.io/vipps-ecom-api/#/Authorization_Service/fetchAuthorizationTokenUsingPost)
-and passing the `client_id`, `client_secret` and `Ocp-Apim-Subscription-Key`.
-
-See [Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
-in the
-[Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
-for more information.
 
 # Testing
 
