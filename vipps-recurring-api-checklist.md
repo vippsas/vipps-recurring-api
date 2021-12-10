@@ -3,6 +3,11 @@
 API version: 2.0
 
 Document version 1.2.4.
+<<<<<<< HEAD
+=======
+
+For examples of requests and responses, see the Postman collection in [tools](tools/)
+>>>>>>> 625ffc01682cc4acdffc4b7b7804cda2642799fa
 
 ## Checklist
 
@@ -19,10 +24,11 @@ Document version 1.2.4.
     - For examples of requests and responses, see the Postman collection in [tools](tools/).
   - [ ] Send the [Vipps HTTP headers](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#vipps-http-headers)
         in all API requests for better tracking and troubleshooting (mandatory for partners and platforms):
+      - [ ] `Merchant-Serial-Number`    
       - [ ] `Vipps-System-Name`
       - [ ] `Vipps-System-Version`
       - [ ] `Vipps-System-Plugin-Name`
-        - [ ] `Vipps-System-Plugin-Version`
+      - [ ] `Vipps-System-Plugin-Version`
 - [ ] Avoid Integration pitfalls
     - [ ] The Merchant _must not_ rely on `Redirect` alone
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
