@@ -28,7 +28,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.23.
+Document version 2.3.24.
 
 ## Table of Contents
 
@@ -679,6 +679,8 @@ Example response:
   "failureDescription": "Payment was declined by the payer bank due to lack of funds"
 }
 ```
+
+See: [Charge states](#charge-states).
 
 ## Manage charges and agreements
 
