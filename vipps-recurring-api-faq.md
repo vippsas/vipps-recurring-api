@@ -11,33 +11,32 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.4.4
+Document version: 1.4.5.
 
 ## Table of Contents
 
-- [Vipps Recurring API: Frequently Asked Questions](#vipps-recurring-api-frequently-asked-questions)
-  - [Table of Contents](#table-of-contents)
-  - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
-  - [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
-  - [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
-  - [How do I check my customer's status?](#how-do-i-check-my-customers-status)
-  - [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
-  - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
-  - [Can the charge for an Agreement be changed?](#can-the-charge-for-an-agreement-be-changed)
-  - [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
-  - [When can I send charges for a user?](#when-can-i-send-charges-for-a-user)
-  - [How can I delete an agreement?](#how-can-i-delete-an-agreement)
-  - [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
-  - [What happens to charges if the corresponding agreement is cancelled?](#what-happens-to-charges-if-the-corresponding-agreement-is-cancelled)
-  - [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
-  - [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
-  - [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
-  - [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps-can-new-charges-be-made-to-that-card)
-  - [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
-  - [Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?](#does-the-recent-24092020-changes-in-terms-regarding-valid-reservations-affect-my-agreements)
-  - [Settlement](#settlement)
-  - [Invoicing](#invoicing)
-  - [Questions?](#questions)
+* [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
+* [Can I look up a user's information?](#can-i-look-up-a-users-information)
+* [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
+* [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
+* [How do I check my customer's status?](#how-do-i-check-my-customers-status)
+* [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
+* [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
+* [Can the charge for an Agreement be changed?](#can-the-charge-for-an-agreement-be-changed)
+* [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
+* [When can I send charges for a user?](#when-can-i-send-charges-for-a-user)
+* [How can I delete an agreement?](#how-can-i-delete-an-agreement)
+* [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
+* [What happens to charges if the corresponding agreement is cancelled?](#what-happens-to-charges-if-the-corresponding-agreement-is-cancelled)
+* [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
+* [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
+* [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
+* [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps-can-new-charges-be-made-to-that-card)
+* [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
+* [Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?](#does-the-recent-24092020-changes-in-terms-regarding-valid-reservations-affect-my-agreements)
+* [Settlement](#settlement)
+* [Invoicing](#invoicing)
+* [Questions?](#questions)
 
 ## Why do I get the error `merchant.not.allowed.for.recurring.operation`?
 
@@ -55,6 +54,13 @@ activating the Vipps Recurring API.
 Please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
+
+## Can I look up a user's information?
+
+Vipps can only provide user information with the user's consent.
+The merchant must ask the user for consent when creating the agreement using
+[Userinfo](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#userinfo)
+with the correct `scope`.
 
 ## How can I convert existing agreements to Vipps agreements?
 
