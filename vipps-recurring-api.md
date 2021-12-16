@@ -797,13 +797,13 @@ This results in a _very_ high success rate for charges.
 ### Example charge flows
 
 Scenario: Everything goes as it should: The user has money, and the charge is successful on the `due` date:
-`PENDING` -> `DUE` -> `PROCESSING` (just for the one due day)-> `CHARGED`
+* `PENDING` -> `DUE` -> `PROCESSING` (just for the one due day)-> `CHARGED`
 
 Scenario: The user does not have funds and `retryDays = 0`:
-`PENDING` -> `DUE` -> `PROCESSING` -> `FAILED`
+* `PENDING` -> `DUE` -> `PROCESSING` -> `FAILED`
 
 Scenario: The user does not have funds on the `due` date, `retryDays = 10`, and has funds on the fifth day:
-`PENDING` -> `DUE` -> `PROCESSING` (for five days) -> `CHARGED`
+* `PENDING` -> `DUE` -> `PROCESSING` (for five days) -> `CHARGED`
 
 **Please note:** Since charges are polled by the merchant, it is possible that
 the charge status appears to "skip" a transition, e.g. moving directly from
