@@ -781,7 +781,7 @@ This table has all the details for the charge states returned by
 | State      | Description                                                                          | Visible in Vipps? |
 |:-----------|:-------------------------------------------------------------------------------------| ----------------- |
 | `PENDING`  | The charge has been created, but is not yet visible to the user in Vipps. | No. |
-| `DUE`      | The charge is visible in Vipps and will be processed on the due date. This status is very short, and really just a transition from `PENDING` to `PROCESSING`. | Yes. |
+| `DUE`      | The charge is visible in Vipps and will be processed on the due date. This status is just a quick transition from `PENDING` to `PROCESSING`. | Yes. |
 | `PROCESSING` | The charge is currently being processed by Vipps. This is the state from the `due` date for `retryDays`until the charge is `CHARGED` or `FAILED`. | Yes. |
 | `CHARGED`  | The charge has been completed. | Yes. |
 | `FAILED`   | The charge has failed for some reason, i.e. expired card, insufficient funds, etc. | Yes. |
