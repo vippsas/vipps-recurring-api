@@ -796,7 +796,7 @@ This results in a _very_ high success rate for charges.
 
 ### Example charge flows
 
-Scenario: Everything goes as it should: The user has money, and the charge is successful:
+Scenario: Everything goes as it should: The user has money, and the charge is successful on the `due` date:
 `PENDING` -> `DUE` -> `PROCESSING` (just for the one due day)-> `CHARGED`
 
 Scenario: The user does not have funds and `retryDays = 0`:
@@ -819,11 +819,14 @@ Vipps offers the possibility for merchants to ask for the user's profile informa
 This is done through Vipps Userinfo which
 You can learn more at the [OIDC Standard](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
-To enable the posibility to fetch profile information for a user the merchant can add a `scope`
+To enable the possibility to fetch profile information for a user the merchant can add a `scope`
 parameter to the draft agreement call:
 [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
 
-If the enduser has not already consented to sharing information from Vipps to the merchant the user will be asked for such consent before activating the agreement. Once the agreement has been accepted the merchant can get the profile information from our Userinfo endpoint.
+If the user has not already consented to sharing information from Vipps to the
+merchant the user will be asked for such consent before activating the agreement.
+Once the agreement has been accepted the merchant can get the profile information
+from our Userinfo endpoint.
 
 A users consent to share information with a merchant applies across our services. Thus, if the merchant implements Vipps login in addition to profile information as part of the agreement flow, the merchant can also use Vipps to log the user in without the need for additional consents.
 
