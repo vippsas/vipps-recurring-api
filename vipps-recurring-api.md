@@ -914,7 +914,8 @@ Example `sub` and `userinfoUrl` format:
 ```
 
 This `sub` is a link between the merchant and the user and can used to retrieve
-the user's details from Vipps userinfo: [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-recurring-api/#/Userinfo%20Endpoint/getUserinfo)
+the user's details from Vipps userinfo:
+[`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-recurring-api/#/Userinfo%20Endpoint/getUserinfo)
 
 **Please note:** It is recommended to get the user's information directly after
 completing the transaction. There is however a _time limit of 168 hours_
@@ -941,7 +942,9 @@ Call [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-
 
 The access token is received on a successful request to the token endpoint described in [Authentication](#authentication).
 
-**Important note:** Subscription key used for the Recurring API must _not_ be included. This is because userinfo is part of Vipps Login and is therefore _not_ under the same subscription, and will result in a `HTTP Unauthorized 401` error.
+**Important note:** Subscription key used for the Recurring API must _not_ be
+included. This is because userinfo is part of Vipps Login and is therefore
+_not_ under the same subscription, and will result in a `HTTP Unauthorized 401` error.
 
 **Example response:**
 
@@ -1008,7 +1011,8 @@ of consent cards for Android(left) and iOS(right):
 
 ![Consent card](images/share-user-info.png)
 
-**Please note:** This operation has an "all or nothing" approach, so a user must accept the agreement and consent to _all_ values in order to complete the
+**Please note:** This operation has an "all or nothing" approach, so a user
+must accept the agreement and consent to _all_ values in order to complete the
 session. If a user chooses to reject the terms the agreement will not be
 activated. Unless the whole flow is completed, this will be handled as a
 failed agreement by the Recurring API.
@@ -1021,11 +1025,11 @@ amount each interval, based on the users specified max amount.
 Instead of setting a price when drafting a new agreement, the new
 `suggestedMaxAmount` field is set to what the maximum price could be each interval.
 `suggestedMaxAmount` is then presented to the user when accepting an agreement,
-as a suggestion that indicates the maxmium price that could potentially be charged
+as a suggestion that indicates the maximum price that could potentially be charged
 within each interval.
 
 The user chooses a max amount themselves when accepting the agreement, but we
-recomended the user to choose the same amount as `suggestedMaxAmount`. The max
+recommended the user to choose the same amount as `suggestedMaxAmount`. The max
 amount can at any time be changed by the user. What the user has picked as their
 max amount will be available in the `GET agreement` response. Its recommended
 that when you set the `suggestedMaxAmount`, that you set a realistic amount -
@@ -1063,7 +1067,7 @@ this will be ignored since the user picks the allowed max amount themselves.
 
 **Restrictions when using variable amount:**
 
-- There is currently a limit of 5 000 NOK for the `suggestedMaxAmount`.
+- There is currently a limit of **5 000 NOK** for the `suggestedMaxAmount`.
 - `Campaign` can not be used when the agreement has `variableAmount`.
 
 The user will be presented with the variable agreement in Vipps,
@@ -1114,13 +1118,16 @@ It's possible to change the suggestedMaxAmount on the agreement by calling the u
 }
 ```
 
-**Note:** The user will not be allerted by this change by Vipps.
+**Note:** The user will not be alerted by this change by Vipps.
 
 #### Create charge
 
-There are changes in how the interval and amount calculation works for agreements with `variable amount`. The amount of the charge/charges in the interval can not be higher than either the `suggestedMaxAmount` or `maxAmount` field, based on whichever is highest.
+There are changes in how the interval and amount calculation works for agreements
+with `variable amount`. The amount of the charge/charges in the interval can not
+be higher than either the `suggestedMaxAmount` or `maxAmount` field, based on
+whichever is highest.
 
-Changes in how interval works:
+Changes in how intervals and charge rules work:
 
 **Yearly:**
 
@@ -1153,13 +1160,14 @@ Example:
 
 Once a day, same as without variable amount.
 
-**Note:** In the examples above the `intervalCount` is 1. This can be changed as described in the [Intervals](#intervals) section.
+**Please note:** In the examples above the `intervalCount` is 1.
+This can be changed as described in the [Intervals](#intervals) section.
 
 #### Charge amount higher than the users max amount
 
 If the created charge is above the users `maxAmount`, the charge will be set
-to `PROCESSING`. If the user does not update their maxAmount to the same or a higher
-amount than the charge, it will fail when `dueDate` + `retryDays` is reached, and
+to `PROCESSING`. If the user does not update their `maxAmount` to the same or a higher
+amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
 GET charge response where amount is higher than the users max amount:
@@ -1201,7 +1209,8 @@ If the sale unit is not whitelisted, the request will fail and an error message 
 If you want to check if a sale unit is allowed to use `skipLandingPage`:
 
 1. Draft an agreement with `"skipLandingPage": true`.
-2. Check the response code and message. The API will return an error if attempting to use `skipLandingPage` without being whitelisted.
+2. Check the response code and message.
+   The API will return an error if attempting to use `skipLandingPage` without being whitelisted.
 
 If you need to skip the landing page for a different reason: contact your
 Key Account Manager. If you do not have a KAM: Please log in on
