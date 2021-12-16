@@ -141,10 +141,10 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 4. For all future charges, you must create a charge:
    [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
    See [Create a charge](#create-a-charge).
-   Based on the `dueDate` set in the request, our batch job will try to process the charge on that day.
+   Based on the `due` set in the request, our batch job will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
-   we will retry up to twice a day for the amount of days provided by the `retryDays` value.
-   We recommend at least 2 days retry.
+   we will retry for the number of days specified by the `retryDays` value.
+   We recommend at least two days retry.
 
 ### Reserve capture
 
@@ -166,9 +166,9 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 5. For all future charges, you must create a charge:
    [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
    See [Create a charge](#create-a-charge).
-   Based on the `dueDate` set in the request, our batch job will try to process the charge on that day.
+   Based on the `due` set in the request, our batch job will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
-   we will retry up to twice a day for the amount of days provided by the `retryDays` value.
+   we will retry for the number of days specified by the `retryDays` value.
    We recommend at least 2 days retry.
 
 ### Vipps screenshots
@@ -778,17 +778,17 @@ to set up a new agreement.
 This table has all the details for the charge states returned by
 [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge):
 
-| State      | Description                                                                          | Visible in Vipps? |
-|:-----------|:-------------------------------------------------------------------------------------| ----------------- |
-| `PENDING`  | The charge has been created, but is not yet visible to the user in Vipps. | No. |
-| `DUE`      | The charge is visible in Vipps and will be processed on the due date. This status is just a quick transition from `PENDING` to `PROCESSING`. | Yes. |
-| `PROCESSING` | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`. | Yes. |
-| `CHARGED`  | The charge has been successfully completed. | Yes. |
-| `FAILED`   | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.| Yes. |
-| `REFUNDED` | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. | Yes. |
-| `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. | Yes. |
-| `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. | Yes. |
-| `CANCELLED` | The charge has been cancelled by the merchant. | Yes. |
+| State      | Description                                                                          
+|:-----------|:-------------------------------------------------------------------------------------
+| `PENDING`  | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps.|
+| `DUE`      | The charge is visible in Vipps and will be processed on the due date. This status is just a quick transition from `PENDING` to `PROCESSING`. |
+| `PROCESSING` | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`. |
+| `CHARGED`  | The charge has been successfully completed. |
+| `FAILED`   | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.|
+| `REFUNDED` | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. |
+| `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. |
+| `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. |
+| `CANCELLED` | The charge has been cancelled by the merchant. |
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
