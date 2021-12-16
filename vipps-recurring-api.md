@@ -679,8 +679,8 @@ From the `due` date and during the `retryDays` the status of the charge will be
 If all charge attempts fail, the status will be `FAILED`.
 See: [Charge states](#charge-states).
 
-Vipps does not provide details about each charge attempt to the merchant,
-but helps the user to correct any problems.
+**IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
+but helps the user to correct any problems in Vipps.
 This results in a _very_ high success rate for charges.
 
 ### Retrieve a charge
@@ -775,8 +775,7 @@ to set up a new agreement.
 
 ### Charge states
 
-The illustration above is a simplification. This table has all the details for
-the charge states returned by
+This table has all the details for the charge states returned by
 [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge):
 
 | State      | Description                                                                          | Visible in Vipps? |
@@ -790,6 +789,10 @@ the charge states returned by
 | `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. | Yes. |
 | `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. | Yes. |
 | `CANCELLED` | The charge has been cancelled. | Yes. |
+
+**IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
+but helps the user to correct any problems in Vipps.
+This results in a _very_ high success rate for charges.
 
 ### Example charge flows
 
