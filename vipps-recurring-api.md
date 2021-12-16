@@ -782,13 +782,13 @@ This table has all the details for the charge states returned by
 |:-----------|:-------------------------------------------------------------------------------------| ----------------- |
 | `PENDING`  | The charge has been created, but is not yet visible to the user in Vipps. | No. |
 | `DUE`      | The charge is visible in Vipps and will be processed on the due date. This status is just a quick transition from `PENDING` to `PROCESSING`. | Yes. |
-| `PROCESSING` | The charge is currently being processed by Vipps. This is the state from the `due` date for `retryDays`until the charge is `CHARGED` or `FAILED`. | Yes. |
-| `CHARGED`  | The charge has been completed. | Yes. |
-| `FAILED`   | The charge has failed for some reason, i.e. expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.| Yes. |
-| `REFUNDED` | The charge has been refunded. The timeframe for issuing a refund is 365 days from the date of capture. | Yes. |
+| `PROCESSING` | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`. | Yes. |
+| `CHARGED`  | The charge has been successfully completed. | Yes. |
+| `FAILED`   | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.| Yes. |
+| `REFUNDED` | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. | Yes. |
 | `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. | Yes. |
 | `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. | Yes. |
-| `CANCELLED` | The charge has been cancelled. | Yes. |
+| `CANCELLED` | The charge has been cancelled by the merchant. | Yes. |
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
