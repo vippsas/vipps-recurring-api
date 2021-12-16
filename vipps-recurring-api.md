@@ -5,6 +5,11 @@ to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
 that will be automatically processed on the due date.
 
+The overall idea is:
+* Merchants let users enter agreements in Vipps.
+* Merchants ask Vipps to make charges, and Vipps handles _everything_.
+* Users have the full overview in Vipps, including a link to the merchant's website.
+
 **IMPORTANT:** The Vipps Recurring API is available for existing customers that
 have "Vipps på Nett" and a direct integration with the
 [Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
@@ -28,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.3.24.
+Document version 2.4.0.
 
 ## Table of Contents
 
@@ -63,7 +68,6 @@ Document version 2.3.24.
   - [Pause an agreement](#pause-an-agreement)
   - [Stop an agreement](#stop-an-agreement)
   - [Charge states](#charge-states)
-  - [Charge failure reasons](#charge-failure-reasons)
 - [Userinfo](#userinfo)
   - [Scope](#scope)
   - [Userinfo call by call guide](#userinfo-call-by-call-guide)
@@ -302,7 +306,8 @@ This code illustrates how to create an agreement:
 }
 ```
 
-**Note:** To create agreements with support for variable amounts on charges, see [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).
+**Note:** To create agreements with support for variable amounts on charges, see
+[Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).
 
 The `merchantAgreementUrl` is a link to a "My page", where the customer
 can manage the agreement: Change, pause, cancel, etc.
@@ -319,10 +324,10 @@ actively check the payment with
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement.
-We do not have any specific requirements for the security of the page, but
-we strongly recommend to use
+Vipps does not have any specific requirements for the security of the page, but
+strongly recommend using
 [Vipps Logg Inn](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
-so the user does not have to use a username and password, but is logged
+so the user does not need a username or password, but is logged
 in automatically through Vipps. See the
 [API documentation](https://github.com/vippsas/vipps-login-api)
 for more details.
@@ -418,6 +423,13 @@ Example for a subscription every 100th day:
   "intervalCount": 100
 }
 ```
+
+**Please note:** It is not possible to change intervals. If the user has
+accepted a yearly interval, the agreement can not be changed to a monthly
+agreement. This requires a new agreement and a new consent from the user.
+It _is_ possible to make a monthly agreement and only charge some of the
+months. The general rule: Be as customer friendly and easy to understand
+as possible.
 
 ### Initial charge
 
@@ -560,7 +572,8 @@ An [agreement](#agreements) has payments, called charges.
 
 ### Create a charge
 
-*Recurring has functionality to charge a variable amount each interval, more information about recurring agreements with variable amount can be found [here](#Recurring-agreements-with-variable-amount).*
+*Recurring has functionality to charge a variable amount each interval. See:
+[Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).*
 
 Charge the customer for each period with
 [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
@@ -586,7 +599,8 @@ This `orderId` must be unique across all Recurring and eCom
 transactions for the given `merchantSerialNumber`.
 See [orderId recommendations](#orderid-recommendations).
 
-If the field is not given a unique id will be generated in the form `chr-xxxxxxx` (where each x is an alphanumeric character).
+If the field is not given a unique id will be generated in the form `chr-xxxxxxx`
+(where each x is an alphanumeric character).
 
 ### Amount changes
 
@@ -609,14 +623,15 @@ When charges are shown to users in Vipps, they will have a title, and a
 description. The title of a charge is derived directly from
 `{agreement.ProductName}` whereas the description is set per charge, i.e.
 `{charge.description}`. For example, a charge on an agreement with product
-name *Premier League subscription* with description *October* would look like
+name "Premier League subscription" with description "October" would look like
 the following screenshot:
 
 ![Charge description example](images/charge_descriptions_example.png)
 
-When the charge is processed, the payment will show up in the users's payment
-history. In the payment history a charge from Vipps recurring payment will have
-a description with follow format `{agreement.ProductName} - {charge.description}`.
+When the charge is completed (the money has been moved), the payment will
+show up in the users's payment history. In the payment history a charge from
+Vipps recurring payment will have a description with follow format
+`{agreement.ProductName} - {charge.description}`.
 
 [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge)
 
@@ -635,28 +650,38 @@ a description with follow format `{agreement.ProductName} - {charge.description}
 ### Charge times
 
 Charge _attempts_ are primarily made two times during the day: 07:00 and 15:00 UTC.
+Vipps may change this without notice.
 The processing of charges typically takes around one hour, however this varies and we do not guarantee any time.
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
 
-**Note:** Payments _might_ get processed any time during the day (07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
+**Note:** Payments _might_ get processed any time during the day
+(07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
 
 **Note:** Since payments _can_ be processed any time (07:00UTC - 23:59 UTC) it is advisable to fetch the charge at/after 00:00 UTC the day after the last retry day to be sure you get the last status.
 
+When a charge has reached its `due` date, the status of the charge will be
+`PROCESSING` until the charge is successful, for as long as the merchant has
+specified with `retryDays`.
+
+**Important:** Vipps does not "leak" the customers's information about insufficient funds,
+blocked cards, etc. Users are informed about all such problems in Vipps,
+which is the only place they can be corrected. The merchant's customer service
+should always ask the user to check in Vipps if a charge has failed.
+
 ### Charge retries
 
-Vipps will retry the charge for the number of days specified in `retryDays`. The maximum number of retryDays is currently set to 14 days
+Vipps will retry the charge for the number of days specified in `retryDays`.
+The maximum number of `retryDays` is 14.
 
-So if `retryDays=2` that would mean a maximum of 6 retries:
-Two on the initial day, and two each for the subsequent days.
+From the `due` date and during the `retryDays` the status of the charge will be
+`PROCESSING` until the charge is successful and the status is `CHARGED`.
+If all charge attempts fail, the status will be `FAILED`.
+See: [Charge states](#charge-states).
 
-If `retryDays=0` it will try two times on the initial day.
-
-Be aware that if you check the status of the charge within the retry period, it
-might have status `FAILED`, also after the first attempt on the first and only day.
-
-If a charge fails, you will get information about the reason:
-[Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons).
+Vipps does not provide details about each charge attempt to the merchant,
+but helps the user to correct any problems.
+This results in a _very_ high success rate for charges.
 
 ### Retrieve a charge
 
@@ -675,8 +700,6 @@ Example response:
   "status": "PENDING",
   "transactionId": "5001419121",
   "type": "RECURRING",
-  "failureReason": "insufficient_funds",
-  "failureDescription": "Payment was declined by the payer bank due to lack of funds"
 }
 ```
 
@@ -752,71 +775,40 @@ to set up a new agreement.
 
 ### Charge states
 
-![Recurring charge states](images/Recurring-chargestates-new.svg)
-
 The illustration above is a simplification. This table has all the details for
 the charge states returned by
 [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge):
 
-| # | State      | Description                                                                          |
-|:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `PENDING`  | The charge has been created, but is not yet visible to the user in Vipps. |
-| 2 | `DUE`      | The charge is now visible in Vipps and will be processed on the due date. |
-| 3 | `CHARGED`  | The charge has been completed. |
-| 4 | `FAILED`   | The charge has failed for some reason, i.e. expired card, insufficient funds, etc. Read the [Charge failure reasons](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#charge-failure-reasons) section for more details. |
-| 5 | `REFUNDED` | The charge has been refunded. The timeframe for issuing a refund is 365 days from the date of capture. |
-| 6 | `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. |
-| 7 | `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. |
-| 8 | `CANCELLED` | The charge has been cancelled. |
-| 9 | `PROCESSING` | The charge is currently being processed by Vipps. Normal processing takes less than 1 second, but in some cases they can stay in this status for several minutes |
+| State      | Description                                                                          | Visible in Vipps? |
+|:-----------|:-------------------------------------------------------------------------------------| ----------------- |
+| `PENDING`  | The charge has been created, but is not yet visible to the user in Vipps. | No. |
+| `DUE`      | The charge is visible in Vipps and will be processed on the due date. This status is very short, and really just a transition from `PENDING` to `PROCESSING`. | Yes. |
+| `PROCESSING` | The charge is currently being processed by Vipps. This is the state from the `due` date for `retryDays`until the charge is `CHARGED` or `FAILED`. | Yes. |
+| `CHARGED`  | The charge has been completed. | Yes. |
+| `FAILED`   | The charge has failed for some reason, i.e. expired card, insufficient funds, etc. | Yes. |
+| `REFUNDED` | The charge has been refunded. The timeframe for issuing a refund is 365 days from the date of capture. | Yes. |
+| `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. | Yes. |
+| `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. | Yes. |
+| `CANCELLED` | The charge has been cancelled. | Yes. |
 
 ### Example charge flows
 
-Scenario: The user does not have funds and `retryDays = 0`,
-`PENDING` -> `DUE` -> `PROCESSING` -> `DUE` -> `PROCESSING` -> `FAILED`
+Scenario: Everything goes as it should: The user has money, and the charge is successful:
+`PENDING` -> `DUE` -> `PROCESSING` (just for the one due day)-> `CHARGED`
 
-Scenario: The user does not have funds on the first attempt, but the second attempt is successful:
-`PENDING` -> `DUE` -> `PROCESSING` -> `DUE` -> `PROCESSING` -> `CHARGED`
+Scenario: The user does not have funds and `retryDays = 0`:
+`PENDING` -> `DUE` -> `PROCESSING` -> `FAILED`
+
+Scenario: The user does not have funds on the `due` date, `retryDays = 10`, and has funds on the fifth day:
+`PENDING` -> `DUE` -> `PROCESSING` (for five days) -> `CHARGED`
 
 **Please note:** Since charges are polled by the merchant, it is possible that
 the charge status appears to "skip" a transition, e.g. moving directly from
-`PROCESSING` to `CHARGED`, or even from `PROCESSING` to `REFUNDED`
-depending on your systems. `PROCESSING` is not normally seen, as a charge usually
-only has this status for a very brief period of time, but merchants must
-still make sure they can handle this status.
-
-### Charge failure reasons
-
-When fetching a charge through the API, you can find two fields in the response
-body to identify why the charge failed `failureReason` and `failureDescription`
-
-**Important:** This is an experimental feature. The design has not been finalized
-and it only applies to Vipps Recurring API. You may use `failureReason` and
-`failureDescription` when the fields are available in the response, but do
-not depend on them, and be aware that they may only contain `None` if there
-are no further details available for the failure.
-
-An example from a response:
-
-```json
-{
-  "status": "FAILED",
-  "type": "RECURRING",
-  "failureReason": "insufficient_funds",
-  "failureDescription": "Payment was declined by the payer bank due to lack of funds"
-}
-```
-
-Here is a list of possible values for `failureReason`, their respective descriptions and possible actions that the user/merchant could take.
-
-| Reason | Description | Action |
-| ---- | ----------- | ------ |
-| insufficient_funds | Payment was declined by the payer bank due to lack of funds. | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
-| invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
-| verification_required | Payment declined because the issuing bank requires verification. | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue. |
-| invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. |
-| charge_amount_too_high | Amount is higher than the users specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
-| internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
+`PENDING` to `CHARGED`, or even from `PENDING` to `REFUNDED`
+depending on your systems.
+The `DUE` status is not normally seen, as a charge usually only has this status
+for a brief period of time, but merchants must still make sure they can handle
+this, and all other, statuses.
 
 ## Userinfo
 
@@ -1016,16 +1008,30 @@ activated. Unless the whole flow is completed, this will be handled as a
 failed agreement by the Recurring API.
 
 ## Recurring agreements with variable amount
-Recurring with variable amounts offer merchants a way to charge users a different amount each interval, based on the users specified max amount.
 
-Instead of setting a price when drafting a new agreement, the new `suggestedMaxAmount` field is set to what the maximum price could be each interval. `suggestedMaxAmount` is then presented to the user when accepting an agreement, as a suggestion that indicates the maxmium price that could potentially be charged within each interval.
-The user chooses a max amount themselves when accepting the agreement, but we recomended the user to choose the same amount as `suggestedMaxAmount`. The max amount can at any time be changed by the user. What the user has picked as their max amount will be available in the `GET agreement` response. Its recommended that when you set the `suggestedMaxAmount`, that you set a realistic amount - as setting it to unrealistic amounts might scare of the user when they accept the agreement.
+Recurring with variable amounts offer merchants a way to charge users a different
+amount each interval, based on the users specified max amount.
+
+Instead of setting a price when drafting a new agreement, the new
+`suggestedMaxAmount` field is set to what the maximum price could be each interval.
+`suggestedMaxAmount` is then presented to the user when accepting an agreement,
+as a suggestion that indicates the maxmium price that could potentially be charged
+within each interval.
+
+The user chooses a max amount themselves when accepting the agreement, but we
+recomended the user to choose the same amount as `suggestedMaxAmount`. The max
+amount can at any time be changed by the user. What the user has picked as their
+max amount will be available in the `GET agreement` response. Its recommended
+that when you set the `suggestedMaxAmount`, that you set a realistic amount -
+as setting it to unrealistic amounts might scare of the user when they accept
+the agreement.
 
 ### How it works
 
 #### Create agreement
 
-Create an agreement and specify that it's with `variableAmount` and set a `suggestedMaxAmount` (in øre).
+Create an agreement and specify that it's with `variableAmount` and set a
+`suggestedMaxAmount` (in øre).
 
 Create agreement request:
 
@@ -1046,19 +1052,21 @@ Create agreement request:
 }
 ```
 
-**Note:** There is no need to supply the agreement with a `price` field, this will be ignored since the user picks the allowed max amount themselves.
+**Please note:** There is no need to supply the agreement with a `price` field,
+this will be ignored since the user picks the allowed max amount themselves.
 
 **Restrictions when using variable amount:**
 
 - There is currently a limit of 5 000 NOK for the `suggestedMaxAmount`.
 - `Campaign` can not be used when the agreement has `variableAmount`.
 
-The user will be presented with the variable agreement in the app. Here they can change the max amount they allow to be charged each interval.
+The user will be presented with the variable agreement in Vipps,
+where they can change the max amount they allow to be charged each interval.
 
-Accepting agreement in Vipps
+Accepting agreement in Vipps:
 ![variable_amount_accept](images/variable_amount_accept.png)
 
-Variable amount and initial charge can be combined
+Variable amount and initial charge can be combined:
 ![variable_amount_accept_initial](images/variable_amount_accept_initial.png)
 
 #### Get agreement
@@ -1143,7 +1151,10 @@ Once a day, same as without variable amount.
 
 #### Charge amount higher than the users max amount
 
-If the created charge is above the users `max amount`, the charge will be set to `DUE` with a `failureReason` as shown below. If the user does not update their maxAmount to the same or a higher amount than the charge, it will fail when `dueDate` + `retryDays` is reached.
+If the created charge is above the users `maxAmount`, the charge will be set
+to `PROCESSING`. If the user does not update their maxAmount to the same or a higher
+amount than the charge, it will fail when `dueDate` + `retryDays` is reached, and
+the status will be `FAILED`.
 
 GET charge response where amount is higher than the users max amount:
 
@@ -1157,14 +1168,13 @@ GET charge response where amount is higher than the users max amount:
     "transactionId": null,
     "description": "Monthly payment",
     "type": "RECURRING",
-    "failureReason": "charge_amount_too_high",
-    "failureDescription": "Amount is higher than the users specified max amount"
 }
 ```
 
-The user will aslo see a failure description on the charge in the app and a push notification will be sent if enabled.
+The user will also see a failure description on the charge in the app and a
+push notification will be sent if enabled.
 
-Display of ChargeFailure and changing maxAmount in Vipps
+Display of charge failure due to a charge being higher than the `maxAmount` in Vipps:
 ![variable_amount_charge](images/variable_amount_charge.png)
 
 ## Skip landing page
@@ -1175,7 +1185,10 @@ Skipping the landing page is only reserved for physical points of sale and vendi
 
 This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
 
-If the `skipLandingPage` property is set to `true` in the [`POST:/recurring/v2/agreements`][draft-agreement-endpoint] call, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
+If the `skipLandingPage` property is set to `true` in the
+[`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
+call, it will cause a push notification to be sent to the given phone number
+immediately, without loading the landing page.
 
 If the sale unit is not whitelisted, the request will fail and an error message will be returned.
 
@@ -1184,12 +1197,17 @@ If you want to check if a sale unit is allowed to use `skipLandingPage`:
 1. Draft an agreement with `"skipLandingPage": true`.
 2. Check the response code and message. The API will return an error if attempting to use `skipLandingPage` without being whitelisted.
 
-If you need to skip the landing page for a different reason: contact your Key Account Manager. If you do not have a KAM:
-Please log in on [portal.vipps.no](https://portal.vipps.no), find the right sale unit and click the email link under the
-"i" information bubble. Include a detailed description of why it is not possible to display the landing page.
+If you need to skip the landing page for a different reason: contact your
+Key Account Manager. If you do not have a KAM: Please log in on
+[portal.vipps.no](https://portal.vipps.no),
+find the right sale unit and click the email link under the "i" information
+bubble. Include a detailed description of why it is not possible to display
+the landing page.
 
-**Please note:** When using `skipLandingPage`, the user is not sent to a URL after complation of the payment. The "result page" is just
-the confirmation in Vipps. The `fallback` URL sent in the API request can therefore be the merchant's main URL, like `https://example.com`, etc.
+**Please note:** When using `skipLandingPage`, the user is not sent to a URL
+after complation of the payment. The "result page" is just the confirmation in
+Vipps. The `fallback` URL sent in the API request can therefore be the
+merchant's main URL, like `https://example.com`, etc.
 
 ## HTTP responses
 
@@ -1276,6 +1294,9 @@ on behalf of a merchant. The partner must use the _merchant's_ MSN, not the
 partner's MSN. This parameter is also recommended for regular Vipps
 merchants making API calls for themselves.
 
+See:
+[Vipps Partners](https://github.com/vippsas/vipps-partner).
+
 ## Polling guidelines
 
 General guidelines for When to start polling with
@@ -1317,11 +1338,15 @@ This means that the user has a total of 10 minutes to complete the payment.
 
 # Testing
 
-To facilitate automated testing in [The Vipps Test Environment (MT)][vipps-test-environment], the Vipps Recurring API provides a
-"force accept" endpoint to avoid manual agreement acceptance in the Vipps app: [`POST:/recurring/v2/agreements/{agreementId}/accept`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/forceAcceptAgreement).
+To facilitate automated testing in the
+[Vipps Test Environment (MT)][vipps-test-environment],
+the Vipps Recurring API provides a "force accept" endpoint to avoid manual
+agreement acceptance in the Vipps app:
+[`POST:/recurring/v2/agreements/{agreementId}/accept`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/forceAcceptAgreement).
 
-The "force approve" endpoint allows developers to approve a payment through the Vipps Recurring API without the use of Vipps.
-This is useful for automated testing. The endpoint is only available in our test environment.
+The "force approve" endpoint allows developers to approve a payment through the
+Vipps Recurring API without the use of Vipps. This is useful for automated testing.
+The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
 
