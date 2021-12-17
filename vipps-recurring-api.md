@@ -33,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.4.0.
+Document version 2.4.1.
 
 ## Table of Contents
 
@@ -250,7 +250,33 @@ values that uniquely identify the system (and plugin).
 
 ## orderId recommendations
 
-A `orderId` must be unique.
+An optional _and recommended_ `orderId` field can be set in the request:
+[`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+
+```
+{
+  "amount": 49900,
+  "currency": "NOK",
+  "description": "Premier League subscription",
+  "due": "2030-12-31",
+  "retryDays": 5,
+  "orderId": "acmeshop123order123abc"
+}
+```
+
+The `orderId` replaces the `chargeId`.
+
+**Important:** If the `orderId` is provided:
+* The value of the `orderId` is used for all instances of `chargeId`
+* The `orderId` (and `chargeId`) is sed for for all subsequent identification
+  of the charge.
+* The `orderId` is used in the settlement files.
+
+This `orderId` must be unique across all Recurring and eCom
+transactions for the given `merchantSerialNumber`.
+
+If the field is _not_ provided, Vipps will automatically create a unique id
+prefixed with `chr-`: `chr-xxxxxxx`(where each x is an alphanumeric character).
 
 If you ever have a problem that requires us to search in our logs, we need
 `orderId`s that are "unique enough" to actually find them. An `orderId` that
@@ -591,16 +617,8 @@ the charge will be performed. This date has to be at a minimum two days in the
 future (it is minimum one day in the test environment), and all charges `due` in
 30 days or less are visible for users in Vipps.
 
-An optional _and recommended_ `orderId` field can be set in the request.
-If used this will be the id used to identify the charge throughout its payment
-history, including in settlement files.
-
-This `orderId` must be unique across all Recurring and eCom
-transactions for the given `merchantSerialNumber`.
-See [orderId recommendations](#orderid-recommendations).
-
-If the field is not given a unique id will be generated in the form `chr-xxxxxxx`
-(where each x is an alphanumeric character).
+See:
+[orderId recommendations](#orderid-recommendations).
 
 ### Amount changes
 
