@@ -166,7 +166,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 5. For all future charges, you must create a charge:
    [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
    See [Create a charge](#create-a-charge).
-   Based on the `due` set in the request, our batch job will try to process the charge on that day.
+   Based on the `due` set in the request, we will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
    we will retry for the number of days specified by the `retryDays` value.
    We recommend at least 2 days retry.
