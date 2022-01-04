@@ -1145,7 +1145,7 @@ It's possible to change the suggestedMaxAmount on the agreement by calling the u
 
 There are changes in how the interval and amount calculation works for agreements
 with `variable amount`. The amount of the charge/charges in the interval can not
-be higher than either the `suggestedMaxAmount` or `maxAmount` field, based on
+be higher than either the `suggestedMaxAmount` or `maxAmount` field, depending on
 whichever is highest.
 
 Changes in how intervals and charge rules work:
