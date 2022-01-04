@@ -33,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.4.1.
+Document version 2.4.2.
 
 ## Table of Contents
 
@@ -692,9 +692,12 @@ should always ask the user to check in Vipps if a charge has failed.
 Vipps will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
 
-From the `due` date and during the `retryDays` the status of the charge will be
-`PROCESSING` until the charge is successful and the status is `CHARGED`.
-If all charge attempts fail, the status will be `FAILED`.
+The status of a charge will be `PROCESSING` while Vipps is taking care of business,
+from the `due` date until the charge has succeeded, or until the
+`retryDays` have passed without a successful charge.
+The final status will be `CHARGED` or `FAILED`.
+See the API documentation for more details.
+
 See: [Charge states](#charge-states).
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
