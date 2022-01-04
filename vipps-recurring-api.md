@@ -1041,7 +1041,7 @@ failed agreement by the Recurring API.
 ## Recurring agreements with variable amount
 
 Recurring with variable amounts offer merchants a way to charge users a different
-amount each interval, based on the users specified max amount.
+amount each interval, as long as the amount is lower than the users specified max amount.
 
 Instead of setting a price when drafting a new agreement, the new
 `suggestedMaxAmount` field is set to what the maximum price could be each interval.
