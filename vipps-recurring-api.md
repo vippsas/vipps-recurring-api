@@ -1207,7 +1207,7 @@ GET charge response where amount is higher than the users max amount:
 ```
 
 The user will also see a failure description on the charge in the app and a
-push notification will be sent if enabled.
+push notification will be sent .
 
 Display of charge failure due to a charge being higher than the `maxAmount` in Vipps:
 ![variable_amount_charge](images/variable_amount_charge.png)
