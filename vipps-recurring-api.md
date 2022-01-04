@@ -830,9 +830,6 @@ Scenario: The user does not have funds on the `due` date, `retryDays = 10`, and 
 the charge status appears to "skip" a transition, e.g. moving directly from
 `PENDING` to `CHARGED`, or even from `PENDING` to `REFUNDED`
 depending on your systems.
-The `DUE` status is not normally seen, as a charge usually only has this status
-for a brief period of time, but merchants must still make sure they can handle
-this, and all other, statuses.
 
 ## Userinfo
 
