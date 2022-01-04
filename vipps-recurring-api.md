@@ -668,7 +668,7 @@ Vipps recurring payment will have a description with follow format
 ### Charge times
 
 Charge _attempts_ are primarily made two times during the day: 07:00 and 15:00 UTC.
-Vipps may change this without notice.
+Vipps may do extra attempts and/or change this without notice.
 The processing of charges typically takes around one hour, however this varies and we do not guarantee any time.
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
