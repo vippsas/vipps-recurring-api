@@ -1054,7 +1054,7 @@ recommended the user to choose the same amount as `suggestedMaxAmount`. The max
 amount can at any time be changed by the user. What the user has picked as their
 max amount will be available in the `GET agreement` response. Its recommended
 that when you set the `suggestedMaxAmount`, that you set a realistic amount -
-as setting it to unrealistic amounts might scare of the user when they accept
+as setting it to unrealistic amounts might scare off the user when they accept
 the agreement.
 
 ### How it works
