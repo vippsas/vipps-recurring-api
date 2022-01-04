@@ -350,7 +350,7 @@ actively check the payment with
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement.
-Vipps does not have any specific requirements for the security of the page, but
+Vipps does not have any specific requirements for the security of the page, other than using https, but
 strongly recommend using
 [Vipps Logg Inn](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not need a username or password, but is logged
