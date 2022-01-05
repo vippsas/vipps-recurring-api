@@ -33,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.4.2.
+Document version 2.5.0.
 
 ## Table of Contents
 
@@ -62,6 +62,7 @@ Document version 2.4.2.
   - [Charge times](#charge-times)
   - [Charge retries](#charge-retries)
   - [Retrieve a charge](#retrieve-a-charge)
+  - [Retrieve all charges](#retrieve-all-charges)
 - [Manage charges and agreements](#manage-charges-and-agreements)
   - [Agreement states](#agreement-states)
   - [Update an agreement](#update-an-agreement)
@@ -725,6 +726,11 @@ Example response:
 ```
 
 See: [Charge states](#charge-states).
+
+### Retrieve all charges
+
+A charges for an agreement can be retrieved with
+[`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges).
 
 ## Manage charges and agreements
 
