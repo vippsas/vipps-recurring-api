@@ -722,8 +722,14 @@ Example response:
   "status": "PENDING",
   "transactionId": "5001419121",
   "type": "RECURRING",
+  "failureReason": "insufficient_funds",
+  "failureDescription": "Payment was declined by the payer bank due to lack of funds"
 }
 ```
+
+**Please note:** `failureReason` and `failureDescription` are experimental, and
+will soon be replaced by an event log. Subscribe to the technical newsletter
+to get updates: https://github.com/vippsas/vipps-developers/tree/master/newsletters
 
 See: [Charge states](#charge-states).
 
@@ -836,6 +842,37 @@ Scenario: The user does not have funds on the `due` date, `retryDays = 10`, and 
 the charge status appears to "skip" a transition, e.g. moving directly from
 `PENDING` to `CHARGED`, or even from `PENDING` to `REFUNDED`
 depending on your systems.
+
+## Charge failure reasons
+
+**Please note:** `failureReason` and `failureDescription` are experimental, and
+will soon be replaced by an event log. Subscribe to the technical newsletter
+to get updates: https://github.com/vippsas/vipps-developers/tree/master/newsletters
+
+When fetching a charge through the API, you can find two fields in the response
+body to identify why the charge failed `failureReason` and `failureDescription`.
+
+An example from a response:
+
+```json
+{
+  "status": "FAILED",
+  "type": "RECURRING",
+  "failureReason": "insufficient_funds",
+  "failureDescription": "Payment was declined by the payer bank due to lack of funds"
+}
+```
+
+Here is a list of possible values for `failureReason`, their respective descriptions and possible actions that the user/merchant could take.
+
+| Reason | Description | Action |
+| ---- | ----------- | ------ |
+| insufficient_funds | Payment was declined by the payer bank due to lack of funds. | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
+| invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
+| verification_required | Payment declined because the issuing bank requires verification. | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue. |
+| invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. |
+| charge_amount_too_high | Amount is higher than the users specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
+| internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
 
 ## Userinfo
 
