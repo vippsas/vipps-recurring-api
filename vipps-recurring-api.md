@@ -33,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.5.0.
+Document version 2.5.1.
 
 ## Table of Contents
 
@@ -977,6 +977,9 @@ Example `sub` and `userinfoUrl` format:
 This `sub` is a link between the merchant and the user and can used to retrieve
 the user's details from Vipps userinfo:
 [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-recurring-api/#/Userinfo%20Endpoint/getUserinfo)
+
+The `sub` is based on the user's national identity number ("fødselsnummer"
+in Norway), and does not change (except in very special cases).
 
 **Please note:** It is recommended to get the user's information directly after
 completing the transaction. There is however a _time limit of 168 hours_
