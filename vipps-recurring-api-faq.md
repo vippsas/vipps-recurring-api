@@ -214,10 +214,9 @@ Vipps offers a
 [Postman collection](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-postman.md)
 that can be used if needed.
 
-Vipps has previously handled the above by creating a new MSN to use with the
+**Please note:** Vipps has previously handled the above by creating a new MSN to use with the
 new partner. We no longer offer this, as it creates a lot of additional work,
-it results in a confusing user experience for Vipps users. It is also quite
-time-consuming, and we must prioritize other work.
+and it results in a confusing user experience for Vipps users. 
 
 ## Is there an API for retrieving information about a Vipps user?
 
