@@ -214,6 +214,12 @@ Vipps offers a
 [Postman collection](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-postman.md)
 that can be used if needed.
 
+When the merchant wants to remove the old partner's access to the MSN,
+the merchant can log in on
+[portal.vipps.no](https://portal.vipps.no)
+and regenerate the MSN's API keys.
+That will make the MSN's old API keys invalid and unusable.
+
 **Please note:** Vipps has previously handled the above by creating a new MSN to use with the
 new partner. We no longer offer this, as it creates a lot of additional work,
 and it results in a confusing user experience for Vipps users - and partners.
