@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.4.5.
+Document version: 1.5.0.
 
 ## Table of Contents
 
@@ -32,6 +32,7 @@ Document version: 1.4.5.
 * [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 * [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
 * [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps-can-new-charges-be-made-to-that-card)
+* [How can I change partner for my integration with Vipps?](#how-can-i-change-partner-for-my-integration-with-vipps)
 * [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
 * [Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?](#does-the-recent-24092020-changes-in-terms-regarding-valid-reservations-affect-my-agreements)
 * [Settlement](#settlement)
@@ -175,6 +176,47 @@ Users may want to charge different Agreements to different cards, and we do
 not want to automatically make changes to payment sources. Instead, we notify
 users as described in
 [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
+
+## How can I change partner for my integration with Vipps?
+
+If the merchant changes partners, the merchant's MSN (Merchant Serial Number,
+identifying the sale unit) must be updated so the new partner's
+[partner keys](https://github.com/vippsas/vipps-partner#partner-keys)
+can be used for the MSN.
+
+The MSN can only be used with one set of partner keys at a time,
+so in the transition period this requires some effort from
+both the merchant and the partners.
+
+This is the recommended way:
+
+1. The merchant logs in on
+   [portal.vipps.no](https://portal.vipps.no)
+   and retrieves the API keys for the MSN as documented in
+   [Getting started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#getting-the-api-keys).
+2. The merchant securely provides the API keys to _both_ the
+   old partner and the new partner. This ensures that both partners can
+   make API calls for the MSN, regardless of each partner's
+   [partner keys](https://github.com/vippsas/vipps-partner#partner-keys)
+3. The new partner
+   [contacts Partnerbestilling](https://github.com/vippsas/vipps-developers/blob/master/contact.md#we-help-with-technical-issues)
+   and orders a change for the MSN: It now has New Partner as partner.
+4. The new partner's partner keys now work for the MSN,
+   and the old partner's partner keys do no longer work for this MSN.
+5. The new partner uses its partner keys.
+   The old partner must use the merchant's own API keys,
+   which they got in step 2.
+
+Both partners can use the merchant's own API keys if there are "special"
+API calls to make in the transition period.
+Vipps offers a
+[Postman collection](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-postman.md)
+that can be used if needed.
+
+Vipps has previously handled the above by creating a new MSN to use with the
+new partner. We no longer offer this, as it creates a lot of additional work,
+it results in a confusing user experience for Vipps users. It is also quite
+time-consuming, and we must prioritize other work.
 
 ## Is there an API for retrieving information about a Vipps user?
 
