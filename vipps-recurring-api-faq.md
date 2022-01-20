@@ -216,7 +216,7 @@ that can be used if needed.
 
 **Please note:** Vipps has previously handled the above by creating a new MSN to use with the
 new partner. We no longer offer this, as it creates a lot of additional work,
-and it results in a confusing user experience for Vipps users. 
+and it results in a confusing user experience for Vipps users - and partners.
 
 ## Is there an API for retrieving information about a Vipps user?
 
