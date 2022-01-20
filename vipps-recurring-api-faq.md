@@ -192,17 +192,18 @@ This is the recommended way:
 
 1. The merchant logs in on
    [portal.vipps.no](https://portal.vipps.no)
-   and retrieves the API keys for the MSN as documented in
+   and retrieves the API keys for the MSN, as documented in
    [Getting started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#getting-the-api-keys).
 2. The merchant securely provides the API keys to _both_ the
    old partner and the new partner. This ensures that both partners can
    make API calls for the MSN, regardless of each partner's
-   [partner keys](https://github.com/vippsas/vipps-partner#partner-keys)
-3. The new partner
-   [contacts Partnerbestilling](https://github.com/vippsas/vipps-developers/blob/master/contact.md#we-help-with-technical-issues)
-   and orders a change for the MSN: It now has New Partner as partner.
+   [partner keys](https://github.com/vippsas/vipps-partner#partner-keys).
+3. The new partner contacts
+   [Partnerbestilling](https://github.com/vippsas/vipps-developers/blob/master/contact.md#we-help-with-technical-issues)
+   and orders a change for the MSN. When this is done, the MSN has the new
+   partner as partner.
 4. The new partner's partner keys now work for the MSN,
-   and the old partner's partner keys do no longer work for this MSN.
+   and the old partner's partner keys has stopped working for this MSN.
 5. The new partner uses its partner keys.
    The old partner must use the merchant's own API keys,
    which they got in step 2.
