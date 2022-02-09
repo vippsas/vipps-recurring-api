@@ -50,6 +50,7 @@ Document version: 1.5.2.
  We _will_ however retry a charge, created by the merchant, multiple times before we stop.
 
  For more details, see our [call-by-call guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#call-by-call-guide)
+ 
  ## Do I need to store card data?
 
  No. Vipps handles all payment details.
