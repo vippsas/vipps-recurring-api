@@ -48,7 +48,7 @@ Document version: 1.5.2.
  If the merchant doesn't create a charge, nothing will be done.
  ## Do I need to store card data?
 
- No. Vipps all payment details.
+ No. Vipps handles all payment details.
 
 ## Why do I get the error `merchant.not.allowed.for.recurring.operation`?
 
