@@ -11,10 +11,12 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.5.1.
+Document version: 1.5.2.
 
 ## Table of Contents
 
+* [Does Vipps automatically create charges for an agreement?](#does-vipps-automatically-create-charges-for-an-agreement)
+* [Do I need to store card data?](#do-i-need-to-store-card-data)
 * [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
 * [Can I look up a user's information?](#can-i-look-up-a-users-information)
 * [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
@@ -38,6 +40,15 @@ Document version: 1.5.1.
 * [Settlement](#settlement)
 * [Invoicing](#invoicing)
 * [Questions?](#questions)
+
+## Does Vipps automatically create charges for an agreement?
+ 
+ No. Vipps does _not_ create charges based on the agreement, this is left up to the merchant to create.  
+ When a merchant creates a charge, Vipps will actually attempt to charge the customer.  
+ If the merchant doesn't create a charge, nothing will be done.
+ ## Do I need to store card data?
+
+ No. Vipps all payment details.
 
 ## Why do I get the error `merchant.not.allowed.for.recurring.operation`?
 
