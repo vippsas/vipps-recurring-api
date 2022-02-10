@@ -44,13 +44,10 @@ Document version: 1.5.2.
 ## Does Vipps automatically create charges for an agreement?
  
  No. Vipps does _not_ create charges based on the agreement, this is left up to the merchant to create.  
- When a merchant creates a charge, Vipps will actually attempt to charge the customer.  
- If the merchant doesn't create a charge, nothing will be done.
-
- We _will_ however retry a charge, created by the merchant, multiple times before we stop.
+ When a merchant creates a charge, Vipps will actually attempt to charge the customer, starting on the `due date` and for as long as specified in `retryDays`.
 
  For more details, see our [call-by-call guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#call-by-call-guide)
- 
+
  ## Do I need to store card data?
 
  No. Vipps handles all payment details.
