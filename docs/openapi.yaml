@@ -20,11 +20,12 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.5.3
+  version: 2.5.4
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
-  - name: Agreement Endpoints
+  - name: Agreement V2 Endpoints
+  - name: Agreement V3 Endpoints
   - name: Charge Endpoints
   - name: Userinfo Endpoint
 paths:
@@ -84,7 +85,7 @@ paths:
   "/recurring/v2/agreements":
     get:
       tags:
-        - Agreement Endpoints
+        - Agreement V2 Endpoints
       summary: List Agreements
       operationId: listAgreements
       description: >-
@@ -129,7 +130,7 @@ paths:
           $ref: "#/components/responses/TimeoutError"
     post:
       tags:
-        - Agreement Endpoints
+        - Agreement V2 Endpoints
       summary: Create a new Agreement, to be confirmed in Vipps
       operationId: draftAgreement
       description: >-
@@ -179,7 +180,7 @@ paths:
   "/recurring/v2/agreements/{agreementId}":
     get:
       tags:
-        - Agreement Endpoints
+        - Agreement V2 Endpoints
       summary: Fetch an Agreement
       operationId: getAgreement
       description: >-
@@ -217,7 +218,7 @@ paths:
           $ref: "#/components/responses/TimeoutError"
     patch:
       tags:
-        - Agreement Endpoints
+        - Agreement V2 Endpoints
       summary: Update an Agreement
       operationId: updateAgreement
       description: >-
@@ -259,6 +260,394 @@ paths:
           $ref: "#/components/responses/UnavailableError"
         "504":
           $ref: "#/components/responses/TimeoutError"
+
+  "/v3/agreements":
+    get:
+      tags:
+        - Agreement V3 Endpoints
+      summary: List Agreements
+      operationId: ListAgreementsV3
+      description: >-
+        The API call allows merchant to fetch all agreements.
+        If no query status is supplied it will default to only retrieving active agreements.
+        There is no way to list all Agreements with all statuses, this is due to performance.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - name: status
+          in: query
+          required: false
+          description: Filter by status of the agreement.
+          schema:
+            $ref: "#/components/schemas/AgreementStatus"
+        - name: createdAfter
+          in: query
+          description: Filter by agreement start date in miliseconds.
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: integer
+          example: 1644572442944
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgreementResponseV3'
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/UnsupportedFeatureError"
+        "422":
+          description: Unprocessable Entity (invalid json)
+        "429":
+          $ref: "#/components/responses/RateLimitError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+      deprecated: false
+    post:
+      tags:
+        - Agreement V3 Endpoints
+      summary: Create a new Agreement, to be confirmed in Vipps
+      operationId: DraftAgreementV3
+      description: >-
+        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
+          </br>
+          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+          </br>
+          Please note the different use cases for `initialCharge` and `compaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgreementRequestV3'
+            examples:
+              Minimal:
+                value:
+                  currency: NOK
+                  interval: MONTH
+                  intervalCount: 1
+                  isApp: true
+                  merchantRedirectUrl: https://merchant.redirect.url.no
+                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  customerPhoneNumber: '45678272'
+                  price: 2500
+                  productDescription: MyNews on web
+                  productName: MyNews Digital
+                  skipLandingPage: true
+              With Initial Charge:
+                description: If you want the customer to pay to activate the agreement, you should add an initial charge. If the amount on the initial charge is not the same as the agreement/campaign price, it will show up as a separate payment bubble in the app.
+                value:
+                  currency: NOK
+                  interval: MONTH
+                  intervalCount: 1
+                  isApp: true
+                  merchantRedirectUrl: https://merchant.redirect.url.no
+                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  customerPhoneNumber: '45678272'
+                  price: 2500
+                  productDescription: MyNews on web
+                  productName: MyNews Digital
+                  skipLandingPage: true
+                  initialCharge:
+                    amount: 100
+                    currency: NOK
+                    description: Initial Charge
+                    transactionType: DIRECT_CAPTURE
+              With Price Campaign:
+                description: A price campaign allows you to communicate that the agreement price is rebated until a given date, ie. "1kr per week until 04.05.2022, then 39 per week".
+                value:
+                  currency: NOK
+                  interval: MONTH
+                  intervalCount: 1
+                  isApp: true
+                  merchantRedirectUrl: https://merchant.redirect.url.no
+                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  customerPhoneNumber: '45678272'
+                  price: 2500
+                  productDescription: MyNews on web
+                  productName: MyNews Digital
+                  skipLandingPage: true
+                  campaign:
+                    type: PRICE_CAMPAIGN
+                    price: 100
+                    end: 2022/02/28T00:00:00Z
+              With Period Campaign:
+                description: A period campaign allows you to communicate a campaign where the user pays a fixed price for a given period before the normal agreement starts, ie. "4 weeks for 1 kr". Should be combined with an initial charge to get money on activation.
+                value:
+                  currency: NOK
+                  interval: MONTH
+                  intervalCount: 1
+                  isApp: true
+                  merchantRedirectUrl: https://merchant.redirect.url.no
+                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  customerPhoneNumber: '45678272'
+                  price: 2500
+                  productDescription: MyNews on web
+                  productName: MyNews Digital
+                  skipLandingPage: true
+                  campaign:
+                    type: PERIOD_CAMPAIGN
+                    price: 100
+                    period: WEEK
+                    periodCount: 4
+                  initialCharge:
+                    amount: 100
+                    currency: NOK
+                    description: Activation Charge
+                    transactionType: DIRECT_CAPTURE
+              With Event Campaign:
+                description: A period campaign allows you to communicate a campaign where the user pays a fixed price until a given event before the normal agreement starts, ie. "Until Christmas for 1 kr". Should be combined with an initial charge to get money on activation.
+                value:
+                  currency: NOK
+                  interval: MONTH
+                  intervalCount: 1
+                  isApp: true
+                  merchantRedirectUrl: https://merchant.redirect.url.no
+                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  customerPhoneNumber: '45678272'
+                  price: 2500
+                  productDescription: MyNews on web
+                  productName: MyNews Digital
+                  skipLandingPage: true
+                  campaign:
+                    type: EVENT_CAMPAIGN
+                    price: 100
+                    eventDate: '2022-12-25T00:00:00Z'
+                    eventText: Until Christmas
+                  initialCharge:
+                    amount: 100
+                    currency: NOK
+                    description: Activation Charge
+                    transactionType: DIRECT_CAPTURE
+              With Full Flex Campaign:
+                value:
+                  currency: NOK
+                  interval: MONTH
+                  intervalCount: 1
+                  isApp: true
+                  merchantRedirectUrl: https://merchant.redirect.url.no
+                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  customerPhoneNumber: '45678272'
+                  price: 2500
+                  productDescription: MyNews on web
+                  productName: MyNews Digital
+                  skipLandingPage: true
+                  campaign:
+                    type: FULL_FLEX_CAMPAIGN
+                    price: 100
+                    end: '2022-03-13T00:00:00Z'
+                    interval: WEEK
+                    intervalCount: 2
+              With Variable Amount:
+                description: An agreement where the price can vary and the user choose a max amount they can be charged each interval.
+                value:
+                  currency: NOK
+                  interval: MONTH
+                  intervalCount: 1
+                  isApp: true
+                  merchantRedirectUrl: https://merchant.redirect.url.no
+                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  customerPhoneNumber: '45678272'
+                  productDescription: Power on web
+                  productName: MyNews Digital
+                  skipLandingPage: true
+                  variableAmount:
+                    suggestedMaxAmount: 3000
+              With Profile Flow:
+                description: User consents to sharing data that can be retrieved after they accept the agreement.
+                value:
+                  currency: NOK
+                  interval: MONTH
+                  intervalCount: 1
+                  isApp: true
+                  merchantRedirectUrl: https://merchant.redirect.url.no
+                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  customerPhoneNumber: '45678272'
+                  price: 2500
+                  productDescription: Power on web
+                  productName: MyNews Digital
+                  scope: address name email birthDate phoneNumber
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementReference'
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/UnsupportedFeatureError"
+        "422":
+          description: Unprocessable Entity (invalid json)
+        "429":
+          $ref: "#/components/responses/RateLimitError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+      deprecated: false
+  /v3/agreements/{agreementId}:
+    get:
+      tags:
+        - Agreement V3 Endpoints
+      summary: Fetch an Agreement
+      operationId: FetchAgreementV3
+      description: >-
+        Fetch a single agreement for a user. Recomended to use when polling for status changes after sending an agreement to a user.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementResponseV3'
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/UnsupportedFeatureError"
+        "422":
+          description: Unprocessable Entity (invalid json)
+        "429":
+          $ref: "#/components/responses/RateLimitError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+      deprecated: false
+    patch:
+      tags:
+        - Agreement V3 Endpoints
+      summary: Update an Agreement
+      operationId: UpdateAgreementPatchV3
+      description: >-
+        Updates the agreement. Note that when updating the status to "STOPPED", you can not re-activate it. If you want to pause an agreement, we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchAgreementV3'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgreementReference'
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          $ref: "#/components/responses/UnsupportedFeatureError"
+        "422":
+          description: Unprocessable Entity (invalid json)
+        "429":
+          $ref: "#/components/responses/RateLimitError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+      deprecated: false
+
+  "/v3/agreements/{agreementId}/accept":
+    patch:
+      tags:
+        - Agreement V3 Endpoints
+      summary: Force accept an Agreement (Only available in test environment)
+      operationId: acceptUsingPATCHV3
+      description: >-
+        Forces an agreement to be accepted by the given customer phone number. This endpoint
+        can only be used in the test environment.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AgreementForceAccept"
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "409":
+          $ref: "#/components/responses/ServerError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+      deprecated: false
 
   "/recurring/v2/agreements/{agreementId}/charges":
     get:
@@ -359,7 +748,7 @@ paths:
   "/recurring/v2/agreements/{agreementId}/accept":
     patch:
       tags:
-        - Agreement Endpoints
+        - Agreement V2 Endpoints
       summary: Force accept an agreement (Only available in test environment)
       operationId: forceAcceptAgreement
       description: >-
@@ -975,6 +1364,190 @@ components:
             We do not have any specific requirements for the security of the page.
           example: https://www.example.com/vipps-subscriptions/1234/
 
+    AgreementRequestV3:
+      type: object
+      required:
+        - currency
+        - interval
+        - intervalCount
+        - isApp
+        - merchantAgreementUrl
+        - merchantRedirectUrl
+        - price
+        - productName
+      properties:
+        campaign:
+          description: A campaign is a way to make a temporary alteration in the agreement to make it more tempting for a customer. Like a given period for a set price before the normal agreement starts, a period of rebated price, etc.
+          $ref: '#/components/schemas/campaignV3'
+        currency:
+          type: string
+          example: NOK
+          enum:
+            - NOK
+        customerPhoneNumber:
+          type: string
+          example: '+4740000000'
+          description: Customers phone number (if available). Used to simplify the following Vipps interaction
+        initialCharge:
+          $ref: '#/components/schemas/InitialCharge'
+        interval:
+          type: string
+          example: WEEK
+          description: Interval for subscription
+          enum:
+            - YEAR
+            - MONTH
+            - WEEK
+            - DAY
+        intervalCount:
+          type: integer
+          format: int32
+          example: 2
+          description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year'
+          minimum: 1
+          maximum: 31
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        isApp:
+          type: boolean
+          example: true
+          description: If merchant is redirecting user from an app.
+        merchantAgreementUrl:
+          type: string
+          example: https://www.merchant.no/subscriptions/1234/
+          description: URL where Vipps can redirect the customer to view/administer their subscription.
+        merchantRedirectUrl:
+          type: string
+          example: https://api.merchant.no/landing
+          description: URL where customer should be redirected after the agreement has been approved/rejected in the Vipps mobile application.
+        price:
+          type: integer
+          format: int32
+          example: 7900
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+        productDescription:
+          type: string
+          example: Fin abonnementspakke
+        productName:
+          type: string
+          example: Pluss-abonnement
+          description: Name of the product being subscribed to.
+        scope:
+          type: string
+          example: name nin birthDate email phoneNumber address
+          description: Space separated list of scopes for retrieving userdata after user has accepted an agreement.
+        variableAmount:
+          $ref: '#/components/schemas/VariableAmount'
+
+    AgreementResponseV3:
+      type: object
+      properties:
+        campaign:
+          description: A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date
+          $ref: '#/components/schemas/campaignV3'
+        currency:
+          type: string
+          example: NOK
+          enum:
+            - NOK
+        id:
+          type: string
+          example: agr_5kSeqzFAMkfBbc
+          description: Uniquely identifies this agreement
+          readOnly: true
+        interval:
+          type: string
+          example: WEEK
+          description: Interval for subscription
+          enum:
+            - DAY
+            - WEEK
+            - MONTH
+            - YEAR
+        intervalCount:
+          type: integer
+          format: int32
+          example: 2
+          description: 'Number of intervals between charges. Example: interval=WEEK, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.'
+          minimum: 1
+          maximum: 31
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        price:
+          type: integer
+          format: int32
+          example: 7900
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+        productDescription:
+          type: string
+          example: Fin abonnementspakke
+        productName:
+          type: string
+          example: Pluss-abonnement
+          description: Name of the product being subscribed to.
+        start:
+          type: string
+          example: '2019-01-01T00:00:00Z'
+          description: Date when agreement was started.
+          readOnly: true
+        status:
+          type: string
+          example: ACTIVE
+          description: Status of the agreement.
+          enum:
+            - PENDING
+            - ACTIVE
+            - STOPPED
+            - EXPIRED
+        stop:
+          type: string
+          example: '2019-01-01T00:00:00Z'
+          description: Date when agreement was stopped.
+          readOnly: true
+        merchantAgreementUrl:
+          type: string
+          example: https://www.merchant.no/subscriptions/1234/
+          description: URL where Vipps can redirect the customer to view/administer their subscription.
+        sub:
+          type: string
+          example: 8d7de74e-0243-11eb-adc1-0242ac120002
+          description: User identifier (subject). Will be null if profile data was not requested.
+        userinfoUrl:
+          type: string
+          example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
+          description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
+        variableAmount:
+                  $ref: "#/components/schemas/VariableAmount"
+      title: Agreement
+
+    PatchAgreementV3:
+      type: object
+      properties:
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          example: 7900
+          minimum: 100
+          description: Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+        productDescription:
+          type: string
+          example: Fin abonnementspakke
+        productName:
+          type: string
+          example: Pluss-abonnement
+          description: Name of the product being subscribed to.
+        merchantAgreementUrl:
+          type: string
+          example: https://www.merchant.no/subscriptions/1234/
+          description: URL where Vipps can redirect the customer to view/administer their subscription.
+        status:
+          type: string
+          example: ACTIVE
+          description: Status of the agreement.
+          enum:
+            - STOPPED
+      title: PatchAgreement
+      
     AgreementReference:
       type: object
       required:
@@ -1073,6 +1646,74 @@ components:
               format: date-time
               description: The date and time the campaign starts in ISO 8601 format. Needs to be UTC.
               example: "2019-06-01T00:00:00Z"
+    campaignV3:
+      title: campaign
+      type: object
+      required:
+        - type
+        - price
+      properties:
+        type:
+          type: string
+          description: The type of campaign. This decides which properties are required
+          enum:
+            - PRICE_CAMPAIGN
+            - PERIOD_CAMPAIGN
+            - EVENT_CAMPAIGN
+            - FULL_FLEX_CAMPAIGN
+        price:
+          type: integer
+          format: int32
+          example: 1500
+          description: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+        end:
+          type: string
+          example: '2019-06-01T00:00:00Z'
+          description: The date and time the campaign ends. Needs to be UTC
+        eventDate:
+          type: string
+          example: '2019-06-01T00:00:00Z'
+          description: The date and time the campaign ends. Needs to be UTC
+        eventText:
+          type: string
+          example: Until Christmas
+          description: A short text that describes the event
+        interval:
+          type: string
+          example: WEEK
+          description: Interval for subscription in the campaign period
+          enum:
+            - YEAR
+            - MONTH
+            - WEEK
+            - DAY
+        intervalCount:
+          type: integer
+          format: int32
+          example: 2
+          description: 'Number of intervals between charges in the campaign. Example: interval=week, intervalCount=2 to be able to charge every two weeks.'
+          minimum: 1
+          maximum: 31
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        period:
+          type: string
+          example: WEEK
+          description: Period type for subscription
+          enum:
+            - YEAR
+            - MONTH
+            - WEEK
+            - DAY
+        periodCount:
+          type: integer
+          format: int32
+          example: 2
+          description: 'Number of periods that the campaign price pays for. Example: period=week, periodCount=2 to say that you pay for two weeks'
+          minimum: 1
+          maximum: 31
+          exclusiveMinimum: false
+          exclusiveMaximum: false
     InitialCharge:
       type: object
       required:
