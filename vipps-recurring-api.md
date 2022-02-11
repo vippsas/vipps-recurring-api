@@ -534,7 +534,7 @@ A reserved charge can be captured with
 [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
 when the product is shipped.
 
-### Campaigns
+### Campaigns V2 
 
 A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
@@ -566,6 +566,46 @@ date-time is used. All dates must be in date-time format as according to
 | `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
 | `end`            | End date of campaign offer, can not be in the past |
 | `campaignPrice`       | The price that will be shown for comparison   |
+
+### Campaigns V3
+
+A campaign in recurring is a period where the price is lower than usual, and
+this is communicated to the customer with the original price shown for comparison.
+Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
+
+| Campaign types       | Description                                                                           | Example |
+| -------------------- | --------------------------------------------------------------------------------------| ---------- |
+| `price campaign`     | One different price until a set date. Same interval. (Fixed interval, variable price) | 10 kroner per 2 weeks interval until 2022-05-01T00:00:00Z
+| `period campaign`    | A set price for a given duration (period of time) (a number of time units).           | 1 kroner for 6 months
+| `event campaign`     | A set price for a given duration (until a specific date)                              | 20 kr until Christmas
+| `full flex campaign` | Different prices and different intervals                                              | 10 kroners per week for 4 weeks, after that 200 kr a month
+
+![Campaign example](images/CampaignExample.PNG)
+
+In order to start a campaign the campaign field has to be added either to the agreement draft
+[`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
+for a campaign in the start of an agreement
+
+
+```json
+{
+  "campaign": {
+    "campaignType": "PRICE_CAMPAIGN",
+    "end": "2022-06-01T00:00:00Z",
+    "price": 49900
+  }
+}
+```
+
+| Field               | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `campaignType`      | The type of the campaign: PERIOD_CAMPAIGN, PRICE_CAMPAIGN,EVENT_CAMPAIGN or FULL_FLEX_CAMPAIGN  |
+| `price`             | The price that the customer will pay during the campaign |
+| `end`               | The price that will be shown for comparison   |
+| `period`               | The price that will be shown for comparison   |
+| `periodCount`               | The price that will be shown for comparison   |
+| `interval`               | The price that will be shown for comparison   |
+| `intervalCount`               | The price that will be shown for comparison   |
 
 ### Retrieve an agreement
 
