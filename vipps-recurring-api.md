@@ -35,9 +35,9 @@ with [Postman collection](tools/),
 [Integration checklist](vipps-recurring-api-checklist.md),
 [FAQ](vipps-recurring-api-faq.md).
 
-API version: 1.0.0.
+API version: 3.0.0.
 
-Document version 2.5.3.
+Document version 2.6.0.
 
 ## Table of Contents
 
