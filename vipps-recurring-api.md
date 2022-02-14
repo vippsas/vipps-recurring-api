@@ -1,5 +1,9 @@
 # Vipps Recurring API
 
+# todo change all link to swagger to v3 endpoints
+# todo change v2 into v3
+
+
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user the merchant can send charges
@@ -317,11 +321,11 @@ See [Charges](#charges).
 ### Create an agreement
 
 Create an agreement:
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
+[`POST:/recurring/v3/agreements`][draft-agreement-endpoint].
 
 This code illustrates how to create an agreement:
 
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
+[`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
 
 ```json
 {
@@ -356,7 +360,7 @@ actively check the payment with
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement.
-Vipps does not have any specific requirements for the security of the page, other than using https, but
+Vipps does not have any specific requirements for the security of the page, other than using **https**, but
 strongly recommend using
 [Vipps Logg Inn](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not need a username or password, but is logged
@@ -365,7 +369,7 @@ in automatically through Vipps. See the
 for more details.
 
 The request parameters have the following size limits
-(see [`POST:/recurring/v2/agreements`][draft-agreement-endpoint] for more details):
+(see [`POST:/recurring/v3/agreements`][draft-agreement-endpoint] for more details):
 
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
@@ -384,7 +388,7 @@ There are 100 øre in 1 krone.
 
 The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`.
 This `agreementResource` is a complete URL for performing a
-[`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
+[`GET:/recurring/v3/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
 request.
 
 The `vippsConfirmationUrl` should be used to redirect the
@@ -394,12 +398,12 @@ user can then approve the agreement.
 
 ### Accept an agreement
 
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint] will return the following JSON structure.
+[`POST:/recurring/v3/agreements`][draft-agreement-endpoint] will return the following JSON structure.
 
 ```json
 {
   "vippsConfirmationUrl": "https://api.vipps.no/dwo-api-application/v1/deeplink/vippsgateway?v=2/token=eyJraWQiOiJqd3RrZXkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDE0MmIxYy02YjI",
-  "agreementResource": "https://api.vipps.no-recurring/v2/agreements/agr_TGSuPyV",
+  "agreementResource": "https://api.vipps.no-recurring/v3/agreements/agr_TGSuPyV",
   "agreementId": "agr_TGSuPyV"
 }
 ```
@@ -534,59 +538,28 @@ A reserved charge can be captured with
 [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
 when the product is shipped.
 
-### Campaigns V2 
+### Campaigns
 
-A campaign in recurring is a period where the price is lower than usual, and
-this is communicated to the customer with the original price shown for comparison.
-Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
-
-![Campaign example](images/CampaignExample.PNG)
-
-In order to start a campaign the campaign field has to be added either to the agreement draft
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
-for a campaign in the start of an agreement or update an agreement
-[`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)
-for an ongoing agreement. When adding a campaign
-while drafting a new agreement the start date is ignored and the current
-date-time is used. All dates must be in date-time format as according to
-[RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
-
-```json
-{
-  "campaign": {
-    "start": "2019-05-01T00:00:00Z",
-    "end": "2019-06-01T00:00:00Z",
-    "campaignPrice": 49900
-  }
-}
-```
-
-| Field         | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
-| `end`            | End date of campaign offer, can not be in the past |
-| `campaignPrice`       | The price that will be shown for comparison   |
-
-### Campaigns V3
-
-A campaign in recurring is a period where the price is lower than usual, and
-this is communicated to the customer with the original price shown for comparison.
+**#todo** check if orginal price is shown for all campaign types
+Campaigns can be used to lower the price of the agreement for a limited amount of time.
+Recurring supports 4 different campaign types : price campaign, period campaign, event campaign, full flex campaign, see more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
 Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
 
 | Campaign types       | Description                                                                           | Example |
 | -------------------- | --------------------------------------------------------------------------------------| ---------- |
-| `price campaign`     | One different price until a set date. Same interval. (Fixed interval, variable price) | 10 kroner per 2 weeks interval until 2022-05-01T00:00:00Z
-| `period campaign`    | A set price for a given duration (period of time) (a number of time units).           | 1 kroner for 6 months
-| `event campaign`     | A set price for a given duration (until a specific date)                              | 20 kr until Christmas
-| `full flex campaign` | Different prices and different intervals                                              | 10 kroners per week for 4 weeks, after that 200 kr a month
+| `price campaign`     | A set price until a set date. Same interval as agreement. | 10kr per 2 weeks interval until 2022-05-01T00:00:00Z and then 200kr per 2 weeks interval
+| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR)              | 1kr for 6 months and then 100kr each month
+| `event campaign`     | A set price for until a given date with a text description for a given event                            | 20kr until Christmas and then 100kr each month
+| `full flex campaign` | A set price for a different interval until a given date                                             | 10kr per week until 2022-05-01T00:00:00Z and then 200kr a month
 
-![Campaign example](images/CampaignExample.PNG)
+# todo add screenshots of the app with different campaigns
+![Campaign example]()
 
-In order to start a campaign the campaign field has to be added either to the agreement draft
+In order to start a campaign the campaign field has to be added to the agreement draft
 [`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
 for a campaign in the start of an agreement
 
-
+Price campaign
 ```json
 {
   "campaign": {
@@ -596,16 +569,68 @@ for a campaign in the start of an agreement
   }
 }
 ```
-
 | Field               | Description                                 |
 | ------------------- | ------------------------------------------- |
-| `campaignType`      | The type of the campaign: PERIOD_CAMPAIGN, PRICE_CAMPAIGN,EVENT_CAMPAIGN or FULL_FLEX_CAMPAIGN  |
+| `campaignType`      | The type of the campaign |
 | `price`             | The price that the customer will pay during the campaign |
-| `end`               | The price that will be shown for comparison   |
-| `period`               | The price that will be shown for comparison   |
-| `periodCount`               | The price that will be shown for comparison   |
-| `interval`               | The price that will be shown for comparison   |
-| `intervalCount`               | The price that will be shown for comparison   |
+| `end`               | The end date of the campaign   |
+
+Period campaign
+```json
+{
+ "campaign": {
+    "type": "PERIOD_CAMPAIGN",
+    "price": 100,
+    "period": "WEEK",
+    "periodCount": 4
+  }
+}
+```
+| Field               | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `campaignType`      | The type of the campaign |
+| `price`             | The price that the customer will pay during the campaign |
+| `period`               | The period where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR |
+| `periodCount`               | The number of periods the campaign should run for   |
+
+
+Event campaign
+```json
+{
+"campaign": {
+    "type": "EVENT_CAMPAIGN",
+    "price": 100,
+    "eventDate": "2022-12-25T00:00:00Z",
+    "eventText": "Until Christmas"
+  }
+}
+```
+| Field               | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `campaignType`      | The type of the campaign  |
+| `price`             | The price that the customer will pay during the campaign |
+| `eventDate`               | The date of the event marking the end of the campaign   |
+| `eventText`               | Name of the event to display to the end user   |
+
+Full flex campaign
+```json
+{
+ "campaign": {
+    "type": "FULL_FLEX_CAMPAIGN",
+    "price": 100,
+    "end": "2022-03-13T00:00:00Z",
+    "interval": "WEEK",
+    "intervalCount": 2
+  }
+}
+```
+| Field               | Description                                 |
+| ------------------- | ------------------------------------------- |
+| `campaignType`      | The type of the campaign |
+| `price`             | The price that the customer will pay during the campaign |
+| `end`               | The end date of the campaign   |
+| `interval`          | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
+| `intervalCount`     | The frequency of how often the user should be charged   |
 
 ### Retrieve an agreement
 
@@ -614,13 +639,14 @@ If the customer approves the agreement, and the initialCharge (if provided) is s
 processed, the agreement status will change to `ACTIVE`.
 
 The approved agreement is retrieved from
-[`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
+[`GET:/recurring/v3/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
 with `"status":"ACTIVE"` when the customer has approved the agreement.
 
 See [Agreement states](#agreement-states).
 
 This is an example response from a call to
-[`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement):
+# todo change shortcut to v3 swagger
+[`GET:/recurring/v3/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement):
 
 ```json
 {
@@ -826,6 +852,8 @@ when setting an agreement status to `STOPPED` no other changes are allowed.
 Attempts at changing other properties while stopping an agreement will result
 in a `400 Bad Request` response.
 
+# TODO make a V3 version 
+
 ### Pause an agreement
 
 If there should be a pause in an agreement, like a temporary stop of a
@@ -978,12 +1006,12 @@ Scenario: You want to complete a payment and get the name and phone number of
 a customer.
 
 1. Retrieve the access token:
-   [`POST:/recurring/v2/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Endpoints/getAccessToken).
+   [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Endpoints/getAccessToken).
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
-   access to (valid scope) before calling [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
+   access to (valid scope) before calling [`POST:/recurring/v3/agreements`][draft-agreement-endpoint].
 3. The user consents to the information sharing and accepts the agreement in Vipps.
 4. Retrieve the `sub` by calling
-   [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
+   [`GET:/recurring/v3/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
 5. Using the sub from step 4, call
    [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-recurring-api/#/Userinfo%20Endpoint/getUserinfo)
    to retrieve the user's information.
@@ -997,7 +1025,7 @@ and will result in a `HTTP Unauthorized 401` error.
 ### Example calls
 
 To request this scope add the scope to the initial call to
-[`POST:​/v2​/agreements`][draft-agreement-endpoint]
+[`POST:​/v23/agreements`][draft-agreement-endpoint]
 
 Example of request with scope:
 
@@ -1024,7 +1052,7 @@ complete a valid agreement and consent to all values in order to complete the
 session. If a user chooses to reject the terms the agreement will not be
 processed. Unless the whole flow is completed, this will be handled as a regular failed agreement by the recurring APIs.
 
-Once the user completes the session a unique identifier `sub` can be retrieved in the agreement details [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) endpoint alongside the full URL to Userinfo.
+Once the user completes the session a unique identifier `sub` can be retrieved in the agreement details [`GET:/recurring/v3/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) endpoint alongside the full URL to Userinfo.
 
 Example `sub` and `userinfoUrl` format:
 
@@ -1204,6 +1232,8 @@ Accepting agreement in Vipps:
 Variable amount and initial charge can be combined:
 ![variable_amount_accept_initial](images/variable_amount_accept_initial.png)
 
+# TODO add v3 documentation
+
 #### Get agreement
 
 Retrieving the agreement shows the `maxAmount` that was picked by the user.
@@ -1324,7 +1354,7 @@ Skipping the landing page is only reserved for physical points of sale and vendi
 This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
 
 If the `skipLandingPage` property is set to `true` in the
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
+[`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
 call, it will cause a push notification to be sent to the given phone number
 immediately, without loading the landing page.
 
@@ -1564,5 +1594,6 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
+# todo update shorcut to v3 swagger endpoint
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement
 [vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md
