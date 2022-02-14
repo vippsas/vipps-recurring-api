@@ -694,6 +694,8 @@ See:
 
 ### Amount changes
 
+# todo should be changed if rule about campaign price is enforced
+
 The `amount` of a charge is flexible and does not have to match the
 `price` of the agreement.
 
@@ -818,17 +820,18 @@ and to use the API to make sure everything is in sync.
 
 ### Agreement states
 
+# todo update shortcut to v3 endpoints
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Agreement has been created, but not approved by the user in Vipps yet |
 | 2 | `ACTIVE` | The agreement has been confirmed by the end user in Vipps and can receive charges |
-| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement), or by the user by cancelling or rejecting the agreement. |
+| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by [`PATCH:/recurring/v3/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement), or by the user by cancelling or rejecting the agreement. |
 | 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in Vipps |
 
 ### Update an agreement
 
 A merchant can update an agreement by calling
-[`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement).
+[`PATCH:/recurring/v3/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement).
 The following properties are available for updating:
 
 ```json
@@ -836,13 +839,7 @@ The following properties are available for updating:
   "productName": "A new name",
   "productDescription": "A new description",
   "merchantAgreementUrl": "https://www.example.com/vipps-subscriptions/1234/",
-  "price": 25000,
-  "status": "ACTIVE",
-  "campaign": {
-    "start": "2019-10-01T00:00:00Z",
-    "end": "2019-12-01T00:00:00Z",
-    "campaignPrice": 10000
-  },
+  "status": "STOPPED",
   "suggestedMaxAmount": 300000
 }
 ```
@@ -851,8 +848,6 @@ The following properties are available for updating:
 when setting an agreement status to `STOPPED` no other changes are allowed.
 Attempts at changing other properties while stopping an agreement will result
 in a `400 Bad Request` response.
-
-# TODO make a V3 version 
 
 ### Pause an agreement
 
@@ -971,7 +966,7 @@ You can learn more at the [OIDC Standard](https://openid.net/specs/openid-connec
 
 To enable the possibility to fetch profile information for a user the merchant can add a `scope`
 parameter to the draft agreement call:
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
+[`POST:/recurring/v3/agreements`][draft-agreement-endpoint].
 
 If the user has not already consented to sharing information from Vipps to the
 merchant the user will be asked for such consent before activating the agreement.
@@ -1025,7 +1020,7 @@ and will result in a `HTTP Unauthorized 401` error.
 ### Example calls
 
 To request this scope add the scope to the initial call to
-[`POST:​/v23/agreements`][draft-agreement-endpoint]
+[`POST:​/v3/agreements`][draft-agreement-endpoint]
 
 Example of request with scope:
 
@@ -1231,8 +1226,6 @@ Accepting agreement in Vipps:
 
 Variable amount and initial charge can be combined:
 ![variable_amount_accept_initial](images/variable_amount_accept_initial.png)
-
-# TODO add v3 documentation
 
 #### Get agreement
 
@@ -1511,7 +1504,7 @@ To facilitate automated testing in the
 [Vipps Test Environment (MT)][vipps-test-environment],
 the Vipps Recurring API provides a "force accept" endpoint to avoid manual
 agreement acceptance in the Vipps app:
-[`POST:/recurring/v2/agreements/{agreementId}/accept`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/forceAcceptAgreement).
+[`POST:/recurring/v3/agreements/{agreementId}/accept`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/forceAcceptAgreement).
 
 The "force approve" endpoint allows developers to approve a payment through the
 Vipps Recurring API without the use of Vipps. This is useful for automated testing.
@@ -1568,6 +1561,8 @@ Initial charges are designed to be used whenever there is an additional cost in 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, as well as having to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be payed upon entering the agreement. If used for campaigns, be sure to have good descriptions in `productName` and `productDescription` on the agreement, as well as `description` on the initial charge.
 
 ### Campaign
+
+# todo update campaign flow image
 
 ![flow_Campaign](images/flow-Campaign.png)
 
