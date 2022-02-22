@@ -612,6 +612,9 @@ Event campaign
 ![event campaign](images/eventCampaignExample.png)
 
 Full flex campaign
+
+**Note:** todo contact vipps before creating agreement with full flex campaign 
+
 ```json
 {
  "campaign": {
