@@ -1,8 +1,6 @@
 # Vipps Recurring API
 
 # todo change all link to swagger to v3 endpoints
-# todo change v2 into v3
-
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
@@ -666,6 +664,20 @@ This is an example response from a call to
   "campaign": null
 }
 ```
+
+### List agreements
+
+It is possible to retrieve all agreements by calling [`GET:/recurring/v3/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) todo change to list
+By default, this endpoint will return only "ACTIVE" agreements.
+
+Query parameters available 
+| Query parameter               | Description                                 | Example                                 |
+| -------------------           | ------------------------------------------- | ------------------------------------------- |
+| `status`                      | Filter by status of the agreement(PENDING, ACTIVE, EXPIRED, STOPPED) | ?status=ACTIVE |
+| `createdAfter`                | Filter by agreement start date in miliseconds | ?createdAfter=1645543020311 |
+| `filter`                      | Filter on agreement. Currently only supporting 'ACTIVE_CAMPAIGNS' filter | ?filter=ACTIVE_CAMPAIGNS |
+
+**Note:** Listing all agreements can result in a timeout if there are many agreements. Use createdAfter query for pagination.
 
 ## Charges
 
@@ -1574,10 +1586,17 @@ This is the preferred flow whenever you have a type of campaign where the subscr
 
 **Note:** Campaign is not supported for `variableAmount` agreements.
 
-### Event campaign flow
+### Price campaign flow
+![flow_Campaign](images/priceCampaignFlow.png)
+
+### Period campaign flow
+![flow_Campaign](images/periodCampaignFlow.png)
+
+### Full flex campaign flow
 ![flow_Campaign](images/eventCampaignFlow.png)
 
-# todo update campaign flow image
+### Event campaign flow
+![flow_Campaign](images/fullFlexCampaignFlow.png)
 
 ### Initial charge and campaign
 
