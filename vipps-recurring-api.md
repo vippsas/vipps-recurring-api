@@ -706,7 +706,7 @@ For example, in the agreement
 a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
 hindrance the agreement `price` can be [updated](#update-an-agreement).
 
-From XXX (todo set date) new rules will be enforced : 
+From August 1st, 2022 new rules will be enforced : 
 - The `amount` of a charge is flexible but can not be higher than the `agreement price`.
 
 - For an agreement with a campaign, the `amount` of a charge is flexible but can not be higher than the campaign price until the campaign expires. After that, the `amount` of a charge is flexible but can not be higher than the `agreement price`.
