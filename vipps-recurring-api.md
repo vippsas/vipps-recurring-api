@@ -540,7 +540,6 @@ when the product is shipped.
 
 ### Campaigns
 
-**#todo** check if orginal price is shown for all campaign types
 Campaigns can be used to lower the price of the agreement for a limited amount of time.
 Recurring supports 4 different campaign types : price campaign, period campaign, event campaign, full flex campaign, see more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
 Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
@@ -551,9 +550,6 @@ Campaigns can not be used in combination with variable amount, see more about va
 | `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR)              | 1kr for 6 months and then 100kr each month
 | `event campaign`     | A set price for until a given date with a text description for a given event                            | 20kr until Christmas and then 100kr each month
 | `full flex campaign` | A set price for a different interval until a given date                                             | 10kr per week until 2022-05-01T00:00:00Z and then 200kr a month
-
-# todo add screenshots of the app with different campaigns
-![Campaign example]()
 
 In order to start a campaign the campaign field has to be added to the agreement draft
 [`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
@@ -575,6 +571,8 @@ Price campaign
 | `price`             | The price that the customer will pay during the campaign |
 | `end`               | The end date of the campaign   |
 
+![price campaign](images/priceCampaignExample.png)
+
 Period campaign
 ```json
 {
@@ -593,6 +591,7 @@ Period campaign
 | `period`               | The period where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR |
 | `periodCount`               | The number of periods the campaign should run for   |
 
+![period campaign](images/periodCampaignExample.png)
 
 Event campaign
 ```json
@@ -611,6 +610,8 @@ Event campaign
 | `price`             | The price that the customer will pay during the campaign |
 | `eventDate`               | The date of the event marking the end of the campaign   |
 | `eventText`               | Name of the event to display to the end user   |
+
+![event campaign](images/eventCampaignExample.png)
 
 Full flex campaign
 ```json
@@ -631,6 +632,8 @@ Full flex campaign
 | `end`               | The end date of the campaign   |
 | `interval`          | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
 | `intervalCount`     | The frequency of how often the user should be charged   |
+
+![full flex campaign](images/fullFlexCampaignExample.png)
 
 ### Retrieve an agreement
 
@@ -692,9 +695,7 @@ future (it is minimum one day in the test environment), and all charges `due` in
 See:
 [orderId recommendations](#orderid-recommendations).
 
-### Amount changes
-
-# todo should be changed if rule about campaign price is enforced
+### Charge amount
 
 The `amount` of a charge is flexible and does not have to match the
 `price` of the agreement.
@@ -705,9 +706,15 @@ For example, in the agreement
 a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
 hindrance the agreement `price` can be [updated](#update-an-agreement).
 
-**Note:** Although it is _technically_ possible to increase the price 10
-times, we **strongly** recommend to be as user-friendly as possible, and
-to make sure the user understands any changes and get updated information.
+#todo set date
+From XXX 
+- The `amount` of a charge is flexible but can not be higher than the `agreement price`.
+
+- For an agreement with a campaign, the `amount` of a charge is flexible but can not be higher than the campaign price until the campaign expires. After that, the `amount` of a charge is flexible but can not be higher than the `agreement price`.
+
+- For an agreement with variable amount, see [create charge for agreement with variable amount](#create-charge)
+
+
 
 ### Charge descriptions
 
@@ -1562,15 +1569,16 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 
 ### Campaign
 
-# todo update campaign flow image
-
-![flow_Campaign](images/flow-Campaign.png)
-
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. Here as well you have options of setting `productName` and `productDescription` to even further explain to the user.
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
 **Note:** Campaign is not supported for `variableAmount` agreements.
+
+### Event campaign flow
+![flow_Campaign](images/eventCampaignFlow.png)
+
+# todo update campaign flow image
 
 ### Initial charge and campaign
 
