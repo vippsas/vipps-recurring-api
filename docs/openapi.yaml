@@ -294,6 +294,15 @@ paths:
           schema:
             type: integer
           example: 1644572442944
+        - name: filter
+          in: query
+          description: Filter on agreement. Currently only supporting 'ACTIVE_CAMPAIGNS' filter
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          example: ACTIVE_CAMPAIGNS
+
       responses:
         '200':
           description: OK
