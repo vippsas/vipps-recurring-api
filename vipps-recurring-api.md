@@ -678,7 +678,6 @@ Query parameters available
 | -------------------           | ------------------------------------------- | ------------------------------------------- |
 | `status`                      | Filter by status of the agreement(PENDING, ACTIVE, EXPIRED, STOPPED) | ?status=ACTIVE |
 | `createdAfter`                | Filter by agreement start date in miliseconds | ?createdAfter=1645543020311 |
-| `filter`                      | Filter on agreement. Currently only supporting 'ACTIVE_CAMPAIGNS' filter | ?filter=ACTIVE_CAMPAIGNS |
 
 **Note:** Listing all agreements can result in a timeout if there are many agreements. Use createdAfter query for pagination.
 
