@@ -723,11 +723,10 @@ hindrance the agreement `price` can be [updated](#update-an-agreement).
 From August 1st, 2022 new rules will be enforced : 
 - The `amount` of a charge is flexible but can not be higher than the `agreement price`.
 
-- For an agreement with a campaign, the `amount` of a charge is flexible but can not be higher than the campaign price until the campaign expires. After that, the `amount` of a charge is flexible but can not be higher than the `agreement price`.
+- For an agreement with a `campaign`, the `amount` of a charge is flexible but can not be higher than the campaign price until the campaign expires. After that, the `amount` of a charge is flexible but can not be higher than the `agreement price`. 
+If the agreement was created with an initial charge and the initial charge amount is the same amount as the campaign price, then no new charges can be created until the next interval for the campaign.
 
-- For an agreement with variable amount, see [create charge for agreement with variable amount](#create-charge)
-
-
+- For an agreement with `variable amount`, see [create charge for agreement with variable amount](#create-charge)
 
 ### Charge descriptions
 
