@@ -461,9 +461,9 @@ as possible.
 ### Initial charge
 
 **Please note:** Use
-[Campaigns](#campaigns)
+[Campaigns](#campaigns) in combination with initial charge
 if the subscription is cheaper in the beginning than the normal price later.
-If you use `initialcharge` for campaigns, users will be confused by how it appears in Vipps,
+If you use `initialcharge` alone for campaigns, users will be confused by how it appears in Vipps,
 as it looks like the full price period starts immediately.
 
 Initial charge will be performed if the `initialcharge` is provided when
