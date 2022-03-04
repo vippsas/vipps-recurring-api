@@ -613,7 +613,7 @@ Event campaign
 
 Full flex campaign
 
-**Note:** todo contact vipps before creating agreement with full flex campaign 
+**Note:** TODO Contact Vipps before making a full flex campaign
 
 ```json
 {
