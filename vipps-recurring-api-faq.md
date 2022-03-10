@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.5.2.
+Document version: 1.5.3.
 
 ## Table of Contents
 
@@ -42,7 +42,7 @@ Document version: 1.5.2.
 * [Questions?](#questions)
 
 ## Does Vipps automatically create charges for an agreement?
- 
+
  No. Vipps does _not_ create charges based on the agreement, this is left up to the merchant to create.  
  When a merchant creates a charge, Vipps will actually attempt to charge the customer, starting on the `due date` and for as long as specified in `retryDays`.
 
@@ -65,8 +65,8 @@ and have completed some additional KYC checks required by Finanstilsynet.
 Vipps is required to perform some extra compliance checks before
 activating the Vipps Recurring API.
 
-Please
-[contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
+Please order "Vipps Faste betalinger" on
+[portal.vipps.no](https://portal.vipps.no)
 to get access to the Recurring API in production.
 
 ## Can I look up a user's information?
