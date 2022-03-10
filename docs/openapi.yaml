@@ -268,7 +268,7 @@ paths:
       summary: List Agreements
       operationId: ListAgreementsV3
       description: >-
-        The API call allows merchant to fetch all agreements.
+        Lists agreements filtered by query parameters.
         If no query status is supplied it will default to only retrieving active agreements.
         There is no way to list all Agreements with all statuses, this is due to performance.
       parameters:
@@ -288,7 +288,7 @@ paths:
             $ref: "#/components/schemas/AgreementStatus"
         - name: createdAfter
           in: query
-          description: Filter by agreement start date in miliseconds.
+          description: Filter by agreement start date in milliseconds.
           required: false
           allowEmptyValue: false
           schema:
@@ -354,8 +354,8 @@ paths:
                   interval: MONTH
                   intervalCount: 1
                   isApp: true
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirected-from-vipps
+                  merchantAgreementUrl: https://example.com/agreement/1234
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
