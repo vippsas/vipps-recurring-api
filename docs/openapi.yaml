@@ -1212,8 +1212,7 @@ components:
         price:
           type: integer
           format: int32
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
-            = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
           minimum: 100
           example: 39900
         productName:
@@ -1245,8 +1244,7 @@ components:
         price:
           type: integer
           format: int32
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
-            = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
           minimum: 0
           example: 39900
         productName:
@@ -1315,8 +1313,7 @@ components:
         price:
           type: integer
           format: int32
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
-            = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
           minimum: 100
           example: 39900
         productName:
@@ -1425,7 +1422,7 @@ components:
           type: integer
           format: int32
           example: 7900
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
         productDescription:
           type: string
           example: Fin abonnementspakke
@@ -1478,7 +1475,7 @@ components:
           type: integer
           format: int32
           example: 7900
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
         productDescription:
           type: string
           example: Fin abonnementspakke
@@ -1529,7 +1526,7 @@ components:
           format: int32
           example: 7900
           minimum: 100
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
         productDescription:
           type: string
           example: Fin abonnementspakke
@@ -1726,8 +1723,7 @@ components:
         amount:
           type: integer
           format: int32
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
-            = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
           example: 49900
           minimum: 100
         currency:
@@ -1757,8 +1753,7 @@ components:
         amount:
           type: integer
           format: int32
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
-            = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
           example: 49900
           minimum: 100
         currency:
@@ -1815,8 +1810,7 @@ components:
         amount:
           type: integer
           format: int32
-          description: Treated as a whole sum postfixed with two decimals for cents, eg 234
-            = 2.34 NOK
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
           example: 39900
         amountRefunded:
           type: integer
@@ -1825,7 +1819,7 @@ components:
             The total amount which has been refunded, in case of status
             refund/partial refund.
 
-            Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+            Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
           example: 39900
         description:
           type: string
@@ -1899,7 +1893,8 @@ components:
           description: >-
             The total amount which has been refunded, in case of status
             refund/partial refund.
-            Treated as a whole sum postfixed with two decimals for cents, eg 234 = 2.34 NOK
+
+            Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
           minimum: 100
           example: 49900
         description:
