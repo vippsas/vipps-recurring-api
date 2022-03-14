@@ -1170,7 +1170,6 @@ GET agreement response:
     "campaign": null,
     "sub": null,
     "userinfoUrl": null,
-    "tags": [],
     "variableAmount": {
         "suggestedMaxAmount": 200000,
         "maxAmount": 180000
