@@ -1348,12 +1348,6 @@ components:
           format: uri
           description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
-        tags:
-          type: array
-          items:
-            type: string
-          description: Tags agreement if payments fail in a way that implies that the users payment source needs to be updated.
-          example: ["payment-source-issue"]
         merchantAgreementUrl:
           type: string
           description: URL where Vipps can send the customer to view/manage their
@@ -1848,23 +1842,27 @@ components:
         failureReason:
           type: string
           enum:
-             - internal_error
-             - insufficient_funds
-             - invalid_card
-             - verification_required
-             - invalid_payment_source
-          example: "insufficient_funds"
+             - user_action_required
+             - charge_amount_too_high
+             - non_technical_error
+             - technical_error
+          example: "user_action_required"
           description: >
              Identifies the reason why the charged has been marked as `FAILED`:
-               * `internal_error` - Something went wrong and the error couldn't be categorized.
-               * `insufficient_funds` - Payment was declined by the payer bank due to lack of funds.
-               * `invalid_card` - The user tried to pay using a card that has either expired or is disabled by the issuer.
-               * `verification_required` - Payment declined because the issuing bank requires verification, e.g. BankID/3DS.
-               * `invalid_payment_source` - The provided payment source is disabled or does not exist.
+               * `user_action_required` - The users card can not fullfill the payment, user needs to take action in Vipps. 
+                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
+               
+               * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
+               
+               * `non_technical_error` - Something went wrong with charging the user.
+                  Examples: User has deleted their Vipps Profile.
+               
+               * `technical_error` - Something went wrong in Recurring while performing the payment.
+                  Examples: Failure in Recurring, failure in downstream services.
         failureDescription:
            type: string
            description: Description for the failure reason
-           example: "Payment was declined by the payer bank due to lack of funds"          
+           example: "User action required"          
     VippsApiError:
       type: object
       required:
