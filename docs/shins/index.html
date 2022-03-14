@@ -2560,9 +2560,6 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
     <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
     <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-    <span class="hljs-attr">&quot;tags&quot;</span>: [
-      <span class="hljs-string">&quot;payment-source-issue&quot;</span>
-    ],
     <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>
   }
 ]
@@ -2886,13 +2883,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
-</tr>
-<tr>
-<td>» tags</td>
-<td>[string]</td>
-<td>false</td>
-<td>none</td>
-<td>Tags agreement if payments fail in a way that implies that the users payment source needs to be updated.</td>
 </tr>
 <tr>
 <td>» merchantAgreementUrl</td>
@@ -4086,9 +4076,6 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
   <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
   <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-  <span class="hljs-attr">&quot;tags&quot;</span>: [
-    <span class="hljs-string">&quot;payment-source-issue&quot;</span>
-  ],
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>
 }
 </code></pre>
@@ -8932,8 +8919,8 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;PENDING&quot;</span>,
     <span class="hljs-attr">&quot;transactionId&quot;</span>: <span class="hljs-string">&quot;5001419121&quot;</span>,
     <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
-    <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;insufficient_funds&quot;</span>,
-    <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;Payment was declined by the payer bank due to lack of funds&quot;</span>
+    <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;user_action_required&quot;</span>,
+    <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>
   }
 ]
 </code></pre>
@@ -9079,7 +9066,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>internal_error</code> - Something went wrong and the error couldn't be categorized.<br />  * <code>insufficient_funds</code> - Payment was declined by the payer bank due to lack of funds.<br />  * <code>invalid_card</code> - The user tried to pay using a card that has either expired or is disabled by the issuer.<br />  * <code>verification_required</code> - Payment declined because the issuing bank requires verification, e.g. BankID/3DS.<br />  * <code>invalid_payment_source</code> - The provided payment source is disabled or does not exist.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fullfill the payment, user needs to take action in Vipps. <br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br />  <br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br />  <br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br />  <br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>» failureDescription</td>
@@ -9145,23 +9132,19 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>failureReason</td>
-<td>internal_error</td>
+<td>user_action_required</td>
 </tr>
 <tr>
 <td>failureReason</td>
-<td>insufficient_funds</td>
+<td>charge_amount_too_high</td>
 </tr>
 <tr>
 <td>failureReason</td>
-<td>invalid_card</td>
+<td>non_technical_error</td>
 </tr>
 <tr>
 <td>failureReason</td>
-<td>verification_required</td>
-</tr>
-<tr>
-<td>failureReason</td>
-<td>invalid_payment_source</td>
+<td>technical_error</td>
 </tr>
 </tbody>
 </table>
@@ -10053,8 +10036,8 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;PENDING&quot;</span>,
   <span class="hljs-attr">&quot;transactionId&quot;</span>: <span class="hljs-string">&quot;5001419121&quot;</span>,
   <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
-  <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;insufficient_funds&quot;</span>,
-  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;Payment was declined by the payer bank due to lack of funds&quot;</span>
+  <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;user_action_required&quot;</span>,
+  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>
 }
 </code></pre>
 <h3 id="fetch-a-charge-responses">Responses</h3>
@@ -12076,9 +12059,6 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
   <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
   <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-  <span class="hljs-attr">&quot;tags&quot;</span>: [
-    <span class="hljs-string">&quot;payment-source-issue&quot;</span>
-  ],
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>
 }
 
@@ -12192,13 +12172,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>[string]</td>
-<td>false</td>
-<td>none</td>
-<td>Tags agreement if payments fail in a way that implies that the users payment source needs to be updated.</td>
 </tr>
 <tr>
 <td>merchantAgreementUrl</td>
@@ -13292,8 +13265,8 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;PENDING&quot;</span>,
   <span class="hljs-attr">&quot;transactionId&quot;</span>: <span class="hljs-string">&quot;5001419121&quot;</span>,
   <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
-  <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;insufficient_funds&quot;</span>,
-  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;Payment was declined by the payer bank due to lack of funds&quot;</span>
+  <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;user_action_required&quot;</span>,
+  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>
 }
 
 </code></pre>
@@ -13370,7 +13343,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>internal_error</code> - Something went wrong and the error couldn't be categorized.<br />  * <code>insufficient_funds</code> - Payment was declined by the payer bank due to lack of funds.<br />  * <code>invalid_card</code> - The user tried to pay using a card that has either expired or is disabled by the issuer.<br />  * <code>verification_required</code> - Payment declined because the issuing bank requires verification, e.g. BankID/3DS.<br />  * <code>invalid_payment_source</code> - The provided payment source is disabled or does not exist.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fullfill the payment, user needs to take action in Vipps. <br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br />  <br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br />  <br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br />  <br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>failureDescription</td>
@@ -13392,23 +13365,19 @@ System.out.println(response.toString());
 <tbody>
 <tr>
 <td>failureReason</td>
-<td>internal_error</td>
+<td>user_action_required</td>
 </tr>
 <tr>
 <td>failureReason</td>
-<td>insufficient_funds</td>
+<td>charge_amount_too_high</td>
 </tr>
 <tr>
 <td>failureReason</td>
-<td>invalid_card</td>
+<td>non_technical_error</td>
 </tr>
 <tr>
 <td>failureReason</td>
-<td>verification_required</td>
-</tr>
-<tr>
-<td>failureReason</td>
-<td>invalid_payment_source</td>
+<td>technical_error</td>
 </tr>
 </tbody>
 </table>
