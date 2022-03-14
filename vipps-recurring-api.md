@@ -37,67 +37,71 @@ Document version 2.5.1.
 
 ## Table of Contents
 
-- [Terminology](#terminology)
-- [Flow diagram](#flow-diagram)
-- [Call by call guide](#call-by-call-guide)
-  - [Direct capture](#direct-capture)
-  - [Reserve capture](#reserve-capture)
-  - [Vipps screenshots](#vipps-screenshots)
-- [API endpoints](#api-endpoints)
-- [Authentication](#authentication)
-- [Vipps HTTP headers](#vipps-http-headers)
-  - [Example headers](#example-headers)
-- [orderId recommendations](#orderid-recommendations)
-- [Agreements](#agreements)
-  - [Create an agreement](#create-an-agreement)
-  - [Accept an agreement](#accept-an-agreement)
-  - [Intervals](#intervals)
-  - [Initial charge](#initial-charge)
-  - [Campaigns](#campaigns)
-  - [Retrieve an agreement](#retrieve-an-agreement)
-- [Charges](#charges)
-  - [Create a charge](#create-a-charge)
-  - [Amount changes](#amount-changes)
-  - [Charge descriptions](#charge-descriptions)
-  - [Charge times](#charge-times)
-  - [Charge retries](#charge-retries)
-  - [Retrieve a charge](#retrieve-a-charge)
-  - [Retrieve all charges](#retrieve-all-charges)
-- [Manage charges and agreements](#manage-charges-and-agreements)
-  - [Agreement states](#agreement-states)
-  - [Update an agreement](#update-an-agreement)
-  - [Pause an agreement](#pause-an-agreement)
-  - [Stop an agreement](#stop-an-agreement)
-  - [Charge states](#charge-states)
-- [Userinfo](#userinfo)
-  - [Scope](#scope)
-  - [Userinfo call by call guide](#userinfo-call-by-call-guide)
-  - [Example calls](#example-calls)
-  - [Userinfo call](#userinfo-call)
-  - [Consent](#consent)
-- [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)
-  - [How it works](#how-it-works)
-    - [Create agreement](#create-agreement)
-    - [Get agreement](#get-agreement)
-    - [Change suggestedMaxAmount](#change-suggestedmaxamount)
-    - [Create charge](#create-charge)
-    - [Charge amount higher than the users max amount](#charge-amount-higher-than-the-users-max-amount)
-- [Skip landing page](#skip-landing-page)
-- [HTTP responses](#http-responses)
-- [Rate limiting](#rate-limiting)
-- [Partner keys](#partner-keys)
-- [Polling guidelines](#polling-guidelines)
-- [Timeouts](#timeouts)
-  - [Using a phone](#using-a-phone)
-  - [Using a laptop/desktop](#using-a-laptopdesktop)
+- [Vipps Recurring API](#vipps-recurring-api)
+  - [Table of Contents](#table-of-contents)
+  - [Terminology](#terminology)
+  - [Flow diagram](#flow-diagram)
+  - [Call by call guide](#call-by-call-guide)
+    - [Direct capture](#direct-capture)
+    - [Reserve capture](#reserve-capture)
+    - [Vipps screenshots](#vipps-screenshots)
+  - [API endpoints](#api-endpoints)
+  - [Authentication](#authentication)
+  - [Vipps HTTP headers](#vipps-http-headers)
+    - [Example headers](#example-headers)
+  - [orderId recommendations](#orderid-recommendations)
+  - [Agreements](#agreements)
+    - [Create an agreement](#create-an-agreement)
+    - [Accept an agreement](#accept-an-agreement)
+    - [Intervals](#intervals)
+    - [Initial charge](#initial-charge)
+    - [Campaigns](#campaigns)
+    - [Retrieve an agreement](#retrieve-an-agreement)
+  - [Charges](#charges)
+    - [Create a charge](#create-a-charge)
+    - [Amount changes](#amount-changes)
+    - [Charge descriptions](#charge-descriptions)
+    - [Charge times](#charge-times)
+    - [Charge retries](#charge-retries)
+    - [Retrieve a charge](#retrieve-a-charge)
+    - [Retrieve all charges](#retrieve-all-charges)
+  - [Manage charges and agreements](#manage-charges-and-agreements)
+    - [Agreement states](#agreement-states)
+    - [Update an agreement](#update-an-agreement)
+    - [Pause an agreement](#pause-an-agreement)
+    - [Stop an agreement](#stop-an-agreement)
+    - [Charge states](#charge-states)
+    - [Example charge flows](#example-charge-flows)
+  - [Charge failure reasons](#charge-failure-reasons)
+  - [Userinfo](#userinfo)
+    - [Scope](#scope)
+    - [Userinfo call by call guide](#userinfo-call-by-call-guide)
+    - [Example calls](#example-calls)
+    - [Userinfo call](#userinfo-call)
+    - [Consent](#consent)
+  - [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)
+    - [How it works](#how-it-works)
+      - [Create agreement](#create-agreement)
+      - [Get agreement](#get-agreement)
+      - [Change suggestedMaxAmount](#change-suggestedmaxamount)
+      - [Create charge](#create-charge)
+      - [Charge amount higher than the users max amount](#charge-amount-higher-than-the-users-max-amount)
+  - [Skip landing page](#skip-landing-page)
+  - [HTTP responses](#http-responses)
+  - [Rate limiting](#rate-limiting)
+  - [Partner keys](#partner-keys)
+  - [Polling guidelines](#polling-guidelines)
+  - [Timeouts](#timeouts)
+    - [Using a phone](#using-a-phone)
+    - [Using a laptop/desktop](#using-a-laptopdesktop)
 - [Testing](#testing)
-- [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
-- [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
-  - [Normal agreement](#normal-agreement-flow)
-  - [Initial charge](#initial-charge-flow)
-  - [Campaign](#campaign)
-  - [Initial charge and campaign](#initial-charge-and-campaign)
-- [Questions?](#questions)
+  - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
+  - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
+    - [Normal agreement flow](#normal-agreement-flow)
+    - [Initial charge flow](#initial-charge-flow)
+    - [Campaign](#campaign)
+    - [Initial charge and campaign](#initial-charge-and-campaign)
+  - [Questions?](#questions)
 
 ## Terminology
 
@@ -722,14 +726,16 @@ Example response:
   "status": "PENDING",
   "transactionId": "5001419121",
   "type": "RECURRING",
-  "failureReason": "insufficient_funds",
-  "failureDescription": "Payment was declined by the payer bank due to lack of funds"
+  "failureReason": "user_action_required",
+  "failureDescription": "User action required"
 }
 ```
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will soon be replaced by an event log. Subscribe to the technical newsletter
 to get updates: https://github.com/vippsas/vipps-developers/tree/master/newsletters
+
+See more about [charge failure reason](#charge-failure-reasons).
 
 See: [Charge states](#charge-states).
 
@@ -858,8 +864,8 @@ An example from a response:
 {
   "status": "FAILED",
   "type": "RECURRING",
-  "failureReason": "insufficient_funds",
-  "failureDescription": "Payment was declined by the payer bank due to lack of funds"
+  "failureReason": "user_action_required",
+  "failureDescription": "User action required"
 }
 ```
 
@@ -867,12 +873,12 @@ Here is a list of possible values for `failureReason`, their respective descript
 
 | Reason | Description | Action |
 | ---- | ----------- | ------ |
-| insufficient_funds | Payment was declined by the payer bank due to lack of funds. | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
-| invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
-| verification_required | Payment declined because the issuing bank requires verification. | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue. |
-| invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. |
+| user_action_required | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. | User will get notified in Vipps and need to take action. This could be to add funds to the card or change the card on the agreement. |
 | charge_amount_too_high | Amount is higher than the users specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
-| internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
+| non_technical_error | Payment failed. Could be that the user has deleted their Vipps profile. | The user needs to take action in Vipps. |
+| technical_error | Payment failed due to a technical error in Recurring or a downstream service | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge. |
+
+The user get more information in Vipps regarding why the Charge did not get charged. If the charge has `retryDays` left, recurring wil continue to try and process the charge and notify the user.
 
 ## Userinfo
 
