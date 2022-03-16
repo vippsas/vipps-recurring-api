@@ -33,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.5.1.
+Document version 2.5.2.
 
 ## Table of Contents
 
@@ -351,7 +351,7 @@ The integrator ***must*** implement such functionality for the customer to manag
 **Please note:** If the user closes Vipps before the redirect is done,
 the `merchantRedirectUrl` will not be used. It is therefore important that you
 actively check the payment with
-[`GET:/recurring/v2/agreements/{agreementId}](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
+[`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement.
