@@ -25,7 +25,7 @@ info:
 tags:
   - name: Authorization Service
   - name: Agreement V2 Endpoints
-  - name: Agreement V3 Endpoints
+  - name: Coming soon - Agreement V3 Endpoints
   - name: Charge Endpoints
   - name: Userinfo Endpoint
 paths:
@@ -264,7 +264,7 @@ paths:
   "/v3/agreements":
     get:
       tags:
-        - Agreement V3 Endpoints
+        - Coming soon - Agreement V3 Endpoints
       summary: List Agreements
       operationId: ListAgreementsV3
       description: >-
@@ -323,7 +323,7 @@ paths:
       deprecated: false
     post:
       tags:
-        - Agreement V3 Endpoints
+        - Coming soon - Agreement V3 Endpoints
       summary: Create a new Agreement, to be confirmed in Vipps
       operationId: DraftAgreementV3
       description: >-
@@ -521,7 +521,7 @@ paths:
   /v3/agreements/{agreementId}:
     get:
       tags:
-        - Agreement V3 Endpoints
+        - Coming soon - Agreement V3 Endpoints
       summary: Fetch an Agreement
       operationId: FetchAgreementV3
       description: >-
@@ -562,7 +562,7 @@ paths:
       deprecated: false
     patch:
       tags:
-        - Agreement V3 Endpoints
+        - Coming soon - Agreement V3 Endpoints
       summary: Update an Agreement
       operationId: UpdateAgreementPatchV3
       description: >-
@@ -611,7 +611,7 @@ paths:
   "/v3/agreements/{agreementId}/accept":
     patch:
       tags:
-        - Agreement V3 Endpoints
+        - Coming soon - Agreement V3 Endpoints
       summary: Force accept an Agreement (Only available in test environment)
       operationId: acceptUsingPATCHV3
       description: >-
