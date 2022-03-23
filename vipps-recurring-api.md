@@ -741,7 +741,7 @@ See: [Charge states](#charge-states).
 
 ### Retrieve all charges
 
-A charges for an agreement can be retrieved with
+All charges, including the optional initial charge, for an agreement can be retrieved with
 [`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges).
 
 ## Manage charges and agreements
@@ -879,7 +879,7 @@ Here is a list of possible values for `failureReason`, their respective descript
 | technical_error | Payment failed due to a technical error in Recurring or a downstream service | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge. |
 | invalid_payment_source | The user's card for this agreement is no longer valid, and must be updated in Vipps. The card may have expired, etc. |
 
-The user gets more information in Vipps regarding why the Charge did not get charged. If they contact you about failing charges, you should refer them to Vipps. As long as the charge has `retryDays` left, we wil continue to try and process the charge and notify the user.
+The user gets more information in Vipps regarding why the Charge did not get charged. If they contact you about failing charges, you should refer them to Vipps. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
 
 ## Userinfo
 
