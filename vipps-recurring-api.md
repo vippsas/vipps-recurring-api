@@ -33,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.5.2.
+Document version 2.5.3.
 
 ## Table of Contents
 
@@ -877,6 +877,7 @@ Here is a list of possible values for `failureReason`, their respective descript
 | charge_amount_too_high | Amount is higher than the users specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
 | non_technical_error | Payment failed. Could be that the user has deleted their Vipps profile. | The user needs to take action in Vipps. |
 | technical_error | Payment failed due to a technical error in Recurring or a downstream service | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge. |
+| invalid_payment_source | The user's card for this agreement is no longer valid, and must be updated in Vipps. The card may have expired, etc. |
 
 The user gets more information in Vipps regarding why the Charge did not get charged. If they contact you about failing charges, you should refer them to Vipps. As long as the charge has `retryDays` left, we wil continue to try and process the charge and notify the user.
 
