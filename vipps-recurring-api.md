@@ -73,6 +73,7 @@ Document version 2.5.3.
     - [Charge states](#charge-states)
     - [Example charge flows](#example-charge-flows)
   - [Charge failure reasons](#charge-failure-reasons)
+    - [Deprecated failureReasons](#deprecated-failurereasons)
   - [Userinfo](#userinfo)
     - [Scope](#scope)
     - [Userinfo call by call guide](#userinfo-call-by-call-guide)
@@ -877,7 +878,19 @@ Here is a list of possible values for `failureReason`, their respective descript
 | charge_amount_too_high | Amount is higher than the users specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
 | non_technical_error | Payment failed. Could be that the user has deleted their Vipps profile. | The user needs to take action in Vipps. |
 | technical_error | Payment failed due to a technical error in Recurring or a downstream service | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge. |
-| invalid_payment_source | The user's card for this agreement is no longer valid, and must be updated in Vipps. The card may have expired, etc. |
+
+### Deprecated failureReasons
+
+The following `failureReasons` are no longer exposed on charges:
+
+| Reason | Description | Action |
+| ---- | ----------- | ------ |
+| insufficient_funds | Payment was declined by the payer bank due to lack of funds. | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
+| invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
+| verification_required | Payment declined because the issuing bank requires verification. | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue. |
+| invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. |
+| internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
+
 
 The user gets more information in Vipps regarding why the Charge did not get charged. If they contact you about failing charges, you should refer them to Vipps. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
 
