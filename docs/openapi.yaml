@@ -1588,13 +1588,14 @@ components:
       type: object
       required:
        - suggestedMaxAmount
-      description: VariableAmount can not be used togheter with campaign. See the documentation for more information about agreement with variable amount.
+      description: VariableAmount can not be used together with campaign. See the documentation for more information about agreement with variable amount.
       properties:
         suggestedMaxAmount:
           type: integer
           format: int32
           description: The suggested max amount of a charge each interval.
           minimum: 100
+          maximum: 2000000
           example: 40000
     CampaignRequest:
       type: object
