@@ -1151,7 +1151,7 @@ this will be ignored since the user picks the allowed max amount themselves.
 
 **Restrictions when using variable amount:**
 
-- There is currently a limit of **5 000 NOK** for the `suggestedMaxAmount`.
+- There is currently a limit of **20 000 NOK** for the `suggestedMaxAmount`.
 - `Campaign` can not be used when the agreement has `variableAmount`.
 
 The user will be presented with the variable agreement in Vipps,
