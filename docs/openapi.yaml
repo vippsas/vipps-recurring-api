@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.6.0
+  version: 2.6.1
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -657,7 +657,7 @@ paths:
       summary: List Charges
       operationId: listCharges
       description: >-
-        Fetches all charges for a single agreement.
+        Fetches all charges for a single agreement, including the optional initial charge.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
@@ -1539,7 +1539,7 @@ components:
           enum:
             - STOPPED
       title: PatchAgreement
-      
+
     AgreementReference:
       type: object
       required:
@@ -1849,20 +1849,20 @@ components:
           example: "user_action_required"
           description: >
              Identifies the reason why the charged has been marked as `FAILED`:
-               * `user_action_required` - The users card can not fullfill the payment, user needs to take action in Vipps. 
+               * `user_action_required` - The users card can not fullfill the payment, user needs to take action in Vipps.
                   Examples: Card is blocked for ecommerce, insufficient funds, expired card.
-               
+
                * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
-               
+
                * `non_technical_error` - Something went wrong with charging the user.
                   Examples: User has deleted their Vipps Profile.
-               
+
                * `technical_error` - Something went wrong in Recurring while performing the payment.
                   Examples: Failure in Recurring, failure in downstream services.
         failureDescription:
            type: string
            description: Description for the failure reason
-           example: "User action required"          
+           example: "User action required"
     VippsApiError:
       type: object
       required:
