@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.6.0</title>
+    <title>Recurring Payments Merchant API v2.6.1</title>
 
     <style>
     </style>
@@ -8778,7 +8778,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /recurring/v2/agreements/{agreementId}/charges</code></p>
-<p>Fetches all charges for a single agreement.</p>
+<p>Fetches all charges for a single agreement, including the optional initial charge.</p>
 <h3 id="list-charges-parameters">Parameters</h3>
 <table>
 <thead>
@@ -9066,7 +9066,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fullfill the payment, user needs to take action in Vipps. <br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br />  <br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br />  <br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br />  <br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fullfill the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>» failureDescription</td>
@@ -13343,7 +13343,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fullfill the payment, user needs to take action in Vipps. <br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br />  <br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br />  <br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br />  <br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fullfill the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>failureDescription</td>
