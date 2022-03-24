@@ -305,21 +305,21 @@ paths:
                 items:
                   $ref: '#/components/schemas/AgreementResponseV3'
         "400":
-          $ref: "#/components/responses/BadRequestError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "401":
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "403":
-          $ref: "#/components/responses/UnsupportedFeatureError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "422":
           description: Unprocessable Entity (invalid json)
         "429":
-          $ref: "#/components/responses/RateLimitError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "500":
-          $ref: "#/components/responses/ServerError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "503":
-          $ref: "#/components/responses/UnavailableError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "504":
-          $ref: "#/components/responses/TimeoutError"
+          $ref: "#/components/responses/ProblemErrorResponse"
       deprecated: false
     post:
       tags:
@@ -502,21 +502,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/AgreementReference'
         "400":
-          $ref: "#/components/responses/BadRequestError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "401":
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "403":
-          $ref: "#/components/responses/UnsupportedFeatureError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "422":
           description: Unprocessable Entity (invalid json)
         "429":
-          $ref: "#/components/responses/RateLimitError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "500":
-          $ref: "#/components/responses/ServerError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "503":
-          $ref: "#/components/responses/UnavailableError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "504":
-          $ref: "#/components/responses/TimeoutError"
+          $ref: "#/components/responses/ProblemErrorResponse"
       deprecated: false
   /v3/agreements/{agreementId}:
     get:
@@ -544,21 +544,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/AgreementResponseV3'
         "400":
-          $ref: "#/components/responses/BadRequestError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "401":
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "403":
-          $ref: "#/components/responses/UnsupportedFeatureError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "422":
           description: Unprocessable Entity (invalid json)
         "429":
-          $ref: "#/components/responses/RateLimitError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "500":
-          $ref: "#/components/responses/ServerError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "503":
-          $ref: "#/components/responses/UnavailableError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "504":
-          $ref: "#/components/responses/TimeoutError"
+          $ref: "#/components/responses/ProblemErrorResponse"
       deprecated: false
     patch:
       tags:
@@ -591,21 +591,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/AgreementReference'
         "400":
-          $ref: "#/components/responses/BadRequestError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "401":
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "403":
-          $ref: "#/components/responses/UnsupportedFeatureError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "422":
           description: Unprocessable Entity (invalid json)
         "429":
-          $ref: "#/components/responses/RateLimitError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "500":
-          $ref: "#/components/responses/ServerError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "503":
-          $ref: "#/components/responses/UnavailableError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "504":
-          $ref: "#/components/responses/TimeoutError"
+          $ref: "#/components/responses/ProblemErrorResponse"
       deprecated: false
 
   "/v3/agreements/{agreementId}/accept":
@@ -637,17 +637,17 @@ paths:
         "200":
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "401":
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "409":
-          $ref: "#/components/responses/ServerError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "500":
-          $ref: "#/components/responses/ServerError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "503":
-          $ref: "#/components/responses/UnavailableError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "504":
-          $ref: "#/components/responses/TimeoutError"
+          $ref: "#/components/responses/ProblemErrorResponse"
       deprecated: false
 
   "/recurring/v2/agreements/{agreementId}/charges":
@@ -1153,6 +1153,13 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/VippsApiError"
+    ProblemErrorResponse:
+      description: "Problem JSON error response"
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            $ref: "#/components/schemas/ProblemErrorResponse"
 
   schemas:
     AgreementRequest:
@@ -1864,6 +1871,44 @@ components:
            type: string
            description: Description for the failure reason
            example: "User action required"
+
+    ProblemErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "https://vipps.no/problems/recurring/validation-error"
+        title:
+          type: string
+          example: "Bad Request"
+        status:
+          type: integer
+          example: 400
+        detail:
+          type: string
+          example: "Input validation failed"
+        instance:
+          type: string
+          example: "/v3/agreements"
+        contextId:
+          type: string
+          example: "0b7a2d85-8233-4a0f-867b-fa77a8cdf8de"
+        extraDetails:
+          type: array
+          items:
+            type: object
+            $ref: "#/components/schemas/ExtraDetails"
+              
+    ExtraDetails:
+      type: object
+      properties:
+        key:
+          type: string
+          example: "campaign"
+        value:
+          type: string
+          example: "'type' can not be null"
+        
     VippsApiError:
       type: object
       required:
