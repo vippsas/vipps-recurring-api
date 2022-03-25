@@ -769,6 +769,7 @@ The following properties are available for updating:
 {
   "productName": "A new name",
   "productDescription": "A new description",
+  "merchantAgreementUrl": "https://www.example.com/vipps-subscriptions/1234/",
   "price": 25000,
   "status": "ACTIVE",
   "campaign": {
