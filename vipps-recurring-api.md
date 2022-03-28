@@ -567,7 +567,7 @@ Price campaign
 | `price`             | The price that the customer will pay during the campaign |
 | `end`               | The end date of the campaign   |
 
-![price campaign](images/priceCampaignExample.png)
+![price campaign](images/priceCampaignExample.png) todo add screenshot
 
 Period campaign
 ```json
@@ -587,7 +587,7 @@ Period campaign
 | `period`               | The period where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR |
 | `periodCount`               | The number of periods the campaign should run for   |
 
-![period campaign](images/periodCampaignExample.png)
+![period campaign](images/periodCampaignExample.png) 
 
 Event campaign
 ```json
@@ -607,11 +607,11 @@ Event campaign
 | `eventDate`               | The date of the event marking the end of the campaign   |
 | `eventText`               | Name of the event to display to the end user   |
 
-![event campaign](images/eventCampaignExample.png)
+![event campaign](images/eventCampaignExample.png) todo add screenshot
 
 Full flex campaign
 
-**Note:** Contact Vipps before creating a draft agreement with a full flex campaign
+**Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
 
 ```json
 {
@@ -632,7 +632,7 @@ Full flex campaign
 | `interval`          | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
 | `intervalCount`     | The frequency of how often the user should be charged   |
 
-![full flex campaign](images/fullFlexCampaignExample.png)
+![full flex campaign](images/fullFlexCampaignExample.png) todo add screenshot
 
 ### Retrieve an agreement
 
