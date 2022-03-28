@@ -540,12 +540,12 @@ Campaigns can be used to lower the price of the agreement for a limited amount o
 Recurring supports 4 different campaign types : price campaign, period campaign, event campaign, full flex campaign, see more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
 Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
 
-| Campaign types       | Description                                                                           | Example |
-| -------------------- | --------------------------------------------------------------------------------------| ---------- |
-| `price campaign`     | A set price until a set date. Same interval as agreement. | 10kr per 2 weeks interval until 2022-05-01T00:00:00Z and then 200kr per 2 weeks interval
-| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR)              | 1kr for 6 months and then 100kr each month
-| `event campaign`     | A set price for until a given date with a text description for a given event                            | 20kr until Christmas and then 100kr each month
-| `full flex campaign` | A set price for a different interval until a given date                                             | 10kr per week until 2022-05-01T00:00:00Z and then 200kr a month
+| Campaign types       | Description                                                                                             | Example |
+| -------------------- | --------------------------------------------------------------------------------------------------------| ---------- |
+| `price campaign`     | A set price until a set date. Same interval as agreement.                                               | 10kr per 1 week interval until 2022-05-01T00:00:00Z and then 200kr per 1 week interval |
+| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR) | 1kr for 6 months and then 100kr each month |
+| `event campaign`     | A set price for until a given date with a text description for a given event                            | 20kr until Christmas and then 100kr each month |
+| `full flex campaign` | A set price for a different interval until a given date                                                 | 10kr per week until 2022-05-01T00:00:00Z and then 200kr a month |
 
 In order to start a campaign the campaign field has to be added to the agreement draft
 [`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
@@ -561,11 +561,11 @@ Price campaign
   }
 }
 ```
-| Field               | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `campaignType`      | The type of the campaign |
-| `price`             | The price that the customer will pay during the campaign |
-| `end`               | The end date of the campaign   |
+| Field               | Description                                                                |
+| ------------------- | ---------------------------------------------------------------------------|
+| `campaignType`      | The type of the campaign                                                   |
+| `price`             | The price that the customer will pay for each interval during the campaign |
+| `end`               | The end date of the campaign                                               |
 
 ![price campaign](images/priceCampaignExample.png) todo add screenshot
 
@@ -580,12 +580,12 @@ Period campaign
   }
 }
 ```
-| Field               | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `campaignType`      | The type of the campaign |
-| `price`             | The price that the customer will pay during the campaign |
-| `period`               | The period where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR |
-| `periodCount`               | The number of periods the campaign should run for   |
+| Field               | Description                                                                   |
+| ------------------- | ------------------------------------------------------------------------------|
+| `campaignType`      | The type of the campaign                                                      |
+| `price`             | The price that the customer will pay for the period of the campaign           |
+| `period`            | The period where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR |
+| `periodCount`       | The number of periods the campaign should run for                             |
 
 ![period campaign](images/periodCampaignExample.png) 
 
@@ -600,12 +600,12 @@ Event campaign
   }
 }
 ```
-| Field               | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `campaignType`      | The type of the campaign  |
-| `price`             | The price that the customer will pay during the campaign |
-| `eventDate`               | The date of the event marking the end of the campaign   |
-| `eventText`               | Name of the event to display to the end user   |
+| Field               | Description                                               |
+| ------------------- | -------------------------------------------               |
+| `campaignType`      | The type of the campaign                                  |
+| `price`             | The price that the customer will pay until the event date |
+| `eventDate`         | The date of the event marking the end of the campaign     |
+| `eventText`         | Name of the event to display to the end user              |
 
 ![event campaign](images/eventCampaignExample.png) todo add screenshot
 
@@ -624,13 +624,13 @@ Full flex campaign
   }
 }
 ```
-| Field               | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `campaignType`      | The type of the campaign |
-| `price`             | The price that the customer will pay during the campaign |
-| `end`               | The end date of the campaign   |
+| Field               | Description                                                                      |
+| ------------------- | -------------------------------------------                                      |
+| `campaignType`      | The type of the campaign                                                         |
+| `price`             | The price that the customer will pay for each interval during the campaign       |
+| `end`               | The end date of the campaign                                                     |
 | `interval`          | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
-| `intervalCount`     | The frequency of how often the user should be charged   |
+| `intervalCount`     | The frequency of how often the user should be charged                            |
 
 ![full flex campaign](images/fullFlexCampaignExample.png) todo add screenshot
 
@@ -671,10 +671,10 @@ It is possible to retrieve all agreements by calling [`GET:/recurring/v3/agreeme
 By default, this endpoint will return only "ACTIVE" agreements.
 
 Query parameters available 
-| Query parameter               | Description                                 | Example                                 |
-| -------------------           | ------------------------------------------- | ------------------------------------------- |
-| `status`                      | Filter by status of the agreement(PENDING, ACTIVE, EXPIRED, STOPPED) | ?status=ACTIVE |
-| `createdAfter`                | Filter by agreement start date in miliseconds | ?createdAfter=1645543020311 |
+| Query parameter               | Description                                 | Example                                     |
+| ----------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `status`                      | Filter by status of the agreement(PENDING, ACTIVE, EXPIRED, STOPPED) | ?status=ACTIVE     |
+| `createdAfter`                | Filter by agreement start date in miliseconds | ?createdAfter=1645543020311               |
 
 **Note:** Listing all agreements can result in a timeout if there are many agreements. Use createdAfter query for pagination.
 
