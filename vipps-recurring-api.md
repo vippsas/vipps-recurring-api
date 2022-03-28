@@ -471,6 +471,33 @@ if the subscription is cheaper in the beginning than the normal price later.
 If you use `initialcharge` alone for campaigns, users will be confused by how it appears in Vipps,
 as it looks like the full price period starts immediately.
 
+Example of a draft agreement with initial charge and a campaign: 
+```json
+{
+  "currency": "NOK",
+  "customerPhoneNumber": "90000000",
+  "initialCharge": {
+     "amount": 5000,
+     "currency": "NOK",
+     "description": "Premier League subscription",
+     "transactionType": "DIRECT_CAPTURE"
+  },
+  "campaign": {
+        "type": "PRICE_CAMPAIGN",
+        "price": 30000,
+        "end": "2022-06-01T00:00:00Z"
+    },
+  "interval": "MONTH",
+  "intervalCount": 1,
+  "isApp": false,
+  "merchantRedirectUrl": "https://example.com/confirmation",
+  "merchantAgreementUrl": "https://example.com/my-customer-agreement",
+  "price": 49900,
+  "productDescription": "Access to all games of English top football",
+  "productName": "Premier League subscription"
+}
+```
+
 Initial charge will be performed if the `initialcharge` is provided when
 creating an agreement. If there is no initial charge: Don't sent `initialcharge`
 when creating the new agreement.
@@ -551,7 +578,7 @@ In order to start a campaign the campaign field has to be added to the agreement
 [`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
 for a campaign in the start of an agreement
 
-Price campaign
+**Price campaign**
 ```json
 {
   "campaign": {
@@ -567,9 +594,9 @@ Price campaign
 | `price`             | The price that the customer will pay for each interval during the campaign |
 | `end`               | The end date of the campaign                                               |
 
-![price campaign](images/priceCampaignExample.png) todo add screenshot
+TODO add screenshot
 
-Period campaign
+**Period campaign**
 ```json
 {
  "campaign": {
@@ -589,7 +616,7 @@ Period campaign
 
 ![period campaign](images/periodCampaignExample.png) 
 
-Event campaign
+**Event campaign**
 ```json
 {
 "campaign": {
@@ -607,9 +634,9 @@ Event campaign
 | `eventDate`         | The date of the event marking the end of the campaign     |
 | `eventText`         | Name of the event to display to the end user              |
 
-![event campaign](images/eventCampaignExample.png) todo add screenshot
+TODO add screenshot
 
-Full flex campaign
+**Full flex campaign**
 
 **Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
 
@@ -632,7 +659,7 @@ Full flex campaign
 | `interval`          | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
 | `intervalCount`     | The frequency of how often the user should be charged                            |
 
-![full flex campaign](images/fullFlexCampaignExample.png) todo add screenshot
+TODO add screenshot
 
 ### Retrieve an agreement
 
