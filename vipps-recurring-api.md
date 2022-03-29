@@ -638,7 +638,8 @@ TODO add screenshot
 
 **Full flex campaign**
 
-**Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
+**Note:** Contact Vipps before creating a draft agreement with a full flex campaign.\
+Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
 
 ```json
 {
