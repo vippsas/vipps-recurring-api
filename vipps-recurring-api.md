@@ -801,6 +801,9 @@ When a user notifies the merchant that they want to cancel a subscription or
 service, the merchant must ensure that the status of the recurring agreement is
 set to `STOPPED` at a suitable time.
 
+Stopping an agreement results in cancellation of any charges that are DUE/PENDING at the time of stopping it, 
+and it will not be possible to create new charges for a stopped agreement.
+
 We recommend that the recurring agreement remains `ACTIVE` for as long as the
 user has access to the service.    
 For example; if the user cancels their subscription, but they are still able to
