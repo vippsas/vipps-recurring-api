@@ -1597,7 +1597,7 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 
 ### Campaign
 
-When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. Here as well you have options of setting `productName` to even further explain to the user.
+When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. Here as well be sure to have a good description in `productName`.
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
