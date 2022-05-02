@@ -5635,7 +5635,6 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
     <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
     <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
-    <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
     <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
     <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -5848,13 +5847,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>»» productDescription</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
 </tr>
 <tr>
 <td>»» productName</td>
@@ -6107,7 +6099,6 @@ curl -X POST https://api.vipps.no/v3/agreements \
   &quot;merchantAgreementUrl&quot;: &quot;https://example.com/agreement/1234&quot;,
   &quot;customerPhoneNumber&quot;: &quot;45678272&quot;,
   &quot;price&quot;: 2500,
-  &quot;productDescription&quot;: &quot;MyNews on web&quot;,
   &quot;productName&quot;: &quot;MyNews Digital&quot;,
   &quot;skipLandingPage&quot;: true
 }&#x27;</span>;
@@ -6277,7 +6268,6 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://example.com/agreement/1234&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;45678272&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">2500</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;MyNews on web&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;MyNews Digital&quot;</span>,
   <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">true</span>
 }
@@ -6524,13 +6514,6 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td>integer(int32)</td>
 <td>true</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>» productDescription</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
 </tr>
 <tr>
 <td>» productName</td>
@@ -7031,7 +7014,6 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -7147,7 +7129,6 @@ curl -X PATCH https://api.vipps.no/v3/agreements/{agreementId} \
 </code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
   &quot;suggestedMaxAmount&quot;: 7900,
-  &quot;productDescription&quot;: &quot;Fin abonnementspakke&quot;,
   &quot;productName&quot;: &quot;Pluss-abonnement&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://www.merchant.no/subscriptions/1234/&quot;,
   &quot;status&quot;: &quot;ACTIVE&quot;
@@ -7307,7 +7288,6 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.merchant.no/subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>
@@ -7401,13 +7381,6 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>» productDescription</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
 </tr>
 <tr>
 <td>» productName</td>
@@ -11493,7 +11466,6 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.merchant.no/subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.merchant.no/landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;name nin birthDate email phoneNumber address&quot;</span>,
   <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
@@ -11586,13 +11558,6 @@ System.out.println(response.toString());
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
-<td>productDescription</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>productName</td>
 <td>string</td>
 <td>true</td>
@@ -11668,7 +11633,6 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -11737,13 +11701,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>productDescription</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -11857,7 +11814,6 @@ System.out.println(response.toString());
 <a id="tocspatchagreementv3"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.merchant.no/subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>
@@ -11883,13 +11839,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>productDescription</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
 </tr>
 <tr>
 <td>productName</td>
