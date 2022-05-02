@@ -358,7 +358,6 @@ paths:
                   merchantAgreementUrl: https://example.com/agreement/1234
                   customerPhoneNumber: '45678272'
                   price: 2500
-                  productDescription: MyNews on web
                   productName: MyNews Digital
                   skipLandingPage: true
               With Initial Charge:
@@ -372,7 +371,6 @@ paths:
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
-                  productDescription: MyNews on web
                   productName: MyNews Digital
                   skipLandingPage: true
                   initialCharge:
@@ -391,7 +389,6 @@ paths:
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
-                  productDescription: MyNews on web
                   productName: MyNews Digital
                   skipLandingPage: true
                   campaign:
@@ -409,7 +406,6 @@ paths:
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
-                  productDescription: MyNews on web
                   productName: MyNews Digital
                   skipLandingPage: true
                   campaign:
@@ -433,7 +429,6 @@ paths:
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
-                  productDescription: MyNews on web
                   productName: MyNews Digital
                   skipLandingPage: true
                   campaign:
@@ -456,7 +451,6 @@ paths:
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
-                  productDescription: MyNews on web
                   productName: MyNews Digital
                   skipLandingPage: true
                   campaign:
@@ -475,7 +469,6 @@ paths:
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  productDescription: Power on web
                   productName: MyNews Digital
                   skipLandingPage: true
                   variableAmount:
@@ -491,7 +484,6 @@ paths:
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
-                  productDescription: Power on web
                   productName: MyNews Digital
                   scope: address name email birthDate phoneNumber
       responses:
@@ -1424,9 +1416,6 @@ components:
           format: int32
           example: 7900
           description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
-        productDescription:
-          type: string
-          example: Fin abonnementspakke
         productName:
           type: string
           example: Pluss-abonnement
@@ -1477,9 +1466,6 @@ components:
           format: int32
           example: 7900
           description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
-        productDescription:
-          type: string
-          example: Fin abonnementspakke
         productName:
           type: string
           example: Pluss-abonnement
@@ -1528,9 +1514,6 @@ components:
           example: 7900
           minimum: 100
           description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
-        productDescription:
-          type: string
-          example: Fin abonnementspakke
         productName:
           type: string
           example: Pluss-abonnement
