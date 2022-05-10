@@ -1307,7 +1307,7 @@ bubble. Include a detailed description of why it is not possible to display
 the landing page.
 
 **Please note:** When using `skipLandingPage`, the user is not sent to a URL
-after complation of the payment. The "result page" is just the confirmation in
+after completion of the payment. The "result page" is just the confirmation in
 Vipps. The `fallback` URL sent in the API request can therefore be the
 merchant's main URL, like `https://example.com`, etc.
 
@@ -1496,9 +1496,9 @@ When an initial charge is present, the flow in Vipps will change. First the user
 
 Here we also show `productName` and `productDescription` on the agreement, as well as `description` on the initial charge. All of which are defined by the merchant.
 
-Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobilephone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
+Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobile phone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
 
-As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, as well as having to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be payed upon entering the agreement. If used for campaigns, be sure to have good descriptions in `productName` and `productDescription` on the agreement, as well as `description` on the initial charge.
+As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, as well as having to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement. If used for campaigns, be sure to have good descriptions in `productName` and `productDescription` on the agreement, as well as `description` on the initial charge.
 
 ### Campaign
 
