@@ -351,8 +351,9 @@ paths:
               Minimal:
                 value:
                   currency: NOK
-                  interval: MONTH
-                  intervalCount: 1
+                  interval:
+                    unit: "MONTH"
+                    count: 1
                   isApp: true
                   merchantRedirectUrl: https://example.com/redirected-from-vipps
                   merchantAgreementUrl: https://example.com/agreement/1234
@@ -364,8 +365,9 @@ paths:
                 description: If you want the customer to pay to activate the agreement, you should add an initial charge. If the amount on the initial charge is not the same as the agreement/campaign price, it will show up as a separate payment bubble in the app.
                 value:
                   currency: NOK
-                  interval: MONTH
-                  intervalCount: 1
+                  interval:
+                    unit: "MONTH"
+                    count: 1
                   isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
@@ -382,8 +384,9 @@ paths:
                 description: A price campaign allows you to communicate that the agreement price is rebated until a given date, ie. "1kr per week until 04.05.2022, then 39 per week".
                 value:
                   currency: NOK
-                  interval: MONTH
-                  intervalCount: 1
+                  interval:
+                    unit: "MONTH"
+                    count: 1
                   isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
@@ -399,8 +402,9 @@ paths:
                 description: A period campaign allows you to communicate a campaign where the user pays a fixed price for a given period before the normal agreement starts, ie. "4 weeks for 1 kr". Should be combined with an initial charge to get money on activation.
                 value:
                   currency: NOK
-                  interval: MONTH
-                  intervalCount: 1
+                  interval:
+                    unit: "MONTH"
+                    count: 1
                   isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
@@ -411,19 +415,21 @@ paths:
                   campaign:
                     type: PERIOD_CAMPAIGN
                     price: 100
-                    period: WEEK
-                    periodCount: 4
+                    period:
+                      unit: "WEEK"
+                      count: 4
                   initialCharge:
                     amount: 100
                     currency: NOK
                     description: Activation Charge
                     transactionType: DIRECT_CAPTURE
               With Event Campaign:
-                description: A period campaign allows you to communicate a campaign where the user pays a fixed price until a given event before the normal agreement starts, ie. "Until Christmas for 1 kr". Should be combined with an initial charge to get money on activation.
+                description: An event campaign allows you to communicate a campaign where the user pays a fixed price until a given event before the normal agreement starts, ie. "Until Christmas for 1 kr". Should be combined with an initial charge to get money on activation.
                 value:
                   currency: NOK
-                  interval: MONTH
-                  intervalCount: 1
+                  interval:
+                    unit: "MONTH"
+                    count: 1
                   isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
@@ -444,8 +450,9 @@ paths:
               With Full Flex Campaign:
                 value:
                   currency: NOK
-                  interval: MONTH
-                  intervalCount: 1
+                  interval:
+                    unit: "MONTH"
+                    count: 1
                   isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
@@ -457,14 +464,16 @@ paths:
                     type: FULL_FLEX_CAMPAIGN
                     price: 100
                     end: '2022-03-13T00:00:00Z'
-                    interval: WEEK
-                    intervalCount: 2
+                    interval:
+                      unit: "WEEK"
+                      count: 2
               With Variable Amount:
                 description: An agreement where the price can vary and the user choose a max amount they can be charged each interval.
                 value:
                   currency: NOK
-                  interval: MONTH
-                  intervalCount: 1
+                  interval:
+                    unit: "MONTH"
+                    count: 1
                   isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
@@ -477,8 +486,9 @@ paths:
                 description: User consents to sharing data that can be retrieved after they accept the agreement.
                 value:
                   currency: NOK
-                  interval: MONTH
-                  intervalCount: 1
+                  interval:
+                    unit: "MONTH"
+                    count: 1
                   isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
@@ -1382,23 +1392,8 @@ components:
         initialCharge:
           $ref: '#/components/schemas/InitialCharge'
         interval:
-          type: string
-          example: WEEK
           description: Interval for subscription
-          enum:
-            - YEAR
-            - MONTH
-            - WEEK
-            - DAY
-        intervalCount:
-          type: integer
-          format: int32
-          example: 2
-          description: 'Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year'
-          minimum: 1
-          maximum: 31
-          exclusiveMinimum: false
-          exclusiveMaximum: false
+          $ref: '#/components/schemas/TimePeriod'
         isApp:
           type: boolean
           example: true
@@ -1444,23 +1439,8 @@ components:
           description: Uniquely identifies this agreement
           readOnly: true
         interval:
-          type: string
-          example: WEEK
           description: Interval for subscription
-          enum:
-            - DAY
-            - WEEK
-            - MONTH
-            - YEAR
-        intervalCount:
-          type: integer
-          format: int32
-          example: 2
-          description: 'Number of intervals between charges. Example: interval=WEEK, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.'
-          minimum: 1
-          maximum: 31
-          exclusiveMinimum: false
-          exclusiveMaximum: false
+          $ref: '#/components/schemas/TimePeriod'
         price:
           type: integer
           format: int32
@@ -1662,41 +1642,39 @@ components:
           example: Until Christmas
           description: A short text that describes the event
         interval:
-          type: string
-          example: WEEK
           description: Interval for subscription in the campaign period
-          enum:
-            - YEAR
-            - MONTH
-            - WEEK
-            - DAY
-        intervalCount:
-          type: integer
-          format: int32
-          example: 2
-          description: 'Number of intervals between charges in the campaign. Example: interval=week, intervalCount=2 to be able to charge every two weeks.'
-          minimum: 1
-          maximum: 31
-          exclusiveMinimum: false
-          exclusiveMaximum: false
+          $ref: '#/components/schemas/TimePeriod'
         period:
+          description: The period that the campaign price pays for
+          $ref: '#/components/schemas/TimePeriod'
+    TimePeriod:
+      type: object
+      required:
+        - unit
+        - count
+      properties:
+        unit:
           type: string
           example: WEEK
-          description: Period type for subscription
+          description: Unit for time period
           enum:
             - YEAR
             - MONTH
             - WEEK
             - DAY
-        periodCount:
+        count:
           type: integer
           format: int32
           example: 2
-          description: 'Number of periods that the campaign price pays for. Example: period=week, periodCount=2 to say that you pay for two weeks'
+          description: 'Number of "units" in the time period. Example: unit=WEEK, count=2 to say two weeks'
           minimum: 1
           maximum: 31
           exclusiveMinimum: false
           exclusiveMaximum: false
+        text:
+          type: string
+          example: 'To uker'
+          description: 'Textual representation used in VIPPS of the time period. This is a read-only field.'
     InitialCharge:
       type: object
       required:
@@ -1881,7 +1859,6 @@ components:
           items:
             type: object
             $ref: "#/components/schemas/ExtraDetails"
-              
     ExtraDetails:
       type: object
       properties:
@@ -1891,7 +1868,6 @@ components:
         value:
           type: string
           example: "'type' can not be null"
-        
     VippsApiError:
       type: object
       required:
