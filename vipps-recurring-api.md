@@ -941,7 +941,7 @@ Scenario: You want to complete a payment and get the name and phone number of
 a customer.
 
 1. Retrieve the access token:
-   [`POST:/recurring/v2/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Endpoints/getAccessToken).
+   [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-recurring-api/#/Access%20Endpoints/getAccessToken).
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
    access to (valid scope) before calling [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
 3. The user consents to the information sharing and accepts the agreement in Vipps.
