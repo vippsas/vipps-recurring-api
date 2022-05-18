@@ -327,8 +327,10 @@ This code illustrates how to create an agreement:
 {
   "currency": "NOK",
   "customerPhoneNumber":"90000000",
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit": "MONTH",
+    "count": 1
+  },
   "isApp": false,
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
@@ -418,39 +420,39 @@ Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` an
 Example for a bi-weekly subscription:
 ```json
 {
-  "interval": "WEEK",
-  "intervalCount": 2
+  "unit": "WEEK",
+  "count": 2
 }
 ```
 
 Example for a quarterly subscription
 ```json
 {
-  "interval": "MONTH",
-  "intervalCount": 3
+  "unit": "MONTH",
+  "count": 3
 }
 ```
 
 Examples for a yearly subscription
 ```json
 {
-  "interval": "YEAR",
-  "intervalCount": 1
+  "unit": "YEAR",
+  "count": 1
 }
 ```
 OR
 ```json
 {
-  "interval": "MONTH",
-  "intervalCount": 12
+  "unit": "MONTH",
+  "count": 12
 }
 ```
 
 Example for a subscription every 100th day:
 ```json
 {
-  "interval": "DAY",
-  "intervalCount": 100
+  "unit": "DAY",
+  "count": 100
 }
 ```
 
@@ -482,11 +484,15 @@ Example of a draft agreement with initial charge and a campaign:
   },
   "campaign": {
         "type": "PRICE_CAMPAIGN",
-        "price": 30000,
-        "end": "2022-06-01T00:00:00Z"
+        "price": 3000,
+        "end": "2022-06-01T00:00:00Z",
+        "explanation": "Ordinary price 50 kr after 6/1/22"
     },
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit": "MONTH",
+    "count": 1,
+    "text": "per month"
+  },
   "isApp": false,
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
@@ -530,8 +536,10 @@ of 499 NOK:
      "description": "Premier League subscription",
      "transactionType": "DIRECT_CAPTURE"
   },
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit": "MONTH",
+    "count": 1
+  },
   "isApp": false,
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
@@ -560,7 +568,7 @@ when the product is shipped.
 ### Campaigns
 
 Campaigns can be used to lower the price of the agreement for a limited amount of time.
-Recurring supports 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign. See more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
+Recurring supports 4 different campaign types:price campaign, period campaign, event campaign, and full flex campaign. See more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
 Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
 
 | Campaign types       | Description                                                                                             | Example |
@@ -598,8 +606,10 @@ TODO add screenshot
  "campaign": {
     "type": "PERIOD_CAMPAIGN",
     "price": 100,
-    "period": "WEEK",
-    "periodCount": 4
+    "period": {
+      "unit": "WEEK",
+      "count": 2
+    }
   }
 }
 ```
@@ -643,18 +653,20 @@ Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
     "type": "FULL_FLEX_CAMPAIGN",
     "price": 100,
     "end": "2022-03-13T00:00:00Z",
-    "interval": "WEEK",
-    "intervalCount": 2
+   "interval": {
+     "unit": "WEEK",
+     "count": 1
+   }
   }
 }
 ```
-| Field               | Description                                                                      |
-| ------------------- | -------------------------------------------                                      |
-| `campaignType`      | The type of the campaign                                                         |
-| `price`             | The price that the customer will pay for each interval during the campaign       |
-| `end`               | The end date of the campaign                                                     |
-| `interval`          | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
-| `intervalCount`     | The frequency of how often the user should be charged                            |
+| Field            | Description                                                                      |
+|------------------| -------------------------------------------                                      |
+| `campaignType`   | The type of the campaign                                                         |
+| `price`          | The price that the customer will pay for each interval during the campaign       |
+| `end`            | The end date of the campaign                                                     |
+| `interval.unit`  | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
+| `interval.count` | The frequency of how often the user should be charged                            |
 
 TODO add screenshot
 
@@ -681,8 +693,10 @@ This is an example response from a call to
   "status": "ACTIVE",
   "productName": "Premier League subscription",
   "price": 49900,
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit": "MONTH",
+    "count": 1
+  },
   "currency": "NOK",
   "campaign": null
 }
@@ -1069,8 +1083,10 @@ Example of request with scope:
 {
   "currency": "NOK",
   "customerPhoneNumber":"90000000",
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit": "MONTH",
+    "count": 1
+  },
   "isApp": false,
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
@@ -1239,8 +1255,10 @@ Create agreement request:
     "suggestedMaxAmount": 200000
   },
   "currency": "NOK",
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit": "MONTH",
+    "count": 1
+  },
   "isApp": false,
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
@@ -1280,8 +1298,11 @@ GET agreement response:
     "status": "ACTIVE",
     "productName": "Power company A",
     "price": 0,
-    "interval": "MONTH",
-    "intervalCount": 1,
+    "interval": {
+      "unit": "MONTH",
+      "count": 1,
+      "text": "per month"
+    },
     "currency": "NOK",
     "campaign": null,
     "sub": null,
@@ -1345,7 +1366,7 @@ Example:
 
 Once a day, same as without variable amount.
 
-**Please note:** In the examples above the `intervalCount` is 1.
+**Please note:** In the examples above the `interval.count` is 1.
 This can be changed as described in the [Intervals](#intervals) section.
 
 #### Charge amount higher than the users max amount
