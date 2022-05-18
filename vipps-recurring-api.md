@@ -560,7 +560,7 @@ when the product is shipped.
 ### Campaigns
 
 Campaigns can be used to lower the price of the agreement for a limited amount of time.
-Recurring supports 4 different campaign types : price campaign, period campaign, event campaign, full flex campaign, see more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
+Recurring supports 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign. See more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
 Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
 
 | Campaign types       | Description                                                                                             | Example |
@@ -697,7 +697,7 @@ Query parameters available
 | Query parameter               | Description                                 | Example                                     |
 | ----------------------------- | ------------------------------------------- | ------------------------------------------- |
 | `status`                      | Filter by status of the agreement(PENDING, ACTIVE, EXPIRED, STOPPED) | ?status=ACTIVE     |
-| `createdAfter`                | Filter by agreement start date in miliseconds | ?createdAfter=1645543020311               |
+| `createdAfter`                | Filter by agreement start date in milliseconds | ?createdAfter=1645543020311               |
 
 **Note:** Listing all agreements can result in a timeout if there are many agreements. Use createdAfter query for pagination.
 
@@ -740,7 +740,7 @@ For example, in the agreement
 a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
 hindrance the agreement `price` can be [updated](#update-an-agreement).
 
-From **August 1st, 2022** new rules will be enforced : 
+From **August 1st, 2022** new rules will be enforced: 
 - The `amount` of a charge is flexible but can not be higher than the `agreement price`.
 
 - For an agreement with a `campaign`, the `amount` of a charge is flexible but can not be higher than the campaign price. After the campaign expires the `amount` of a charge can not be higher than the `agreement price`.
@@ -1017,17 +1017,17 @@ A users consent to share information with a merchant applies across our services
 
 | scope            | Description                                                                                                                                                                                                                                                                | User consent required |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `address`        | A list containing the user's addresses. The list always contains the home address from the National Population Register, and can also include work address and other addresses added by the user in Vipps.                                                                                                                                                           | yes                   |
-| `birthDate`      | Birth date. Verified with BankID.                                                                                                                                                                                                                                               | yes                   |
-| `email`          | Email address. The flag `email_verified : true` (or `false`) in the response indicates whether the email address is verified.                                                                                                                                                 | yes                   |
-| `name`           | First, middle and given name. Verified with the National Population Register.                                                                                                                                                                                                  | yes                   |
+| `address`        | A list containing the user's addresses. The list always contains the home address from the National Population Register, and can also include work address and other addresses added by the user in Vipps.                                                                                                                                                          | yes                   |
+| `birthDate`      | Birth date. Verified with BankID.                                                                                                                                                                                                                                              | yes                   |
+| `email`          | Email address. The flag `email_verified: true` (or `false`) in the response indicates whether the email address is verified.                                                                                                                                                 | yes                   |
+| `name`           | First, middle and given name. Verified with the National Population Register.                                                                                                                                                                                                 | yes                   |
 | `phoneNumber`    | Phone number. Verified when creating the Vipps account.                                                                                                                                                                                                  | yes                   |
 | `nin`            | Norwegian national identity number. Verified with BankID. **NB:** Merchants need to apply for access to NIN. See: [Who can get access to NIN and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-nin-and-how)   | yes                   |
 | `accountNumbers` | User bank account numbers. **NB:** Merchants need to apply for access to accountNumbers. See: [Who can get access to account numbers and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-accountnumbers-and-how) | yes                   |  
 
 See the API specification for the formats and other details for each scope.
 
-**Please note:** If the e-mail address that is delivered has the flag `email_verified : false`
+**Please note:** If the e-mail address that is delivered has the flag `email_verified: false`
 this address should not be used to link the user to an existing account without
 further authentication. Such authentication could be to prompt the user to
 login to the original account or confirm the account linking by having a
