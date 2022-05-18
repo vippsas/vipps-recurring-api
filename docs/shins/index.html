@@ -1547,6 +1547,7 @@ Darkula color scheme from the JetBrains family of IDEs
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;php&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -1825,6 +1826,11 @@ Darkula color scheme from the JetBrains family of IDEs
                 
                   <li>
                     <a href="#tocs_campaignv3" class="toc-h2 toc-link" data-title="">campaignV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_timeperiod" class="toc-h2 toc-link" data-title="">TimePeriod</a>
                     
                   </li>
                 
@@ -5625,17 +5631,25 @@ System.out.println(response.toString());
       <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
       <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
       <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-      <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
-      <span class="hljs-attr">&quot;period&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;periodCount&quot;</span>: <span class="hljs-number">2</span>
+      <span class="hljs-attr">&quot;interval&quot;</span>: {
+        <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+        <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+      },
+      <span class="hljs-attr">&quot;period&quot;</span>: {
+        <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+        <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+      }
     },
     <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
     <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
-    <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">&quot;interval&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+    },
     <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
-    <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
     <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
     <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -5788,31 +5802,38 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>»»» interval</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»»» unit</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Unit for time period</td>
+</tr>
+<tr>
+<td>»»»» count</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>Number of &quot;units&quot; in the time period. Example: unit=WEEK, count=2 to say two weeks</td>
+</tr>
+<tr>
+<td>»»»» text</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Interval for subscription in the campaign period</td>
-</tr>
-<tr>
-<td>»»» intervalCount</td>
-<td>integer(int32)</td>
-<td>false</td>
-<td>none</td>
-<td>Number of intervals between charges in the campaign. Example: interval=week, intervalCount=2 to be able to charge every two weeks.</td>
+<td>Textual representation used in VIPPS of the time period. This is a read-only field.</td>
 </tr>
 <tr>
 <td>»»» period</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
-<td>Period type for subscription</td>
-</tr>
-<tr>
-<td>»»» periodCount</td>
-<td>integer(int32)</td>
-<td>false</td>
 <td>none</td>
-<td>Number of periods that the campaign price pays for. Example: period=week, periodCount=2 to say that you pay for two weeks</td>
 </tr>
 <tr>
 <td>»» currency</td>
@@ -5830,17 +5851,10 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>»» interval</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
-<td>Interval for subscription</td>
-</tr>
-<tr>
-<td>»» intervalCount</td>
-<td>integer(int32)</td>
-<td>false</td>
 <td>none</td>
-<td>Number of intervals between charges. Example: interval=WEEK, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.</td>
 </tr>
 <tr>
 <td>»» price</td>
@@ -5848,13 +5862,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>»» productDescription</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
 </tr>
 <tr>
 <td>»» productName</td>
@@ -5996,56 +6003,24 @@ System.out.println(response.toString());
 <td>FULL_FLEX_CAMPAIGN</td>
 </tr>
 <tr>
-<td>interval</td>
+<td>unit</td>
 <td>YEAR</td>
 </tr>
 <tr>
-<td>interval</td>
+<td>unit</td>
 <td>MONTH</td>
 </tr>
 <tr>
-<td>interval</td>
+<td>unit</td>
 <td>WEEK</td>
 </tr>
 <tr>
-<td>interval</td>
-<td>DAY</td>
-</tr>
-<tr>
-<td>period</td>
-<td>YEAR</td>
-</tr>
-<tr>
-<td>period</td>
-<td>MONTH</td>
-</tr>
-<tr>
-<td>period</td>
-<td>WEEK</td>
-</tr>
-<tr>
-<td>period</td>
+<td>unit</td>
 <td>DAY</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>NOK</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>DAY</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>WEEK</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>MONTH</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>YEAR</td>
 </tr>
 <tr>
 <td>status</td>
@@ -6100,14 +6075,15 @@ curl -X POST https://api.vipps.no/v3/agreements \
 </code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
   &quot;currency&quot;: &quot;NOK&quot;,
-  &quot;interval&quot;: &quot;MONTH&quot;,
-  &quot;intervalCount&quot;: 1,
+  &quot;interval&quot;: {
+    &quot;unit&quot;: &quot;MONTH&quot;,
+    &quot;count&quot;: 1
+  },
   &quot;isApp&quot;: true,
   &quot;merchantRedirectUrl&quot;: &quot;https://example.com/redirected-from-vipps&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://example.com/agreement/1234&quot;,
   &quot;customerPhoneNumber&quot;: &quot;45678272&quot;,
   &quot;price&quot;: 2500,
-  &quot;productDescription&quot;: &quot;MyNews on web&quot;,
   &quot;productName&quot;: &quot;MyNews Digital&quot;,
   &quot;skipLandingPage&quot;: true
 }&#x27;</span>;
@@ -6270,14 +6246,15 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
-  <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">1</span>
+  },
   <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://example.com/redirected-from-vipps&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://example.com/agreement/1234&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;45678272&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">2500</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;MyNews on web&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;MyNews Digital&quot;</span>,
   <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">true</span>
 }
@@ -6402,30 +6379,37 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <tr>
 <td>»» interval</td>
 <td>body</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
-<td>Interval for subscription in the campaign period</td>
+<td>none</td>
 </tr>
 <tr>
-<td>»» intervalCount</td>
+<td>»»» unit</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>Unit for time period</td>
+</tr>
+<tr>
+<td>»»» count</td>
 <td>body</td>
 <td>integer(int32)</td>
+<td>true</td>
+<td>Number of &quot;units&quot; in the time period. Example: unit=WEEK, count=2 to say two weeks</td>
+</tr>
+<tr>
+<td>»»» text</td>
+<td>body</td>
+<td>string</td>
 <td>false</td>
-<td>Number of intervals between charges in the campaign. Example: interval=week, intervalCount=2 to be able to charge every two weeks.</td>
+<td>Textual representation used in VIPPS of the time period. This is a read-only field.</td>
 </tr>
 <tr>
 <td>»» period</td>
 <td>body</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
-<td>Period type for subscription</td>
-</tr>
-<tr>
-<td>»» periodCount</td>
-<td>body</td>
-<td>integer(int32)</td>
-<td>false</td>
-<td>Number of periods that the campaign price pays for. Example: period=week, periodCount=2 to say that you pay for two weeks</td>
+<td>none</td>
 </tr>
 <tr>
 <td>» currency</td>
@@ -6486,16 +6470,9 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <tr>
 <td>» interval</td>
 <td>body</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>true</td>
-<td>Interval for subscription</td>
-</tr>
-<tr>
-<td>» intervalCount</td>
-<td>body</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year</td>
+<td>none</td>
 </tr>
 <tr>
 <td>» isApp</td>
@@ -6524,13 +6501,6 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td>integer(int32)</td>
 <td>true</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>» productDescription</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
 </tr>
 <tr>
 <td>» productName</td>
@@ -6609,35 +6579,19 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td>FULL_FLEX_CAMPAIGN</td>
 </tr>
 <tr>
-<td>»» interval</td>
+<td>»»» unit</td>
 <td>YEAR</td>
 </tr>
 <tr>
-<td>»» interval</td>
+<td>»»» unit</td>
 <td>MONTH</td>
 </tr>
 <tr>
-<td>»» interval</td>
+<td>»»» unit</td>
 <td>WEEK</td>
 </tr>
 <tr>
-<td>»» interval</td>
-<td>DAY</td>
-</tr>
-<tr>
-<td>»» period</td>
-<td>YEAR</td>
-</tr>
-<tr>
-<td>»» period</td>
-<td>MONTH</td>
-</tr>
-<tr>
-<td>»» period</td>
-<td>WEEK</td>
-</tr>
-<tr>
-<td>»» period</td>
+<td>»»» unit</td>
 <td>DAY</td>
 </tr>
 <tr>
@@ -6655,22 +6609,6 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <tr>
 <td>»» transactionType</td>
 <td>RESERVE_CAPTURE</td>
-</tr>
-<tr>
-<td>» interval</td>
-<td>YEAR</td>
-</tr>
-<tr>
-<td>» interval</td>
-<td>MONTH</td>
-</tr>
-<tr>
-<td>» interval</td>
-<td>WEEK</td>
-</tr>
-<tr>
-<td>» interval</td>
-<td>DAY</td>
 </tr>
 </tbody>
 </table>
@@ -7021,17 +6959,25 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-    <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">&quot;period&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;periodCount&quot;</span>: <span class="hljs-number">2</span>
+    <span class="hljs-attr">&quot;interval&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+    },
+    <span class="hljs-attr">&quot;period&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+    }
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-  <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+  },
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -7147,7 +7093,6 @@ curl -X PATCH https://api.vipps.no/v3/agreements/{agreementId} \
 </code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
   &quot;suggestedMaxAmount&quot;: 7900,
-  &quot;productDescription&quot;: &quot;Fin abonnementspakke&quot;,
   &quot;productName&quot;: &quot;Pluss-abonnement&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://www.merchant.no/subscriptions/1234/&quot;,
   &quot;status&quot;: &quot;ACTIVE&quot;
@@ -7307,7 +7252,6 @@ System.out.println(response.toString());
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.merchant.no/subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>
@@ -7401,13 +7345,6 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>» productDescription</td>
-<td>body</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
 </tr>
 <tr>
 <td>» productName</td>
@@ -11473,10 +11410,16 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-    <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">&quot;period&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;periodCount&quot;</span>: <span class="hljs-number">2</span>
+    <span class="hljs-attr">&quot;interval&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+    },
+    <span class="hljs-attr">&quot;period&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+    }
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;+4740000000&quot;</span>,
@@ -11487,13 +11430,15 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
     <span class="hljs-attr">&quot;orderId&quot;</span>: <span class="hljs-string">&quot;acmeshop123order123abc&quot;</span>
   },
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-  <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+  },
   <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.merchant.no/subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.merchant.no/landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;name nin birthDate email phoneNumber address&quot;</span>,
   <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
@@ -11545,17 +11490,10 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>interval</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>true</td>
 <td>none</td>
 <td>Interval for subscription</td>
-</tr>
-<tr>
-<td>intervalCount</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>none</td>
-<td>Number of intervals between charges. Example: interval=week, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year</td>
 </tr>
 <tr>
 <td>isApp</td>
@@ -11584,13 +11522,6 @@ System.out.println(response.toString());
 <td>true</td>
 <td>none</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>productDescription</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -11628,22 +11559,6 @@ System.out.println(response.toString());
 <td>currency</td>
 <td>NOK</td>
 </tr>
-<tr>
-<td>interval</td>
-<td>YEAR</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>MONTH</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>WEEK</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>DAY</td>
-</tr>
 </tbody>
 </table>
 <h2 id="tocs_agreementresponsev3">AgreementResponseV3</h2>
@@ -11658,17 +11573,25 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-    <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
-    <span class="hljs-attr">&quot;period&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;periodCount&quot;</span>: <span class="hljs-number">2</span>
+    <span class="hljs-attr">&quot;interval&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+    },
+    <span class="hljs-attr">&quot;period&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+    }
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-  <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+  },
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -11719,17 +11642,10 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>interval</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
 <td>Interval for subscription</td>
-</tr>
-<tr>
-<td>intervalCount</td>
-<td>integer(int32)</td>
-<td>false</td>
-<td>none</td>
-<td>Number of intervals between charges. Example: interval=WEEK, intervalCount=2 to be able to charge every two weeks. Charges should occur at least once a year.</td>
 </tr>
 <tr>
 <td>price</td>
@@ -11737,13 +11653,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>productDescription</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -11817,22 +11726,6 @@ System.out.println(response.toString());
 <td>NOK</td>
 </tr>
 <tr>
-<td>interval</td>
-<td>DAY</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>WEEK</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>MONTH</td>
-</tr>
-<tr>
-<td>interval</td>
-<td>YEAR</td>
-</tr>
-<tr>
 <td>status</td>
 <td>PENDING</td>
 </tr>
@@ -11857,7 +11750,6 @@ System.out.println(response.toString());
 <a id="tocspatchagreementv3"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">7900</span>,
-  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;Fin abonnementspakke&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.merchant.no/subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>
@@ -11883,13 +11775,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>productDescription</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -12220,10 +12105,16 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-  <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-  <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">&quot;period&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-  <span class="hljs-attr">&quot;periodCount&quot;</span>: <span class="hljs-number">2</span>
+  <span class="hljs-attr">&quot;interval&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+  },
+  <span class="hljs-attr">&quot;period&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+  }
 }
 
 </code></pre>
@@ -12277,31 +12168,17 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>interval</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
 <td>Interval for subscription in the campaign period</td>
 </tr>
 <tr>
-<td>intervalCount</td>
-<td>integer(int32)</td>
-<td>false</td>
-<td>none</td>
-<td>Number of intervals between charges in the campaign. Example: interval=week, intervalCount=2 to be able to charge every two weeks.</td>
-</tr>
-<tr>
 <td>period</td>
-<td>string</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
-<td>Period type for subscription</td>
-</tr>
-<tr>
-<td>periodCount</td>
-<td>integer(int32)</td>
-<td>false</td>
-<td>none</td>
-<td>Number of periods that the campaign price pays for. Example: period=week, periodCount=2 to say that you pay for two weeks</td>
+<td>The period that the campaign price pays for</td>
 </tr>
 </tbody>
 </table>
@@ -12330,36 +12207,78 @@ System.out.println(response.toString());
 <td>type</td>
 <td>FULL_FLEX_CAMPAIGN</td>
 </tr>
+</tbody>
+</table>
+<h2 id="tocs_timeperiod">TimePeriod</h2>
+<p><a id="schematimeperiod"></a>
+<a id="schema_TimePeriod"></a>
+<a id="tocStimeperiod"></a>
+<a id="tocstimeperiod"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+  <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
+}
+
+</code></pre>
+<h3 id="properties-15">Properties</h3>
+<table>
+<thead>
 <tr>
-<td>interval</td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unit</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Unit for time period</td>
+</tr>
+<tr>
+<td>count</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>Number of &quot;units&quot; in the time period. Example: unit=WEEK, count=2 to say two weeks</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Textual representation used in VIPPS of the time period. This is a read-only field.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-16">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unit</td>
 <td>YEAR</td>
 </tr>
 <tr>
-<td>interval</td>
+<td>unit</td>
 <td>MONTH</td>
 </tr>
 <tr>
-<td>interval</td>
+<td>unit</td>
 <td>WEEK</td>
 </tr>
 <tr>
-<td>interval</td>
-<td>DAY</td>
-</tr>
-<tr>
-<td>period</td>
-<td>YEAR</td>
-</tr>
-<tr>
-<td>period</td>
-<td>MONTH</td>
-</tr>
-<tr>
-<td>period</td>
-<td>WEEK</td>
-</tr>
-<tr>
-<td>period</td>
+<td>unit</td>
 <td>DAY</td>
 </tr>
 </tbody>
@@ -12379,7 +12298,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>An initial charge for a new agreement. The charge will be executed immediately when the user approves the agreement.</p>
-<h3 id="properties-15">Properties</h3>
+<h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12443,7 +12362,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-16">Properties</h3>
+<h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12509,7 +12428,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-17">Properties</h3>
+<h3 id="properties-18">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12549,7 +12468,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-18">Properties</h3>
+<h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12633,7 +12552,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-16">Enumerated Values</h4>
+<h4 id="enumerated-values-17">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12681,7 +12600,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-19">Properties</h3>
+<h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12755,7 +12674,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-20">Properties</h3>
+<h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12796,7 +12715,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-21">Properties</h3>
+<h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12849,7 +12768,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-22">Properties</h3>
+<h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12886,7 +12805,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Status of the agreement.</p>
-<h3 id="properties-23">Properties</h3>
+<h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12907,7 +12826,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-17">Enumerated Values</h4>
+<h4 id="enumerated-values-18">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12942,7 +12861,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;PENDING&quot;</span>
 
 </code></pre>
-<h3 id="properties-24">Properties</h3>
+<h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12963,7 +12882,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-18">Enumerated Values</h4>
+<h4 id="enumerated-values-19">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13019,7 +12938,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></p>
-<h3 id="properties-25">Properties</h3>
+<h3 id="properties-26">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13040,7 +12959,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-19">Enumerated Values</h4>
+<h4 id="enumerated-values-20">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13064,7 +12983,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Type of transaction, either direct capture or reserve capture</p>
-<h3 id="properties-26">Properties</h3>
+<h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13085,7 +13004,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-20">Enumerated Values</h4>
+<h4 id="enumerated-values-21">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13112,7 +13031,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;RECURRING&quot;</span>
 
 </code></pre>
-<h3 id="properties-27">Properties</h3>
+<h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13133,7 +13052,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-21">Enumerated Values</h4>
+<h4 id="enumerated-values-22">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13161,7 +13080,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Interval for subscription</p>
-<h3 id="properties-28">Properties</h3>
+<h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13182,7 +13101,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-22">Enumerated Values</h4>
+<h4 id="enumerated-values-23">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13217,7 +13136,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&quot;</span>
 
 </code></pre>
-<h3 id="properties-29">Properties</h3>
+<h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13254,7 +13173,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-30">Properties</h3>
+<h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13363,7 +13282,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-31">Properties</h3>
+<h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13480,7 +13399,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-32">Properties</h3>
+<h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13531,7 +13450,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-33">Properties</h3>
+<h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13608,7 +13527,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-34">Properties</h3>
+<h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13657,7 +13576,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-23">Enumerated Values</h4>
+<h4 id="enumerated-values-24">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13690,7 +13609,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<h3 id="properties-35">Properties</h3>
+<h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13755,6 +13674,7 @@ System.out.println(response.toString());
 </table>
 <!-- Renderer: Shins v2.6.0 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->

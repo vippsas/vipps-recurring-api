@@ -2,7 +2,7 @@
 
 API version: 2.0
 
-Document version 1.2.4.
+Document version 1.2.6.
 
 ## Checklist
 
@@ -25,7 +25,7 @@ Document version 1.2.4.
       - [ ] `Vipps-System-Plugin-Name`
       - [ ] `Vipps-System-Plugin-Version`
 - [ ] Avoid Integration pitfalls
-    - [ ] The Merchant _must not_ rely on `Redirect` alone
+    - [ ] The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) to check the status of the agreement.
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
     - [ ] The merchant must have a way for the user to manage and stop subscription in merchantAgreementUrl in their Agreement. This should result in a timely update of the Vipps Agreement.
     - [ ] Vipps never generates charges automatically on behalf of the Merchant. Every charge is the responsibility of the Merchant.
