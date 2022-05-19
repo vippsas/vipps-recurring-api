@@ -42,7 +42,7 @@ paths:
         The access token endpoint is used to get the JWT (JSON Web Token) that
         must be passed in every API request in the Authorization header.
         The access token is a base64-encoded string value that must be
-        aquired first before making any Vipps api calls.
+        acquired first before making any Vipps api calls.
         The access token is valid for 1 hour in the test environment
         and 24 hours in the production environment.
       parameters:
@@ -136,9 +136,9 @@ paths:
       description: >-
         The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
           </br>
-          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recommend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
           </br>
-          Please note the different use cases for `initialCharge` and `compaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
+          Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
@@ -184,7 +184,7 @@ paths:
       summary: Fetch an Agreement
       operationId: getAgreement
       description: >-
-        Fetch a single agreement for a user. Recomended to use when polling for status changes after sending an agreement to a user.
+        Fetch a single agreement for a user. Recommended to use when polling for status changes after sending an agreement to a user.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
@@ -329,9 +329,9 @@ paths:
       description: >-
         The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
           </br>
-          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recommend that you implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
           </br>
-          Please note the different use cases for `initialCharge` and `compaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
+          Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
@@ -527,7 +527,7 @@ paths:
       summary: Fetch an Agreement
       operationId: FetchAgreementV3
       description: >-
-        Fetch a single agreement for a user. Recomended to use when polling for status changes after sending an agreement to a user.
+        Fetch a single agreement for a user. Recommended to use when polling for status changes after sending an agreement to a user.
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
