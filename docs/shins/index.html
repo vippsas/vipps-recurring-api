@@ -1825,7 +1825,7 @@ Darkula color scheme from the JetBrains family of IDEs
                   </li>
                 
                   <li>
-                    <a href="#tocs_campaignv3" class="toc-h2 toc-link" data-title="">campaignV3</a>
+                    <a href="#tocs_campaignv3" class="toc-h2 toc-link" data-title="">CampaignV3</a>
                     
                   </li>
                 
@@ -5640,7 +5640,8 @@ System.out.println(response.toString());
         <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
         <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
         <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-      }
+      },
+      <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
     },
     <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
     <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
@@ -5752,7 +5753,7 @@ System.out.println(response.toString());
 <td>none</td>
 </tr>
 <tr>
-<td>» Agreement</td>
+<td>» Agreement V3</td>
 <td><a href="#schemaagreementresponsev3">AgreementResponseV3</a></td>
 <td>false</td>
 <td>none</td>
@@ -5760,7 +5761,7 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>»» campaign</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">CampaignV3</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -5834,6 +5835,13 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>none</td>
+</tr>
+<tr>
+<td>»»» explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
 </tr>
 <tr>
 <td>»» currency</td>
@@ -6337,7 +6345,7 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <tr>
 <td>» campaign</td>
 <td>body</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">CampaignV3</a></td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -6410,6 +6418,13 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
+</tr>
+<tr>
+<td>»» explanation</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
 </tr>
 <tr>
 <td>» currency</td>
@@ -6968,7 +6983,8 @@ System.out.println(response.toString());
       <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
       <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-    }
+    },
+    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
@@ -11419,7 +11435,8 @@ System.out.println(response.toString());
       <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
       <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-    }
+    },
+    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;+4740000000&quot;</span>,
@@ -11462,7 +11479,7 @@ System.out.println(response.toString());
 <tbody>
 <tr>
 <td>campaign</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">CampaignV3</a></td>
 <td>false</td>
 <td>none</td>
 <td>A campaign is a way to make a temporary alteration in the agreement to make it more tempting for a customer. Like a given period for a set price before the normal agreement starts, a period of rebated price, etc.</td>
@@ -11582,7 +11599,8 @@ System.out.println(response.toString());
       <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
       <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-    }
+    },
+    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
@@ -11606,7 +11624,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<p>Agreement</p>
+<p>Agreement V3</p>
 <h3 id="properties-6">Properties</h3>
 <table>
 <thead>
@@ -11621,7 +11639,7 @@ System.out.println(response.toString());
 <tbody>
 <tr>
 <td>campaign</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">CampaignV3</a></td>
 <td>false</td>
 <td>none</td>
 <td>A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date</td>
@@ -12094,9 +12112,9 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h2 id="tocs_campaignv3">campaignV3</h2>
+<h2 id="tocs_campaignv3">CampaignV3</h2>
 <p><a id="schemacampaignv3"></a>
-<a id="schema_campaignV3"></a>
+<a id="schema_CampaignV3"></a>
 <a id="tocScampaignv3"></a>
 <a id="tocscampaignv3"></a></p>
 <pre class="highlight tab tab-json"><code>{
@@ -12114,11 +12132,12 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
     <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-  }
+  },
+  <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
 }
 
 </code></pre>
-<p>campaign</p>
+<p>Campaign V3</p>
 <h3 id="properties-14">Properties</h3>
 <table>
 <thead>
@@ -12179,6 +12198,13 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>The period that the campaign price pays for</td>
+</tr>
+<tr>
+<td>explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
 </tr>
 </tbody>
 </table>
