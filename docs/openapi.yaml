@@ -1289,12 +1289,12 @@ components:
     Agreement:
       type: object
       required:
-          - interval
-          - intervalCount
-          - price
-          - productDescription
-          - productName
-          - status
+        - interval
+        - intervalCount
+        - price
+        - productDescription
+        - productName
+        - status
       properties:
         variableAmount:
           $ref: "#/components/schemas/VariableAmount"
@@ -1379,7 +1379,7 @@ components:
       properties:
         campaign:
           description: A campaign is a way to make a temporary alteration in the agreement to make it more tempting for a customer. Like a given period for a set price before the normal agreement starts, a period of rebated price, etc.
-          $ref: '#/components/schemas/campaignV3'
+          $ref: '#/components/schemas/CampaignV3'
         currency:
           type: string
           example: NOK
@@ -1427,7 +1427,7 @@ components:
       properties:
         campaign:
           description: A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date
-          $ref: '#/components/schemas/campaignV3'
+          $ref: '#/components/schemas/CampaignV3'
         currency:
           type: string
           example: NOK
@@ -1482,8 +1482,8 @@ components:
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
           description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
         variableAmount:
-                  $ref: "#/components/schemas/VariableAmount"
-      title: Agreement
+          $ref: "#/components/schemas/VariableAmount"
+      title: Agreement V3
 
     PatchAgreementV3:
       type: object
@@ -1557,7 +1557,7 @@ components:
     VariableAmountRequest:
       type: object
       required:
-       - suggestedMaxAmount
+        - suggestedMaxAmount
       description: VariableAmount can not be used together with campaign. See the documentation for more information about agreement with variable amount.
       properties:
         suggestedMaxAmount:
@@ -1590,7 +1590,7 @@ components:
         - $ref: "#/components/schemas/VariableAmountRequest"
         - type: object
           required:
-          - maxAmount
+            - maxAmount
           properties:
             maxAmount:
               type: integer
@@ -1602,15 +1602,15 @@ components:
         - $ref: "#/components/schemas/CampaignRequest"
         - type: object
           required:
-          - start
+            - start
           properties:
             start:
               type: string
               format: date-time
               description: The date and time the campaign starts in ISO 8601 format. Needs to be UTC.
               example: "2019-06-01T00:00:00Z"
-    campaignV3:
-      title: campaign
+    CampaignV3:
+      title: Campaign V3
       type: object
       required:
         - type
@@ -1647,6 +1647,10 @@ components:
         period:
           description: The period that the campaign price pays for
           $ref: '#/components/schemas/TimePeriod'
+        explanation:
+          description: The text displayed in the Vipps app to explain the campaign to the user
+          type: string
+          example : 'Ordinary price 399 kr starts 6/12/2022'
     TimePeriod:
       type: object
       required:
@@ -1811,27 +1815,27 @@ components:
         failureReason:
           type: string
           enum:
-             - user_action_required
-             - charge_amount_too_high
-             - non_technical_error
-             - technical_error
+            - user_action_required
+            - charge_amount_too_high
+            - non_technical_error
+            - technical_error
           example: "user_action_required"
           description: >
-             Identifies the reason why the charged has been marked as `FAILED`:
-               * `user_action_required` - The users card can not fullfill the payment, user needs to take action in Vipps.
-                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
-
-               * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
-
-               * `non_technical_error` - Something went wrong with charging the user.
-                  Examples: User has deleted their Vipps Profile.
-
-               * `technical_error` - Something went wrong in Recurring while performing the payment.
-                  Examples: Failure in Recurring, failure in downstream services.
+            Identifies the reason why the charged has been marked as `FAILED`:
+              * `user_action_required` - The users card can not fullfill the payment, user needs to take action in Vipps.
+                 Examples: Card is blocked for ecommerce, insufficient funds, expired card.
+            
+              * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
+            
+              * `non_technical_error` - Something went wrong with charging the user.
+                 Examples: User has deleted their Vipps Profile.
+            
+              * `technical_error` - Something went wrong in Recurring while performing the payment.
+                 Examples: Failure in Recurring, failure in downstream services.
         failureDescription:
-           type: string
-           description: Description for the failure reason
-           example: "User action required"
+          type: string
+          description: Description for the failure reason
+          example: "User action required"
 
     ProblemErrorResponse:
       type: object
