@@ -2116,7 +2116,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>POST /accesstoken/get</code></p>
-<p>The access token endpoint is used to get the JWT (JSON Web Token) that must be passed in every API request in the Authorization header. The access token is a base64-encoded string value that must be aquired first before making any Vipps api calls. The access token is valid for 1 hour in the test environment and 24 hours in the production environment.</p>
+<p>The access token endpoint is used to get the JWT (JSON Web Token) that must be passed in every API request in the Authorization header. The access token is a base64-encoded string value that must be acquired first before making any Vipps api calls. The access token is valid for 1 hour in the test environment and 24 hours in the production environment.</p>
 <h3 id="fetch-authorization-token-parameters">Parameters</h3>
 <table>
 <thead>
@@ -3268,9 +3268,9 @@ System.out.println(response.toString());
 <p><code>POST /recurring/v2/agreements</code></p>
 <p>The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a <code>vippsConfirmationUrl</code>. This is used to redirect the user to the Vipps landing page, or to the Vipps app if <code>&quot;isApp&quot;:true</code> is used.
 <br />
-If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in <code>merchantRedirectUrl</code>. We <strong>strongly</strong> recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the <code>merchantRedirectUrl</code>. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in <code>merchantRedirectUrl</code>. We <strong>strongly</strong> recommend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the <code>merchantRedirectUrl</code>. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
 <br />
-Please note the different use cases for <code>initialCharge</code> and <code>compaign</code>. And when to use <code>RESERVE_CAPTURE</code> instead of <code>DIRECT_CAPTURE</code> as transactionType. More information about this can be found in the API documentation.</p>
+Please note the different use cases for <code>initialCharge</code> and <code>campaign</code>. And when to use <code>RESERVE_CAPTURE</code> instead of <code>DIRECT_CAPTURE</code> as transactionType. More information about this can be found in the API documentation.</p>
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
@@ -3988,7 +3988,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /recurring/v2/agreements/{agreementId}</code></p>
-<p>Fetch a single agreement for a user. Recomended to use when polling for status changes after sending an agreement to a user.</p>
+<p>Fetch a single agreement for a user. Recommended to use when polling for status changes after sending an agreement to a user.</p>
 <h3 id="fetch-an-agreement-parameters">Parameters</h3>
 <table>
 <thead>
@@ -6246,9 +6246,9 @@ System.out.println(response.toString());
 <p><code>POST /v3/agreements</code></p>
 <p>The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a <code>vippsConfirmationUrl</code>. This is used to redirect the user to the Vipps landing page, or to the Vipps app if <code>&quot;isApp&quot;:true</code> is used.
 <br />
-If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in <code>merchantRedirectUrl</code>. We <strong>strongly</strong> recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the <code>merchantRedirectUrl</code>. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in <code>merchantRedirectUrl</code>. We <strong>strongly</strong> recommend that you implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the <code>merchantRedirectUrl</code>. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
 <br />
-Please note the different use cases for <code>initialCharge</code> and <code>compaign</code>. And when to use <code>RESERVE_CAPTURE</code> instead of <code>DIRECT_CAPTURE</code> as transactionType. More information about this can be found in the API documentation.</p>
+Please note the different use cases for <code>initialCharge</code> and <code>campaign</code>. And when to use <code>RESERVE_CAPTURE</code> instead of <code>DIRECT_CAPTURE</code> as transactionType. More information about this can be found in the API documentation.</p>
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
@@ -6883,7 +6883,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /v3/agreements/{agreementId}</code></p>
-<p>Fetch a single agreement for a user. Recomended to use when polling for status changes after sending an agreement to a user.</p>
+<p>Fetch a single agreement for a user. Recommended to use when polling for status changes after sending an agreement to a user.</p>
 <h3 id="fetch-an-agreement-parameters">Parameters</h3>
 <table>
 <thead>
