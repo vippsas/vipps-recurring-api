@@ -309,7 +309,7 @@ paths:
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "403":
-          $ref: "#/components/responses/ProblemErrorResponse"
+          $ref: "#/components/responses/UnsupportedFeatureError"
         "422":
           $ref: "#/components/responses/UnprocessableError"
         "429":
@@ -1130,12 +1130,36 @@ components:
               $ref: "#/components/schemas/VippsApiError"
     UnauthorizedError: #401
       description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
     ConflictError: #409
       description: There is a conflict with the server
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
     NotFoundError: #404
       description: Item does not exist (and never has)
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
     UnprocessableError: #422
       description: Unprocessable Entity (invalid json)
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
     ServerError: #500
       description: Internal server error
       content:
@@ -1146,10 +1170,28 @@ components:
               $ref: "#/components/schemas/VippsApiError"
     UnavailableError: #503
       description: Service unavailable
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
     TimeoutError: #504
       description: Timeout
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
     RateLimitError: #429
       description: Too Many Requests
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/VippsApiError"
     UnsupportedFeatureError:
       description: Feature is not supported for the given sale unit
       content:
@@ -1874,7 +1916,7 @@ components:
           example: "campaign"
         value:
           type: string
-          example: "'type' can not be null"
+          example: "'type' cannot be null"
     VippsApiError:
       type: object
       required:
