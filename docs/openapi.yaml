@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.6.1
+  version: 2.6.2
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -136,7 +136,7 @@ paths:
       description: >-
         The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
           </br>
-          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recommend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recommend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
           </br>
           Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
       parameters:
@@ -329,7 +329,7 @@ paths:
       description: >-
         The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
           </br>
-          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recommend that you implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+          If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. We **strongly** recommend that you implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`. We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
           </br>
           Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. More information about this can be found in the API documentation.
       parameters:
@@ -781,7 +781,7 @@ paths:
         "401":
           $ref: "#/components/responses/UnauthorizedError"
         "409":
-          $ref: "#/components/responses/ServerError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "500":
           $ref: "#/components/responses/ServerError"
         "503":
@@ -822,7 +822,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
         "409":
-          $ref: "#/components/responses/RateLimitError"
+          $ref: "#/components/responses/ProblemErrorResponse"
         "500":
           $ref: "#/components/responses/ServerError"
         "503":
@@ -864,8 +864,7 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundError"
         "409":
-          description: This charge is not in a deletable state, it may have already been
-            charged to the user.
+          $ref: "#/components/responses/ProblemErrorResponse"
         "429":
           $ref: "#/components/responses/RateLimitError"
         "500":
@@ -1822,7 +1821,7 @@ components:
           example: "user_action_required"
           description: >
             Identifies the reason why the charged has been marked as `FAILED`:
-              * `user_action_required` - The users card can not fullfill the payment, user needs to take action in Vipps.
+              * `user_action_required` - The users card can not fulfil the payment, user needs to take action in Vipps.
                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
             
               * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
