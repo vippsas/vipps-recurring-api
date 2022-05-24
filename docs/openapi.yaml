@@ -20,7 +20,7 @@ info:
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
 
 
-  version: 2.6.2
+  version: 2.6.3
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -42,7 +42,7 @@ paths:
         The access token endpoint is used to get the JWT (JSON Web Token) that
         must be passed in every API request in the Authorization header.
         The access token is a base64-encoded string value that must be
-        acquired first before making any Vipps api calls.
+        acquired first before making any Vipps API calls.
         The access token is valid for 1 hour in the test environment
         and 24 hours in the production environment.
       parameters:
@@ -64,6 +64,10 @@ paths:
             type: string
           example: Y8Kteew6GE2ZmeycEt6egg==
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
       responses:
         "200":
           description: OK
