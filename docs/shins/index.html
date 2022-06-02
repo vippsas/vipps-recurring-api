@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.6.3</title>
+    <title>Recurring Payments Merchant API v2.6.4</title>
 
     <style>
     </style>
@@ -1611,7 +1611,7 @@ Darkula color scheme from the JetBrains family of IDEs
               <ul class="toc-list-h2">
                 
                   <li>
-                    <a href="#authentication" class="toc-h2 toc-link" data-title="">Authentication</a>
+                    <a href="#authentication-see--a-href----authorization-20service-getaccesstoken--target--_blank--fetch-authorization-token--a-" class="toc-h2 toc-link" data-title="">Authentication See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a></a>
                     
                   </li>
                 
@@ -1957,14 +1957,11 @@ Darkula color scheme from the JetBrains family of IDEs
         <h1 id="recurring-payments">Recurring payments</h1>
 <p>Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.</p>
 <ol>
-<li>A draft agreement is initialized and the user is redirected for approval.</li>
-<li>The user approves the agreement and the merchant can call GET on the agreement to verify the status.</li>
-<li>The merchant can start sending charges which will be charged the user in the future.
+<li>A draft agreement is initialized and the user is redirected for approval. 2. The user approves the agreement and the merchant can call GET on the agreement to verify the status. 3. The merchant can start sending charges which will be charged the user in the future.
 The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user).</li>
 </ol>
-<h2 id="authentication">Authentication</h2>
-<p>See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a>
-For information regarding authentication please read <a href="https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication">our guide</a></p>
+<h2 id="authentication-see--a-href----authorization-20service-getaccesstoken--target--_blank--fetch-authorization-token--a-">Authentication See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a></h2>
+<p>For information regarding authentication please read <a href="https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication">our guide</a></p>
 <p>Base URLs:</p>
 <ul>
 <li>
@@ -3128,7 +3125,7 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>» stop</td>
-<td>string(date-time)</td>
+<td>string(date-time)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>Date when agreement was stopped in ISO 8601 format.</td>
@@ -3142,14 +3139,14 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>» sub</td>
-<td>string(uuid)</td>
+<td>string(uuid)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>User identifier (subject). Will be null if profile data was not requested.</td>
 </tr>
 <tr>
 <td>» userinfoUrl</td>
-<td>string(uri)</td>
+<td>string(uri)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
@@ -15892,7 +15889,7 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>stop</td>
-<td>string(date-time)</td>
+<td>string(date-time)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>Date when agreement was stopped in ISO 8601 format.</td>
@@ -15906,14 +15903,14 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>sub</td>
-<td>string(uuid)</td>
+<td>string(uuid)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>User identifier (subject). Will be null if profile data was not requested.</td>
 </tr>
 <tr>
 <td>userinfoUrl</td>
-<td>string(uri)</td>
+<td>string(uri)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
