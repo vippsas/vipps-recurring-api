@@ -6,21 +6,16 @@ info:
     Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
 
     1. A draft agreement is initialized and the user is redirected for approval.
-
     2. The user approves the agreement and the merchant can call GET on the agreement to verify the status.
-
     3. The merchant can start sending charges which will be charged the user in the future.
 
     The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user).
 
     ## Authentication
-
     See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a>
 
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
-
-
-  version: 2.6.3
+  version: 2.6.4
   title: Recurring Payments Merchant API
 tags:
   - name: Authorization Service
@@ -1393,6 +1388,7 @@ components:
           type: string
           format: date-time
           description: Date when agreement was stopped in ISO 8601 format.
+          nullable: true
           example: null
         status:
           $ref: "#/components/schemas/AgreementStatus"
@@ -1400,11 +1396,13 @@ components:
           type: string
           format: uuid
           description: User identifier (subject). Will be null if profile data was not requested.
+          nullable: true
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
         userinfoUrl:
           type: string
           format: uri
           description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
+          nullable: true
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
         merchantAgreementUrl:
           type: string
@@ -1873,12 +1871,12 @@ components:
             Identifies the reason why the charged has been marked as `FAILED`:
               * `user_action_required` - The users card can not fulfil the payment, user needs to take action in Vipps.
                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
-            
+
               * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
-            
+
               * `non_technical_error` - Something went wrong with charging the user.
                  Examples: User has deleted their Vipps Profile.
-            
+
               * `technical_error` - Something went wrong in Recurring while performing the payment.
                  Examples: Failure in Recurring, failure in downstream services.
         failureDescription:
