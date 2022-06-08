@@ -33,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.5.3.
+Document version 2.5.4.
 
 ## Table of Contents
 
@@ -448,11 +448,11 @@ OR
 }
 ```
 
-Example for a subscription every 100th day:
+Example for a subscription every 30th day:
 ```json
 {
   "interval": "DAY",
-  "intervalCount": 100
+  "intervalCount": 30
 }
 ```
 
@@ -801,7 +801,7 @@ When a user notifies the merchant that they want to cancel a subscription or
 service, the merchant must ensure that the status of the recurring agreement is
 set to `STOPPED` at a suitable time.
 
-Stopping an agreement results in cancellation of any charges that are DUE/PENDING at the time of stopping it, 
+Stopping an agreement results in cancellation of any charges that are DUE/PENDING at the time of stopping it,
 and it will not be possible to create new charges for a stopped agreement.
 
 We recommend that the recurring agreement remains `ACTIVE` for as long as the
