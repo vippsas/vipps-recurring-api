@@ -566,7 +566,7 @@ when the product is shipped.
 ### Campaigns
 
 Campaigns can be used to lower the price of the agreement for a limited amount of time.
-Recurring supports 4 different campaign types:price campaign, period campaign, event campaign, and full flex campaign. See more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
+Recurring supports 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign. See more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
 Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
 
 | Campaign types        | Description                                                                                              | Example                                                                                 |
@@ -631,12 +631,14 @@ TODO add screenshot
   }
 }
 ```
-| Field           | Description                                                |
-|-----------------|------------------------------------------------------------|
-| `campaignType`  | The type of the campaign                                   |
-| `price`         | The price that the customer will pay until the event date  |
-| `eventDate`     | The date of the event marking the end of the campaign      |
-| `eventText`     | Name of the event to display to the end user               |
+| Field           | Description                                               |
+|-----------------|-----------------------------------------------------------|
+| `campaignType`  | The type of the campaign                                  |
+| `price`         | The price that the customer will pay until the event date |
+| `eventDate`     | The date of the event marking the end of the campaign     |
+| `eventText`     | The event text to display to the end user                 |
+
+**Note:** We recommend to start the event text with lowercase for better user experience. See example below
 
 TODO add screenshot
 
