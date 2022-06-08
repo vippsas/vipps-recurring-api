@@ -569,12 +569,12 @@ Campaigns can be used to lower the price of the agreement for a limited amount o
 Recurring supports 4 different campaign types:price campaign, period campaign, event campaign, and full flex campaign. See more about the different campaign types in the table below. This is communicated to the customer with the original price shown for comparison.
 Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
 
-| Campaign types       | Description                                                                                             | Example |
-| -------------------- | --------------------------------------------------------------------------------------------------------| ---------- |
-| `price campaign`     | A set price until a set date. Same interval as agreement.                                               | 10kr per 1 week interval until 2022-05-01T00:00:00Z and then 200kr per 1 week interval |
-| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR) | 1kr for 6 months and then 100kr each month |
-| `event campaign`     | A set price for until a given date with a text description for a given event                            | 20kr until Christmas and then 100kr each month |
-| `full flex campaign` | A set price for a different interval until a given date                                                 | 10kr per week until 2022-05-01T00:00:00Z and then 200kr a month |
+| Campaign types        | Description                                                                                              | Example                                                                                 |
+|-----------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `price campaign`      | A set price until a set date. Same interval as agreement.                                                | 10kr per 1 week interval until 2022-05-01T00:00:00Z and then 200kr per 1 week interval  |
+| `period campaign`     | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR)  | 1kr for 6 months and then 100kr each month                                              |
+| `event campaign`      | A set price for until a given date with a text description for a given event                             | 20kr until Christmas and then 100kr each month                                          |
+| `full flex campaign`  | A set price for a different interval until a given date                                                  | 10kr per week until 2022-05-01T00:00:00Z and then 200kr a month                         |
 
 In order to start a campaign the campaign field has to be added to the agreement draft
 [`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
@@ -590,11 +590,11 @@ for a campaign in the start of an agreement
   }
 }
 ```
-| Field               | Description                                                                |
-| ------------------- | ---------------------------------------------------------------------------|
-| `campaignType`      | The type of the campaign                                                   |
-| `price`             | The price that the customer will pay for each interval during the campaign |
-| `end`               | The end date of the campaign                                               |
+| Field               | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| `campaignType`      | The type of the campaign                                                    |
+| `price`             | The price that the customer will pay for each interval during the campaign  |
+| `end`               | The end date of the campaign                                                |
 
 TODO add screenshot
 
@@ -658,13 +658,13 @@ Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
   }
 }
 ```
-| Field            | Description                                                                      |
-|------------------| -------------------------------------------                                      |
-| `campaignType`   | The type of the campaign                                                         |
-| `price`          | The price that the customer will pay for each interval during the campaign       |
-| `end`            | The end date of the campaign                                                     |
-| `interval.unit`  | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
-| `interval.count` | The frequency of how often the user should be charged                            |
+| Field            | Description                                                                       |
+|------------------|-----------------------------------------------------------------------------------|
+| `campaignType`   | The type of the campaign                                                          |
+| `price`          | The price that the customer will pay for each interval during the campaign        |
+| `end`            | The end date of the campaign                                                      |
+| `interval.unit`  | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR   |
+| `interval.count` | The frequency of how often the user should be charged                             |
 
 TODO add screenshot
 
