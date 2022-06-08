@@ -1342,15 +1342,20 @@ components:
       properties:
         variableAmount:
           $ref: "#/components/schemas/VariableAmount"
+          nullable: true
         campaign:
           $ref: "#/components/schemas/Campaign"
+          nullable: true
         currency:
           $ref: "#/components/schemas/Currency"
+          nullable: true
         id:
           type: string
+          nullable: true
           description: Uniquely identifies this agreement
           maxLength: 36
           example: agr_5kSeqzFAMkfBbc
+          nullable: true
         interval:
           $ref: "#/components/schemas/Interval"
         intervalCount:
@@ -1381,11 +1386,14 @@ components:
           example: Access to all games of English top football
         start:
           type: string
+          nullable: true
           format: date-time
+          nullable: true
           description: Date when agreement was started in ISO 8601 format.
           example: "2019-01-01T00:00:00Z"
         stop:
           type: string
+          nullable: true
           format: date-time
           description: Date when agreement was stopped in ISO 8601 format.
           nullable: true
@@ -1394,18 +1402,21 @@ components:
           $ref: "#/components/schemas/AgreementStatus"
         sub:
           type: string
+          nullable: true
           format: uuid
           description: User identifier (subject). Will be null if profile data was not requested.
           nullable: true
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
         userinfoUrl:
           type: string
+          nullable: true
           format: uri
           description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
           nullable: true
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
         merchantAgreementUrl:
           type: string
+          nullable: true
           description: URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
@@ -1861,6 +1872,7 @@ components:
           $ref: "#/components/schemas/ChargeType"
         failureReason:
           type: string
+          nullable: true
           enum:
             - user_action_required
             - charge_amount_too_high
@@ -1881,6 +1893,7 @@ components:
                  Examples: Failure in Recurring, failure in downstream services.
         failureDescription:
           type: string
+          nullable: true
           description: Description for the failure reason
           example: "User action required"
 
