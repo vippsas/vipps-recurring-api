@@ -1333,6 +1333,7 @@ components:
     Agreement:
       type: object
       required:
+        - currency
         - interval
         - intervalCount
         - price
@@ -1348,7 +1349,6 @@ components:
           nullable: true
         currency:
           $ref: "#/components/schemas/Currency"
-          nullable: true
         id:
           type: string
           nullable: true
