@@ -1492,9 +1492,9 @@ This is the preferred flow whenever there is no campaigns or similar present.
 
 ![flow_Initial_charge](images/flow-Initial-charge.png)
 
-When an initial charge is present, the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
+When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
 
-Here we also show `productName` and the agreement description on the agreement, as well as `description` on the initial charge. `productName` and `inital charge description` are defined by the merchant. The agreement description is created by Vipps based on the interval. 
+Here we also show `productName` and the agreement explanation on the agreement, as well as `description` on the initial charge. `productName` and `inital charge description` are defined by the merchant. The agreement explanation is created by Vipps based on the interval. 
 
 Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobile phone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
 
