@@ -1482,7 +1482,7 @@ First a short description on the flows.
 
 In the normal agreement, the user gets presented with the agreement, agrees to that, and gets sent to a confirmation screen.
 On the agreement we present the start date, the price of the agreements, the `productName` which are all defined by the merchant. 
-We also present the agreement description which is used to describe the agreement interval to the user. 
+We also present an agreement explanation which is used to describe the agreement interval to the user. 
 For example, for an agreement with `interval=WEEK` and `intervalCount=2`, the agreement explanation will be `hver 2.uke til du sier opp` or `every 2 weeks until cancelled`
 
 
