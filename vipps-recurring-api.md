@@ -792,9 +792,7 @@ in a `400 Bad Request` response.
 If there should be a pause in an agreement, like a temporary stop of a
 subscription: Simply do not create any charges during the pause.
 
-We recommended not to set the agreement status to `STOPPED`, but to update
-the `productDescription` field of the agreement so the user can see that the
-subscription is paused in Vipps.
+We recommended not to set the agreement status to `STOPPED`. `STOPPED` agreements cannot be reactivated.
 
 ### Stop an agreement
 
@@ -809,9 +807,7 @@ We recommend that the recurring agreement remains `ACTIVE` for as long as the
 user has access to the service.    
 For example; if the user cancels their subscription, but they are still able to
 use the service until the end of the billing cycle, the agreement should only be
-set to `STOPPED` at the end of the billing cycle. In this case we also recommend
-updating the `productDescription` field of the agreement so that the user can see
-that the subscription is cancelled or due to be cancelled at a given time.
+set to `STOPPED` at the end of the billing cycle.
 
 Since `STOPPED` agreements cannot be reactivated, a benefit of waiting until
 the "end of service" before setting the agreement status to `STOPPED` is that
@@ -1485,7 +1481,10 @@ First a short description on the flows.
 ![flow_Normal_agreement](images/flow-Normal-agreement.png)
 
 In the normal agreement, the user gets presented with the agreement, agrees to that, and gets sent to a confirmation screen.
-On the agreement we present start date, interval, the price of the agreements, as well as `productName` and `productDescription`, the latter of which can be used to describe the agreement to the user and can be defined by the merchant.
+On the agreement we present the start date, the price of the agreements, the `productName` which are all defined by the merchant. 
+We also present an agreement explanation which is used to describe the agreement interval to the user. 
+For example, for an agreement with `interval=WEEK` and `intervalCount=2`, the agreement explanation will be `hver 2.uke til du sier opp` or `every 2 weeks until cancelled`
+
 
 This is the preferred flow whenever there is no campaigns or similar present.
 
@@ -1493,19 +1492,19 @@ This is the preferred flow whenever there is no campaigns or similar present.
 
 ![flow_Initial_charge](images/flow-Initial-charge.png)
 
-When an initial charge is present, the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
+When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
 
-Here we also show `productName` and `productDescription` on the agreement, as well as `description` on the initial charge. All of which are defined by the merchant.
+Here we also show `productName` and the agreement explanation on the agreement, as well as `description` on the initial charge. `productName` and `inital charge description` are defined by the merchant. The agreement explanation is created by Vipps based on the interval and the campaign if specified. 
 
 Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobile phone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
 
-As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, as well as having to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement. If used for campaigns, be sure to have good descriptions in `productName` and `productDescription` on the agreement, as well as `description` on the initial charge.
+As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, as well as having to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
 
 ### Campaign
 
 ![flow_Campaign](images/flow-Campaign.png)
 
-When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. Here as well you have options of setting `productName` and `productDescription` to even further explain to the user.
+When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. 
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
