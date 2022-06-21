@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.6.1</title>
+    <title>Recurring Payments Merchant API v2.6.4</title>
 
     <style>
     </style>
@@ -1611,7 +1611,7 @@ Darkula color scheme from the JetBrains family of IDEs
               <ul class="toc-list-h2">
                 
                   <li>
-                    <a href="#authentication" class="toc-h2 toc-link" data-title="">Authentication</a>
+                    <a href="#authentication-see--a-href----authorization-20service-getaccesstoken--target--_blank--fetch-authorization-token--a-" class="toc-h2 toc-link" data-title="">Authentication See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a></a>
                     
                   </li>
                 
@@ -1825,7 +1825,7 @@ Darkula color scheme from the JetBrains family of IDEs
                   </li>
                 
                   <li>
-                    <a href="#tocs_campaignv3" class="toc-h2 toc-link" data-title="">campaignV3</a>
+                    <a href="#tocs_campaignv3" class="toc-h2 toc-link" data-title="">CampaignV3</a>
                     
                   </li>
                 
@@ -1957,14 +1957,11 @@ Darkula color scheme from the JetBrains family of IDEs
         <h1 id="recurring-payments">Recurring payments</h1>
 <p>Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.</p>
 <ol>
-<li>A draft agreement is initialized and the user is redirected for approval.</li>
-<li>The user approves the agreement and the merchant can call GET on the agreement to verify the status.</li>
-<li>The merchant can start sending charges which will be charged the user in the future.
+<li>A draft agreement is initialized and the user is redirected for approval. 2. The user approves the agreement and the merchant can call GET on the agreement to verify the status. 3. The merchant can start sending charges which will be charged the user in the future.
 The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user).</li>
 </ol>
-<h2 id="authentication">Authentication</h2>
-<p>See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a>
-For information regarding authentication please read <a href="https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication">our guide</a></p>
+<h2 id="authentication-see--a-href----authorization-20service-getaccesstoken--target--_blank--fetch-authorization-token--a-">Authentication See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a></h2>
+<p>For information regarding authentication please read <a href="https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication">our guide</a></p>
 <p>Base URLs:</p>
 <ul>
 <li>
@@ -1985,7 +1982,11 @@ curl -X POST https://api.vipps.no/accesstoken/get \
   -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;client_id: fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span> \
   -H <span class="hljs-string">&#x27;client_secret: Y8Kteew6GE2ZmeycEt6egg==&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>
+  -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Vipps-System-Name: woocommerce&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Vipps-System-Version: 5.4&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Vipps-System-Plugin-Name: vipps-woocommerce&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Vipps-System-Plugin-Version: 1.2.1&#x27;</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">POST</span> <span class="hljs-string">https://api.vipps.no/accesstoken/get</span> HTTP/1.1
@@ -1994,6 +1995,10 @@ curl -X POST https://api.vipps.no/accesstoken/get \
 <span class="hljs-attribute">client_id</span>: fb492b5e-7907-4d83-ba20-c7fb60ca35de
 <span class="hljs-attribute">client_secret</span>: Y8Kteew6GE2ZmeycEt6egg==
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
+<span class="hljs-attribute">Vipps-System-Name</span>: woocommerce
+<span class="hljs-attribute">Vipps-System-Version</span>: 5.4
+<span class="hljs-attribute">Vipps-System-Plugin-Name</span>: vipps-woocommerce
+<span class="hljs-attribute">Vipps-System-Plugin-Version</span>: 1.2.1
 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
@@ -2001,7 +2006,11 @@ curl -X POST https://api.vipps.no/accesstoken/get \
   <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;client_id&#x27;</span>:<span class="hljs-string">&#x27;fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span>,
   <span class="hljs-string">&#x27;client_secret&#x27;</span>:<span class="hljs-string">&#x27;Y8Kteew6GE2ZmeycEt6egg==&#x27;</span>,
-  <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>
+  <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>:<span class="hljs-string">&#x27;woocommerce&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span>:<span class="hljs-string">&#x27;5.4&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span>:<span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>:<span class="hljs-string">&#x27;1.2.1&#x27;</span>
 };
 
 fetch(<span class="hljs-string">&#x27;https://api.vipps.no/accesstoken/get&#x27;</span>,
@@ -2024,7 +2033,11 @@ headers = {
   <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;client_id&#x27;</span> =&gt; <span class="hljs-string">&#x27;fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span>,
   <span class="hljs-string">&#x27;client_secret&#x27;</span> =&gt; <span class="hljs-string">&#x27;Y8Kteew6GE2ZmeycEt6egg==&#x27;</span>,
-  <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>
+  <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;5.4&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;1.2.1&#x27;</span>
 }
 
 result = RestClient.post <span class="hljs-string">&#x27;https://api.vipps.no/accesstoken/get&#x27;</span>,
@@ -2039,7 +2052,11 @@ headers = {
   <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;client_id&#x27;</span>: <span class="hljs-string">&#x27;fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span>,
   <span class="hljs-string">&#x27;client_secret&#x27;</span>: <span class="hljs-string">&#x27;Y8Kteew6GE2ZmeycEt6egg==&#x27;</span>,
-  <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>
+  <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>: <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span>: <span class="hljs-string">&#x27;5.4&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span>: <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>: <span class="hljs-string">&#x27;1.2.1&#x27;</span>
 }
 
 r = requests.post(<span class="hljs-string">&#x27;https://api.vipps.no/accesstoken/get&#x27;</span>, headers = headers)
@@ -2051,6 +2068,10 @@ print(r.json())
     <span class="hljs-string">&#x27;client_id&#x27;</span> =&gt; <span class="hljs-string">&#x27;fb492b5e-7907-4d83-ba20-c7fb60ca35de&#x27;</span>,
     <span class="hljs-string">&#x27;client_secret&#x27;</span> =&gt; <span class="hljs-string">&#x27;Y8Kteew6GE2ZmeycEt6egg==&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+    <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
+    <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;5.4&#x27;</span>,
+    <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
+    <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;1.2.1&#x27;</span>,
 );
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
@@ -2103,6 +2124,10 @@ System.out.println(response.toString());
         <span class="hljs-string">&quot;client_id&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;fb492b5e-7907-4d83-ba20-c7fb60ca35de&quot;</span>},
         <span class="hljs-string">&quot;client_secret&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;Y8Kteew6GE2ZmeycEt6egg==&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
+        <span class="hljs-string">&quot;Vipps-System-Name&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;woocommerce&quot;</span>},
+        <span class="hljs-string">&quot;Vipps-System-Version&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;5.4&quot;</span>},
+        <span class="hljs-string">&quot;Vipps-System-Plugin-Name&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;vipps-woocommerce&quot;</span>},
+        <span class="hljs-string">&quot;Vipps-System-Plugin-Version&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;1.2.1&quot;</span>},
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
@@ -2116,7 +2141,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>POST /accesstoken/get</code></p>
-<p>The access token endpoint is used to get the JWT (JSON Web Token) that must be passed in every API request in the Authorization header. The access token is a base64-encoded string value that must be aquired first before making any Vipps api calls. The access token is valid for 1 hour in the test environment and 24 hours in the production environment.</p>
+<p>The access token endpoint is used to get the JWT (JSON Web Token) that must be passed in every API request in the Authorization header. The access token is a base64-encoded string value that must be acquired first before making any Vipps API calls. The access token is valid for 1 hour in the test environment and 24 hours in the production environment.</p>
 <h3 id="fetch-authorization-token-parameters">Parameters</h3>
 <table>
 <thead>
@@ -2149,6 +2174,34 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>The subscription key for your API product is available on <a href="http://portal.vipps.no">portal.vipps.no</a>, under the 'Utvikler' tab. Keep it secret.</td>
+</tr>
+<tr>
+<td>Vipps-System-Name</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>The name of the ecommerce solution. One word in lowercase letters is good.</td>
+</tr>
+<tr>
+<td>Vipps-System-Version</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>The version number of the ecommerce solution.</td>
+</tr>
+<tr>
+<td>Vipps-System-Plugin-Name</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.</td>
+</tr>
+<tr>
+<td>Vipps-System-Plugin-Version</td>
+<td>header</td>
+<td>string</td>
+<td>false</td>
+<td>The version number of the ecommerce plugin (if applicable).</td>
 </tr>
 </tbody>
 </table>
@@ -2189,13 +2242,13 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -2207,18 +2260,214 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
 <h3 id="fetch-authorization-token-responseschema">Response Schema</h3>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -2609,13 +2858,13 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -2627,13 +2876,13 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -2876,7 +3125,7 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>» stop</td>
-<td>string(date-time)</td>
+<td>string(date-time)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>Date when agreement was stopped in ISO 8601 format.</td>
@@ -2890,14 +3139,14 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>» sub</td>
-<td>string(uuid)</td>
+<td>string(uuid)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>User identifier (subject). Will be null if profile data was not requested.</td>
 </tr>
 <tr>
 <td>» userinfoUrl</td>
-<td>string(uri)</td>
+<td>string(uri)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
@@ -3007,7 +3256,203 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -3268,9 +3713,9 @@ System.out.println(response.toString());
 <p><code>POST /recurring/v2/agreements</code></p>
 <p>The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a <code>vippsConfirmationUrl</code>. This is used to redirect the user to the Vipps landing page, or to the Vipps app if <code>&quot;isApp&quot;:true</code> is used.
 <br />
-If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in <code>merchantRedirectUrl</code>. We <strong>strongly</strong> recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the <code>merchantRedirectUrl</code>. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in <code>merchantRedirectUrl</code>. We <strong>strongly</strong> recommend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the <code>merchantRedirectUrl</code>. We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
 <br />
-Please note the different use cases for <code>initialCharge</code> and <code>compaign</code>. And when to use <code>RESERVE_CAPTURE</code> instead of <code>DIRECT_CAPTURE</code> as transactionType. More information about this can be found in the API documentation.</p>
+Please note the different use cases for <code>initialCharge</code> and <code>campaign</code>. And when to use <code>RESERVE_CAPTURE</code> instead of <code>DIRECT_CAPTURE</code> as transactionType. More information about this can be found in the API documentation.</p>
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
@@ -3624,7 +4069,7 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>403</td>
@@ -3636,13 +4081,13 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>Unprocessable Entity (invalid json)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -3654,18 +4099,67 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
 <h3 id="create-a-new-agreement--to-be-confirmed-in-vipps-responseschema">Response Schema</h3>
 <p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>401</strong></p>
 <table>
 <thead>
 <tr>
@@ -3763,7 +4257,203 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>422</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -3988,7 +4678,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /recurring/v2/agreements/{agreementId}</code></p>
-<p>Fetch a single agreement for a user. Recomended to use when polling for status changes after sending an agreement to a user.</p>
+<p>Fetch a single agreement for a user. Recommended to use when polling for status changes after sending an agreement to a user.</p>
 <h3 id="fetch-an-agreement-parameters">Parameters</h3>
 <table>
 <thead>
@@ -4124,19 +4814,19 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Item does not exist (and never has)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -4148,13 +4838,13 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -4208,7 +4898,252 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>404</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -4693,19 +5628,19 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Item does not exist (and never has)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -4717,13 +5652,13 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -4777,7 +5712,252 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>404</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -5152,12 +6332,12 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>409</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.8">Conflict</a></td>
-<td>Internal server error</td>
+<td>There is a conflict with the server</td>
 <td>Inline</td>
 </tr>
 <tr>
@@ -5170,18 +6350,67 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
 <h3 id="force-accept-an-agreement--only-available-in-test-environment--responseschema">Response Schema</h3>
 <p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>401</strong></p>
 <table>
 <thead>
 <tr>
@@ -5280,6 +6509,104 @@ System.out.println(response.toString());
 </tbody>
 </table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -5640,7 +6967,8 @@ System.out.println(response.toString());
         <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
         <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
         <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-      }
+      },
+      <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
     },
     <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
     <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
@@ -5684,50 +7012,50 @@ System.out.println(response.toString());
 <tr>
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Invalid request, check your parameters</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Access token is missing or invalid</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Feature is not supported for the given sale unit</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>Unprocessable Entity (invalid json)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Too Many Requests</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Internal server error</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Service unavailable</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Timeout</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -5752,7 +7080,7 @@ System.out.println(response.toString());
 <td>none</td>
 </tr>
 <tr>
-<td>» Agreement</td>
+<td>» Agreement V3</td>
 <td><a href="#schemaagreementresponsev3">AgreementResponseV3</a></td>
 <td>false</td>
 <td>none</td>
@@ -5760,7 +7088,7 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>»» campaign</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">CampaignV3</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -5834,6 +7162,13 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>none</td>
+</tr>
+<tr>
+<td>»»» explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
 </tr>
 <tr>
 <td>»» currency</td>
@@ -6040,6 +7375,398 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>403</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>422</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <h2 id="create-a-new-agreement--to-be-confirmed-in-vipps-2">Create a new Agreement, to be confirmed in Vipps</h2>
 <p><a id="opIdDraftAgreementV3"></a></p>
 <blockquote>
@@ -6238,9 +7965,9 @@ System.out.println(response.toString());
 <p><code>POST /v3/agreements</code></p>
 <p>The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a <code>vippsConfirmationUrl</code>. This is used to redirect the user to the Vipps landing page, or to the Vipps app if <code>&quot;isApp&quot;:true</code> is used.
 <br />
-If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in <code>merchantRedirectUrl</code>. We <strong>strongly</strong> recomend that you implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the <code>merchantRedirectUrl</code>. We have no control over if a user is actially redirected back or not, this depends on what browser the user came from.
+If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in <code>merchantRedirectUrl</code>. We <strong>strongly</strong> recommend that you implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the <code>merchantRedirectUrl</code>. We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
 <br />
-Please note the different use cases for <code>initialCharge</code> and <code>compaign</code>. And when to use <code>RESERVE_CAPTURE</code> instead of <code>DIRECT_CAPTURE</code> as transactionType. More information about this can be found in the API documentation.</p>
+Please note the different use cases for <code>initialCharge</code> and <code>campaign</code>. And when to use <code>RESERVE_CAPTURE</code> instead of <code>DIRECT_CAPTURE</code> as transactionType. More information about this can be found in the API documentation.</p>
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
@@ -6337,7 +8064,7 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <tr>
 <td>» campaign</td>
 <td>body</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">CampaignV3</a></td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -6410,6 +8137,13 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
+</tr>
+<tr>
+<td>»» explanation</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
 </tr>
 <tr>
 <td>» currency</td>
@@ -6645,50 +8379,443 @@ Please note the different use cases for <code>initialCharge</code> and <code>com
 <tr>
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Invalid request, check your parameters</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Access token is missing or invalid</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Feature is not supported for the given sale unit</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>Unprocessable Entity (invalid json)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Too Many Requests</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Internal server error</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Service unavailable</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Timeout</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="create-a-new-agreement--to-be-confirmed-in-vipps-responseschema">Response Schema</h3>
+<p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>403</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>422</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody>
 </table>
@@ -6868,7 +8995,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /v3/agreements/{agreementId}</code></p>
-<p>Fetch a single agreement for a user. Recomended to use when polling for status changes after sending an agreement to a user.</p>
+<p>Fetch a single agreement for a user. Recommended to use when polling for status changes after sending an agreement to a user.</p>
 <h3 id="fetch-an-agreement-parameters">Parameters</h3>
 <table>
 <thead>
@@ -6968,7 +9095,8 @@ System.out.println(response.toString());
       <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
       <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-    }
+    },
+    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
@@ -7011,50 +9139,443 @@ System.out.println(response.toString());
 <tr>
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Invalid request, check your parameters</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Access token is missing or invalid</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Feature is not supported for the given sale unit</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>Unprocessable Entity (invalid json)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Too Many Requests</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Internal server error</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Service unavailable</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Timeout</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fetch-an-agreement-responseschema">Response Schema</h3>
+<p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>403</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>422</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody>
 </table>
@@ -7417,50 +9938,443 @@ System.out.println(response.toString());
 <tr>
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Invalid request, check your parameters</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Access token is missing or invalid</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>403</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Feature is not supported for the given sale unit</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>422</td>
 <td><a href="https://tools.ietf.org/html/rfc2518#section-10.3">Unprocessable Entity</a></td>
 <td>Unprocessable Entity (invalid json)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Too Many Requests</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Internal server error</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Service unavailable</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Timeout</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="update-an-agreement-responseschema">Response Schema</h3>
+<p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>403</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>422</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody>
 </table>
@@ -7472,7 +10386,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-shell"><code><span class="hljs-comment"># You can also use wget</span>
 curl -X PATCH https://api.vipps.no/v3/agreements/{agreementId}/accept \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Accept: application/problem+json&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
@@ -7486,7 +10400,7 @@ curl -X PATCH https://api.vipps.no/v3/agreements/{agreementId}/accept \
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">PATCH</span> <span class="hljs-string">https://api.vipps.no/v3/agreements/{agreementId}/accept</span> HTTP/1.1
 <span class="hljs-attribute">Host</span>: api.vipps.no
 <span class="hljs-attribute">Content-Type</span>: application/json
-<span class="hljs-attribute">Accept</span>: application/problem+json
+<span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
@@ -7502,7 +10416,7 @@ curl -X PATCH https://api.vipps.no/v3/agreements/{agreementId}/accept \
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/problem+json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -7531,7 +10445,7 @@ fetch(<span class="hljs-string">&#x27;https://api.vipps.no/v3/agreements/{agreem
 
 headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/problem+json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -7552,7 +10466,7 @@ p JSON.parse(result)
 <pre class="highlight tab tab-python"><code><span class="hljs-keyword">import</span> requests
 headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
-  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/problem+json&#x27;</span>,
+  <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -7569,7 +10483,7 @@ print(r.json())
 
 </code></pre>
 <pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
-    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/problem+json&#x27;</span>,
+    <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -7627,7 +10541,7 @@ System.out.println(response.toString());
 
     headers := <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>][]<span class="hljs-keyword">string</span>{
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
-        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/problem+json&quot;</span>},
+        <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
@@ -7754,20 +10668,14 @@ System.out.println(response.toString());
 <blockquote>
 <p>400 Response</p>
 </blockquote>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;https://vipps.no/problems/recurring/validation-error&quot;</span>,
-  <span class="hljs-attr">&quot;title&quot;</span>: <span class="hljs-string">&quot;Bad Request&quot;</span>,
-  <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-number">400</span>,
-  <span class="hljs-attr">&quot;detail&quot;</span>: <span class="hljs-string">&quot;Input validation failed&quot;</span>,
-  <span class="hljs-attr">&quot;instance&quot;</span>: <span class="hljs-string">&quot;/v3/agreements&quot;</span>,
-  <span class="hljs-attr">&quot;contextId&quot;</span>: <span class="hljs-string">&quot;0b7a2d85-8233-4a0f-867b-fa77a8cdf8de&quot;</span>,
-  <span class="hljs-attr">&quot;extraDetails&quot;</span>: [
-    {
-      <span class="hljs-attr">&quot;key&quot;</span>: <span class="hljs-string">&quot;campaign&quot;</span>,
-      <span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;&#x27;type&#x27; can not be null&quot;</span>
-    }
-  ]
-}
+<pre class="highlight tab tab-json"><code>[
+  {
+    <span class="hljs-attr">&quot;code&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+    <span class="hljs-attr">&quot;field&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+    <span class="hljs-attr">&quot;message&quot;</span>: <span class="hljs-string">&quot;Description of the error&quot;</span>,
+    <span class="hljs-attr">&quot;contextId&quot;</span>: <span class="hljs-string">&quot;0b7a2d85-8233-4a0f-867b-fa77a8cdf8de&quot;</span>
+  }
+]
 </code></pre>
 <h3 id="force-accept-an-agreement--only-available-in-test-environment--responses">Responses</h3>
 <table>
@@ -7789,38 +10697,333 @@ System.out.println(response.toString());
 <tr>
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Invalid request, check your parameters</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Access token is missing or invalid</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>409</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.8">Conflict</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>There is a conflict with the server</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Internal server error</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Service unavailable</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
-<td>Problem JSON error response</td>
-<td><a href="#schemaproblemerrorresponse">ProblemErrorResponse</a></td>
+<td>Timeout</td>
+<td>Inline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="force-accept-an-agreement--only-available-in-test-environment--responseschema">Response Schema</h3>
+<p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>409</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody>
 </table>
@@ -8167,19 +11370,19 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Item does not exist (and never has)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -8191,13 +11394,13 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -8282,7 +11485,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fullfill the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fulfil the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>» failureDescription</td>
@@ -8413,7 +11616,252 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>404</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -8843,19 +12291,19 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Item does not exist (and never has)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -8867,13 +12315,13 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -8927,7 +12375,252 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>404</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -9283,19 +12976,19 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Item does not exist (and never has)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>409</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.8">Conflict</a></td>
-<td>Too Many Requests</td>
-<td>None</td>
+<td>There is a conflict with the server</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -9307,13 +13000,13 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -9367,7 +13060,252 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>404</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>409</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -9733,25 +13671,25 @@ System.out.println(response.toString());
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Item does not exist (and never has)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>409</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.8">Conflict</a></td>
-<td>This charge is not in a deletable state, it may have already been charged to the user.</td>
-<td>None</td>
+<td>There is a conflict with the server</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -9763,13 +13701,13 @@ System.out.println(response.toString());
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -9823,7 +13761,301 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>404</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>409</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -10231,19 +14463,19 @@ Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr
 <td>401</td>
 <td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
 <td>Access token is missing or invalid</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Item does not exist (and never has)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Too Many Requests</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>500</td>
@@ -10255,13 +14487,13 @@ Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr
 <td>503</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.4">Service Unavailable</a></td>
 <td>Service unavailable</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>504</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.5">Gateway Time-out</a></td>
 <td>Timeout</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
@@ -10315,7 +14547,252 @@ Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr
 </tr>
 </tbody>
 </table>
+<p>Status Code <strong>401</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>404</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>429</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <p>Status Code <strong>500</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>503</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>504</strong></p>
 <table>
 <thead>
 <tr>
@@ -10681,12 +15158,61 @@ System.out.println(response.toString());
 <td>404</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
 <td>Item does not exist (and never has)</td>
-<td>None</td>
+<td>Inline</td>
 </tr>
 </tbody>
 </table>
 <h3 id="capture-a-reserved-charge-responseschema">Response Schema</h3>
 <p>Status Code <strong>400</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemavippsapierror">VippsApiError</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» code</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» field</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» message</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» contextId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Status Code <strong>404</strong></p>
 <table>
 <thead>
 <tr>
@@ -11363,7 +15889,7 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>stop</td>
-<td>string(date-time)</td>
+<td>string(date-time)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>Date when agreement was stopped in ISO 8601 format.</td>
@@ -11377,14 +15903,14 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>sub</td>
-<td>string(uuid)</td>
+<td>string(uuid)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>User identifier (subject). Will be null if profile data was not requested.</td>
 </tr>
 <tr>
 <td>userinfoUrl</td>
-<td>string(uri)</td>
+<td>string(uri)¦null</td>
 <td>false</td>
 <td>none</td>
 <td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
@@ -11419,7 +15945,8 @@ System.out.println(response.toString());
       <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
       <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-    }
+    },
+    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;+4740000000&quot;</span>,
@@ -11462,7 +15989,7 @@ System.out.println(response.toString());
 <tbody>
 <tr>
 <td>campaign</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">CampaignV3</a></td>
 <td>false</td>
 <td>none</td>
 <td>A campaign is a way to make a temporary alteration in the agreement to make it more tempting for a customer. Like a given period for a set price before the normal agreement starts, a period of rebated price, etc.</td>
@@ -11582,7 +16109,8 @@ System.out.println(response.toString());
       <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
       <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
       <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-    }
+    },
+    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
   },
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqzFAMkfBbc&quot;</span>,
@@ -11606,7 +16134,7 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<p>Agreement</p>
+<p>Agreement V3</p>
 <h3 id="properties-6">Properties</h3>
 <table>
 <thead>
@@ -11621,7 +16149,7 @@ System.out.println(response.toString());
 <tbody>
 <tr>
 <td>campaign</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">CampaignV3</a></td>
 <td>false</td>
 <td>none</td>
 <td>A campaign is a temporary lowering of the agreement price. The end user will only see the campaign if today's date is between the start and end date</td>
@@ -12094,9 +16622,9 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h2 id="tocs_campaignv3">campaignV3</h2>
+<h2 id="tocs_campaignv3">CampaignV3</h2>
 <p><a id="schemacampaignv3"></a>
-<a id="schema_campaignV3"></a>
+<a id="schema_CampaignV3"></a>
 <a id="tocScampaignv3"></a>
 <a id="tocscampaignv3"></a></p>
 <pre class="highlight tab tab-json"><code>{
@@ -12114,11 +16642,12 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
     <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;To uker&quot;</span>
-  }
+  },
+  <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
 }
 
 </code></pre>
-<p>campaign</p>
+<p>Campaign V3</p>
 <h3 id="properties-14">Properties</h3>
 <table>
 <thead>
@@ -12179,6 +16708,13 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>The period that the campaign price pays for</td>
+</tr>
+<tr>
+<td>explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
 </tr>
 </tbody>
 </table>
@@ -12541,7 +17077,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fullfill the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fulfil the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>failureDescription</td>
@@ -12594,7 +17130,7 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;extraDetails&quot;</span>: [
     {
       <span class="hljs-attr">&quot;key&quot;</span>: <span class="hljs-string">&quot;campaign&quot;</span>,
-      <span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;&#x27;type&#x27; can not be null&quot;</span>
+      <span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;&#x27;type&#x27; cannot be null&quot;</span>
     }
   ]
 }
@@ -12670,7 +17206,7 @@ System.out.println(response.toString());
 <a id="tocsextradetails"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;key&quot;</span>: <span class="hljs-string">&quot;campaign&quot;</span>,
-  <span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;&#x27;type&#x27; can not be null&quot;</span>
+  <span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;&#x27;type&#x27; cannot be null&quot;</span>
 }
 
 </code></pre>

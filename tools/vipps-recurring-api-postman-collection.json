@@ -37,6 +37,10 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -108,6 +112,10 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -174,6 +182,10 @@
 							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -244,6 +256,10 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -310,6 +326,30 @@
 							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -358,6 +398,30 @@
 							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -406,6 +470,30 @@
 							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -454,6 +542,30 @@
 							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -502,6 +614,30 @@
 							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -626,6 +762,30 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -663,6 +823,10 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -737,6 +901,26 @@
 							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -792,6 +976,10 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -840,6 +1028,10 @@
 							{
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -936,6 +1128,10 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -1020,6 +1216,10 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -1097,6 +1297,10 @@
 								"key": "Ocp-Apim-Subscription-Key",
 								"value": "{{Ocp-Apim-Subscription-Key}}",
 								"type": "text"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1179,6 +1383,10 @@
 								"type": "text"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -1241,6 +1449,10 @@
 								"type": "text"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -1297,6 +1509,10 @@
 								"value": "{{Ocp-Apim-Subscription-Key}}"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -1351,6 +1567,10 @@
 							{
 								"key": "Content-Type",
 								"value": "Application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1440,6 +1660,10 @@
 								"type": "text"
 							},
 							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
 								"key": "Vipps-System-Name",
 								"value": "{{vipps_system_name}}",
 								"type": "default"
@@ -1494,6 +1718,10 @@
 								"key": "Authorization",
 								"type": "text",
 								"value": "Bearer {{login_token}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
 							},
 							{
 								"key": "Vipps-System-Name",
