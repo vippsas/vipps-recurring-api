@@ -541,7 +541,7 @@ A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
 Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
 
-![Campaign example](images/CampaignExample.PNG)
+![flow_Campaign](images/flow-Campaign.png)
 
 In order to start a campaign the campaign field has to be added either to the agreement draft
 [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
