@@ -2,7 +2,7 @@
 
 API version: 2.0
 
-Document version 1.2.6.
+Document version 1.2.7.
 
 ## Checklist
 
@@ -18,7 +18,8 @@ Document version 1.2.6.
     - [ ] Charge: Capture a reserved initial charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
     - For examples of requests and responses, see the Postman collection in [tools](tools/).
   - [ ] Send the [Vipps HTTP headers](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#vipps-http-headers)
-        in all API requests for better tracking and troubleshooting (mandatory for partners and platforms):
+        in all API requests for better tracking and troubleshooting
+        (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
       - [ ] `Merchant-Serial-Number`    
       - [ ] `Vipps-System-Name`
       - [ ] `Vipps-System-Version`
