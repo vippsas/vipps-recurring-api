@@ -662,13 +662,12 @@ Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
   }
 }
 ```
-| Field            | Description                                                                       |
-|------------------|-----------------------------------------------------------------------------------|
-| `campaignType`   | The type of the campaign                                                          |
-| `price`          | The price that the customer will pay for each interval during the campaign        |
-| `end`            | The end date of the campaign                                                      |
-| `interval.unit`  | The interval where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR   |
-| `interval.count` | The frequency of how often the user should be charged                             |
+| Field          | Description                                                                                                                      |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------|
+| `campaignType` | The type of the campaign                                                                                                         |
+| `price`        | The price that the customer will pay for each interval during the campaign                                                       |
+| `end`          | The end date of the campaign                                                                                                     |
+| `interval`     | The payment interval where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "WEEK", "count": 4 } |
 
 TODO add screenshot
 
