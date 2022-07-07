@@ -574,7 +574,7 @@ Campaigns can not be used in combination with variable amount, see more about va
 |-----------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
 | `price campaign`      | Different interval price until specified date. Same interval as agreement.                                                | 10kr per 1 week interval until 2022-05-01T00:00:00Z and then 200kr per 1 week interval  |
 | `period campaign`     | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR)  | 1kr for 6 months and then 100kr each month                                              |
-| `event campaign`      | A set price for until a given date with a text description for a given event                             | 20kr until Christmas and then 100kr each month                                          |
+| `event campaign`      | A set price until a given event date with a text describing the event                             | 20kr until Christmas and then 100kr each month                                          |
 | `full flex campaign`  | A set price for a different interval until a given date                                                  | 10kr per week until 2022-05-01T00:00:00Z and then 200kr a month                         |
 
 In order to start a campaign the campaign field has to be added to the agreement draft
