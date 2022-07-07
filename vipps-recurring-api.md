@@ -616,8 +616,7 @@ TODO add screenshot
 |----------------|--------------------------------------------------------------------------------|
 | `campaignType` | The type of the campaign                                                       |
 | `price`        | The price that the customer will pay for the period of the campaign            |
-| `period.unit`  | The period where the campaign price is applied. Can be DAY, WEEK, MONTH, YEAR  |
-| `period.count` | The number of periods the campaign should run for                              |
+| `period`  | The period where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "WEEK", "count": 4 }  |
 
 ![period campaign](images/periodCampaignExample.png) 
 
