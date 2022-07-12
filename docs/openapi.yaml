@@ -21,7 +21,8 @@ tags:
   - name: Authorization Service
   - name: Agreement V2 Endpoints
   - name: Coming soon - Agreement V3 Endpoints
-  - name: Charge Endpoints
+  - name: Charge V2 Endpoints
+  - name: Coming soon - Charge V3 Endpoints
   - name: Userinfo Endpoint
 paths:
   /accesstoken/get:
@@ -654,7 +655,7 @@ paths:
   "/recurring/v2/agreements/{agreementId}/charges":
     get:
       tags:
-        - Charge Endpoints
+        - Charge V2 Endpoints
       summary: List Charges
       operationId: listCharges
       description: >-
@@ -699,7 +700,7 @@ paths:
           $ref: "#/components/responses/TimeoutError"
     post:
       tags:
-        - Charge Endpoints
+        - Charge V2 Endpoints
       summary: Create a new charge
       operationId: createCharge
       description: >-
@@ -791,7 +792,7 @@ paths:
   "/recurring/v2/agreements/{agreementId}/charges/{chargeId}":
     get:
       tags:
-        - Charge Endpoints
+        - Charge V2 Endpoints
       summary: Fetch a Charge
       operationId: getCharge
       description: >-
@@ -830,7 +831,7 @@ paths:
           $ref: "#/components/responses/TimeoutError"
     delete:
       tags:
-        - Charge Endpoints
+        - Charge V2 Endpoints
       summary: Cancel a Charge
       operationId: cancelCharge
       description: >-
@@ -875,7 +876,7 @@ paths:
   "/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund":
     post:
       tags:
-        - Charge Endpoints
+        - Charge V2 Endpoints
       summary: Refund a charge
       operationId: refundCharge
       description: >-
@@ -924,7 +925,7 @@ paths:
   "/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture":
     post:
       tags:
-        - Charge Endpoints
+        - Charge V2 Endpoints
       summary: Capture a reserved charge
       operationId: captureCharge
       description: >-
@@ -1018,6 +1019,275 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserinfoError"
+  
+  "/recurring/v3/agreements/{agreementId}/charges":
+    get:
+      tags:
+        - Coming soon - Charge V3 Endpoints
+      summary: List Charges
+      operationId: listCharges
+      description: >-
+        Fetches all charges for a single agreement, including the optional initial charge.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - name: chargeStatus
+          in: query
+          required: false
+          description: Filter by status of the charge.
+          schema:
+            $ref: "#/components/schemas/ChargeStatus"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChargeV3"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "429":
+          $ref: "#/components/responses/RateLimitError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+    post:
+      tags:
+        - Coming soon - Charge V3 Endpoints
+      summary: Create a new charge
+      operationId: createCharge
+      description: >-
+        Creates a new recurring charge *(payment)* that will charge the user on the date specified. If the payment fails, the charge will be retried based on `retryDays`.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Idempotency-Key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChargeRequestV3"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChargeReference"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "429":
+          $ref: "#/components/responses/RateLimitError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+  "/recurring/v3/agreements/{agreementId}/charges/{chargeId}":
+    get:
+      tags:
+        - Coming soon - Charge V3 Endpoints
+      summary: Fetch a Charge
+      operationId: getCharge
+      description: >-
+        Fetch a single charge for a user.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChargeV3"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "409":
+          $ref: "#/components/responses/ConflictError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+    delete:
+      tags:
+        - Coming soon - Charge V3 Endpoints
+      summary: Cancel a Charge
+      operationId: cancelCharge
+      description: >-
+        Cancels a due or reserved charge. Note if you cancels an agreement, there is no need to cancel the charges that belongs to the agreement. This will be done automatically by Vipps.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
+      responses:
+        "200":
+          description: Success
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "409":
+          $ref: "#/components/responses/ConflictError"
+        "429":
+          $ref: "#/components/responses/RateLimitError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+  "/recurring/v3/agreements/{agreementId}/charges/{chargeId}/refund":
+    post:
+      tags:
+        - Coming soon - Charge V3 Endpoints
+      summary: Refund a charge
+      operationId: refundCharge
+      description: >-
+        Refunds a charge, can also do a partial refund (refunding a smaller part of the payment).
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefundRequest"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+        "429":
+          $ref: "#/components/responses/RateLimitError"
+        "500":
+          $ref: "#/components/responses/ServerError"
+        "503":
+          $ref: "#/components/responses/UnavailableError"
+        "504":
+          $ref: "#/components/responses/TimeoutError"
+  "/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture":
+    post:
+      tags:
+        - Coming soon - Charge V3 Endpoints
+      summary: Capture a reserved charge
+      operationId: captureCharge
+      description: >-
+        Captures an `charge` with type `RESERVE_CAPTURE`.
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Idempotency key
+          example: aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK
+          schema:
+            $ref: "#/components/schemas/IdempotencyKeyFormat"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/AgreementId"
+        - $ref: "#/components/parameters/ChargeId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CaptureRequestV3"
+        required: true
+      responses:
+        "200":
+          description: Success
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
 
 servers:
   - url: https://api.vipps.no
@@ -1800,6 +2070,50 @@ components:
           example: acmeshop123order123abc
           maxLength: 50
           pattern: '^[a-zA-Z0-9-]{1,50}$'
+    ChargeRequestV3:
+      type: object
+      required:
+        - amount
+        - description
+        - due
+        - transactionType
+        - retryDays
+      properties:
+        amount:
+          type: integer
+          format: int32
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
+          example: 49900
+          minimum: 100
+        description:
+          type: string
+          description: This field is visible to the end user in-app
+          example: Premier League subscription
+          maxLength: 45
+        due:
+          type: string
+          format: date
+          description: YYYY-MM-DD. Each specific charge on an agreement must
+            be scheduled by the merchant, a minimum of two days before the
+            payment will occur (it is minimum one day in the test environment).
+          example: "2030-12-31"
+        transactionType:
+          $ref: "#/components/schemas/TransactionType"
+        retryDays:
+          type: integer
+          format: int32
+          description: The service will attempt to charge the customer for N days [non
+            inclusive], must be null or contain a value >= 0. If zero, no
+            retries will be performed
+          minimum: 0
+          maximum: 14
+          example: 5
+        orderId:
+          type: string
+          description: Optional orderId, will be auto generated if not provided
+          example: acmeshop123order123abc
+          maxLength: 50
+          pattern: '^[a-zA-Z0-9-]{1,50}$'    
     ChargeReference:
       type: object
       required:
@@ -1883,7 +2197,92 @@ components:
           type: string
           description: Description for the failure reason
           example: "User action required"
+    ChargeV3:
+      type: object
+      required:
+        - transactionId
+        - description
+        - type
+        - amount
+        - amountRefunded
+        - amountCaptured
+        - transactionType
+        - due
+        - id
+        - status
+        - currency
+      properties:
+        amount:
+          type: integer
+          format: int32
+          description: "Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre."
+          example: 39900
+        amountRefunded:
+          type: integer
+          format: int32
+          description: >-
+            The total amount which has been refunded, in case of status
+            refund/partial refund.
 
+            Amounts are specified in minor units. For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+          example: 39900
+        amountCaptured:
+          type: integer
+          format: int32
+          description: 
+            The total amount which has been captured, in case if status partial refund.
+        description:
+          type: string
+          description: Description of the charge
+          example: "Premier League subscription: September"
+        due:
+          type: string
+          format: date-time
+          description: The due date for this charge
+          example: "2019-06-01T00:00:00Z"
+        id:
+          type: string
+          description: Identifier for this charge (for this customer's subscription).
+          default: NOT_SET
+          maxLength: 15
+          example: chg_WCVbcAbRCmu2zk
+        status:
+          $ref: "#/components/schemas/ChargeStatus"
+        transactionId:
+          type: string
+          description: Contains null until the status has reached CHARGED
+          maxLength: 36
+          example: "5001419121"
+        type:
+          $ref: "#/components/schemas/ChargeType"
+        transactionType:
+          $ref: "#/components/schemas/TransactionType"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        failureReason:
+          type: string
+          enum:
+            - user_action_required
+            - charge_amount_too_high
+            - non_technical_error
+            - technical_error
+          example: "user_action_required"
+          description: >
+            Identifies the reason why the charged has been marked as `FAILED`:
+              * `user_action_required` - The users card can not fulfil the payment, user needs to take action in Vipps.
+                 Examples: Card is blocked for ecommerce, insufficient funds, expired card.
+
+              * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
+
+              * `non_technical_error` - Something went wrong with charging the user.
+                 Examples: User has deleted their Vipps Profile.
+
+              * `technical_error` - Something went wrong in Recurring while performing the payment.
+                 Examples: Failure in Recurring, failure in downstream services.
+        failureDescription:
+          type: string
+          description: Description for the failure reason
+          example: "User action required"
     ProblemErrorResponse:
       type: object
       properties:
@@ -1957,6 +2356,18 @@ components:
             the users app.
           maxLength: 45
           example: Forgot to apply discount, refunding 50%
+    CaptureRequestV3:
+      type: object
+      required:
+        - amount
+        - description
+      properties:
+        amount:
+          type: integer
+          example: 1000
+        description:
+          type: string
+          example: Description of the charge
     AgreementStatus:
       type: string
       description: Status of the agreement.
