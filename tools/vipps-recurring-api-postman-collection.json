@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4e690490-4923-49df-87dd-53ab19114598",
+		"_postman_id": "dd7f48a0-6a2a-4cba-893e-f018cdedd6ed",
 		"name": "Recurring Payments - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -138,7 +138,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -210,7 +210,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"variableAmount\": {\n\t    \"suggestedMaxAmount\": 6000\n    },\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"variableAmount\": {\n\t    \"suggestedMaxAmount\": 6000\n    },\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -282,7 +282,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\" : \"PRICE_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\" : \"PRICE_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -354,7 +354,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\" : \"PERIOD_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"period\": \"DAY\",\n    \"periodCount\": \"2\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\" : \"PERIOD_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"period\": {\n        \"unit\": \"DAY\",\n        \"count\": \"2\"\n    }\n },\n \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -426,7 +426,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"EVENT_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"eventDate\": \"2040-12-25T00:00:00Z\",\n    \"eventText\": \"Until Christmas\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"EVENT_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"eventDate\": \"2040-12-25T00:00:00Z\",\n    \"eventText\": \"Until Christmas\"\n },\n \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -498,7 +498,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"FULL_FLEX_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"interval\": \"WEEK\",\n    \"intervalCount\": 4,\n    \"end\": \"2030-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"FULL_FLEX_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n    \"end\": \"2030-01-01T00:00:00Z\"\n },\n \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -570,7 +570,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -642,7 +642,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -723,7 +723,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"currency\": \"NOK\",\n\t\"interval\": \"WEEK\",\n\t\"intervalCount\": 1,\n\t\"isApp\": false,\n\t\"merchantRedirectUrl\": \"https://netthandel-mock-server.azurewebsites.net/ecom/echo\",\n\t\"merchantAgreementUrl\": \"https://www.nrk.no\",\n\t\"customerPhoneNumber\": \"{{user_mobile_number}}\",\n\t\"price\": \"500\",\n\t\"productName\": \"Userinfo\",\n\t\"scope\": \"address name email birthDate phoneNumber\"\n}",
+							"raw": "{\n\t\"currency\": \"NOK\",\n    \"interval\": {\n        \"unit\": {{interval}},\n        \"count\": {{intervalCount}}\n    },\n\t\"isApp\": false,\n\t\"merchantRedirectUrl\": \"https://netthandel-mock-server.azurewebsites.net/ecom/echo\",\n\t\"merchantAgreementUrl\": \"https://www.nrk.no\",\n\t\"customerPhoneNumber\": \"{{user_mobile_number}}\",\n\t\"price\": \"500\",\n\t\"productName\": \"Userinfo\",\n\t\"scope\": \"address name email birthDate phoneNumber\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1082,7 +1082,7 @@
 			"name": "Charge Controller",
 			"item": [
 				{
-					"name": "Create Charge - Due tomorrow",
+					"name": "Create Charge - Reserve capture",
 					"event": [
 						{
 							"listen": "test",
@@ -1154,16 +1154,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"RESERVE_CAPTURE\"\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges"
@@ -1174,7 +1174,99 @@
 					"response": []
 				},
 				{
-					"name": "Create Charge",
+					"name": "Create Charge - Direct capture",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"chargeId\", jsonData.chargeId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var tomorrow = new Date();\r",
+									"tomorrow.setDate(tomorrow.getDate() + 1);\r",
+									"tomorrowString = [tomorrow.getFullYear(), (\"0\" + (tomorrow.getMonth()+1)).slice(-2), (\"0\" + tomorrow.getDate()).slice(-2)].join('-');\r",
+									"pm.environment.set(\"due\", tomorrowString);\r",
+									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotent-Key",
+								"value": "{{Idempotent-Key-Create}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{duedate}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"DIRECT_CAPTURE\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}",
+								"charges"
+							]
+						},
+						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Charge - Due tomorrow",
 					"event": [
 						{
 							"listen": "test",
@@ -1242,16 +1334,104 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{dueDate}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"DIRECT_CAPTURE\"\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
+								"agreements",
+								"{{agreementId}}",
+								"charges"
+							]
+						},
+						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Charge - With order id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"chargeId\", jsonData.chargeId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotent-Key",
+								"value": "{{Idempotent-Key-Create}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchant_serial_number}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"DIRECT_CAPTURE\",\r\n  \"orderId\": \"orderId-1234\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges"
@@ -1328,13 +1508,13 @@
 							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges",
@@ -1409,16 +1589,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n  \"amount\": {{amount_charge}},\n  \"description\": \"{{description_charge}}\"\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/capture",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}/capture",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges",
@@ -1478,13 +1658,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges",
@@ -1534,13 +1714,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges",
@@ -1594,13 +1774,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges"
