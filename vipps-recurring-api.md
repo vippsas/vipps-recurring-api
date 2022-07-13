@@ -1209,22 +1209,12 @@ It's possible to change the suggestedMaxAmount on the agreement by calling the u
 
 #### Create charge
 
-Charges have two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
-See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the eCom FAQ.
-
-`DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
-reserves the payment for capturing at a later date. `RESERVE_CAPTURE` must be
-used when selling physical goods bundled with an agreement.
-
-
-Changes in how intervals and charge rules work:
-
 There are changes in how the interval and amount calculation works for agreements
 with `variable amount`. The amount of the charge/charges in the interval can not
 be higher than either the `suggestedMaxAmount` or `maxAmount` field, depending on
 which is highest. The user will be notified if a charge is created with an amount higher than their specified max amount, and they are encouraged to alter the max amount to a higher amount.
+
+Changes in how intervals and charge rules work:
 
 **Yearly:**
 
