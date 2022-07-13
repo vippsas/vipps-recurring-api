@@ -180,7 +180,7 @@ A charge will be displayed to the user 6 days before the charge is due to be pro
 The charge will then appear in the app.
 
 You can still retrieve all relevant charges through the API:
-[`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges).
+[`GET:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges).
 
 ## If a user changes the default payment card in Vipps, can new charges be made to that card?
 No, currently the payment card tied to an agreement will not be updated automatically.

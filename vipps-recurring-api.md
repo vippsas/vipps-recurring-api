@@ -129,7 +129,7 @@ See the eCom FAQ for the difference:
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with
-[`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+[`POST:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
 You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
@@ -145,7 +145,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. For all future charges, you must create a charge:
-   [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+   [`POST:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
@@ -164,18 +164,18 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
    [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement).
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
-4. If there is a product that is shipped to the customer, the initial charge should be captured at this point.
-   Capture the charge:
-   [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
-   If there is no product being shipped, or a need to provide access at a later point - the merchant should change the
-   merchant sale unit setup to use `DIRECT CAPTURE` instead.
-5. For all future charges, you must create a charge:
-   [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+4. For all future charges, you must create a charge:
+   [`POST:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
    we will retry for the number of days specified by the `retryDays` value.
    We recommend at least 2 days retry.
+5. If there is a product that is shipped to the customer, the charge should be captured at this point.
+   Capture the charge:
+   [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
+   If there is no product being shipped, or a need to provide access at a later point - the merchant should change the
+   merchant sale unit setup to use `DIRECT CAPTURE` instead.
 
 ### Vipps screenshots
 
@@ -189,12 +189,12 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | [Retrieve an agreement](#retrieve-an-agreement)  | Retrieve the details of an agreement.  |  [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) |
 | [Update an agreement]()   |  Update an agreement with new details. |  [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement) |
 | [Stop an agreement](#stop-an-agreement) | Update the status to `STOPPED`.  | [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)  |
-| List all charges  | Get all charges for an agreement.  | [`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges)  |
-| [Create a charge](#create-a-charge)   |  Create a new charge for an agreement. |  [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge) |
-| Retrieve a charge  | Retrieve all details of a charge.  | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge)  |
-| Capture a charge  | Each charge must first be created, then captured.  | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)  |
-| Cancel a charge | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/cancelCharge) |
-| Refund a charge    | Refund a charge that has been performed.   | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/refundCharge)  |
+| List all charges  | Get all charges for an agreement.  | [`GET:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges)  |
+| [Create a charge](#create-a-charge)   |  Create a new charge for an agreement. |  [`POST:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge) |
+| Retrieve a charge  | Retrieve all details of a charge.  | [`GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge)  |
+| Capture a charge  | Each charge must first be created, then captured.  | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)  |
+| Cancel a charge | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/cancelCharge) |
+| Refund a charge    | Refund a charge that has been performed.   | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/refundCharge)  |
 
 See [Authentication and authorization](#authentication-and-authorization).
 
@@ -257,15 +257,15 @@ values that uniquely identify the system (and plugin).
 ## orderId recommendations
 
 An optional _and recommended_ `orderId` field can be set in the request:
-[`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+[`POST:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
 
 ```
 {
   "amount": 49900,
-  "currency": "NOK",
   "description": "Premier League subscription",
   "due": "2030-12-31",
   "retryDays": 5,
+  "transactionType": "DIRECT_CAPTURE"
   "orderId": "acmeshop123order123abc"
 }
 ```
@@ -503,17 +503,17 @@ of 499 NOK:
   "customerPhoneNumber": "90000000",
   "initialCharge": {
      "amount": 49900,
-     "currency": "NOK",
      "description": "Premier League subscription",
      "transactionType": "DIRECT_CAPTURE"
   },
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit": "MONTH", 
+    "count": 1
+  },
   "isApp": false,
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
   "price": 49900,
-  "productDescription": "Access to all games of English top football",
   "productName": "Premier League subscription"
 }
 ```
@@ -525,14 +525,13 @@ Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial c
   "initialCharge": {
     "transactionType": "RESERVE_CAPTURE",
     "amount": 19900,
-    "currency": "NOK",
     "description": "Phone"
   }
 }
 ```
 
 A reserved charge can be captured with
-[`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
+[`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
 when the product is shipped.
 
 ### Campaigns
@@ -609,7 +608,7 @@ An [agreement](#agreements) has payments, called charges.
 [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).*
 
 Charge the customer for each period with
-[`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
+[`POST:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge).
 
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur (it is minimum one day in the test environment).
@@ -658,15 +657,15 @@ show up in the users's payment history. In the payment history a charge from
 Vipps recurring payment will have a description with follow format
 `{agreement.ProductName} - {charge.description}`.
 
-[`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge)
+[`POST:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge)
 
 ```json
 {
   "amount": 49900,
-  "currency": "NOK",
   "description": "October",
   "due": "2018-09-01",
-  "retryDays": 5
+  "retryDays": 5,
+  "transactionType": "DIRECT_CAPTURE"
 }
 ```
 
@@ -714,7 +713,7 @@ This results in a _very_ high success rate for charges.
 ### Retrieve a charge
 
 A charge can be retrieved with
-[`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge).
+[`GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge).
 
 Example response:
 
@@ -722,10 +721,13 @@ Example response:
 {
   "amount": 39900,
   "amountRefunded": 39900,
+  "amountCaptured": 39900,
+  "transactionType": "DIRECT_CAPTURE",
   "description": "Premier League subscription: September",
   "due": "2019-06-01T00:00:00Z",
   "id": "chg_WCVbcAbRCmu2zk",
   "status": "PENDING",
+  "currency": "NOK",
   "transactionId": "5001419121",
   "type": "RECURRING",
   "failureReason": "user_action_required",
@@ -744,7 +746,7 @@ See: [Charge states](#charge-states).
 ### Retrieve all charges
 
 All charges, including the optional initial charge, for an agreement can be retrieved with
-[`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges).
+[`GET:/recurring/v3/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges).
 
 ## Manage charges and agreements
 
@@ -817,19 +819,20 @@ to set up a new agreement.
 ### Charge states
 
 This table has all the details for the charge states returned by
-[`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge):
+[`GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge):
 
-| State      | Description                                                                          
-|:-----------|:-------------------------------------------------------------------------------------
-| `PENDING`  | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps.|
-| `DUE`      | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.  |
-| `PROCESSING` | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`. |
-| `CHARGED`  | The charge has been successfully completed. |
-| `FAILED`   | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.|
-| `REFUNDED` | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. |
-| `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. |
-| `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. |
-| `CANCELLED` | The charge has been cancelled by the merchant. |
+| State                | Description                                                                          
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PENDING`            | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps. |
+| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                       |
+| `PROCESSING`         | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`.                        |
+| `CHARGED`            | The charge has been successfully completed.                                                                                                   |
+| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                |
+| `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                      |
+| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded.                                                                                              |
+| `RESERVED`           | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully.                      |
+| `CANCELLED`          | The charge has been cancelled by the merchant.                                                                                                |
+| `PARTIALLY_CAPTURED` | A part of the charge amount has been captured.                                                                                                |
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
@@ -1206,12 +1209,22 @@ It's possible to change the suggestedMaxAmount on the agreement by calling the u
 
 #### Create charge
 
+Charges have two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
+See:
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the eCom FAQ.
+
+`DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
+reserves the payment for capturing at a later date. `RESERVE_CAPTURE` must be
+used when selling physical goods bundled with an agreement.
+
+
+Changes in how intervals and charge rules work:
+
 There are changes in how the interval and amount calculation works for agreements
 with `variable amount`. The amount of the charge/charges in the interval can not
 be higher than either the `suggestedMaxAmount` or `maxAmount` field, depending on
 which is highest. The user will be notified if a charge is created with an amount higher than their specified max amount, and they are encouraged to alter the max amount to a higher amount.
-
-Changes in how intervals and charge rules work:
 
 **Yearly:**
 
@@ -1266,6 +1279,8 @@ GET charge response where amount is higher than the users max amount:
     "transactionId": null,
     "description": "Monthly payment",
     "type": "RECURRING",
+    "transactionType": "RESERVED_CAPTURE",
+    "currency": "NOK"
 }
 ```
 
