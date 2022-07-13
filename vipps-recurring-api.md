@@ -604,6 +604,15 @@ An [agreement](#agreements) has payments, called charges.
 
 ### Create a charge
 
+Charges have two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
+See:
+[What is the difference between “Reserve Capture” and “Direct Capture”?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the eCom FAQ.
+
+`DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
+reserves the payment for capturing at a later date. `RESERVE_CAPTURE` must be
+used when selling physical goods bundled with an agreement.
+
 *Recurring has functionality to charge a variable amount each interval. See:
 [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).*
 
