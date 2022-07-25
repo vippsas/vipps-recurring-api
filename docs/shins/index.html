@@ -2846,7 +2846,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The max amount choosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -3252,7 +3252,7 @@ More information about this can be found in the API documentation.</p>
 <td>body</td>
 <td>integer(int32)</td>
 <td>true</td>
-<td>The amount that must be payed or approved before starting the agreement.</td>
+<td>The amount that must be paid or approved before starting the agreement.</td>
 </tr>
 <tr>
 <td>»» currency</td>
@@ -3374,7 +3374,7 @@ For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 ør
 following Vipps interaction. MSISDN: <a href="https://www.msisdn.org">https://www.msisdn.org</a></p>
 <p><strong>» initialCharge</strong>: An initial charge for a new agreement.
 The charge will be processed immediately when the user approves the agreement.</p>
-<p><strong>»» amount</strong>: The amount that must be payed or approved before starting the agreement.</p>
+<p><strong>»» amount</strong>: The amount that must be paid or approved before starting the agreement.</p>
 <p>Amounts are specified in minor units.
 For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</p>
 <p><strong>» intervalCount</strong>: Number of intervals between charges. Example: interval=week,
@@ -5084,7 +5084,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The max amount choosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -5534,7 +5534,7 @@ More information about this can be found in the API documentation.</p>
 <td>body</td>
 <td>integer(int32)</td>
 <td>true</td>
-<td>The amount that must be payed or approved before starting the agreement.</td>
+<td>The amount that must be paid or approved before starting the agreement.</td>
 </tr>
 <tr>
 <td>»» currency</td>
@@ -5644,7 +5644,7 @@ Needs to be UTC.</p>
 following Vipps interaction. MSISDN: <a href="https://www.msisdn.org">https://www.msisdn.org</a></p>
 <p><strong>» initialCharge</strong>: An initial charge for a new agreement.
 The charge will be processed immediately when the user approves the agreement.</p>
-<p><strong>»» amount</strong>: The amount that must be payed or approved before starting the agreement.</p>
+<p><strong>»» amount</strong>: The amount that must be paid or approved before starting the agreement.</p>
 <p>Amounts are specified in minor units.
 For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</p>
 <p><strong>» merchantAgreementUrl</strong>: URL where Vipps can send the customer to view/manage their
@@ -7198,28 +7198,28 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be payed by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»» amountRefunded</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been refunded, in case of status refund/partial refund.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The total amount which has been refunded, in case of status refund/partial refund.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»» description</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Description of the charge</td>
+<td>Description of the charge.</td>
 </tr>
 <tr>
 <td>»» due</td>
 <td>string(date-time)</td>
 <td>true</td>
 <td>none</td>
-<td>The due date for this charge</td>
+<td>The due date for this charge.</td>
 </tr>
 <tr>
 <td>»» id</td>
@@ -7240,7 +7240,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Contains null until the status has reached CHARGED</td>
+<td>Contains null until the status has reached CHARGED.</td>
 </tr>
 <tr>
 <td>»» type</td>
@@ -7254,14 +7254,14 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fulfil the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The user's card can not fulfil the payment. The user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The user's max amount is too low. The user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>»» failureDescription</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Description for the failure reason</td>
+<td>Description for the failure reason.</td>
 </tr>
 </tbody>
 </table>
@@ -7645,7 +7645,7 @@ If the payment fails, the charge will be retried based on <code>retryDays</code>
 <td>body</td>
 <td>integer(int32)</td>
 <td>true</td>
-<td>Amount to be payed by the customer.</td>
+<td>Amount to be paid by the customer.</td>
 </tr>
 <tr>
 <td>» currency</td>
@@ -7696,7 +7696,7 @@ making payments on behalf of a merchant.
 The partner must use the merchant's MSN (not the partner's MSN).
 This parameter is optional, and recommended, for regular Vipps
 merchants making payments for themselves.</p>
-<p><strong>» amount</strong>: Amount to be payed by the customer.</p>
+<p><strong>» amount</strong>: Amount to be paid by the customer.</p>
 <p>Amounts are specified in minor units.
 For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</p>
 <p><strong>» due</strong>: The date when the charge is due to be processed.</p>
@@ -8251,7 +8251,7 @@ System.out.println(response.toString());
 <p>Cancels a pending, due or reserved charge.
 When cancelling a charge that is <code>PARTIALLY_CAPTURED</code>, the remaining funds on the charge
 will be released back to the customer.</p>
-<p>Note if you cancels an agreement,
+<p>Note if you cancel an agreement,
 there is no need to cancel the charges that belongs to the agreement.
 This will be done automatically by Vipps.</p>
 <h3 id="cancel-a-charge-parameters">Parameters</h3>
@@ -9029,7 +9029,7 @@ System.out.println(response.toString());
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>A textual description of the operation, which will be displayed in the users app.</td>
+<td>A textual description of the operation, which will be displayed in the user's app.</td>
 </tr>
 </tbody>
 </table>
@@ -9491,7 +9491,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be payed by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»» amountRefunded</td>
@@ -9561,7 +9561,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fulfil the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The user's card can not fulfil the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The user's max amount is too low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>»» failureDescription</td>
@@ -9960,7 +9960,7 @@ If the payment fails, the charge will be retried based on <code>retryDays</code>
 <td>body</td>
 <td>integer(int32)</td>
 <td>true</td>
-<td>Amount to be payed by the customer.</td>
+<td>Amount to be paid by the customer.</td>
 </tr>
 <tr>
 <td>» TransactionType</td>
@@ -10011,7 +10011,7 @@ making payments on behalf of a merchant.
 The partner must use the merchant's MSN (not the partner's MSN).
 This parameter is optional, and recommended, for regular Vipps
 merchants making payments for themselves.</p>
-<p><strong>» amount</strong>: Amount to be payed by the customer.</p>
+<p><strong>» amount</strong>: Amount to be paid by the customer.</p>
 <p>Amounts are specified in minor units.
 For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</p>
 <p><strong>» due</strong>: The date when the charge is due to be processed.</p>
@@ -10574,7 +10574,7 @@ System.out.println(response.toString());
 <p>Cancels a pending, due or reserved charge.
 When cancelling a charge that is <code>PARTIALLY_CAPTURED</code>, the remaining funds on the charge
 will be released back to the customer.</p>
-<p>Note if you cancels an agreement,
+<p>Note if you cancel an agreement,
 there is no need to cancel the charges that belongs to the agreement.
 This will be done automatically by Vipps.</p>
 <h3 id="cancel-a-charge-parameters">Parameters</h3>
@@ -11032,7 +11032,7 @@ Can also do partial captures (captures a smaller part of the payment).</p>
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>A textual description of the operation, which will be displayed in the users app.</td>
+<td>A textual description of the operation, which will be displayed in the user's app.</td>
 </tr>
 </tbody>
 </table>
@@ -11410,7 +11410,7 @@ System.out.println(response.toString());
 <td>body</td>
 <td>string</td>
 <td>true</td>
-<td>A textual description of the operation, which will be displayed in the users app.</td>
+<td>A textual description of the operation, which will be displayed in the user's app.</td>
 </tr>
 </tbody>
 </table>
@@ -11606,7 +11606,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p><code>GET /vipps-userinfo-api/userinfo/{sub}</code></p>
-<p>This endpoint returns the payload with the information that the user has consented to share. Find more info on the <code>/userinfo</code> endpoint at the OIDC Standard <a href="https://openid.net/specs/openid-connect-core-1_0.html#UserInfo">https://openid.net/specs/openid-connect-core-1_0.html#UserInfo</a></p>
+<p>This endpoint returns the payload with the information that the user has consented to share. Find more info on the <code>/userinfo</code> endpoint at the OIDC Standard: <a href="https://openid.net/specs/openid-connect-core-1_0.html#UserInfo">https://openid.net/specs/openid-connect-core-1_0.html#UserInfo</a></p>
 <h3 id="get-userinfo-parameters">Parameters</h3>
 <table>
 <thead>
@@ -13015,7 +13015,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The max amount choosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -13365,7 +13365,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount that must be payed or approved before starting the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The amount that must be paid or approved before starting the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -13453,7 +13453,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be payed by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -13540,7 +13540,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be payed by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>TransactionType</td>
@@ -13648,28 +13648,28 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be payed by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>amountRefunded</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been refunded, in case of status refund/partial refund.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The total amount which has been refunded, in case of status refund/partial refund.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>description</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Description of the charge</td>
+<td>Description of the charge.</td>
 </tr>
 <tr>
 <td>due</td>
 <td>string(date-time)</td>
 <td>true</td>
 <td>none</td>
-<td>The due date for this charge</td>
+<td>The due date for this charge.</td>
 </tr>
 <tr>
 <td>id</td>
@@ -13690,7 +13690,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Contains null until the status has reached CHARGED</td>
+<td>Contains null until the status has reached CHARGED.</td>
 </tr>
 <tr>
 <td>type</td>
@@ -13704,14 +13704,14 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fulfil the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The user's card can not fulfil the payment. The user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The user's max amount is too low. The user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>failureDescription</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Description for the failure reason</td>
+<td>Description for the failure reason.</td>
 </tr>
 </tbody>
 </table>
@@ -13781,7 +13781,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be payed by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>amountRefunded</td>
@@ -13851,7 +13851,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The users card can not fulfil the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The users max amount is to low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
+<td>Identifies the reason why the charged has been marked as <code>FAILED</code>:<br />  * <code>user_action_required</code> - The user's card can not fulfil the payment, user needs to take action in Vipps.<br />     Examples: Card is blocked for ecommerce, insufficient funds, expired card.<br /><br />  * <code>charge_amount_too_high</code> - The user's max amount is too low, user needs to update their max amount in Vipps.<br /><br />  * <code>non_technical_error</code> - Something went wrong with charging the user.<br />     Examples: User has deleted their Vipps Profile.<br /><br />  * <code>technical_error</code> - Something went wrong in Recurring while performing the payment.<br />     Examples: Failure in Recurring, failure in downstream services.</td>
 </tr>
 <tr>
 <td>failureDescription</td>
@@ -13925,7 +13925,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>A textual description of the operation, which will be displayed in the users app.</td>
+<td>A textual description of the operation, which will be displayed in the user's app.</td>
 </tr>
 </tbody>
 </table>
@@ -13965,7 +13965,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>A textual description of the operation, which will be displayed in the users app.</td>
+<td>A textual description of the operation, which will be displayed in the user's app.</td>
 </tr>
 </tbody>
 </table>
