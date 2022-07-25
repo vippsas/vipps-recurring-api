@@ -33,7 +33,7 @@ with [Postman collection](tools/),
 
 API version: 1.0.0.
 
-Document version 2.5.4.
+Document version 2.5.5.
 
 ## Table of Contents
 
@@ -86,7 +86,7 @@ Document version 2.5.4.
       - [Get agreement](#get-agreement)
       - [Change suggestedMaxAmount](#change-suggestedmaxamount)
       - [Create charge](#create-charge)
-      - [Charge amount higher than the users max amount](#charge-amount-higher-than-the-users-max-amount)
+      - [Charge amount higher than the user's max amount](#charge-amount-higher-than-the-users-max-amount)
   - [Skip landing page](#skip-landing-page)
   - [HTTP responses](#http-responses)
   - [Rate limiting](#rate-limiting)
@@ -876,7 +876,7 @@ Here is a list of possible values for `failureReason`, their respective descript
 | Reason | Description | Action |
 | ---- | ----------- | ------ |
 | user_action_required | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open Vipps and check the payment there to see why it is not paid. | User will get notified in Vipps and need to take action. This could be to add funds to the card or change the card on the agreement. |
-| charge_amount_too_high | Amount is higher than the users specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
+| charge_amount_too_high | Amount is higher than the user's specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
 | non_technical_error | Payment failed. Could be that the user has deleted their Vipps profile. | The user needs to take action in Vipps. |
 | technical_error | Payment failed due to a technical error in Recurring or a downstream service | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge. |
 
@@ -1105,7 +1105,7 @@ failed agreement by the Recurring API.
 ## Recurring agreements with variable amount
 
 Recurring with variable amounts offer merchants a way to charge users a different
-amount each interval, as long as the amount is lower than the users specified max amount.
+amount each interval, as long as the amount is lower than the user's specified max amount.
 
 Instead of setting a price when drafting a new agreement, the new
 `suggestedMaxAmount` field is set to what the maximum price could be each interval.
@@ -1247,14 +1247,14 @@ Once a day, same as without variable amount.
 **Please note:** In the examples above the `intervalCount` is 1.
 This can be changed as described in the [Intervals](#intervals) section.
 
-#### Charge amount higher than the users max amount
+#### Charge amount higher than the user's max amount
 
-If the created charge is above the users `maxAmount`, the charge will be set
+If the created charge is above the user's `maxAmount`, the charge will be set
 to `PROCESSING`. If the user does not update their `maxAmount` to the same or a higher
 amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
-GET charge response where amount is higher than the users max amount:
+GET charge response where amount is higher than the user's max amount:
 
 ```json
 {

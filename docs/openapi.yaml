@@ -837,7 +837,7 @@ paths:
         When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge 
         will be released back to the customer.
         
-        Note if you cancels an agreement, 
+        Note if you cancel an agreement, 
         there is no need to cancel the charges that belongs to the agreement. 
         This will be done automatically by Vipps.
       operationId: CancelCharge
@@ -1039,7 +1039,7 @@ paths:
         When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge 
         will be released back to the customer.
         
-        Note if you cancels an agreement, 
+        Note if you cancel an agreement, 
         there is no need to cancel the charges that belongs to the agreement. 
         This will be done automatically by Vipps.
       operationId: CancelChargeV3
@@ -1135,7 +1135,9 @@ paths:
         - Userinfo Endpoint
       summary: Get Userinfo
       description: >-
-        This endpoint returns the payload with the information that the user has consented to share. Find more info on the `/userinfo` endpoint at the OIDC Standard https://openid.net/specs/openid-connect-core-1_0.html#UserInfo
+        This endpoint returns the payload with the information that the user has consented to share.
+        Find more info on the `/userinfo` endpoint at the OIDC Standard:
+        https://openid.net/specs/openid-connect-core-1_0.html#UserInfo
       operationId: getUserinfo
       parameters:
         - name: sub
@@ -1899,7 +1901,7 @@ components:
           format: int32
           example: 3000
           description: |- 
-            The max amount choosen by the customer.
+            The max amount chosen by the customer.
 
             Amounts are specified in minor units. 
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
@@ -2060,7 +2062,7 @@ components:
           format: int32
           example: 234
           description: |-
-            The amount that must be payed or approved before starting the agreement.
+            The amount that must be paid or approved before starting the agreement.
 
             Amounts are specified in minor units. 
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
@@ -2101,7 +2103,7 @@ components:
           minimum: 100
           example: 234
           description: |- 
-            Amount to be payed by the customer.
+            Amount to be paid by the customer.
 
             Amounts are specified in minor units. 
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
@@ -2152,7 +2154,7 @@ components:
           minimum: 100
           example: 234
           description: |- 
-            Amount to be payed by the customer.
+            Amount to be paid by the customer.
 
             Amounts are specified in minor units. 
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
@@ -2215,9 +2217,9 @@ components:
           format: int32
           example: 234
           description: |- 
-            Amount to be payed by the customer.
+            Amount to be paid by the customer.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         amountRefunded:
           type: integer
@@ -2226,16 +2228,16 @@ components:
           description: |-
             The total amount which has been refunded, in case of status refund/partial refund.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         description:
           type: string
-          description: Description of the charge
+          description: Description of the charge.
           example: "Premier League subscription: September"
         due:
           type: string
           format: date-time
-          description: The due date for this charge
+          description: The due date for this charge.
           example: "2019-06-01T00:00:00Z"
         id:
           type: string
@@ -2246,7 +2248,7 @@ components:
           $ref: "#/components/schemas/ChargeStatus"
         transactionId:
           type: string
-          description: Contains null until the status has reached CHARGED
+          description: Contains null until the status has reached CHARGED.
           maxLength: 36
           example: "5001419121"
         type:
@@ -2261,10 +2263,10 @@ components:
           example: "user_action_required"
           description: >
             Identifies the reason why the charged has been marked as `FAILED`:
-              * `user_action_required` - The users card can not fulfil the payment, user needs to take action in Vipps.
+              * `user_action_required` - The user's card can not fulfil the payment. The user needs to take action in Vipps.
                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
 
-              * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
+              * `charge_amount_too_high` - The user's max amount is too low. The user needs to update their max amount in Vipps.
 
               * `non_technical_error` - Something went wrong with charging the user.
                  Examples: User has deleted their Vipps Profile.
@@ -2273,7 +2275,7 @@ components:
                  Examples: Failure in Recurring, failure in downstream services.
         failureDescription:
           type: string
-          description: Description for the failure reason
+          description: Description for the failure reason.
           example: "User action required"
 
     ChargeResponseV3:
@@ -2295,7 +2297,7 @@ components:
           format: int32
           example: 234
           description: |- 
-            Amount to be payed by the customer.
+            Amount to be paid by the customer.
 
             Amounts are specified in minor units. 
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
@@ -2352,10 +2354,10 @@ components:
           example: "user_action_required"
           description: >
             Identifies the reason why the charged has been marked as `FAILED`:
-              * `user_action_required` - The users card can not fulfil the payment, user needs to take action in Vipps.
+              * `user_action_required` - The user's card can not fulfil the payment, user needs to take action in Vipps.
                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
 
-              * `charge_amount_too_high` - The users max amount is to low, user needs to update their max amount in Vipps.
+              * `charge_amount_too_high` - The user's max amount is too low, user needs to update their max amount in Vipps.
 
               * `non_technical_error` - Something went wrong with charging the user.
                  Examples: User has deleted their Vipps Profile.
@@ -2388,7 +2390,7 @@ components:
           type: string
           minimum: 1
           example: Forgot to apply discount, refunding 50%
-          description: A textual description of the operation, which will be displayed in the users app.
+          description: A textual description of the operation, which will be displayed in the user's app.
     
     CaptureRequestV3:
       title: Capture charge request
@@ -2411,7 +2413,7 @@ components:
           type: string
           minimum: 1
           example: Not all items were in stock. Partial capture.
-          description: A textual description of the operation, which will be displayed in the users app.
+          description: A textual description of the operation, which will be displayed in the user's app.
     
     TimePeriod:
       title: Time Period request
@@ -2537,7 +2539,7 @@ components:
 
     ErrorV3:
       title: Error response
-      description: Error reponse using the Problem JSON format
+      description: Error response using the Problem JSON format
       type: object
       properties:
         type:
