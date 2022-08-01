@@ -38,7 +38,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -113,7 +113,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -185,7 +185,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -257,7 +257,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -329,7 +329,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -401,7 +401,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -473,7 +473,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -545,7 +545,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -617,7 +617,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -694,7 +694,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
@@ -765,7 +765,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -826,7 +826,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -896,7 +896,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Ocp-Apim-Subscription-Key",
@@ -977,7 +977,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1031,7 +1031,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1129,7 +1129,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1217,7 +1217,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1300,7 +1300,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1384,7 +1384,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1450,7 +1450,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1510,7 +1510,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1570,7 +1570,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1661,7 +1661,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
@@ -1721,7 +1721,7 @@
 							},
 							{
 								"key": "Merchant-Serial-Number",
-								"value": "{{merchant_serial_number}}"
+								"value": "{{merchantSerialNumber}}"
 							},
 							{
 								"key": "Vipps-System-Name",
