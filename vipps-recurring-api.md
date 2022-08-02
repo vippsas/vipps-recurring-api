@@ -277,8 +277,8 @@ transactions for the given `merchantSerialNumber`.
 If the field is _not_ provided, Vipps will automatically create a unique id
 prefixed with `chr-`: `chr-xxxxxxx`(where each x is an alphanumeric character).
 
-If you ever have a problem that requires us to search in our logs, we need
-`orderId`s that are "unique enough" to actually find them. An `orderId` that
+If you ever have a problem that requires us to search in our logs, we will need
+`orderId` values that are "unique enough" to actually find them. An `orderId` that
 is just a number may not be possible to find.
 
 While the minimum length for `orderId` _technically_ is just one character,
@@ -297,15 +297,14 @@ tend to remove them, and this may cause misunderstandings.
 
 With multiple sale units, prefixing the `orderId` with the MSN
 for each sale unit is recommended: If the MSN is `654321`, the
-`orderId`s could start at `654321000000000001` and increment by 1
+`orderId` values could start at `654321000000000001` and increment by 1
 for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
 An agreement is between the Vipps user and the merchant.
 Think of it as a subscription.
-An agreement has payments, called charges.
-See [Charges](#charges).
+An agreement has payments, called [charges](#charges).
 
 ### Create an agreement
 
@@ -334,11 +333,11 @@ This code illustrates how to create an agreement:
 **Note:** To create agreements with support for variable amounts on charges, see
 [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).
 
-The `merchantAgreementUrl` is a link to a "My page", where the customer
-can manage the agreement: Change, pause, cancel, etc.
-Vipps does not offer any form of agreement management, as this may be
-quite complex operations, like changing subscription types,
-temporary address change, etc.  
+The `merchantAgreementUrl` is a link to the customer's account page on your website, where they
+can manage the agreement (e.g., change, pause, cancel the agreement).
+Vipps does not offer any form of agreement management, as this may include
+quite complex operations (e.g., changing subscription types,
+temporary address change).
 The URL is opened in the standard web browser.  
 The integrator ***must*** implement such functionality for the customer to manage the agreement in their system.
 
@@ -351,10 +350,10 @@ The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement.
 Vipps does not have any specific requirements for the security of the page, other than using https, but
 strongly recommend using
-[Vipps Logg Inn](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
+[Vipps Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not need a username or password, but is logged
 in automatically through Vipps. See the
-[API documentation](https://github.com/vippsas/vipps-login-api)
+[Login API documentation](https://github.com/vippsas/vipps-login-api)
 for more details.
 
 The request parameters have the following size limits
@@ -364,16 +363,16 @@ The request parameters have the following size limits
 * `productDescription`: Max length 100 characters
 * `price`: Greater than 100, meaning 1 NOK.
 
-Agreements may be initiated with or without an [initial charge](#initial-charge),
+Agreements may be initiated with or without an [initial charge](#initial-charge).
 
-The agreement price, and the amount for the initial charge, is given in øre,
+The agreement price and the amount for the initial charge, is given in øre,
 the centesimal subdivision of the Norwegian kroner (NOK).
 There are 100 øre in 1 krone.
 
 | # | Agreement      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `Agreement starting now`  | Agreement with an `initialcharge` that uses `DIRECT_CAPTURE` will only be `active` if the initial charge is processed successfully |
-| 2 | `Agreement starting in future`  | Agreement without an `initialcharge`, or with `initialcharge` that uses `RESERVE_CAPTURE` can be approved but no payment will happen until the first charge is provided |
+| 2 | `Agreement starting in future`  | Agreement without an `initialcharge`, or with `initialcharge` that uses `RESERVE_CAPTURE`, can be approved but no payment will happen until the first charge is provided |
 
 The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`.
 This `agreementResource` is a complete URL for performing a
@@ -398,7 +397,7 @@ user can then approve the agreement.
 ```
 
 The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing
-page. The user can then confirm their identity, and receive a prompt to accept the
+page. The user can then confirm their identity and receive a prompt to accept the
 agreement within Vipps.
 
 The `isApp` property can be used to receive a deeplink URL, which in a mobile context,
@@ -451,7 +450,7 @@ Example for a subscription every 30th day:
 ```
 
 **Please note:** It is not possible to change intervals. If the user has
-accepted a yearly interval, the agreement can not be changed to a monthly
+accepted a yearly interval, the agreement cannot be changed to a monthly
 agreement. This requires a new agreement and a new consent from the user.
 It _is_ possible to make a monthly agreement and only charge some of the
 months. The general rule: Be as customer friendly and easy to understand
@@ -459,33 +458,34 @@ as possible.
 
 ### Initial charge
 
-**Please note:** Use
-[Campaigns](#campaigns) in combination with initial charge
-if the subscription is cheaper in the beginning than the normal price later.
+**Please note:** If the subscription is cheaper in the beginning than the normal price later, use
+[campaigns](#campaigns) in combination with initial charge.
 If you use `initialcharge` alone for campaigns, users will be confused by how it appears in Vipps,
 as it looks like the full price period starts immediately.
 
 Initial charge will be performed if the `initialcharge` is provided when
-creating an agreement. If there is no initial charge: Don't sent `initialcharge`
+creating an agreement. If there is no initial charge, don't sent `initialcharge`
 when creating the new agreement.
 
 Unlike regular (or `RECURRING`) charges, there is no price limit on an `initialCharge`.
 This allows for products to be bundled with agreements as one transaction
-(for example a phone). The user will be clearly informed when an `initialCharge`
+(for example, a phone). The user will be clearly informed when an `initialCharge`
 is included in the agreement they are accepting.
 
 See [Charge Titles](#charge-descriptions) for explanation of how the charge description
 is shown to the user.
 
 The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
-See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the eCom FAQ.
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
-reserves the payment for capturing at a later date. `RESERVE_CAPTURE` must be
+reserves the payment for capturing at a later date. See:
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the eCom FAQ for more details.
+
+`RESERVE_CAPTURE` must be
 used when selling physical goods bundled with an agreement - such as a phone
 when subscribing to an agreement.
+
 
 This example shows the same agreement as above, with an `initialCharge`
 of 499 NOK:
@@ -532,16 +532,16 @@ when the product is shipped.
 
 A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
-Campaigns can not be used in combination with variable amount, see more about variable amount [here](#Recurring-agreements-with-variable-amount).
+Campaigns cannot be used in combination with [variable amount](#Recurring-agreements-with-variable-amount).
 
 ![flow_Campaign](images/flow-Campaign.png)
 
-In order to start a campaign the campaign field has to be added either to the agreement draft
+In order to start a campaign, the campaign field must be added either to the agreement draft
 [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
-for a campaign in the start of an agreement or update an agreement
+for a campaign in the start of an agreement, or to an updated agreement
 [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)
 for an ongoing agreement. When adding a campaign
-while drafting a new agreement the start date is ignored and the current
+while drafting a new agreement, the start date is ignored and the current
 date-time is used. All dates must be in date-time format as according to
 [RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
 
