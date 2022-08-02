@@ -20,20 +20,32 @@ Import the collection by following the steps below:
 
 ### Step 2: Import the Postman Environment
 
-1. Click `Import` in the upper left corner.
+1. Click `Import` in the upper-left corner.
 2. Import the [vipps-recurring-api-postman-environment.json](https://raw.githubusercontent.com/vippsas/vipps-recurring-api/master/tools/vipps-recurring-api-postman-environment.json) file.
 
 ### Step 3: Setup Postman Environment
 
-1. Click the "eye" icon in the top right corner.
-2. In the dropdown window, click `Edit` in the top right corner.
-3. Fill in the `Current Value` for the following fields to get started.
-   - `client-id`
-   - `client-secret`
-   - `merchantSerialNumber`
-   - `Ocp-Apim-Subscription-Key`
+1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
+2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
+3. Fill in the `Current Value` for the following fields to get started. For the first three keys, go to *Vipps Portal* > *Utvikler* ->  *Test Keys*.
+   - `client_id` - Merchant key is required for getting the access token.
+   - `client_secret` - Merchant key is required for getting the access token.
+   - `Ocp-Apim-Subscription-Key` - Merchant subscription key.
+   - `merchantSerialNumber` - Merchant id.
+   - `mobileNumber` - The mobile number for the test app profile you have received or registered.
 
-# Questions?
+### Step 4: Run the examples
+
+See the [Recurring API Specifications](https://vippsas.github.io/vipps-recurring-api/#/) for details about the calls.
+
+#### 1. Get access token
+
+Send request `Get Access Token`. This provides you with access to the API.
+
+The access token is valid for 1 hour in the test environment
+and 24 hours in the production environment.
+
+## Questions?
 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-ecom-api/issues),
