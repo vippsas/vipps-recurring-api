@@ -188,9 +188,9 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | [Retrieve an agreement](#retrieve-an-agreement)  | Retrieve the details of an agreement.  |  [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement) |
 | [Update an agreement]()   |  Update an agreement with new details. |  [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement) |
 | [Stop an agreement](#stop-an-agreement) | Update the status to `STOPPED`.  | [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)  |
-| List all charges  | Get all charges for an agreement.  | [`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges)  |
+| [List charges](#list-charges)  | Get all charges for an agreement.  | [`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges)  |
 | [Create a charge](#create-a-charge)   |  Create a new charge for an agreement. |  [`POST:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/createCharge) |
-| Retrieve a charge  | Retrieve all details of a charge.  | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge)  |
+| [Retrieve a charge](#retrieve-a-charge)  | Retrieve all details of a charge.  | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/getCharge)  |
 | Capture a charge  | Each charge must first be created, then captured.  | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)  |
 | Cancel a charge | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/cancelCharge) |
 | Refund a charge    | Refund a charge that has been performed.   | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/refundCharge)  |
@@ -734,10 +734,10 @@ See more about [charge failure reason](#charge-failure-reasons).
 
 See: [Charge states](#charge-states).
 
-### Retrieve all charges
+### List charges
 
 All charges, including the optional initial charge, for an agreement can be retrieved with
-[`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/listCharges).
+[`GET:/recurring/v2/agreements/{agreementId}/charges`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20v2%20endpoints/ListCharges).
 
 ## Manage charges and agreements
 
