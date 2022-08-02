@@ -225,33 +225,27 @@ These headers are **required for plugins and partners** and sent by the recent v
 [the official Vipps plugins](https://github.com/vippsas/vipps-developers#plugins)
 and we recommend all customers with direct integration with the API to also do so.
 
-Partners must always send the `Merchant-Serial-Number` header, and we recommend that
-everyone sends it too. It can speed up any trouble-shooting quite a bit.
-
-| Header                        | Description                                  | Example value       |
-| ----------------------------- | -------------------------------------------- | ------------------- |
-| `Merchant-Serial-Number`      | The MSN for the sale unit                    | `123456`            |
-| `Vipps-System-Name`           | The name of the ecommerce solution           | `woocommerce`       |
-| `Vipps-System-Version`        | The version number of the ecommerce solution | `5.4`               |
-| `Vipps-System-Plugin-Name`    | The name of the ecommerce plugin             | `vipps-woocommerce` |
-| `Vipps-System-Plugin-Version` | The version number of the ecommerce plugin   | `1.4.1`             |
-
-### Example headers
-
-If the vendor's name is "Acme AS", and the vendor offers two different systems
-one for point of sale (POS) integrations and one for web shops,
-the headers should be:
-
-| Header                        | Example value for POS | Example value for webshop | Example value for Vending machines |
-| ----------------------------- | --------------------- | ------------------- | ------------------- |
-| `Merchant-Serial-Number`      | `123456`              | `123456`            | `123456`            |
-| `Vipps-System-Name`           | `acme`                | `acme`              | `acme`              |
-| `Vipps-System-Version`        | `1.7`                 | `2.6`               | `2.6`               |
-| `Vipps-System-Plugin-Name`    | `acme-pos`            | `acme-webshop`      | `acme-vending`      |
-| `Vipps-System-Plugin-Version` | `3.2`                 | `4.3`               | `4.3`               |
+Partners must always send the `Merchant-Serial-Number` header, and we recommend
+that _everyone_ sends it, also when using the merchant's own API keys.
+The `Merchant-Serial-Number` header can be used with all API keys, and can
+speed up any trouble-shooting of API problems quite a bit.
 
 **Important:** Please use self-explanatory, human readable and reasonably short
 values that uniquely identify the system (and plugin).
+
+For example, if the vendor's name is "Acme AS" and the vendor offers two different systems,
+one for point of sale (POS) integrations and one for web shops,
+the headers should be:
+
+| Header | Description | Example value for POS | Example value for webshop | Example value for Vending machines |
+| ------ | ----------- | --------------------- | ------------------------- | ---------------------------------- |
+| `Merchant-Serial-Number`   | The MSN for the sale unit | `123456` | `123456` | `123456` |
+| `Vipps-System-Name`        | The name of the ecommerce solution | `acme` | `acme` | `acme` |
+| `Vipps-System-Version`     | The version number of the ecommerce solution | `1.7` | `2.6` | `2.6` |
+| `Vipps-System-Plugin-Name` | The name of the ecommerce plugin | `acme-pos` | `acme-webshop` | `acme-vending` |
+| `Vipps-System-Plugin-Version` | The version number of the ecommerce plugin   | `3.2` | `4.3` | `4.3` |
+
+
 
 ## orderId recommendations
 
