@@ -18,16 +18,16 @@ A user chooses Vipps as payment method for a subscription on a merchant’s webs
 
 ## 2. The Vipps landing page
 
-If the payment was started on a desktop device the user will be sent to the Vipps landing page.
-The user confirms their number, and is prompted to log in to Vipps.
+If the payment was started on a desktop device, the user will be sent to the Vipps landing page.
+The user confirms their number and is prompted to log in to Vipps.
 
-If the payment was started from a mobile device, the app wil automatically switch over to Vipps.
+If the payment was started from a mobile device, the app will automatically switch over to Vipps.
 
 ![Vipps landing page](images/vipps-recurring-step2.svg)
 
 ## 3. Accept agreement in Vipps
 
-The user receives a push notification on their phone. They log in to Vipps, and accept the agreement.
+The user receives a push notification on their phone. They log in to Vipps and accept the agreement.
 
 If there is an initial charge to be made, the user confirms the payment in this step as well
 
@@ -47,13 +47,13 @@ The user can see their active subscriptions, as well as stopped subscriptions, a
 
 ## 6. Manage agreements
 
-If the user click on “Manage agreement” in the previous step, they will be sent to the merchant’s site and the user can manage their subscriptions. We recommend using [Vipps Login](https://github.com/vippsas/vipps-login-api) to make login to the merchant’s site go smoothly.
+If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://github.com/vippsas/vipps-login-api) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](images/vipps-recurring-step6.svg)
 
 ## Great! Now you know how the Vipps Recurring payment process works.
 
-Take a look at the technical documentation in the [Vipps Recurring API Guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md)
+Take a look at the technical documentation in the [Vipps Recurring API Guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md).
 
 
 ## Questions?
