@@ -2,7 +2,7 @@
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
-When the agreement is accepted by the end user the merchant can send charges
+When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
 The overall idea is:
@@ -10,30 +10,29 @@ The overall idea is:
 * Merchants ask Vipps to make charges, and Vipps handles _everything_.
 * Users have the full overview in Vipps, including a link to the merchant's website.
 
-**IMPORTANT:** The Vipps Recurring API is available for existing customers that
-have "Vipps på Nett" and a direct integration with the
-[Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
-and have completed some additional KYC checks required by Finanstilsynet.
-Vipps is required to perform some extra compliance checks before
-activating the Vipps Recurring API, please order Vipps Faste betalinger on
+Please order Vipps "Faste Betalinger" (recurring payments) on
 [portal.vipps.no](https://portal.vipps.no)
 to get access to the Recurring API in production.
 
-See: [How it works](vipps-login-recurring-howitworks.md).
+**IMPORTANT:** Before
+activating recurring payments, Vipps must perform some extra Know Your Customer (KYC) checks, as required by [Finanstilsynet](https://www.finanstilsynet.no).
+You will get access to recurring payments if you have passed these checks and if you have "Vipps på Nett" and a direct integration with the
+[Vipps eCom API](https://github.com/vippsas/vipps-ecom-api).
 
-These Swagger/OpenAPI representations may be useful to get a quick overview:
-* [Swagger](https://vippsas.github.io/vipps-recurring-api/)
-* [ReDoc](https://vippsas.github.io/vipps-recurring-api/redoc.html)
-* [Shins](https://vippsas.github.io/vipps-recurring-api/shins/index.html)
+As a merchant, you can check if you have access to recurring payments through [portal.vipps.no](https://portal.vipps.no). Partners can check if they have access to recurring payments through the [Vipps Partner API](https://github.com/vippsas/vipps-partner-api#readme).
 
-See: Vipps Recurring [GitHub repository](https://github.com/vippsas/vipps-recurring-api/),
-with [Postman collection](tools/),
-[Integration checklist](vipps-recurring-api-checklist.md),
-[FAQ](vipps-recurring-api-faq.md).
+
+See a detailed example of [how it works](vipps-login-recurring-howitworks.md).
+
+See also:
+* Recurring API Specifications:  [Swagger](https://vippsas.github.io/vipps-recurring-api/), [ReDoc](https://vippsas.github.io/vipps-recurring-api/redoc.html), [Shins](https://vippsas.github.io/vipps-recurring-api/shins/index.html)
+* [Step-by-step examples in Postman guide](vipps-recurring-postman.md)
+* [Integration checklist](vipps-recurring-api-checklist.md)
+* [FAQ](vipps-recurring-api-faq.md)
 
 API version: 1.0.0.
 
-Document version 2.5.5.
+Document version 2.5.6.
 
 ## Table of Contents
 
@@ -108,8 +107,8 @@ Document version 2.5.5.
 
 | Term        |  Description                                    |
 | ----------- | ----------------------------------------------- |
-| Agreement   | A payment subscription with a set of parameters that a customer agrees to  |
-| Charge      | A single payment within an agreement |
+| Agreement   | A payment subscription with a set of parameters that a customer agrees to.  |
+| Charge      | A single payment within an agreement. |
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
 
 ## Flow diagram
