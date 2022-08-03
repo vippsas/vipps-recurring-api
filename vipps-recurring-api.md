@@ -5,21 +5,21 @@ to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
-The overall idea is:
-* Merchants let users enter agreements in Vipps.
-* Merchants ask Vipps to make charges, and Vipps handles _everything_.
-* Users have the full overview in Vipps, including a link to the merchant's website.
+The overall flow is:
+* The merchant creates a draft agreement and proposes it to the customer via Vipps.
+* The customer approves the agreement in Vipps.
+* At the due date, the merchant sends a charge request to Vipps.
+* If the agreement is active, Vipps authorizes the charge.
+* The customer can find a full overview in Vipps, including a link to the merchant's website.
 
-Please order Vipps "Faste Betalinger" (recurring payments) on
-[portal.vipps.no](https://portal.vipps.no)
-to get access to the Recurring API in production.
+To get access to the Recurring API in production, order Vipps "Faste Betalinger" (recurring payments) on
+[portal.vipps.no](https://portal.vipps.no).
 
-**IMPORTANT:** Before
-activating recurring payments, Vipps must perform some extra Know Your Customer (KYC) checks, as required by [Finanstilsynet](https://www.finanstilsynet.no).
-You will get access to recurring payments if you have passed these checks and if you have "Vipps på Nett" and a direct integration with the
-[Vipps eCom API](https://github.com/vippsas/vipps-ecom-api).
+**IMPORTANT:** Before activating recurring payments for you, 
+Vipps must perform some extra Know Your Customer (KYC) checks, as required by [Finanstilsynet](https://www.finanstilsynet.no).
+You will also need to set up a direct agreement for use of "Vipps på Nett" ([Vipps eCom API](https://github.com/vippsas/vipps-ecom-api)).
 
-As a merchant, you can check if you have access to recurring payments through [portal.vipps.no](https://portal.vipps.no). Partners can check if they have access to recurring payments through the [Vipps Partner API](https://github.com/vippsas/vipps-partner-api#readme).
+As a merchant, you can check if you have access to recurring payments through [portal.vipps.no](https://portal.vipps.no). Partners can check if a merchant has access to recurring payments through the [Vipps Partner API](https://github.com/vippsas/vipps-partner-api/blob/main/vipps-partner-api.md#get-information-about-a-sale-unit-based-on-msn).
 
 
 See a detailed example of [how it works](vipps-login-recurring-howitworks.md).
