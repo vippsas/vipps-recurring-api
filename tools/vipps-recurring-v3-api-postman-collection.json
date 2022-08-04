@@ -667,7 +667,7 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"agreementid\", jsonData.agreementId)",
+									"postman.setEnvironmentVariable(\"agreementId\", jsonData.agreementId)",
 									"var str = jsonData.vippsConfirmationUrl",
 									"var str2 = str.split('=', 3)[2]",
 									"postman.setEnvironmentVariable(\"landing_page_url\", str2);",
@@ -932,7 +932,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementid}}/accept",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/accept",
 							"host": [
 								"{{base_url}}"
 							],
@@ -940,7 +940,7 @@
 								"recurring",
 								"v3",
 								"agreements",
-								"{{agreementid}}",
+								"{{agreementId}}",
 								"accept"
 							]
 						},
