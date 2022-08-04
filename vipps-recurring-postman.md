@@ -38,16 +38,14 @@ Import the collection by following the steps below:
 
 See the [Recurring API Specifications](https://vippsas.github.io/vipps-recurring-api/#/) for details about the calls.
 
-### Step 5: Get access token
+#### 1. Get access token
 
 Send request `Get Access Token`. This provides you with access to the API.
 
 The access token is valid for 1 hour in the test environment
 and 24 hours in the production environment.
 
-### Step 6: Run Agreement Controller examples
-
-#### 1. Create a minimal agreement
+#### 2. Test working with an agreement
 
 1. Send `Draft Agreement - Minimal`. This is to demonstrate a simple agreement by using
    [`POST:/v2/agreements`]([draft-agreement-endpoint]).
@@ -57,69 +55,74 @@ and 24 hours in the production environment.
    Ctrl+click on the link that appears and it will take you to the Vipps landing page.
    Enter your test phone number and complete the agreement authorization in the Vipps app in your mobile test environment.
 
-#### 2. Get information the agreement
-
 1. Send `Get Agreement` with `agreementId` for information about this agreement by using
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
 1. Send `Fetch Agreements` to get a list of all the agreements by using
-   [`GET:/v2/agreements`][list-agreements-endpoint]
+   [`GET:/v2/agreements`][list-agreements-endpoint].
 
-#### 3. Update the agreement
+1. Send `Update agreement`. This changes the price, product name, product description, and status according to values sent in the body of [`PUT:/v2/agreements/{{agreementId}}`][update-agreement-endpoint]. Send `Get Agreement` and `Fetch Agreements` to see the changes.
 
-1. Send `Update agreement`. This changes the price, product name, product description, and status according to values sent in the body of [`PUT:/v2/agreements/{{agreementId}}`][update-agreement-endpoint].
+1. Open `Stop agreement`. The status is set to `STOPPED` in the body of [`PUT:/v2/agreements/{{agreementId}}`][update-agreement-endpoint].
+   Send `Get Agreement` and `Fetch Agreements` to see the changes.
 
-1. Send `Get Agreement`. The information returned will reflect the changes.
 
-#### 4. Stop the agreement
+#### 3. Test creating a charge
 
-1. Open `Update agreement`. In the body of [`PUT:/v2/agreements/{{agreementId}}`][update-agreement-endpoint, update status to `STOPPED`. Send the request, and the agreement will be stopped.
+1. Send `Draft Agreement - Minimal` and approve it.
 
-1. Send `Get Agreement`. The information returned will reflect the changes.
+   The `agreementId` variable is now in the environment.
 
-1. Send `Fetch Agreements`. The agreement will be gone from the list.
+1. Send `Create Charge - Due tomorrow`. This creates a charge that is due tomorrow.
+   Note, that you can't create the charge for the same day as you send the request.
 
-   Note that, if you change the `status` body parameter to "STOPPED", you will see it there in the list of the stopped recurring payments.
+   The `chargeId` variable is set for later use.
 
-#### 5. Test creating other types of agreements
+1. Send `Get Charge` with `chargeId`. This uses [`GET:/v2/agreements/{{agreementId}}/charges/{{chargeId}}`][fetch-charge-endpoint]
+   to get information about the charge.
+
+1. Send `List Charges` which uses [`GET:/v2/agreements/{{agreementId}}/charges`][list-charges-endpoint] to provide a list of all the charges
+   for an agreement.
+
+
+#### 4. Create an agreement with initial charges
 
 You can create more complex types of agreements by modifying the parameters in [`POST:/v2/agreements`][draft-agreement-endpoint].
 
 1. Send `Draft Agreement - Full`.  This demonstrates the addition of an initial charge and a campaign.
 
-   Ctrl+click on the link that appears and complete the authorization.
+   Ctrl+click on the link and complete the authorization.
+
+   When you use this, a charge is automatically created for the initial payment.
+   The `agreementId` and `chargeId` are set in the environment.
+
+#### 5. Test creating agreements with initial charges and reserve capture
 
 1. Send `Draft Agreement - Reserved Charge`.  This demonstrates the addition of an initial charge with a transactionType: `RESERVE_CAPTURE`.
 
-   Ctrl+click on the link that appears and complete the authorization.
+   Ctrl+click on the link  and complete the authorization.
+
+   When you use this, a charge is automatically created for the initial payment and you can capture it immediately.
+   The `agreementId` and `chargeId` are set in the environment.
+
+1. Send `Capture reserved charge` which uses [`POST:/v2/agreements/{{agreementId}}/charges/{{chargeId}}/capture`][capture-charge-endpoint].
+
 
 
 #### X. Getting access to user info
 
-
 1. Send request `Draft Agreement - Profile flow`. Provide the `scope` object in the [`POST:/v2/agreements`][draft-agreement-endpoint] call. This contains the information types that you want access to, separated by spaces (e.g., "name address email phoneNumber birthDate").
 
-   Here, the `agreementid` and `landing_page_url` are retrieved from the response and set as variables.
+   Here, the `agreementId` and `landing_page_url` are retrieved from the response and set as variables.
 
-1. Send request `Get Agreement` for information about this payment by using [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
+1. Once you complete the session, a unique identifier `sub` can be retrieved in the agreement details.
+   Send request `Get Agreement` for information about this payment by using [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
-   Here, the `sub` is retrieved from the response and set as a variable.
+   In this example, `sub` is retrieved from the response and set as a variable.
 
 1. Send request `Get Userinfo`. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
 
 See [Userinfo](vipps-recurring-api.md#userinfo) for more information.
-
-
-
-### Step 7: Run Charge Controller examples
-
-For the following examples, you need an `agreementId`. This is filled out automatically in the Postman environment upon running any of the `Draft Agreement` calls.
-
-#### 1. Testing with charges
-
-1. Send `Create Charge`
-   `{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges`
-
 
 ## Questions?
 
