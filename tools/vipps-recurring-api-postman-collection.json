@@ -307,7 +307,7 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"agreement_id\", jsonData.agreementId)",
+									"postman.setEnvironmentVariable(\"agreementid\", jsonData.agreementId)",
 									"var str = jsonData.vippsConfirmationUrl",
 									"var str2 = str.split('=', 3)[2]",
 									"postman.setEnvironmentVariable(\"landing_page_url\", str2);",

@@ -667,7 +667,7 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"agreement_id\", jsonData.agreementId)",
+									"postman.setEnvironmentVariable(\"agreementid\", jsonData.agreementId)",
 									"var str = jsonData.vippsConfirmationUrl",
 									"var str2 = str.split('=', 3)[2]",
 									"postman.setEnvironmentVariable(\"landing_page_url\", str2);",
@@ -723,7 +723,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"currency\": \"NOK\",\n\t\"interval\": \"WEEK\",\n\t\"intervalCount\": 1,\n\t\"isApp\": false,\n\t\"merchantRedirectUrl\": \"https://netthandel-mock-server.azurewebsites.net/ecom/echo\",\n\t\"merchantAgreementUrl\": \"https://www.nrk.no\",\n\t\"customerPhoneNumber\": \"{{user_mobile_number}}\",\n\t\"price\": \"500\",\n\t\"productName\": \"Userinfo\",\n\t\"scope\": \"address name email birthDate phoneNumber\"\n}",
+							"raw": "{\n\t\"currency\": \"NOK\",\n\t\"interval\": \"WEEK\",\n\t\"intervalCount\": 1,\n\t\"isApp\": false,\n\t\"merchantRedirectUrl\": \"https://netthandel-mock-server.azurewebsites.net/ecom/echo\",\n\t\"merchantAgreementUrl\": \"https://www.nrk.no\",\n\t\"customerPhoneNumber\": \"{{customerPhoneNumber}}\",\n\t\"price\": \"500\",\n\t\"productName\": \"Userinfo\",\n\t\"scope\": \"address name email birthDate phoneNumber\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -731,10 +731,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{url}}/recurring/v3/agreements",
-							"protocol": "https",
+							"raw": "{{base_url}}/recurring/v3/agreements",
 							"host": [
-								"{{url}}"
+								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
@@ -925,7 +924,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"customerPhoneNumber\": \"{{user_mobile_number}}\"\n}",
+							"raw": "{\n\t\"customerPhoneNumber\": \"{{customerPhoneNumber}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -933,7 +932,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements/{{agreement_id}}/accept",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementid}}/accept",
 							"host": [
 								"{{base_url}}"
 							],
@@ -941,7 +940,7 @@
 								"recurring",
 								"v3",
 								"agreements",
-								"{{agreement_id}}",
+								"{{agreementid}}",
 								"accept"
 							]
 						},

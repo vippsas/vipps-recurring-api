@@ -99,7 +99,7 @@ You can create more complex types of agreements by modifying the parameters in [
 
 1. Send request `Draft Agreement - Profile flow`. Provide the `scope` object in the [`POST:/v2/agreements`][draft-agreement-endpoint] call. This contains the information types that you want access to, separated by spaces (e.g., "name address email phoneNumber birthDate").
 
-   Here, the `agreement_id` and `landing_page_url` are retrieved from the response and set as variables.
+   Here, the `agreementid` and `landing_page_url` are retrieved from the response and set as variables.
 
 1. Send request `Get Agreement` for information about this payment by using [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
