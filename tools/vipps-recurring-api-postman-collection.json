@@ -447,6 +447,67 @@
 					"response": []
 				},
 				{
+					"name": "Stop Agreement",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"status\": \"STOPPED\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v2/agreements/{agreement_id}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v2",
+								"agreements",
+								"{agreement_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Agreement",
 					"event": [
 						{
