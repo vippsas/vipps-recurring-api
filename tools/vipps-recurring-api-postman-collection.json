@@ -138,7 +138,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"Minimal Draft Agreement\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v2/agreements",
@@ -210,7 +210,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"campaignPrice\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productDescription\": \"{{productDescription}}\",\n \"productName\": \"Full Draft Agreement\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v2/agreements",
