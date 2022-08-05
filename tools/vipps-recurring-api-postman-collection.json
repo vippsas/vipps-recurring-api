@@ -849,7 +849,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									""
+									"pm.environment.set('Idempotent-Key-Capture',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
 								"type": "text/javascript"
 							}
@@ -866,7 +866,7 @@
 							},
 							{
 								"key": "Idempotent-Key",
-								"value": "{{Idempotent-Key-Refund}}",
+								"value": "{{Idempotent-Key-Capture}}",
 								"type": "text"
 							},
 							{

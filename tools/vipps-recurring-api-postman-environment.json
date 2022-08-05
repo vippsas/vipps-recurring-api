@@ -134,6 +134,12 @@
 			"enabled": true
 		},
 		{
+			"key": "Idempotent-Key-Capture",
+			"value": "<This value will be overwritten when you call Capture Charge>",
+			"type": "any",
+			"enabled": true
+		},
+		{
 			"key": "description_initial",
 			"value": "Transaction initiated through Postman",
 			"enabled": true
