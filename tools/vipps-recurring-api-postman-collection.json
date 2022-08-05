@@ -234,7 +234,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);\r",
+									"pm.environment.set(\"chargeId\", pm.response.json().chargeId);"
 								],
 								"type": "text/javascript"
 							}
