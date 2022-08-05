@@ -364,7 +364,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"currency\": \"NOK\",\n\t\"interval\": \"WEEK\",\n\t\"intervalCount\": 1,\n\t\"isApp\": false,\n\t\"merchantRedirectUrl\": \"https://netthandel-mock-server.azurewebsites.net/ecom/echo\",\n\t\"merchantAgreementUrl\": \"https://www.nrk.no\",\n\t\"customerPhoneNumber\": \"{{customerPhoneNumber}}\",\n\t\"price\": \"500\",\n\t\"productDescription\": \"Dataleak\",\n\t\"productName\": \"Userinfo\",\n\t\"scope\": \"address name email birthDate phoneNumber\"\n}",
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"WEEK\",\n \"intervalCount\": 1,\n \"isApp\": false,\n \"merchantRedirectUrl\": \"https://example.com/confirmation\",\n \"merchantAgreementUrl\": \"https://example.com/my-customer-agreement\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\",\n \"price\": \"500\",\n \"productDescription\": \"Access to user info\",\n \"productName\": \"Userinfo\",\n \"scope\": \"address name email birthDate phoneNumber\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
