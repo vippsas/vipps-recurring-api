@@ -1104,7 +1104,7 @@
 							],
 							"query": [
 								{
-									"key": "status",
+									"key": "chargeStatus",
 									"value": "{{status_charges}}",
 									"disabled": true
 								}
