@@ -1152,7 +1152,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges?chargeStatus={{status_charges}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1166,8 +1166,7 @@
 							"query": [
 								{
 									"key": "chargeStatus",
-									"value": "{{status_charges}}",
-									"disabled": true
+									"value": "{{status_charges}}"
 								}
 							]
 						},
