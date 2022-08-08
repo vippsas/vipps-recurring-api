@@ -90,12 +90,18 @@
 		},
 		{
 			"key": "status_charges",
-			"value": "CHARGED",
+			"value": "DUE",
 			"enabled": true
 		},
 		{
 			"key": "status_updated",
 			"value": "ACTIVE",
+			"enabled": true
+		},
+		{
+			"key": "status_stopped",
+			"value": "STOPPED",
+			"type": "default",
 			"enabled": true
 		},
 		{
@@ -131,6 +137,12 @@
 		{
 			"key": "Idempotent-Key-Refund",
 			"value": "<This value will be overwritten when you call Refund Charge>",
+			"enabled": true
+		},
+		{
+			"key": "Idempotent-Key-Capture",
+			"value": "<This value will be overwritten when you call Capture Charge>",
+			"type": "any",
 			"enabled": true
 		},
 		{
