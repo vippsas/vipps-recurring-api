@@ -90,7 +90,7 @@
 		},
 		{
 			"key": "status_charges",
-			"value": "CHARGED",
+			"value": "DUE",
 			"enabled": true
 		},
 		{
