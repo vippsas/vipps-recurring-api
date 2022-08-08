@@ -494,7 +494,7 @@
 							"raw": "{\r\n\t\"status\": \"STOPPED\"\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{agreement_id}",
+							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -502,7 +502,7 @@
 								"recurring",
 								"v2",
 								"agreements",
-								"{agreement_id}"
+								"{{agreementId}}"
 							]
 						}
 					},
