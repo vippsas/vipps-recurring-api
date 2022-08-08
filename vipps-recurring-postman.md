@@ -78,7 +78,6 @@ You can create more complex types of agreements by modifying the parameters in [
 1. Send request `Get Agreement` for information about this payment by using
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
-
 #### 3. Create an agreement with a reserve capture
 
 When you use this, a charge is automatically created for the initial payment and
@@ -118,7 +117,6 @@ If you need to get access to some user information in addition to the recurring 
 1. Send request `Get Userinfo`, from the *User Info* folder. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
 
 See [User info](vipps-recurring-api.md#userinfo) for more information.
-
 
 #### 5. Get a list of agreements
 
@@ -242,7 +240,6 @@ a [pull request](https://github.com/vippsas/vipps-ecom-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
-
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/ListAgreements
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/DraftAgreement
