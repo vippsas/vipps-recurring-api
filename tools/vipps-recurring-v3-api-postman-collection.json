@@ -690,7 +690,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "bearer {{token}}"
+								"value": "bearer {{access_token}}"
 							},
 							{
 								"key": "Merchant-Serial-Number",
