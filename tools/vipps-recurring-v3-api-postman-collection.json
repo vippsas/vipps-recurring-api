@@ -138,7 +138,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\",\n \"price\": {{price}},\n \"productName\": \"Minimal Draft Agreement\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -210,7 +210,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": \"{{interval}}\",\n \"intervalCount\": \"{{intervalCount}}\",\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"variableAmount\": {\n\t    \"suggestedMaxAmount\": 6000\n    },\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"variableAmount\": {\n\t    \"suggestedMaxAmount\": 6000\n    },\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -282,7 +282,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\" : \"PRICE_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\" : \"PRICE_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -354,7 +354,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\" : \"PERIOD_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"period\": \"DAY\",\n    \"periodCount\": \"2\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\" : \"PERIOD_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"period\": {\n        \"unit\" : \"DAY\",\n        \"count\": \"2\"\n    }\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -426,7 +426,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"EVENT_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"eventDate\": \"2040-12-25T00:00:00Z\",\n    \"eventText\": \"Until Christmas\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"EVENT_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"eventDate\": \"2040-12-25T00:00:00Z\",\n    \"eventText\": \"Until Christmas\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -498,7 +498,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"FULL_FLEX_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"interval\": \"WEEK\",\n    \"intervalCount\": 4,\n    \"end\": \"2030-01-01T00:00:00Z\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"FULL_FLEX_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"interval\": {\n        \"unit\" : \"WEEK\",\n        \"count\" :  4\n    },\n    \"end\": \"2030-01-01T00:00:00Z\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -570,7 +570,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -642,7 +642,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": \"{{interval}}\",\n \"intervalCount\": {{intervalCount}},\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -723,7 +723,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"currency\": \"NOK\",\n\t\"interval\": \"WEEK\",\n\t\"intervalCount\": 1,\n\t\"isApp\": false,\n\t\"merchantRedirectUrl\": \"https://netthandel-mock-server.azurewebsites.net/ecom/echo\",\n\t\"merchantAgreementUrl\": \"https://www.nrk.no\",\n\t\"customerPhoneNumber\": \"{{customerPhoneNumber}}\",\n\t\"price\": \"500\",\n\t\"productName\": \"Userinfo\",\n\t\"scope\": \"address name email birthDate phoneNumber\"\n}",
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"1\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"https://netthandel-mock-server.azurewebsites.net/ecom/echo\",\n \"merchantAgreementUrl\": \"https://www.nrk.no\",\n \"customerPhoneNumber\": \"{{customerPhoneNumber}}\",\n \"price\": \"500\",\n \"productName\": \"Userinfo\",\n \"scope\": \"address name email birthDate phoneNumber\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
