@@ -8,7 +8,7 @@ that will be automatically processed on the due date.
 The overall flow is:
 * The merchant creates a draft agreement and proposes it to the customer via Vipps.
 * The customer approves the agreement in Vipps.
-* At the due date, the merchant sends a charge request to Vipps.
+* The merchant sends a charge request to Vipps at least two days before due date
 * If the agreement is active, Vipps authorizes the charge.
 * The customer can find a full overview in Vipps, including a link to the merchant's website.
 
@@ -465,7 +465,7 @@ If you use `initialcharge` alone for campaigns, users will be confused by how it
 as it looks like the full price period starts immediately.
 
 Initial charge will be performed if the `initialcharge` is provided when
-creating an agreement. If there is no initial charge, don't sent `initialcharge`
+creating an agreement. If there is no initial charge, don't send `initialcharge`
 when creating the new agreement.
 
 Unlike regular (or `RECURRING`) charges, there is no price limit on an `initialCharge`.
