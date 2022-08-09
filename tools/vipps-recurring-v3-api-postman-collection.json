@@ -1054,7 +1054,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements",
+							"raw": "{{base_url}}/recurring/v3/agreements?status={{status_agreements}}",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1066,8 +1066,7 @@
 							"query": [
 								{
 									"key": "status",
-									"value": "{{status_agreements}}",
-									"disabled": true
+									"value": "{{status_agreements}}"
 								}
 							]
 						},
