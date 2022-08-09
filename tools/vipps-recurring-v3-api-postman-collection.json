@@ -1155,13 +1155,13 @@
 							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges"
@@ -1243,13 +1243,13 @@
 							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges"
@@ -1326,13 +1326,13 @@
 							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges",
@@ -1410,13 +1410,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/capture",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}/capture",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges",
@@ -1476,13 +1476,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges",
@@ -1532,13 +1532,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges",
