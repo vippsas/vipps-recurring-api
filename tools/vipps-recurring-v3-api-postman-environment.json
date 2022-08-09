@@ -130,17 +130,17 @@
 			"enabled": true
 		},
 		{
-			"key": "Idempotent-Key-Create",
+			"key": "Idempotency-Key-Create",
 			"value": "<This value will be overwritten when you call Create Charge>",
 			"enabled": true
 		},
 		{
-			"key": "Idempotent-Key-Refund",
+			"key": "Idempotency-Key-Refund",
 			"value": "<This value will be overwritten when you call Refund Charge>",
 			"enabled": true
 		},
 		{
-			"key": "Idempotent-Key-Capture",
+			"key": "Idempotency-Key-Capture",
 			"value": "<This value will be overwritten when you call Capture Charge>",
 			"type": "any",
 			"enabled": true

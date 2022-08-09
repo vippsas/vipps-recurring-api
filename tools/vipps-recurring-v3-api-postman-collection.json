@@ -1100,7 +1100,7 @@
 									"tomorrow.setDate(tomorrow.getDate() + 1);\r",
 									"tomorrowString = [tomorrow.getFullYear(), (\"0\" + (tomorrow.getMonth()+1)).slice(-2), (\"0\" + tomorrow.getDate()).slice(-2)].join('-');\r",
 									"pm.environment.set(\"due\", tomorrowString);\r",
-									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
+									"pm.environment.set('Idempotency-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
 								"type": "text/javascript"
 							}
@@ -1114,8 +1114,8 @@
 								"value": "application/json"
 							},
 							{
-								"key": "Idempotent-Key",
-								"value": "{{Idempotent-Key-Create}}"
+								"key": "Idempotency-Key",
+								"value": "{{Idempotency-Key-Create}}"
 							},
 							{
 								"key": "Authorization",
@@ -1167,7 +1167,7 @@
 								"charges"
 							]
 						},
-						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
+						"description": "Creates a charge on the last relevant agreement.The idempotency-key is included to make sure you do not have additional draws."
 					},
 					"response": []
 				},
@@ -1188,7 +1188,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set('Idempotent-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
+									"pm.environment.set('Idempotency-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
 								"type": "text/javascript"
 							}
@@ -1202,8 +1202,8 @@
 								"value": "application/json"
 							},
 							{
-								"key": "Idempotent-Key",
-								"value": "{{Idempotent-Key-Create}}"
+								"key": "Idempotency-Key",
+								"value": "{{Idempotency-Key-Create}}"
 							},
 							{
 								"key": "Authorization",
@@ -1255,7 +1255,7 @@
 								"charges"
 							]
 						},
-						"description": "Creates a charge on the last relevant agreement.The idempotent-key is included to make sure you do not have additional draws."
+						"description": "Creates a charge on the last relevant agreement.The idempotency-key is included to make sure you do not have additional draws."
 					},
 					"response": []
 				},
@@ -1266,7 +1266,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set('Idempotent-Key-Refund',pm.environment.get('agreementId') + (new Date()).getTime());"
+									"pm.environment.set('Idempotency-Key-Refund',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
 								"type": "text/javascript"
 							}
@@ -1282,8 +1282,8 @@
 								"type": "text"
 							},
 							{
-								"key": "Idempotent-Key",
-								"value": "{{Idempotent-Key-Refund}}",
+								"key": "Idempotency-Key",
+								"value": "{{Idempotency-Key-Refund}}",
 								"type": "text"
 							},
 							{
@@ -1366,8 +1366,8 @@
 								"type": "text"
 							},
 							{
-								"key": "Idempotent-Key",
-								"value": "{{Idempotent-Key-Capture}}",
+								"key": "Idempotency-Key",
+								"value": "{{Idempotency-Key-Capture}}",
 								"type": "text"
 							},
 							{
