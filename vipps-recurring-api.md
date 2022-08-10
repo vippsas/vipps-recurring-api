@@ -1663,11 +1663,11 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
 
-[list-agreements-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/ListAgreements
-[draft-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/DraftAgreement
-[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/FetchAgreement
-[update-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/UpdateAgreementPatch
-[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/acceptUsingPATCH
+[list-agreements-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v3%20endpoints/ListAgreementsV3
+[draft-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v3%20endpoints/DraftAgreementV3
+[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v3%20endpoints/FetchAgreementV3
+[update-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v3%20endpoints/UpdateAgreementPatchV3
+[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v3%20endpoints/acceptUsingPATCHV3
 [list-charges-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Charge%20v2%20endpoints/ListCharges
 [create-charge-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Charge%20v2%20endpoints/CreateCharge
 [fetch-charge-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Charge%20v2%20endpoints/FetchCharge
