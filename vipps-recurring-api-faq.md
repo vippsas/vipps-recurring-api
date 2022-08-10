@@ -58,9 +58,9 @@ The `merchant.not.allowed.for.recurring.operation` error indicates
 that the Vipps Recurring API is not yet activated for this sale unit.
 
 The Vipps Recurring API is available for existing customers that
-have "Vipps på Nett" and a direct integration with the
-[Vipps eCom API](https://github.com/vippsas/vipps-recurring-api)
-and have completed some additional KYC checks required by Finanstilsynet.
+have "Vipps på Nett", a direct integration with the
+[Vipps eCom API](https://github.com/vippsas/vipps-ecom-api),
+and have completed some additional Know Your Customer (KYC) checks required by [Finanstilsynet](https://www.finanstilsynet.no).
 
 Vipps is required to perform some extra compliance checks before
 activating the Vipps Recurring API.

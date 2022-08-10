@@ -1,6 +1,6 @@
 {
 	"id": "06124433-3824-4f61-b4f7-dd20d57a2947",
-	"name": "Recurring Payments - Environment",
+	"name": "Recurring Payments v2 - Environment",
 	"values": [
 		{
 			"key": "client_id",
@@ -13,7 +13,7 @@
 			"enabled": true
 		},
 		{
-			"key": "merchant_serial_number",
+			"key": "merchantSerialNumber",
 			"value": "<Go To Vipps Portal->Select the Developer tab->Select Test or Production Keys->Copy the Merchant Serial Number from the Sale Unit you copied the keys from>",
 			"type": "default",
 			"enabled": true
@@ -90,12 +90,18 @@
 		},
 		{
 			"key": "status_charges",
-			"value": "CHARGED",
+			"value": "DUE",
 			"enabled": true
 		},
 		{
 			"key": "status_updated",
 			"value": "ACTIVE",
+			"enabled": true
+		},
+		{
+			"key": "status_stopped",
+			"value": "STOPPED",
+			"type": "default",
 			"enabled": true
 		},
 		{
@@ -131,6 +137,12 @@
 		{
 			"key": "Idempotent-Key-Refund",
 			"value": "<This value will be overwritten when you call Refund Charge>",
+			"enabled": true
+		},
+		{
+			"key": "Idempotent-Key-Capture",
+			"value": "<This value will be overwritten when you call Capture Charge>",
+			"type": "any",
 			"enabled": true
 		},
 		{
