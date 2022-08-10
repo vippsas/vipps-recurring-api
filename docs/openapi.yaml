@@ -749,7 +749,7 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeStatusQuery"
+        - $ref: "#/components/parameters/ChargeStatusQueryV2"
       responses:
         '200':
           description: Success
@@ -951,7 +951,7 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeStatusQuery"
+        - $ref: "#/components/parameters/ChargeStatusQueryV3"
       responses:
         '200':
           description: Success
@@ -1282,9 +1282,17 @@ components:
         format: int32
       example: 1644572442944
 
-    ChargeStatusQuery:
+    ChargeStatusQueryV2:
       in: query
       name: chargeStatus
+      required: false
+      description: Filter by status of the charge.
+      schema:
+        $ref: "#/components/schemas/ChargeStatus"
+
+    ChargeStatusQueryV3:
+      in: query
+      name: status
       required: false
       description: Filter by status of the charge.
       schema:
