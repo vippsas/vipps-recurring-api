@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4e690490-4923-49df-87dd-53ab19114598",
+		"_postman_id": "3fb4d75a-c8c8-4585-9295-d04f89b804b5",
 		"name": "Recurring Payments v3 - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1080,7 +1080,7 @@
 			"name": "Charge Controller",
 			"item": [
 				{
-					"name": "Create Charge - Due tomorrow",
+					"name": "Create Charge - Direct capture",
 					"event": [
 						{
 							"listen": "test",
@@ -1152,7 +1152,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"DIRECT_CAPTURE\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
@@ -1172,7 +1172,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Charge",
+					"name": "Create Charge - Reserve capture",
 					"event": [
 						{
 							"listen": "test",
@@ -1188,6 +1188,10 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"var tomorrow = new Date();\r",
+									"tomorrow.setDate(tomorrow.getDate() + 1);\r",
+									"tomorrowString = [tomorrow.getFullYear(), (\"0\" + (tomorrow.getMonth()+1)).slice(-2), (\"0\" + tomorrow.getDate()).slice(-2)].join('-');\r",
+									"pm.environment.set(\"due\", tomorrowString);\r",
 									"pm.environment.set('Idempotency-Key-Create',pm.environment.get('agreementId') + (new Date()).getTime());"
 								],
 								"type": "text/javascript"
@@ -1240,7 +1244,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"currency\": \"NOK\",\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}}\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n   \"transactionType\": \"RESERVE_CAPTURE\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
@@ -1407,7 +1411,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n  \"amount\": {{amount_charge}},\n  \"description\": \"{{description_charge}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}/capture",
