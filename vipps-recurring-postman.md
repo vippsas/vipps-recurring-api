@@ -16,12 +16,12 @@ We also have a short [getting started guide to Postman](https://github.com/vipps
 Import the collection by following the steps below:
 
 1. Click `Import` in the upper left corner.
-2. Import the [vipps-recurring-api-postman-collection.json](https://raw.githubusercontent.com/vippsas/vipps-recurring-api/master/tools/vipps-recurring-api-postman-collection.json) file.
+2. Import the [vipps-recurring-api-postman-collection.json](./tools/vipps-recurring-api-postman-collection.json) file.
 
 ### Step 2: Import the Postman Environment
 
 1. Click `Import` in the upper-left corner.
-2. Import the [vipps-recurring-api-postman-environment.json](https://raw.githubusercontent.com/vippsas/vipps-recurring-api/master/tools/vipps-recurring-api-postman-environment.json) file.
+2. Import the [vipps-recurring-api-postman-environment.json](./tools/vipps-recurring-api-postman-environment.json) file.
 
 ### Step 3: Setup Postman Environment
 
@@ -48,7 +48,7 @@ For details about the calls, see [Agreement v2 endpoints](https://vippsas.github
 
 1. Send the `Draft Agreement - Minimal` request.
    This demonstrates how to create a simple agreement using
-   [`POST:/v2/agreements`]([draft-agreement-endpoint]).
+   [`POST:/v2/agreements`][draft-agreement-endpoint].
 
    Ctrl+click the link and it will take you to the Vipps landing page.
    Enter your test phone number and complete the authorization in the Vipps app in your mobile test app.
