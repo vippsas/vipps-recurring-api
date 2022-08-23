@@ -669,9 +669,10 @@ Vipps recurring payment will have a description with follow format
 
 ### Cancel a charge
 
-Cancels a pending, due or reserved charge. When cancelling a charge that is PARTIALLY_CAPTURED, the remaining funds on the charge will be released back to the customer.
+You can cancel charges that are in the `pending`, `due` or `reserved` state.
+If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
 
-Note if you cancel an agreement, there is no need to cancel the charges that belongs to the agreement. This will be done automatically by Vipps.
+**Note:** if you cancel an agreement, there is no need to cancel the charges that belongs to the agreement. This will be done automatically by Vipps.
 
 A charge can be cancelled with: [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
 
