@@ -674,7 +674,7 @@ If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the 
 
 **Note:** if you cancel an agreement, there is no need to cancel the charges that belongs to the agreement. This will be done automatically by Vipps.
 
-A charge can be cancelled with: [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
+A charge can be cancelled with: [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
 
 ### Charge times
 
