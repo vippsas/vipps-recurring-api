@@ -101,7 +101,7 @@ Merchants sometimes need to move customer agreements from one organization
 number ("orgno") to another, or from one sale unit
 (merchant serial number, "MSN") to another.
 
-First of all: A business can not "change organization number". An organization
+First of all: A merchant can not "change organization number". An organization
 number uniquely identifies a juridical unit, and can not be changed.
 It may still be possible to move existing agreements.
 
@@ -122,6 +122,16 @@ Here are some typical cases:
 3. If the merchant wants to move agreements from
    one orgno to another,
    and the orgnos are not owned by a parent company,
+   Vipps may not be able to help.
+   The users have entered agreements with an orgno, and Vipps can not
+   automatically move the agreements without the user's consent to enter
+   agreements with the new orgno.
+   The users may need to enter new agreements with the new orgno.
+   Please contact your KAM, your partner or
+   [Vipps customer service](https://vipps.no/kontakt-oss/).
+4. If the merchant splits or fissions out a new orgno,
+   is merged with another orgno,
+   is acquired by another orgno, etc:
    Vipps may not be able to help.
    The users have entered agreements with an orgno, and Vipps can not
    automatically move the agreements without the user's consent to enter
