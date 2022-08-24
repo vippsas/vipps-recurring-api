@@ -105,6 +105,11 @@ First of all: A merchant can not "change organization number". An organization
 number uniquely identifies a juridical unit, and can not be changed.
 It may still be possible to move existing agreements.
 
+Clarification of terms:
+* Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
+* MSN: The unique id of a sale unit. A merchant may have one or more sale units.
+  MSN is short for "Merchant Serial Number", but (sadly) identifies a sale unit, not a merchant.
+
 Here are some typical cases:
 
 1. If the merchant wants to move agreements from
@@ -114,11 +119,11 @@ Here are some typical cases:
 2. If the merchant wants to move agreements from
    one orgno to another,
    and both orgnos are owned by the same parent orgno,
-   ipps may be able to help.
+   Vipps may be able to help.
 3. If the merchant wants to move agreements from
    one orgno to another,
    and the orgnos are not owned by a parent company,
-   ipps may be able to help.
+   Vipps may be able to help.
    The users have entered agreements with an orgno, and Vipps can not
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
