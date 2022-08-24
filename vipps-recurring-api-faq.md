@@ -11,7 +11,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.5.3.
+Document version: 1.6.0.
 
 ## Table of Contents
 
@@ -20,6 +20,7 @@ Document version: 1.5.3.
 * [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
 * [Can I look up a user's information?](#can-i-look-up-a-users-information)
 * [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
+* [How can I move agreements between organizations and sale units?](#how-can-i-move-agreements-between-organizations-and-sale-units)
 * [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
 * [How do I check my customer's status?](#how-do-i-check-my-customers-status)
 * [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
@@ -93,6 +94,41 @@ change to Vipps in different ways:
   users will see the PDF invoice on their phone, and can not easily scan the QR.
 * Paper invoice: Include a QR code with unique URL for the customer, same as
   above.
+
+## How can I move agreements between organizations and sale units?
+
+Merchants sometimes need to move customer agreements from one organization
+number ("orgno") to another, or from one sale unit
+(merchant serial number, "MSN") to another.
+
+First of all: A business can not "change organization number". An organization
+number uniquely identifies a juridical unit, and can not be changed.
+
+1. If the merchant wants to move agreements from
+   one MSN to another,
+   aqnd both MSNs are under the same orgno,
+   Vipps are probably able to help.
+   Please contact your KAM, your partner or Vipps customer service.
+2. If the merchant wants to move agreements from
+   one orgno to another,
+   and both orgnos are owned by the same parent orgno,
+   Vipps are probably able to help.
+   Please contact your KAM, your partner or Vipps customer service.
+3. If the merchant wants to move agreements from
+   one orgno to another,
+   and the orgnos are not owned by a parent company,
+   Vipps may not be able to help.
+   The users have entered agreements with an orgno, and Vipps can not
+   automatically move the agreements without the user's consent to enter
+   agreements with the new orgno.
+   The users may need to enter new agreements with the new orgno.
+   Please contact your KAM, your partner or Vipps customer service.
+
+**Please note:** If the merchant deactivates a MSN that has active
+agreements, it will no longer be possible to:
+- Manage the agreements
+- Perform new charges
+- Make refunds
 
 ## At what time during the day are charges made?
 Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
