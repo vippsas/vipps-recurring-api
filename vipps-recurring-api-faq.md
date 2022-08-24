@@ -110,15 +110,15 @@ Here are some typical cases:
 1. If the merchant wants to move agreements from
    one MSN to another,
    and both MSNs are under the same orgno,
-   Vipps are probably able to help.
+   Vipps may be able to help.
 2. If the merchant wants to move agreements from
    one orgno to another,
    and both orgnos are owned by the same parent orgno,
-   Vipps are probably able to help.
+   ipps may be able to help.
 3. If the merchant wants to move agreements from
    one orgno to another,
    and the orgnos are not owned by a parent company,
-   Vipps may not be able to help.
+   ipps may be able to help.
    The users have entered agreements with an orgno, and Vipps can not
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
@@ -126,7 +126,7 @@ Here are some typical cases:
 4. If the merchant splits or fissions out a new orgno,
    is merged with another orgno,
    is acquired by another orgno, etc:
-   Vipps may not be able to help.
+   Vipps may *not* be able to help.
    The users have entered agreements with an orgno, and Vipps can not
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
@@ -144,7 +144,7 @@ agreements, it will no longer be possible to:
 
 ## At what time during the day are charges made?
 Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
-Subsequent attempts are made according to the `retryDays` specified.  
+Subsequent attempts are made according to the `retryDays` specified.
 This applies for both our production and test environment (MT).
 
 ## How do I check my customer's status?
