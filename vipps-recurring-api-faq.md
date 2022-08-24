@@ -129,10 +129,13 @@ Typical cases:
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
    The users may need to enter new agreements with the new orgno.
-4. If the merchant splits or fissions out a new orgno,
+4. If the merchant wants to move agreements between two independent orgnos
+   (not owned by a parent orgno),
+   splits or fissions out a new orgno,
    is merged with another orgno,
-   is acquired by another orgno, etc:
-   Vipps may *not* be able to help.
+   is acquired by another orgno,
+   etc:
+   Vipps may *_not_* be able to help.
    The users have entered agreements with an orgno, and Vipps can not
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
