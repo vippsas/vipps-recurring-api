@@ -97,8 +97,8 @@ change to Vipps in different ways:
 
 ## How can I move agreements between merchants and sale units?
 
-Merchants sometimes need to move customer agreements from one merchant ("orgno")
-to another, or from one sale unit (MSN) to another.
+Merchants sometimes need to move customer agreements from one merchant
+to another, or from one sale unit to another.
 
 Clarification of terms:
 * Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
