@@ -103,6 +103,9 @@ number ("orgno") to another, or from one sale unit
 
 First of all: A business can not "change organization number". An organization
 number uniquely identifies a juridical unit, and can not be changed.
+It may still be possible to move existing agreements.
+
+Here are some typical cases:
 
 1. If the merchant wants to move agreements from
    one MSN to another,
