@@ -97,20 +97,19 @@ change to Vipps in different ways:
 
 ## How can I move agreements between merchants and sale units?
 
-Merchants sometimes need to move customer agreements from one organization
-number ("orgno") to another, or from one sale unit
-(merchant serial number, "MSN") to another.
-
-First of all: A merchant can not "change organization number". An organization
-number uniquely identifies a juridical unit, and can not be changed.
-It may still be possible to move existing agreements.
-
 Clarification of terms:
 * Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
 * MSN: The unique id of a sale unit. A merchant may have one or more sale units.
   MSN is short for "Merchant Serial Number", but (sadly) identifies a sale unit, not a merchant.
 
-Here are some typical cases:
+Merchants sometimes need to move customer agreements from one merchant ("orgno")
+to another, or from one sale unit (MSN) to another.
+
+First of all: A merchant can not "change organization number". An organization
+number uniquely identifies a juridical unit, and can not be changed.
+It may still be possible to move existing agreements.
+
+Typical cases:
 
 1. If the merchant wants to move agreements from
    one MSN to another,
@@ -136,7 +135,6 @@ Here are some typical cases:
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
    The users may need to enter new agreements with the new orgno.
-
 
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
