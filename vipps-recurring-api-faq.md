@@ -111,14 +111,10 @@ Here are some typical cases:
    one MSN to another,
    and both MSNs are under the same orgno,
    Vipps are probably able to help.
-   Please contact your KAM, your partner or
-   [Vipps customer service](https://vipps.no/kontakt-oss/).
 2. If the merchant wants to move agreements from
    one orgno to another,
    and both orgnos are owned by the same parent orgno,
    Vipps are probably able to help.
-   Please contact your KAM, your partner or
-   [Vipps customer service](https://vipps.no/kontakt-oss/).
 3. If the merchant wants to move agreements from
    one orgno to another,
    and the orgnos are not owned by a parent company,
@@ -127,8 +123,6 @@ Here are some typical cases:
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
    The users may need to enter new agreements with the new orgno.
-   Please contact your KAM, your partner or
-   [Vipps customer service](https://vipps.no/kontakt-oss/).
 4. If the merchant splits or fissions out a new orgno,
    is merged with another orgno,
    is acquired by another orgno, etc:
@@ -137,8 +131,10 @@ Here are some typical cases:
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
    The users may need to enter new agreements with the new orgno.
-   Please contact your KAM, your partner or
-   [Vipps customer service](https://vipps.no/kontakt-oss/).
+
+
+For all requests to move agreements: Please contact your KAM, your partner or
+[Vipps customer service](https://vipps.no/kontakt-oss/).
 
 **Please note:** If the merchant deactivates a MSN that has active
 agreements, it will no longer be possible to:
