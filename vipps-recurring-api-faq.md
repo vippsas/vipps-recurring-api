@@ -102,6 +102,8 @@ to another, or from one sale unit to another.
 
 Clarification of terms:
 * Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
+* Sale unit: A merchant can have one or more sale units. It may be different
+  brands, different physical locations, different services, etc.
 * MSN: The unique id of a sale unit. A merchant may have one or more sale units.
   MSN is short for "Merchant Serial Number", but (sadly) identifies a sale unit, not a merchant.
 
