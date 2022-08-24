@@ -20,7 +20,7 @@ Document version: 1.6.0.
 * [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
 * [Can I look up a user's information?](#can-i-look-up-a-users-information)
 * [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
-* [How can I move agreements between organizations and sale units?](#how-can-i-move-agreements-between-organizations-and-sale-units)
+* [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
 * [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
 * [How do I check my customer's status?](#how-do-i-check-my-customers-status)
 * [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
@@ -95,7 +95,7 @@ change to Vipps in different ways:
 * Paper invoice: Include a QR code with unique URL for the customer, same as
   above.
 
-## How can I move agreements between organizations and sale units?
+## How can I move agreements between merchants and sale units?
 
 Merchants sometimes need to move customer agreements from one organization
 number ("orgno") to another, or from one sale unit
