@@ -109,7 +109,7 @@ Here are some typical cases:
 
 1. If the merchant wants to move agreements from
    one MSN to another,
-   aqnd both MSNs are under the same orgno,
+   and both MSNs are under the same orgno,
    Vipps are probably able to help.
    Please contact your KAM, your partner or Vipps customer service.
 2. If the merchant wants to move agreements from
