@@ -97,13 +97,13 @@ change to Vipps in different ways:
 
 ## How can I move agreements between merchants and sale units?
 
+Merchants sometimes need to move customer agreements from one merchant ("orgno")
+to another, or from one sale unit (MSN) to another.
+
 Clarification of terms:
 * Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
 * MSN: The unique id of a sale unit. A merchant may have one or more sale units.
   MSN is short for "Merchant Serial Number", but (sadly) identifies a sale unit, not a merchant.
-
-Merchants sometimes need to move customer agreements from one merchant ("orgno")
-to another, or from one sale unit (MSN) to another.
 
 First of all: A merchant can not "change organization number". An organization
 number uniquely identifies a juridical unit, and can not be changed.
