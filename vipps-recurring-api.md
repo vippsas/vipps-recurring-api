@@ -32,7 +32,7 @@ See also:
 
 API version: 1.0.0.
 
-Document version 2.5.7.
+Document version 2.5.8.
 
 ## Table of Contents
 
