@@ -141,6 +141,9 @@ Typical cases:
    agreements with the new orgno.
    The users may need to enter new agreements with the new orgno.
 
+If an agreement is moved, it will get a new `agreementId`, to prevent any
+confusion around charges, refunds, etc between the two MSNs.
+
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
 
