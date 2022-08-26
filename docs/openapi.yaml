@@ -15,7 +15,7 @@ info:
     See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a>
 
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
-  version: 2.6.5
+  version: 2.6.6
   title: Recurring Payments Merchant API
 
 servers:
@@ -1418,7 +1418,6 @@ components:
         - merchantRedirectUrl
         - price
         - productName
-        - productDescription
       properties:
         variableAmount:
           $ref: '#/components/schemas/variableAmount'
