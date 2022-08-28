@@ -545,7 +545,7 @@ for a campaign in the start of an agreement, or to an updated agreement
 for an ongoing agreement. When adding a campaign
 while drafting a new agreement, the start date is ignored and the current
 date-time is used. All dates must be in date-time format as according to
-[RFC-3999](https://www.ietf.org/rfc/rfc3339.txt).
+[RFC-3339](https://www.ietf.org/rfc/rfc3339.txt).
 
 ```json
 {
