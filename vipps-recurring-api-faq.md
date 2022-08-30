@@ -108,7 +108,7 @@ Clarification of terms:
   MSN is short for "Merchant Serial Number", but (sadly) identifies a sale unit, not a merchant.
 
 First of all: A merchant can not "change organization number". An organization
-number uniquely identifies a juridical unit, and can not be changed.
+number uniquely identifies a juridical unit and cannot be changed.
 It may still be possible to move existing agreements.
 
 Typical cases:
