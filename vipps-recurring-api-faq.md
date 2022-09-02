@@ -107,9 +107,9 @@ Clarification of terms:
 * MSN: The unique id of a sale unit.
   MSN is short for "Merchant Serial Number", but (sadly) identifies a sale unit, not a merchant.
 
-First of all: A merchant can not "change organization number". An organization
-number uniquely identifies a juridical unit and cannot be changed.
-It may still be possible to move existing agreements.
+First of all: A merchant very rarely "changes organization number".
+That only occurs in special cases.
+An organization number uniquely identifies a juridical unit and cannot usually be changed.
 
 Typical cases:
 
@@ -140,6 +140,18 @@ Typical cases:
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
    The users may need to enter new agreements with the new orgno.
+
+The general process is:
+- Log in on
+  [portal.vipps.no](https://portal.vipps.no)
+  and enter a new agreement with Vipps for the new orgno.
+- Order "Vipps Faste betalinger" for the new orno. on
+  [portal.vipps.no](https://portal.vipps.no).
+- Inform all existing customers of the new orgno.
+- Send a confirmation to avtale@vipps.no that all customers have been informed,
+  including a copy of the information sent.
+- Contact Vipps (your KAM or partner manager) to plan the switch, and
+  the date and time for moving the agreements.
 
 If an agreement is moved, it will get a new `agreementId`, to prevent any
 confusion around charges, refunds, etc between the two MSNs.
