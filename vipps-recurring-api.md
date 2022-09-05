@@ -1,3 +1,10 @@
+<!-- START_METADATA
+---
+title: API Guide
+sidebar_position: 20
+---
+END_METADATA -->
+
 # Vipps Recurring API
 
 The Vipps Recurring API delivers recurring payment functionality for a merchant
@@ -33,6 +40,8 @@ See also:
 API version: 1.0.0.
 
 Document version 2.5.7.
+
+<!-- START_TOC -->
 
 ## Table of Contents
 
@@ -104,6 +113,8 @@ Document version 2.5.7.
     - [Initial charge and campaign](#initial-charge-and-campaign)
   - [Questions?](#questions)
 
+<!-- END_TOC -->
+
 ## Terminology
 
 | Term        |  Description                                    |
@@ -116,7 +127,7 @@ Document version 2.5.7.
 
 This diagram shows a simplified payment flow:
 
-![Recurring agreement flow](/images/Recurring-createagreement.svg)
+![Recurring agreement flow](images/Recurring-createagreement.svg)
 
 ## Call by call guide
 

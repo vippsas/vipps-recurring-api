@@ -1,3 +1,11 @@
+<!-- START_METADATA
+---
+id: vipps-recurring-faq
+title: FAQ
+sidebar_position: 35
+---
+END_METADATA -->
+
 # Vipps Recurring API: Frequently Asked Questions
 
 See the
@@ -12,6 +20,8 @@ See also:
 guide.
 
 Document version: 1.6.0.
+
+<!-- START_TOC -->
 
 ## Table of Contents
 
@@ -41,6 +51,8 @@ Document version: 1.6.0.
 * [Settlement](#settlement)
 * [Invoicing](#invoicing)
 * [Questions?](#questions)
+
+<!-- END_TOC -->
 
 ## Does Vipps automatically create charges for an agreement?
 
