@@ -1,3 +1,10 @@
+<!-- START_METADATA
+---
+title: How It Works
+sidebar_position: 10
+---
+END_METADATA -->
+
 # Vipps Recurring API: How It Works
 
 Vipps Recurring can be used for subscriptions, donations or other recurring payments.
