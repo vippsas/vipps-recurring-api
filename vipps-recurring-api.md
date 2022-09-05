@@ -127,7 +127,7 @@ Document version 2.5.7.
 
 This diagram shows a simplified payment flow:
 
-![Recurring agreement flow](/images/Recurring-createagreement.svg)
+![Recurring agreement flow](images/Recurring-createagreement.svg)
 
 ## Call by call guide
 
