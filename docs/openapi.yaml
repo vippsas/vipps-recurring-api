@@ -254,7 +254,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DraftAgreementResponse'
+                $ref: '#/components/schemas/DraftAgreementResponseV2'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
       deprecated: false
@@ -622,7 +622,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DraftAgreementResponse'
+                $ref: '#/components/schemas/DraftAgreementResponseV3'
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
