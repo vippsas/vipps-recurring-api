@@ -423,6 +423,7 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - $ref: "#/components/parameters/AgreementStatusQuery"
         - $ref: "#/components/parameters/CreatedAfterQuery"
+        - $ref: "#/components/parameters/Idempotency-Key"
       responses:
         '200':
           description: OK
@@ -1367,6 +1368,84 @@ components:
         - REFUNDED
         - PROCESSING
 
+    ChargeSummary:
+      type: object
+      description: A summary of the amounts captured, refunded and cancelled
+      required:
+        - captured
+        - refunded
+        - cancelled
+      properties:
+        captured:
+          type: integer
+          format: int32
+          example: 234
+          description: |-
+            The total amount which has been captured/charged, in case of status charged/partial capture.
+            Amounts are specified in minor units. 
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        refunded:
+          type: integer
+          format: int32
+          example: 0
+          description: |-
+            The total amount which has been refunded, in case of status refund/partial refund.
+            Amounts are specified in minor units. 
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        cancelled:
+          type: integer
+          format: int32
+          example: 234
+          description: |-
+            The total amount which has been cancelled.
+
+            Amounts are specified in minor units. 
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+    ChargeHistory:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChargeEvent'
+      description: |-
+        List of events related to the charge.
+    ChargeEvent:
+      type: object
+      description: Describes the operation that was performed on the charge
+      required:
+        - occurred
+        - event
+        - amount
+        - idempotencyKey
+        - success
+      properties:
+        occurred:
+          type: string
+          description: Date and time of the event
+          example: 2022-09-05T14:25:55Z
+        event:
+          type: string
+          enum:
+            - CREATE
+            - RESERVE
+            - CAPTURE
+            - REFUND
+            - CANCEL
+            - FAIL
+          example: RESERVE
+        amount:
+          type: integer
+          format: int32
+          example: 234
+          description: |-
+            The amount related to the operation.
+            Amounts are specified in minor units. 
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        idempotencyKey:
+          type: string
+          description: The idempotency key of the event
+        success:
+          type: boolean
+          description: True if the operation was successful, false otherwise
+
     Currency:
       type: string
       description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
@@ -1433,7 +1512,7 @@ components:
           maxLength: 15
           example: "4791234567"
         initialCharge:
-          $ref: '#/components/schemas/InitialCharge'
+          $ref: '#/components/schemas/InitialChargeV2'
         interval:
           $ref: "#/components/schemas/Interval"
         intervalCount:
@@ -1522,7 +1601,7 @@ components:
           maxLength: 15
           example: "4791234567"
         initialCharge:
-          $ref: '#/components/schemas/InitialCharge'
+          $ref: '#/components/schemas/InitialChargeV3'
         interval:
           $ref: '#/components/schemas/TimePeriod'
         isApp:
@@ -1569,7 +1648,7 @@ components:
             the request will fail and an error message will be returned (statusCode=403).
           example: false
 
-    DraftAgreementResponse:
+    DraftAgreementResponseV2:
       title: DraftAgreementResponse
       type: object
       required:
@@ -1608,6 +1687,35 @@ components:
           example: chr_5kSeqz
           pattern: '^[a-zA-Z0-9-]{1,50}$'
 
+    DraftAgreementResponseV3:
+      title: DraftAgreementResponse
+      type: object
+      required:
+        - agreementId
+      properties:
+        agreementId:
+          type: string
+          description: |-
+            Id of a an agreement which user may agree to. 
+            Initially the agreement is in a pending state waiting for user approval. 
+            It enters active state once the user has approved it in Vipps.
+          example: agr_5kSeqz
+        vippsConfirmationUrl:
+          type: string
+          description: |-
+            The `vippsConfirmationUrl` should be used to redirect the
+            user to the Vipps landing page in a desktop flow (with `https://`),
+            or to the Vipps app in a mobile flow (with `vipps://`), where the
+            user can then approve the agreement.
+          example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
+        chargeId:
+          type: string
+          description: |-
+            The Id of the initialCharge if given, otherwise `null`.
+            If an `orderId` is specified this is used as the `chargeId` otherwise it is auto generated.
+          example: chr_5kSeqz
+          pattern: '^[a-zA-Z0-9-]{1,50}$'
+
     AgreementResponseV2:
       title: Agreement response
       type: object
@@ -1621,7 +1729,6 @@ components:
       properties:
         campaign:
           $ref: '#/components/schemas/campaignV2'
-          nullable: true
         currency:
           $ref: "#/components/schemas/Currency"
         id:
@@ -1692,7 +1799,6 @@ components:
           nullable: true
         variableAmount:
           $ref: '#/components/schemas/variableAmountResponse'
-          nullable: true
 
     AgreementResponseV3:
       title: Agreement response
@@ -1704,8 +1810,7 @@ components:
         - productName
       properties:
         campaign:
-          $ref: '#/components/schemas/campaignV2'
-          nullable: true
+          $ref: '#/components/schemas/campaignResponseV3'
         currency:
           $ref: "#/components/schemas/Currency"
         id:
@@ -1714,7 +1819,7 @@ components:
           maxLength: 36
           description: Uniquely identifies this agreement
         interval:
-          $ref: '#/components/schemas/TimePeriod'
+          $ref: '#/components/schemas/TimePeriodResponse'
         price:
           type: integer
           format: int32
@@ -1764,7 +1869,6 @@ components:
           nullable: true
         variableAmount:
           $ref: '#/components/schemas/variableAmountResponse'
-          nullable: true
 
     PatchAgreementV2:
       title: PatchAgreement
@@ -1908,6 +2012,7 @@ components:
     campaignV2:
       title: Campaign request
       type: object
+      nullable: true
       required:
         - campaignPrice
         - end
@@ -1955,6 +2060,7 @@ components:
     campaignV3:
       title: Campaign request
       type: object
+      nullable: true
       required:
         - type
         - price
@@ -1990,15 +2096,16 @@ components:
           example: Until Christmas
           description: A short text that describes the event
         interval:
-          description: 'Interval for subscription in the campaign period. Example: unit=week, count=2 to be able to charge every two weeks.'
           $ref: '#/components/schemas/TimePeriod'
         period:
-          description: 'Time period that the campaign price pays for. Example: unit=week, count=2 to say that you pay for two weeks'
           $ref: '#/components/schemas/TimePeriod'
 
     campaignResponseV3:
       title: Campaign response
       type: object
+      required:
+        - type
+        - price
       properties:
         type:
           type: string
@@ -2034,17 +2141,15 @@ components:
           example: Until Christmas
           description: A short text that describes the event
         interval:
-          description: 'Interval for subscription in the campaign period. Example: unit=week, count=2 to be able to charge every two weeks.'
           $ref: '#/components/schemas/TimePeriod'
         period:
-          description: 'Time period that the campaign price pays for. Example: unit=week, count=2 to say that you pay for two weeks'
           $ref: '#/components/schemas/TimePeriod'
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
           description: The text displayed in the Vipps app to explain the campaign to the user
 
-    InitialCharge:
+    InitialChargeV2:
       title: InitialCharge
       description: |- 
         An initial charge for a new agreement. 
@@ -2078,6 +2183,42 @@ components:
           type: string
           example: DIRECT_CAPTURE
           description: The type of payment to be made. 
+          enum:
+            - RESERVE_CAPTURE
+            - DIRECT_CAPTURE
+        orderId:
+          type: string
+          example: abc123
+          description: An optional orderId for the payment, auto generated otherwise
+
+    InitialChargeV3:
+      title: InitialCharge
+      description: |-
+        An initial charge for a new agreement. 
+        The charge will be processed immediately when the user approves the agreement.
+      type: object
+      required:
+        - amount
+        - description
+        - transactionType
+      properties:
+        amount:
+          type: integer
+          format: int32
+          example: 234
+          description: |-
+            The amount that must be payed or approved before starting the agreement.
+
+            Amounts are specified in minor units. 
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        description:
+          type: string
+          example: Månedsabonnement
+          description: This field is visible to the end user in-app
+        transactionType:
+          type: string
+          example: DIRECT_CAPTURE
+          description: The type of payment to be made.
           enum:
             - RESERVE_CAPTURE
             - DIRECT_CAPTURE
@@ -2284,12 +2425,14 @@ components:
         - transactionId
         - description
         - type
+        - transactionType
         - amount
-        - amountRefunded
-        - amountCaptured
+        - summary
+        - history
         - due
         - id
         - status
+        - currency
       properties:
         amount:
           type: integer
@@ -2300,24 +2443,8 @@ components:
 
             Amounts are specified in minor units. 
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-        amountRefunded:
-          type: integer
-          format: int32
-          example: 0
-          description: |-
-            The total amount which has been refunded, in case of status refund/partial refund.
-
-            Amounts are specified in minor units. 
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-        amountCaptured:
-          type: integer
-          format: int32
-          example: 0
-          description: |-
-            The total amount which has been captured/charged, in case of status charged/partial capture.
-
-            Amounts are specified in minor units. 
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        currency:
+          $ref: "#/components/schemas/Currency"
         description:
           type: string
           description: Description of the charge
@@ -2367,6 +2494,10 @@ components:
           type: string
           description: Description for the failure reason
           example: "User action required"
+        summary:
+          $ref: "#/components/schemas/ChargeSummary"
+        history:
+          $ref: "#/components/schemas/ChargeHistory"
     
     RefundRequest:
       title: Refund charge request
