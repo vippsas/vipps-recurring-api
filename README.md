@@ -7,7 +7,7 @@ END_METADATA -->
 
 # Vipps Recurring API
 
-This repository contains developer resources for the Vipps Recurring API. 
+This repository contains developer resources for the Vipps Recurring API.
 For more information about this product, please see
 [Faste betalinger med Vipps](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
@@ -19,6 +19,9 @@ Vipps is required to perform some extra compliance checks before
 activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
+
+💥 Preview the new documentation pages here: https://vippsas.github.io/vipps-developer-docs/
+See the disclaimer: https://vippsas.github.io/vipps-developer-docs/docs/examples/
 
 * [How It Works](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api-howitworks.md): An overview of how the Recurring API works.
 * [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): Information about API keys, product activation.
