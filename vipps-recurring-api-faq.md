@@ -1,6 +1,5 @@
 <!-- START_METADATA
 ---
-id: vipps-recurring-faq
 title: FAQ
 sidebar_position: 35
 ---
