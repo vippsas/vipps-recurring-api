@@ -8,6 +8,14 @@ END_METADATA -->
 # Vipps Recurring API
 
 This repository contains developer resources for the Vipps Recurring API. 
+
+<!-- START_COMMENT -->
+
+💥 Preview the new documentation pages here: <https://vippsas.github.io/vipps-developer-docs/>.
+See the disclaimer: <https://vippsas.github.io/vipps-developer-docs/docs/examples/>.
+
+<!-- END_COMMENT -->
+
 For more information about this product, please see
 [Faste betalinger med Vipps](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
@@ -30,8 +38,8 @@ to get access to the Recurring API in production.
 
 You can peruse the API reference documentation as:
 * [Swagger](https://vippsas.github.io/vipps-recurring-api/)
-* [ReDoc](https://vippsas.github.io/vipps-recurring-api/redoc.html)
-* [Shins](https://vippsas.github.io/vipps-recurring-api/shins/index.html)
+* [ReDoc](https://vippsas.github.io/vipps-developer-docs/api/recurring)
+
 
 The flow of settlements and how to retrieve them are described in
 [Settlements](https://github.com/vippsas/vipps-developers/tree/master/settlements).
