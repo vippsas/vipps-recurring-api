@@ -57,19 +57,19 @@ For details about the calls, see [Agreement v2 endpoints](https://vippsas.github
    This demonstrates how to create a simple agreement using
    [`POST:/v2/agreements`][draft-agreement-endpoint].
 
-   Ctrl+click the link and it will take you to the Vipps landing page.
+   Ctrl+click the link, it will take you to the Vipps landing page.
    Enter your test phone number and complete the authorization in the Vipps app in your mobile test app.
 
    You should now have an active agreement. The variable `agreementId` is set in the environment.
 
-1. To get the information about an agreement, send `Get Agreement`. This uses
+2. To get the information about an agreement, send `Get Agreement`. This uses
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
    The variable `agreementId` is set by the `Draft Agreement` step.
 
    If you authorized the agreement, the status should be ACTIVE in the response.
    If you didn't go through with the authorization, the status will be PENDING for a
    [maximum of 10 minutes](vipps-recurring-api.md#timeouts),
-   before it goes to EXPIRED.
+   before it goes to `EXPIRED`.
 
 #### 2. Create an agreement with an initial charge
 
@@ -82,12 +82,12 @@ You can create more complex types of agreements by modifying the parameters in [
    When you use this, a charge is automatically created for the initial payment and charged.
    The `agreementId` and `chargeId` are set in the environment.
 
-1. Send request `Get Agreement` for information about this payment by using
+2. Send request `Get Agreement` for information about this payment by using
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
 #### 3. Create an agreement with a reserve capture
 
-When you use this, a charge is automatically created for the initial payment and
+When you use this, a charge is automatically created for the initial payment, and
 you can capture it when you provide the product or service.
 
 For example, if a customer purchased a mobile phone with a data subscription, you could set up a recurring
@@ -98,10 +98,10 @@ Then, you can capture the payment when you ship the phone.
 
    Ctrl+click on the link and complete the authorization.
 
-1. Send request `Get Agreement` for information about this payment by using
+2. Send request `Get Agreement` for information about this payment by using
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
-1. The `agreementId` and `chargeId` are set in the environment.
+3. The `agreementId` and `chargeId` are set in the environment.
    Take a note of these values, because you will need them when you
    [capture the reserved charge](#5-capture-reserved-charge).
 
@@ -115,13 +115,13 @@ If you need to get access to some user information in addition to the recurring 
 
    Here, the `agreementId` and `landing_page_url` are retrieved from the response and set as variables.
 
-1. Once you complete the session, a unique identifier `sub` can be retrieved in the agreement details.
+2. Once you complete the session, a unique identifier `sub` can be retrieved in the agreement details.
    Send request `Get Agreement` for information about this payment by using
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
    In this example, `sub` is retrieved from the response and set as a variable.
 
-1. Send request `Get Userinfo`, from the *User Info* folder. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
+3. Send request `Get Userinfo`, from the *User Info* folder. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
 
 See [User info](vipps-recurring-api.md#userinfo) for more information.
 
@@ -133,26 +133,26 @@ See [User info](vipps-recurring-api.md#userinfo) for more information.
    This includes a query `status=ACTIVE`, so it filters out other
    [agreement states](vipps-recurring-api.md#agreement-states).
 
-1. Change or remove the query to see agreements with other states.
+2. Change or remove the query to see agreements with other states.
 
 #### 6. Update an agreement
 
 1. Set `agreementId` to the id of an ACTIVE agreement.
 
-1. Run `Get Agreement` to see the properties of the agreement.
+2. Run `Get Agreement` to see the properties of the agreement.
 
-1. Run `Update agreement` which modifies some of the properties by using
+3. Run `Update agreement` which modifies some properties by using
    [`PUT:/v2/agreements/{{agreementId}}`][update-agreement-endpoint].
 
-1. Run `Get Agreement` to see the updated properties.
+4. Run `Get Agreement` to see the updated properties.
 
 #### 7. Stop an agreement
 
 1. Set `agreementId` to the id of an ACTIVE agreement.
 
-1. Send the `Stop agreement` request, where the status is set to `STOPPED` in the body of [`PUT:/v2/agreements/{{agreementId}}`][update-agreement-endpoint].
+2. Send the `Stop agreement` request, where the status is set to `STOPPED` in the body of [`PUT:/v2/agreements/{{agreementId}}`][update-agreement-endpoint].
 
-1. Run `Get Agreement` to see that the status is not "STOPPED".
+3. Run `Get Agreement` to see that the status is not "STOPPED".
 
 ### Step 6: Run the Charge Controller examples
 
@@ -170,29 +170,29 @@ See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details abo
 
 1. Set `agreementId` to the id of an ACTIVE agreement.
 
-1. Send `Create Charge - Due tomorrow`. This uses
+2. Send `Create Charge - Due tomorrow`. This uses
    [`POST:/v2/agreements/{{agreementId}}/charges`][create-charge-endpoint]
    with "due" set to tomorrow's date.
 
    The `chargeId` variable is set for later use.
 
-1. Send `Get Charge`.
+3. Send `Get Charge`.
    This uses [`GET:/v2/agreements/{{agreementId}}/charges/{{chargeId}}`][fetch-charge-endpoint]
    to get information about the charge. The status will be "PENDING" for a while before it goes to "DUE".
 
-1. If you run `Get Charge` again tomorrow, you should see that the status changes to "CHARGED".
+4. If you run `Get Charge` again tomorrow, you should see that the status changes to "CHARGED".
 
 #### 2. Get a list of charges for an agreement
 
 1. Set `agreementId` to the id of an agreement.
    Note, you can get a list of all your agreements with the `Fetch Agreements` example.
 
-1. Send `List Charges` which uses [`GET:/v2/agreements/{{agreementId}}/charges`][list-charges-endpoint].
+2. Send `List Charges` which uses [`GET:/v2/agreements/{{agreementId}}/charges`][list-charges-endpoint].
 
    This includes a query `chargeStatus=DUE` and filters out other
    [charge states](vipps-recurring-api.md#charge-states).
 
-1. Change or remove the query to see charges with other states.
+3. Change or remove the query to see charges with other states.
 
 #### 3. Cancel a charge
 
@@ -203,7 +203,7 @@ You can cancel an existing charge before the user is charged.
 
    The `chargeId` variable is set to this charge.
 
-1. Send `Cancel Charge` which uses
+2. Send `Cancel Charge` which uses
    [`DEL:/v2/agreements/{{agreementId}}/charges/{{chargeId}}`][cancel-charge-endpoint].
 
    Send `Get Charge` to see the change of status.
@@ -214,15 +214,15 @@ You can refund a charge that has already been charged.
 
 1. Set `chargeId` to the id of a charge with status of CHARGED.
    The easiest way to test this is to run `Draft Agreement - Full`.
-   This creates a charge that is immediately processed and
+   This creates a charge that is immediately processed, and
    it sets the `agreementId` and `chargeId` to the corresponding values.
 
-1. Send `Get Charge` to see the change of status.
+2. Send `Get Charge` to see the change of status.
 
-1. Send `Refund Charge` which uses
+3. Send `Refund Charge` which uses
    [`post:{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges/{{chargeId}}/refund`][refund-charge-endpoint].
 
-1. Send `Get Charge` to see that the charge is all or partially refunded.
+4. Send `Get Charge` to see that the charge is all or partially refunded.
    To fully refund, set the amount value to the amount remaining (amount - amountRefunded).
 
 #### 5. Capture reserved charge
@@ -233,11 +233,11 @@ When you create an agreement with a reserved charge, you will need to capture th
    If you ran [Create an agreement with a reserve capture](#3-create-an-agreement-with-a-reserve-capture),
    you can use the values set by the example.
 
-1. Send `Get Charge`, to see the status of this charge.
+2. Send `Get Charge`, to see the status of this charge.
 
-1. Send `Capture reserved charge` which uses [`POST:/v2/agreements/{{agreementId}}/charges/{{chargeId}}/capture`][capture-charge-endpoint].
+3. Send `Capture reserved charge` which uses [`POST:/v2/agreements/{{agreementId}}/charges/{{chargeId}}/capture`][capture-charge-endpoint].
 
-1. Send `Get Charge` again, to see that the status is now "CHARGED".
+4. Send `Get Charge` again, to see that the status is now "CHARGED".
 
 ## Questions?
 

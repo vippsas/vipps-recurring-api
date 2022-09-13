@@ -42,7 +42,7 @@ If there is an initial charge to be made, the user confirms the payment in this 
 
 ## 4. Confirmation of subscription
 
-The user is redirected back to the merchant’s web site or app, and the subscription is confirmed on the merchant’s page.
+The user is redirected back to the merchant’s website or app, and the subscription is confirmed on the merchant’s page.
 
 ![Confirmation of subscription](images/vipps-recurring-step4.svg)
 

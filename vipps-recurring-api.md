@@ -56,7 +56,6 @@ Document version 2.5.7.
   - [API endpoints](#api-endpoints)
   - [Authentication](#authentication)
   - [Vipps HTTP headers](#vipps-http-headers)
-    - [Example headers](#example-headers)
   - [orderId recommendations](#orderid-recommendations)
   - [Agreements](#agreements)
     - [Create an agreement](#create-an-agreement)
@@ -73,7 +72,7 @@ Document version 2.5.7.
     - [Charge times](#charge-times)
     - [Charge retries](#charge-retries)
     - [Retrieve a charge](#retrieve-a-charge)
-    - [Retrieve all charges](#retrieve-all-charges)
+    - [List charges](#list-charges)
   - [Manage charges and agreements](#manage-charges-and-agreements)
     - [Agreement states](#agreement-states)
     - [Update an agreement](#update-an-agreement)
@@ -117,10 +116,10 @@ Document version 2.5.7.
 
 ## Terminology
 
-| Term        |  Description                                    |
-| ----------- | ----------------------------------------------- |
-| Agreement   | A payment subscription with a set of parameters that a customer agrees to.  |
-| Charge      | A single payment within an agreement. |
+| Term        | Description                                                                                                  |
+|-------------|--------------------------------------------------------------------------------------------------------------|
+| Agreement   | A payment subscription with a set of parameters that a customer agrees to.                                   |
+| Charge      | A single payment within an agreement.                                                                        |
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
 
 ## Flow diagram
@@ -194,21 +193,21 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 ## API endpoints
 
-| Operation           | Description         | Endpoint          |
-| -------------------- | ------------------- | ----------------- |
-| List agreements  | List all agreements for a merchant.  | [`GET:/recurring/v2/agreements`][list-agreements-endpoint]  |
-| [Create an agreement](#create-an-agreement)  | Create a new, draft agreement.  | [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]  |
-| [Retrieve an agreement](#retrieve-an-agreement)  | Retrieve the details of an agreement.  |  [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint] |
-| [Update an agreement](#update-an-agreement)   |  Update an agreement with new details. |  [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-endpoint] |
-| [Stop an agreement](#stop-an-agreement) | Update the status to `STOPPED`.  | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-endpoint]  |
-| [List charges](#list-charges)  | Get all charges for an agreement.  | [`GET:/recurring/v2/agreements/{agreementId}/charges`][list-charges-endpoint]  |
-| [Create a charge](#create-a-charge)   |  Create a new charge for an agreement. |  [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint] |
-| [Retrieve a charge](#retrieve-a-charge)  | Retrieve all details of a charge.  | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]  |
-| Capture a charge  | Each charge must first be created, then captured.  | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
-| Cancel a charge | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] |
-| Refund a charge    | Refund a charge that has been performed.   | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]  |
+| Operation                                       | Description                                           | Endpoint                                                                                            |
+|-------------------------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| List agreements                                 | List all agreements for a merchant.                   | [`GET:/recurring/v2/agreements`][list-agreements-endpoint]                                          |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]                                         |
+| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-endpoint]                         |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-endpoint]                         |
+| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/recurring/v2/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
+| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
+| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
+| Capture a charge                                | Each charge must first be created, then captured.     | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
+| Cancel a charge                                 | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
+| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
 
-See [Authentication and authorization](#authentication-and-authorization).
+See [Authentication and authorization](#authentication).
 
 See the Postman collection available on https://github.com/vippsas/vipps-recurring-api
 for en easy way to test the API.
@@ -218,10 +217,10 @@ for en easy way to test the API.
 All Vipps API calls are authenticated and authorized with an access token
 (JWT bearer token) and an API subscription key:
 
-| Header Name | Header Value | Description |
-| ----------- | ------------ | ----------- |
-| `Authorization` | `Bearer <JWT access token>` | Type: Authorization token. This obtained as described in [Getting started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): [Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token) |
-| `Ocp-Apim-Subscription-Key` | Base 64 encoded string | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no). |
+| Header Name                 | Header Value                | Description                                                                                                                                                                                                                                                                               |
+|-----------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Authorization`             | `Bearer <JWT access token>` | Type: Authorization token. This obtained as described in [Getting started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): [Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token) |
+| `Ocp-Apim-Subscription-Key` | Base 64 encoded string      | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no).                                                                                                                                                                                       |
 
 For more information about how to obtain an access token and all details around this, please see:
 [Quick overview of how to make an API call](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#quick-overview-of-how-to-make-an-api-call)
@@ -235,28 +234,28 @@ Vipps eCom API. These headers provide useful metadata about the merchant's syste
 which help Vipps improve our services, and also help in investigating problems.
 
 These headers are **required for plugins and partners** and sent by the recent versions of
-[the official Vipps plugins](https://github.com/vippsas/vipps-developers#plugins)
+[the official Vipps plugins,](https://github.com/vippsas/vipps-developers#plugins)
 and we recommend all customers with direct integration with the API to also do so.
 
 Partners must always send the `Merchant-Serial-Number` header, and we recommend
 that _everyone_ sends it, also when using the merchant's own API keys.
 The `Merchant-Serial-Number` header can be used with all API keys, and can
-speed up any trouble-shooting of API problems quite a bit.
+speed up any troubleshooting of API problems quite a bit.
 
-**Important:** Please use self-explanatory, human readable and reasonably short
+**Important:** Please use self-explanatory, human-readable and reasonably short
 values that uniquely identify the system (and plugin).
 
 For example, if the vendor's name is "Acme AS" and the vendor offers two different systems,
 one for point of sale (POS) integrations and one for web shops,
 the headers should be:
 
-| Header | Description | Example value for POS | Example value for webshop | Example value for Vending machines |
-| ------ | ----------- | --------------------- | ------------------------- | ---------------------------------- |
-| `Merchant-Serial-Number`   | The MSN for the sale unit | `123456` | `123456` | `123456` |
-| `Vipps-System-Name`        | The name of the ecommerce solution | `acme` | `acme` | `acme` |
-| `Vipps-System-Version`     | The version number of the ecommerce solution | `1.7` | `2.6` | `2.6` |
-| `Vipps-System-Plugin-Name` | The name of the ecommerce plugin | `acme-pos` | `acme-webshop` | `acme-vending` |
-| `Vipps-System-Plugin-Version` | The version number of the ecommerce plugin   | `3.2` | `4.3` | `4.3` |
+| Header                        | Description                                  | Example value for POS | Example value for webshop | Example value for Vending machines |
+|-------------------------------|----------------------------------------------|-----------------------|---------------------------|------------------------------------|
+| `Merchant-Serial-Number`      | The MSN for the sale unit                    | `123456`              | `123456`                  | `123456`                           |
+| `Vipps-System-Name`           | The name of the ecommerce solution           | `acme`                | `acme`                    | `acme`                             |
+| `Vipps-System-Version`        | The version number of the ecommerce solution | `1.7`                 | `2.6`                     | `2.6`                              |
+| `Vipps-System-Plugin-Name`    | The name of the ecommerce plugin             | `acme-pos`            | `acme-webshop`            | `acme-vending`                     |
+| `Vipps-System-Plugin-Version` | The version number of the ecommerce plugin   | `3.2`                 | `4.3`                     | `4.3`                              |
 
 
 
@@ -280,7 +279,7 @@ The `orderId` replaces the `chargeId`.
 
 **Important:** If the `orderId` is provided:
 * The value of the `orderId` is used for all instances of `chargeId`
-* The `orderId` (and `chargeId`) is sed for for all subsequent identification
+* The `orderId` (and `chargeId`) is sed for all subsequent identification
   of the charge.
 * The `orderId` is used in the settlement files.
 
@@ -465,8 +464,8 @@ Example for a subscription every 30th day:
 **Please note:** It is not possible to change intervals. If the user has
 accepted a yearly interval, the agreement cannot be changed to a monthly
 agreement. This requires a new agreement and a new consent from the user.
-It _is_ possible to make a monthly agreement and only charge some of the
-months. The general rule: Be as customer friendly and easy to understand
+It _is_ possible to make a monthly agreement and charge some months only. 
+The general rule: Be as customer friendly and easy to understand
 as possible.
 
 ### Initial charge
@@ -568,11 +567,11 @@ date-time is used. All dates must be in date-time format as according to
 }
 ```
 
-| Field         | Description                                 |
-| ------------------- | ------------------------------------------- |
-| `start`            | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable  |
-| `end`            | End date of campaign offer, can not be in the past |
-| `campaignPrice`       | The price that will be shown for comparison   |
+| Field           | Description                                                                                                             |
+|-----------------|-------------------------------------------------------------------------------------------------------------------------|
+| `start`         | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable |
+| `end`           | End date of campaign offer, can not be in the past                                                                      |
+| `campaignPrice` | The price that will be shown for comparison                                                                             |
 
 ### Retrieve an agreement
 
@@ -660,7 +659,7 @@ the following screenshot:
 ![Charge description example](images/charge_descriptions_example.png)
 
 When the charge is completed (the money has been moved), the payment will
-show up in the users's payment history. In the payment history a charge from
+show up in the users' payment history. In the payment history a charge from
 Vipps recurring payment will have a description with follow format
 `{agreement.ProductName} - {charge.description}`.
 
@@ -691,7 +690,7 @@ A charge can be cancelled with: [`DELETE:/recurring/v2/agreements/{agreementId}/
 
 Charge _attempts_ are primarily made two times during the day: 07:00 and 15:00 UTC.
 Vipps may do extra attempts and/or change this without notice.
-The processing of charges typically takes around one hour, however this varies and we do not guarantee any time.
+The processing of charges typically takes around one hour, however this varies, and we do not guarantee any time.
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
 
@@ -704,7 +703,7 @@ When a charge has reached its `due` date, the status of the charge will be
 `PROCESSING` until the charge is successful, for as long as the merchant has
 specified with `retryDays`.
 
-**Important:** Vipps does not "leak" the customers's information about insufficient funds,
+**Important:** Vipps does not "leak" the customers' information about insufficient funds,
 blocked cards, etc. Users are informed about all such problems in Vipps,
 which is the only place they can be corrected. The merchant's customer service
 should always ask the user to check in Vipps if a charge has failed.
@@ -797,7 +796,7 @@ The following properties are available for updating:
 }
 ```
 
-**Please note:** As a `PATCH` operation all parameters are optional. However
+**Please note:** As a `PATCH` operation all parameters are optional. However,
 when setting an agreement status to `STOPPED` no other changes are allowed.
 Attempts at changing other properties while stopping an agreement will result
 in a `400 Bad Request` response.
@@ -834,17 +833,17 @@ to set up a new agreement.
 This table has all the details for the charge states returned by
 [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]:
 
-| State      | Description                                                                          
-|:-----------|:-------------------------------------------------------------------------------------
-| `PENDING`  | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps.|
-| `DUE`      | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.  |
-| `PROCESSING` | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`. |
-| `CHARGED`  | The charge has been successfully completed. |
-| `FAILED`   | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.|
-| `REFUNDED` | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. |
-| `PARTIALLY_REFUNDED`| A part of the captured amount has been refunded. |
-| `RESERVED` | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully. |
-| `CANCELLED` | The charge has been cancelled by the merchant. |
+| State                | Description                                                                                                                                   |
+|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| `PENDING`            | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps. |
+| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                       |
+| `PROCESSING`         | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`.                        |
+| `CHARGED`            | The charge has been successfully completed.                                                                                                   |
+| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                |
+| `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                      |
+| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded.                                                                                              |
+| `RESERVED`           | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully.                      |
+| `CANCELLED`          | The charge has been cancelled by the merchant.                                                                                                |
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
@@ -888,24 +887,24 @@ An example from a response:
 
 Here is a list of possible values for `failureReason`, their respective descriptions and possible actions that the user/merchant could take.
 
-| Reason | Description | Action |
-| ---- | ----------- | ------ |
-| user_action_required | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open Vipps and check the payment there to see why it is not paid. | User will get notified in Vipps and need to take action. This could be to add funds to the card or change the card on the agreement. |
-| charge_amount_too_high | Amount is higher than the user's specified max amount | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed.
-| non_technical_error | Payment failed. Could be that the user has deleted their Vipps profile. | The user needs to take action in Vipps. |
-| technical_error | Payment failed due to a technical error in Recurring or a downstream service | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge. |
+| Reason                 | Description                                                                                                                                                                                                                                 | Action                                                                                                                                                                                   |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| user_action_required   | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open Vipps and check the payment there to see why it is not paid. | User will get notified in Vipps and need to take action. This could be to add funds to the card or change the card on the agreement.                                                     |
+| charge_amount_too_high | Amount is higher than the user's specified max amount                                                                                                                                                                                       | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed. |
+| non_technical_error    | Payment failed. Could be that the user has deleted their Vipps profile.                                                                                                                                                                     | The user needs to take action in Vipps.                                                                                                                                                  |
+| technical_error        | Payment failed due to a technical error in Recurring or a downstream service                                                                                                                                                                | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge.                             |
 
 ### Deprecated failureReasons
 
 The following `failureReasons` are no longer exposed on charges:
 
-| Reason | Description | Action |
-| ---- | ----------- | ------ |
-| insufficient_funds | Payment was declined by the payer bank due to lack of funds. | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
-| invalid_card | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps. |
-| verification_required | Payment declined because the issuing bank requires verification. | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue. |
-| invalid_payment_source | The provided payment source is disabled or does not exist. | User must change payment source for the agreement. |
-| internal_error | Internal Error / Something went wrong | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information. |
+| Reason                 | Description                                                                              | Action                                                                                                                                                                                                                      |
+|------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| insufficient_funds     | Payment was declined by the payer bank due to lack of funds.                             | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
+| invalid_card           | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps.                                                                                                                                                   |
+| verification_required  | Payment declined because the issuing bank requires verification.                         | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue.                                                                    |
+| invalid_payment_source | The provided payment source is disabled or does not exist.                               | User must change payment source for the agreement.                                                                                                                                                                          |
+| internal_error         | Internal Error / Something went wrong                                                    | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information.                                          |
 
 
 The user gets more information in Vipps regarding why the Charge did not get charged. If they contact you about failing charges, you should refer them to Vipps. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
@@ -930,13 +929,13 @@ A users consent to share information with a merchant applies across our services
 ### Scope
 
 | scope            | Description                                                                                                                                                                                                                                                                | User consent required |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `address`        | A list containing the user's addresses. The list always contains the home address from the National Population Register, and can also include work address and other addresses added by the user in Vipps.                                                                                                                                                           | yes                   |
-| `birthDate`      | Birth date. Verified with BankID.                                                                                                                                                                                                                                               | yes                   |
-| `email`          | Email address. The flag `email_verified : true` (or `false`) in the response indicates whether the email address is verified.                                                                                                                                                 | yes                   |
-| `name`           | First, middle and given name. Verified with the National Population Register.                                                                                                                                                                                                  | yes                   |
-| `phoneNumber`    | Phone number. Verified when creating the Vipps account.                                                                                                                                                                                                  | yes                   |
-| `nin`            | Norwegian national identity number. Verified with BankID. **NB:** Merchants need to apply for access to NIN. See: [Who can get access to NIN and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-nin-and-how)   | yes                   |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
+| `address`        | A list containing the user's addresses. The list always contains the home address from the National Population Register, and can also include work address and other addresses added by the user in Vipps.                                                                 | yes                   |
+| `birthDate`      | Birth date. Verified with BankID.                                                                                                                                                                                                                                          | yes                   |
+| `email`          | Email address. The flag `email_verified : true` (or `false`) in the response indicates whether the email address is verified.                                                                                                                                              | yes                   |
+| `name`           | First, middle and given name. Verified with the National Population Register.                                                                                                                                                                                              | yes                   |
+| `phoneNumber`    | Phone number. Verified when creating the Vipps account.                                                                                                                                                                                                                    | yes                   |
+| `nin`            | Norwegian national identity number. Verified with BankID. **NB:** Merchants need to apply for access to NIN. See: [Who can get access to NIN and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-nin-and-how)    | yes                   |
 | `accountNumbers` | User bank account numbers. **NB:** Merchants need to apply for access to accountNumbers. See: [Who can get access to account numbers and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-accountnumbers-and-how) | yes                   |  
 
 See the API specification for the formats and other details for each scope.
@@ -944,7 +943,7 @@ See the API specification for the formats and other details for each scope.
 **Please note:** If the e-mail address that is delivered has the flag `email_verified : false`
 this address should not be used to link the user to an existing account without
 further authentication. Such authentication could be to prompt the user to
-login to the original account or confirm the account linking by having a
+log in to the original account or confirm the account linking by having a
 confirmation link sent to the email address.
 
 ### Userinfo call by call guide
@@ -1010,7 +1009,7 @@ Example `sub` and `userinfoUrl` format:
 }
 ```
 
-This `sub` is a link between the merchant and the user and can used to retrieve
+This `sub` is a link between the merchant and the user and can be used to retrieve
 the user's details from Vipps userinfo:
 [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint]
 
@@ -1036,9 +1035,9 @@ Call [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub
 
 *Headers*
 
-| Header            | Description                            |
-| ----------------- | -------------------------------------  |
-| Authorization     | "Bearer {Access Token}"                |
+| Header        | Description             |
+|---------------|-------------------------|
+| Authorization | "Bearer {Access Token}" |
 
 The access token is received on a successful request to the token endpoint described in [Authentication](#authentication).
 
@@ -1280,7 +1279,7 @@ GET charge response where amount is higher than the user's max amount:
     "amountRefunded": 0,
     "transactionId": null,
     "description": "Monthly payment",
-    "type": "RECURRING",
+    "type": "RECURRING"
 }
 ```
 
@@ -1327,18 +1326,18 @@ merchant's main URL, like `https://example.com`, etc.
 
 This API returns the following HTTP statuses in the responses:
 
-| HTTP status                 | Description                                 |
-| --------------------------- | ------------------------------------------- |
-| `200 OK`                    | Request successful                          |
-| `201 Created`               | Request successful, resource created        |
-| `400 Bad Request`           | Invalid request, see the error for details  |
-| `401 Unauthorized`          | Invalid credentials                         |
-| `403 Forbidden`             | Authentication ok, but credentials lacks authorization  |
-| `404 Not Found`             | The resource was not found                  |
-| `409 Conflict`              | Unsuccessful due to conflicting resource    |
-| `422 Unprocessable Entity`  | Vipps could not process                     |
-| `429 Too Many Requests`     | Look at [table below to view current rate limits](#rate-limiting)   |
-| `500 Server Error`          | An internal Vipps problem.                  |
+| HTTP status                | Description                                                       |
+|----------------------------|-------------------------------------------------------------------|
+| `200 OK`                   | Request successful                                                |
+| `201 Created`              | Request successful, resource created                              |
+| `400 Bad Request`          | Invalid request, see the error for details                        |
+| `401 Unauthorized`         | Invalid credentials                                               |
+| `403 Forbidden`            | Authentication ok, but credentials lacks authorization            |
+| `404 Not Found`            | The resource was not found                                        |
+| `409 Conflict`             | Unsuccessful due to conflicting resource                          |
+| `422 Unprocessable Entity` | Vipps could not process                                           |
+| `429 Too Many Requests`    | Look at [table below to view current rate limits](#rate-limiting) |
+| `500 Server Error`         | An internal Vipps problem.                                        |
 
 All error responses contains an `error` object in the body, with details of the
 problem.
@@ -1353,18 +1352,18 @@ if you notice any unexpected behaviour.
 The "Key" column specifies what we consider to be the unique identifier, and
 what we "use to count". The limits are of course not _total_ limits.
 
-| API                                                                                                      | Limit          | Key used                                          | Explanation |
-|----------------------------------------------------------------------------------------------------------|----------------|---------------------------------------------------| --- |
-| [CreateCharge][create-charge-endpoint]         | 2 per minute   | agreementId + chargeId (based on idempotency key) | Two calls per minute per unique agreementId and chargeId |
-| [CancelCharge][cancel-charge-endpoint]         | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
-| [CaptureCharge][capture-charge-endpoint]      | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
-| [RefundCharge][refund-charge-endpoint]         | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
-| [ListAgreements][list-agreements-endpoint]  | 5 per minute   | (per merchant)                                    | Five calls per minute per merchant |
-| [UpdateAgreement][update-agreement-endpoint]| 5 per minute   | agreementId                                       | Five calls per minute per unique agreementId |
-| [FetchCharge][fetch-charge-endpoint]             | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId |
-| [ListCharges][list-charges-endpoint]           | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId |
-| [FetchAgreement][fetch-agreement-endpoint]    | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId |
-| [DraftAgreement][draft-agreement-endpoint]  | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant |
+| API                                          | Limit          | Key used                                          | Explanation                                               |
+|----------------------------------------------|----------------|---------------------------------------------------|-----------------------------------------------------------|
+| [CreateCharge][create-charge-endpoint]       | 2 per minute   | agreementId + chargeId (based on idempotency key) | Two calls per minute per unique agreementId and chargeId  |
+| [CancelCharge][cancel-charge-endpoint]       | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
+| [CaptureCharge][capture-charge-endpoint]     | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
+| [RefundCharge][refund-charge-endpoint]       | 5 per minute   | agreementId + chargeId                            | Five calls per minute per unique agreementId and chargeId |
+| [ListAgreements][list-agreements-endpoint]   | 5 per minute   | (per merchant)                                    | Five calls per minute per merchant                        |
+| [UpdateAgreement][update-agreement-endpoint] | 5 per minute   | agreementId                                       | Five calls per minute per unique agreementId              |
+| [FetchCharge][fetch-charge-endpoint]         | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId  |
+| [ListCharges][list-charges-endpoint]         | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId               |
+| [FetchAgreement][fetch-agreement-endpoint]   | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId               |
+| [DraftAgreement][draft-agreement-endpoint]   | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
 
 **Please note:** The "Key" column is important. The above means that we allow two
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
@@ -1382,7 +1381,7 @@ the `Merchant-Serial-Number` header to identify which of your merchants you
 are acting on behalf of. The `Merchant-Serial-Number` must be sent in the header
 of all API requests.
 
-By including the [Vipps HTTP Headers](#vipps-vipps-http-headers) you will make
+By including the [Vipps HTTP Headers](#vipps-http-headers) you will make
 it easier to investigate problems, if anything unexpected happens. Partners may
 re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
@@ -1466,7 +1465,7 @@ The endpoint is only available in our test environment.
 
 Since Vipps is a mobile entity the amount of control Vipps have over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
 
-Examples of some, but not all, factors outside of Vipps control.
+Examples of some, but not all, factors out of Vipps control.
 - Configurations set by the OS itself, for example the default browser.
 - User configurations of browsers.
 - Users closing app immediately upon purchase.
@@ -1513,7 +1512,7 @@ Here we also show `productName` and the agreement explanation on the agreement, 
 
 Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobile phone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
 
-As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, as well as having to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
+As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, and have to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
 
 ### Campaign
 

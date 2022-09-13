@@ -44,9 +44,9 @@ The user may click "See your information" to see the actual information that wil
 
 ![Give consent to share information](images/login-recurring-step4.svg)
 
-## 5. Logged in and ready to checkout
+## 5. Logged in and ready to check out
 
-This step is controlled and designed by the individual merchant. Typically the user will now be logged in on the merchant’s page, and can proceed to set up the payment for the subscription. The information the user has shared with the merchant is automatically filled in. The merchant can also provide the user with the possibility to edit or add information if necessary.
+This step is controlled and designed by the individual merchant. Typically, the user will now be logged in on the merchant’s page, and can proceed to set up the payment for the subscription. The information the user has shared with the merchant is automatically filled in. The merchant can also provide the user with the possibility to edit or add information if necessary.
 
 ![Checkout](images/login-recurring-step5-v3.svg)
 
@@ -58,7 +58,7 @@ The user accept the agreement in Vipps.
 
 ## 7. Subscription confirmed
 
-The user is sent back to the merchant’s web site or app, and the subscription is confirmed on the merchant’s site.
+The user is sent back to the merchant’s website or app, and the subscription is confirmed on the merchant’s site.
 
 ![Confirmation page](images/login-recurring-step7.svg)
 
