@@ -15,7 +15,7 @@ info:
     See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a>
 
     For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
-  version: 2.6.6
+  version: 2.6.7
   title: Recurring Payments Merchant API
 
 servers:
@@ -455,6 +455,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Idempotency-Key"
         - $ref: "#/components/parameters/Content-Type"
         - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
