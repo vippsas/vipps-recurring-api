@@ -142,16 +142,17 @@ Typical cases:
    The users may need to enter new agreements with the new orgno.
 
 The general process is:
+- Contact Vipps (your KAM or partner manager) to plan the switch, and
+  the date and time for moving the agreements.
 - Log in on
   [portal.vipps.no](https://portal.vipps.no)
   and enter a new agreement with Vipps for the new orgno.
 - Order "Vipps Faste betalinger" for the new orno. on
   [portal.vipps.no](https://portal.vipps.no).
-- Inform all existing customers of the new orgno.
+- Inform all existing customers of the new orgno,
+  and the planned date of the change.
 - Send a confirmation to avtale@vipps.no that all customers have been informed,
   including a copy of the information sent.
-- Contact Vipps (your KAM or partner manager) to plan the switch, and
-  the date and time for moving the agreements.
 
 If an agreement is moved, it will get a new `agreementId`, to prevent any
 confusion around charges, refunds, etc between the two MSNs.
