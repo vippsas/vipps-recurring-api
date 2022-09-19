@@ -97,6 +97,9 @@ change to Vipps in different ways:
 
 ## How can I move agreements between merchants and sale units?
 
+**Please note:** We are working out the details for this process, please contact
+us if you need help with this.
+
 Merchants sometimes need to move customer agreements from one merchant
 to another, or from one sale unit to another.
 
@@ -136,7 +139,7 @@ Typical cases:
    is acquired by another orgno,
    etc:
    Vipps may *_not_* be able to help.
-   The users have entered agreements with an orgno, and Vipps can not
+   The users have entered agreements with an orgno, and Vipps may not be able to
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
    The users may need to enter new agreements with the new orgno.
@@ -154,8 +157,11 @@ The general process is:
 - Send a confirmation to avtale@vipps.no that all customers have been informed,
   including a copy of the information sent.
 
-Agreements are not actually moved. Your new saleunit will get new agreements identical to the old ones, but with new agreementIds. The old agreements will be stopped. This is done to prevent any
-confusion around charges, refunds, etc between the two MSNs. Charges done by the old MSN are in the old agreement, while the new MSN uses only the new agreement
+Agreements are not actually moved. Your new saleunit will get new agreements
+identical to the old ones, but with new agreementIds. The old agreements will
+be stopped. This is done to prevent any confusion around charges, refunds, etc.
+between the two MSNs. Charges done by the old MSN are in the old agreement,
+while the new MSN uses only the new agreement
 
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
