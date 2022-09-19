@@ -154,7 +154,7 @@ The general process is:
 - Send a confirmation to avtale@vipps.no that all customers have been informed,
   including a copy of the information sent.
 
-If an agreement is moved, it will get a new `agreementId`, to prevent any
+Agreements are not actually moved. Your new saleunit will get new agreements identical to the old ones, but with new agreementIds. The old agreements will be stopped. This is done to prevent any
 confusion around charges, refunds, etc between the two MSNs.
 
 For all requests to move agreements: Please contact your KAM, your partner or
