@@ -155,7 +155,7 @@ The general process is:
   including a copy of the information sent.
 
 Agreements are not actually moved. Your new saleunit will get new agreements identical to the old ones, but with new agreementIds. The old agreements will be stopped. This is done to prevent any
-confusion around charges, refunds, etc between the two MSNs.
+confusion around charges, refunds, etc between the two MSNs. Charges done by the old MSN are in the old agreement, while the new MSN uses only the new agreement
 
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
