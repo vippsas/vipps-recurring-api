@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.6.7</title>
+    <title>Recurring Payments Merchant API v2.6.8</title>
 
     <style>
     </style>
@@ -1617,20 +1617,6 @@ Darkula color scheme from the JetBrains family of IDEs
 	  	<ul class="toc-list-h1">
         
           <li>
-            <a href="#recurring-payments" class="toc-h1 toc-link" data-title="Recurring payments">Recurring payments</a>
-            
-              <ul class="toc-list-h2">
-                
-                  <li>
-                    <a href="#authentication-see--a-href----authorization-20service-getaccesstoken--target--_blank--fetch-authorization-token--a-" class="toc-h2 toc-link" data-title="">Authentication See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a></a>
-                    
-                  </li>
-                
-              </ul>
-            
-          </li>
-        
-          <li>
             <a href="#recurring-payments-merchant-api-authorization-service" class="toc-h1 toc-link" data-title="Authorization Service">Authorization Service</a>
             
               <ul class="toc-list-h2">
@@ -2059,14 +2045,7 @@ Darkula color scheme from the JetBrains family of IDEs
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="recurring-payments">Recurring payments</h1>
-<p>Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.</p>
-<ol>
-<li>A draft agreement is initialized and the user is redirected for approval. 2. The user approves the agreement and the merchant can call GET on the agreement to verify the status. 3. The merchant can start sending charges which will be charged the user in the future.
-The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user).</li>
-</ol>
-<h2 id="authentication-see--a-href----authorization-20service-getaccesstoken--target--_blank--fetch-authorization-token--a-">Authentication See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a></h2>
-<p>For information regarding authentication please read <a href="https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication">our guide</a></p>
+        <p>Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc. For details, see the <a href="https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api">Recurring API Guide</a>.</p>
 <p>Base URLs:</p>
 <ul>
 <li>
