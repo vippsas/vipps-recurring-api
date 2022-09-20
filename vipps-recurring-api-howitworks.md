@@ -60,8 +60,7 @@ If the user clicks on “Manage agreement” in the previous step, they will be 
 
 ## Great! Now you know how the Vipps Recurring payment process works.
 
-Take a look at the technical documentation in the [Vipps Recurring API Guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md).
-
+Take a look at the technical documentation in the [Vipps Recurring API Guide](vipps-recurring-api.md).
 
 ## Questions?
 

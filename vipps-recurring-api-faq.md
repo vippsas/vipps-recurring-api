@@ -8,7 +8,7 @@ END_METADATA -->
 # Vipps Recurring API: Frequently Asked Questions
 
 See the
-[Vipps Recurring API](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md)
+[Vipps Recurring API](vipps-recurring-api.md)
 for all the details.
 
 See also:
@@ -57,11 +57,11 @@ Document version: 1.5.3.
  No. Vipps does _not_ create charges based on the agreement, this is left up to the merchant to create.  
  When a merchant creates a charge, Vipps will actually attempt to charge the customer, starting on the `due date` and for as long as specified in `retryDays`.
 
- For more details, see our [call-by-call guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#call-by-call-guide)
+ For more details, see our [call-by-call guide](vipps-recurring-api.md#call-by-call-guide)
 
- ## Do I need to store card data?
+## Do I need to store card data?
 
- No. Vipps handles all payment details.
+No. Vipps handles all payment details.
 
 ## Why do I get the error `merchant.not.allowed.for.recurring.operation`?
 
@@ -84,7 +84,7 @@ to get access to the Recurring API in production.
 
 Vipps can only provide user information with the user's consent.
 The merchant must ask the user for consent when creating the agreement using
-[Userinfo](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#userinfo)
+[Userinfo](vipps-recurring-api.md#userinfo)
 with the correct `scope`.
 
 ## How can I convert existing agreements to Vipps agreements?
@@ -149,7 +149,7 @@ See [How do I check my customer's status?](#how-do-i-check-my-customers-status)
 ## How can I delete an agreement?
 
 Agreements are marked as deleted by
-[updating the Agreement](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#updating-an-agreement)
+[updating the Agreement](vipps-recurring-api.md#updating-an-agreement)
 to `STOPPED` or `EXPIRED`.
 
 ## Can a user cancel the agreement through the Vipps app?
@@ -214,7 +214,7 @@ Yes.
 
 Vipps offers the possibility for merchants to as part of the payment flow to request the user's information. For example if you wish to retrieve the user's email as part of a User profile setup. This is supported in both [Vipps eCom API v2](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
 and
-[Vipps Recurring API](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#userinfo).
+[Vipps Recurring API](vipps-recurring-api.md#userinfo).
 
 This is done by adding a `scope` parameter to the initiate calls:
 [`POST:/ecomm/v2/payments`](https://vippsas.github.io/vipps-ecom-api/#/Vipps%20eCom%20API/initiatePaymentV3UsingPOST) (eCom)

@@ -13,13 +13,14 @@ When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
 The overall flow is:
+
 * The merchant creates a draft agreement and proposes it to the customer via Vipps.
 * The customer approves the agreement in Vipps.
 * The merchant sends a charge request to Vipps at least two days before due date
 * If the agreement is active, Vipps authorizes the charge.
 * The customer can find a full overview in Vipps, including a link to the merchant's website.
 
-To get access to the Recurring API in production, order Vipps "Faste Betalinger" (recurring payments) on
+To get access to the Recurring API in production, order Vipps "Faste Betalinger" (_recurring payments_) on
 [portal.vipps.no](https://portal.vipps.no).
 
 **IMPORTANT:** Before activating recurring payments for you, 
@@ -28,18 +29,18 @@ You will also need to set up a direct agreement for use of "Vipps på Nett" ([Vi
 
 As a merchant, you can check if you have access to recurring payments through [portal.vipps.no](https://portal.vipps.no). Partners can check if a merchant has access to recurring payments through the [Vipps Partner API](https://github.com/vippsas/vipps-partner-api/blob/main/vipps-partner-api.md#get-information-about-a-sale-unit-based-on-msn).
 
-
 See a detailed example of [how it works](vipps-login-recurring-howitworks.md).
 
 See also:
-* Recurring API Specifications:  [Swagger](https://vippsas.github.io/vipps-recurring-api/), [ReDoc](https://vippsas.github.io/vipps-recurring-api/redoc.html), [Shins](https://vippsas.github.io/vipps-recurring-api/shins/index.html)
+
+* [API Reference](https://vippsas.github.io/vipps-recurring-api/)
 * [Step-by-step examples in Postman guide](vipps-recurring-postman.md)
 * [Integration checklist](vipps-recurring-api-checklist.md)
 * [FAQ](vipps-recurring-api-faq.md)
 
 API version: 1.0.0.
 
-Document version 2.5.7.
+Document version 2.5.8.
 
 <!-- START_TOC -->
 
@@ -1540,7 +1541,6 @@ a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
 or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
-
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/ListAgreements
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-recurring-api/#/Agreement%20v2%20endpoints/DraftAgreement

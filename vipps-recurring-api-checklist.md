@@ -9,11 +9,11 @@ END_METADATA -->
 
 API version: 2.0
 
-Document version 1.2.7.
+Document version 1.2.8.
 
 ## Checklist
 
-- [ ] Integrate _all_ the [API endpoints](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md) described in our guide:
+- [ ] Integrate _all_ the [API endpoints](vipps-recurring-api.md) described in our guide:
     - [ ] Agreement: Create an agreement [`POST:/recurring/v2/agreements`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/draftAgreement)
     - [ ] Agreement: Retrieve an agreement [`GET:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/getAgreement)
     - [ ] Agreement: Update an agreement [`PATCH:/recurring/v2/agreements/{agreementId}`](https://vippsas.github.io/vipps-recurring-api/#/Agreement%20Endpoints/updateAgreement)
@@ -24,7 +24,7 @@ Document version 1.2.7.
     - [ ] Charge: Refund a charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/refundCharge)
     - [ ] Charge: Capture a reserved initial charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`](https://vippsas.github.io/vipps-recurring-api/#/Charge%20Endpoints/captureCharge)
     - For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-api-postman-collection.json) and [environment](./tools/vipps-recurring-api-postman-environment.json).
-  - [ ] Send the [Vipps HTTP headers](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#vipps-http-headers)
+  - [ ] Send the [Vipps HTTP headers](vipps-recurring-api.md#vipps-http-headers)
         in all API requests for better tracking and troubleshooting
         (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
       - [ ] `Merchant-Serial-Number`    
