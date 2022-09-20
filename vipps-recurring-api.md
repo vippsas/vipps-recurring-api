@@ -205,7 +205,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
 | [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
 | Capture a charge                                | Each charge must first be created, then captured.     | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
-| Cancel a charge                                 | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
+| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
 | Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
 
 See [Authentication and authorization](#authentication).

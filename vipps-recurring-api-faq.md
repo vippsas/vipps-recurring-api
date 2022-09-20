@@ -18,7 +18,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.5.3.
+Document version: 1.6.0.
 
 <!-- START_TOC -->
 
@@ -29,6 +29,7 @@ Document version: 1.5.3.
 * [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
 * [Can I look up a user's information?](#can-i-look-up-a-users-information)
 * [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
+* [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
 * [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
 * [How do I check my customer's status?](#how-do-i-check-my-customers-status)
 * [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
@@ -105,9 +106,86 @@ change to Vipps in different ways:
 * Paper invoice: Include a QR code with unique URL for the customer, same as
   above.
 
+## How can I move agreements between merchants and sale units?
+
+**Please note:** We are working out the details for this process, please contact
+us if you need help with this.
+
+Merchants sometimes need to move customer agreements from one merchant
+to another, or from one sale unit to another.
+
+Clarification of terms:
+* Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
+* Sale unit: A merchant can have one or more sale units. It may be different
+  brands, different physical locations, different services, etc.
+* MSN: The unique id of a sale unit.
+  MSN is short for "Merchant Serial Number", but (sadly) identifies a sale unit, not a merchant.
+
+First of all: A merchant very rarely "changes organization number".
+That only occurs in special cases.
+An organization number uniquely identifies a juridical unit and cannot usually be changed.
+
+Typical cases:
+
+1. If the merchant wants to move agreements from
+   one MSN to another,
+   and both MSNs are under the same orgno,
+   Vipps may be able to help.
+2. If the merchant wants to move agreements from
+   one orgno to another,
+   and both orgnos are owned by the same parent orgno,
+   Vipps may be able to help.
+3. If the merchant wants to move agreements from
+   one orgno to another,
+   and the orgnos are not owned by a parent company,
+   Vipps may be able to help.
+   The users have entered agreements with an orgno, and Vipps can not
+   automatically move the agreements without the user's consent to enter
+   agreements with the new orgno.
+   The users may need to enter new agreements with the new orgno.
+4. If the merchant wants to move agreements between two independent orgnos
+   (not owned by a parent orgno),
+   splits or fissions out a new orgno,
+   is merged with another orgno,
+   is acquired by another orgno,
+   etc:
+   Vipps may *_not_* be able to help.
+   The users have entered agreements with an orgno, and Vipps may not be able to
+   automatically move the agreements without the user's consent to enter
+   agreements with the new orgno.
+   The users may need to enter new agreements with the new orgno.
+
+The general process is:
+- Contact Vipps (your KAM or partner manager) to plan the switch, and
+  the date and time for moving the agreements.
+- Log in on
+  [portal.vipps.no](https://portal.vipps.no)
+  and enter a new agreement with Vipps for the new orgno.
+- Order "Vipps Faste betalinger" for the new orno. on
+  [portal.vipps.no](https://portal.vipps.no).
+- Inform all existing customers of the new orgno,
+  and the planned date of the change.
+- Send a confirmation to avtale@vipps.no that all customers have been informed,
+  including a copy of the information sent.
+
+Agreements are not actually moved. Your new saleunit will get new agreements
+identical to the old ones, but with new agreementIds. The old agreements will
+be stopped. This is done to prevent any confusion around charges, refunds, etc.
+between the two MSNs. Charges done by the old MSN are in the old agreement,
+while the new MSN uses only the new agreement
+
+For all requests to move agreements: Please contact your KAM, your partner or
+[Vipps customer service](https://vipps.no/kontakt-oss/).
+
+**Please note:** If the merchant deactivates a MSN that has active
+agreements, it will no longer be possible to:
+- Manage the agreements
+- Perform new charges
+- Make refunds
+
 ## At what time during the day are charges made?
 Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
-Subsequent attempts are made according to the `retryDays` specified.  
+Subsequent attempts are made according to the `retryDays` specified.
 This applies for both our production and test environment (MT).
 
 ## How do I check my customer's status?
