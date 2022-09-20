@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: >-
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
-    For details, see the [Recurring API Guide](http://localhost:3000/vipps-developer-docs/docs/APIs/recurring-api).
+    For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
   version: 2.6.8
   title: Recurring Payments Merchant API
