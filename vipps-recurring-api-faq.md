@@ -18,7 +18,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.6.0.
+Document version: 1.6.1.
 
 <!-- START_TOC -->
 
