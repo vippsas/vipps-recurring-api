@@ -19,7 +19,7 @@ The overall flow is:
 * If the agreement is active, Vipps authorizes the charge.
 * The customer can find a full overview in Vipps, including a link to the merchant's website.
 
-To get access to the Recurring API in production, order Vipps "Faste Betalinger" (recurring payments) on
+To get access to the Recurring API in production, order Vipps "Faste Betalinger" (_recurring payments_) on
 [portal.vipps.no](https://portal.vipps.no).
 
 **IMPORTANT:** Before activating recurring payments for you, 
