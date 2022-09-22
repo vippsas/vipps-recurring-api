@@ -34,13 +34,13 @@ See a detailed example of [how it works](vipps-login-recurring-howitworks.md).
 See also:
 
 * [API Reference](https://vippsas.github.io/vipps-recurring-api/)
-* [Step-by-step examples in Postman guide](vipps-recurring-postman.md)
+* [Quick start guide](vipps-recurring-api-quick-start.md)
 * [Integration checklist](vipps-recurring-api-checklist.md)
 * [FAQ](vipps-recurring-api-faq.md)
 
 API version: 1.0.0.
 
-Document version 2.5.8.
+Document version 2.5.9.
 
 <!-- START_TOC -->
 
@@ -210,8 +210,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 See [Authentication and authorization](#authentication).
 
-See the Postman collection available on https://github.com/vippsas/vipps-recurring-api
-for en easy way to test the API.
+See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way to test the API.
 
 ## Authentication
 

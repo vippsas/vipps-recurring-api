@@ -29,13 +29,10 @@ Review the [Getting Started](https://github.com/vippsas/vipps-developers/blob/ma
 
 ## Recurring API
 
+* [API Quick Start](vipps-recurring-api-quick-start.md): Quick Start.
 * [API guide](vipps-recurring-api.md): Developer guide for Vipps Recurring API.
 * [API Checklist](vipps-recurring-api-checklist.md): For direct and POS integrations.
 * [API Reference](https://vippsas.github.io/vipps-developer-docs/api/recurring): Recurring API Reference Specifications.
-
-## Examples
-
-* [Postman guide](vipps-recurring-postman.md): Step-by-step guide for using the Recurring API Postman collection of examples.
 
 ## Questions?
 

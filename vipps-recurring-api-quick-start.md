@@ -5,7 +5,26 @@ sidebar_position: 40
 ---
 END_METADATA -->
 
-# Postman
+# Quick start
+
+<!-- START_TOC -->
+
+## Table of Contents
+
+* [Postman](#postman)
+  * [Step 1: Get the Postman collection](#step-1-get-the-postman-collection)
+  * [Step 2: Import the Postman environment](#step-2-import-the-postman-environment)
+  * [Step 3: Set up Postman environment](#step-3-setup-postman-environment)
+* [Make API calls](#make-api-calls)
+  * [Create agreements](#create-agreements)
+  * [Create charges](#create-charges)
+* [Questions?](#questions)
+
+<!-- END_TOC -->
+
+Document version 1.0.1.
+
+## Postman
 
 [Postman](https://www.getpostman.com/) is a common tool for working with REST APIs.
 We offer a [Postman Collection](https://www.getpostman.com/collection) to make development easier.
@@ -14,23 +33,19 @@ See the [Postman documentation](https://www.getpostman.com/docs/) for more infor
 By following the steps below, you can make calls to all the
 endpoints, and see the full `request` and `response` for each call.
 
-We also have a short [getting started guide to Postman](https://github.com/vippsas/vipps-developers/blob/master/vipps-quick-start-guides.md).
-
-## Setting up Postman
-
-### Step 1: Get the Postman Collection
+### Step 1: Get the Postman collection
 
 Import the collection by following the steps below:
 
 1. Click `Import` in the upper left corner.
-2. Import the [vipps-recurring-api-quick-start-collection.json](./tools/vipps-recurring-api-quick-start-collection.json) file.
+2. Import the [vipps-recurring-api-postman-collection.json](./tools/vipps-recurring-api-postman-collection.json) file.
 
-### Step 2: Import the Postman Environment
+### Step 2: Import the Postman environment
 
 1. Click `Import` in the upper-left corner.
-2. Import the [vipps-recurring-api-quick-start-environment.json](./tools/vipps-recurring-api-quick-start-environment.json) file.
+2. Import the [vipps-recurring-api-postman-environment.json](./tools/vipps-recurring-api-postman-environment.json) file.
 
-### Step 3: Setup Postman Environment
+### Step 3: Setup Postman environment
 
 1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
 2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
@@ -41,13 +56,19 @@ Import the collection by following the steps below:
    - `merchantSerialNumber` - Merchant id.
    - `customerPhoneNumber` - The mobile number for the test app profile you have received or registered.
 
-### Step 4: Get access token
+## Make API calls
 
-Send request `Get Access Token`. This provides you with access to the API.
+For all of the following, you will start by sending request `Get Access Token`.
+This provides you with access to the API.
 
-The access token is valid for 1 hour in the test environment.
+   The access token is valid for 1 hour in the test environment
+   and 24 hours in the production environment.
 
-### Step 5: Run the Agreement Controller examples
+See the
+[API reference](https://vippsas.github.io/vipps-developer-docs/api/recurring)
+for details about the calls.
+
+### Create agreements
 
 For details about the calls, see [Agreement v2 endpoints][agreement-endpoints] in the Recurring API Specifications.
 
@@ -154,7 +175,7 @@ See [User info](vipps-recurring-api.md#userinfo) for more information.
 
 3. Run `Get Agreement` to see that the status is not "STOPPED".
 
-### Step 6: Run the Charge Controller examples
+### Create charges
 
 You will need at least one ACTIVE agreement for these examples.
 
