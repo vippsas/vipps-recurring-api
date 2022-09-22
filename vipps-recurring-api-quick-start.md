@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: Postman
+title: Quick start
 sidebar_position: 40
 ---
 END_METADATA -->
