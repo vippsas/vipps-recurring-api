@@ -30,6 +30,7 @@ Document version: 1.6.1.
 * [Can I look up a user's information?](#can-i-look-up-a-users-information)
 * [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
 * [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
+* [How can I change partners for a merchant?](#how-can-i-change-partners-for-a-merchant)
 * [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
 * [How do I check my customer's status?](#how-do-i-check-my-customers-status)
 * [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
@@ -182,6 +183,36 @@ agreements, it will no longer be possible to:
 - Manage the agreements
 - Perform new charges
 - Make refunds
+
+## How can I change partners for a merchant?
+
+**Please note:** We are working out the details for this process, please contact
+us if you need help with this.
+
+Here is the procedure for what you must do when changing partners:
+We need consent from the user site that they will change partners.
+They can submit this directly to Vipps (via partnerbestelling@vipps.no) or
+they can submit it through you as a new partner.
+
+The partner orders at Vipps (partnerbestelling@vipps.no) must receive an e-mail
+from the user site or partner stating that they wish to change partner with the
+following information:
+* Name of user location
+* Organization number
+* Name of new partner
+* Name of old partner
+* Which MSN it should be "switched to"
+* Test page if the website changes
+* Date and time of desired transfer from old partner to new partner
+* Signature from customer
+* Possible new price
+
+One thing you should be aware of is that in each agreement there is a `merchantAgreementUrl`
+which is the link each user clicks on to be able to change their subscription.
+In other words, a "My page" for the user. If the link structure is not the same
+in both solutions, you must update all existing agreements with a new URL as
+soon as possible after the move so that the customers can manage the agreements
+further without coming to a blank page.
 
 ## At what time during the day are charges made?
 Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
