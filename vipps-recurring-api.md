@@ -575,7 +575,7 @@ date-time is used. All dates must be in date-time format as according to
 
 ### Retrieve an agreement
 
-A newly created agreement will be in status `PENDING` for 5 minutes before it expires.
+A newly created agreement will be in status `PENDING` for 10 minutes before it expires.
 If the customer approves the agreement, and the initialCharge (if provided) is successfully
 processed, the agreement status will change to `ACTIVE`.
 
