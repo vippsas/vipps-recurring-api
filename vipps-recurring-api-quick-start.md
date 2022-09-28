@@ -84,7 +84,7 @@ For details about the calls, see [Agreement v2 endpoints][agreement-endpoints] i
 
 1. Send request `Get Access Token`. This provides you with access to the API.
 
-1. Send the `Draft Agreement - Minimal` request.
+2. Send the `Draft Agreement - Minimal` request.
    This demonstrates how to create a simple agreement using
    [`POST:/v2/agreements`][draft-agreement-endpoint].
 
@@ -93,7 +93,7 @@ For details about the calls, see [Agreement v2 endpoints][agreement-endpoints] i
 
    You should now have an active agreement. The variable `agreementId` is set in the environment.
 
-1. To get the information about an agreement, send `Get Agreement`. This uses
+3. To get the information about an agreement, send `Get Agreement`. This uses
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
    The variable `agreementId` is set by the `Draft Agreement` step.
 
@@ -129,10 +129,10 @@ Then, you can capture the payment when you ship the phone.
 
    Ctrl+click on the link and complete the authorization.
 
-1. Send request `Get Agreement` for information about this payment by using
+2. Send request `Get Agreement` for information about this payment by using
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
-1. The `agreementId` and `chargeId` are set in the environment.
+3. The `agreementId` and `chargeId` are set in the environment.
    Take a note of these values, because you will need them when you
    [capture the reserved charge](#capture-reserved-charge).
 
@@ -146,13 +146,13 @@ If you need to get access to some user information in addition to the recurring 
 
    Here, the `agreementId` and `landing_page_url` are retrieved from the response and set as variables.
 
-1. Once you complete the session, a unique identifier `sub` can be retrieved in the agreement details.
+2. Once you complete the session, a unique identifier `sub` can be retrieved in the agreement details.
    Send request `Get Agreement` for information about this payment by using
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
    In this example, `sub` is retrieved from the response and set as a variable.
 
-1. Send request `Get Userinfo`, from the *User Info* folder. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
+3. Send request `Get Userinfo`, from the *User Info* folder. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
 
 #### Get a list of agreements
 
