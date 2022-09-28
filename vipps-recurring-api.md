@@ -53,7 +53,6 @@ Document version 2.5.9.
   - [Call by call guide](#call-by-call-guide)
     - [Direct capture](#direct-capture)
     - [Reserve capture](#reserve-capture)
-    - [Vipps screenshots](#vipps-screenshots)
   - [API endpoints](#api-endpoints)
   - [Authentication](#authentication)
   - [Vipps HTTP headers](#vipps-http-headers)
@@ -188,9 +187,6 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
    we will retry for the number of days specified by the `retryDays` value.
    We recommend at least 2 days retry.
 
-### Vipps screenshots
-
-![Vipps screenshots](images/RecurringOverview.png)
 
 ## API endpoints
 
@@ -199,8 +195,8 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | List agreements                                 | List all agreements for a merchant.                   | [`GET:/recurring/v2/agreements`][list-agreements-endpoint]                                          |
 | [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]                                         |
 | [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
-| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-patch-endpoint]                         |
-| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-patch-endpoint]                         |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
 | [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/recurring/v2/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
 | [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
 | [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
@@ -1492,10 +1488,10 @@ First a short description on the flows.
 
 ### Normal agreement flow
 
-![flow_Normal_agreement](images/flow-Normal-agreement.png)
+![Normal_agreement](images/normal_agreement.png)
 
 In the normal agreement, the user gets presented with the agreement, agrees to that, and gets sent to a confirmation screen.
-On the agreement we present the start date, the price of the agreements, the `productName` which are all defined by the merchant. 
+On the agreement we present the start date, the price of the agreements, the `productName` and the `product description` which are all defined by the merchant. 
 We also present an agreement explanation which is used to describe the agreement interval to the user. 
 For example, for an agreement with `interval=WEEK` and `intervalCount=2`, the agreement explanation will be `hver 2.uke til du sier opp` or `every 2 weeks until cancelled`
 
@@ -1504,7 +1500,7 @@ This is the preferred flow whenever there is no campaigns or similar present.
 
 ### Initial charge flow
 
-![flow_Initial_charge](images/flow-Initial-charge.png)
+![flow_Initial_charge](images/normal_agreement_with_initial_charge.png)
 
 When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
 
@@ -1526,7 +1522,7 @@ This is the preferred flow whenever you have a type of campaign where the subscr
 
 ### Initial charge and campaign
 
-![flow_initial_charge_campaign](images/flow-Initial-charge-and-campaign.png)
+![flow_initial_charge_campaign](images/campaign_agreement_with_initial_charge.png)
 
 In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
