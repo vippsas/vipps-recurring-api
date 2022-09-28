@@ -30,12 +30,12 @@
 		},
 		{
 			"key": "merchantRedirectUrl",
-			"value": "<Input your redirect URL here - this is where the user will be redirected to after approving/rejecting the agreement>",
+			"value": "https://example.com/",
 			"enabled": true
 		},
 		{
 			"key": "merchantAgreementUrl",
-			"value": "<Input your subscription administration page here>",
+			"value": "https://example.com/",
 			"enabled": true
 		},
 		{

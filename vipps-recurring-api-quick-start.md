@@ -7,14 +7,18 @@ END_METADATA -->
 
 # Quick start
 
+Use the Recurring API to create different types of agreements, get information about agreements, update and stop agreements.
+After creating the agreements, you still need to send the charge requests.
+So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
+
 <!-- START_TOC -->
 
 ## Table of Contents
 
 * [Postman](#postman)
   * [Prerequisites](#prerequisites)
-  * [Step 1: Get the Postman collection](#step-1-get-the-postman-collection)
-  * [Step 2: Import the Postman environment](#step-2-import-the-postman-environment)
+  * [Step 1: Get the Vipps Postman collection and environment](#step-1-get-the-vipps-postman-collection-and-environment)
+  * [Step 2: Import the Vipps Postman files](#step-2-import-the-vipps-postman-files)
   * [Step 3: Set up Postman environment](#step-3-setup-postman-environment)
 * [Make API calls](#make-api-calls)
   * [Create agreements](#create-agreements)
@@ -23,50 +27,51 @@ END_METADATA -->
 
 <!-- END_TOC -->
 
-Document version 1.0.2.
+Document version 1.0.3.
 
 ## Postman
 
 ### Prerequisites
 
-* If you are not familiar with Postman, review
-[Getting started with Postman](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-quick-start-guides#getting-started-with-postman).
+Review
+[Vipps quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-quick-start-guides) for information about getting your test environment set up.
 
-* You will need a merchant test account.
-If you haven't already set this up, see
-[Test Merchants](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-test-environment#test-merchants).
+### Step 1: Get the Vipps Postman collection and environment
 
-### Step 1: Get the Postman collection
+Save the following files to your computer:
 
-Import the collection by following the steps below:
+* [Vipps Recurring API Postman collection](tools/vipps-recurring-api-postman-collection.json)
+* [Vipps Recurring API Postman environment](tools/vipps-recurring-api-postman-environment.json)
 
-1. Click `Import` in the upper left corner.
-2. Import the [vipps-recurring-api-postman-collection.json](./tools/vipps-recurring-api-postman-collection.json) file.
+### Step 2: Import the Vipps Postman files
 
-### Step 2: Import the Postman environment
-
-1. Click `Import` in the upper-left corner.
-2. Import the [vipps-recurring-api-postman-environment.json](./tools/vipps-recurring-api-postman-environment.json) file.
+1. In Postman, click *Import* in the upper-left corner.
+1. In the dialog that opens, with *File* selected, click *Upload Files*.
+1. Select the two files you have just downloaded and click *Import*.
 
 ### Step 3: Setup Postman environment
 
 1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
 2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
 3. Fill in the `Current Value` for the following fields to get started. For the first three keys, go to *Vipps Portal* > *Utvikler* ->  *Test Keys*.
-   - `client_id` - Merchant key is required for getting the access token.
-   - `client_secret` - Merchant key is required for getting the access token.
-   - `Ocp-Apim-Subscription-Key` - Merchant subscription key.
-   - `merchantSerialNumber` - Merchant id.
-   - `customerPhoneNumber` - The mobile number for the test app profile you have received or registered.
+   * `client_id` - Merchant key is required for getting the access token.
+   * `client_secret` - Merchant key is required for getting the access token.
+   * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
+   * `merchantSerialNumber` - Merchant id.
+   * `customerPhoneNumber` - The mobile number for the test app profile you have received or registered.
+
+You can update any of the other environment variables. Be aware of this:
+
+* Any currency amount must be an Integer value minimum 100 in øre.
+* Any URL must be `https`.
 
 ## Make API calls
 
 For all of the following, you will start by sending request `Get Access Token`.
 This provides you with access to the API.
 
-   The access token is valid for 1 hour in the test environment
-   and 24 hours in the production environment.
-
+The access token is valid for 1 hour in the test environment
+and 24 hours in the production environment.
 See the
 [API reference](https://vippsas.github.io/vipps-developer-docs/api/recurring)
 for details about the calls.
@@ -75,9 +80,11 @@ for details about the calls.
 
 For details about the calls, see [Agreement v2 endpoints][agreement-endpoints] in the Recurring API Specifications.
 
-#### 1. Create a minimal agreement
+#### Create a minimal agreement
 
-1. Send the `Draft Agreement - Minimal` request.
+1. Send request `Get Access Token`. This provides you with access to the API.
+
+2. Send the `Draft Agreement - Minimal` request.
    This demonstrates how to create a simple agreement using
    [`POST:/v2/agreements`][draft-agreement-endpoint].
 
@@ -86,7 +93,7 @@ For details about the calls, see [Agreement v2 endpoints][agreement-endpoints] i
 
    You should now have an active agreement. The variable `agreementId` is set in the environment.
 
-2. To get the information about an agreement, send `Get Agreement`. This uses
+3. To get the information about an agreement, send `Get Agreement`. This uses
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
    The variable `agreementId` is set by the `Draft Agreement` step.
 
@@ -95,7 +102,7 @@ For details about the calls, see [Agreement v2 endpoints][agreement-endpoints] i
    [maximum of 10 minutes](vipps-recurring-api.md#timeouts),
    before it goes to `EXPIRED`.
 
-#### 2. Create an agreement with an initial charge
+#### Create an agreement with an initial charge
 
 You can create more complex types of agreements by modifying the parameters in [`POST:/v2/agreements`][draft-agreement-endpoint].
 
@@ -106,10 +113,10 @@ You can create more complex types of agreements by modifying the parameters in [
    When you use this, a charge is automatically created for the initial payment and charged.
    The `agreementId` and `chargeId` are set in the environment.
 
-2. Send request `Get Agreement` for information about this payment by using
+1. Send request `Get Agreement` for information about this payment by using
    [`GET:/v2/agreements/{{agreementId}}`][fetch-agreement-endpoint].
 
-#### 3. Create an agreement with a reserve capture
+#### Create an agreement with a reserve capture
 
 When you use this, a charge is automatically created for the initial payment, and
 you can capture it when you provide the product or service.
@@ -127,9 +134,9 @@ Then, you can capture the payment when you ship the phone.
 
 3. The `agreementId` and `chargeId` are set in the environment.
    Take a note of these values, because you will need them when you
-   [capture the reserved charge](#5-capture-reserved-charge).
+   [capture the reserved charge](#capture-reserved-charge).
 
-#### 4. Getting access to user info
+#### Getting access to user info
 
 If you need to get access to some user information in addition to the recurring payment agreement, you can use the profile flow.
 
@@ -147,9 +154,7 @@ If you need to get access to some user information in addition to the recurring 
 
 3. Send request `Get Userinfo`, from the *User Info* folder. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
 
-See [User info](vipps-recurring-api.md#userinfo) for more information.
-
-#### 5. Get a list of agreements
+#### Get a list of agreements
 
 1. Send `Fetch Agreements` to get a list of agreements by using
    [`GET:/v2/agreements`][list-agreements-endpoint].
@@ -159,7 +164,7 @@ See [User info](vipps-recurring-api.md#userinfo) for more information.
 
 2. Change or remove the query to see agreements with other states.
 
-#### 6. Update an agreement
+#### Update an agreement
 
 1. Set `agreementId` to the id of an ACTIVE agreement.
 
@@ -170,7 +175,7 @@ See [User info](vipps-recurring-api.md#userinfo) for more information.
 
 4. Run `Get Agreement` to see the updated properties.
 
-#### 7. Stop an agreement
+#### Stop an agreement
 
 1. Set `agreementId` to the id of an ACTIVE agreement.
 
@@ -184,7 +189,7 @@ You will need at least one ACTIVE agreement for these examples.
 
 For details about the calls, see [Charge v2 endpoints][charge-endpoints] in the Recurring API Specifications.
 
-#### 1. Create a charge
+#### Create a charge
 
 Although charges for initial payments are created automatically,
 you must create charge requests for the recurring payments.
@@ -206,7 +211,7 @@ See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details abo
 
 4. If you run `Get Charge` again tomorrow, you should see that the status changes to "CHARGED".
 
-#### 2. Get a list of charges for an agreement
+#### Get a list of charges for an agreement
 
 1. Set `agreementId` to the id of an agreement.
    Note, you can get a list of all your agreements with the `Fetch Agreements` example.
@@ -218,7 +223,7 @@ See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details abo
 
 3. Change or remove the query to see charges with other states.
 
-#### 3. Cancel a charge
+#### Cancel a charge
 
 You can cancel an existing charge before the user is charged.
 
@@ -232,7 +237,7 @@ You can cancel an existing charge before the user is charged.
 
    Send `Get Charge` to see the change of status.
 
-#### 4. Refund a charge
+#### Refund a charge
 
 You can refund a charge that has already been charged.
 
@@ -249,12 +254,12 @@ You can refund a charge that has already been charged.
 4. Send `Get Charge` to see that the charge is all or partially refunded.
    To fully refund, set the amount value to the amount remaining (amount - amountRefunded).
 
-#### 5. Capture reserved charge
+#### Capture reserved charge
 
 When you create an agreement with a reserved charge, you will need to capture this charge.
 
 1. In the environment, set `agreementId` and `chargeId` to refer to the agreement and charge.
-   If you ran [Create an agreement with a reserve capture](#3-create-an-agreement-with-a-reserve-capture),
+   If you ran [Create an agreement with a reserve capture](#create-an-agreement-with-a-reserve-capture),
    you can use the values set by the example.
 
 2. Send `Get Charge`, to see the status of this charge.
