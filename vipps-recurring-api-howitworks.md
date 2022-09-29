@@ -30,7 +30,7 @@ The user confirms their number and is prompted to log in to Vipps.
 
 If the payment was started from a mobile device, the app will automatically switch over to Vipps.
 
-![Vipps landing page](images/vipps-recurring-api-howitworks/vipps-recurring-step2.svg)
+![Vipps landing page](images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
 ## 3. Accept agreement in Vipps
 
