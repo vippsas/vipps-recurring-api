@@ -578,12 +578,12 @@ date-time is used. All dates must be in date-time format as according to
 In V3, we introduce 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign. 
 See more about the different campaign types in the table below.
 
-| Campaign types       | Description                                                                                             | Example                                                                              |
-|----------------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| `price campaign`     | Different interval price until specified date. Same interval as agreement.                              | 1kr per 1 week interval until 2022-12-25T00:00:00Z and then 50kr per 1 week interval |
-| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR) | 1kr for 10 weeks and then 349kr each month                                           |
-| `event campaign`     | A set price until a given event date with a text describing the event                                   | 1kr to the end of August and then 349kr each month                                   |
-| `full flex campaign` | Different price and interval until a given date                                                         | 100kr per month until 2023-01-01T00:00:00Z and then 1000kr every year                |
+| Campaign types       | Description                                                                                             | Example                                                                 |
+|----------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `price campaign`     | Different interval price until specified date. Same interval as agreement.                              | 1kr every week until 2022-12-25T00:00:00Z and then 50kr every week      |
+| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR) | 1kr for 10 weeks and then 349kr every month                             |
+| `event campaign`     | A set price until a given event date with a text describing the event                                   | 1kr until Christmas and then 349kr every month                          |
+| `full flex campaign` | Different price and interval until a given date                                                         | 100kr every month until 2023-01-01T00:00:00Z and then 1000kr every year |
 
 In order to start a campaign the campaign field has to be added to the agreement draft
 [`POST:/recurring/v3/agreements`][draft-agreement-endpoint-v3]
