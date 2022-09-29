@@ -23,7 +23,7 @@ The overall flow is:
 To get access to the Recurring API in production, order Vipps "Faste Betalinger" (_recurring payments_) on
 [portal.vipps.no](https://portal.vipps.no).
 
-**IMPORTANT:** Before activating recurring payments for you, 
+**IMPORTANT:** Before activating recurring payments for you,
 Vipps must perform some extra Know Your Customer (KYC) checks, as required by [Finanstilsynet](https://www.finanstilsynet.no).
 You will also need to set up a direct agreement for use of "Vipps på Nett" ([Vipps eCom API](https://github.com/vippsas/vipps-ecom-api)).
 
@@ -38,9 +38,9 @@ See also:
 * [Integration checklist](vipps-recurring-api-checklist.md)
 * [FAQ](vipps-recurring-api-faq.md)
 
-API version: 1.0.0.
+API version: 2.0.0.
 
-Document version 2.5.9.
+Document version 2.5.10.
 
 <!-- START_TOC -->
 
@@ -407,10 +407,26 @@ The `vippsConfirmationUrl` should be used to redirect the user to the Vipps land
 page. The user can then confirm their identity and receive a prompt to accept the
 agreement within Vipps.
 
-The `isApp` property can be used to receive a deeplink URL, which in a mobile context,
-can be used to perform an app-switch, which removes the landing page step. This will only
-work if the user has Vipps installed on the same device as they are initiating
-the agreement from.
+If the payment is initiated in a native app, it is possible to explicitly force
+a `vipps://` URL by sending the `isApp` parameter in the initiate call:
+
+* `"isApp": false`: The URL is `https://`, which handles
+  everything automatically for you.
+  The phone's operating system will know, through "universal linking", that
+  the `https://api.vipps.no` URL should open the Vipps app, and not the default
+  web browser.
+  **Please note:** In some cases, this requires the user to approve that
+  Vipps is opened, but this is usually only the first time.
+* `"isApp": true`: The URL is for a deeplink, for forced app-switch to Vipps, with `vipps://`.
+  **Please note:** In our test environment (MT), the scheme is `vippsMT://`
+
+If the user does not have Vipps installed:
+
+* `"isApp":false`: The Vipps landing page will be shown,
+   and the user can enter a phone number and pay on a device with Vipps installed.
+* `"isApp": true`: The user will get an error message saying that the link can
+  not be opened.
+
 
 ### Intervals
 
@@ -459,7 +475,7 @@ Example for a subscription every 30th day:
 **Please note:** It is not possible to change intervals. If the user has
 accepted a yearly interval, the agreement cannot be changed to a monthly
 agreement. This requires a new agreement and a new consent from the user.
-It _is_ possible to make a monthly agreement and charge some months only. 
+It _is_ possible to make a monthly agreement and charge some months only.
 The general rule: Be as customer friendly and easy to understand
 as possible.
 
@@ -1487,8 +1503,8 @@ First a short description on the flows.
 ![Normal_agreement](images/normal_agreement.png)
 
 In the normal agreement, the user gets presented with the agreement, agrees to that, and gets sent to a confirmation screen.
-On the agreement we present the start date, the price of the agreements, the `productName` and the `product description` which are all defined by the merchant. 
-We also present an agreement explanation which is used to describe the agreement interval to the user. 
+On the agreement we present the start date, the price of the agreements, the `productName` and the `product description` which are all defined by the merchant.
+We also present an agreement explanation which is used to describe the agreement interval to the user.
 For example, for an agreement with `interval=WEEK` and `intervalCount=2`, the agreement explanation will be `hver 2.uke til du sier opp` or `every 2 weeks until cancelled`
 
 
@@ -1500,7 +1516,7 @@ This is the preferred flow whenever there is no campaigns or similar present.
 
 When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
 
-Here we also show `productName` and the agreement explanation on the agreement, as well as `description` on the initial charge. `productName` and `inital charge description` are defined by the merchant. The agreement explanation is created by Vipps based on the interval and the campaign if specified. 
+Here we also show `productName` and the agreement explanation on the agreement, as well as `description` on the initial charge. `productName` and `inital charge description` are defined by the merchant. The agreement explanation is created by Vipps based on the interval and the campaign if specified.
 
 Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobile phone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
 
@@ -1510,7 +1526,7 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 
 ![flow_Campaign](images/flow-Campaign.png)
 
-When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen. 
+When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
