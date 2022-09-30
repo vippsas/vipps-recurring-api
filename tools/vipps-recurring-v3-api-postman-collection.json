@@ -138,7 +138,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\",\n \"price\": {{price}},\n \"productName\": \"Minimal Draft Agreement\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\",\n \"price\": {{price}},\n \"productName\": \"Minimal Draft Agreement\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -210,7 +210,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"variableAmount\": {\n\t    \"suggestedMaxAmount\": 6000\n    },\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"currency\": \"NOK\",\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"variableAmount\": {\n\t    \"suggestedMaxAmount\": 6000\n    },\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -1264,90 +1264,6 @@
 					"response": []
 				},
 				{
-					"name": "Refund Charge",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.environment.set('Idempotency-Key-Refund',pm.environment.get('agreementId') + (new Date()).getTime());"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Idempotency-Key",
-								"value": "{{Idempotency-Key-Refund}}",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}",
-								"type": "text"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{merchantSerialNumber}}"
-							},
-							{
-								"key": "Vipps-System-Name",
-								"value": "{{vipps_system_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Version",
-								"value": "{{vipps_system_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Name",
-								"value": "{{vipps_system_plugin_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Version",
-								"value": "{{vipps_system_plugin_version}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v3",
-								"agreements",
-								"{{agreementId}}",
-								"charges",
-								"{{chargeId}}",
-								"refund"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Capture reserved charge",
 					"event": [
 						{
@@ -1426,6 +1342,90 @@
 								"charges",
 								"{{chargeId}}",
 								"capture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refund Charge",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set('Idempotency-Key-Refund',pm.environment.get('agreementId') + (new Date()).getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{Idempotency-Key-Refund}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}",
+								"type": "text"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": {{amount_refund}},\r\n  \"description\":\"{{description_refund}}\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges/{{chargeId}}/refund",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}",
+								"charges",
+								"{{chargeId}}",
+								"refund"
 							]
 						}
 					},
