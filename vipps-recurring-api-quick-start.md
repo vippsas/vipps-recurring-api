@@ -27,14 +27,14 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 
 <!-- END_TOC -->
 
-Document version 1.0.3.
+Document version 1.0.4.
 
 ## Postman
 
 ### Prerequisites
 
 Review
-[Vipps quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-quick-start-guides) for information about getting your test environment set up.
+[Vipps quick start guides](https://github.com/vippsas/vipps-developers/blob/master/vipps-quick-start-guides.md) for information about getting your test environment set up.
 
 ### Step 1: Get the Vipps Postman collection and environment
 
