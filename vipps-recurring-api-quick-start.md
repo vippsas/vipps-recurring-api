@@ -159,7 +159,7 @@ If you need to get access to some user information in addition to the recurring 
 
    In this example, `sub` is retrieved from the response and set as a variable.
 
-3. Send request `Get Userinfo`, from the *User Info* folder. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
+3. Send request `Get Userinfo`, from the *User Info* folder. This uses the [`userinfo`][userinfo-endpoint] endpoint with the `sub` variable from the previous call.
 
 #### Get a list of agreements
 
