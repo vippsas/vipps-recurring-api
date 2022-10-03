@@ -1639,6 +1639,10 @@ components:
           description: Product name (short)
           maxLength: 45
           example: Premier League subscription
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
         scope:
           type: string
           description: Space separated list of the user profile-data scope to require for the agreement.
@@ -1838,6 +1842,10 @@ components:
           description: Product name (short)
           maxLength: 45
           example: Premier League subscription
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
         start:
           type: string
           format: date-time
@@ -1943,6 +1951,11 @@ components:
           type: string
           example: Pluss-abonnement
           description: Name of the product being subscribed to.
+          maxLength: 45
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
         merchantAgreementUrl:
           type: string
           description: URL where Vipps can send the customer to view/manage their
