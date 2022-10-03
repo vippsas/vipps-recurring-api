@@ -9,7 +9,7 @@ END_METADATA -->
 
 API version: 2.0
 
-Document version 1.2.8.
+Document version 1.2.9.
 
 ## Checklist
 
@@ -23,7 +23,7 @@ Document version 1.2.8.
     - [ ] Charge: Cancel a charge [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
     - [ ] Charge: Refund a charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]
     - [ ] Charge: Capture a reserved initial charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]
-    - For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-api-postman-collection.json) and [environment](./tools/vipps-recurring-api-postman-environment.json).
+    - For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
   - [ ] Send the [Vipps HTTP headers](vipps-recurring-api.md#vipps-http-headers)
         in all API requests for better tracking and troubleshooting
         (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
