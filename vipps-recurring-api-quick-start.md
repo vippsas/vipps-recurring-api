@@ -27,21 +27,22 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 
 <!-- END_TOC -->
 
-Document version 1.0.4.
+Document version 1.1.0.
 
 ## Postman
 
 ### Prerequisites
 
 Review
-[Vipps quick start guides](https://github.com/vippsas/vipps-developers/blob/master/vipps-quick-start-guides.md) for information about getting your test environment set up.
+[Vipps quick start guides](https://github.com/vippsas/vipps-developers/blob/master/vipps-quick-start-guides.md)
+for information about getting your test environment set up.
 
 ### Step 1: Get the Vipps Postman collection and environment
 
 Save the following files to your computer:
 
 * [Vipps Recurring API Postman collection](tools/vipps-recurring-api-postman-collection.json)
-* [Vipps Recurring API Postman environment](tools/vipps-recurring-api-postman-environment.json)
+* [Vipps API Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
 ### Step 2: Import the Vipps Postman files
 
@@ -53,7 +54,7 @@ Save the following files to your computer:
 
 1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
 2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
-3. Fill in the `Current Value` for the following fields to get started. For the first three keys, go to *Vipps Portal* > *Utvikler* ->  *Test Keys*.
+3. Fill in the `Current Value` for the following fields to get started. For the first keys, go to *Vipps Portal* > *Utvikler* ->  *Test Keys*.
    * `client_id` - Merchant key is required for getting the access token.
    * `client_secret` - Merchant key is required for getting the access token.
    * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
@@ -63,7 +64,7 @@ Save the following files to your computer:
 You can update any of the other environment variables. Be aware of this:
 
 * Any currency amount must be an Integer value minimum 100 in øre.
-* Any URL must be `https`.
+* Many URLs must be `https`.
 
 ## Make API calls
 
