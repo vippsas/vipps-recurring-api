@@ -51,7 +51,7 @@ Document version 1.2.9.
 3. The merchant receives an email from Vipps saying that they can log in with bankID on [portal.vipps.no](https://portal.vipps.no) and retrieve API keys.
 4. The merchant completes all checklist items.
 5. The merchant [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with the MSN to check.
-   Vipps will check agreements and charges in the [Vipps test environment](https://github.com/vippsas/vipps-developers#the-vipps-test-environment-mt), showing that all checklist items have been fulfilled:
+   Vipps will check agreements and charges in the [Vipps test environment](https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md), showing that all checklist items have been fulfilled:
     - A complete Agreement ending in `ACTIVE`.
     - A complete Agreement ending in `STOPPED`.
     - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
