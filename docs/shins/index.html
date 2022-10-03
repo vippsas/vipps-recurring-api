@@ -2943,7 +2943,6 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
   &quot;currency&quot;: &quot;NOK&quot;,
   &quot;interval&quot;: &quot;MONTH&quot;,
   &quot;intervalCount&quot;: 1,
-  &quot;isApp&quot;: false,
   &quot;merchantRedirectUrl&quot;: &quot;https://merchant.redirect.url.no&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://merchant.agreement.url.no&quot;,
   &quot;customerPhoneNumber&quot;: &quot;45678272&quot;,
@@ -3115,7 +3114,6 @@ More information about this can be found in the API documentation.</p>
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">1</span>,
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.redirect.url.no&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.agreement.url.no&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;45678272&quot;</span>,
@@ -3309,7 +3307,7 @@ More information about this can be found in the API documentation.</p>
 <td>» isApp</td>
 <td>body</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>This parameter indicates whether payment request is triggered from</td>
 </tr>
 <tr>
@@ -5322,7 +5320,6 @@ curl -X POST https://api.vipps.no/recurring/v3/agreements \
     &quot;unit&quot;: &quot;MONTH&quot;,
     &quot;count&quot;: 1
   },
-  &quot;isApp&quot;: true,
   &quot;merchantRedirectUrl&quot;: &quot;https://merchant.redirect.url.no&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://merchant.agreement.url.no&quot;,
   &quot;customerPhoneNumber&quot;: &quot;45678272&quot;,
@@ -5500,7 +5497,6 @@ More information about this can be found in the API documentation.</p>
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">1</span>
   },
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.redirect.url.no&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.agreement.url.no&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;45678272&quot;</span>,
@@ -5728,7 +5724,7 @@ More information about this can be found in the API documentation.</p>
 <td>» isApp</td>
 <td>body</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>If merchant is redirecting user from an app or a mobile device.</td>
 </tr>
 <tr>
@@ -12678,7 +12674,7 @@ System.out.println(response.toString());
 <tr>
 <td>isApp</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>This parameter indicates whether payment request is triggered from<br />Mobile App or Web browser. Based on this value, response will be<br />redirect URL for Vipps landing page or deeplink URL to connect vipps<br />App. When isApp is set to true, URLs passed to Vipps will not be<br />validated as regular URLs.</td>
 </tr>
@@ -12768,7 +12764,7 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
   },
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.example.com/vipps-landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
@@ -12837,7 +12833,7 @@ System.out.println(response.toString());
 <tr>
 <td>isApp</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>If merchant is redirecting user from an app or a mobile device.</td>
 </tr>
