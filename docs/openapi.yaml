@@ -142,7 +142,6 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -156,7 +155,6 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -464,7 +462,6 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -478,7 +475,6 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -497,7 +493,6 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -515,7 +510,6 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -540,7 +534,6 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -563,7 +556,6 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -584,7 +576,6 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -599,7 +590,6 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -1490,7 +1480,6 @@ components:
         - currency
         - interval
         - intervalCount
-        - isApp
         - merchantAgreementUrl
         - merchantRedirectUrl
         - price
@@ -1584,7 +1573,6 @@ components:
         - currency
         - interval
         - intervalCount
-        - isApp
         - merchantAgreementUrl
         - merchantRedirectUrl
         - price
@@ -1610,7 +1598,7 @@ components:
         isApp:
           type: boolean
           description: If merchant is redirecting user from an app or a mobile device.
-          example: true
+          example: false
         merchantAgreementUrl:
           type: string
           description: |-
