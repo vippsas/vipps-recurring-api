@@ -173,6 +173,7 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
+                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -189,6 +190,7 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
+                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -210,6 +212,7 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
+                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -224,6 +227,7 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
+                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
