@@ -4929,6 +4929,7 @@ Key size can be between 1 to 40 characters.</p>
     },
     <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
     <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+    <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
     <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -5128,6 +5129,13 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>»» productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>»» start</td>
@@ -5752,6 +5760,13 @@ More information about this can be found in the API documentation.</p>
 <td>Product name (short)</td>
 </tr>
 <tr>
+<td>» productDescription</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Product description (longer)</td>
+</tr>
+<tr>
 <td>» scope</td>
 <td>body</td>
 <td>string</td>
@@ -6198,6 +6213,7 @@ merchants making payments for themselves.</p>
   },
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -6274,6 +6290,7 @@ curl -X PATCH https://api.vipps.no/recurring/v3/agreements/{agreementId} \
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
   &quot;suggestedMaxAmount&quot;: 3000,
   &quot;productName&quot;: &quot;Pluss-abonnement&quot;,
+  &quot;productDescription&quot;: &quot;string&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://www.example.com/vipps-subscriptions/1234/&quot;,
   &quot;status&quot;: &quot;STOPPED&quot;
 }&#x27;</span>;
@@ -6436,6 +6453,7 @@ we suggest leaving the agreement active and skipping the creation of charges as 
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;STOPPED&quot;</span>
 }
@@ -6535,6 +6553,13 @@ we suggest leaving the agreement active and skipping the creation of charges as 
 <td>string</td>
 <td>false</td>
 <td>Name of the product being subscribed to.</td>
+</tr>
+<tr>
+<td>» productDescription</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>» merchantAgreementUrl</td>
@@ -12748,6 +12773,7 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.example.com/vipps-landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>,
   <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">false</span>
 }
@@ -12842,6 +12868,13 @@ System.out.println(response.toString());
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>scope</td>
@@ -13144,6 +13177,7 @@ System.out.println(response.toString());
   },
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -13211,6 +13245,13 @@ System.out.println(response.toString());
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>start</td>
@@ -13369,6 +13410,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;STOPPED&quot;</span>
 }
@@ -13400,6 +13442,13 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Name of the product being subscribed to.</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>merchantAgreementUrl</td>
