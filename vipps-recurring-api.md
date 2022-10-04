@@ -138,24 +138,23 @@ See the eCom FAQ for the difference:
 [What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
-the merchant has created a charge for with
-[`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint].
-You can also [Manage charges and agreements](#manage-charges-and-agreements).
+the merchant has created a charge for with the [`create charge`][create-charge-endpoint] endpoint.
+You can also [manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
 
 For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
-1. Create a (draft) agreement: [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
+1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
-   This will result in a capture of the initial charge (if one was defined in the first step).
-3. Retrieve the (hopefully approved) agreement:
-   [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint].
+   This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
+   See [Initial charge](#initial-charge)
+3. Retrieve the agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
-4. For all future charges, you must create a charge:
-   [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint].
+4. All future charges can be created by using the [`create charge`][create-charge-endpoint] endpoint. 
+   For direct capture you must set `"transactionType": "DIRECT_CAPTURE"`. 
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
@@ -164,45 +163,46 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 ### Reserve capture
 
+**Note:** Reserve capture on recurring charges is available in the recurring API v3. 
+In the API V2, reserve capture is only available for initial charges.
+
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
-1. Create a (draft) agreement: [`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
+1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
-   This will result in a capture of the initial charge (if one was defined in the first step).
-3. Retrieve the (hopefully approved) agreement:
-   [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint].
+   This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
+3. Retrieve the agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
-4. If there is a product that is shipped to the customer, the initial charge should be captured at this point.
-   Capture the charge:
-   [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]
-   If there is no product being shipped, or a need to provide access at a later point - the merchant should change the
-   merchant sale unit setup to use `DIRECT CAPTURE` instead.
-5. For all future charges, you must create a charge:
-   [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint].
+4. All future charges can be created by using the [`create charge`][create-charge-endpoint] endpoint.
+   For reserve capture you must set `"transactionType": "RESERVE_CAPTURE"`.
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
    we will retry for the number of days specified by the `retryDays` value.
    We recommend at least 2 days retry.
+5. If there is a product that is shipped to the customer, the charge should be captured at this point. 
+   Capture the charge by calling the [`capture charge`][capture-charge-endpoint] endpoint.
+   If there is no product being shipped, nor a need to provide access at a later point - the merchant should change the
+   merchant sale unit setup to use `DIRECT CAPTURE` instead and create charge with `"transactionType": "DIRECT_CAPTURE"`.
 
 
 ## API endpoints
 
-| Operation                                       | Description                                           | Endpoint                                                                                            |
-|-------------------------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| List agreements                                 | List all agreements for a merchant.                   | [`GET:/recurring/v2/agreements`][list-agreements-endpoint]                                          |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]                                         |
-| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
-| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
-| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
-| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/recurring/v2/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
-| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
-| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
-| Capture a charge                                | Each charge must first be created, then captured.     | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
-| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
-| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
+| Operation                                       | Description                                           | Endpoint                                              |
+|-------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
+| List agreements                                 | List all agreements for a merchant.                   | [`list agreements`][list-agreements-endpoint]         |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`draft agreement`][draft-agreement-endpoint]         |
+| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`fetch agreement`][fetch-agreement-endpoint]         |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`update agreement`][update-agreement-patch-endpoint] |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`update agreement`][update-agreement-patch-endpoint] |
+| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`list charges`][list-charges-endpoint]               |
+| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`create charge`][create-charge-endpoint]             |
+| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`fetch charge`][fetch-charge-endpoint]               |
+| Capture a charge                                | Each charge must first be created, then captured.     | [`capture charge`][capture-charge-endpoint]           |
+| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`cancel charge`][cancel-charge-endpoint]             |
+| Refund a charge                                 | Refund a charge that has been performed.              | [`refund charge`][refund-charge-endpoint]             |
 
 See [Authentication and authorization](#authentication).
 
@@ -257,8 +257,7 @@ the headers should be:
 
 ## orderId recommendations
 
-An optional _and recommended_ `orderId` field can be set in the request:
-[`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint].
+An optional _and recommended_ `orderId` field can be set in the [`create charge`][create-charge-endpoint] request.
 
 ```
 {
@@ -316,12 +315,7 @@ An agreement has payments, called [charges](#charges).
 
 ### Create an agreement
 
-Create an agreement:
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint].
-
-This code illustrates how to create an agreement:
-
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
+This is an example of a request body for the [`draft agreement`][draft-agreement-endpoint] call:
 
 ```json
 {
@@ -364,7 +358,7 @@ in automatically through Vipps. See the
 for more details.
 
 The request parameters have the following size limits
-(see [`POST:/recurring/v2/agreements`][draft-agreement-endpoint] for more details):
+(see the [`draft agreement][draft-agreement-endpoint] endpoint for more details):
 
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
@@ -623,21 +617,54 @@ An [agreement](#agreements) has payments, called charges.
 *Recurring has functionality to charge a variable amount each interval. See:
 [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).*
 
-Charge the customer for each period with the
-[`create charge`][create-charge-endpoint] endpoint.
-
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur (it is minimum one day in the test environment).
 
+Charge the customer for each period with the
+[`create charge`][create-charge-endpoint] endpoint.
+`due` will define for which date the charge will be performed.
+This date has to be at a minimum two days in the
+future (it is minimum one day in the test environment), and all charges `due` in
+30 days or less are visible for users in Vipps.
+
 Example: If the charge is _created_ on the 25th, the earliest the charge can be
-_made_ is the 27th (25+2). This is so that the user can be informed about the
+_due_ is the 27th (25+2). This is so that the user can be informed about the
 upcoming charge. The user is only shown one charge per agreement, in order to
 not overwhelm the user when doing daily or weekly charges.
 
-Create a charge for a given agreement. `due` will define for which date
-the charge will be performed. This date has to be at a minimum two days in the
-future (it is minimum one day in the test environment), and all charges `due` in
-30 days or less are visible for users in Vipps.
+A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
+**Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api (Coming soon)
+
+`DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
+reserves the payment for capturing at a later date. See:
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the eCom FAQ for more details.
+
+`RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
+
+This is an example of a request body for the [`create charge`][create-charge-endpoint] call:
+
+```json
+{
+  "amount": 100,
+  "description": "Betaling",
+  "due": "2022-09-28",
+  "retryDays": 3,
+  "transactionType": "DIRECT_CAPTURE"
+}
+```
+
+Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the charge.
+
+```json
+{
+  "amount": 200,
+  "description": "Test tomorrow",
+  "due": "2022-09-16",
+  "retryDays": 3,
+  "transactionType": "RESERVE_CAPTURE"
+}
+```
 
 See:
 [orderId recommendations](#orderid-recommendations).
@@ -673,7 +700,7 @@ show up in the users' payment history. In the payment history a charge from
 Vipps recurring payment will have a description with follow format
 `{agreement.ProductName} - {charge.description}`.
 
-This is an request example for a call to the [`create charge`][create-charge-endpoint] endpoint:
+This is an example of a request body for the [`create charge`][create-charge-endpoint] call:
 
 ```json
 {
@@ -959,8 +986,7 @@ confirmation link sent to the email address.
 Scenario: You want to complete a payment and get the name and phone number of
 a customer.
 
-1. Retrieve the access token:
-   [`POST:/accesstoken/get`][access-token-endpoint].
+1. Retrieve the access token by calling the [`access token`][access-token-endpoint] endpoint.
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
    access to (valid scope) before calling the [`draft agreement`][draft-agreement-endpoint] endpoint.
 3. The user consents to the information sharing and accepts the agreement in Vipps.
