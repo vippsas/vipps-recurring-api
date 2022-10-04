@@ -7,33 +7,39 @@ END_METADATA -->
 
 # Vipps Recurring API Checklist
 
-API version: 2.0
+API version: 3.0
 
-Document version 1.2.9.
+Document version 3.0.0.
 
 ## Checklist
 
 - [ ] Integrate _all_ the [API endpoints](vipps-recurring-api.md) described in our guide:
-    - [ ] Agreement: Create an agreement [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
-    - [ ] Agreement: Retrieve an agreement [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint]
-    - [ ] Agreement: Update an agreement [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-put-endpoint]
-    - [ ] Agreement: List charges [`GET:/recurring/v2/agreements/{agreementId}/charges`][list-charges-endpoint]
-    - [ ] Charge: Create Charge [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint]
-    - [ ] Charge: Retrieve a charge [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]
-    - [ ] Charge: Cancel a charge [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
-    - [ ] Charge: Refund a charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]
-    - [ ] Charge: Capture a reserved initial charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]
-    - For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
-  - [ ] Send the [Vipps HTTP headers](vipps-recurring-api.md#vipps-http-headers)
-        in all API requests for better tracking and troubleshooting
-        (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
-      - [ ] `Merchant-Serial-Number`
-      - [ ] `Vipps-System-Name`
-      - [ ] `Vipps-System-Version`
-      - [ ] `Vipps-System-Plugin-Name`
-      - [ ] `Vipps-System-Plugin-Version`
+
+  - Agreement endpoints:
+      - [ ] [`Draft agreement`][draft-agreement-endpoint]
+      - [ ] [`Fetch agreement`][fetch-agreement-endpoint]
+      - [ ] [`Update agreement`][update-agreement-put-endpoint]
+      - [ ] [`List charges`][list-charges-endpoint]
+    
+  - Charge endpoints: 
+      - [ ] [`Create charge`][create-charge-endpoint]
+      - [ ] [`Fetch charge`][fetch-charge-endpoint]
+      - [ ] [`Cancel charge`][cancel-charge-endpoint]
+      - [ ] [`Refund charge`][refund-charge-endpoint]
+      - [ ] [`Capture reserved charge`][capture-charge-endpoint]
+
+  For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
+
+- [ ] Send the [Vipps HTTP headers](vipps-recurring-api.md#vipps-http-headers)
+      in all API requests for better tracking and troubleshooting
+      (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
+    - [ ] `Merchant-Serial-Number`
+    - [ ] `Vipps-System-Name`
+    - [ ] `Vipps-System-Version`
+    - [ ] `Vipps-System-Plugin-Name`
+    - [ ] `Vipps-System-Plugin-Version`
 - [ ] Avoid Integration pitfalls
-    - [ ] The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement.
+    - [ ] The Merchant _must not_ rely on `Redirect` alone, but must always poll the [`fetch agreement`][fetch-agreement-endpoint] endpoint to check the status of the agreement.
     - [ ] Monitor the error messages Vipps returns from the APIs, and correct problems as quickly as possible. It's recommended to log errors emitted by our APIs, this makes it easier to pinpoint what has gone wrong.
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
     - [ ] The merchant must have a way for the user to manage and stop subscription in merchantAgreementUrl in their Agreement. This should result in a timely update of the Vipps Agreement.
