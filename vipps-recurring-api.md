@@ -149,7 +149,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
-   See [Initial charge](#initial-charge)
+   See [Initial charge](#initial-charge).
 3. Retrieve the agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
@@ -163,8 +163,8 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 ### Reserve capture
 
-**Note:** Reserve capture on recurring charges is available in the recurring API v3. 
-In the API V2, reserve capture is only available for initial charges.
+**Note:** Reserve capture on recurring charges is available in the recurring API v3 (Coming soon) 
+In the API V2, reserve capture is only available on initial charges.
 
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
@@ -172,6 +172,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
+   See [Initial charge](#initial-charge).
 3. Retrieve the agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
@@ -642,32 +643,9 @@ in the eCom FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
 
-This is an example of a request body for the [`create charge`][create-charge-endpoint] call:
+See the [`create charge`][create-charge-endpoint] endpoint definition for more info and examples.
 
-```json
-{
-  "amount": 100,
-  "description": "Betaling",
-  "due": "2022-09-28",
-  "retryDays": 3,
-  "transactionType": "DIRECT_CAPTURE"
-}
-```
-
-Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the charge.
-
-```json
-{
-  "amount": 200,
-  "description": "Test tomorrow",
-  "due": "2022-09-16",
-  "retryDays": 3,
-  "transactionType": "RESERVE_CAPTURE"
-}
-```
-
-See:
-[orderId recommendations](#orderid-recommendations).
+Also see check [orderId recommendations](#orderid-recommendations) before creating charges.
 
 ### Amount changes
 
