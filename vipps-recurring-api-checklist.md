@@ -14,22 +14,19 @@ Document version 3.0.0.
 ## Checklist
 
 - [ ] Integrate _all_ the [API endpoints](vipps-recurring-api.md) described in our guide:
-
   - Agreement endpoints:
       - [ ] [`Draft agreement`][draft-agreement-endpoint]
       - [ ] [`Fetch agreement`][fetch-agreement-endpoint]
       - [ ] [`Update agreement`][update-agreement-put-endpoint]
       - [ ] [`List charges`][list-charges-endpoint]
-    
   - Charge endpoints: 
       - [ ] [`Create charge`][create-charge-endpoint]
       - [ ] [`Fetch charge`][fetch-charge-endpoint]
       - [ ] [`Cancel charge`][cancel-charge-endpoint]
       - [ ] [`Refund charge`][refund-charge-endpoint]
       - [ ] [`Capture reserved charge`][capture-charge-endpoint]
-
+  
   For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
-
 - [ ] Send the [Vipps HTTP headers](vipps-recurring-api.md#vipps-http-headers)
       in all API requests for better tracking and troubleshooting
       (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
