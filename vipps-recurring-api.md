@@ -641,7 +641,11 @@ in the eCom FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
 
-See the [`create charge`][create-charge-endpoint] endpoint definition for more info and examples.
+The advantage to using reserve capture is that you can release the reservation immediately:
+- For a reserved payment, the merchant can make a /cancel call to immediately release the reservation and make it available in the customer's account.
+- For a captured payment, the merchant must make a /refund call. It then takes a few days before the amount is available in the customer's account.
+
+See the [`create charge`][create-charge-endpoint] endpoint definition for examples.
 
 Also see check [orderId recommendations](#orderid-recommendations) before creating charges.
 
