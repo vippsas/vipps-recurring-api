@@ -641,7 +641,7 @@ The `description` text is mandatory and is displayed to the end user in the Vipp
 
 Capture is done with the [`capture charge`][capture-charge-endpoint] endpoint.
 
-`Idempotency key` header must be set in the request. 
+`Idempotency-Key` header must be set in the request. 
 Then, if a capture request fails for any reason, it can be retried with the same idempotency key. 
 Also, in the case of retries, it will prevent duplicating capture operations.
 
