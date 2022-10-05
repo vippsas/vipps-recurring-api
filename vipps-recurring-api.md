@@ -185,8 +185,6 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
    We recommend at least 2 days retry.
 5. If there is a product that is shipped to the customer, the charge should be captured at this point. 
    Capture the charge by calling the [`capture charge`][capture-charge-endpoint] endpoint.
-   If there is no product being shipped, nor a need to provide access at a later point - the merchant should change the
-   merchant sale unit setup to use `DIRECT CAPTURE` instead and create charge with `"transactionType": "DIRECT_CAPTURE"`.
 
 
 ## API endpoints
