@@ -14,30 +14,153 @@ Please check the [migration guide](#migration-guide) to see the differences betw
 
 ### Campaign
 The Recurring API V3 adds new campaign types.
-See [TODO-title](#TODO-add-link)
+See [Campaigns](#TODO-add-link) in the API Guide
 
 ### Reserve capture
-The Recurring API V3 add the functionality to do reserve and capture on recurring charges. 
+The Recurring API V3 adds the functionality to do reserve and capture on recurring charges. 
 (Only available on initial charge in the Recurring API V2)
-See [TODO-title](#TODO-add-link)
+See [Reserve capture](#TODO-add-link) in the API Guide
 
 ### Partial capture
-The Recurring API V3 add the functionality to do partial capture on reserved charges.
-See [TODO-title](#TODO-add-link)
+The Recurring API V3 adds the functionality to do partial capture on reserved charges.
+See [TODO-title](#TODO-add-link) in the API Guide
 
 ### Response statuses
-- Update agreement now returns 204 No Content
+
+The API V3 returns different response status for some endpoints:
+
+| Endpoint                                        | V2 response status | V3 response status |
+|-------------------------------------------------|--------------------|--------------------|
+| [`update agreement`][update-agreement-endpoint] | `200 OK`           | `204 No Content`   | 
+| [`cancel charge`][cancel-charge-endpoint]       | `200 OK`           | `204 No Content`   | 
+| [`capture charge`][capture-charge-endpoint]     | `200 OK`           | `204 No Content`   | 
+| [`refund charge`][refund-charge-endpoint]       | `200 OK`           | `204 No Content`   | 
 
 ### Error responses
 
 ### New price representation 
 
-### Idempotency key
+The Recurring API V3 introduces a new JSON representation for agreement price.
+
+There is no change on the charge limits rules. Going forward, we will look into how we can implement charge limits in a better way, that takes care of the merchants needs.
+
+To draft an agreement with a fix amount with the same charge limit as in V2, `pricing.type` should be set to `LEGACY`.
+
+**Note**: `pricing.type` is an optional field. If not provided in the request the type will be defaulted to `LEGACY`.
+
+Truncated example of request body for the [draft agreement]() endpoint from V2 and the equivalent in V3:
+
+V2 request body
+```json
+{
+  "currency": "NOK",
+  "price": 100000,
+  "productName": "MyNews Digital",
+  "customerPhoneNumber": "45678272",
+  "...": "..."
+}
+```
+
+V3 request body
+```json
+{
+  "pricing": {
+    "type": "LEGACY",
+    "amount": 180000,
+    "currency": "NOK"
+  },
+  "productName": "MyNews Digital",
+  "customerPhoneNumber": "45678272",
+  "...": "..."
+}
+```
+
+To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`
+
+Truncated example of request body for the [draft agreement]() endpoint from V2 and the equivalent in V3:
+
+V2 request body
+```json
+{
+  "currency": "NOK",
+  "variableAmount": {
+    "suggestedMaxAmount": 3000
+  },
+  "productName": "MyNews Digital",
+  "customerPhoneNumber": "45678272",
+  "...": "..."
+}
+```
+
+V3 request body
+```json
+{
+  "pricing": {
+    "type": "VARIABLE",
+    "suggestedMaxAmount": 180000,
+    "currency": "NOK"
+  },
+  "productName": "MyNews Digital",
+  "customerPhoneNumber": "45678272",
+  "...": "..."
+}
+```
 
 ### New interval representation
+The Recurring API V3 introduces a new JSON representation for agreement interval.
+
+Truncated example of request body for the [draft agreement]() endpoint from V2 and the equivalent in V3:
+
+V2 request body
+```json
+{
+  "interval": "MONTH",
+  "intervalCount": 1,
+  "productName": "MyNews Digital",
+  "customerPhoneNumber": "45678272",
+  "...": "..."
+}
+```
+
+V3 request body
+```json
+{
+  "interval": {
+    "unit": "MONTH",
+    "count": 1
+  },
+  "productName": "MyNews Digital",
+  "customerPhoneNumber": "45678272",
+  "...": "..."
+}
+```
 
 ### More details on Charges
 
+
+
+
+### Idempotency key
+
+`Idempotency-Key` is now required for the following endpoints:
+- [`draft agreement`][draft-agreement-endpoint]
+- [`create charge`][create-charge-endpoint]
+- [`capture charge`][capture-charge-endpoint]
+- [`refund charge`][refund-charge-endpoint] 
+
+
 ### Product description guidelines
+We do not recommend you to use `Product Description` for agreements with a campaign.
+We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
+`Product description` will be, at a point in the future, phased out in order to improve user experience.
+
+
+[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
+[update-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Charge-v3-endpoints/operation/CreateChargeV3
+[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
+[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
+[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
+
 
 
