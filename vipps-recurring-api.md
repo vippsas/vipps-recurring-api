@@ -172,6 +172,8 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. If there is a product that is shipped to the customer, the initial charge should be captured at this point.
    Capture the charge by calling the [`capture charge`][capture-charge-endpoint] endpoint.
+   If there is no product being shipped, or a need to provide access at a later point - the merchant should change the
+   merchant sale unit setup to use `DIRECT CAPTURE` instead.
 5. For all future charges, you must create a charge by calling the [`create charge`][create-charge-endpoint] endpoint.
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
