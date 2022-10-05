@@ -647,7 +647,7 @@ Also, in the case of retries, it will prevent duplicating capture operations.
 
 **Please note:** It is important to check the response of the /capture call. The capture is only successful when the response is `HTTP 204 No Content`.
 
-Capture can be made up to 180 days after reservation. Attempting to capture an older payment will result in a HTTP 400 Bad Request.
+Capture can be made up to 180 days after reservation. Attempting to capture an older payment will result in `HTTP 400 Bad Request`.
 
 ### Partial capture (Coming soon)
 
