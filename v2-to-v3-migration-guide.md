@@ -44,7 +44,7 @@ The Recurring API V3 introduces a new JSON representation for agreement price.
 
 There is no change on the charge limits rules. Going forward, we will look into how we can implement charge limits in a better way, that takes care of the merchants needs.
 
-To draft an agreement with a fix amount with the same charge limit as in V2, `pricing.type` should be set to `LEGACY`.
+To draft an agreement with a fixed amount with the same charge limit as in V2, `pricing.type` should be set to `LEGACY`.
 
 **Note**: `pricing.type` is an optional field. If not provided in the request the type will be defaulted to `LEGACY`.
 
