@@ -1656,16 +1656,16 @@ This is the preferred flow whenever you have a type of campaign where the subscr
 
 ### Initial charge and campaign
 
-![flow_initial_charge_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
-
 In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
 Ideally, this flow is intended for when you have a combination of an additional cost when setting up the agreement, presented as the initial charge, as well as having a limited time offer on the actual subscription.
 
-**Agreement flow with initial and campaign v2**
-![flow_initial_charge_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
+**Agreement screens with initial and campaign v2**
+![screen_initial_charge_legacy_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
 
-**(Coming soon) Agreement flow with initial and campaign v3**
+**(Coming soon) Agreement screens with initial and campaign v3**
+![screen_initial_charge_legacy_campaign](images/campaigns/screens/price-campaign-with-initial-charge.png)
+
 
 ## Questions?
 
