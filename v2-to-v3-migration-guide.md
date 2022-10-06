@@ -14,16 +14,16 @@ Please check the [migration guide](#migration-guide) to see the differences betw
 
 ### Campaign
 The Recurring API V3 adds new campaign types.
-See [Campaigns](#TODO-add-link) in the API Guide
+See [Campaigns][campaigns] in the API Guide
 
 ### Reserve capture
 The Recurring API V3 adds the functionality to do reserve and capture on recurring charges. 
 (Only available on initial charge in the Recurring API V2)
-See [Reserve capture](#TODO-add-link) in the API Guide
+See [Reserve capture][reserve-capture] in the API Guide
 
 ### Partial capture
 The Recurring API V3 adds the functionality to do partial capture on reserved charges.
-See [TODO-title](#TODO-add-link) in the API Guide
+See [partial capture][partial-capture] in the API Guide
 
 ### Response statuses
 
@@ -37,6 +37,25 @@ The API V3 returns different response status for some endpoints:
 | [`refund charge`][refund-charge-endpoint]       | `200 OK`           | `204 No Content`   | 
 
 ### Error responses
+
+In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
+For example, if the agreement is not active the [`update agreement`][update-agreement-endpoint] endpoint will return:
+
+```json
+{
+    "type": "https://vipps.no/problems/recurring/illegal-agreement-update",
+    "title": "Bad Request",
+    "status": 400,
+    "detail": "Illegal update",
+    "instance": "/vipps-recurring-merchant-api/v3/agreements/agr_nmgWS4e",
+    "contextId": "ef087f56-4281-494d-9591-5e4cf6fe05b5",
+    "extraDetails": [
+        {
+            "status": "Cannot modify an agreement which is not active."
+        }
+    ]
+}
+```
 
 ### New price representation 
 
@@ -161,6 +180,10 @@ We see that the user experience is not optimal when a lot of text is "squeezed" 
 [cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
 [capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
+
+[partial-capture]: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api/#partial-capture-coming-soon
+[reserve-capture]: #todo-add-link
+[campaigns]: #todo-add-link
 
 
 
