@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.6.8</title>
+    <title>Recurring Payments Merchant API v2.6.9</title>
 
     <style>
     </style>
@@ -2736,7 +2736,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>»»» end</td>
@@ -2778,7 +2778,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»» productName</td>
@@ -2848,14 +2848,14 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>»»» maxAmount</td>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -2943,14 +2943,13 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
   &quot;currency&quot;: &quot;NOK&quot;,
   &quot;interval&quot;: &quot;MONTH&quot;,
   &quot;intervalCount&quot;: 1,
-  &quot;isApp&quot;: true,
   &quot;merchantRedirectUrl&quot;: &quot;https://merchant.redirect.url.no&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://merchant.agreement.url.no&quot;,
   &quot;customerPhoneNumber&quot;: &quot;45678272&quot;,
   &quot;price&quot;: 2500,
   &quot;productDescription&quot;: &quot;MyNews on web&quot;,
   &quot;productName&quot;: &quot;MyNews Digital&quot;,
-  &quot;skipLandingPage&quot;: true
+  &quot;skipLandingPage&quot;: false
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3115,14 +3114,13 @@ More information about this can be found in the API documentation.</p>
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">1</span>,
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.redirect.url.no&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.agreement.url.no&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;45678272&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">2500</span>,
   <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;MyNews on web&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;MyNews Digital&quot;</span>,
-  <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">true</span>
+  <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">false</span>
 }
 </code></pre>
 <h3 id="create-a-new-agreement--to-be-confirmed-in-vipps-parameters">Parameters</h3>
@@ -3309,8 +3307,8 @@ More information about this can be found in the API documentation.</p>
 <td>» isApp</td>
 <td>body</td>
 <td>boolean</td>
-<td>true</td>
-<td>If merchant is redirecting user from an app or a mobile device.</td>
+<td>false</td>
+<td>This parameter indicates whether payment request is triggered from</td>
 </tr>
 <tr>
 <td>» merchantAgreementUrl</td>
@@ -3389,6 +3387,11 @@ For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 �
 <p><strong>» intervalCount</strong>: Number of intervals between charges. Example: interval=week,
 intervalCount=2 to be able to charge every two weeks.
 Charges should occur at least once a year.</p>
+<p><strong>» isApp</strong>: This parameter indicates whether payment request is triggered from
+Mobile App or Web browser. Based on this value, response will be
+redirect URL for Vipps landing page or deeplink URL to connect vipps
+App. When isApp is set to true, URLs passed to Vipps will not be
+validated as regular URLs.</p>
 <p><strong>» merchantAgreementUrl</strong>: URL where Vipps can send the customer to view/manage their
 subscription. Typically a &quot;My page&quot; where the user can change, pause, cancel, etc.
 We recommend letting users log in with Vipps, not with username and password.
@@ -4924,6 +4927,7 @@ Key size can be between 1 to 40 characters.</p>
     },
     <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
     <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+    <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
     <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -5010,21 +5014,21 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>»»» end</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>»»» eventDate</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>»»» eventText</td>
@@ -5115,7 +5119,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»» productName</td>
@@ -5123,6 +5127,13 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>»» productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>»» start</td>
@@ -5178,14 +5189,14 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>»»» maxAmount</td>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -5309,7 +5320,6 @@ curl -X POST https://api.vipps.no/recurring/v3/agreements \
     &quot;unit&quot;: &quot;MONTH&quot;,
     &quot;count&quot;: 1
   },
-  &quot;isApp&quot;: true,
   &quot;merchantRedirectUrl&quot;: &quot;https://merchant.redirect.url.no&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://merchant.agreement.url.no&quot;,
   &quot;customerPhoneNumber&quot;: &quot;45678272&quot;,
@@ -5487,7 +5497,6 @@ More information about this can be found in the API documentation.</p>
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">1</span>
   },
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.redirect.url.no&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.agreement.url.no&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;45678272&quot;</span>,
@@ -5715,7 +5724,7 @@ More information about this can be found in the API documentation.</p>
 <td>» isApp</td>
 <td>body</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>If merchant is redirecting user from an app or a mobile device.</td>
 </tr>
 <tr>
@@ -5745,6 +5754,13 @@ More information about this can be found in the API documentation.</p>
 <td>string</td>
 <td>true</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>» productDescription</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>» scope</td>
@@ -6193,6 +6209,7 @@ merchants making payments for themselves.</p>
   },
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -6269,6 +6286,7 @@ curl -X PATCH https://api.vipps.no/recurring/v3/agreements/{agreementId} \
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
   &quot;suggestedMaxAmount&quot;: 3000,
   &quot;productName&quot;: &quot;Pluss-abonnement&quot;,
+  &quot;productDescription&quot;: &quot;string&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://www.example.com/vipps-subscriptions/1234/&quot;,
   &quot;status&quot;: &quot;STOPPED&quot;
 }&#x27;</span>;
@@ -6431,6 +6449,7 @@ we suggest leaving the agreement active and skipping the creation of charges as 
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;STOPPED&quot;</span>
 }
@@ -6530,6 +6549,13 @@ we suggest leaving the agreement active and skipping the creation of charges as 
 <td>string</td>
 <td>false</td>
 <td>Name of the product being subscribed to.</td>
+</tr>
+<tr>
+<td>» productDescription</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>» merchantAgreementUrl</td>
@@ -9654,7 +9680,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»» currency</td>
@@ -9738,21 +9764,21 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been captured/charged, in case of status charged/partial capture.<br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The total amount which has been captured/charged, in case of status charged/partial capture.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»»» refunded</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been refunded, in case of status refund/partial refund.<br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The total amount which has been refunded, in case of status refund/partial refund.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»»» cancelled</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been cancelled.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The total amount which has been cancelled.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»» history</td>
@@ -9780,7 +9806,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount related to the operation.<br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The amount related to the operation.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»»» idempotencyKey</td>
@@ -12194,21 +12220,21 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been captured/charged, in case of status charged/partial capture.<br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The total amount which has been captured/charged, in case of status charged/partial capture.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>refunded</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been refunded, in case of status refund/partial refund.<br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The total amount which has been refunded, in case of status refund/partial refund.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>cancelled</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been cancelled.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The total amount which has been cancelled.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -12296,7 +12322,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount related to the operation.<br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The amount related to the operation.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>idempotencyKey</td>
@@ -12572,7 +12598,7 @@ System.out.println(response.toString());
   },
   <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.example.com/vipps-landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
@@ -12629,7 +12655,7 @@ System.out.println(response.toString());
 <td><a href="#schemainitialchargev2">InitialChargeV2</a></td>
 <td>false</td>
 <td>none</td>
-<td>An initial charge for a new agreement. <br />The charge will be processed immediately when the user approves the agreement.</td>
+<td>An initial charge for a new agreement.<br />The charge will be processed immediately when the user approves the agreement.</td>
 </tr>
 <tr>
 <td>interval</td>
@@ -12643,14 +12669,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Number of intervals between charges. Example: interval=week,<br />intervalCount=2 to be able to charge every two weeks. <br />Charges should occur at least once a year.</td>
+<td>Number of intervals between charges. Example: interval=week,<br />intervalCount=2 to be able to charge every two weeks.<br />Charges should occur at least once a year.</td>
 </tr>
 <tr>
 <td>isApp</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
-<td>If merchant is redirecting user from an app or a mobile device.</td>
+<td>This parameter indicates whether payment request is triggered from<br />Mobile App or Web browser. Based on this value, response will be<br />redirect URL for Vipps landing page or deeplink URL to connect vipps<br />App. When isApp is set to true, URLs passed to Vipps will not be<br />validated as regular URLs.</td>
 </tr>
 <tr>
 <td>merchantAgreementUrl</td>
@@ -12671,7 +12697,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -12738,11 +12764,12 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
   },
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.example.com/vipps-landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>,
   <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">false</span>
 }
@@ -12794,7 +12821,7 @@ System.out.println(response.toString());
 <td><a href="#schemainitialchargev3">InitialChargeV3</a></td>
 <td>false</td>
 <td>none</td>
-<td>An initial charge for a new agreement. <br />The charge will be processed immediately when the user approves the agreement.</td>
+<td>An initial charge for a new agreement.<br />The charge will be processed immediately when the user approves the agreement.</td>
 </tr>
 <tr>
 <td>interval</td>
@@ -12806,7 +12833,7 @@ System.out.println(response.toString());
 <tr>
 <td>isApp</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>If merchant is redirecting user from an app or a mobile device.</td>
 </tr>
@@ -12829,7 +12856,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -12837,6 +12864,13 @@ System.out.println(response.toString());
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>scope</td>
@@ -12885,14 +12919,14 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Reference of a an agreement which user may agree to. <br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
+<td>Reference of a an agreement which user may agree to.<br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
 </tr>
 <tr>
 <td>agreementId</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Id of a an agreement which user may agree to. <br />Initially the agreement is in a pending state waiting for user approval. <br />It enters active state once the user has approved it in Vipps.</td>
+<td>Id of a an agreement which user may agree to.<br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
 </tr>
 <tr>
 <td>vippsConfirmationUrl</td>
@@ -12940,7 +12974,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Id of a an agreement which user may agree to. <br />Initially the agreement is in a pending state waiting for user approval. <br />It enters active state once the user has approved it in Vipps.</td>
+<td>Id of a an agreement which user may agree to.<br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
 </tr>
 <tr>
 <td>vippsConfirmationUrl</td>
@@ -13041,7 +13075,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -13139,6 +13173,7 @@ System.out.println(response.toString());
   },
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
@@ -13198,7 +13233,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -13206,6 +13241,13 @@ System.out.println(response.toString());
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>start</td>
@@ -13295,7 +13337,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>campaign</td>
@@ -13309,7 +13351,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -13364,6 +13406,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;STOPPED&quot;</span>
 }
@@ -13387,7 +13430,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -13395,6 +13438,13 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Name of the product being subscribed to.</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>merchantAgreementUrl</td>
@@ -13455,7 +13505,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Id of a an agreement which user may agree to. <br />Initially the agreement is in a pending state waiting for user approval. <br />It enters active state once the user has approved it in Vipps.</td>
+<td>Id of a an agreement which user may agree to.<br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
 </tr>
 </tbody>
 </table>
@@ -13487,7 +13537,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -13520,14 +13570,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>maxAmount</td>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -13560,7 +13610,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>end</td>
@@ -13601,21 +13651,21 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>start</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>end</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 </tbody>
 </table>
@@ -13665,14 +13715,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>eventDate</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>eventText</td>
@@ -13772,21 +13822,21 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>end</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>eventDate</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>eventText</td>
@@ -13877,7 +13927,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount that must be paid or approved before starting the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The amount that must be paid or approved before starting the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -13963,7 +14013,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount that must be payed or approved before starting the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The amount that must be payed or approved before starting the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -14040,7 +14090,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -14127,7 +14177,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>TransactionType</td>
@@ -14381,7 +14431,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -14525,7 +14575,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount to refund on a captured/charged charge.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The amount to refund on a captured/charged charge.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -14565,7 +14615,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount to capture on a reserved charge.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The amount to capture on a reserved charge.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>description</td>
