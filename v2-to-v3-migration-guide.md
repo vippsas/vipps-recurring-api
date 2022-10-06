@@ -39,7 +39,7 @@ The API V3 returns different response status for some endpoints:
 ### Error responses
 
 In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-For example, when calling [`update agreement`][update-agreement-endpoint] endpoint with a not active agreement, 
+For example, when calling [`update agreement`][update-agreement-endpoint] endpoint with a stopped agreement, 
 the response will be the following:
 
 ```json
