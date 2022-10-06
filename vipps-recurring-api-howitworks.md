@@ -7,6 +7,13 @@ END_METADATA -->
 
 # Vipps Recurring API: How It Works
 
+<!-- START_COMMENT -->
+
+💥 Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
+
 Vipps Recurring can be used for subscriptions, donations or other recurring payments.
 
 For technical documentation go to:

@@ -7,6 +7,13 @@ END_METADATA -->
 
 # Vipps Recurring API
 
+<!-- START_COMMENT -->
+
+💥 Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
+
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user, the merchant can send charges
@@ -632,17 +639,17 @@ See:
 
 ### Capture a charge
 
-Capture payment allows the merchant to capture the reserved amount of a charge. 
+Capture payment allows the merchant to capture the reserved amount of a charge.
 The API allows for both a full amount capture and a partial amount capture (partial amount only available in API V3)(Coming soon)
 
-The amount to capture cannot be higher than the reserved amount. 
-According to Norwegian regulations, capture cannot be done before the goods have been shipped. 
+The amount to capture cannot be higher than the reserved amount.
+According to Norwegian regulations, capture cannot be done before the goods have been shipped.
 The `description` text is mandatory and is displayed to the end user in the Vipps app.
 
 Capture is done with the [`capture charge`][capture-charge-endpoint] endpoint.
 
-`Idempotency-Key` header must be set in the request. 
-Then, if a capture request fails for any reason, it can be retried with the same idempotency key. 
+`Idempotency-Key` header must be set in the request.
+Then, if a capture request fails for any reason, it can be retried with the same idempotency key.
 Also, in the case of retries, it will prevent duplicating capture operations.
 
 **Please note:** It is important to check the response of the /capture call. The capture is only successful when the response is `HTTP 204 No Content`.
@@ -651,7 +658,7 @@ Capture can be made up to 180 days after reservation. Attempting to capture an o
 
 ### Partial capture (Coming soon)
 
-Partial capture may be used in cases where a partial order is shipped or for other reasons. 
+Partial capture may be used in cases where a partial order is shipped or for other reasons.
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.

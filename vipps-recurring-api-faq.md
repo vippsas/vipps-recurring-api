@@ -7,6 +7,13 @@ END_METADATA -->
 
 # Vipps Recurring API: Frequently Asked Questions
 
+<!-- START_COMMENT -->
+
+💥 Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
+
 See the
 [Vipps Recurring API](vipps-recurring-api.md)
 for all the details.
