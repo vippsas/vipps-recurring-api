@@ -155,10 +155,59 @@ V3 request body
 }
 ```
 
-### More details on Charges
+### More details on charges
 
+In the API V3, the response from the [`fetch charge`][fetch-charge-endpoint] endpoint 
+contains the history of the charge and not just the current status.
+It also contains a summary of the total of amounts captured, refunded and cancelled. 
 
+Truncated example of the response from the [`fetch charge`][fetch-charges-endpoint] endpoint:
 
+````json
+{
+  "id": "chr_WCVbcA",
+  "status": "REFUNDED",
+  "amount": 1000,
+  "type": "RECURRING",
+  "transactionType": "RESERVE_CAPTURE",
+  "...": "...",
+  "summary": {
+    "captured": 1000,
+    "refunded": 600,
+    "cancelled": 0
+  },
+  "history": [
+    {
+      "occurred": "2022-09-14T10:31:15Z",
+      "event": "CREATE",
+      "amount": 200,
+      "idempotencyKey": "e80bd8c6-3b83-4583-a49c-847021fcd839",
+      "success": true
+    },
+    {
+      "occurred": "2022-09-16T06:01:00Z",
+      "event": "RESERVE",
+      "amount": 200,
+      "idempotencyKey": "chr-4assY8f-agr_FJw2Anb-ProcessPayment",
+      "success": true
+    },
+    {
+      "occurred": "2022-09-18T06:01:00Z",
+      "event": "CAPTURE",
+      "amount": 1000,
+      "idempotencyKey": "096b1415-2c77-4001-9576-531a856bbaf4",
+      "success": true
+    },
+    {
+      "occurred": "2022-09-20T06:01:00Z",
+      "event": "REFUND",
+      "amount": 600,
+      "idempotencyKey": "0bc7cc3b-fdef-4d24-b4fe-49b7da40d22f",
+      "success": true
+    }
+  ]
+}
+````
 
 ### Idempotency key
 
@@ -181,6 +230,7 @@ We see that the user experience is not optimal when a lot of text is "squeezed" 
 [cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
 [capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
+[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
 
 [partial-capture]: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api/#partial-capture-coming-soon
 [reserve-capture]: #todo-add-link
