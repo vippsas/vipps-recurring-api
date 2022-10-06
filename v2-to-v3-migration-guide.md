@@ -8,22 +8,21 @@ END_METADATA -->
 # Vipps Recurring API V2
 
 V2 API is now deprecated. 
-Please check the [migration guide](#migration-guide) to see the differences between Recurring API v2 and v3
+Please check the [migration guide](#migration-guide) to see the differences between Recurring API v2 and v3.
 
 ## Migration guide
 
 ### Campaign
 The Recurring API V3 adds new campaign types.
-See [Campaigns][campaigns] in the API Guide
+See [Campaigns][campaigns] in the API Guide.
 
 ### Reserve capture
-The Recurring API V3 adds the functionality to do reserve and capture on recurring charges. 
-(Only available on initial charge in the Recurring API V2)
-See [Reserve capture][reserve-capture] in the API Guide
+The Recurring API V3 adds the functionality to do reserve and capture on recurring charges.
+See [Reserve capture][reserve-capture] in the API Guide.
 
 ### Partial capture
 The Recurring API V3 adds the functionality to do partial capture on reserved charges.
-See [partial capture][partial-capture] in the API Guide
+See [partial capture][partial-capture] in the API Guide.
 
 ### Response statuses
 
@@ -95,7 +94,7 @@ V3 request body
 }
 ```
 
-To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`
+To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
 Truncated example of request body for the [draft agreement]() endpoint from V2 and the equivalent in V3:
 
