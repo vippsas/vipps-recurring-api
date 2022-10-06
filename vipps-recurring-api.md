@@ -545,7 +545,7 @@ Campaigns cannot be used in combination with [variable amount](#Recurring-agreem
 
 #### Campaigns in V2 API
 
-![flow_Campaign](images/campaigns/flow-legacy-campaign.png)
+![screen-legacy-campaign](images/campaigns/screens/legacy-campaign.png)
 
 In order to start a campaign, the campaign field must be added either to the
 [`draft agreement`][draft-agreement-endpoint-v2] request
@@ -579,7 +579,7 @@ See more about the different campaign types in the table below.
 | Campaign types       | Description                                                                                             | Example                                                                 |
 |----------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 | `price campaign`     | Different interval price until specified date. Same interval as agreement.                              | 1kr every week until 2022-12-25T00:00:00Z and then 50kr every week      |
-| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR) | 1kr for 10 weeks and then 349kr every month                             |
+| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR) | 10 weeks for 1kr and then 349kr every month                             |
 | `event campaign`     | A set price until a given event date with a text describing the event                                   | 1kr until Christmas and then 349kr every month                          |
 | `full flex campaign` | Different price and interval until a given date                                                         | 100kr every month until 2023-01-01T00:00:00Z and then 1000kr every year |
 
@@ -589,7 +589,7 @@ for a campaign in the start of an agreement
 
 ##### Price campaign
 
-![price-campaign](images/campaigns/price-campaign.png)  
+![price-campaign-explanation](images/campaigns/price-campaign.png)  
 
 ```json
 {
@@ -606,9 +606,11 @@ for a campaign in the start of an agreement
 | `price`             | The price that the customer will pay for each interval during the campaign  |
 | `end`               | The end date of the campaign                                                |
 
+![screen-price-campaign](images/campaigns/screens/price-campaign.png)
+
 ##### Period campaign
 
-![period-campaign](images/campaigns/period-campaign.png)
+![period-campaign-explanation](images/campaigns/period-campaign.png)
 
 ```json
 {
@@ -627,6 +629,8 @@ for a campaign in the start of an agreement
 | `campaignType` | The type of the campaign                                                                                                |
 | `price`        | The price that the customer will pay for the period of the campaign                                                     |
 | `period`       | The period where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+
+![screen-price-campaign](images/campaigns/screens/period-campaign.png)
 
 ##### Event campaign
 
@@ -649,7 +653,9 @@ for a campaign in the start of an agreement
 | `eventDate`     | The date of the event marking the end of the campaign     |
 | `eventText`     | The event text to display to the end user                 |
 
-**Note:** We recommend to start the event text with lowercase for better user experience. See example below
+**Note:** We recommend to start the event text with lowercase for better user experience. See example below.
+
+![screen-event-campaign](images/campaigns/screens/event-campaign.png)
 
 ##### Full flex campaign
 
@@ -677,6 +683,8 @@ Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
 | `price`        | The price that the customer will pay for each interval during the campaign                                                        |
 | `end`          | The end date of the campaign                                                                                                      |
 | `interval`     | The payment interval where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+
+![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
 ### Retrieve an agreement
 
@@ -1648,14 +1656,14 @@ This is the preferred flow whenever you have a type of campaign where the subscr
 
 ### Initial charge and campaign
 
-![flow_initial_charge_campaign](images/campaign_agreement_with_initial_charge.png)
+![flow_initial_charge_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
 
 In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
 Ideally, this flow is intended for when you have a combination of an additional cost when setting up the agreement, presented as the initial charge, as well as having a limited time offer on the actual subscription.
 
 **Agreement flow with initial and campaign v2**
-![flow_initial_charge_campaign](images/flow-Initial-charge-and-campaign-v2.png)
+![flow_initial_charge_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
 
 **(Coming soon) Agreement flow with initial and campaign v3**
 
