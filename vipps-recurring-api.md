@@ -1670,7 +1670,7 @@ Ideally, this flow is intended for when you have a combination of an additional 
 **Agreement screens with initial and campaign v2**
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
 
-**(Coming soon) Agreement screens with initial and campaign v3**
+**(Coming soon WORK IN PROGRESS) Agreement screens with initial and campaign v3**
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/price-campaign-with-initial-charge.png)
 
 
