@@ -20,7 +20,6 @@ When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
 The overall flow is:
-
 * The merchant creates a draft agreement and proposes it to the customer via Vipps.
 * The customer approves the agreement in Vipps.
 * The merchant sends a charge request to Vipps at least two days before due date
@@ -110,7 +109,7 @@ Document version 2.5.10.
   - [Timeouts](#timeouts)
     - [Using a phone](#using-a-phone)
     - [Using a laptop/desktop](#using-a-laptopdesktop)
-- [Testing](#testing)
+  - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
   - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
     - [Normal agreement flow](#normal-agreement-flow)
@@ -152,7 +151,7 @@ You can also [Manage charges and agreements](#manage-charges-and-agreements).
 
 For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
-1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint] endpoint.
+1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint-v2] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture of the initial charge (if one was defined in the first step).
@@ -170,7 +169,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
-1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint] endpoint.
+1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint-v2] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture of the initial charge (if one was defined in the first step).
@@ -194,7 +193,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | Operation                                       | Description                                           | Endpoint                                              |
 |-------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
 | List agreements                                 | List all agreements for a merchant.                   | [`list agreements`][list-agreements-endpoint]         |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`draft agreement`][draft-agreement-endpoint]         |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`draft agreement`][draft-agreement-endpoint-v2]                                      |
 | [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`fetch agreement`][fetch-agreement-endpoint]         |
 | [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`update agreement`][update-agreement-patch-endpoint] |
 | [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`update agreement`][update-agreement-patch-endpoint] |
@@ -359,7 +358,7 @@ in automatically through Vipps. See the
 for more details.
 
 The request parameters have the following size limits
-(see the [`draft agreement][draft-agreement-endpoint] endpoint for more details):
+(see the [`draft agreement][draft-agreement-endpoint-v2] endpoint for more details):
 
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
@@ -388,7 +387,7 @@ user can then approve the agreement.
 
 ### Accept an agreement
 
-The [`draft agreement`][draft-agreement-endpoint] endpoint will return the following JSON structure.
+The [`draft agreement`][draft-agreement-endpoint-v2] endpoint will return the following JSON structure.
 
 ```json
 {
@@ -551,10 +550,12 @@ A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
 Campaigns cannot be used in combination with [variable amount](#Recurring-agreements-with-variable-amount).
 
-![flow_Campaign](images/flow-Campaign.png)
+#### Campaigns in V2 API
+
+![screen-legacy-campaign](images/campaigns/screens/legacy-campaign.png)
 
 In order to start a campaign, the campaign field must be added either to the
-[`draft agreement`][draft-agreement-endpoint] request
+[`draft agreement`][draft-agreement-endpoint-v2] request
 for a campaign in the start of an agreement, or to the
 [`update agreement`][update-agreement-patch-endpoint] request
 for an ongoing agreement. When adding a campaign
@@ -577,6 +578,120 @@ date-time is used. All dates must be in date-time format as according to
 | `start`         | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable |
 | `end`           | End date of campaign offer, can not be in the past                                                                      |
 | `campaignPrice` | The price that will be shown for comparison                                                                             |
+
+#### (Coming soon) Campaigns in V3 API
+In V3, we introduce 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign. 
+See more about the different campaign types in the table below.
+
+| Campaign types       | Description                                                                                             | Example                                                                 |
+|----------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `price campaign`     | Different interval price until specified date. Same interval as agreement.                              | 1kr every week until 2022-12-25T00:00:00Z and then 50kr every week      |
+| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR) | 10 weeks for 1kr and then 349kr every month                             |
+| `event campaign`     | A set price until a given event date with a text describing the event                                   | 1kr until Christmas and then 349kr every month                          |
+| `full flex campaign` | Different price and interval until a given date                                                         | 100kr every month until 2023-01-01T00:00:00Z and then 1000kr every year |
+
+In order to start a campaign the campaign field has to be added to the agreement draft
+[`POST:/recurring/v3/agreements`][draft-agreement-endpoint-v3]
+for a campaign in the start of an agreement
+
+##### Price campaign
+
+![price-campaign-explanation](images/campaigns/price-campaign.png)  
+
+```json
+{
+  "campaign": {
+    "campaignType": "PRICE_CAMPAIGN",
+    "end": "2022-12-25T00:00:00Z",
+    "price": 100
+  }
+}
+```
+| Field               | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| `campaignType`      | The type of the campaign                                                    |
+| `price`             | The price that the customer will pay for each interval during the campaign  |
+| `end`               | The end date of the campaign                                                |
+
+![screen-price-campaign](images/campaigns/screens/price-campaign.png)
+
+##### Period campaign
+
+![period-campaign-explanation](images/campaigns/period-campaign.png)
+
+```json
+{
+ "campaign": {
+    "type": "PERIOD_CAMPAIGN",
+    "price": 100,
+    "period": {
+      "unit": "WEEK",
+      "count": 10
+    }
+  }
+}
+```
+| Field          | Description                                                                                                             |
+|----------------|-------------------------------------------------------------------------------------------------------------------------|
+| `campaignType` | The type of the campaign                                                                                                |
+| `price`        | The price that the customer will pay for the period of the campaign                                                     |
+| `period`       | The period where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+
+![screen-price-campaign](images/campaigns/screens/period-campaign.png)
+
+##### Event campaign
+
+![event-campaign](images/campaigns/event-campaign.png)
+
+```json
+{
+"campaign": {
+    "type": "EVENT_CAMPAIGN",
+    "price": 100,
+    "eventDate": "2022-09-01T00:00:00Z",
+    "eventText": "To the end of august"
+  }
+}
+```
+| Field           | Description                                               |
+|-----------------|-----------------------------------------------------------|
+| `campaignType`  | The type of the campaign                                  |
+| `price`         | The price that the customer will pay until the event date |
+| `eventDate`     | The date of the event marking the end of the campaign     |
+| `eventText`     | The event text to display to the end user                 |
+
+**Note:** We recommend to start the event text with lowercase for better user experience. See example below.
+
+![screen-event-campaign](images/campaigns/screens/event-campaign.png)
+
+##### Full flex campaign
+
+**Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
+Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
+
+![full-flex-campaign](images/campaigns/full-flex-campaign.png)
+
+```json
+{
+ "campaign": {
+    "type": "FULL_FLEX_CAMPAIGN",
+    "price": 10000,
+    "end": "2023-01-01T00:00:00Z",
+   "interval": {
+     "unit": "MONTH",
+     "count": 1
+   }
+  }
+}
+```
+| Field          | Description                                                                                                                       |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `campaignType` | The type of the campaign                                                                                                          |
+| `price`        | The price that the customer will pay for each interval during the campaign                                                        |
+| `end`          | The end date of the campaign                                                                                                      |
+| `interval`     | The payment interval where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+
+![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
 ### Retrieve an agreement
 
@@ -950,7 +1065,7 @@ This is done through Vipps Userinfo which
 You can learn more at the [OIDC Standard](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
 To enable the possibility to fetch profile information for a user the merchant can add a `scope`
-parameter to the [`draft agreement`][draft-agreement-endpoint] call.
+parameter to the [`draft agreement`][draft-agreement-endpoint-v2] call.
 
 If the user has not already consented to sharing information from Vipps to the
 merchant the user will be asked for such consent before activating the agreement.
@@ -986,7 +1101,7 @@ a customer.
 
 1. Retrieve the access token by calling the [`access token`][access-token-endpoint] endpoint.
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
-   access to (valid scope) before calling the [`draft agreement`][draft-agreement-endpoint] endpoint.
+   access to (valid scope) before calling the [`draft agreement`][draft-agreement-endpoint-v2] endpoint.
 3. The user consents to the information sharing and accepts the agreement in Vipps.
 4. Retrieve the `sub` by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
 5. Using the sub from step 4, call the [`user info`][userinfo-endpoint] endpoint to retrieve the user's information.
@@ -998,7 +1113,7 @@ and will result in a `HTTP Unauthorized 401` error.
 
 ### Example calls
 
-To request this scope add the scope to the initial [`draft agreement`][draft-agreement-endpoint] call
+To request this scope add the scope to the initial [`draft agreement`][draft-agreement-endpoint-v2] call
 
 Example of request with scope:
 
@@ -1322,7 +1437,7 @@ Skipping the landing page is only reserved for physical points of sale and vendi
 This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
 
 If the `skipLandingPage` property is set to `true` in the
-[`draft agreement`][draft-agreement-endpoint]
+[`draft agreement`][draft-agreement-endpoint-v2]
 call, it will cause a push notification to be sent to the given phone number
 immediately, without loading the landing page.
 
@@ -1472,7 +1587,7 @@ has an additional 5 minutes to complete the payment in Vipps.
 
 This means that the user has a total of 10 minutes to complete the payment.
 
-# Testing
+## Testing
 
 To facilitate automated testing in the
 [Vipps Test Environment (MT)][vipps-test-environment],
@@ -1538,7 +1653,7 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 
 ### Campaign
 
-![flow_Campaign](images/flow-Campaign.png)
+See [Campaigns](#campaigns) for details about campaigns.
 
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
 
@@ -1548,11 +1663,16 @@ This is the preferred flow whenever you have a type of campaign where the subscr
 
 ### Initial charge and campaign
 
-![flow_initial_charge_campaign](images/campaign_agreement_with_initial_charge.png)
-
 In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
 Ideally, this flow is intended for when you have a combination of an additional cost when setting up the agreement, presented as the initial charge, as well as having a limited time offer on the actual subscription.
+
+**Agreement screens with initial and campaign v2**
+![screen_initial_charge_legacy_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
+
+**(Coming soon) Agreement screens with initial and campaign v3**
+![screen_initial_charge_legacy_campaign](images/campaigns/screens/price-campaign-with-initial-charge.png)
+
 
 ## Questions?
 
@@ -1564,7 +1684,8 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/ListAgreements
-[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
+[draft-agreement-endpoint-v2]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
+[draft-agreement-endpoint-v3]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
 [update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
 [update-agreement-put-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPut
