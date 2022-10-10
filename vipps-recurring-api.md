@@ -632,7 +632,7 @@ upcoming charge. The user is only shown one charge per agreement, in order to
 not overwhelm the user when doing daily or weekly charges.
 
 A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
-**Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api (Coming soon)
+**Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api (Coming soon - WORK IN PROGRESS)
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
