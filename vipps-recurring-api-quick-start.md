@@ -78,7 +78,7 @@ for details about the calls.
 
 ### Create agreements
 
-For details about the calls, see [Agreement v3 endpoints][agreement-endpoints] in the Recurring API Specifications.
+For details about the calls, see [Agreement endpoints][agreement-endpoints] in the Recurring API Specifications.
 
 #### Create a minimal agreement
 
