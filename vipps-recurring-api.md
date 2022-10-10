@@ -145,7 +145,7 @@ See the eCom FAQ for the difference:
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`create charge`][create-charge-endpoint] endpoint.
-You can also [Manage charges and agreements](#manage-charges-and-agreements).
+You can also [manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
 
@@ -154,11 +154,13 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint-v2] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
-   This will result in a capture of the initial charge (if one was defined in the first step).
-3. Retrieve the (hopefully approved) agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
+   This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
+   See [Initial charge](#initial-charge).
+3. Retrieve the agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
-4. For all future charges, you must create a charge using the [`create charge`][create-charge-endpoint] endpoint.
+4. All future charges can be created by using the [`create charge`][create-charge-endpoint] endpoint. 
+   For direct capture you must set `"transactionType": "DIRECT_CAPTURE"`. 
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
@@ -167,25 +169,28 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 ### Reserve capture
 
+**Note:** Reserve capture on recurring charges is available in the recurring API v3 (Coming soon - WORK IN PROGRESS) 
+In the API V2, reserve capture is only available on initial charges.
+
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint-v2] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
-   This will result in a capture of the initial charge (if one was defined in the first step).
-3. Retrieve the (hopefully approved) agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
+   This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
+   See [Initial charge](#initial-charge).
+3. Retrieve the agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
-4. If there is a product that is shipped to the customer, the initial charge should be captured at this point.
-   Capture the charge by calling the [`capture charge`][capture-charge-endpoint] endpoint.
-   If there is no product being shipped, or a need to provide access at a later point - the merchant should change the
-   merchant sale unit setup to use `DIRECT CAPTURE` instead.
-5. For all future charges, you must create a charge by calling the [`create charge`][create-charge-endpoint] endpoint.
+4. All future charges can be created by using the [`create charge`][create-charge-endpoint] endpoint.
+   For reserve capture you must set `"transactionType": "RESERVE_CAPTURE"`.
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
    we will retry for the number of days specified by the `retryDays` value.
    We recommend at least 2 days retry.
+5. If there is a product that is shipped to the customer, the charge should be captured at this point. 
+   Capture the charge by calling the [`capture charge`][capture-charge-endpoint] endpoint.
 
 
 ## API endpoints
@@ -733,24 +738,38 @@ An [agreement](#agreements) has payments, called charges.
 *Recurring has functionality to charge a variable amount each interval. See:
 [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).*
 
-Charge the customer for each period with the
-[`create charge`][create-charge-endpoint] endpoint.
-
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur (it is minimum one day in the test environment).
 
-Example: If the charge is _created_ on the 25th, the earliest the charge can be
-_made_ is the 27th (25+2). This is so that the user can be informed about the
-upcoming charge. The user is only shown one charge per agreement, in order to
-not overwhelm the user when doing daily or weekly charges.
-
-Create a charge for a given agreement. `due` will define for which date
-the charge will be performed. This date has to be at a minimum two days in the
+Charge the customer for each period with the
+[`create charge`][create-charge-endpoint] endpoint.
+`due` will define for which date the charge will be performed.
+This date has to be at a minimum two days in the
 future (it is minimum one day in the test environment), and all charges `due` in
 30 days or less are visible for users in Vipps.
 
-See:
-[orderId recommendations](#orderid-recommendations).
+Example: If the charge is _created_ on the 25th, the earliest the charge can be
+_due_ is the 27th (25+2). This is so that the user can be informed about the
+upcoming charge. The user is only shown one charge per agreement, in order to
+not overwhelm the user when doing daily or weekly charges.
+
+A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
+**Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api (Coming soon - WORK IN PROGRESS)
+
+`DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
+reserves the payment for capturing at a later date. See:
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the eCom FAQ for more details.
+
+`RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
+
+The advantage to using reserve capture is that you can release the reservation immediately:
+- For a reserved payment, the merchant can make a /cancel call to immediately release the reservation and make it available in the customer's account.
+- For a captured payment, the merchant must make a /refund call. It then takes a few days before the amount is available in the customer's account.
+
+See the [`create charge`][create-charge-endpoint] endpoint definition for examples.
+
+Also see check [orderId recommendations](#orderid-recommendations) before creating charges.
 
 ### Capture a charge
 
