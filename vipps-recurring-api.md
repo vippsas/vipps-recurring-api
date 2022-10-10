@@ -163,7 +163,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 ### Reserve capture
 
-**Note:** Reserve capture on recurring charges is available in the recurring API v3 (Coming soon) 
+**Note:** Reserve capture on recurring charges is available in the recurring API v3 (Coming soon - WORK IN PROGRESS) 
 In the API V2, reserve capture is only available on initial charges.
 
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
