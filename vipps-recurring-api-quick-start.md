@@ -227,7 +227,7 @@ See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details abo
 2. Send `List Charges` which uses [`GET:/v2/agreements/{{agreementId}}/charges`][list-charges-endpoint].
 
    This includes a query `chargeStatus=DUE` and filters out other
-   [charge states](vipps-recurring-api.md#charge-states).
+   [charge states](vipps-recurring-api.md#Charge states).
 
 3. Change or remove the query to see charges with other states.
 
