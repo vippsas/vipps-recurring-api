@@ -55,6 +55,7 @@ Document version: 1.6.1.
 * [How can I change partner for my integration with Vipps?](#how-can-i-change-partner-for-my-integration-with-vipps)
 * [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
 * [For how long is a payment reserved?](#for-how-long-is-a-payment-reserved)
+* [When do users get push messages?](#when-do-users-get-push-messages)
 * [Settlement](#settlement)
 * [Invoicing](#invoicing)
 * [Questions?](#questions)
@@ -359,6 +360,19 @@ other API to look up a user's address, retrieve a user's purchases, etc.
 
 See [For how long is a payment reserved?](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq/#for-how-long-is-a-payment-reserved)
 in eCom api faq.
+
+## When do users get push messages?
+
+| Event                                           | Push message text                                                                   | English                                                                                        |
+|-------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Agreement request                               | Bekreft fast betaling                                                               | Confirm recurring payment                                                                      |
+| Charge processed successfully                   | Fast betaling til `merchant name` har blitt gjennomført                             | Payment to `merchant name` has been processed                                                  |
+| Insufficient funds                              | Pass på at du har nok penger. Vi prøver igjen litt senere.                          | Make sure you have enough money. We'll try again later.                                        |
+| Invalid payment source (charge not retryable)   | Kortet er ugyldig, prøv å endre det og kontakt `merchant name` å fortsette avtalen. | The card is invalid, try changing it and contacting `merchant name` to continue the agreement. |
+| Invalid payment source (charge retryable)       | Kortet er ugyldig, prøv et annet.                                                   | The card is invalid, try another.                                                              |
+| Charge amount too high (variable amount)        | Beløpet er høyere enn det avtalte maksimumsbeløpet.                                 | The amount is higher than the agreed maximum amount.                                           |
+| Future charge amount too high (variable amount) | Du må øke maksbeløpet i avtalen med `merchant name`                                 | You have to change the maximum amount in the agreement. If not, the payment will fail.         |
+
 
 ## Settlement
 The settlements are done trough Vipps.
