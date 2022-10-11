@@ -29,11 +29,9 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-## Getting started
-
-Review the
+Review
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
-pages for information about API keys, product activation, contact information, contribution guidelines, etc.
+for information about API keys, product activation, contact information, contribution guidelines, etc.
 
 ## How it works
 
