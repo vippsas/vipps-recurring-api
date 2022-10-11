@@ -869,7 +869,7 @@ Subsequent attempts are made according to the `retryDays` specified.
 **Note:** Since payments _can_ be processed any time (07:00UTC - 23:59 UTC) it is advisable to fetch the charge at/after 00:00 UTC the day after the last retry day to be sure you get the last status.
 
 When a charge has reached its `due` date, the status of the charge will be
-`PROCESSING` until the charge is successful, for as long as the merchant has
+`DUE` until the charge is successful, for as long as the merchant has
 specified with `retryDays`.
 
 **Important:** Vipps does not "leak" the customers' information about insufficient funds,
@@ -882,7 +882,7 @@ should always ask the user to check in Vipps if a charge has failed.
 Vipps will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
 
-The status of a charge will be `PROCESSING` while Vipps is taking care of business,
+The status of a charge will be `DUE` while Vipps is taking care of business,
 from the `due` date until the charge has succeeded, or until the
 `retryDays` have passed without a successful charge.
 The final status will be `CHARGED` or `FAILED`.
@@ -1005,7 +1005,7 @@ This table has all the details for the charge states returned by the
 |:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | `PENDING`            | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps. |
 | `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                       |
-| `PROCESSING`         | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`.                        |
+| `PROCESSING`         | The charge status is unknown but should be processed.                                                                                         |
 | `CHARGED`            | The charge has been successfully completed.                                                                                                   |
 | `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                |
 | `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                      |
@@ -1020,13 +1020,13 @@ This results in a _very_ high success rate for charges.
 ### Example charge flows
 
 Scenario: Everything goes as it should: The user has money, and the charge is successful on the `due` date:
-* `PENDING` -> `DUE` -> `PROCESSING` (just for the one due day)-> `CHARGED`
+* `PENDING` -> `DUE` (just for the one due day)-> `CHARGED`
 
 Scenario: The user does not have funds and `retryDays = 0`:
-* `PENDING` -> `DUE` -> `PROCESSING` -> `FAILED`
+* `PENDING` -> `DUE` -> `FAILED`
 
 Scenario: The user does not have funds on the `due` date, `retryDays = 10`, and has funds on the fifth day:
-* `PENDING` -> `DUE` -> `PROCESSING` (for five days) -> `CHARGED`
+* `PENDING` -> `DUE` (for five days) -> `CHARGED`
 
 **Please note:** Since charges are polled by the merchant, it is possible that
 the charge status appears to "skip" a transition, e.g. moving directly from
@@ -1422,7 +1422,7 @@ This can be changed as described in the [Intervals](#intervals) section.
 #### Charge amount higher than the user's max amount
 
 If the created charge is above the user's `maxAmount`, the charge will be set
-to `PROCESSING`. If the user does not update their `maxAmount` to the same or a higher
+to `DUE`. If the user does not update their `maxAmount` to the same or a higher
 amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
