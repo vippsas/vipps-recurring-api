@@ -4,7 +4,7 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-  version: 2.6.9
+  version: 2.6.10
   title: Recurring Payments Merchant API
 
 servers:
@@ -2445,6 +2445,7 @@ components:
           type: string
           description: Contains null until the status has reached CHARGED.
           maxLength: 36
+          pattern: '^\d{10+}$'
           example: "5001419121"
         type:
           $ref: "#/components/schemas/ChargeType"
@@ -2520,6 +2521,7 @@ components:
           type: string
           description: Contains null until the status has reached CHARGED
           maxLength: 36
+          pattern: '^\d{10+}$'
           example: "5001419121"
         type:
           $ref: "#/components/schemas/ChargeType"
