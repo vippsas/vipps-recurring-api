@@ -40,9 +40,9 @@ Document version: 1.6.1.
 * [How can I change partners for a merchant?](#how-can-i-change-partners-for-a-merchant)
 * [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
 * [How do I check my customer's status?](#how-do-i-check-my-customers-status)
-* [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-i-did-not-receive-any-warning)
+* [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-did-not-receive-any-warning)
 * [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
-* [Can the charge for an Agreement be changed?](#can-the-charge-for-an-agreement-be-changed)
+* [Can the charge be different from the agreement's price?](#can-the-charge-be-different-from-the-agreements-price)
 * [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
 * [When can I send charges for a user?](#when-can-i-send-charges-for-a-user)
 * [How can I delete an agreement?](#how-can-i-delete-an-agreement)
@@ -51,10 +51,11 @@ Document version: 1.6.1.
 * [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
 * [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 * [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
-* [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps-can-new-charges-be-made-to-that-card)
+* [If a user adds or updates a card in vipps, will new recurring charges be made to that card?](#if-a-user-adds-or-updates-a-card-in-vipps-will-new-recurring-charges-be-made-to-that-card)
 * [How can I change partner for my integration with Vipps?](#how-can-i-change-partner-for-my-integration-with-vipps)
 * [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
-* [Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?](#does-the-recent-24092020-changes-in-terms-regarding-valid-reservations-affect-my-agreements)
+* [For how long is a payment reserved?](#for-how-long-is-a-payment-reserved)
+* [When do users get push messages?](#when-do-users-get-push-messages)
 * [Settlement](#settlement)
 * [Invoicing](#invoicing)
 * [Questions?](#questions)
@@ -228,13 +229,10 @@ This applies for both our production and test environment (MT).
 
 ## How do I check my customer's status?
 
-Get all Agreements for a customer:
-[`GET:/recurring/v2/agreements`][draft-agreement-endpoint]
-
 Get details about a specific Agreement:
-[`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint].
+[`fetch agreement endpoint`][fetch-agreement-endpoint].
 
-## A customer's charge failed, but I did not receive any warning
+## A customer's charge failed, but did not receive any warning
 The customer may not have notifications turned on,
 or they have not upgraded to the Vipps version that supports it.
 
@@ -244,9 +242,8 @@ retry once each day until the value is reached. The valid values are none
 (defaulting to 0) or 0-14. We strongly recommend having more than 1 retry day
 to account for possible networking issues etc.
 
-## Can the charge for an Agreement be changed?
-Yes. See
-[Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
+## Can the charge be different from the agreement's price?
+Yes. See [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user).
 
 ## Are there any limits on charging a user?
 Yes, within the `interval` period of the Agreement the merchant can charge at
@@ -261,20 +258,19 @@ the price of the Agreement.
 You can send charges once you have polled and found a valid Agreement tied to
 the user.
 
-See [How do I check my customer's status?](#how-do-i-check-my-customers-status)
+See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 
-## How can I delete an agreement?
+## How can I delete an agreement? 
 
-Agreements are marked as deleted by
-[updating the Agreement](vipps-recurring-api.md#updating-an-agreement)
-to `STOPPED` or `EXPIRED`.
+Agreements can be stopped by calling the [`update agreement`][update-agreement-endpoint] endpoint. 
+See [Stop an agreement](vipps-recurring-api.md#stop-an-agreement).
 
 ## Can a user cancel the agreement through the Vipps app?
 No, the user needs to contact the merchant which can then cancel or modify the
 agreement as they see fit.
 
-There is a link in Vipps to "my page" on the merchant's website, where the
-user can manage the agreement.
+The merchant must provide a link to the "my page" on the merchant's website when creating the agreement.
+See [Create an agreement](vipps-recurring-api.md#create-an-agreement).
 
 Users may want to make other changes to the Agreement than to simply cancel it.
 A subscription may be paused for a period, it may be changed to a lower
@@ -285,7 +281,8 @@ Agreement.
 
 ## What happens to charges if the corresponding agreement is cancelled?
 All charges in a `PENDING`, `DUE` or `RESERVED` state will be cancelled if the Agreement is stopped.  
-**Note**: This also includes the `initial charge` if it's currently `RESERVED`. So if the merchant needs to charge the user for the initial charge; then this needs to be done before the agreement is stopped.
+**Note**: This also includes the `initial charge` if it's currently `RESERVED`. 
+So if the merchant needs to charge the user for the initial charge; then this needs to be done before the agreement is stopped.
 
 ## If a user's card expires: What happens on the next charge?
 
@@ -309,11 +306,9 @@ See [If a user's card expires: What happens on the next charge?](#if-a-users-car
 A charge will be displayed to the user 6 days before the charge is due to be processed.
 The charge will then appear in the app.
 
-You can still retrieve all relevant charges through the API:
-[`GET:/recurring/v2/agreements/{agreementId}/charges`][list-charges-endpoint].
+You can still retrieve all relevant charges through the [`list charges`][list-charges-endpoint] endpoint.
 
-## If a user changes the default payment card in Vipps, can new charges be made to that card?
-
+## If a user adds or updates a card in vipps, will new recurring charges be made to that card?
 No, currently the payment card tied to an agreement will not be updated automatically.
 
 Users may want to charge different Agreements to different cards, and we do
@@ -323,8 +318,7 @@ users as described in
 
 ## How can I change partner for my integration with Vipps?
 
-See:
-[How to change partners for a merchant](https://github.com/vippsas/vipps-partner#how-to-change-partners-for-a-merchant).
+See [How to change partners for a merchant](https://github.com/vippsas/vipps-partner#how-to-change-partners-for-a-merchant).
 
 **Please note:** The MSN (the number) does _not_ change when changing partners.
 
@@ -332,14 +326,15 @@ See:
 
 Yes.
 
-Vipps offers the possibility for merchants to as part of the payment flow to request the user's information. For example if you wish to retrieve the user's email as part of a User profile setup. This is supported in both [Vipps eCom API v2](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
-and
-[Vipps Recurring API](vipps-recurring-api.md#userinfo).
+Vipps offers the possibility for merchants, as part of the payment flow, to request the user's information. 
+For example if you wish to retrieve the user's email as part of a User profile setup. 
+This is supported in both [Vipps eCom API](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
+and [Vipps Recurring API](vipps-recurring-api.md#userinfo).
 
 This is done by adding a `scope` parameter to the initiate calls:
-[`POST:/ecomm/v2/payments`](https://vippsas.github.io/vipps-developer-docs/api/ecom#tag/Vipps-eCom-API/operation/initiatePaymentV3UsingPOST) (eCom)
+[`initiate payment`](https://vippsas.github.io/vipps-developer-docs/api/ecom#tag/Vipps-eCom-API/operation/initiatePaymentV3UsingPOST) (eCom)
 and
-[`POST:/recurring/v2/agreements`][draft-agreement-endpoint] (Recurring):
+[`draft agreement`][draft-agreement-endpoint] (Recurring):
 
 - address
 - birthDate
@@ -360,9 +355,23 @@ Using the Vipps Login service itself is optional.
 information to third parties, and Vipps does not allow it. There is no
 other API to look up a user's address, retrieve a user's purchases, etc.
 
-## Does the recent (24.09.2020) changes in terms regarding valid reservations affect my agreements?
+## For how long is a payment reserved?
 
-If you are using reserve-capture on your initial charge, then capture will only be possible within the first 30 days.
+See [For how long is a payment reserved?](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq/#for-how-long-is-a-payment-reserved)
+in eCom api faq.
+
+## When do users get push messages?
+
+| Event                                           | Push message text (Norwegian)                                                       | Push message text (English)                                                                    |
+|-------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Agreement request                               | Bekreft fast betaling                                                               | Confirm recurring payment                                                                      |
+| Charge processed successfully                   | Fast betaling til `merchant name` har blitt gjennomført                             | Payment to `merchant name` has been processed                                                  |
+| Insufficient funds                              | Pass på at du har nok penger. Vi prøver igjen litt senere.                          | Make sure you have enough money. We'll try again later.                                        |
+| Invalid payment source (retryable)              | Kortet er ugyldig, prøv å endre det og kontakt `merchant name` å fortsette avtalen. | The card is invalid, try changing it and contacting `merchant name` to continue the agreement. |
+| Invalid payment source (not retryable)          | Kortet er ugyldig, prøv et annet.                                                   | The card is invalid, try another.                                                              |
+| Charge amount too high (variable amount)        | Beløpet er høyere enn det avtalte maksimumsbeløpet.                                 | The amount is higher than the agreed maximum amount.                                           |
+| Future charge amount too high (variable amount) | Du må øke maksbeløpet i avtalen med `merchant name`                                 | You have to change the maximum amount in the agreement. If not, the payment will fail.         |
+
 
 ## Settlement
 The settlements are done trough Vipps.
@@ -382,18 +391,8 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
-[list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/ListAgreements
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
 [fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
-[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
-[update-agreement-put-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPut
-[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/acceptUsingPATCH
+[update-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
 [list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/ListCharges
-[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CreateCharge
-[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/FetchCharge
-[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CancelCharge
-[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CaptureCharge
-[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/RefundCharge
-[userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
-[access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md
+
