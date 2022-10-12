@@ -51,7 +51,7 @@ Document version: 1.6.1.
 * [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
 * [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 * [How does a user see any charges I send?](#how-does-a-user-see-any-charges-i-send)
-* [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-changes-the-default-payment-card-in-vipps-can-new-charges-be-made-to-that-card)
+* [If a user changes the default payment card in Vipps, can new charges be made to that card?](#if-a-user-adds-or-updates-a-card-in-vipps-will-new-recurring-charges-be-made-to-that-card)
 * [How can I change partner for my integration with Vipps?](#how-can-i-change-partner-for-my-integration-with-vipps)
 * [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
 * [For how long is a payment reserved?](#for-how-long-is-a-payment-reserved)
@@ -308,8 +308,7 @@ The charge will then appear in the app.
 
 You can still retrieve all relevant charges through the [`list charges`][list-charges-endpoint] endpoint.
 
-## If a user changes the default payment card in Vipps, can new charges be made to that card?
-
+## If a user adds or updates a card in vipps, will new recurring charges be made to that card?
 No, currently the payment card tied to an agreement will not be updated automatically.
 
 Users may want to charge different Agreements to different cards, and we do
