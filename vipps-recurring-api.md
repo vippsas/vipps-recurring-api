@@ -320,7 +320,7 @@ An agreement has payments, called [charges](#charges).
 
 ### Create an agreement
 
-This is an example of a request body for the [`draft agreement`][draft-agreement-endpoint] call:
+This is an example of a request body for the [`draft agreement`][draft-agreement-endpoint-v2] call:
 
 ```json
 {
@@ -363,7 +363,7 @@ in automatically through Vipps. See the
 for more details.
 
 The request parameters have the following size limits
-(see the [`draft agreement][draft-agreement-endpoint-v2] endpoint for more details):
+(see the [`draft agreement`][draft-agreement-endpoint-v2] endpoint for more details):
 
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
@@ -584,7 +584,7 @@ date-time is used. All dates must be in date-time format as according to
 | `end`           | End date of campaign offer, can not be in the past                                                                      |
 | `campaignPrice` | The price that will be shown for comparison                                                                             |
 
-#### (Coming soon) Campaigns in V3 API
+#### (Coming soon - WORK IN PROGRESS) Campaigns in V3 API
 In V3, we introduce 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign. 
 See more about the different campaign types in the table below.
 
@@ -595,9 +595,8 @@ See more about the different campaign types in the table below.
 | `event campaign`     | A set price until a given event date with a text describing the event                                   | 1kr until Christmas and then 349kr every month                          |
 | `full flex campaign` | Different price and interval until a given date                                                         | 100kr every month until 2023-01-01T00:00:00Z and then 1000kr every year |
 
-In order to start a campaign the campaign field has to be added to the agreement draft
-[`POST:/recurring/v3/agreements`][draft-agreement-endpoint-v3]
-for a campaign in the start of an agreement
+In order to start a campaign, the `campaign` field has to be added to the agreement draft body in the
+[`draft agreement`][draft-agreement-endpoint-v3] call.
 
 ##### Price campaign
 
