@@ -672,7 +672,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 ##### Full flex campaign
 
 **Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
-Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
+See [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
 
 ![full-flex-campaign](images/campaigns/full-flex-campaign.png)
 
