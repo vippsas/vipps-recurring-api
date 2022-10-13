@@ -185,7 +185,8 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 4. All future charges can be created by using the [`create charge`][create-charge-endpoint] endpoint.
    For reserve capture you must set `"transactionType": "RESERVE_CAPTURE"`.
    See [Create a charge](#create-a-charge).
-   Based on the `due` set in the request, we will try to process the charge on that day.
+   Based on the `due` set in the request, we will try to process the charge on that day. 
+   If the charge is processed successfully, the status will be `RESERVED`.
    If for some reason, a charge fails to be processed,
    we will retry for the number of days specified by the `retryDays` value.
    We recommend at least 2 days retry.
