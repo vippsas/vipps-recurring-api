@@ -199,7 +199,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | Operation                                       | Description                                           | Endpoint                                              |
 |-------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
 | List agreements                                 | List all agreements for a merchant.                   | [`list agreements`][list-agreements-endpoint]         |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`draft agreement`][draft-agreement-endpoint-v2]                                      |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`draft agreement`][draft-agreement-endpoint-v2]      |
 | [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`fetch agreement`][fetch-agreement-endpoint]         |
 | [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`update agreement`][update-agreement-patch-endpoint] |
 | [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`update agreement`][update-agreement-patch-endpoint] |
