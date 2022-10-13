@@ -1453,7 +1453,7 @@ components:
       pattern: ^[A-Z]{3}$
       example: NOK
 
-    TransactionType:
+    transactionType:
       type: string
       description: Type of transaction, either direct capture or reserve capture
       enum:
@@ -2353,7 +2353,7 @@ components:
 
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-        TransactionType:
+        transactionType:
           $ref: "#/components/schemas/TransactionType"
         description:
           type: string
@@ -2526,7 +2526,7 @@ components:
         type:
           $ref: "#/components/schemas/ChargeType"
         transactionType:
-          $ref: "#/components/schemas/TransactionType"
+          $ref: "#/components/schemas/transactionType"
         failureReason:
           type: string
           enum:
