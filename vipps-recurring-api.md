@@ -439,6 +439,8 @@ If the user does not have Vipps installed:
 
 Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31.
 
+#### Example in the V2 api:
+
 Example for a bi-weekly subscription:
 ```json
 {
@@ -470,12 +472,64 @@ OR
 }
 ```
 
+Example for a subscription every 30th day:
+```json
+{
+  "interval": {
+    "unit": "DAY",
+    "count": 30
+  }
+}
+```
+
+Example in the V3 api (Coming soon - WORK IN PROGRESS):
+
+Example for a bi-weekly subscription:
+```json
+{
+  "interval": {
+    "unit": "WEEK",
+    "count": 2
+  }
+}
+```
+
+Example for a quarterly subscription
+```json
+{
+  "interval": {
+    "unit": "MONTH",
+    "count": 3
+  }
+}
+```
+
+Examples for a yearly subscription
+```json
+{
+  "interval": {
+    "unit": "YEAR",
+    "count": 1
+  }
+}
+```
+OR
+```json
+{
+  "interval": {
+    "unit": "MONTH",
+    "count": 12
+  }
+}
+```
 
 Example for a subscription every 30th day:
 ```json
 {
-  "interval": "DAY",
-  "intervalCount": 30
+  "interval": {
+    "unit": "DAY",
+    "count": 30
+  }
 }
 ```
 
