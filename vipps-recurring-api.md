@@ -697,6 +697,11 @@ Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
 
 ![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
+##### Product description guidelines for agreements with campaigns.
+We do not recommend you to use `Product Description` for agreements with a campaign.
+We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
+`Product description` will be, at a point in the future, phased out in order to improve user experience.
+
 ### Retrieve an agreement
 
 A newly created agreement will be in status `PENDING` for 10 minutes before it expires.
