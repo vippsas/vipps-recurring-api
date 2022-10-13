@@ -2354,7 +2354,7 @@ components:
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         transactionType:
-          $ref: "#/components/schemas/TransactionType"
+          $ref: "#/components/schemas/transactionType"
         description:
           type: string
           minimum: 1
