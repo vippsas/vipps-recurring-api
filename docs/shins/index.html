@@ -10020,7 +10020,7 @@ curl -X POST https://api.vipps.no/recurring/v3/agreements/{agreementId}/charges 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
   &quot;amount&quot;: 234,
-  &quot;transactionType&quot;: null,
+  &quot;transactionType&quot;: &quot;DIRECT_CAPTURE&quot;,
   &quot;description&quot;: &quot;Månedsabonnement&quot;,
   &quot;due&quot;: &quot;2030-12-31&quot;,
   &quot;retryDays&quot;: 5,
@@ -10187,7 +10187,7 @@ If the payment fails, the charge will be retried based on <code>retryDays</code>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
-  <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
   <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Månedsabonnement&quot;</span>,
   <span class="hljs-attr">&quot;due&quot;</span>: <span class="hljs-string">&quot;2030-12-31&quot;</span>,
   <span class="hljs-attr">&quot;retryDays&quot;</span>: <span class="hljs-number">5</span>,
@@ -10293,9 +10293,9 @@ If the payment fails, the charge will be retried based on <code>retryDays</code>
 <tr>
 <td>» transactionType</td>
 <td>body</td>
-<td>any</td>
+<td><a href="#schematransactiontype">transactionType</a></td>
 <td>false</td>
-<td>none</td>
+<td>Type of transaction, either direct capture or reserve capture</td>
 </tr>
 <tr>
 <td>» description</td>
@@ -10346,6 +10346,25 @@ For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 �
 <p>If the charge is DIRECT_CAPTURE, the charge is processed and charged on due date.
 If the charge is RESERVE_CAPTURE, the charge is RESERVED on due date.</p>
 <p>Must be in the format <code>yyyy-MM-dd</code></p>
+<h4 id="enumerated-values-14">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>» transactionType</td>
+<td>DIRECT_CAPTURE</td>
+</tr>
+<tr>
+<td>» transactionType</td>
+<td>RESERVE_CAPTURE</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>Example responses</p>
 </blockquote>
@@ -12112,7 +12131,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-14">Enumerated Values</h4>
+<h4 id="enumerated-values-15">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12168,7 +12187,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-15">Enumerated Values</h4>
+<h4 id="enumerated-values-16">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12369,7 +12388,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-16">Enumerated Values</h4>
+<h4 id="enumerated-values-17">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12434,7 +12453,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-17">Enumerated Values</h4>
+<h4 id="enumerated-values-18">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12479,7 +12498,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-18">Enumerated Values</h4>
+<h4 id="enumerated-values-19">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12527,7 +12546,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-19">Enumerated Values</h4>
+<h4 id="enumerated-values-20">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12576,7 +12595,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-20">Enumerated Values</h4>
+<h4 id="enumerated-values-21">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13386,7 +13405,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-21">Enumerated Values</h4>
+<h4 id="enumerated-values-22">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13465,7 +13484,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-22">Enumerated Values</h4>
+<h4 id="enumerated-values-23">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13750,7 +13769,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-23">Enumerated Values</h4>
+<h4 id="enumerated-values-24">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13871,7 +13890,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-24">Enumerated Values</h4>
+<h4 id="enumerated-values-25">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13954,7 +13973,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-25">Enumerated Values</h4>
+<h4 id="enumerated-values-26">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14037,7 +14056,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-26">Enumerated Values</h4>
+<h4 id="enumerated-values-27">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14120,7 +14139,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-27">Enumerated Values</h4>
+<h4 id="enumerated-values-28">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14195,7 +14214,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-28">Enumerated Values</h4>
+<h4 id="enumerated-values-29">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14293,7 +14312,7 @@ System.out.println(response.toString());
 <a id="tocscreatechargev3"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
-  <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
   <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Månedsabonnement&quot;</span>,
   <span class="hljs-attr">&quot;due&quot;</span>: <span class="hljs-string">&quot;2030-12-31&quot;</span>,
   <span class="hljs-attr">&quot;retryDays&quot;</span>: <span class="hljs-number">5</span>,
@@ -14323,10 +14342,10 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>transactionType</td>
-<td><a href="#schematransactiontype">TransactionType</a></td>
+<td><a href="#schematransactiontype">transactionType</a></td>
 <td>false</td>
 <td>none</td>
-<td>none</td>
+<td>Type of transaction, either direct capture or reserve capture</td>
 </tr>
 <tr>
 <td>description</td>
@@ -14494,7 +14513,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-29">Enumerated Values</h4>
+<h4 id="enumerated-values-30">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14661,7 +14680,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-30">Enumerated Values</h4>
+<h4 id="enumerated-values-31">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14808,7 +14827,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-31">Enumerated Values</h4>
+<h4 id="enumerated-values-32">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14883,7 +14902,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-32">Enumerated Values</h4>
+<h4 id="enumerated-values-33">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -15541,7 +15560,7 @@ The most important property is the HTTP status code.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-33">Enumerated Values</h4>
+<h4 id="enumerated-values-34">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
