@@ -181,14 +181,14 @@ Truncated example of the response from the [`fetch charge`][fetch-charge-endpoin
     {
       "occurred": "2022-09-14T10:31:15Z",
       "event": "CREATE",
-      "amount": 200,
+      "amount": 1000,
       "idempotencyKey": "e80bd8c6-3b83-4583-a49c-847021fcd839",
       "success": true
     },
     {
       "occurred": "2022-09-16T06:01:00Z",
       "event": "RESERVE",
-      "amount": 200,
+      "amount": 1000,
       "idempotencyKey": "chr-4assY8f-agr_FJw2Anb-ProcessPayment",
       "success": true
     },
