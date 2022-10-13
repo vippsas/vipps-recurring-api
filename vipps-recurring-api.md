@@ -605,17 +605,17 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 ```json
 {
   "campaign": {
-    "campaignType": "PRICE_CAMPAIGN",
+    "type": "PRICE_CAMPAIGN",
     "end": "2022-12-25T00:00:00Z",
     "price": 100
   }
 }
 ```
-| Field               | Description                                                                 |
-|---------------------|-----------------------------------------------------------------------------|
-| `campaignType`      | The type of the campaign                                                    |
-| `price`             | The price that the customer will pay for each interval during the campaign  |
-| `end`               | The end date of the campaign                                                |
+| Field   | Description                                                                 |
+|---------|-----------------------------------------------------------------------------|
+| `type`  | The type of the campaign                                                    |
+| `price` | The price that the customer will pay for each interval during the campaign  |
+| `end`   | The end date of the campaign                                                |
 
 ![screen-price-campaign](images/campaigns/screens/price-campaign.png)
 
@@ -635,11 +635,11 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
   }
 }
 ```
-| Field          | Description                                                                                                             |
-|----------------|-------------------------------------------------------------------------------------------------------------------------|
-| `campaignType` | The type of the campaign                                                                                                |
-| `price`        | The price that the customer will pay for the period of the campaign                                                     |
-| `period`       | The period where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+| Field    | Description                                                                                                             |
+|----------|-------------------------------------------------------------------------------------------------------------------------|
+| `type`   | The type of the campaign                                                                                                |
+| `price`  | The price that the customer will pay for the period of the campaign                                                     |
+| `period` | The period where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
 
 ![screen-price-campaign](images/campaigns/screens/period-campaign.png)
 
@@ -657,12 +657,12 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
   }
 }
 ```
-| Field           | Description                                               |
-|-----------------|-----------------------------------------------------------|
-| `campaignType`  | The type of the campaign                                  |
-| `price`         | The price that the customer will pay until the event date |
-| `eventDate`     | The date of the event marking the end of the campaign     |
-| `eventText`     | The event text to display to the end user                 |
+| Field       | Description                                               |
+|-------------|-----------------------------------------------------------|
+| `type`      | The type of the campaign                                  |
+| `price`     | The price that the customer will pay until the event date |
+| `eventDate` | The date of the event marking the end of the campaign     |
+| `eventText` | The event text to display to the end user                 |
 
 **Note:** We recommend to start the event text with lowercase for better user experience. See example below.
 
@@ -688,12 +688,12 @@ Contact details: kirsten.jarneid@vipps.no (Product Manager, Recurring Payments)"
   }
 }
 ```
-| Field          | Description                                                                                                                       |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `campaignType` | The type of the campaign                                                                                                          |
-| `price`        | The price that the customer will pay for each interval during the campaign                                                        |
-| `end`          | The end date of the campaign                                                                                                      |
-| `interval`     | The payment interval where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+| Field      | Description                                                                                                                       |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `type`     | The type of the campaign                                                                                                          |
+| `price`    | The price that the customer will pay for each interval during the campaign                                                        |
+| `end`      | The end date of the campaign                                                                                                      |
+| `interval` | The payment interval where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
 
 ![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
