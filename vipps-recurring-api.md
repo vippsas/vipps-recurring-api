@@ -60,7 +60,7 @@ Document version 2.5.10.
     - [Direct capture](#direct-capture)
     - [Reserve capture](#reserve-capture)
   - [API endpoints](#api-endpoints)
-  - [Authentication](#authentication)
+  - [Authentication and authorization](#authentication-and-authorization)
   - [Vipps HTTP headers](#vipps-http-headers)
   - [orderId recommendations](#orderid-recommendations)
   - [Agreements](#agreements)
@@ -210,11 +210,11 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`cancel charge`][cancel-charge-endpoint]             |
 | Refund a charge                                 | Refund a charge that has been performed.              | [`refund charge`][refund-charge-endpoint]             |
 
-See [Authentication and authorization](#authentication).
+See [Authentication and authorization](#authentication-and-authorization).
 
 See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way to test the API.
 
-## Authentication
+## Authentication and authorization
 
 All Vipps API calls are authenticated and authorized with an access token
 (JWT bearer token) and an API subscription key:
@@ -260,6 +260,10 @@ the headers should be:
 | `Vipps-System-Plugin-Version` | The version number of the ecommerce plugin   | `3.2`                 | `4.3`                     | `4.3`                              |
 
 
+## Idempotency Key header (V3 API Coming Soon)
+The `Idempotency-Key` header must be set in each `POST` or `PATCH` request.
+This way, if a request fails for any reason, it can be retried with the same `Idempotency-Key`.
+Also, in the case of retries, it will prevent duplicating operations.
 
 ## orderId recommendations
 
@@ -787,10 +791,6 @@ The `description` text is mandatory and is displayed to the end user in the Vipp
 
 Capture is done with the [`capture charge`][capture-charge-endpoint] endpoint.
 
-`Idempotency-Key` header must be set in the request.
-Then, if a capture request fails for any reason, it can be retried with the same idempotency key.
-Also, in the case of retries, it will prevent duplicating capture operations.
-
 **Please note:** It is important to check the response of the /capture call. The capture is only successful when the response is `HTTP 204 No Content`.
 
 Capture can be made up to 180 days after reservation. Attempting to capture an older payment will result in `HTTP 400 Bad Request`.
@@ -1203,7 +1203,7 @@ Call the Vipps [`user info`][userinfo-endpoint] endpoint with the `sub` that was
 |---------------|-------------------------|
 | Authorization | "Bearer {Access Token}" |
 
-The access token is received on a successful request to the token endpoint described in [Authentication](#authentication).
+The access token is received on a successful request to the token endpoint described in [Authentication and authorization](#authentication-and-authorization).
 
 **Important note:** Subscription key used for the Recurring API must _not_ be
 included. This is because userinfo is part of Vipps Login and is therefore
@@ -1535,7 +1535,7 @@ different payments is far higher than 2.
 
 ## Partner keys
 
-In addition to the normal [Authentication](#authentication) we offer _partner keys_,
+In addition to the normal [Authentication](#authentication-and-authorization) we offer _partner keys_,
 which let a partner make API calls on behalf of a merchant.
 
 If you are a Vipps partner managing agreements on behalf of Vipps merchants you
