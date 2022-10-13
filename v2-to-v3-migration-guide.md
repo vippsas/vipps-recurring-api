@@ -28,12 +28,14 @@ See [partial capture][partial-capture] in the API Guide.
 
 The API V3 returns different response status for some endpoints:
 
-| Endpoint                                        | V2 response status | V3 response status |
-|-------------------------------------------------|--------------------|--------------------|
-| [`update agreement`][update-agreement-endpoint] | `200 OK`           | `204 No Content`   | 
-| [`cancel charge`][cancel-charge-endpoint]       | `200 OK`           | `204 No Content`   | 
-| [`capture charge`][capture-charge-endpoint]     | `200 OK`           | `204 No Content`   | 
-| [`refund charge`][refund-charge-endpoint]       | `200 OK`           | `204 No Content`   | 
+| Endpoint                                        | V2 response status | V3 response status                   |
+|-------------------------------------------------|--------------------|--------------------------------------|
+| [`update agreement`][update-agreement-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`*  | 
+| [`cancel charge`][cancel-charge-endpoint]       | `200 OK`           | `204 No Content` or `202 Accepted`*  | 
+| [`capture charge`][capture-charge-endpoint]     | `200 OK`           | `204 No Content` or `202 Accepted`*  | 
+| [`refund charge`][refund-charge-endpoint]       | `200 OK`           | `204 No Content` or `202 Accepted`*  | 
+
+**Note** In the future the API might return `202 Accepted` for some operations if the request is processed asynchronously.
 
 ### Error responses
 
@@ -85,7 +87,7 @@ V3 request body
 {
   "pricing": {
     "type": "LEGACY",
-    "amount": 180000,
+    "amount": 100000,
     "currency": "NOK"
   },
   "productName": "MyNews Digital",
@@ -116,7 +118,7 @@ V3 request body
 {
   "pricing": {
     "type": "VARIABLE",
-    "suggestedMaxAmount": 180000,
+    "suggestedMaxAmount": 3000,
     "currency": "NOK"
   },
   "productName": "MyNews Digital",
@@ -160,7 +162,7 @@ In the API V3, the response from the [`fetch charge`][fetch-charge-endpoint] end
 contains the history of the charge and not just the current status.
 It also contains a summary of the total of amounts captured, refunded and cancelled. 
 
-Truncated example of the response from the [`fetch charge`][fetch-charges-endpoint] endpoint:
+Truncated example of the response from the [`fetch charge`][fetch-charge-endpoint] endpoint:
 
 ````json
 {
@@ -210,11 +212,15 @@ Truncated example of the response from the [`fetch charge`][fetch-charges-endpoi
 
 ### Idempotency key
 
-`Idempotency-Key` is now required for the following endpoints:
+The`Idempotency-Key` header is now required for the following endpoints:
 - [`draft agreement`][draft-agreement-endpoint]
 - [`create charge`][create-charge-endpoint]
 - [`capture charge`][capture-charge-endpoint]
 - [`refund charge`][refund-charge-endpoint] 
+
+The misspelled `Idempotent-Key` header is deprecated.  
+
+TODO add section in API GUIDE on Idempotency-key (Use text from Capture charge)
 
 
 ### Product description guidelines
