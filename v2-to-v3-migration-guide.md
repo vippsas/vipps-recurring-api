@@ -69,7 +69,7 @@ To draft an agreement with a fixed amount with the same charge limit as in V2, `
 
 **Note**: `pricing.type` is an optional field. If not provided in the request the type will be defaulted to `LEGACY`.
 
-Truncated example of request body for the [draft agreement]() endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`draft agreement`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 ```json
@@ -98,7 +98,7 @@ V3 request body
 
 To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
-Truncated example of request body for the [draft agreement]() endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`draft agreement`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 ```json
@@ -130,7 +130,7 @@ V3 request body
 ### New interval representation
 The Recurring API V3 introduces a new JSON representation for agreement interval.
 
-Truncated example of request body for the [draft agreement]() endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`draft agreement`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 ```json
@@ -211,22 +211,17 @@ Truncated example of the response from the [`fetch charge`][fetch-charge-endpoin
 ````
 
 ### Idempotency key
-
-The`Idempotency-Key` header is now required for the following endpoints:
-- [`draft agreement`][draft-agreement-endpoint]
-- [`create charge`][create-charge-endpoint]
-- [`capture charge`][capture-charge-endpoint]
-- [`refund charge`][refund-charge-endpoint] 
-
-The misspelled `Idempotent-Key` header is deprecated.  
-
-TODO add section in API GUIDE on Idempotency-key (Use text from Capture charge)
-
+The misspelled `Idempotent-Key` header is deprecated.
+The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints. 
+See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#idempotency-key-header)
 
 ### Product description guidelines
 We do not recommend you to use `Product Description` for agreements with a campaign.
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
 `Product description` will be, at a point in the future, phased out in order to improve user experience.
+
+### Update agreement endpoint
+TODO
 
 
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
@@ -238,8 +233,8 @@ We see that the user experience is not optimal when a lot of text is "squeezed" 
 [fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
 
 [partial-capture]: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api/#partial-capture-coming-soon
-[reserve-capture]: #todo-add-link
-[campaigns]: #todo-add-link
+[reserve-capture]: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api/#reserve-capture
+[campaigns]: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api/#campaigns
 
 
 
