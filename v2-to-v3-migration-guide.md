@@ -213,7 +213,7 @@ Truncated example of the response from the [`fetch charge`][fetch-charge-endpoin
 ### Idempotency key
 The misspelled `Idempotent-Key` header is deprecated.
 The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints. 
-See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#idempotency-key-header) in the API Guide.
+See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/idempotency-key-header-v3-api-coming-soon) in the API Guide.
 
 ### Product description guidelines
 We do not recommend you to use `Product Description` for agreements with a campaign.
