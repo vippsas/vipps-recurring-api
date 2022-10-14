@@ -220,8 +220,18 @@ We do not recommend you to use `Product Description` for agreements with a campa
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
 `Product description` will be, at a point in the future, phased out in order to improve user experience.
 
-### Update agreement endpoint
-TODO
+### Update an agreement
+
+In the API V3, it is possible to update the following fields on an agreement: 
+- product name
+- product description
+- merchant agreement url
+- pricing
+
+See the [`update agreement`][update-agreement-endpoint] endpoint.
+
+Also, the API V3 returns different response status. It will return `204 No Content` or `202 Accepted`.
+See [Response statuses](#response-statuses)
 
 
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
