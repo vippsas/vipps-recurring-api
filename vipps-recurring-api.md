@@ -1111,16 +1111,15 @@ The following properties are available for updating:
   "productName": "A new name",
   "productDescription": "A new description",
   "merchantAgreementUrl": "https://www.example.com/vipps-subscriptions/1234/",
-  "price": 25000,
-  "status": "ACTIVE",
-  "campaign": {
-    "start": "2019-10-01T00:00:00Z",
-    "end": "2019-12-01T00:00:00Z",
-    "campaignPrice": 10000
-  },
-  "suggestedMaxAmount": 300000
+  "pricing": {
+    "amount": 25000,
+    "suggestedMaxAmount": 300000
+  }
 }
 ```
+
+Updating `amount` is only possible for agreements with `pricing.type:LEGACY`
+Updating `suggestedMaxAmount` is only possible for agreements with `pricing.type:VARIABLE`
 
 **Please note:** As a `PATCH` operation all parameters are optional. However,
 when setting an agreement status to `STOPPED` no other changes are allowed.
@@ -1139,6 +1138,15 @@ We recommended not to set the agreement status to `STOPPED`. `STOPPED` agreement
 When a user notifies the merchant that they want to cancel a subscription or
 service, the merchant must ensure that the status of the recurring agreement is
 set to `STOPPED` at a suitable time.
+
+A merchant can stopped an agreement by calling the [`update agreement`][update-agreement-patch-endpoint] endpoint.
+Request body for stopping an agreement:
+
+```json
+{
+  "status": "STOPPED"
+}
+```
 
 Stopping an agreement results in cancellation of any charges that are DUE/PENDING at the time of stopping it,
 and it will not be possible to create new charges for a stopped agreement.
@@ -1883,19 +1891,18 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
-[list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/ListAgreements
+[list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [draft-agreement-endpoint-v2]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
 [draft-agreement-endpoint-v3]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
-[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
-[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
-[update-agreement-put-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPut
-[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/acceptUsingPATCH
-[list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/ListCharges
-[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CreateCharge
-[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/FetchCharge
-[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CancelCharge
-[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CaptureCharge
-[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/RefundCharge
+[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
+[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
+[list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
+[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
+[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
+[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
+[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
+[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
 [vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md
