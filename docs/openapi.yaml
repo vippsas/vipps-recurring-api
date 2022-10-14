@@ -1930,7 +1930,7 @@ components:
           enum:
             - STOPPED
         pricing:
-          $ref: '#/components/schemas/pricingUpdateRequest'
+          $ref: '#/components/schemas/PricingUpdateRequest'
 
     AgreementReference:
       type: object
@@ -2201,7 +2201,7 @@ components:
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
 
-    pricingUpdateRequest:
+    PricingUpdateRequest:
       title: pricing
       type: object
       properties:
