@@ -1046,6 +1046,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1081,6 +1083,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1114,6 +1118,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
