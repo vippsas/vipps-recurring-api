@@ -4,7 +4,7 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-  version: 2.6.10
+  version: 2.6.11
   title: Recurring Payments Merchant API
 
 servers:
@@ -1907,17 +1907,6 @@ components:
       title: PatchAgreement
       type: object
       properties:
-        suggestedMaxAmount:
-          type: integer
-          format: int32
-          example: 3000
-          minimum: 100
-          maximum: 2000000
-          description: |-
-            The suggested max amount that the customer should choose.
-
-            Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         productName:
           type: string
           example: Pluss-abonnement
@@ -1940,6 +1929,8 @@ components:
           description: Status of the agreement.
           enum:
             - STOPPED
+        pricing:
+          $ref: '#/components/schemas/pricingUpdateRequest'
 
     AgreementReference:
       type: object
@@ -2206,6 +2197,32 @@ components:
           example: 30000
           description: |-
             The max amount chosen by the customer.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+
+    pricingUpdateRequest:
+      title: pricing
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int32
+          minimum: 100
+          example: 1500
+          description: |-
+            The price of the agreement, can only be updated if agreement type is LEGACY
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          minimum: 100
+          maximum: 2000000
+          example: 3000
+          description: |-
+            The suggested max amount that the customer should choose, can only be updated if agreement type is VARIABLE.
 
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
