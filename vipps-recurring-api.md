@@ -20,6 +20,7 @@ When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
 The overall flow is:
+
 * The merchant creates a draft agreement and proposes it to the customer via Vipps.
 * The customer approves the agreement in Vipps.
 * The merchant sends a charge request to Vipps at least two days before due date
@@ -46,7 +47,7 @@ See also:
 
 API version: 2.0.0.
 
-Document version 2.5.10.
+Document version 2.6.0.
 
 <!-- START_TOC -->
 
@@ -219,60 +220,33 @@ See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way 
 
 ## Authentication and authorization
 
-All Vipps API calls are authenticated and authorized with an access token
-(JWT bearer token) and an API subscription key:
-
-| Header Name                 | Header Value                | Description                                                                                                                                                                                                                                                                               |
-|-----------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Authorization`             | `Bearer <JWT access token>` | Type: Authorization token. This obtained as described in [Getting started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): [Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token) |
-| `Ocp-Apim-Subscription-Key` | Base 64 encoded string      | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no).                                                                                                                                                                                       |
-
-For more information about how to obtain an access token and all details around this, please see:
-[Quick overview of how to make an API call](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#quick-overview-of-how-to-make-an-api-call)
-in the
-[Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md).
+All Vipps API calls are authenticated with an access token and an API subscription key.
+See
+[Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
+in the Getting started guide, for details.
 
 ## Vipps HTTP headers
 
-Please use the following Vipps HTTP headers for all requests to the
-Vipps eCom API. These headers provide useful metadata about the merchant's system,
-which help Vipps improve our services, and also help in investigating problems.
+We recommend using the standard Vipps HTTP headers for all requests.
 
-These headers are **required for plugins and partners** and sent by the recent versions of
-[the official Vipps plugins,](https://github.com/vippsas/vipps-plugins)
-and we recommend all customers with direct integration with the API to also do so.
-
-Partners must always send the `Merchant-Serial-Number` header, and we recommend
-that _everyone_ sends it, also when using the merchant's own API keys.
-The `Merchant-Serial-Number` header can be used with all API keys, and can
-speed up any troubleshooting of API problems quite a bit.
-
-**Important:** Please use self-explanatory, human-readable and reasonably short
-values that uniquely identify the system (and plugin).
-
-For example, if the vendor's name is "Acme AS" and the vendor offers two different systems,
-one for point of sale (POS) integrations and one for web shops,
-the headers should be:
-
-| Header                        | Description                                  | Example value for POS | Example value for webshop | Example value for Vending machines |
-|-------------------------------|----------------------------------------------|-----------------------|---------------------------|------------------------------------|
-| `Merchant-Serial-Number`      | The MSN for the sale unit                    | `123456`              | `123456`                  | `123456`                           |
-| `Vipps-System-Name`           | The name of the ecommerce solution           | `acme`                | `acme`                    | `acme`                             |
-| `Vipps-System-Version`        | The version number of the ecommerce solution | `1.7`                 | `2.6`                     | `2.6`                              |
-| `Vipps-System-Plugin-Name`    | The name of the ecommerce plugin             | `acme-pos`            | `acme-webshop`            | `acme-vending`                     |
-| `Vipps-System-Plugin-Version` | The version number of the ecommerce plugin   | `3.2`                 | `4.3`                     | `4.3`                              |
-
+See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#vipps-http-headers)
+in the Getting started guide, for details.
 
 ## Idempotency Key header (V3 API Coming Soon)
+
 The `Idempotency-Key` header must be set in each `POST` or `PATCH` request.
 This way, if a request fails for any reason, it can be retried with the same `Idempotency-Key`.
 Also, in the case of retries, it will prevent duplicating operations.
+
+See the
+[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#idempotency-header)
+for more details.
 
 ## orderId recommendations
 
 An optional _and recommended_ `orderId` field can be set in the [`create charge`][create-charge-endpoint] request.
 
-```
+```json
 {
   "amount": 49900,
   "currency": "NOK",
@@ -286,6 +260,7 @@ An optional _and recommended_ `orderId` field can be set in the [`create charge`
 The `orderId` replaces the `chargeId`.
 
 **Important:** If the `orderId` is provided:
+
 * The value of the `orderId` is used for all instances of `chargeId`
 * The `orderId` (and `chargeId`) is sed for all subsequent identification
   of the charge.
@@ -1260,7 +1235,9 @@ Call the Vipps [`user info`][userinfo-endpoint] endpoint with the `sub` that was
 |---------------|-------------------------|
 | Authorization | "Bearer {Access Token}" |
 
-The access token is received on a successful request to the token endpoint described in [Authentication and authorization](#authentication-and-authorization).
+The access token is received on a successful request to the token endpoint described in
+[Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
+in the Getting started guide.
 
 **Important note:** Subscription key used for the Recurring API must _not_ be
 included. This is because userinfo is part of Vipps Login and is therefore
