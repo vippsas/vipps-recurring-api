@@ -1653,7 +1653,7 @@ This API returns the following HTTP statuses in the responses:
 | HTTP status                | Description                                                       |
 |----------------------------|-------------------------------------------------------------------|
 | `200 OK`                   | Request successful                                                |
-| `204 No content`           | Created                                                           |
+| `204 No content`           | Request successful                                                |
 | `400 Bad Request`          | Invalid request, see the error for details                        |
 | `401 Unauthorized`         | Invalid credentials                                               |
 | `403 Forbidden`            | Authentication ok, but credentials lacks authorization            |
@@ -1688,6 +1688,9 @@ the response will be the following:
     ]
 }
 ```
+
+**Please note**: We are still working on improving error responses. 
+This means, in the future, `detail` and `extraDetails` content can change for some error responses.
 
 ## Rate limiting
 
