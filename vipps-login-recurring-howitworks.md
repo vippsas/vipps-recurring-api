@@ -7,7 +7,14 @@ END_METADATA -->
 
 # Vipps Login + Vipps Recurring: How It Works
 
-Vipps Login and Vipps Recurring can be used together making registration and payment simple for your customers. 
+<!-- START_COMMENT -->
+
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
+
+Vipps Login and Vipps Recurring can be used together making registration and payment simple for your customers.
 
 For the complete API documentation go to
 * [Vipps Login API](https://github.com/vippsas/vipps-login-api)
@@ -26,14 +33,14 @@ A user wants to buy a subscription on a merchant’s website or app.
 
 ## 2. Login with Vipps
 
-The user logs in with Vipps on the merchant’s site. 
+The user logs in with Vipps on the merchant’s site.
 If the user is remembered in browser the login will be completed directly in the browser. If not the user will be taken to the app to authenticate.
 
 ![Login with Vipps](images/vipps-login-recurring-howitworks/login-recurring-step2.svg)
 
 ## 3. Confirm login
 
-If the user needs to authenticate in the app, the user will be taken to Vipps to confirm the login. 
+If the user needs to authenticate in the app, the user will be taken to Vipps to confirm the login.
 
 ![Confirm login](images/vipps-login-recurring-howitworks/login-recurring-step3.svg)
 
@@ -52,7 +59,7 @@ This step is controlled and designed by the individual merchant. Typically, the 
 
 ## 6. Accept agreement in Vipps
 
-The user accept the agreement in Vipps. 
+The user accept the agreement in Vipps.
 
 ![Agreement in Vipps](images/vipps-login-recurring-howitworks/login-recurring-step6.png)
 

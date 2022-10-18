@@ -7,6 +7,13 @@ END_METADATA -->
 
 # Vipps Recurring API
 
+<!-- START_COMMENT -->
+
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
+
 The Vipps Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user, the merchant can send charges
@@ -40,7 +47,7 @@ See also:
 
 API version: 2.0.0.
 
-Document version 2.5.10.
+Document version 2.6.1.
 
 <!-- START_TOC -->
 
@@ -54,8 +61,9 @@ Document version 2.5.10.
     - [Direct capture](#direct-capture)
     - [Reserve capture](#reserve-capture)
   - [API endpoints](#api-endpoints)
-  - [Authentication](#authentication)
+  - [Authentication and authorization](#authentication-and-authorization)
   - [Vipps HTTP headers](#vipps-http-headers)
+  - [Idempotency Key header (V3 API Coming Soon)](#idempotency-key-header-v3-api-coming-soon)
   - [orderId recommendations](#orderid-recommendations)
   - [Agreements](#agreements)
     - [Create an agreement](#create-an-agreement)
@@ -66,6 +74,8 @@ Document version 2.5.10.
     - [Retrieve an agreement](#retrieve-an-agreement)
   - [Charges](#charges)
     - [Create a charge](#create-a-charge)
+    - [Capture a charge](#capture-a-charge)
+    - [Partial capture(Coming soon)](#partial-capture-coming-soon)
     - [Amount changes](#amount-changes)
     - [Charge descriptions](#charge-descriptions)
     - [Cancel a charge](#cancel-a-charge)
@@ -103,7 +113,7 @@ Document version 2.5.10.
   - [Timeouts](#timeouts)
     - [Using a phone](#using-a-phone)
     - [Using a laptop/desktop](#using-a-laptopdesktop)
-- [Testing](#testing)
+  - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
   - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
     - [Normal agreement flow](#normal-agreement-flow)
@@ -138,21 +148,23 @@ See the eCom FAQ for the difference:
 [What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
-the merchant has created a charge for with the [`create charge`][create-charge-endpoint] endpoint.
-You can also [Manage charges and agreements](#manage-charges-and-agreements).
+the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
+You can also [manage charges and agreements](#manage-charges-and-agreements).
 
 ### Direct capture
 
 For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
-1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint] endpoint.
+1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
-   This will result in a capture of the initial charge (if one was defined in the first step).
-3. Retrieve the (hopefully approved) agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
+   This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
+   See [Initial charge](#initial-charge).
+3. Retrieve the agreement by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
-4. For all future charges, you must create a charge using the [`create charge`][create-charge-endpoint] endpoint.
+4. All future charges can be created by using the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
+   For direct capture you must set `"transactionType": "DIRECT_CAPTURE"`.
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
    If for some reason, a charge fails to be processed,
@@ -161,99 +173,80 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 ### Reserve capture
 
+**Note:** Reserve capture on recurring charges is available in the recurring API v3 (Coming soon - WORK IN PROGRESS)
+In the API V2, reserve capture is only available on initial charges.
+
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
-1. Create a (draft) agreement using the [`draft agreement`][draft-agreement-endpoint] endpoint.
+1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
-   This will result in a capture of the initial charge (if one was defined in the first step).
-3. Retrieve the (hopefully approved) agreement by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
+   This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
+   See [Initial charge](#initial-charge).
+3. Retrieve the agreement by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
    **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
-4. If there is a product that is shipped to the customer, the initial charge should be captured at this point.
-   Capture the charge by calling the [`capture charge`][capture-charge-endpoint] endpoint.
-   If there is no product being shipped, or a need to provide access at a later point - the merchant should change the
-   merchant sale unit setup to use `DIRECT CAPTURE` instead.
-5. For all future charges, you must create a charge by calling the [`create charge`][create-charge-endpoint] endpoint.
+4. All future charges can be created by using the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
+   For reserve capture you must set `"transactionType": "RESERVE_CAPTURE"`.
    See [Create a charge](#create-a-charge).
    Based on the `due` set in the request, we will try to process the charge on that day.
+   If the charge is processed successfully, the status will be `RESERVED`.
    If for some reason, a charge fails to be processed,
    we will retry for the number of days specified by the `retryDays` value.
    We recommend at least 2 days retry.
+5. If there is a product that is shipped to the customer, the charge should be captured at this point.
+   Capture the charge by calling the [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] endpoint.
 
 
 ## API endpoints
 
 | Operation                                       | Description                                           | Endpoint                                              |
 |-------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
-| List agreements                                 | List all agreements for a merchant.                   | [`list agreements`][list-agreements-endpoint]         |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`draft agreement`][draft-agreement-endpoint]         |
-| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`fetch agreement`][fetch-agreement-endpoint]         |
-| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`update agreement`][update-agreement-patch-endpoint] |
-| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`update agreement`][update-agreement-patch-endpoint] |
-| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`list charges`][list-charges-endpoint]               |
-| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`create charge`][create-charge-endpoint]             |
-| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`fetch charge`][fetch-charge-endpoint]               |
-| [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.     | [`capture charge`][capture-charge-endpoint]           |
-| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`cancel charge`][cancel-charge-endpoint]             |
-| Refund a charge                                 | Refund a charge that has been performed.              | [`refund charge`][refund-charge-endpoint]             |
+| List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]         |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint-v2]      |
+| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]         |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] |
+| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]               |
+| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]             |
+| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]               |
+| [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.     | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]           |
+| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]             |
+| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]             |
 
-See [Authentication and authorization](#authentication).
+See [Authentication and authorization](#authentication-and-authorization).
 
 See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way to test the API.
 
-## Authentication
+## Authentication and authorization
 
-All Vipps API calls are authenticated and authorized with an access token
-(JWT bearer token) and an API subscription key:
-
-| Header Name                 | Header Value                | Description                                                                                                                                                                                                                                                                               |
-|-----------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Authorization`             | `Bearer <JWT access token>` | Type: Authorization token. This obtained as described in [Getting started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): [Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token) |
-| `Ocp-Apim-Subscription-Key` | Base 64 encoded string      | The subscription key for this API. This is available on [portal.vipps.no](https://portal.vipps.no).                                                                                                                                                                                       |
-
-For more information about how to obtain an access token and all details around this, please see:
-[Quick overview of how to make an API call](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#quick-overview-of-how-to-make-an-api-call)
-in the
-[Getting started guide](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md).
+All Vipps API calls are authenticated with an access token and an API subscription key.
+See
+[Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
+in the Getting started guide, for details.
 
 ## Vipps HTTP headers
 
-Please use the following Vipps HTTP headers for all requests to the
-Vipps eCom API. These headers provide useful metadata about the merchant's system,
-which help Vipps improve our services, and also help in investigating problems.
+We recommend using the standard Vipps HTTP headers for all requests.
 
-These headers are **required for plugins and partners** and sent by the recent versions of
-[the official Vipps plugins,](https://github.com/vippsas/vipps-plugins)
-and we recommend all customers with direct integration with the API to also do so.
+See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#vipps-http-headers)
+in the Getting started guide, for details.
 
-Partners must always send the `Merchant-Serial-Number` header, and we recommend
-that _everyone_ sends it, also when using the merchant's own API keys.
-The `Merchant-Serial-Number` header can be used with all API keys, and can
-speed up any troubleshooting of API problems quite a bit.
+## Idempotency Key header (V3 API Coming Soon)
 
-**Important:** Please use self-explanatory, human-readable and reasonably short
-values that uniquely identify the system (and plugin).
+The `Idempotency-Key` header must be set in each `POST` or `PATCH` request.
+This way, if a request fails for any reason, it can be retried with the same `Idempotency-Key`.
+Also, in the case of retries, it will prevent duplicating operations.
 
-For example, if the vendor's name is "Acme AS" and the vendor offers two different systems,
-one for point of sale (POS) integrations and one for web shops,
-the headers should be:
-
-| Header                        | Description                                  | Example value for POS | Example value for webshop | Example value for Vending machines |
-|-------------------------------|----------------------------------------------|-----------------------|---------------------------|------------------------------------|
-| `Merchant-Serial-Number`      | The MSN for the sale unit                    | `123456`              | `123456`                  | `123456`                           |
-| `Vipps-System-Name`           | The name of the ecommerce solution           | `acme`                | `acme`                    | `acme`                             |
-| `Vipps-System-Version`        | The version number of the ecommerce solution | `1.7`                 | `2.6`                     | `2.6`                              |
-| `Vipps-System-Plugin-Name`    | The name of the ecommerce plugin             | `acme-pos`            | `acme-webshop`            | `acme-vending`                     |
-| `Vipps-System-Plugin-Version` | The version number of the ecommerce plugin   | `3.2`                 | `4.3`                     | `4.3`                              |
-
-
+See the
+[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#idempotency-header)
+for more details.
 
 ## orderId recommendations
 
-An optional _and recommended_ `orderId` field can be set in the [`create charge`][create-charge-endpoint] request.
+An optional _and recommended_ `orderId` field can be set in the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] request.
 
-```
+```json
 {
   "amount": 49900,
   "currency": "NOK",
@@ -267,6 +260,7 @@ An optional _and recommended_ `orderId` field can be set in the [`create charge`
 The `orderId` replaces the `chargeId`.
 
 **Important:** If the `orderId` is provided:
+
 * The value of the `orderId` is used for all instances of `chargeId`
 * The `orderId` (and `chargeId`) is sed for all subsequent identification
   of the charge.
@@ -309,7 +303,7 @@ An agreement has payments, called [charges](#charges).
 
 ### Create an agreement
 
-This is an example of a request body for the [`draft agreement`][draft-agreement-endpoint] call:
+This is an example of a request body for the [`POST:/agreements`][draft-agreement-endpoint-v2] call:
 
 ```json
 {
@@ -339,7 +333,7 @@ The integrator ***must*** implement such functionality for the customer to manag
 **Please note:** If the user closes Vipps before the redirect is done,
 the `merchantRedirectUrl` will not be used. It is therefore important that you
 actively check the payment with the
-[`fetch agreement`][fetch-agreement-endpoint] endpoint.
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
 
 The `merchantAgreementUrl` is just a normal link to a page where the customer
 can log in and manage the agreement.
@@ -352,7 +346,7 @@ in automatically through Vipps. See the
 for more details.
 
 The request parameters have the following size limits
-(see the [`draft agreement][draft-agreement-endpoint] endpoint for more details):
+(see the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint for more details):
 
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
@@ -371,7 +365,7 @@ There are 100 øre in 1 krone.
 
 The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`.
 This `agreementResource` is a complete URL for performing a
-[`fetch agreement`][fetch-agreement-endpoint]
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
 request.
 
 The `vippsConfirmationUrl` should be used to redirect the
@@ -381,7 +375,7 @@ user can then approve the agreement.
 
 ### Accept an agreement
 
-The [`draft agreement`][draft-agreement-endpoint] endpoint will return the following JSON structure.
+The [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint will return the following JSON structure.
 
 ```json
 {
@@ -420,6 +414,8 @@ If the user does not have Vipps installed:
 
 Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31.
 
+#### Example in the V2 api:
+
 Example for a bi-weekly subscription:
 ```json
 {
@@ -451,12 +447,64 @@ OR
 }
 ```
 
+Example for a subscription every 30th day:
+```json
+{
+  "interval": {
+    "unit": "DAY",
+    "count": 30
+  }
+}
+```
+
+Example in the V3 api (Coming soon - WORK IN PROGRESS):
+
+Example for a bi-weekly subscription:
+```json
+{
+  "interval": {
+    "unit": "WEEK",
+    "count": 2
+  }
+}
+```
+
+Example for a quarterly subscription
+```json
+{
+  "interval": {
+    "unit": "MONTH",
+    "count": 3
+  }
+}
+```
+
+Examples for a yearly subscription
+```json
+{
+  "interval": {
+    "unit": "YEAR",
+    "count": 1
+  }
+}
+```
+OR
+```json
+{
+  "interval": {
+    "unit": "MONTH",
+    "count": 12
+  }
+}
+```
 
 Example for a subscription every 30th day:
 ```json
 {
-  "interval": "DAY",
-  "intervalCount": 30
+  "interval": {
+    "unit": "DAY",
+    "count": 30
+  }
 }
 ```
 
@@ -535,7 +583,7 @@ Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial c
 ```
 
 A reserved charge can be captured with the
-[`capture charge`][capture-charge-endpoint] endpoint
+[`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] endpoint
 when the product is shipped.
 
 ### Campaigns
@@ -544,12 +592,14 @@ A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
 Campaigns cannot be used in combination with [variable amount](#Recurring-agreements-with-variable-amount).
 
-![flow_Campaign](images/flow-Campaign.png)
+#### Campaigns in V2 API
+
+![screen-legacy-campaign](images/campaigns/screens/legacy-campaign.png)
 
 In order to start a campaign, the campaign field must be added either to the
-[`draft agreement`][draft-agreement-endpoint] request
+[`POST:/agreements`][draft-agreement-endpoint-v2] request
 for a campaign in the start of an agreement, or to the
-[`update agreement`][update-agreement-patch-endpoint] request
+[`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] request
 for an ongoing agreement. When adding a campaign
 while drafting a new agreement, the start date is ignored and the current
 date-time is used. All dates must be in date-time format as according to
@@ -571,6 +621,124 @@ date-time is used. All dates must be in date-time format as according to
 | `end`           | End date of campaign offer, can not be in the past                                                                      |
 | `campaignPrice` | The price that will be shown for comparison                                                                             |
 
+#### (Coming soon - WORK IN PROGRESS) Campaigns in V3 API
+In V3, we introduce 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign.
+See more about the different campaign types in the table below.
+
+| Campaign types       | Description                                                                                             | Example                                                                 |
+|----------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `price campaign`     | Different interval price until specified date. Same interval as agreement.                              | 1kr every week until 2022-12-25T00:00:00Z and then 50kr every week      |
+| `period campaign`    | A set price for a given duration. A duration is defined by a number of periods (DAY, WEEK, MONTH, YEAR) | 10 weeks for 1kr and then 349kr every month                             |
+| `event campaign`     | A set price until a given event date with a text describing the event                                   | 1kr until Christmas and then 349kr every month                          |
+| `full flex campaign` | Different price and interval until a given date                                                         | 100kr every month until 2023-01-01T00:00:00Z and then 1000kr every year |
+
+In order to start a campaign, the `campaign` field has to be added to the agreement draft body in the
+[`draft agreement`][draft-agreement-endpoint-v3] call.
+
+##### Price campaign
+
+![price-campaign-explanation](images/campaigns/price-campaign.png)  
+
+```json
+{
+  "campaign": {
+    "type": "PRICE_CAMPAIGN",
+    "end": "2022-12-25T00:00:00Z",
+    "price": 100
+  }
+}
+```
+| Field   | Description                                                                 |
+|---------|-----------------------------------------------------------------------------|
+| `type`  | The type of the campaign                                                    |
+| `price` | The price that the customer will pay for each interval during the campaign  |
+| `end`   | The end date of the campaign                                                |
+
+![screen-price-campaign](images/campaigns/screens/price-campaign.png)
+
+##### Period campaign
+
+![period-campaign-explanation](images/campaigns/period-campaign.png)
+
+```json
+{
+ "campaign": {
+    "type": "PERIOD_CAMPAIGN",
+    "price": 100,
+    "period": {
+      "unit": "WEEK",
+      "count": 10
+    }
+  }
+}
+```
+| Field    | Description                                                                                                             |
+|----------|-------------------------------------------------------------------------------------------------------------------------|
+| `type`   | The type of the campaign                                                                                                |
+| `price`  | The price that the customer will pay for the period of the campaign                                                     |
+| `period` | The period where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+
+![screen-price-campaign](images/campaigns/screens/period-campaign.png)
+
+##### Event campaign
+
+![event-campaign](images/campaigns/event-campaign.png)
+
+```json
+{
+"campaign": {
+    "type": "EVENT_CAMPAIGN",
+    "price": 100,
+    "eventDate": "2022-09-01T00:00:00Z",
+    "eventText": "To the end of august"
+  }
+}
+```
+| Field       | Description                                               |
+|-------------|-----------------------------------------------------------|
+| `type`      | The type of the campaign                                  |
+| `price`     | The price that the customer will pay until the event date |
+| `eventDate` | The date of the event marking the end of the campaign     |
+| `eventText` | The event text to display to the end user                 |
+
+**Note:** We recommend to start the event text with lowercase for better user experience. See example below.
+
+![screen-event-campaign](images/campaigns/screens/event-campaign.png)
+
+##### Full flex campaign
+
+**Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
+See [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+
+![full-flex-campaign](images/campaigns/full-flex-campaign.png)
+
+```json
+{
+ "campaign": {
+    "type": "FULL_FLEX_CAMPAIGN",
+    "price": 10000,
+    "end": "2023-01-01T00:00:00Z",
+   "interval": {
+     "unit": "MONTH",
+     "count": 1
+   }
+  }
+}
+```
+| Field      | Description                                                                                                                       |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `type`     | The type of the campaign                                                                                                          |
+| `price`    | The price that the customer will pay for each interval during the campaign                                                        |
+| `end`      | The end date of the campaign                                                                                                      |
+| `interval` | The payment interval where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+
+![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
+
+##### Product description guidelines for agreements with campaigns.
+We do not recommend you to use `Product Description` for agreements with a campaign.
+We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
+`Product description` will be, at a point in the future, phased out in order to improve user experience.
+
 ### Retrieve an agreement
 
 A newly created agreement will be in status `PENDING` for 10 minutes before it expires.
@@ -578,13 +746,13 @@ If the customer approves the agreement, and the initialCharge (if provided) is s
 processed, the agreement status will change to `ACTIVE`.
 
 The approved agreement is retrieved from the
-[`fetch agreement`][fetch-agreement-endpoint] endpoint
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint
 with `"status":"ACTIVE"` when the customer has approved the agreement.
 
 See [Agreement states](#agreement-states).
 
 This is an example response from a call to the
-[`fetch agreement`][fetch-agreement-endpoint] endpoint:
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint:
 
 ```json
 {
@@ -611,39 +779,49 @@ An [agreement](#agreements) has payments, called charges.
 *Recurring has functionality to charge a variable amount each interval. See:
 [Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).*
 
-Charge the customer for each period with the
-[`create charge`][create-charge-endpoint] endpoint.
-
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur (it is minimum one day in the test environment).
 
-Example: If the charge is _created_ on the 25th, the earliest the charge can be
-_made_ is the 27th (25+2). This is so that the user can be informed about the
-upcoming charge. The user is only shown one charge per agreement, in order to
-not overwhelm the user when doing daily or weekly charges.
-
-Create a charge for a given agreement. `due` will define for which date
-the charge will be performed. This date has to be at a minimum two days in the
+Charge the customer for each period with the
+[`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
+`due` will define for which date the charge will be performed.
+This date has to be at a minimum two days in the
 future (it is minimum one day in the test environment), and all charges `due` in
 30 days or less are visible for users in Vipps.
 
-See:
-[orderId recommendations](#orderid-recommendations).
+Example: If the charge is _created_ on the 25th, the earliest the charge can be
+_due_ is the 27th (25+2). This is so that the user can be informed about the
+upcoming charge. The user is only shown one charge per agreement, in order to
+not overwhelm the user when doing daily or weekly charges.
+
+A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
+**Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api (Coming soon - WORK IN PROGRESS)
+
+`DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
+reserves the payment for capturing at a later date. See:
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the eCom FAQ for more details.
+
+`RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
+
+The advantage to using reserve capture is that you can release the reservation immediately:
+- For a reserved payment, the merchant can make a /cancel call to immediately release the reservation and make it available in the customer's account.
+- For a captured payment, the merchant must make a /refund call. It then takes a few days before the amount is available in the customer's account.
+
+See the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint definition for examples.
+
+Also see check [orderId recommendations](#orderid-recommendations) before creating charges.
 
 ### Capture a charge
 
-Capture payment allows the merchant to capture the reserved amount of a charge. 
+Capture payment allows the merchant to capture the reserved amount of a charge.
 The API allows for both a full amount capture and a partial amount capture (partial amount only available in API V3)(Coming soon)
 
-The amount to capture cannot be higher than the reserved amount. 
-According to Norwegian regulations, capture cannot be done before the goods have been shipped. 
+The amount to capture cannot be higher than the reserved amount.
+According to Norwegian regulations, capture cannot be done before the goods have been shipped.
 The `description` text is mandatory and is displayed to the end user in the Vipps app.
 
-Capture is done with the [`capture charge`][capture-charge-endpoint] endpoint.
-
-`Idempotency-Key` header must be set in the request. 
-Then, if a capture request fails for any reason, it can be retried with the same idempotency key. 
-Also, in the case of retries, it will prevent duplicating capture operations.
+Capture is done with the [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] endpoint.
 
 **Please note:** It is important to check the response of the /capture call. The capture is only successful when the response is `HTTP 204 No Content`.
 
@@ -651,11 +829,11 @@ Capture can be made up to 180 days after reservation. Attempting to capture an o
 
 ### Partial capture (Coming soon)
 
-Partial capture may be used in cases where a partial order is shipped or for other reasons. 
+Partial capture may be used in cases where a partial order is shipped or for other reasons.
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [For how long is a payment reserve](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq/#for-how-long-is-a-payment-reserved)
+See [For how long is a payment reserved](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq/#for-how-long-is-a-payment-reserved)
 in the eCom FAQ for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
@@ -691,7 +869,7 @@ show up in the users' payment history. In the payment history a charge from
 Vipps recurring payment will have a description with follow format
 `{agreement.ProductName} - {charge.description}`.
 
-This is an example of a request body for the [`create charge`][create-charge-endpoint] call:
+This is an example of a request body for the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] call:
 
 ```json
 {
@@ -712,7 +890,7 @@ If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the 
 
 **Note:** If you cancel an agreement, there is no need to cancel the charges that belong to the agreement. This will be done automatically by Vipps.
 
-A charge can be cancelled with the [`cancel charge`][cancel-charge-endpoint] endpoint.
+A charge can be cancelled with the [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] endpoint.
 
 ### Charge times
 
@@ -728,7 +906,7 @@ Subsequent attempts are made according to the `retryDays` specified.
 **Note:** Since payments _can_ be processed any time (07:00UTC - 23:59 UTC) it is advisable to fetch the charge at/after 00:00 UTC the day after the last retry day to be sure you get the last status.
 
 When a charge has reached its `due` date, the status of the charge will be
-`PROCESSING` until the charge is successful, for as long as the merchant has
+`DUE` until the charge is successful, for as long as the merchant has
 specified with `retryDays`.
 
 **Important:** Vipps does not "leak" the customers' information about insufficient funds,
@@ -741,7 +919,7 @@ should always ask the user to check in Vipps if a charge has failed.
 Vipps will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
 
-The status of a charge will be `PROCESSING` while Vipps is taking care of business,
+The status of a charge will be `DUE` while Vipps is taking care of business,
 from the `due` date until the charge has succeeded, or until the
 `retryDays` have passed without a successful charge.
 The final status will be `CHARGED` or `FAILED`.
@@ -755,7 +933,7 @@ This results in a _very_ high success rate for charges.
 
 ### Retrieve a charge
 
-A charge can be retrieved with the [`fetch charge`][fetch-charge-endpoint] endpoint.
+A charge can be retrieved with the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
 
 Example response:
 
@@ -785,7 +963,7 @@ See: [Charge states](#charge-states).
 ### List charges
 
 All charges, including the optional initial charge, for an agreement can be retrieved with the
-[`list charges`][list-charges-endpoint] endpoint.
+[`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
 
 ## Manage charges and agreements
 
@@ -798,13 +976,13 @@ and to use the API to make sure everything is in sync.
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Agreement has been created, but not approved by the user in Vipps yet |
 | 2 | `ACTIVE` | The agreement has been confirmed by the end user in Vipps and can receive charges |
-| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by the [`update agreement`][update-agreement-patch-endpoint] endpoint, or by the user by cancelling or rejecting the agreement. |
+| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by the [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint, or by the user by cancelling or rejecting the agreement. |
 | 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in Vipps |
 
 ### Update an agreement
 
 A merchant can update an agreement by calling the
-[`update agreement`][update-agreement-patch-endpoint] endpoint.
+[`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint.
 The following properties are available for updating:
 
 ```json
@@ -858,13 +1036,13 @@ to set up a new agreement.
 ### Charge states
 
 This table has all the details for the charge states returned by the
-[`fetch charge`][fetch-charge-endpoint] endpoint:
+[`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
 
 | State                | Description                                                                                                                                   |
 |:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | `PENDING`            | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps. |
 | `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                       |
-| `PROCESSING`         | The charge is being processed by Vipps, from the `due` date for `retryDays` until the charge is `CHARGED` or `FAILED`.                        |
+| `PROCESSING`         | The charge status is unknown but should be processed.                                                                                         |
 | `CHARGED`            | The charge has been successfully completed.                                                                                                   |
 | `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                |
 | `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                      |
@@ -879,13 +1057,13 @@ This results in a _very_ high success rate for charges.
 ### Example charge flows
 
 Scenario: Everything goes as it should: The user has money, and the charge is successful on the `due` date:
-* `PENDING` -> `DUE` -> `PROCESSING` (just for the one due day)-> `CHARGED`
+* `PENDING` -> `DUE` (just for the one due day)-> `CHARGED`
 
 Scenario: The user does not have funds and `retryDays = 0`:
-* `PENDING` -> `DUE` -> `PROCESSING` -> `FAILED`
+* `PENDING` -> `DUE` -> `FAILED`
 
 Scenario: The user does not have funds on the `due` date, `retryDays = 10`, and has funds on the fifth day:
-* `PENDING` -> `DUE` -> `PROCESSING` (for five days) -> `CHARGED`
+* `PENDING` -> `DUE` (for five days) -> `CHARGED`
 
 **Please note:** Since charges are polled by the merchant, it is possible that
 the charge status appears to "skip" a transition, e.g. moving directly from
@@ -943,7 +1121,7 @@ This is done through Vipps Userinfo which
 You can learn more at the [OIDC Standard](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
 To enable the possibility to fetch profile information for a user the merchant can add a `scope`
-parameter to the [`draft agreement`][draft-agreement-endpoint] call.
+parameter to the [`POST:/agreements`][draft-agreement-endpoint-v2] call.
 
 If the user has not already consented to sharing information from Vipps to the
 merchant the user will be asked for such consent before activating the agreement.
@@ -977,21 +1155,21 @@ confirmation link sent to the email address.
 Scenario: You want to complete a payment and get the name and phone number of
 a customer.
 
-1. Retrieve the access token by calling the [`access token`][access-token-endpoint] endpoint.
+1. Retrieve the access token by calling the [`POST:/accesstoken/get`][access-token-endpoint] endpoint.
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
-   access to (valid scope) before calling the [`draft agreement`][draft-agreement-endpoint] endpoint.
+   access to (valid scope) before calling the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint.
 3. The user consents to the information sharing and accepts the agreement in Vipps.
-4. Retrieve the `sub` by calling the [`fetch agreement`][fetch-agreement-endpoint] endpoint.
-5. Using the sub from step 4, call the [`user info`][userinfo-endpoint] endpoint to retrieve the user's information.
+4. Retrieve the `sub` by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
+5. Using the sub from step 4, call the [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint to retrieve the user's information.
 
-**Important note:** The API call to the [`user info`][userinfo-endpoint] endpoint
+**Important note:** The API call to the [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint
 must _not_ include the subscription key (the `Ocp-Apim-Subscription-Key` header) used for the Recurring API.
 This is because userinfo is part of Vipps Login and is therefore _not_ under the same subscription,
 and will result in a `HTTP Unauthorized 401` error.
 
 ### Example calls
 
-To request this scope add the scope to the initial [`draft agreement`][draft-agreement-endpoint] call
+To request this scope add the scope to the initial [`POST:/agreements`][draft-agreement-endpoint-v2] call
 
 Example of request with scope:
 
@@ -1017,7 +1195,7 @@ complete a valid agreement and consent to all values in order to complete the
 session. If a user chooses to reject the terms the agreement will not be
 processed. Unless the whole flow is completed, this will be handled as a regular failed agreement by the recurring APIs.
 
-Once the user completes the session a unique identifier `sub` can be retrieved with the [`fetch agreement`][fetch-agreement-endpoint] endpoint alongside the full URL to Userinfo.
+Once the user completes the session a unique identifier `sub` can be retrieved with the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint alongside the full URL to Userinfo.
 
 Example `sub` and `userinfoUrl` format:
 
@@ -1029,7 +1207,7 @@ Example `sub` and `userinfoUrl` format:
 ```
 
 This `sub` is a link between the merchant and the user and can be used to retrieve
-the user's details from the Vipps [`user info`][userinfo-endpoint] endpoint
+the user's details from the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint
 
 The `sub` is based on the user's national identity number ("fødselsnummer"
 in Norway), and does not change (except in very special cases).
@@ -1047,7 +1225,7 @@ transaction and the fetching of the profile data.
 
 This endpoint returns the payload with the information that the user has consented to share.
 
-Call the Vipps [`user info`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier. See below on how to construct the call.
+Call the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier. See below on how to construct the call.
 
 **Request**
 
@@ -1057,7 +1235,9 @@ Call the Vipps [`user info`][userinfo-endpoint] endpoint with the `sub` that was
 |---------------|-------------------------|
 | Authorization | "Bearer {Access Token}" |
 
-The access token is received on a successful request to the token endpoint described in [Authentication](#authentication).
+The access token is received on a successful request to the token endpoint described in
+[Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
+in the Getting started guide.
 
 **Important note:** Subscription key used for the Recurring API must _not_ be
 included. This is because userinfo is part of Vipps Login and is therefore
@@ -1281,7 +1461,7 @@ This can be changed as described in the [Intervals](#intervals) section.
 #### Charge amount higher than the user's max amount
 
 If the created charge is above the user's `maxAmount`, the charge will be set
-to `PROCESSING`. If the user does not update their `maxAmount` to the same or a higher
+to `DUE`. If the user does not update their `maxAmount` to the same or a higher
 amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
@@ -1315,7 +1495,7 @@ Skipping the landing page is only reserved for physical points of sale and vendi
 This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
 
 If the `skipLandingPage` property is set to `true` in the
-[`draft agreement`][draft-agreement-endpoint]
+[`POST:/agreements`][draft-agreement-endpoint-v2]
 call, it will cause a push notification to be sent to the given phone number
 immediately, without loading the landing page.
 
@@ -1389,7 +1569,7 @@ different payments is far higher than 2.
 
 ## Partner keys
 
-In addition to the normal [Authentication](#authentication) we offer _partner keys_,
+In addition to the normal [Authentication](#authentication-and-authorization) we offer _partner keys_,
 which let a partner make API calls on behalf of a merchant.
 
 If you are a Vipps partner managing agreements on behalf of Vipps merchants you
@@ -1429,7 +1609,7 @@ See:
 
 ## Polling guidelines
 
-General guidelines for polling with the [`fetch agreement`][fetch-agreement-endpoint] endpoint:
+General guidelines for polling with the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint:
 
 1. Start after 5 seconds
 2. Check every 2 seconds
@@ -1465,7 +1645,7 @@ has an additional 5 minutes to complete the payment in Vipps.
 
 This means that the user has a total of 10 minutes to complete the payment.
 
-# Testing
+## Testing
 
 To facilitate automated testing in the
 [Vipps Test Environment (MT)][vipps-test-environment],
@@ -1531,7 +1711,7 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 
 ### Campaign
 
-![flow_Campaign](images/flow-Campaign.png)
+See [Campaigns](#campaigns) for details about campaigns.
 
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
 
@@ -1541,11 +1721,16 @@ This is the preferred flow whenever you have a type of campaign where the subscr
 
 ### Initial charge and campaign
 
-![flow_initial_charge_campaign](images/campaign_agreement_with_initial_charge.png)
-
 In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
 Ideally, this flow is intended for when you have a combination of an additional cost when setting up the agreement, presented as the initial charge, as well as having a limited time offer on the actual subscription.
+
+**Agreement screens with initial and campaign v2**
+![screen_initial_charge_legacy_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
+
+**(Coming soon WORK IN PROGRESS) Agreement screens with initial and campaign v3**
+![screen_initial_charge_legacy_campaign](images/campaigns/screens/price-campaign-with-initial-charge.png)
+
 
 ## Questions?
 
@@ -1557,7 +1742,8 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/ListAgreements
-[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
+[draft-agreement-endpoint-v2]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
+[draft-agreement-endpoint-v3]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
 [update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
 [update-agreement-put-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPut
