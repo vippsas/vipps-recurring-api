@@ -1114,7 +1114,7 @@ When a user notifies the merchant that they want to cancel a subscription or
 service, the merchant must ensure that the status of the recurring agreement is
 set to `STOPPED` at a suitable time.
 
-A merchant can stopped an agreement by calling the [`update agreement`][update-agreement-patch-endpoint] endpoint.
+A merchant can stopped an agreement by calling the [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint.
 Request body for stopping an agreement:
 
 ```json
@@ -1647,7 +1647,7 @@ All error responses contains an `error` object in the body, with details of the
 problem.
 
 In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-For example, when calling [`update agreement`][update-agreement-endpoint] endpoint with a stopped agreement,
+For example, when calling [`PUT:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement,
 the response will be the following:
 
 ```json
