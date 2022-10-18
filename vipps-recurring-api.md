@@ -47,7 +47,7 @@ See also:
 
 API version: 2.0.0.
 
-Document version 2.6.0.
+Document version 2.6.1.
 
 <!-- START_TOC -->
 
@@ -1155,14 +1155,14 @@ confirmation link sent to the email address.
 Scenario: You want to complete a payment and get the name and phone number of
 a customer.
 
-1. Retrieve the access token by calling the [`access token`][access-token-endpoint] endpoint.
+1. Retrieve the access token by calling the [`POST:/accesstoken/get`][access-token-endpoint] endpoint.
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
    access to (valid scope) before calling the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint.
 3. The user consents to the information sharing and accepts the agreement in Vipps.
 4. Retrieve the `sub` by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
-5. Using the sub from step 4, call the [`user info`][userinfo-endpoint] endpoint to retrieve the user's information.
+5. Using the sub from step 4, call the [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint to retrieve the user's information.
 
-**Important note:** The API call to the [`user info`][userinfo-endpoint] endpoint
+**Important note:** The API call to the [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint
 must _not_ include the subscription key (the `Ocp-Apim-Subscription-Key` header) used for the Recurring API.
 This is because userinfo is part of Vipps Login and is therefore _not_ under the same subscription,
 and will result in a `HTTP Unauthorized 401` error.
@@ -1207,7 +1207,7 @@ Example `sub` and `userinfoUrl` format:
 ```
 
 This `sub` is a link between the merchant and the user and can be used to retrieve
-the user's details from the Vipps [`user info`][userinfo-endpoint] endpoint
+the user's details from the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint
 
 The `sub` is based on the user's national identity number ("fødselsnummer"
 in Norway), and does not change (except in very special cases).
@@ -1225,7 +1225,7 @@ transaction and the fetching of the profile data.
 
 This endpoint returns the payload with the information that the user has consented to share.
 
-Call the Vipps [`user info`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier. See below on how to construct the call.
+Call the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier. See below on how to construct the call.
 
 **Request**
 
