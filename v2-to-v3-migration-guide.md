@@ -28,19 +28,19 @@ See [partial capture][partial-capture] in the API Guide.
 
 The API V3 returns different response status for some endpoints:
 
-| Endpoint                                        | V2 response status | V3 response status                   |
-|-------------------------------------------------|--------------------|--------------------------------------|
-| [`update agreement`][update-agreement-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`*  | 
-| [`cancel charge`][cancel-charge-endpoint]       | `200 OK`           | `204 No Content` or `202 Accepted`*  | 
-| [`capture charge`][capture-charge-endpoint]     | `200 OK`           | `204 No Content` or `202 Accepted`*  | 
-| [`refund charge`][refund-charge-endpoint]       | `200 OK`           | `204 No Content` or `202 Accepted`*  | 
+| Endpoint                                                                               | V2 response status | V3 response status                  |
+|----------------------------------------------------------------------------------------|--------------------|-------------------------------------|
+| [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint]                         | `200 OK`           | `204 No Content` or `202 Accepted`* | 
+| [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        | `200 OK`           | `204 No Content` or `202 Accepted`* | 
+| [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`* | 
+| [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   | `200 OK`           | `204 No Content` or `202 Accepted`* | 
 
 **Note** In the future the API might return `202 Accepted` for some operations if the request is processed asynchronously.
 
 ### Error responses
 
 In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-For example, when calling [`update agreement`][update-agreement-endpoint] endpoint with a stopped agreement, 
+For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement, 
 the response will be the following:
 
 ```json
@@ -69,7 +69,7 @@ To draft an agreement with a fixed amount with the same charge limit as in V2, `
 
 **Note**: `pricing.type` is an optional field. If not provided in the request the type will be defaulted to `LEGACY`.
 
-Truncated example of request body for the [`draft agreement`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 ```json
@@ -98,7 +98,7 @@ V3 request body
 
 To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
-Truncated example of request body for the [`draft agreement`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 ```json
@@ -130,7 +130,7 @@ V3 request body
 ### New interval representation
 The Recurring API V3 introduces a new JSON representation for agreement interval.
 
-Truncated example of request body for the [`draft agreement`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 ```json
@@ -158,11 +158,11 @@ V3 request body
 
 ### More details on charges
 
-In the API V3, the response from the [`fetch charge`][fetch-charge-endpoint] endpoint 
+In the API V3, the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint 
 contains the history of the charge and not just the current status.
 It also contains a summary of the total of amounts captured, refunded and cancelled. 
 
-Truncated example of the response from the [`fetch charge`][fetch-charge-endpoint] endpoint:
+Truncated example of the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
 
 ````json
 {
@@ -228,7 +228,7 @@ In the API V3, it is possible to update the following fields on an agreement:
 - merchant agreement url
 - pricing
 
-See the [`update agreement`][update-agreement-endpoint] endpoint.
+See the [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
 
 Also, the API V3 returns different response status. It will return `204 No Content` or `202 Accepted`.
 See [Response statuses](#response-statuses)
