@@ -200,19 +200,19 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 ## API endpoints
 
-| Operation                                       | Description                                           | Endpoint                                              |
-|-------------------------------------------------|-------------------------------------------------------|-------------------------------------------------------|
-| List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]         |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint-v2]      |
-| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]         |
-| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] |
-| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] |
-| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]               |
-| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]             |
-| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]               |
-| [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.     | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]           |
-| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]             |
-| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]             |
+| Operation                                       | Description                                           | Endpoint                                                                               |
+|-------------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------|
+| List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                          |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint-v2]                                      |
+| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                     |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                     |
+| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
+| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
+| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
+| [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.     | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
+| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
+| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
 
 See [Authentication and authorization](#authentication-and-authorization).
 
@@ -382,7 +382,7 @@ To draft an agreement with a fixed amount with the same charge limit as in V2, `
 
 **Note**: `pricing.type` is an optional field. If not provided in the request the type will be defaulted to `LEGACY`.
 
-Truncated example of request body for the [`draft agreement`][draft-agreement-endpoint] endpoint from V3:
+Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V3:
 
 V3 request body
 ```json
@@ -400,7 +400,7 @@ V3 request body
 
 To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
-Truncated example of request body for the [`draft agreement`][draft-agreement-endpoint] endpoint from V3:
+Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V3:
 
 V3 request body
 ```json
@@ -676,7 +676,7 @@ See more about the different campaign types in the table below.
 | `full flex campaign` | Different price and interval until a given date                                                         | 100kr every month until 2023-01-01T00:00:00Z and then 1000kr every year |
 
 In order to start a campaign, the `campaign` field has to be added to the agreement draft body in the
-[`draft agreement`][draft-agreement-endpoint-v3] call.
+[`POST:/agreements`][draft-agreement-endpoint-v3] call.
 
 ##### Price campaign
 
