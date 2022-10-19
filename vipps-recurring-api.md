@@ -200,19 +200,19 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 ## API endpoints
 
-| Operation                                       | Description                                           | Endpoint                                                                           |
-|-------------------------------------------------|-------------------------------------------------------|------------------------------------------------------------------------------------|
-| List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                      |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoin]                                      |
-| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                        |
-| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                 |
-| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                 |
-| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                   |
-| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                 |
-| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]        |
+| Operation                                       | Description                                           | Endpoint                                                                               |
+|-------------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------|
+| List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                          |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoin]                                          |
+| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                     |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                     |
+| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
+| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
+| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
 | [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.     | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
-| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]    |
-| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint] |
+| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
+| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
 
 See [Authentication and authorization](#authentication-and-authorization).
 
@@ -374,17 +374,13 @@ or to Vipps in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
 #### Pricing representation
-The Recurring API V3 introduces a new JSON representation for agreement price.
 
-There is no change on the charge limits rules. Going forward, we will look into how we can implement charge limits in a better way, that takes care of the merchants needs.
+There is two different types of pricing available:
 
-To draft an agreement with a fixed amount with the same charge limit as in V2, `pricing.type` should be set to `LEGACY`.
+First one is `LEGACY`, this is the default type. See [Amount changes](#amount-changes) for the limit rules.
 
-**Note**: `pricing.type` is an optional field. If not provided in the request the type will be defaulted to `LEGACY`.
+Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint:
 
-Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V3:
-
-V3 request body
 ```json
 {
   "pricing": {
@@ -398,11 +394,10 @@ V3 request body
 }
 ```
 
-To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
+Second one is `VARIABLE`. See [variable amount](#recurring-agreements-with-variable-amount). 
 
-Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V3:
+Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint:
 
-V3 request body
 ```json
 {
   "pricing": {
@@ -415,6 +410,8 @@ V3 request body
   "...": "..."
 }
 ```
+
+**Please note**: Going forward, new types will be introduced. We will look into how we can implement charge limits in a better way, that takes care of the merchants needs. 
 
 ### Accept an agreement
 
@@ -1646,7 +1643,7 @@ This API returns the following HTTP statuses in the responses:
 All error responses contains an `error` object in the body, with details of the
 problem.
 
-In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
+HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 For example, when calling [`PUT:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement,
 the response will be the following:
 
