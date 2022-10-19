@@ -7,6 +7,13 @@ END_METADATA -->
 
 # Quick start
 
+<!-- START_COMMENT -->
+
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
+
 Use the Recurring API to create different types of agreements, get information about agreements, update and stop agreements.
 After creating the agreements, you still need to send the charge requests.
 So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
@@ -27,7 +34,7 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 
 <!-- END_TOC -->
 
-Document version 1.1.0.
+Document version 1.1.1.
 
 ## Postman
 
@@ -42,7 +49,7 @@ for information about getting your test environment set up.
 Save the following files to your computer:
 
 * [Vipps Recurring API Postman collection](tools/vipps-recurring-api-postman-collection.json)
-* [Vipps API Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
+* [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
 
 ### Step 2: Import the Vipps Postman files
 

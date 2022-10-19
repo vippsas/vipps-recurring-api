@@ -4,7 +4,7 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-  version: 2.6.9
+  version: 2.6.12
   title: Recurring Payments Merchant API
 
 servers:
@@ -17,10 +17,10 @@ tags:
   - name: Authorization Service
   - name: Agreement v2 endpoints
   - name: Agreement v3 endpoints
-    description: Coming soon
+    description: Coming soon - WORK IN PROGRESS
   - name: Charge v2 endpoints
   - name: Charge v3 endpoints
-    description: Coming soon
+    description: Coming soon - WORK IN PROGRESS
   - name: Userinfo Endpoint
 
 paths:
@@ -458,29 +458,31 @@ paths:
             examples:
               Minimal:
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
               With Initial Charge:
                 description: If you want the customer to pay to activate the agreement, you should add an initial charge. If the amount on the initial charge is not the same as the agreement/campaign price, it will show up as a separate payment bubble in the app.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   initialCharge:
                     amount: 100
                     currency: NOK
@@ -489,16 +491,17 @@ paths:
               With Price Campaign:
                 description: A price campaign allows you to communicate that the agreement price is rebated until a given date, ie. "1kr per week until 04.05.2022, then 39 per week".
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   campaign:
                     type: PRICE_CAMPAIGN
                     price: 100
@@ -506,16 +509,17 @@ paths:
               With Period Campaign:
                 description: A period campaign allows you to communicate a campaign where the user pays a fixed price for a given period before the normal agreement starts, ie. "4 weeks for 1 kr". Should be combined with an initial charge to get money on activation.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   campaign:
                     type: PERIOD_CAMPAIGN
                     price: 100
@@ -530,16 +534,17 @@ paths:
               With Event Campaign:
                 description: A period campaign allows you to communicate a campaign where the user pays a fixed price until a given event before the normal agreement starts, ie. "Until Christmas for 1 kr". Should be combined with an initial charge to get money on activation.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   campaign:
                     type: EVENT_CAMPAIGN
                     price: 100
@@ -552,16 +557,17 @@ paths:
                     transactionType: DIRECT_CAPTURE
               With Full Flex Campaign:
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   campaign:
                     type: FULL_FLEX_CAMPAIGN
                     price: 100
@@ -572,7 +578,10 @@ paths:
               With Variable Amount:
                 description: An agreement where the price can vary and the user choose a max amount they can be charged each interval.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: VARIABLE
+                    suggestedMaxAmount: 3000
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
@@ -580,20 +589,19 @@ paths:
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
-                  skipLandingPage: true
-                  variableAmount:
-                    suggestedMaxAmount: 3000
               With Profile Flow:
                 description: User consents to sharing data that can be retrieved after they accept the agreement.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
                   scope: address name email birthDate phoneNumber
       responses:
@@ -665,12 +673,10 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchAgreementV3'
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgreementReference'
+        '204':
+          description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1038,6 +1044,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1073,6 +1081,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1106,6 +1116,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1445,7 +1457,7 @@ components:
       pattern: ^[A-Z]{3}$
       example: NOK
 
-    TransactionType:
+    transactionType:
       type: string
       description: Type of transaction, either direct capture or reserve capture
       enum:
@@ -1570,20 +1582,16 @@ components:
       title: DraftAgreement
       type: object
       required:
-        - currency
+        - pricing
         - interval
-        - intervalCount
         - merchantAgreementUrl
         - merchantRedirectUrl
-        - price
         - productName
       properties:
-        variableAmount:
-          $ref: '#/components/schemas/variableAmount'
         campaign:
           $ref: '#/components/schemas/campaignV3'
-        currency:
-          $ref: "#/components/schemas/Currency"
+        pricing:
+          $ref: '#/components/schemas/pricingRequest'
         customerPhoneNumber:
           type: string
           description: |-
@@ -1613,15 +1621,6 @@ components:
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application.
           example: https://api.example.com/vipps-landing
-        price:
-          type: integer
-          format: int32
-          example: 7900
-          description:  |-
-            The price of the agreement.
-
-            Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         productName:
           type: string
           description: Product name (short)
@@ -1801,13 +1800,13 @@ components:
       required:
         - id
         - interval
-        - price
+        - pricing
         - productName
       properties:
         campaign:
           $ref: '#/components/schemas/campaignResponseV3'
-        currency:
-          $ref: "#/components/schemas/Currency"
+        pricing:
+          $ref: '#/components/schemas/pricingResponse'
         id:
           type: string
           example: agr_DdLnJAF
@@ -1815,16 +1814,6 @@ components:
           description: Uniquely identifies this agreement
         interval:
           $ref: '#/components/schemas/TimePeriodResponse'
-        price:
-          type: integer
-          format: int32
-          example: 49900
-          description: |-
-            The price of the agreement.
-
-            Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-          minimum: 0
         productName:
           type: string
           description: Product name (short)
@@ -1866,8 +1855,6 @@ components:
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
           description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
           nullable: true
-        variableAmount:
-          $ref: '#/components/schemas/variableAmountResponse'
 
     PatchAgreementV2:
       title: PatchAgreement
@@ -1924,17 +1911,6 @@ components:
       title: PatchAgreement
       type: object
       properties:
-        suggestedMaxAmount:
-          type: integer
-          format: int32
-          example: 3000
-          minimum: 100
-          maximum: 2000000
-          description: |-
-            The suggested max amount that the customer should choose.
-
-            Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         productName:
           type: string
           example: Pluss-abonnement
@@ -1957,6 +1933,8 @@ components:
           description: Status of the agreement.
           enum:
             - STOPPED
+        pricing:
+          $ref: '#/components/schemas/PricingUpdateRequest'
 
     AgreementReference:
       type: object
@@ -2153,6 +2131,106 @@ components:
           example: Ordinary price 399 kr starts 6/12/2022
           description: The text displayed in the Vipps app to explain the campaign to the user
 
+    pricingRequest:
+      title: pricing
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of pricing. This decides which properties are required.
+          enum:
+            - LEGACY
+            - VARIABLE
+        currency:
+          $ref: "#/components/schemas/Currency"
+        amount:
+          type: integer
+          format: int32
+          minimum: 100
+          example: 1500
+          description: |-
+            The price of the agreement, required if type is LEGACY or not present.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          minimum: 100
+          maximum: 2000000
+          example: 3000
+          description: |-
+            The suggested max amount that the customer should choose, required if type is VARIABLE.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+
+    pricingResponse:
+      title: pricing
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of pricing. This decides which properties are present.
+          enum:
+            - LEGACY
+            - VARIABLE
+        currency:
+          $ref: "#/components/schemas/Currency"
+        amount:
+          type: integer
+          format: int32
+          example: 1500
+          description: |-
+            The price of the agreement, present if type is LEGACY.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          example: 30000
+          description: |-
+            The suggested max amount that the customer should choose, present if type is VARIABLE.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        maxAmount:
+          type: integer
+          format: int32
+          example: 30000
+          description: |-
+            The max amount chosen by the customer.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+
+    PricingUpdateRequest:
+      title: pricing
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int32
+          minimum: 100
+          example: 1500
+          description: |-
+            The price of the agreement, can only be updated if agreement type is LEGACY
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          minimum: 100
+          maximum: 2000000
+          example: 3000
+          description: |-
+            The suggested max amount that the customer should choose, can only be updated if agreement type is VARIABLE.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+
     InitialChargeV2:
       title: InitialCharge
       description: |-
@@ -2175,10 +2253,7 @@ components:
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         currency:
-          type: string
-          example: NOK
-          enum:
-            - NOK
+          $ref: "#/components/schemas/Currency"
         description:
           type: string
           example: Månedsabonnement
@@ -2252,10 +2327,7 @@ components:
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         currency:
-          type: string
-          example: NOK
-          enum:
-            - NOK
+          $ref: "#/components/schemas/Currency"
         description:
           type: string
           minimum: 1
@@ -2302,8 +2374,8 @@ components:
 
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-        TransactionType:
-          $ref: "#/components/schemas/TransactionType"
+        transactionType:
+          $ref: "#/components/schemas/transactionType"
         description:
           type: string
           minimum: 1
@@ -2394,6 +2466,7 @@ components:
           type: string
           description: Contains null until the status has reached CHARGED.
           maxLength: 36
+          pattern: '^\d{10+}$'
           example: "5001419121"
         type:
           $ref: "#/components/schemas/ChargeType"
@@ -2469,11 +2542,12 @@ components:
           type: string
           description: Contains null until the status has reached CHARGED
           maxLength: 36
+          pattern: '^\d{10+}$'
           example: "5001419121"
         type:
           $ref: "#/components/schemas/ChargeType"
         transactionType:
-          $ref: "#/components/schemas/TransactionType"
+          $ref: "#/components/schemas/transactionType"
         failureReason:
           type: string
           enum:
