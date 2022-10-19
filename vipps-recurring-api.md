@@ -155,7 +155,7 @@ You can also [manage charges and agreements](#manage-charges-and-agreements).
 
 For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
-1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint.
+1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
@@ -178,7 +178,7 @@ In the API V2, reserve capture is only available on initial charges.
 
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
-1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint.
+1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
 2. The user approves the agreement in Vipps:
    This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
@@ -200,19 +200,19 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 ## API endpoints
 
-| Operation                                       | Description                                           | Endpoint                                                                               |
-|-------------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------|
-| List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                          |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint-v2]                                      |
-| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
-| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                     |
-| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                     |
-| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
-| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
-| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
+| Operation                                       | Description                                           | Endpoint                                                                           |
+|-------------------------------------------------|-------------------------------------------------------|------------------------------------------------------------------------------------|
+| List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                      |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoin]                                      |
+| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                        |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                 |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                 |
+| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                   |
+| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                 |
+| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]        |
 | [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.     | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
-| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
-| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
+| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]    |
+| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint] |
 
 See [Authentication and authorization](#authentication-and-authorization).
 
@@ -303,7 +303,7 @@ An agreement has payments, called [charges](#charges).
 
 ### Create an agreement
 
-This is an example of a request body for the [`POST:/agreements`][draft-agreement-endpoint-v2] call:
+This is an example of a request body for the [`POST:/agreements`][draft-agreement-endpoint] call:
 
 ```json
 {
@@ -346,7 +346,7 @@ in automatically through Vipps. See the
 for more details.
 
 The request parameters have the following size limits
-(see the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint for more details):
+(see the [`POST:/agreements`][draft-agreement-endpoint] endpoint for more details):
 
 * `productName`: Max length 45 characters
 * `productDescription`: Max length 100 characters
@@ -418,7 +418,7 @@ V3 request body
 
 ### Accept an agreement
 
-The [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint will return the following JSON structure.
+The [`POST:/agreements`][draft-agreement-endpoint] endpoint will return the following JSON structure.
 
 ```json
 {
@@ -640,7 +640,7 @@ Campaigns cannot be used in combination with [variable amount](#Recurring-agreem
 ![screen-legacy-campaign](images/campaigns/screens/legacy-campaign.png)
 
 In order to start a campaign, the campaign field must be added either to the
-[`POST:/agreements`][draft-agreement-endpoint-v2] request
+[`POST:/agreements`][draft-agreement-endpoint] request
 for a campaign in the start of an agreement, or to the
 [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] request
 for an ongoing agreement. When adding a campaign
@@ -676,7 +676,7 @@ See more about the different campaign types in the table below.
 | `full flex campaign` | Different price and interval until a given date                                                         | 100kr every month until 2023-01-01T00:00:00Z and then 1000kr every year |
 
 In order to start a campaign, the `campaign` field has to be added to the agreement draft body in the
-[`POST:/agreements`][draft-agreement-endpoint-v3] call.
+[`POST:/agreements`][draft-agreement-endpoint] call.
 
 ##### Price campaign
 
@@ -995,7 +995,7 @@ Example response:
 }
 ```
 #### Details on charges
-In the API V3, the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint
+The response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint
 contains the history of the charge and not just the current status.
 It also contains a summary of the total of amounts captured, refunded and cancelled.
 
@@ -1225,7 +1225,7 @@ This is done through Vipps Userinfo which
 You can learn more at the [OIDC Standard](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
 To enable the possibility to fetch profile information for a user the merchant can add a `scope`
-parameter to the [`POST:/agreements`][draft-agreement-endpoint-v2] call.
+parameter to the [`POST:/agreements`][draft-agreement-endpoint] call.
 
 If the user has not already consented to sharing information from Vipps to the
 merchant the user will be asked for such consent before activating the agreement.
@@ -1261,7 +1261,7 @@ a customer.
 
 1. Retrieve the access token by calling the [`POST:/accesstoken/get`][access-token-endpoint] endpoint.
 2. Add the scope field to the draft agreement request body and include the scope you wish to get
-   access to (valid scope) before calling the [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint.
+   access to (valid scope) before calling the [`POST:/agreements`][draft-agreement-endpoint] endpoint.
 3. The user consents to the information sharing and accepts the agreement in Vipps.
 4. Retrieve the `sub` by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
 5. Using the sub from step 4, call the [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint to retrieve the user's information.
@@ -1273,7 +1273,7 @@ and will result in a `HTTP Unauthorized 401` error.
 
 ### Example calls
 
-To request this scope add the scope to the initial [`POST:/agreements`][draft-agreement-endpoint-v2] call
+To request this scope add the scope to the initial [`POST:/agreements`][draft-agreement-endpoint] call
 
 Example of request with scope:
 
@@ -1599,7 +1599,7 @@ Skipping the landing page is only reserved for physical points of sale and vendi
 This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
 
 If the `skipLandingPage` property is set to `true` in the
-[`POST:/agreements`][draft-agreement-endpoint-v2]
+[`POST:/agreements`][draft-agreement-endpoint]
 call, it will cause a push notification to be sent to the given phone number
 immediately, without loading the landing page.
 
@@ -1872,8 +1872,7 @@ or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.
 Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
-[draft-agreement-endpoint-v2]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
-[draft-agreement-endpoint-v3]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
+[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
 [update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
 [force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
