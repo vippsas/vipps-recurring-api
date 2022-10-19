@@ -995,11 +995,11 @@ Example response:
 }
 ```
 #### Details on charges
-In the API V3, the response from the [`fetch charge`][fetch-charge-endpoint] endpoint
+In the API V3, the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint
 contains the history of the charge and not just the current status.
 It also contains a summary of the total of amounts captured, refunded and cancelled.
 
-Truncated example of the response from the [`fetch charge`][fetch-charge-endpoint] endpoint:
+Truncated example of the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
 
 ````json
 {
