@@ -1,21 +1,10 @@
 openapi: 3.0.0
 info:
   description: >-
-    # Recurring payments
+    Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
+    For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-    Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.
-
-    1. A draft agreement is initialized and the user is redirected for approval.
-    2. The user approves the agreement and the merchant can call GET on the agreement to verify the status.
-    3. The merchant can start sending charges which will be charged the user in the future.
-
-    The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user).
-
-    ## Authentication
-    See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a>
-
-    For information regarding authentication please read [our guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication)
-  version: 2.6.5
+  version: 2.6.12
   title: Recurring Payments Merchant API
 
 servers:
@@ -28,10 +17,10 @@ tags:
   - name: Authorization Service
   - name: Agreement v2 endpoints
   - name: Agreement v3 endpoints
-    description: Coming soon
+    description: Coming soon - WORK IN PROGRESS
   - name: Charge v2 endpoints
   - name: Charge v3 endpoints
-    description: Coming soon
+    description: Coming soon - WORK IN PROGRESS
   - name: Userinfo Endpoint
 
 paths:
@@ -122,14 +111,14 @@ paths:
         - Agreement v2 endpoints
       summary: Create a new Agreement, to be confirmed in Vipps
       description: |-
-        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. 
+        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
         This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
 
-        If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. 
-        You **have** to implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. 
+        If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
+        You **have** to implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`.
         We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
 
-        Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. 
+        Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType.
         More information about this can be found in the API documentation.
       operationId: DraftAgreement
       parameters:
@@ -153,28 +142,26 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
                   productName: MyNews Digital
-                  skipLandingPage: true
+                  skipLandingPage: false
               With Initial Charge:
                 description: If you want the customer to pay to activate the agreement, you should add an initial charge. If the amount on the initial charge is not the same as the agreement/campaign price, it will show up as a separate payment bubble in the app.
                 value:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
                   productName: MyNews Digital
-                  skipLandingPage: true
+                  skipLandingPage: false
                   initialCharge:
                     amount: 100
                     currency: NOK
@@ -186,14 +173,14 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  isApp: true
+                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
                   productName: MyNews Digital
-                  skipLandingPage: true
+                  skipLandingPage: false
                   campaign:
                     campaignPrice: 100
                     end: 2022/02/28T00:00:00Z
@@ -203,14 +190,14 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  isApp: true
+                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
                   productName: MyNews Digital
-                  skipLandingPage: true
+                  skipLandingPage: false
                   campaign:
                     campaignPrice: 100
                     end: 2022/02/28T00:00:00Z
@@ -225,13 +212,13 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  isApp: true
+                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   productDescription: Power on web
                   productName: MyNews Digital
-                  skipLandingPage: true
+                  skipLandingPage: false
                   variableAmount:
                     suggestedMaxAmount: 3000
               With Profile Flow:
@@ -240,7 +227,7 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  isApp: true
+                  isApp: false
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
@@ -254,7 +241,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DraftAgreementResponse'
+                $ref: '#/components/schemas/DraftAgreementResponseV2'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
       deprecated: false
@@ -265,7 +252,7 @@ paths:
         - Agreement v2 endpoints
       summary: Fetch an Agreement
       description: |-
-        Fetch a single agreement for a user. 
+        Fetch a single agreement for a user.
         Recommended to use when polling for status changes after sending an agreement to a user.
       operationId: FetchAgreement
       parameters:
@@ -294,9 +281,9 @@ paths:
         - Agreement v2 endpoints
       summary: Update an Agreement
       description: |-
-        Updates the agreement. 
-        Note that when updating the status to "STOPPED", 
-        you can not re-activate it. If you want to pause an agreement, 
+        Updates the agreement.
+        Note that when updating the status to "STOPPED",
+        you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPut
       parameters:
@@ -332,9 +319,9 @@ paths:
         - Agreement v2 endpoints
       summary: Update an Agreement
       description: |-
-        Updates the agreement. 
-        Note that when updating the status to "STOPPED", 
-        you can not re-activate it. If you want to pause an agreement, 
+        Updates the agreement.
+        Note that when updating the status to "STOPPED",
+        you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPatch
       parameters:
@@ -371,7 +358,7 @@ paths:
         - Agreement v2 endpoints
       summary: Force accept an Agreement (Only available in test environment)
       description: |-
-        Forces an agreement to be accepted by the given customer phone number. 
+        Forces an agreement to be accepted by the given customer phone number.
         This endpoint can only be used in the test environment.
       operationId: acceptUsingPATCH
       parameters:
@@ -423,6 +410,7 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - $ref: "#/components/parameters/AgreementStatusQuery"
         - $ref: "#/components/parameters/CreatedAfterQuery"
+        - $ref: "#/components/parameters/Idempotency-Key"
       responses:
         '200':
           description: OK
@@ -441,19 +429,20 @@ paths:
         - Agreement v3 endpoints
       summary: Create a new Agreement, to be confirmed in Vipps
       description: |-
-        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`. 
+        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
         This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
 
-        If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`. 
-        You **have** to implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`. 
+        If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
+        You **have** to implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`.
         We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
 
-        Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType. 
+        Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType.
         More information about this can be found in the API documentation.
       operationId: DraftAgreementV3
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Idempotency-Key"
         - $ref: "#/components/parameters/Content-Type"
         - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
@@ -469,31 +458,31 @@ paths:
             examples:
               Minimal:
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
               With Initial Charge:
                 description: If you want the customer to pay to activate the agreement, you should add an initial charge. If the amount on the initial charge is not the same as the agreement/campaign price, it will show up as a separate payment bubble in the app.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   initialCharge:
                     amount: 100
                     currency: NOK
@@ -502,17 +491,17 @@ paths:
               With Price Campaign:
                 description: A price campaign allows you to communicate that the agreement price is rebated until a given date, ie. "1kr per week until 04.05.2022, then 39 per week".
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   campaign:
                     type: PRICE_CAMPAIGN
                     price: 100
@@ -520,17 +509,17 @@ paths:
               With Period Campaign:
                 description: A period campaign allows you to communicate a campaign where the user pays a fixed price for a given period before the normal agreement starts, ie. "4 weeks for 1 kr". Should be combined with an initial charge to get money on activation.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   campaign:
                     type: PERIOD_CAMPAIGN
                     price: 100
@@ -545,17 +534,17 @@ paths:
               With Event Campaign:
                 description: A period campaign allows you to communicate a campaign where the user pays a fixed price until a given event before the normal agreement starts, ie. "Until Christmas for 1 kr". Should be combined with an initial charge to get money on activation.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   campaign:
                     type: EVENT_CAMPAIGN
                     price: 100
@@ -568,17 +557,17 @@ paths:
                     transactionType: DIRECT_CAPTURE
               With Full Flex Campaign:
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
-                  skipLandingPage: true
                   campaign:
                     type: FULL_FLEX_CAMPAIGN
                     price: 100
@@ -589,30 +578,30 @@ paths:
               With Variable Amount:
                 description: An agreement where the price can vary and the user choose a max amount they can be charged each interval.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: VARIABLE
+                    suggestedMaxAmount: 3000
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
-                  skipLandingPage: true
-                  variableAmount:
-                    suggestedMaxAmount: 3000
               With Profile Flow:
                 description: User consents to sharing data that can be retrieved after they accept the agreement.
                 value:
-                  currency: NOK
+                  pricing:
+                    type: LEGACY
+                    amount: 2500
+                    currency: NOK
                   interval:
                     unit: MONTH
                     count: 1
-                  isApp: true
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
                   customerPhoneNumber: '45678272'
-                  price: 2500
                   productName: MyNews Digital
                   scope: address name email birthDate phoneNumber
       responses:
@@ -621,7 +610,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DraftAgreementResponse'
+                $ref: '#/components/schemas/DraftAgreementResponseV3'
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -632,7 +621,7 @@ paths:
         - Agreement v3 endpoints
       summary: Fetch an Agreement
       description: |-
-        Fetch a single agreement for a user. 
+        Fetch a single agreement for a user.
         Recommended to use when polling for status changes after sending an agreement to a user.
       operationId: FetchAgreementV3
       parameters:
@@ -661,9 +650,9 @@ paths:
         - Agreement v3 endpoints
       summary: Update an Agreement
       description: |-
-        Updates the agreement. 
-        Note that when updating the status to "STOPPED", 
-        you can not re-activate it. If you want to pause an agreement, 
+        Updates the agreement.
+        Note that when updating the status to "STOPPED",
+        you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPatchV3
       parameters:
@@ -684,12 +673,10 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchAgreementV3'
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgreementReference'
+        '204':
+          description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -700,7 +687,7 @@ paths:
         - Agreement v3 endpoints
       summary: Force accept an Agreement (Only available in test environment)
       description: |-
-        Forces an agreement to be accepted by the given customer phone number. 
+        Forces an agreement to be accepted by the given customer phone number.
         This endpoint can only be used in the test environment.
       operationId: acceptUsingPATCHV3
       parameters:
@@ -768,7 +755,7 @@ paths:
         - Charge v2 endpoints
       summary: Create a new charge
       description: |-
-        Creates a new recurring charge *(payment)* that will charge the user on the date specified. 
+        Creates a new recurring charge *(payment)* that will charge the user on the date specified.
         If the payment fails, the charge will be retried based on `retryDays`.
       operationId: CreateCharge
       parameters:
@@ -833,12 +820,12 @@ paths:
         - Charge v2 endpoints
       summary: Cancel a Charge
       description: |-
-        Cancels a pending, due or reserved charge. 
-        When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge 
+        Cancels a pending, due or reserved charge.
+        When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge
         will be released back to the customer.
-        
-        Note if you cancel an agreement, 
-        there is no need to cancel the charges that belongs to the agreement. 
+
+        Note if you cancel an agreement,
+        there is no need to cancel the charges that belongs to the agreement.
         This will be done automatically by Vipps.
       operationId: CancelCharge
       parameters:
@@ -869,8 +856,8 @@ paths:
         - Charge v2 endpoints
       summary: Capture a reserved charge
       description: |-
-        Captures a reserved charge. 
-        Only charges with transactionType `RESERVE_CAPTURE` can be captured. 
+        Captures a reserved charge.
+        Only charges with transactionType `RESERVE_CAPTURE` can be captured.
       operationId: CaptureCharge
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -951,7 +938,7 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - $ref: "#/components/parameters/AgreementId"
-        - $ref: "#/components/parameters/ChargeStatusQuery"
+        - $ref: "#/components/parameters/ChargeStatusQueryV3"
       responses:
         '200':
           description: Success
@@ -970,7 +957,7 @@ paths:
         - Charge v3 endpoints
       summary: Create a new charge
       description: |-
-        Creates a new recurring charge *(payment)* that will charge the user on the date specified. 
+        Creates a new recurring charge *(payment)* that will charge the user on the date specified.
         If the payment fails, the charge will be retried based on `retryDays`.
       operationId: CreateChargeV3
       parameters:
@@ -1035,12 +1022,12 @@ paths:
         - Charge v3 endpoints
       summary: Cancel a Charge
       description: |-
-        Cancels a pending, due or reserved charge. 
-        When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge 
+        Cancels a pending, due or reserved charge.
+        When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge
         will be released back to the customer.
-        
-        Note if you cancel an agreement, 
-        there is no need to cancel the charges that belongs to the agreement. 
+
+        Note if you cancel an agreement,
+        there is no need to cancel the charges that belongs to the agreement.
         This will be done automatically by Vipps.
       operationId: CancelChargeV3
       parameters:
@@ -1057,6 +1044,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1067,8 +1056,8 @@ paths:
         - Charge v3 endpoints
       summary: Capture a reserved charge
       description: |-
-        Captures a reserved charge. 
-        Only charges with transactionType `RESERVE_CAPTURE` can be captured. 
+        Captures a reserved charge.
+        Only charges with transactionType `RESERVE_CAPTURE` can be captured.
         Can also do partial captures (captures a smaller part of the payment).
       operationId: CaptureChargeV3
       parameters:
@@ -1092,6 +1081,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1125,6 +1116,8 @@ paths:
       responses:
         '204':
           description: No content
+        '202':
+          description: Accepted
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1239,14 +1232,14 @@ components:
       schema:
         type: string
 
-    Idempotency-Key: 
+    Idempotency-Key:
       in: header
       name: Idempotency-Key
-      description: |- 
+      description: |-
         An Idempotency key must be provided to ensure idempotent requests.
         Key size can be between 1 to 40 characters.
       required: true
-      schema: 
+      schema:
         $ref: '#/components/schemas/IdempotencyKeyFormat'
 
     Merchant-Serial-Number:
@@ -1271,7 +1264,7 @@ components:
       description: Filter by status of the agreement.
       schema:
         $ref: "#/components/schemas/AgreementStatus"
-      
+
     CreatedAfterQuery:
       in: query
       name: createdAfter
@@ -1285,6 +1278,14 @@ components:
     ChargeStatusQuery:
       in: query
       name: chargeStatus
+      required: false
+      description: Filter by status of the charge.
+      schema:
+        $ref: "#/components/schemas/ChargeStatus"
+
+    ChargeStatusQueryV3:
+      in: query
+      name: status
       required: false
       description: Filter by status of the charge.
       schema:
@@ -1367,6 +1368,84 @@ components:
         - REFUNDED
         - PROCESSING
 
+    ChargeSummary:
+      type: object
+      description: A summary of the amounts captured, refunded and cancelled
+      required:
+        - captured
+        - refunded
+        - cancelled
+      properties:
+        captured:
+          type: integer
+          format: int32
+          example: 234
+          description: |-
+            The total amount which has been captured/charged, in case of status charged/partial capture.
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        refunded:
+          type: integer
+          format: int32
+          example: 0
+          description: |-
+            The total amount which has been refunded, in case of status refund/partial refund.
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        cancelled:
+          type: integer
+          format: int32
+          example: 234
+          description: |-
+            The total amount which has been cancelled.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+    ChargeHistory:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChargeEvent'
+      description: |-
+        List of events related to the charge.
+    ChargeEvent:
+      type: object
+      description: Describes the operation that was performed on the charge
+      required:
+        - occurred
+        - event
+        - amount
+        - idempotencyKey
+        - success
+      properties:
+        occurred:
+          type: string
+          description: Date and time of the event
+          example: 2022-09-05T14:25:55Z
+        event:
+          type: string
+          enum:
+            - CREATE
+            - RESERVE
+            - CAPTURE
+            - REFUND
+            - CANCEL
+            - FAIL
+          example: RESERVE
+        amount:
+          type: integer
+          format: int32
+          example: 234
+          description: |-
+            The amount related to the operation.
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        idempotencyKey:
+          type: string
+          description: The idempotency key of the event
+        success:
+          type: boolean
+          description: True if the operation was successful, false otherwise
+
     Currency:
       type: string
       description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
@@ -1378,7 +1457,7 @@ components:
       pattern: ^[A-Z]{3}$
       example: NOK
 
-    TransactionType:
+    transactionType:
       type: string
       description: Type of transaction, either direct capture or reserve capture
       enum:
@@ -1413,12 +1492,10 @@ components:
         - currency
         - interval
         - intervalCount
-        - isApp
         - merchantAgreementUrl
         - merchantRedirectUrl
         - price
         - productName
-        - productDescription
       properties:
         variableAmount:
           $ref: '#/components/schemas/variableAmount'
@@ -1434,7 +1511,7 @@ components:
           maxLength: 15
           example: "4791234567"
         initialCharge:
-          $ref: '#/components/schemas/InitialCharge'
+          $ref: '#/components/schemas/InitialChargeV2'
         interval:
           $ref: "#/components/schemas/Interval"
         intervalCount:
@@ -1442,15 +1519,20 @@ components:
           format: int32
           description: |-
             Number of intervals between charges. Example: interval=week,
-            intervalCount=2 to be able to charge every two weeks. 
+            intervalCount=2 to be able to charge every two weeks.
             Charges should occur at least once a year.
           minimum: 1
           maximum: 31
           example: 2
         isApp:
           type: boolean
-          description: If merchant is redirecting user from an app or a mobile device.
-          example: true
+          description: |-
+            This parameter indicates whether payment request is triggered from
+            Mobile App or Web browser. Based on this value, response will be
+            redirect URL for Vipps landing page or deeplink URL to connect vipps
+            App. When isApp is set to true, URLs passed to Vipps will not be
+            validated as regular URLs.
+          example: false
         merchantAgreementUrl:
           type: string
           description: |-
@@ -1472,7 +1554,7 @@ components:
           description:  |-
             The price of the agreement.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         productName:
           type: string
@@ -1500,21 +1582,16 @@ components:
       title: DraftAgreement
       type: object
       required:
-        - currency
+        - pricing
         - interval
-        - intervalCount
-        - isApp
         - merchantAgreementUrl
         - merchantRedirectUrl
-        - price
         - productName
       properties:
-        variableAmount:
-          $ref: '#/components/schemas/variableAmount'
         campaign:
           $ref: '#/components/schemas/campaignV3'
-        currency:
-          $ref: "#/components/schemas/Currency"
+        pricing:
+          $ref: '#/components/schemas/pricingRequest'
         customerPhoneNumber:
           type: string
           description: |-
@@ -1523,13 +1600,13 @@ components:
           maxLength: 15
           example: "4791234567"
         initialCharge:
-          $ref: '#/components/schemas/InitialCharge'
+          $ref: '#/components/schemas/InitialChargeV3'
         interval:
           $ref: '#/components/schemas/TimePeriod'
         isApp:
           type: boolean
           description: If merchant is redirecting user from an app or a mobile device.
-          example: true
+          example: false
         merchantAgreementUrl:
           type: string
           description: |-
@@ -1544,20 +1621,15 @@ components:
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application.
           example: https://api.example.com/vipps-landing
-        price:
-          type: integer
-          format: int32
-          example: 7900
-          description:  |-
-            The price of the agreement.
-
-            Amounts are specified in minor units. 
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         productName:
           type: string
           description: Product name (short)
           maxLength: 45
           example: Premier League subscription
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
         scope:
           type: string
           description: Space separated list of the user profile-data scope to require for the agreement.
@@ -1570,7 +1642,7 @@ components:
             the request will fail and an error message will be returned (statusCode=403).
           example: false
 
-    DraftAgreementResponse:
+    DraftAgreementResponseV2:
       title: DraftAgreementResponse
       type: object
       required:
@@ -1581,16 +1653,16 @@ components:
       properties:
         agreementResource:
           type: string
-          description: |- 
-            Reference of a an agreement which user may agree to. 
+          description: |-
+            Reference of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
             It enters active state once the user has approved it in Vipps.
           example: https://api.vipps.no/v2/agreement/agr_5kSeqz
         agreementId:
           type: string
-          description: |- 
-            Id of a an agreement which user may agree to. 
-            Initially the agreement is in a pending state waiting for user approval. 
+          description: |-
+            Id of a an agreement which user may agree to.
+            Initially the agreement is in a pending state waiting for user approval.
             It enters active state once the user has approved it in Vipps.
           example: agr_5kSeqz
         vippsConfirmationUrl:
@@ -1603,7 +1675,36 @@ components:
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
         chargeId:
           type: string
-          description: |- 
+          description: |-
+            The Id of the initialCharge if given, otherwise `null`.
+            If an `orderId` is specified this is used as the `chargeId` otherwise it is auto generated.
+          example: chr_5kSeqz
+          pattern: '^[a-zA-Z0-9-]{1,50}$'
+
+    DraftAgreementResponseV3:
+      title: DraftAgreementResponse
+      type: object
+      required:
+        - agreementId
+      properties:
+        agreementId:
+          type: string
+          description: |-
+            Id of a an agreement which user may agree to.
+            Initially the agreement is in a pending state waiting for user approval.
+            It enters active state once the user has approved it in Vipps.
+          example: agr_5kSeqz
+        vippsConfirmationUrl:
+          type: string
+          description: |-
+            The `vippsConfirmationUrl` should be used to redirect the
+            user to the Vipps landing page in a desktop flow (with `https://`),
+            or to the Vipps app in a mobile flow (with `vipps://`), where the
+            user can then approve the agreement.
+          example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
+        chargeId:
+          type: string
+          description: |-
             The Id of the initialCharge if given, otherwise `null`.
             If an `orderId` is specified this is used as the `chargeId` otherwise it is auto generated.
           example: chr_5kSeqz
@@ -1622,7 +1723,6 @@ components:
       properties:
         campaign:
           $ref: '#/components/schemas/campaignV2'
-          nullable: true
         currency:
           $ref: "#/components/schemas/Currency"
         id:
@@ -1643,10 +1743,10 @@ components:
           type: integer
           format: int32
           example: 49900
-          description: |- 
+          description: |-
             The price of the agreement.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
           minimum: 0
         productName:
@@ -1675,7 +1775,7 @@ components:
           $ref: "#/components/schemas/AgreementStatus"
         merchantAgreementUrl:
           type: string
-          description: |- 
+          description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
@@ -1693,7 +1793,6 @@ components:
           nullable: true
         variableAmount:
           $ref: '#/components/schemas/variableAmountResponse'
-          nullable: true
 
     AgreementResponseV3:
       title: Agreement response
@@ -1701,36 +1800,29 @@ components:
       required:
         - id
         - interval
-        - price
+        - pricing
         - productName
       properties:
         campaign:
-          $ref: '#/components/schemas/campaignV2'
-          nullable: true
-        currency:
-          $ref: "#/components/schemas/Currency"
+          $ref: '#/components/schemas/campaignResponseV3'
+        pricing:
+          $ref: '#/components/schemas/pricingResponse'
         id:
           type: string
           example: agr_DdLnJAF
           maxLength: 36
           description: Uniquely identifies this agreement
         interval:
-          $ref: '#/components/schemas/TimePeriod'
-        price:
-          type: integer
-          format: int32
-          example: 49900
-          description: |- 
-            The price of the agreement.
-
-            Amounts are specified in minor units. 
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-          minimum: 0
+          $ref: '#/components/schemas/TimePeriodResponse'
         productName:
           type: string
           description: Product name (short)
           maxLength: 45
           example: Premier League subscription
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
         start:
           type: string
           format: date-time
@@ -1747,7 +1839,7 @@ components:
           $ref: "#/components/schemas/AgreementStatus"
         merchantAgreementUrl:
           type: string
-          description: |- 
+          description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
@@ -1762,9 +1854,6 @@ components:
           type: string
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
           description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
-          nullable: true
-        variableAmount:
-          $ref: '#/components/schemas/variableAmountResponse'
           nullable: true
 
     PatchAgreementV2:
@@ -1777,10 +1866,10 @@ components:
           example: 3000
           minimum: 100
           maximum: 2000000
-          description: |- 
+          description: |-
             The suggested max amount that the customer should choose.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         campaign:
           $ref: '#/components/schemas/campaignV2'
@@ -1792,7 +1881,7 @@ components:
           description: |-
             The price of the agreement.
 
-            Price is specified in minor units. 
+            Price is specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         productName:
           type: string
@@ -1817,26 +1906,20 @@ components:
           description: Status of the agreement.
           enum:
             - STOPPED
-    
+
     PatchAgreementV3:
       title: PatchAgreement
       type: object
       properties:
-        suggestedMaxAmount:
-          type: integer
-          format: int32
-          example: 3000
-          minimum: 100
-          maximum: 2000000
-          description: |- 
-            The suggested max amount that the customer should choose.
-
-            Amounts are specified in minor units. 
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         productName:
           type: string
           example: Pluss-abonnement
           description: Name of the product being subscribed to.
+          maxLength: 45
+        productDescription:
+          type: string
+          description: Product description (longer)
+          maxLength: 100
         merchantAgreementUrl:
           type: string
           description: URL where Vipps can send the customer to view/manage their
@@ -1850,6 +1933,8 @@ components:
           description: Status of the agreement.
           enum:
             - STOPPED
+        pricing:
+          $ref: '#/components/schemas/PricingUpdateRequest'
 
     AgreementReference:
       type: object
@@ -1861,10 +1946,10 @@ components:
           type: string
           example: agr_asdf123
           description: |-
-            Id of a an agreement which user may agree to. 
-            Initially the agreement is in a pending state waiting for user approval. 
+            Id of a an agreement which user may agree to.
+            Initially the agreement is in a pending state waiting for user approval.
             It enters active state once the user has approved it in Vipps.
-    
+
     variableAmount:
       title: Variable Amount request
       type: object
@@ -1877,12 +1962,12 @@ components:
           example: 3000
           minimum: 100
           maximum: 2000000
-          description: |- 
+          description: |-
             The suggested max amount that the customer should choose.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
-    
+
     variableAmountResponse:
       title: Variable Amount response
       type: object
@@ -1891,24 +1976,25 @@ components:
           type: integer
           format: int32
           example: 3000
-          description: |- 
+          description: |-
             The suggested max amount that the customer should choose.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         maxAmount:
           type: integer
           format: int32
           example: 3000
-          description: |- 
+          description: |-
             The max amount chosen by the customer.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
-    
+
     campaignV2:
       title: Campaign request
       type: object
+      nullable: true
       required:
         - campaignPrice
         - end
@@ -1920,7 +2006,7 @@ components:
           description: |-
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
-            Price is specified in minor units. 
+            Price is specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         end:
           type: string
@@ -1938,24 +2024,25 @@ components:
           description: |-
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
-            Price is specified in minor units. 
+            Price is specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         start:
           type: string
           example: '2019-06-01T00:00:00Z'
-          description: |- 
-            The date and time the campaign ends. 
+          description: |-
+            The date and time the campaign ends.
             Needs to be UTC.
         end:
           type: string
           example: '2019-07-01T00:00:00Z'
-          description: |- 
-            The date and time the campaign ends. 
+          description: |-
+            The date and time the campaign ends.
             Needs to be UTC.
-    
+
     campaignV3:
       title: Campaign request
       type: object
+      nullable: true
       required:
         - type
         - price
@@ -1976,13 +2063,13 @@ components:
           description: |-
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
-            Price is specified in minor units. 
+            Price is specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         eventDate:
           type: string
           example: '2019-06-01T00:00:00Z'
-          description: |- 
-            The date and time the campaign ends. 
+          description: |-
+            The date and time the campaign ends.
             Needs to be UTC.
         eventText:
           type: string
@@ -1991,15 +2078,16 @@ components:
           example: Until Christmas
           description: A short text that describes the event
         interval:
-          description: 'Interval for subscription in the campaign period. Example: unit=week, count=2 to be able to charge every two weeks.'
           $ref: '#/components/schemas/TimePeriod'
         period:
-          description: 'Time period that the campaign price pays for. Example: unit=week, count=2 to say that you pay for two weeks'
           $ref: '#/components/schemas/TimePeriod'
 
     campaignResponseV3:
       title: Campaign response
       type: object
+      required:
+        - type
+        - price
       properties:
         type:
           type: string
@@ -2016,39 +2104,137 @@ components:
           description: |-
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
-            Price is specified in minor units. 
+            Price is specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         end:
           type: string
           example: '2019-06-01T00:00:00Z'
-          description: |- 
-            The date and time the campaign ends. 
+          description: |-
+            The date and time the campaign ends.
             Needs to be UTC.
         eventDate:
           type: string
           example: '2019-06-01T00:00:00Z'
-          description: |- 
-            The date and time the campaign ends. 
+          description: |-
+            The date and time the campaign ends.
             Needs to be UTC.
         eventText:
           type: string
           example: Until Christmas
           description: A short text that describes the event
         interval:
-          description: 'Interval for subscription in the campaign period. Example: unit=week, count=2 to be able to charge every two weeks.'
           $ref: '#/components/schemas/TimePeriod'
         period:
-          description: 'Time period that the campaign price pays for. Example: unit=week, count=2 to say that you pay for two weeks'
           $ref: '#/components/schemas/TimePeriod'
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
           description: The text displayed in the Vipps app to explain the campaign to the user
 
-    InitialCharge:
+    pricingRequest:
+      title: pricing
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of pricing. This decides which properties are required.
+          enum:
+            - LEGACY
+            - VARIABLE
+        currency:
+          $ref: "#/components/schemas/Currency"
+        amount:
+          type: integer
+          format: int32
+          minimum: 100
+          example: 1500
+          description: |-
+            The price of the agreement, required if type is LEGACY or not present.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          minimum: 100
+          maximum: 2000000
+          example: 3000
+          description: |-
+            The suggested max amount that the customer should choose, required if type is VARIABLE.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+
+    pricingResponse:
+      title: pricing
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of pricing. This decides which properties are present.
+          enum:
+            - LEGACY
+            - VARIABLE
+        currency:
+          $ref: "#/components/schemas/Currency"
+        amount:
+          type: integer
+          format: int32
+          example: 1500
+          description: |-
+            The price of the agreement, present if type is LEGACY.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          example: 30000
+          description: |-
+            The suggested max amount that the customer should choose, present if type is VARIABLE.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        maxAmount:
+          type: integer
+          format: int32
+          example: 30000
+          description: |-
+            The max amount chosen by the customer.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+
+    PricingUpdateRequest:
+      title: pricing
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int32
+          minimum: 100
+          example: 1500
+          description: |-
+            The price of the agreement, can only be updated if agreement type is LEGACY
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        suggestedMaxAmount:
+          type: integer
+          format: int32
+          minimum: 100
+          maximum: 2000000
+          example: 3000
+          description: |-
+            The suggested max amount that the customer should choose, can only be updated if agreement type is VARIABLE.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+
+    InitialChargeV2:
       title: InitialCharge
-      description: |- 
-        An initial charge for a new agreement. 
+      description: |-
+        An initial charge for a new agreement.
         The charge will be processed immediately when the user approves the agreement.
       type: object
       required:
@@ -2064,13 +2250,10 @@ components:
           description: |-
             The amount that must be paid or approved before starting the agreement.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         currency:
-          type: string
-          example: NOK
-          enum:
-            - NOK
+          $ref: "#/components/schemas/Currency"
         description:
           type: string
           example: Månedsabonnement
@@ -2078,7 +2261,43 @@ components:
         transactionType:
           type: string
           example: DIRECT_CAPTURE
-          description: The type of payment to be made. 
+          description: The type of payment to be made.
+          enum:
+            - RESERVE_CAPTURE
+            - DIRECT_CAPTURE
+        orderId:
+          type: string
+          example: abc123
+          description: An optional orderId for the payment, auto generated otherwise
+
+    InitialChargeV3:
+      title: InitialCharge
+      description: |-
+        An initial charge for a new agreement.
+        The charge will be processed immediately when the user approves the agreement.
+      type: object
+      required:
+        - amount
+        - description
+        - transactionType
+      properties:
+        amount:
+          type: integer
+          format: int32
+          example: 234
+          description: |-
+            The amount that must be payed or approved before starting the agreement.
+
+            Amounts are specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        description:
+          type: string
+          example: Månedsabonnement
+          description: This field is visible to the end user in-app
+        transactionType:
+          type: string
+          example: DIRECT_CAPTURE
+          description: The type of payment to be made.
           enum:
             - RESERVE_CAPTURE
             - DIRECT_CAPTURE
@@ -2102,16 +2321,13 @@ components:
           format: int32
           minimum: 100
           example: 234
-          description: |- 
+          description: |-
             Amount to be paid by the customer.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         currency:
-          type: string
-          example: NOK
-          enum:
-            - NOK
+          $ref: "#/components/schemas/Currency"
         description:
           type: string
           minimum: 1
@@ -2120,7 +2336,7 @@ components:
           description: This field is visible to the end user in-app
         due:
           type: string
-          description: |- 
+          description: |-
             The date when the charge is due to be processed.
 
             Must be in the format `yyyy-MM-dd`
@@ -2153,13 +2369,13 @@ components:
           format: int32
           minimum: 100
           example: 234
-          description: |- 
+          description: |-
             Amount to be paid by the customer.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-        TransactionType:
-          $ref: "#/components/schemas/TransactionType"
+        transactionType:
+          $ref: "#/components/schemas/transactionType"
         description:
           type: string
           minimum: 1
@@ -2168,9 +2384,9 @@ components:
           description: This field is visible to the end user in-app
         due:
           type: string
-          description: |- 
+          description: |-
             The date when the charge is due to be processed.
-            
+
             If the charge is DIRECT_CAPTURE, the charge is processed and charged on due date.
             If the charge is RESERVE_CAPTURE, the charge is RESERVED on due date.
 
@@ -2198,7 +2414,7 @@ components:
           type: string
           example: chg_WCVbcAbRCmu2zk
           description: Unique identifier for this charge, up to 15 characters.
-      
+
     ChargeResponseV2:
       title: ChargeResponse
       type: object
@@ -2216,7 +2432,7 @@ components:
           type: integer
           format: int32
           example: 234
-          description: |- 
+          description: |-
             Amount to be paid by the customer.
 
             Amounts are specified in minor units.
@@ -2250,6 +2466,7 @@ components:
           type: string
           description: Contains null until the status has reached CHARGED.
           maxLength: 36
+          pattern: '^\d{10+}$'
           example: "5001419121"
         type:
           $ref: "#/components/schemas/ChargeType"
@@ -2285,40 +2502,26 @@ components:
         - transactionId
         - description
         - type
+        - transactionType
         - amount
-        - amountRefunded
-        - amountCaptured
+        - summary
+        - history
         - due
         - id
         - status
+        - currency
       properties:
         amount:
           type: integer
           format: int32
           example: 234
-          description: |- 
+          description: |-
             Amount to be paid by the customer.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-        amountRefunded:
-          type: integer
-          format: int32
-          example: 0
-          description: |-
-            The total amount which has been refunded, in case of status refund/partial refund.
-
-            Amounts are specified in minor units. 
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
-        amountCaptured:
-          type: integer
-          format: int32
-          example: 0
-          description: |-
-            The total amount which has been captured/charged, in case of status charged/partial capture.
-
-            Amounts are specified in minor units. 
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+        currency:
+          $ref: "#/components/schemas/Currency"
         description:
           type: string
           description: Description of the charge
@@ -2339,11 +2542,12 @@ components:
           type: string
           description: Contains null until the status has reached CHARGED
           maxLength: 36
+          pattern: '^\d{10+}$'
           example: "5001419121"
         type:
           $ref: "#/components/schemas/ChargeType"
         transactionType:
-          $ref: "#/components/schemas/TransactionType"
+          $ref: "#/components/schemas/transactionType"
         failureReason:
           type: string
           enum:
@@ -2368,7 +2572,11 @@ components:
           type: string
           description: Description for the failure reason
           example: "User action required"
-    
+        summary:
+          $ref: "#/components/schemas/ChargeSummary"
+        history:
+          $ref: "#/components/schemas/ChargeHistory"
+
     RefundRequest:
       title: Refund charge request
       type: object
@@ -2381,17 +2589,17 @@ components:
           format: int32
           minimum: 100
           example: 5000
-          description: |- 
+          description: |-
             The amount to refund on a captured/charged charge.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         description:
           type: string
           minimum: 1
           example: Forgot to apply discount, refunding 50%
           description: A textual description of the operation, which will be displayed in the user's app.
-    
+
     CaptureRequestV3:
       title: Capture charge request
       type: object
@@ -2404,17 +2612,17 @@ components:
           format: int32
           minimum: 100
           example: 5000
-          description: |- 
+          description: |-
             The amount to capture on a reserved charge.
 
-            Amounts are specified in minor units. 
+            Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         description:
           type: string
           minimum: 1
           example: Not all items were in stock. Partial capture.
           description: A textual description of the operation, which will be displayed in the user's app.
-    
+
     TimePeriod:
       title: Time Period request
       description: A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)
@@ -2475,7 +2683,7 @@ components:
         customerPhoneNumber:
           type: string
           example: '96969696'
-    
+
     ErrorFromAzure:
       type: object
       description: |-
@@ -2641,7 +2849,7 @@ components:
           description: 'Subject - Identifier for the end user'
           type: string
           example: 'c06c4afe-d9e1-4c5d-939a-177d752a0944'
-    
+
     UserinfoAccountInfo:
       type: object
       properties:
@@ -2654,7 +2862,7 @@ components:
         bank_name:
           description: "Bank connected to the account number"
           type: string
-    
+
     UserinfoAddress:
       type: object
       properties:

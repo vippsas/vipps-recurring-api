@@ -1,7 +1,23 @@
+<!-- START_METADATA
+---
+title: Introduction
+sidebar_position: 1
+hide_table_of_contents: true
+pagination_next: null
+pagination_prev: null
+---
+END_METADATA -->
+
 # Vipps Recurring API
 
-This repository contains developer resources for the Vipps Recurring API. 
-For more information about this product, please see
+<!-- START_COMMENT -->
+
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+
+<!-- END_COMMENT -->
+
+Information about this product in Norwegian, see
 [Faste betalinger med Vipps](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
 **IMPORTANT:** The Vipps Recurring API is available for existing customers that
@@ -13,24 +29,24 @@ activating the Vipps Recurring API, please
 [contact Vipps customer service](https://www.vipps.no/kontakt-oss/bedrift/vipps/)
 to get access to the Recurring API in production.
 
-* [How It Works](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api-howitworks.md): An overview of how the Recurring API works.
-* [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md): Information about API keys, product activation.
-* [Vipps Recurring API guide](vipps-recurring-api.md): Developer guide for Vipps Recurring API.
-* [Vipps Recurring API Checklist](vipps-recurring-api-checklist.md): For direct and POS integrations.
-* [Frequently Asked Questions](vipps-recurring-api-faq.md): Questions and answers.
-* [Postman collection](vipps-recurring-postman.md)
-* [Vipps Login + Vipps Recurring](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-login-recurring-howitworks.md): Learn how you can use Login and Recurring together.
+## How it works
 
-You can peruse the API reference documentation as:
-* [Swagger](https://vippsas.github.io/vipps-recurring-api/)
-* [ReDoc](https://vippsas.github.io/vipps-recurring-api/redoc.html)
-* [Shins](https://vippsas.github.io/vipps-recurring-api/shins/index.html)
+* [How It Works](vipps-recurring-api-howitworks.md): An overview of how the Recurring API works.
+* [Vipps Login + Vipps Recurring](vipps-login-recurring-howitworks.md): Learn how you can use Login and Recurring together.
 
-The flow of settlements and how to retrieve them are described in
-[Settlements](https://github.com/vippsas/vipps-developers/tree/master/settlements).
+## Getting started
 
-See the [Vipps Developers repository](https://github.com/vippsas/vipps-developers)
-for contact information, contribution guidelines, etc.
+See
+[Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
+for information about API keys, product activation, how to make API calls, etc.
+
+## Recurring API
+
+* [API Quick Start](vipps-recurring-api-quick-start.md): Quick Start.
+* [API guide](vipps-recurring-api.md): Developer guide for Vipps Recurring API.
+* [API Checklist](vipps-recurring-api-checklist.md): For direct and POS integrations.
+* [API FAQ](vipps-recurring-api-faq.md): Questions and answers.
+* [API Reference](https://vippsas.github.io/vipps-developer-docs/api/recurring): Recurring API Reference Specifications.
 
 ## Questions?
 

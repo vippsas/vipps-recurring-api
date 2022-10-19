@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Recurring Payments Merchant API v2.6.5</title>
+    <title>Recurring Payments Merchant API v2.6.10</title>
 
     <style>
     </style>
@@ -1554,6 +1554,13 @@ Darkula color scheme from the JetBrains family of IDEs
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;php&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -1610,20 +1617,6 @@ Darkula color scheme from the JetBrains family of IDEs
       
       <div id="toc" class="toc-list-h1">
 	  	<ul class="toc-list-h1">
-        
-          <li>
-            <a href="#recurring-payments" class="toc-h1 toc-link" data-title="Recurring payments">Recurring payments</a>
-            
-              <ul class="toc-list-h2">
-                
-                  <li>
-                    <a href="#authentication-see--a-href----authorization-20service-getaccesstoken--target--_blank--fetch-authorization-token--a-" class="toc-h2 toc-link" data-title="">Authentication See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a></a>
-                    
-                  </li>
-                
-              </ul>
-            
-          </li>
         
           <li>
             <a href="#recurring-payments-merchant-api-authorization-service" class="toc-h1 toc-link" data-title="Authorization Service">Authorization Service</a>
@@ -1820,12 +1813,27 @@ Darkula color scheme from the JetBrains family of IDEs
                   </li>
                 
                   <li>
+                    <a href="#tocs_chargesummary" class="toc-h2 toc-link" data-title="">ChargeSummary</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_chargehistory" class="toc-h2 toc-link" data-title="">ChargeHistory</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_chargeevent" class="toc-h2 toc-link" data-title="">ChargeEvent</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#tocs_currency" class="toc-h2 toc-link" data-title="">Currency</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#tocs_transactiontype" class="toc-h2 toc-link" data-title="">TransactionType</a>
+                    <a href="#tocs_transactiontype" class="toc-h2 toc-link" data-title="">transactionType</a>
                     
                   </li>
                 
@@ -1850,7 +1858,12 @@ Darkula color scheme from the JetBrains family of IDEs
                   </li>
                 
                   <li>
-                    <a href="#tocs_draftagreementresponse" class="toc-h2 toc-link" data-title="">DraftAgreementResponse</a>
+                    <a href="#tocs_draftagreementresponsev2" class="toc-h2 toc-link" data-title="">DraftAgreementResponseV2</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_draftagreementresponsev3" class="toc-h2 toc-link" data-title="">DraftAgreementResponseV3</a>
                     
                   </li>
                 
@@ -1910,7 +1923,22 @@ Darkula color scheme from the JetBrains family of IDEs
                   </li>
                 
                   <li>
-                    <a href="#tocs_initialcharge" class="toc-h2 toc-link" data-title="">InitialCharge</a>
+                    <a href="#tocs_pricingrequest" class="toc-h2 toc-link" data-title="">pricingRequest</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_pricingresponse" class="toc-h2 toc-link" data-title="">pricingResponse</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_initialchargev2" class="toc-h2 toc-link" data-title="">InitialChargeV2</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_initialchargev3" class="toc-h2 toc-link" data-title="">InitialChargeV3</a>
                     
                   </li>
                 
@@ -2029,14 +2057,7 @@ Darkula color scheme from the JetBrains family of IDEs
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="recurring-payments">Recurring payments</h1>
-<p>Recurring payments is used for subscription payments such as weekly dues for newspaper access, monthly dues for public transportation, etc.</p>
-<ol>
-<li>A draft agreement is initialized and the user is redirected for approval. 2. The user approves the agreement and the merchant can call GET on the agreement to verify the status. 3. The merchant can start sending charges which will be charged the user in the future.
-The merchant is responsible for checking the status of charges, and cancelling any user access if charges are failing (or contacting the user).</li>
-</ol>
-<h2 id="authentication-see--a-href----authorization-20service-getaccesstoken--target--_blank--fetch-authorization-token--a-">Authentication See <a href="#/Authorization%20Service/getAccessToken" target="_blank">Fetch authorization token</a></h2>
-<p>For information regarding authentication please read <a href="https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md#authentication">our guide</a></p>
+        <p>Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc. For details, see the <a href="https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api">Recurring API Guide</a>.</p>
 <p>Base URLs:</p>
 <ul>
 <li>
@@ -2717,7 +2738,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 </tr>
 <tr>
 <td>»» campaign</td>
-<td><a href="#schemacampaignv2">campaignV2</a></td>
+<td><a href="#schemacampaignv2">campaignV2</a>¦null</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -2727,7 +2748,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>»»» end</td>
@@ -2769,7 +2790,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>»» productName</td>
@@ -2839,14 +2860,14 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>»»» maxAmount</td>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -2934,14 +2955,13 @@ curl -X POST https://api.vipps.no/recurring/v2/agreements \
   &quot;currency&quot;: &quot;NOK&quot;,
   &quot;interval&quot;: &quot;MONTH&quot;,
   &quot;intervalCount&quot;: 1,
-  &quot;isApp&quot;: true,
   &quot;merchantRedirectUrl&quot;: &quot;https://merchant.redirect.url.no&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://merchant.agreement.url.no&quot;,
   &quot;customerPhoneNumber&quot;: &quot;45678272&quot;,
   &quot;price&quot;: 2500,
   &quot;productDescription&quot;: &quot;MyNews on web&quot;,
   &quot;productName&quot;: &quot;MyNews Digital&quot;,
-  &quot;skipLandingPage&quot;: true
+  &quot;skipLandingPage&quot;: false
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -3106,14 +3126,13 @@ More information about this can be found in the API documentation.</p>
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">1</span>,
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.redirect.url.no&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.agreement.url.no&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;45678272&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">2500</span>,
   <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;MyNews on web&quot;</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;MyNews Digital&quot;</span>,
-  <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">true</span>
+  <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">false</span>
 }
 </code></pre>
 <h3 id="create-a-new-agreement--to-be-confirmed-in-vipps-parameters">Parameters</h3>
@@ -3208,7 +3227,7 @@ More information about this can be found in the API documentation.</p>
 <tr>
 <td>» campaign</td>
 <td>body</td>
-<td><a href="#schemacampaignv2">campaignV2</a></td>
+<td><a href="#schemacampaignv2">campaignV2</a>¦null</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -3243,7 +3262,7 @@ More information about this can be found in the API documentation.</p>
 <tr>
 <td>» initialCharge</td>
 <td>body</td>
-<td><a href="#schemainitialcharge">InitialCharge</a></td>
+<td><a href="#schemainitialchargev2">InitialChargeV2</a></td>
 <td>false</td>
 <td>An initial charge for a new agreement.</td>
 </tr>
@@ -3257,9 +3276,9 @@ More information about this can be found in the API documentation.</p>
 <tr>
 <td>»» currency</td>
 <td>body</td>
-<td>string</td>
+<td><a href="#schemacurrency">Currency</a></td>
 <td>true</td>
-<td>none</td>
+<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
 </tr>
 <tr>
 <td>»» description</td>
@@ -3300,8 +3319,8 @@ More information about this can be found in the API documentation.</p>
 <td>» isApp</td>
 <td>body</td>
 <td>boolean</td>
-<td>true</td>
-<td>If merchant is redirecting user from an app or a mobile device.</td>
+<td>false</td>
+<td>This parameter indicates whether payment request is triggered from</td>
 </tr>
 <tr>
 <td>» merchantAgreementUrl</td>
@@ -3335,7 +3354,7 @@ More information about this can be found in the API documentation.</p>
 <td>» productDescription</td>
 <td>body</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>Product description (longer)</td>
 </tr>
 <tr>
@@ -3380,6 +3399,11 @@ For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 �
 <p><strong>» intervalCount</strong>: Number of intervals between charges. Example: interval=week,
 intervalCount=2 to be able to charge every two weeks.
 Charges should occur at least once a year.</p>
+<p><strong>» isApp</strong>: This parameter indicates whether payment request is triggered from
+Mobile App or Web browser. Based on this value, response will be
+redirect URL for Vipps landing page or deeplink URL to connect vipps
+App. When isApp is set to true, URLs passed to Vipps will not be
+validated as regular URLs.</p>
 <p><strong>» merchantAgreementUrl</strong>: URL where Vipps can send the customer to view/manage their
 subscription. Typically a &quot;My page&quot; where the user can change, pause, cancel, etc.
 We recommend letting users log in with Vipps, not with username and password.
@@ -3463,7 +3487,7 @@ the request will fail and an error message will be returned (statusCode=403).</p
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td>Created</td>
-<td><a href="#schemadraftagreementresponse">DraftAgreementResponse</a></td>
+<td><a href="#schemadraftagreementresponsev2">DraftAgreementResponseV2</a></td>
 </tr>
 <tr>
 <td>default</td>
@@ -4105,7 +4129,7 @@ we suggest leaving the agreement active and skipping the creation of charges as 
 <tr>
 <td>» campaign</td>
 <td>body</td>
-<td><a href="#schemacampaignv2">campaignV2</a></td>
+<td><a href="#schemacampaignv2">campaignV2</a>¦null</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -4564,7 +4588,7 @@ merchants making payments for themselves.</p>
 from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <h3 id="force-accept-an-agreement--only-available-in-test-environment--responseschema">Response Schema</h3>
 <h1 id="recurring-payments-merchant-api-agreement-v3-endpoints">Agreement v3 endpoints</h1>
-<p>Coming soon</p>
+<p>Coming soon - WORK IN PROGRESS</p>
 <h2 id="list-agreements-2">List Agreements</h2>
 <p><a id="opIdListAgreementsV3"></a></p>
 <blockquote>
@@ -4580,7 +4604,8 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
   -H <span class="hljs-string">&#x27;Vipps-System-Name: woocommerce&#x27;</span> \
   -H <span class="hljs-string">&#x27;Vipps-System-Version: 5.4&#x27;</span> \
   -H <span class="hljs-string">&#x27;Vipps-System-Plugin-Name: vipps-woocommerce&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Vipps-System-Plugin-Version: 1.2.1&#x27;</span>
+  -H <span class="hljs-string">&#x27;Vipps-System-Plugin-Version: 1.2.1&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Idempotency-Key: kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.vipps.no/recurring/v3/agreements</span> HTTP/1.1
@@ -4594,6 +4619,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
 <span class="hljs-attribute">Vipps-System-Version</span>: 5.4
 <span class="hljs-attribute">Vipps-System-Plugin-Name</span>: vipps-woocommerce
 <span class="hljs-attribute">Vipps-System-Plugin-Version</span>: 1.2.1
+<span class="hljs-attribute">Idempotency-Key</span>: kRk3uEeiogxLu1yGSZRlNgsIv3TuNS
 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
@@ -4606,7 +4632,8 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>:<span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span>:<span class="hljs-string">&#x27;5.4&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span>:<span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
-  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>:<span class="hljs-string">&#x27;1.2.1&#x27;</span>
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>:<span class="hljs-string">&#x27;1.2.1&#x27;</span>,
+  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span>:<span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>
 };
 
 fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v3/agreements&#x27;</span>,
@@ -4634,7 +4661,8 @@ headers = {
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;5.4&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
-  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;1.2.1&#x27;</span>
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;1.2.1&#x27;</span>,
+  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>
 }
 
 result = RestClient.get <span class="hljs-string">&#x27;https://api.vipps.no/recurring/v3/agreements&#x27;</span>,
@@ -4654,7 +4682,8 @@ headers = {
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>: <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span>: <span class="hljs-string">&#x27;5.4&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span>: <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
-  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>: <span class="hljs-string">&#x27;1.2.1&#x27;</span>
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>: <span class="hljs-string">&#x27;1.2.1&#x27;</span>,
+  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span>: <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>
 }
 
 r = requests.get(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v3/agreements&#x27;</span>, headers = headers)
@@ -4671,6 +4700,7 @@ print(r.json())
     <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;5.4&#x27;</span>,
     <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
     <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;1.2.1&#x27;</span>,
+    <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>,
 );
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
@@ -4728,6 +4758,7 @@ System.out.println(response.toString());
         <span class="hljs-string">&quot;Vipps-System-Version&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;5.4&quot;</span>},
         <span class="hljs-string">&quot;Vipps-System-Plugin-Name&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;vipps-woocommerce&quot;</span>},
         <span class="hljs-string">&quot;Vipps-System-Plugin-Version&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;1.2.1&quot;</span>},
+        <span class="hljs-string">&quot;Idempotency-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&quot;</span>},
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
@@ -4827,6 +4858,13 @@ Use the <code>createdAfter</code> query to paginate the response.</p>
 <td>false</td>
 <td>Filter by createdAfter timestamp for paginating.</td>
 </tr>
+<tr>
+<td>Idempotency-Key</td>
+<td>header</td>
+<td><a href="#schemaidempotencykeyformat">IdempotencyKeyFormat</a></td>
+<td>true</td>
+<td>An Idempotency key must be provided to ensure idempotent requests.</td>
+</tr>
 </tbody>
 </table>
 <h4 id="detailed-descriptions-7">Detailed descriptions</h4>
@@ -4839,6 +4877,8 @@ making payments on behalf of a merchant.
 The partner must use the merchant's MSN (not the partner's MSN).
 This parameter is optional, and recommended, for regular Vipps
 merchants making payments for themselves.</p>
+<p><strong>Idempotency-Key</strong>: An Idempotency key must be provided to ensure idempotent requests.
+Key size can be between 1 to 40 characters.</p>
 <h4 id="enumerated-values-5">Enumerated Values</h4>
 <table>
 <thead>
@@ -4875,27 +4915,42 @@ merchants making payments for themselves.</p>
 <pre class="highlight tab tab-json"><code>[
   {
     <span class="hljs-attr">&quot;campaign&quot;</span>: {
-      <span class="hljs-attr">&quot;campaignPrice&quot;</span>: <span class="hljs-number">1500</span>,
-      <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
+      <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+      <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+      <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+      <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+      <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
+      <span class="hljs-attr">&quot;interval&quot;</span>: {
+        <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+        <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+      },
+      <span class="hljs-attr">&quot;period&quot;</span>: {
+        <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+        <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+      },
+      <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
     },
-    <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+    <span class="hljs-attr">&quot;pricing&quot;</span>: {
+      <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
+      <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+      <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">1500</span>,
+      <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">30000</span>,
+      <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">30000</span>
+    },
     <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_DdLnJAF&quot;</span>,
     <span class="hljs-attr">&quot;interval&quot;</span>: {
       <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;every 2 weeks&quot;</span>
     },
-    <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
     <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+    <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
     <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
     <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
     <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
     <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-    <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-    <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
-      <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
-      <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">3000</span>
-    }
+    <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>
   }
 ]
 </code></pre>
@@ -4955,31 +5010,122 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 </tr>
 <tr>
 <td>»» campaign</td>
-<td><a href="#schemacampaignv2">campaignV2</a></td>
+<td><a href="#schemacampaignresponsev3">campaignResponseV3</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»»» campaignPrice</td>
+<td>»»» type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>»»» price</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>»»» end</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. Needs to be UTC</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
-<td>»» currency</td>
+<td>»»» eventDate</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
+</tr>
+<tr>
+<td>»»» eventText</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>A short text that describes the event</td>
+</tr>
+<tr>
+<td>»»» interval</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td>false</td>
+<td>none</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
+</tr>
+<tr>
+<td>»»»» unit</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Unit for time period</td>
+</tr>
+<tr>
+<td>»»»» count</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>Number of units in the time period. Example: unit=week, count=2 to define two weeks</td>
+</tr>
+<tr>
+<td>»»» period</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td>false</td>
+<td>none</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
+</tr>
+<tr>
+<td>»»» explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
+</tr>
+<tr>
+<td>»» pricing</td>
+<td><a href="#schemapricingresponse">pricingResponse</a></td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The type of pricing. This decides which properties are present.</td>
+</tr>
+<tr>
+<td>»»» currency</td>
 <td><a href="#schemacurrency">Currency</a></td>
 <td>false</td>
 <td>none</td>
 <td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
+</tr>
+<tr>
+<td>»»» amount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The price of the agreement, present if type is LEGACY.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>»»» suggestedMaxAmount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The suggested max amount that the customer should choose, present if type is VARIABLE.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>»»» maxAmount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>»» id</td>
@@ -4990,7 +5136,7 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 </tr>
 <tr>
 <td>»» interval</td>
-<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td><a href="#schematimeperiodresponse">TimePeriodResponse</a></td>
 <td>true</td>
 <td>none</td>
 <td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
@@ -4998,23 +5144,23 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <tr>
 <td>»»» unit</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>Unit for time period</td>
 </tr>
 <tr>
 <td>»»» count</td>
 <td>integer(int32)</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>Number of units in the time period. Example: unit=week, count=2 to define two weeks</td>
 </tr>
 <tr>
-<td>»» price</td>
-<td>integer(int32)</td>
-<td>true</td>
+<td>»»» text</td>
+<td>string</td>
+<td>false</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Textual representation used in VIPPS to describe the time period</td>
 </tr>
 <tr>
 <td>»» productName</td>
@@ -5022,6 +5168,13 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>»» productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>»» start</td>
@@ -5065,27 +5218,6 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>none</td>
 <td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
 </tr>
-<tr>
-<td>»» variableAmount</td>
-<td><a href="#schemavariableamountresponse">variableAmountResponse</a></td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»»» suggestedMaxAmount</td>
-<td>integer(int32)</td>
-<td>false</td>
-<td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
-</tr>
-<tr>
-<td>»»» maxAmount</td>
-<td>integer(int32)</td>
-<td>false</td>
-<td>none</td>
-<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
-</tr>
 </tbody>
 </table>
 <h4 id="enumerated-values-6">Enumerated Values</h4>
@@ -5097,6 +5229,46 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>YEAR</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>MONTH</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>WEEK</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>DAY</td>
+</tr>
+<tr>
+<td>type</td>
+<td>LEGACY</td>
+</tr>
+<tr>
+<td>type</td>
+<td>VARIABLE</td>
+</tr>
 <tr>
 <td>currency</td>
 <td>NOK</td>
@@ -5146,6 +5318,7 @@ curl -X POST https://api.vipps.no/recurring/v3/agreements \
   -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Idempotency-Key: kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Merchant-Serial-Number: 123456&#x27;</span> \
   -H <span class="hljs-string">&#x27;Vipps-System-Name: woocommerce&#x27;</span> \
@@ -5160,6 +5333,7 @@ curl -X POST https://api.vipps.no/recurring/v3/agreements \
 <span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
+<span class="hljs-attribute">Idempotency-Key</span>: kRk3uEeiogxLu1yGSZRlNgsIv3TuNS
 <span class="hljs-attribute">Content-Type</span>: application/json
 <span class="hljs-attribute">Merchant-Serial-Number</span>: 123456
 <span class="hljs-attribute">Vipps-System-Name</span>: woocommerce
@@ -5169,24 +5343,26 @@ curl -X POST https://api.vipps.no/recurring/v3/agreements \
 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
-  &quot;currency&quot;: &quot;NOK&quot;,
+  &quot;pricing&quot;: {
+    &quot;type&quot;: &quot;LEGACY&quot;,
+    &quot;amount&quot;: 2500,
+    &quot;currency&quot;: &quot;NOK&quot;
+  },
   &quot;interval&quot;: {
     &quot;unit&quot;: &quot;MONTH&quot;,
     &quot;count&quot;: 1
   },
-  &quot;isApp&quot;: true,
   &quot;merchantRedirectUrl&quot;: &quot;https://merchant.redirect.url.no&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://merchant.agreement.url.no&quot;,
   &quot;customerPhoneNumber&quot;: &quot;45678272&quot;,
-  &quot;price&quot;: 2500,
-  &quot;productName&quot;: &quot;MyNews Digital&quot;,
-  &quot;skipLandingPage&quot;: true
+  &quot;productName&quot;: &quot;MyNews Digital&quot;
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span>:<span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span>:<span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>:<span class="hljs-string">&#x27;woocommerce&#x27;</span>,
@@ -5216,6 +5392,7 @@ headers = {
   <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span> =&gt; <span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
@@ -5237,6 +5414,7 @@ headers = {
   <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span>: <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span>: <span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>: <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
@@ -5254,6 +5432,7 @@ print(r.json())
     <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+    <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span> =&gt; <span class="hljs-string">&#x27;123456&#x27;</span>,
     <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
@@ -5312,6 +5491,7 @@ System.out.println(response.toString());
         <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
+        <span class="hljs-string">&quot;Idempotency-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Merchant-Serial-Number&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;123456&quot;</span>},
         <span class="hljs-string">&quot;Vipps-System-Name&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;woocommerce&quot;</span>},
@@ -5342,18 +5522,19 @@ More information about this can be found in the API documentation.</p>
 <p>Body parameter</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+  <span class="hljs-attr">&quot;pricing&quot;</span>: {
+    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
+    <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">2500</span>,
+    <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>
+  },
   <span class="hljs-attr">&quot;interval&quot;</span>: {
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">1</span>
   },
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.redirect.url.no&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://merchant.agreement.url.no&quot;</span>,
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;45678272&quot;</span>,
-  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">2500</span>,
-  <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;MyNews Digital&quot;</span>,
-  <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">true</span>
+  <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;MyNews Digital&quot;</span>
 }
 </code></pre>
 <h3 id="create-a-new-agreement--to-be-confirmed-in-vipps-parameters">Parameters</h3>
@@ -5381,6 +5562,13 @@ More information about this can be found in the API documentation.</p>
 <td>string</td>
 <td>true</td>
 <td>The subscription key for your API product is available on <a href="http://portal.vipps.no">portal.vipps.no</a>, under the 'Utvikler' tab.</td>
+</tr>
+<tr>
+<td>Idempotency-Key</td>
+<td>header</td>
+<td><a href="#schemaidempotencykeyformat">IdempotencyKeyFormat</a></td>
+<td>true</td>
+<td>An Idempotency key must be provided to ensure idempotent requests.</td>
 </tr>
 <tr>
 <td>Content-Type</td>
@@ -5432,23 +5620,9 @@ More information about this can be found in the API documentation.</p>
 <td>none</td>
 </tr>
 <tr>
-<td>» variableAmount</td>
-<td>body</td>
-<td><a href="#schemavariableamount">variableAmount</a></td>
-<td>false</td>
-<td>none</td>
-</tr>
-<tr>
-<td>»» suggestedMaxAmount</td>
-<td>body</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>The suggested max amount that the customer should choose.</td>
-</tr>
-<tr>
 <td>» campaign</td>
 <td>body</td>
-<td><a href="#schemacampaignv3">campaignV3</a></td>
+<td><a href="#schemacampaignv3">campaignV3</a>¦null</td>
 <td>false</td>
 <td>none</td>
 </tr>
@@ -5509,11 +5683,39 @@ More information about this can be found in the API documentation.</p>
 <td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
 </tr>
 <tr>
-<td>» currency</td>
+<td>» pricing</td>
+<td>body</td>
+<td><a href="#schemapricingrequest">pricingRequest</a></td>
+<td>true</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»» type</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>The type of pricing. This decides which properties are required.</td>
+</tr>
+<tr>
+<td>»» currency</td>
 <td>body</td>
 <td><a href="#schemacurrency">Currency</a></td>
-<td>true</td>
+<td>false</td>
 <td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
+</tr>
+<tr>
+<td>»» amount</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>The price of the agreement, required if type is LEGACY or not present.</td>
+</tr>
+<tr>
+<td>»» suggestedMaxAmount</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>The suggested max amount that the customer should choose, required if type is VARIABLE.</td>
 </tr>
 <tr>
 <td>» customerPhoneNumber</td>
@@ -5525,7 +5727,7 @@ More information about this can be found in the API documentation.</p>
 <tr>
 <td>» initialCharge</td>
 <td>body</td>
-<td><a href="#schemainitialcharge">InitialCharge</a></td>
+<td><a href="#schemainitialchargev3">InitialChargeV3</a></td>
 <td>false</td>
 <td>An initial charge for a new agreement.</td>
 </tr>
@@ -5534,14 +5736,7 @@ More information about this can be found in the API documentation.</p>
 <td>body</td>
 <td>integer(int32)</td>
 <td>true</td>
-<td>The amount that must be paid or approved before starting the agreement.</td>
-</tr>
-<tr>
-<td>»» currency</td>
-<td>body</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
+<td>The amount that must be payed or approved before starting the agreement.</td>
 </tr>
 <tr>
 <td>»» description</td>
@@ -5575,7 +5770,7 @@ More information about this can be found in the API documentation.</p>
 <td>» isApp</td>
 <td>body</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>If merchant is redirecting user from an app or a mobile device.</td>
 </tr>
 <tr>
@@ -5593,18 +5788,18 @@ More information about this can be found in the API documentation.</p>
 <td>URL where customer should be redirected after the agreement has been</td>
 </tr>
 <tr>
-<td>» price</td>
-<td>body</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>The price of the agreement.</td>
-</tr>
-<tr>
 <td>» productName</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>» productDescription</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>» scope</td>
@@ -5625,6 +5820,8 @@ More information about this can be found in the API documentation.</p>
 <h4 id="detailed-descriptions-8">Detailed descriptions</h4>
 <p><strong>Ocp-Apim-Subscription-Key</strong>: The subscription key for your API product is available on <a href="http://portal.vipps.no">portal.vipps.no</a>, under the 'Utvikler' tab.
 Keep it secret.</p>
+<p><strong>Idempotency-Key</strong>: An Idempotency key must be provided to ensure idempotent requests.
+Key size can be between 1 to 40 characters.</p>
 <p><strong>Merchant-Serial-Number</strong>: The Merchant Serial Number (MSN) is a unique id for the sale unit
 that this payment is made for.
 This is a required parameter if you are a Vipps Recurring partner
@@ -5632,19 +5829,22 @@ making payments on behalf of a merchant.
 The partner must use the merchant's MSN (not the partner's MSN).
 This parameter is optional, and recommended, for regular Vipps
 merchants making payments for themselves.</p>
-<p><strong>»» suggestedMaxAmount</strong>: The suggested max amount that the customer should choose.</p>
-<p>Amounts are specified in minor units.
-For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
 <p><strong>»» price</strong>: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</p>
 <p>Price is specified in minor units.
 For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
 <p><strong>»» eventDate</strong>: The date and time the campaign ends.
 Needs to be UTC.</p>
+<p><strong>»» amount</strong>: The price of the agreement, required if type is LEGACY or not present.</p>
+<p>Amounts are specified in minor units.
+For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
+<p><strong>»» suggestedMaxAmount</strong>: The suggested max amount that the customer should choose, required if type is VARIABLE.</p>
+<p>Amounts are specified in minor units.
+For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
 <p><strong>» customerPhoneNumber</strong>: Customers phone number (if available). Used to simplify the
 following Vipps interaction. MSISDN: <a href="https://www.msisdn.org">https://www.msisdn.org</a></p>
 <p><strong>» initialCharge</strong>: An initial charge for a new agreement.
 The charge will be processed immediately when the user approves the agreement.</p>
-<p><strong>»» amount</strong>: The amount that must be paid or approved before starting the agreement.</p>
+<p><strong>»» amount</strong>: The amount that must be payed or approved before starting the agreement.</p>
 <p>Amounts are specified in minor units.
 For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</p>
 <p><strong>» merchantAgreementUrl</strong>: URL where Vipps can send the customer to view/manage their
@@ -5653,9 +5853,6 @@ We recommend letting users log in with Vipps, not with username and password.
 We do not have any specific requirements for the security of the page other than requiring HTTPS.</p>
 <p><strong>» merchantRedirectUrl</strong>: URL where customer should be redirected after the agreement has been
 approved/rejected in the Vipps mobile application.</p>
-<p><strong>» price</strong>: The price of the agreement.</p>
-<p>Amounts are specified in minor units.
-For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</p>
 <p><strong>» skipLandingPage</strong>: If the property is set to <code>true</code>, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
 This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps. If the sale unit is not whitelisted,
 the request will fail and an error message will be returned (statusCode=403).</p>
@@ -5701,8 +5898,12 @@ the request will fail and an error message will be returned (statusCode=403).</p
 <td>DAY</td>
 </tr>
 <tr>
-<td>» currency</td>
-<td>NOK</td>
+<td>»» type</td>
+<td>LEGACY</td>
+</tr>
+<tr>
+<td>»» type</td>
+<td>VARIABLE</td>
 </tr>
 <tr>
 <td>»» currency</td>
@@ -5725,7 +5926,6 @@ the request will fail and an error message will be returned (statusCode=403).</p
 <p>201 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">&quot;agreementResource&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/v2/agreement/agr_5kSeqz&quot;</span>,
   <span class="hljs-attr">&quot;agreementId&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqz&quot;</span>,
   <span class="hljs-attr">&quot;vippsConfirmationUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/v2/register/U6JUjQXq8HQmmV&quot;</span>,
   <span class="hljs-attr">&quot;chargeId&quot;</span>: <span class="hljs-string">&quot;chr_5kSeqz&quot;</span>
@@ -5746,7 +5946,7 @@ the request will fail and an error message will be returned (statusCode=403).</p
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td>Created</td>
-<td><a href="#schemadraftagreementresponse">DraftAgreementResponse</a></td>
+<td><a href="#schemadraftagreementresponsev3">DraftAgreementResponseV3</a></td>
 </tr>
 <tr>
 <td>default</td>
@@ -6032,27 +6232,42 @@ merchants making payments for themselves.</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;campaign&quot;</span>: {
-    <span class="hljs-attr">&quot;campaignPrice&quot;</span>: <span class="hljs-number">1500</span>,
-    <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
+    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+    <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+    <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+    <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+    <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
+    <span class="hljs-attr">&quot;interval&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+    },
+    <span class="hljs-attr">&quot;period&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+    },
+    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
   },
-  <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+  <span class="hljs-attr">&quot;pricing&quot;</span>: {
+    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
+    <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+    <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">1500</span>,
+    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">30000</span>,
+    <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">30000</span>
+  },
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_DdLnJAF&quot;</span>,
   <span class="hljs-attr">&quot;interval&quot;</span>: {
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;every 2 weeks&quot;</span>
   },
-  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-  <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-  <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
-    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
-    <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">3000</span>
-  }
+  <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>
 }
 </code></pre>
 <h3 id="fetch-an-agreement-responses">Responses</h3>
@@ -6119,6 +6334,7 @@ curl -X PATCH https://api.vipps.no/recurring/v3/agreements/{agreementId} \
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
   &quot;suggestedMaxAmount&quot;: 3000,
   &quot;productName&quot;: &quot;Pluss-abonnement&quot;,
+  &quot;productDescription&quot;: &quot;string&quot;,
   &quot;merchantAgreementUrl&quot;: &quot;https://www.example.com/vipps-subscriptions/1234/&quot;,
   &quot;status&quot;: &quot;STOPPED&quot;
 }&#x27;</span>;
@@ -6281,6 +6497,7 @@ we suggest leaving the agreement active and skipping the creation of charges as 
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;STOPPED&quot;</span>
 }
@@ -6380,6 +6597,13 @@ we suggest leaving the agreement active and skipping the creation of charges as 
 <td>string</td>
 <td>false</td>
 <td>Name of the product being subscribed to.</td>
+</tr>
+<tr>
+<td>» productDescription</td>
+<td>body</td>
+<td>string</td>
+<td>false</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>» merchantAgreementUrl</td>
@@ -7650,9 +7874,9 @@ If the payment fails, the charge will be retried based on <code>retryDays</code>
 <tr>
 <td>» currency</td>
 <td>body</td>
-<td>string</td>
+<td><a href="#schemacurrency">Currency</a></td>
 <td>true</td>
-<td>none</td>
+<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
 </tr>
 <tr>
 <td>» description</td>
@@ -9085,7 +9309,7 @@ For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 ør
 from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <h3 id="refund-a-charge-responseschema">Response Schema</h3>
 <h1 id="recurring-payments-merchant-api-charge-v3-endpoints">Charge v3 endpoints</h1>
-<p>Coming soon</p>
+<p>Coming soon - WORK IN PROGRESS</p>
 <h2 id="list-charges-2">List Charges</h2>
 <p><a id="opIdListChargesV3"></a></p>
 <blockquote>
@@ -9340,7 +9564,7 @@ Supports filtering on status using query parameter.</p>
 <td>The agreement identifier (id)</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>query</td>
 <td><a href="#schemachargestatus">ChargeStatus</a></td>
 <td>false</td>
@@ -9368,43 +9592,43 @@ merchants making payments for themselves.</p>
 </thead>
 <tbody>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>PENDING</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>DUE</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>RESERVED</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>CHARGED</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>PARTIALLY_CAPTURED</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>FAILED</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>CANCELLED</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>PARTIALLY_REFUNDED</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>REFUNDED</td>
 </tr>
 <tr>
-<td>chargeStatus</td>
+<td>status</td>
 <td>PROCESSING</td>
 </tr>
 </tbody>
@@ -9418,8 +9642,7 @@ merchants making payments for themselves.</p>
 <pre class="highlight tab tab-json"><code>[
   {
     <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
-    <span class="hljs-attr">&quot;amountRefunded&quot;</span>: <span class="hljs-number">0</span>,
-    <span class="hljs-attr">&quot;amountCaptured&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
     <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Premier League subscription: September&quot;</span>,
     <span class="hljs-attr">&quot;due&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
     <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;chr_WCVbcA&quot;</span>,
@@ -9428,7 +9651,21 @@ merchants making payments for themselves.</p>
     <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
     <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
     <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;user_action_required&quot;</span>,
-    <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>
+    <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>,
+    <span class="hljs-attr">&quot;summary&quot;</span>: {
+      <span class="hljs-attr">&quot;captured&quot;</span>: <span class="hljs-number">234</span>,
+      <span class="hljs-attr">&quot;refunded&quot;</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">&quot;cancelled&quot;</span>: <span class="hljs-number">234</span>
+    },
+    <span class="hljs-attr">&quot;history&quot;</span>: [
+      {
+        <span class="hljs-attr">&quot;occurred&quot;</span>: <span class="hljs-string">&quot;2022-09-05T14:25:55Z&quot;</span>,
+        <span class="hljs-attr">&quot;event&quot;</span>: <span class="hljs-string">&quot;RESERVE&quot;</span>,
+        <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
+        <span class="hljs-attr">&quot;idempotencyKey&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+        <span class="hljs-attr">&quot;success&quot;</span>: <span class="hljs-literal">true</span>
+      }
+    ]
   }
 ]
 </code></pre>
@@ -9491,21 +9728,14 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
-<td>»» amountRefunded</td>
-<td>integer(int32)</td>
+<td>»» currency</td>
+<td><a href="#schemacurrency">Currency</a></td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been refunded, in case of status refund/partial refund.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>»» amountCaptured</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>none</td>
-<td>The total amount which has been captured/charged, in case of status charged/partial capture.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
 </tr>
 <tr>
 <td>»» description</td>
@@ -9551,8 +9781,8 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 </tr>
 <tr>
 <td>»» transactionType</td>
-<td><a href="#schematransactiontype">TransactionType</a></td>
-<td>false</td>
+<td><a href="#schematransactiontype">transactionType</a></td>
+<td>true</td>
 <td>none</td>
 <td>Type of transaction, either direct capture or reserve capture</td>
 </tr>
@@ -9570,6 +9800,76 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>none</td>
 <td>Description for the failure reason</td>
 </tr>
+<tr>
+<td>»» summary</td>
+<td><a href="#schemachargesummary">ChargeSummary</a></td>
+<td>true</td>
+<td>none</td>
+<td>A summary of the amounts captured, refunded and cancelled</td>
+</tr>
+<tr>
+<td>»»» captured</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The total amount which has been captured/charged, in case of status charged/partial capture.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+<tr>
+<td>»»» refunded</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The total amount which has been refunded, in case of status refund/partial refund.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+<tr>
+<td>»»» cancelled</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The total amount which has been cancelled.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+<tr>
+<td>»» history</td>
+<td>[<a href="#schemachargeevent">ChargeEvent</a>]</td>
+<td>true</td>
+<td>none</td>
+<td>List of events related to the charge.</td>
+</tr>
+<tr>
+<td>»»» occurred</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Date and time of the event</td>
+</tr>
+<tr>
+<td>»»» event</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» amount</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The amount related to the operation.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+<tr>
+<td>»»» idempotencyKey</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The idempotency key of the event</td>
+</tr>
+<tr>
+<td>»»» success</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>True if the operation was successful, false otherwise</td>
+</tr>
 </tbody>
 </table>
 <h4 id="enumerated-values-13">Enumerated Values</h4>
@@ -9581,6 +9881,10 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>currency</td>
+<td>NOK</td>
+</tr>
 <tr>
 <td>status</td>
 <td>PENDING</td>
@@ -9653,6 +9957,30 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 <td>failureReason</td>
 <td>technical_error</td>
 </tr>
+<tr>
+<td>event</td>
+<td>CREATE</td>
+</tr>
+<tr>
+<td>event</td>
+<td>RESERVE</td>
+</tr>
+<tr>
+<td>event</td>
+<td>CAPTURE</td>
+</tr>
+<tr>
+<td>event</td>
+<td>REFUND</td>
+</tr>
+<tr>
+<td>event</td>
+<td>CANCEL</td>
+</tr>
+<tr>
+<td>event</td>
+<td>FAIL</td>
+</tr>
 </tbody>
 </table>
 <h2 id="create-a-new-charge-2">Create a new charge</h2>
@@ -9692,7 +10020,7 @@ curl -X POST https://api.vipps.no/recurring/v3/agreements/{agreementId}/charges 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
   &quot;amount&quot;: 234,
-  &quot;TransactionType&quot;: &quot;DIRECT_CAPTURE&quot;,
+  &quot;transactionType&quot;: &quot;DIRECT_CAPTURE&quot;,
   &quot;description&quot;: &quot;Månedsabonnement&quot;,
   &quot;due&quot;: &quot;2030-12-31&quot;,
   &quot;retryDays&quot;: 5,
@@ -9859,7 +10187,7 @@ If the payment fails, the charge will be retried based on <code>retryDays</code>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
-  <span class="hljs-attr">&quot;TransactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
+  <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
   <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Månedsabonnement&quot;</span>,
   <span class="hljs-attr">&quot;due&quot;</span>: <span class="hljs-string">&quot;2030-12-31&quot;</span>,
   <span class="hljs-attr">&quot;retryDays&quot;</span>: <span class="hljs-number">5</span>,
@@ -9963,9 +10291,9 @@ If the payment fails, the charge will be retried based on <code>retryDays</code>
 <td>Amount to be paid by the customer.</td>
 </tr>
 <tr>
-<td>» TransactionType</td>
+<td>» transactionType</td>
 <td>body</td>
-<td><a href="#schematransactiontype">TransactionType</a></td>
+<td><a href="#schematransactiontype">transactionType</a></td>
 <td>false</td>
 <td>Type of transaction, either direct capture or reserve capture</td>
 </tr>
@@ -10028,11 +10356,11 @@ If the charge is RESERVE_CAPTURE, the charge is RESERVED on due date.</p>
 </thead>
 <tbody>
 <tr>
-<td>» TransactionType</td>
+<td>» transactionType</td>
 <td>DIRECT_CAPTURE</td>
 </tr>
 <tr>
-<td>» TransactionType</td>
+<td>» transactionType</td>
 <td>RESERVE_CAPTURE</td>
 </tr>
 </tbody>
@@ -10354,8 +10682,7 @@ merchants making payments for themselves.</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
-  <span class="hljs-attr">&quot;amountRefunded&quot;</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">&quot;amountCaptured&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Premier League subscription: September&quot;</span>,
   <span class="hljs-attr">&quot;due&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;chr_WCVbcA&quot;</span>,
@@ -10364,7 +10691,21 @@ merchants making payments for themselves.</p>
   <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
   <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
   <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;user_action_required&quot;</span>,
-  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>
+  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>,
+  <span class="hljs-attr">&quot;summary&quot;</span>: {
+    <span class="hljs-attr">&quot;captured&quot;</span>: <span class="hljs-number">234</span>,
+    <span class="hljs-attr">&quot;refunded&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">&quot;cancelled&quot;</span>: <span class="hljs-number">234</span>
+  },
+  <span class="hljs-attr">&quot;history&quot;</span>: [
+    {
+      <span class="hljs-attr">&quot;occurred&quot;</span>: <span class="hljs-string">&quot;2022-09-05T14:25:55Z&quot;</span>,
+      <span class="hljs-attr">&quot;event&quot;</span>: <span class="hljs-string">&quot;RESERVE&quot;</span>,
+      <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
+      <span class="hljs-attr">&quot;idempotencyKey&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+      <span class="hljs-attr">&quot;success&quot;</span>: <span class="hljs-literal">true</span>
+    }
+  ]
 }
 </code></pre>
 <h3 id="fetch-a-charge-responses">Responses</h3>
@@ -11897,6 +12238,191 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_chargesummary">ChargeSummary</h2>
+<p><a id="schemachargesummary"></a>
+<a id="schema_ChargeSummary"></a>
+<a id="tocSchargesummary"></a>
+<a id="tocschargesummary"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;captured&quot;</span>: <span class="hljs-number">234</span>,
+  <span class="hljs-attr">&quot;refunded&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">&quot;cancelled&quot;</span>: <span class="hljs-number">234</span>
+}
+
+</code></pre>
+<p>A summary of the amounts captured, refunded and cancelled</p>
+<h3 id="properties-4">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>captured</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The total amount which has been captured/charged, in case of status charged/partial capture.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+<tr>
+<td>refunded</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The total amount which has been refunded, in case of status refund/partial refund.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+<tr>
+<td>cancelled</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The total amount which has been cancelled.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_chargehistory">ChargeHistory</h2>
+<p><a id="schemachargehistory"></a>
+<a id="schema_ChargeHistory"></a>
+<a id="tocSchargehistory"></a>
+<a id="tocschargehistory"></a></p>
+<pre class="highlight tab tab-json"><code>[
+  {
+    <span class="hljs-attr">&quot;occurred&quot;</span>: <span class="hljs-string">&quot;2022-09-05T14:25:55Z&quot;</span>,
+    <span class="hljs-attr">&quot;event&quot;</span>: <span class="hljs-string">&quot;RESERVE&quot;</span>,
+    <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
+    <span class="hljs-attr">&quot;idempotencyKey&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+    <span class="hljs-attr">&quot;success&quot;</span>: <span class="hljs-literal">true</span>
+  }
+]
+
+</code></pre>
+<p>List of events related to the charge.</p>
+<h3 id="properties-5">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>[<a href="#schemachargeevent">ChargeEvent</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>List of events related to the charge.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_chargeevent">ChargeEvent</h2>
+<p><a id="schemachargeevent"></a>
+<a id="schema_ChargeEvent"></a>
+<a id="tocSchargeevent"></a>
+<a id="tocschargeevent"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;occurred&quot;</span>: <span class="hljs-string">&quot;2022-09-05T14:25:55Z&quot;</span>,
+  <span class="hljs-attr">&quot;event&quot;</span>: <span class="hljs-string">&quot;RESERVE&quot;</span>,
+  <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
+  <span class="hljs-attr">&quot;idempotencyKey&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+  <span class="hljs-attr">&quot;success&quot;</span>: <span class="hljs-literal">true</span>
+}
+
+</code></pre>
+<p>Describes the operation that was performed on the charge</p>
+<h3 id="properties-6">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>occurred</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Date and time of the event</td>
+</tr>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The amount related to the operation.<br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+<tr>
+<td>idempotencyKey</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The idempotency key of the event</td>
+</tr>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>true</td>
+<td>none</td>
+<td>True if the operation was successful, false otherwise</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-17">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event</td>
+<td>CREATE</td>
+</tr>
+<tr>
+<td>event</td>
+<td>RESERVE</td>
+</tr>
+<tr>
+<td>event</td>
+<td>CAPTURE</td>
+</tr>
+<tr>
+<td>event</td>
+<td>REFUND</td>
+</tr>
+<tr>
+<td>event</td>
+<td>CANCEL</td>
+</tr>
+<tr>
+<td>event</td>
+<td>FAIL</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_currency">Currency</h2>
 <p><a id="schemacurrency"></a>
 <a id="schema_Currency"></a>
@@ -11906,7 +12432,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></p>
-<h3 id="properties-4">Properties</h3>
+<h3 id="properties-7">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11927,7 +12453,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-17">Enumerated Values</h4>
+<h4 id="enumerated-values-18">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -11942,16 +12468,16 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h2 id="tocs_transactiontype">TransactionType</h2>
+<h2 id="tocs_transactiontype">transactionType</h2>
 <p><a id="schematransactiontype"></a>
-<a id="schema_TransactionType"></a>
+<a id="schema_transactionType"></a>
 <a id="tocStransactiontype"></a>
 <a id="tocstransactiontype"></a></p>
 <pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>
 
 </code></pre>
 <p>Type of transaction, either direct capture or reserve capture</p>
-<h3 id="properties-5">Properties</h3>
+<h3 id="properties-8">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -11972,7 +12498,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-18">Enumerated Values</h4>
+<h4 id="enumerated-values-19">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -11999,7 +12525,7 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code><span class="hljs-string">&quot;RECURRING&quot;</span>
 
 </code></pre>
-<h3 id="properties-6">Properties</h3>
+<h3 id="properties-9">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12020,7 +12546,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-19">Enumerated Values</h4>
+<h4 id="enumerated-values-20">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12048,7 +12574,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Interval for subscription</p>
-<h3 id="properties-7">Properties</h3>
+<h3 id="properties-10">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12069,7 +12595,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-20">Enumerated Values</h4>
+<h4 id="enumerated-values-21">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -12120,7 +12646,7 @@ System.out.println(response.toString());
   },
   <span class="hljs-attr">&quot;interval&quot;</span>: <span class="hljs-string">&quot;MONTH&quot;</span>,
   <span class="hljs-attr">&quot;intervalCount&quot;</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.example.com/vipps-landing&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
@@ -12132,7 +12658,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>DraftAgreement</p>
-<h3 id="properties-8">Properties</h3>
+<h3 id="properties-11">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12174,10 +12700,10 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>initialCharge</td>
-<td><a href="#schemainitialcharge">InitialCharge</a></td>
+<td><a href="#schemainitialchargev2">InitialChargeV2</a></td>
 <td>false</td>
 <td>none</td>
-<td>An initial charge for a new agreement. <br />The charge will be processed immediately when the user approves the agreement.</td>
+<td>An initial charge for a new agreement.<br />The charge will be processed immediately when the user approves the agreement.</td>
 </tr>
 <tr>
 <td>interval</td>
@@ -12191,14 +12717,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Number of intervals between charges. Example: interval=week,<br />intervalCount=2 to be able to charge every two weeks. <br />Charges should occur at least once a year.</td>
+<td>Number of intervals between charges. Example: interval=week,<br />intervalCount=2 to be able to charge every two weeks.<br />Charges should occur at least once a year.</td>
 </tr>
 <tr>
 <td>isApp</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
-<td>If merchant is redirecting user from an app or a mobile device.</td>
+<td>This parameter indicates whether payment request is triggered from<br />Mobile App or Web browser. Based on this value, response will be<br />redirect URL for Vipps landing page or deeplink URL to connect vipps<br />App. When isApp is set to true, URLs passed to Vipps will not be<br />validated as regular URLs.</td>
 </tr>
 <tr>
 <td>merchantAgreementUrl</td>
@@ -12219,7 +12745,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -12231,7 +12757,7 @@ System.out.println(response.toString());
 <tr>
 <td>productDescription</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>Product description (longer)</td>
 </tr>
@@ -12257,9 +12783,6 @@ System.out.println(response.toString());
 <a id="tocSdraftagreementv3"></a>
 <a id="tocsdraftagreementv3"></a></p>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
-    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>
-  },
   <span class="hljs-attr">&quot;campaign&quot;</span>: {
     <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
     <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
@@ -12274,11 +12797,15 @@ System.out.println(response.toString());
       <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
     }
   },
-  <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+  <span class="hljs-attr">&quot;pricing&quot;</span>: {
+    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
+    <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+    <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">1500</span>,
+    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>
+  },
   <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;4791234567&quot;</span>,
   <span class="hljs-attr">&quot;initialCharge&quot;</span>: {
     <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
-    <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
     <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Månedsabonnement&quot;</span>,
     <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
     <span class="hljs-attr">&quot;orderId&quot;</span>: <span class="hljs-string">&quot;abc123&quot;</span>
@@ -12287,18 +12814,18 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
   },
-  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">&quot;isApp&quot;</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;merchantRedirectUrl&quot;</span>: <span class="hljs-string">&quot;https://api.example.com/vipps-landing&quot;</span>,
-  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">7900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;scope&quot;</span>: <span class="hljs-string">&quot;address name email birthDate phoneNumber&quot;</span>,
   <span class="hljs-attr">&quot;skipLandingPage&quot;</span>: <span class="hljs-literal">false</span>
 }
 
 </code></pre>
 <p>DraftAgreement</p>
-<h3 id="properties-9">Properties</h3>
+<h3 id="properties-12">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12311,13 +12838,6 @@ System.out.println(response.toString());
 </thead>
 <tbody>
 <tr>
-<td>variableAmount</td>
-<td><a href="#schemavariableamount">variableAmount</a></td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>campaign</td>
 <td><a href="#schemacampaignv3">campaignV3</a></td>
 <td>false</td>
@@ -12325,11 +12845,11 @@ System.out.println(response.toString());
 <td>none</td>
 </tr>
 <tr>
-<td>currency</td>
-<td><a href="#schemacurrency">Currency</a></td>
+<td>pricing</td>
+<td><a href="#schemapricingrequest">pricingRequest</a></td>
 <td>true</td>
 <td>none</td>
-<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
+<td>none</td>
 </tr>
 <tr>
 <td>customerPhoneNumber</td>
@@ -12340,10 +12860,10 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>initialCharge</td>
-<td><a href="#schemainitialcharge">InitialCharge</a></td>
+<td><a href="#schemainitialchargev3">InitialChargeV3</a></td>
 <td>false</td>
 <td>none</td>
-<td>An initial charge for a new agreement. <br />The charge will be processed immediately when the user approves the agreement.</td>
+<td>An initial charge for a new agreement.<br />The charge will be processed immediately when the user approves the agreement.</td>
 </tr>
 <tr>
 <td>interval</td>
@@ -12355,7 +12875,7 @@ System.out.println(response.toString());
 <tr>
 <td>isApp</td>
 <td>boolean</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>If merchant is redirecting user from an app or a mobile device.</td>
 </tr>
@@ -12374,18 +12894,18 @@ System.out.println(response.toString());
 <td>URL where customer should be redirected after the agreement has been<br />approved/rejected in the Vipps mobile application.</td>
 </tr>
 <tr>
-<td>price</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
 <td>productName</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>scope</td>
@@ -12403,11 +12923,11 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h2 id="tocs_draftagreementresponse">DraftAgreementResponse</h2>
-<p><a id="schemadraftagreementresponse"></a>
-<a id="schema_DraftAgreementResponse"></a>
-<a id="tocSdraftagreementresponse"></a>
-<a id="tocsdraftagreementresponse"></a></p>
+<h2 id="tocs_draftagreementresponsev2">DraftAgreementResponseV2</h2>
+<p><a id="schemadraftagreementresponsev2"></a>
+<a id="schema_DraftAgreementResponseV2"></a>
+<a id="tocSdraftagreementresponsev2"></a>
+<a id="tocsdraftagreementresponsev2"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;agreementResource&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/v2/agreement/agr_5kSeqz&quot;</span>,
   <span class="hljs-attr">&quot;agreementId&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqz&quot;</span>,
@@ -12417,7 +12937,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>DraftAgreementResponse</p>
-<h3 id="properties-10">Properties</h3>
+<h3 id="properties-13">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12434,14 +12954,14 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Reference of a an agreement which user may agree to. <br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
+<td>Reference of a an agreement which user may agree to.<br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
 </tr>
 <tr>
 <td>agreementId</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Id of a an agreement which user may agree to. <br />Initially the agreement is in a pending state waiting for user approval. <br />It enters active state once the user has approved it in Vipps.</td>
+<td>Id of a an agreement which user may agree to.<br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
 </tr>
 <tr>
 <td>vippsConfirmationUrl</td>
@@ -12454,6 +12974,54 @@ System.out.println(response.toString());
 <td>chargeId</td>
 <td>string</td>
 <td>true</td>
+<td>none</td>
+<td>The Id of the initialCharge if given, otherwise <code>null</code>.<br />If an <code>orderId</code> is specified this is used as the <code>chargeId</code> otherwise it is auto generated.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_draftagreementresponsev3">DraftAgreementResponseV3</h2>
+<p><a id="schemadraftagreementresponsev3"></a>
+<a id="schema_DraftAgreementResponseV3"></a>
+<a id="tocSdraftagreementresponsev3"></a>
+<a id="tocsdraftagreementresponsev3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;agreementId&quot;</span>: <span class="hljs-string">&quot;agr_5kSeqz&quot;</span>,
+  <span class="hljs-attr">&quot;vippsConfirmationUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/v2/register/U6JUjQXq8HQmmV&quot;</span>,
+  <span class="hljs-attr">&quot;chargeId&quot;</span>: <span class="hljs-string">&quot;chr_5kSeqz&quot;</span>
+}
+
+</code></pre>
+<p>DraftAgreementResponse</p>
+<h3 id="properties-14">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agreementId</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Id of a an agreement which user may agree to.<br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
+</tr>
+<tr>
+<td>vippsConfirmationUrl</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The <code>vippsConfirmationUrl</code> should be used to redirect the<br />user to the Vipps landing page in a desktop flow (with <code>https://</code>),<br />or to the Vipps app in a mobile flow (with <code>vipps://</code>), where the<br />user can then approve the agreement.</td>
+</tr>
+<tr>
+<td>chargeId</td>
+<td>string</td>
+<td>false</td>
 <td>none</td>
 <td>The Id of the initialCharge if given, otherwise <code>null</code>.<br />If an <code>orderId</code> is specified this is used as the <code>chargeId</code> otherwise it is auto generated.</td>
 </tr>
@@ -12490,7 +13058,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Agreement response</p>
-<h3 id="properties-11">Properties</h3>
+<h3 id="properties-15">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12542,7 +13110,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The price of the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -12616,32 +13184,47 @@ System.out.println(response.toString());
 <a id="tocsagreementresponsev3"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;campaign&quot;</span>: {
-    <span class="hljs-attr">&quot;campaignPrice&quot;</span>: <span class="hljs-number">1500</span>,
-    <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
+    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+    <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+    <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+    <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+    <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
+    <span class="hljs-attr">&quot;interval&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+    },
+    <span class="hljs-attr">&quot;period&quot;</span>: {
+      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+    },
+    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
   },
-  <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+  <span class="hljs-attr">&quot;pricing&quot;</span>: {
+    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
+    <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+    <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">1500</span>,
+    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">30000</span>,
+    <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">30000</span>
+  },
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;agr_DdLnJAF&quot;</span>,
   <span class="hljs-attr">&quot;interval&quot;</span>: {
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;every 2 weeks&quot;</span>
   },
-  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">49900</span>,
   <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Premier League subscription&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
   <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;2019-01-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;stop&quot;</span>: <span class="hljs-literal">null</span>,
   <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;ACTIVE&quot;</span>,
   <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
   <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-  <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>,
-  <span class="hljs-attr">&quot;variableAmount&quot;</span>: {
-    <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
-    <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">3000</span>
-  }
+  <span class="hljs-attr">&quot;userinfoUrl&quot;</span>: <span class="hljs-string">&quot;https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002&quot;</span>
 }
 
 </code></pre>
 <p>Agreement response</p>
-<h3 id="properties-12">Properties</h3>
+<h3 id="properties-16">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12655,17 +13238,17 @@ System.out.println(response.toString());
 <tbody>
 <tr>
 <td>campaign</td>
-<td><a href="#schemacampaignv2">campaignV2</a></td>
+<td><a href="#schemacampaignresponsev3">campaignResponseV3</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>currency</td>
-<td><a href="#schemacurrency">Currency</a></td>
-<td>false</td>
+<td>pricing</td>
+<td><a href="#schemapricingresponse">pricingResponse</a></td>
+<td>true</td>
 <td>none</td>
-<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
+<td>none</td>
 </tr>
 <tr>
 <td>id</td>
@@ -12676,17 +13259,10 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>interval</td>
-<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td><a href="#schematimeperiodresponse">TimePeriodResponse</a></td>
 <td>true</td>
 <td>none</td>
 <td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
-</tr>
-<tr>
-<td>price</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>none</td>
-<td>The price of the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -12694,6 +13270,13 @@ System.out.println(response.toString());
 <td>true</td>
 <td>none</td>
 <td>Product name (short)</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
 </tr>
 <tr>
 <td>start</td>
@@ -12737,13 +13320,6 @@ System.out.println(response.toString());
 <td>none</td>
 <td>The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.</td>
 </tr>
-<tr>
-<td>variableAmount</td>
-<td><a href="#schemavariableamountresponse">variableAmountResponse</a></td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
 </tbody>
 </table>
 <h2 id="tocs_patchagreementv2">PatchAgreementV2</h2>
@@ -12766,7 +13342,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>PatchAgreement</p>
-<h3 id="properties-13">Properties</h3>
+<h3 id="properties-17">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12783,7 +13359,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>campaign</td>
@@ -12797,7 +13373,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The price of the agreement.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>productName</td>
@@ -12812,77 +13388,6 @@ System.out.println(response.toString());
 <td>false</td>
 <td>none</td>
 <td>Product description (longer)</td>
-</tr>
-<tr>
-<td>merchantAgreementUrl</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>URL where Vipps can send the customer to view/manage their subscription. Typically a &quot;My page&quot; where the user can change, pause, cancel, etc. We recommend letting users log in with Vipps, not with username and password. We do not have any specific requirements for the security of the page other than requiring HTTPS.</td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>Status of the agreement.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="enumerated-values-21">Enumerated Values</h4>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>status</td>
-<td>STOPPED</td>
-</tr>
-</tbody>
-</table>
-<h2 id="tocs_patchagreementv3">PatchAgreementV3</h2>
-<p><a id="schemapatchagreementv3"></a>
-<a id="schema_PatchAgreementV3"></a>
-<a id="tocSpatchagreementv3"></a>
-<a id="tocspatchagreementv3"></a></p>
-<pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
-  <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
-  <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
-  <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;STOPPED&quot;</span>
-}
-
-</code></pre>
-<p>PatchAgreement</p>
-<h3 id="properties-14">Properties</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>suggestedMaxAmount</td>
-<td>integer(int32)</td>
-<td>false</td>
-<td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
-</tr>
-<tr>
-<td>productName</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>Name of the product being subscribed to.</td>
 </tr>
 <tr>
 <td>merchantAgreementUrl</td>
@@ -12915,6 +13420,85 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_patchagreementv3">PatchAgreementV3</h2>
+<p><a id="schemapatchagreementv3"></a>
+<a id="schema_PatchAgreementV3"></a>
+<a id="tocSpatchagreementv3"></a>
+<a id="tocspatchagreementv3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>,
+  <span class="hljs-attr">&quot;productName&quot;</span>: <span class="hljs-string">&quot;Pluss-abonnement&quot;</span>,
+  <span class="hljs-attr">&quot;productDescription&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+  <span class="hljs-attr">&quot;merchantAgreementUrl&quot;</span>: <span class="hljs-string">&quot;https://www.example.com/vipps-subscriptions/1234/&quot;</span>,
+  <span class="hljs-attr">&quot;status&quot;</span>: <span class="hljs-string">&quot;STOPPED&quot;</span>
+}
+
+</code></pre>
+<p>PatchAgreement</p>
+<h3 id="properties-18">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>suggestedMaxAmount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>productName</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Name of the product being subscribed to.</td>
+</tr>
+<tr>
+<td>productDescription</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Product description (longer)</td>
+</tr>
+<tr>
+<td>merchantAgreementUrl</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>URL where Vipps can send the customer to view/manage their subscription. Typically a &quot;My page&quot; where the user can change, pause, cancel, etc. We recommend letting users log in with Vipps, not with username and password. We do not have any specific requirements for the security of the page other than requiring HTTPS.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Status of the agreement.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-23">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>status</td>
+<td>STOPPED</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_agreementreference">AgreementReference</h2>
 <p><a id="schemaagreementreference"></a>
 <a id="schema_AgreementReference"></a>
@@ -12926,7 +13510,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Agreement reference</p>
-<h3 id="properties-15">Properties</h3>
+<h3 id="properties-19">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12943,7 +13527,7 @@ System.out.println(response.toString());
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Id of a an agreement which user may agree to. <br />Initially the agreement is in a pending state waiting for user approval. <br />It enters active state once the user has approved it in Vipps.</td>
+<td>Id of a an agreement which user may agree to.<br />Initially the agreement is in a pending state waiting for user approval.<br />It enters active state once the user has approved it in Vipps.</td>
 </tr>
 </tbody>
 </table>
@@ -12958,7 +13542,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Variable Amount request</p>
-<h3 id="properties-16">Properties</h3>
+<h3 id="properties-20">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -12975,7 +13559,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -12991,7 +13575,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Variable Amount response</p>
-<h3 id="properties-17">Properties</h3>
+<h3 id="properties-21">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13008,14 +13592,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The suggested max amount that the customer should choose.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>maxAmount</td>
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 </tbody>
 </table>
@@ -13031,7 +13615,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Campaign request</p>
-<h3 id="properties-18">Properties</h3>
+<h3 id="properties-22">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13048,7 +13632,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>end</td>
@@ -13072,7 +13656,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Campaign response</p>
-<h3 id="properties-19">Properties</h3>
+<h3 id="properties-23">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13089,21 +13673,21 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>false</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>start</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>end</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 </tbody>
 </table>
@@ -13129,7 +13713,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Campaign request</p>
-<h3 id="properties-20">Properties</h3>
+<h3 id="properties-24">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13153,14 +13737,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>eventDate</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>eventText</td>
@@ -13174,18 +13758,18 @@ System.out.println(response.toString());
 <td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
-<td>Interval for subscription in the campaign period. Example: unit=week, count=2 to be able to charge every two weeks.</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
 </tr>
 <tr>
 <td>period</td>
 <td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
-<td>Time period that the campaign price pays for. Example: unit=week, count=2 to say that you pay for two weeks</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-23">Enumerated Values</h4>
+<h4 id="enumerated-values-24">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13236,7 +13820,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Campaign response</p>
-<h3 id="properties-21">Properties</h3>
+<h3 id="properties-25">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13251,30 +13835,30 @@ System.out.println(response.toString());
 <tr>
 <td>type</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The type of campaign. This decides which properties are required</td>
 </tr>
 <tr>
 <td>price</td>
 <td>integer(int32)</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>end</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>eventDate</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends. <br />Needs to be UTC.</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>eventText</td>
@@ -13288,14 +13872,14 @@ System.out.println(response.toString());
 <td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
-<td>Interval for subscription in the campaign period. Example: unit=week, count=2 to be able to charge every two weeks.</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
 </tr>
 <tr>
 <td>period</td>
 <td><a href="#schematimeperiod">TimePeriod</a></td>
 <td>false</td>
 <td>none</td>
-<td>Time period that the campaign price pays for. Example: unit=week, count=2 to say that you pay for two weeks</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
 </tr>
 <tr>
 <td>explanation</td>
@@ -13306,7 +13890,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-24">Enumerated Values</h4>
+<h4 id="enumerated-values-25">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13333,11 +13917,169 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h2 id="tocs_initialcharge">InitialCharge</h2>
-<p><a id="schemainitialcharge"></a>
-<a id="schema_InitialCharge"></a>
-<a id="tocSinitialcharge"></a>
-<a id="tocsinitialcharge"></a></p>
+<h2 id="tocs_pricingrequest">pricingRequest</h2>
+<p><a id="schemapricingrequest"></a>
+<a id="schema_pricingRequest"></a>
+<a id="tocSpricingrequest"></a>
+<a id="tocspricingrequest"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
+  <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+  <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>
+}
+
+</code></pre>
+<p>pricing</p>
+<h3 id="properties-26">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The type of pricing. This decides which properties are required.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td><a href="#schemacurrency">Currency</a></td>
+<td>false</td>
+<td>none</td>
+<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The price of the agreement, required if type is LEGACY or not present.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>suggestedMaxAmount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The suggested max amount that the customer should choose, required if type is VARIABLE.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-26">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>LEGACY</td>
+</tr>
+<tr>
+<td>type</td>
+<td>VARIABLE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_pricingresponse">pricingResponse</h2>
+<p><a id="schemapricingresponse"></a>
+<a id="schema_pricingResponse"></a>
+<a id="tocSpricingresponse"></a>
+<a id="tocspricingresponse"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
+  <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
+  <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">30000</span>,
+  <span class="hljs-attr">&quot;maxAmount&quot;</span>: <span class="hljs-number">30000</span>
+}
+
+</code></pre>
+<p>pricing</p>
+<h3 id="properties-27">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The type of pricing. This decides which properties are present.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td><a href="#schemacurrency">Currency</a></td>
+<td>false</td>
+<td>none</td>
+<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The price of the agreement, present if type is LEGACY.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>suggestedMaxAmount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The suggested max amount that the customer should choose, present if type is VARIABLE.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>maxAmount</td>
+<td>integer(int32)</td>
+<td>false</td>
+<td>none</td>
+<td>The max amount chosen by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-27">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>LEGACY</td>
+</tr>
+<tr>
+<td>type</td>
+<td>VARIABLE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_initialchargev2">InitialChargeV2</h2>
+<p><a id="schemainitialchargev2"></a>
+<a id="schema_InitialChargeV2"></a>
+<a id="tocSinitialchargev2"></a>
+<a id="tocsinitialchargev2"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
   <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
@@ -13348,7 +14090,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>InitialCharge</p>
-<h3 id="properties-22">Properties</h3>
+<h3 id="properties-28">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13365,14 +14107,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount that must be paid or approved before starting the agreement.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>The amount that must be paid or approved before starting the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td><a href="#schemacurrency">Currency</a></td>
 <td>true</td>
 <td>none</td>
-<td>none</td>
+<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
 </tr>
 <tr>
 <td>description</td>
@@ -13397,7 +14139,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-25">Enumerated Values</h4>
+<h4 id="enumerated-values-28">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13407,9 +14149,80 @@ System.out.println(response.toString());
 </thead>
 <tbody>
 <tr>
-<td>currency</td>
-<td>NOK</td>
+<td>transactionType</td>
+<td>RESERVE_CAPTURE</td>
 </tr>
+<tr>
+<td>transactionType</td>
+<td>DIRECT_CAPTURE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_initialchargev3">InitialChargeV3</h2>
+<p><a id="schemainitialchargev3"></a>
+<a id="schema_InitialChargeV3"></a>
+<a id="tocSinitialchargev3"></a>
+<a id="tocsinitialchargev3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
+  <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Månedsabonnement&quot;</span>,
+  <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
+  <span class="hljs-attr">&quot;orderId&quot;</span>: <span class="hljs-string">&quot;abc123&quot;</span>
+}
+
+</code></pre>
+<p>InitialCharge</p>
+<h3 id="properties-29">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>amount</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The amount that must be payed or approved before starting the agreement.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>This field is visible to the end user in-app</td>
+</tr>
+<tr>
+<td>transactionType</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of payment to be made.</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>An optional orderId for the payment, auto generated otherwise</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-29">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>transactionType</td>
 <td>RESERVE_CAPTURE</td>
@@ -13436,7 +14249,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>CreateCharge</p>
-<h3 id="properties-23">Properties</h3>
+<h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13453,14 +14266,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td><a href="#schemacurrency">Currency</a></td>
 <td>true</td>
 <td>none</td>
-<td>none</td>
+<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
 </tr>
 <tr>
 <td>description</td>
@@ -13492,21 +14305,6 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-26">Enumerated Values</h4>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>currency</td>
-<td>NOK</td>
-</tr>
-</tbody>
-</table>
 <h2 id="tocs_createchargev3">CreateChargeV3</h2>
 <p><a id="schemacreatechargev3"></a>
 <a id="schema_CreateChargeV3"></a>
@@ -13514,7 +14312,7 @@ System.out.println(response.toString());
 <a id="tocscreatechargev3"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
-  <span class="hljs-attr">&quot;TransactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
+  <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
   <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Månedsabonnement&quot;</span>,
   <span class="hljs-attr">&quot;due&quot;</span>: <span class="hljs-string">&quot;2030-12-31&quot;</span>,
   <span class="hljs-attr">&quot;retryDays&quot;</span>: <span class="hljs-number">5</span>,
@@ -13523,7 +14321,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>CreateCharge</p>
-<h3 id="properties-24">Properties</h3>
+<h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13540,11 +14338,11 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
-<td>TransactionType</td>
-<td><a href="#schematransactiontype">TransactionType</a></td>
+<td>transactionType</td>
+<td><a href="#schematransactiontype">transactionType</a></td>
 <td>false</td>
 <td>none</td>
 <td>Type of transaction, either direct capture or reserve capture</td>
@@ -13590,7 +14388,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Charge reference</p>
-<h3 id="properties-25">Properties</h3>
+<h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13631,7 +14429,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>ChargeResponse</p>
-<h3 id="properties-26">Properties</h3>
+<h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13715,7 +14513,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-27">Enumerated Values</h4>
+<h4 id="enumerated-values-30">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13749,8 +14547,7 @@ System.out.println(response.toString());
 <a id="tocschargeresponsev3"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
-  <span class="hljs-attr">&quot;amountRefunded&quot;</span>: <span class="hljs-number">0</span>,
-  <span class="hljs-attr">&quot;amountCaptured&quot;</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
   <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Premier League subscription: September&quot;</span>,
   <span class="hljs-attr">&quot;due&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
   <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;chr_WCVbcA&quot;</span>,
@@ -13759,12 +14556,26 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;RECURRING&quot;</span>,
   <span class="hljs-attr">&quot;transactionType&quot;</span>: <span class="hljs-string">&quot;DIRECT_CAPTURE&quot;</span>,
   <span class="hljs-attr">&quot;failureReason&quot;</span>: <span class="hljs-string">&quot;user_action_required&quot;</span>,
-  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>
+  <span class="hljs-attr">&quot;failureDescription&quot;</span>: <span class="hljs-string">&quot;User action required&quot;</span>,
+  <span class="hljs-attr">&quot;summary&quot;</span>: {
+    <span class="hljs-attr">&quot;captured&quot;</span>: <span class="hljs-number">234</span>,
+    <span class="hljs-attr">&quot;refunded&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">&quot;cancelled&quot;</span>: <span class="hljs-number">234</span>
+  },
+  <span class="hljs-attr">&quot;history&quot;</span>: [
+    {
+      <span class="hljs-attr">&quot;occurred&quot;</span>: <span class="hljs-string">&quot;2022-09-05T14:25:55Z&quot;</span>,
+      <span class="hljs-attr">&quot;event&quot;</span>: <span class="hljs-string">&quot;RESERVE&quot;</span>,
+      <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
+      <span class="hljs-attr">&quot;idempotencyKey&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+      <span class="hljs-attr">&quot;success&quot;</span>: <span class="hljs-literal">true</span>
+    }
+  ]
 }
 
 </code></pre>
 <p>ChargeResponse</p>
-<h3 id="properties-27">Properties</h3>
+<h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13781,21 +14592,14 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>Amount to be paid by the customer.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
 </tr>
 <tr>
-<td>amountRefunded</td>
-<td>integer(int32)</td>
+<td>currency</td>
+<td><a href="#schemacurrency">Currency</a></td>
 <td>true</td>
 <td>none</td>
-<td>The total amount which has been refunded, in case of status refund/partial refund.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
-</tr>
-<tr>
-<td>amountCaptured</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>none</td>
-<td>The total amount which has been captured/charged, in case of status charged/partial capture.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.</td>
+<td>ISO-4217: <a href="https://www.iso.org/iso-4217-currency-codes.html">https://www.iso.org/iso-4217-currency-codes.html</a></td>
 </tr>
 <tr>
 <td>description</td>
@@ -13841,8 +14645,8 @@ System.out.println(response.toString());
 </tr>
 <tr>
 <td>transactionType</td>
-<td><a href="#schematransactiontype">TransactionType</a></td>
-<td>false</td>
+<td><a href="#schematransactiontype">transactionType</a></td>
+<td>true</td>
 <td>none</td>
 <td>Type of transaction, either direct capture or reserve capture</td>
 </tr>
@@ -13860,9 +14664,23 @@ System.out.println(response.toString());
 <td>none</td>
 <td>Description for the failure reason</td>
 </tr>
+<tr>
+<td>summary</td>
+<td><a href="#schemachargesummary">ChargeSummary</a></td>
+<td>true</td>
+<td>none</td>
+<td>A summary of the amounts captured, refunded and cancelled</td>
+</tr>
+<tr>
+<td>history</td>
+<td><a href="#schemachargehistory">ChargeHistory</a></td>
+<td>true</td>
+<td>none</td>
+<td>List of events related to the charge.</td>
+</tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-28">Enumerated Values</h4>
+<h4 id="enumerated-values-31">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13901,7 +14719,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Refund charge request</p>
-<h3 id="properties-28">Properties</h3>
+<h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13918,7 +14736,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount to refund on a captured/charged charge.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The amount to refund on a captured/charged charge.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -13941,7 +14759,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Capture charge request</p>
-<h3 id="properties-29">Properties</h3>
+<h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13958,7 +14776,7 @@ System.out.println(response.toString());
 <td>integer(int32)</td>
 <td>true</td>
 <td>none</td>
-<td>The amount to capture on a reserved charge.<br /><br />Amounts are specified in minor units. <br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+<td>The amount to capture on a reserved charge.<br /><br />Amounts are specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -13981,7 +14799,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Time Period request</p>
-<h3 id="properties-30">Properties</h3>
+<h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14009,7 +14827,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-29">Enumerated Values</h4>
+<h4 id="enumerated-values-32">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14049,7 +14867,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Time Period response</p>
-<h3 id="properties-31">Properties</h3>
+<h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14084,7 +14902,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-30">Enumerated Values</h4>
+<h4 id="enumerated-values-33">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14122,7 +14940,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Force accept agreement request</p>
-<h3 id="properties-32">Properties</h3>
+<h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14162,7 +14980,7 @@ System.out.println(response.toString());
 <p>An error from Microsoft Azure. Vipps has limited control of these errors,
 and can not give as detailed information as with the errors from our own code.
 The most important property is the HTTP status code.</p>
-<h3 id="properties-33">Properties</h3>
+<h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14225,7 +15043,7 @@ The most important property is the HTTP status code.</p>
 
 </code></pre>
 <p>Error response</p>
-<h3 id="properties-34">Properties</h3>
+<h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14282,7 +15100,7 @@ The most important property is the HTTP status code.</p>
 ]
 
 </code></pre>
-<h3 id="properties-35">Properties</h3>
+<h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14325,7 +15143,7 @@ The most important property is the HTTP status code.</p>
 
 </code></pre>
 <p>Error response</p>
-<h3 id="properties-36">Properties</h3>
+<h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14448,7 +15266,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-37">Properties</h3>
+<h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14565,7 +15383,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-38">Properties</h3>
+<h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14616,7 +15434,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-39">Properties</h3>
+<h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14693,7 +15511,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-40">Properties</h3>
+<h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14742,7 +15560,7 @@ The most important property is the HTTP status code.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-31">Enumerated Values</h4>
+<h4 id="enumerated-values-34">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14775,7 +15593,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-41">Properties</h3>
+<h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14854,7 +15672,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-42">Properties</h3>
+<h3 id="properties-49">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14919,6 +15737,13 @@ The most important property is the HTTP status code.</p>
 </table>
 <!-- Renderer: Shins v2.6.0 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
