@@ -203,10 +203,10 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | Operation                                       | Description                                           | Endpoint                                                                               |
 |-------------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------|
 | List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                          |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoin]                                          |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint-v2]                                      |
 | [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
-| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                     |
-| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint]                     |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
 | [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
 | [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
 | [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
@@ -639,7 +639,7 @@ Campaigns cannot be used in combination with [variable amount](#Recurring-agreem
 In order to start a campaign, the campaign field must be added either to the
 [`POST:/agreements`][draft-agreement-endpoint] request
 for a campaign in the start of an agreement, or to the
-[`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] request
+[`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] request
 for an ongoing agreement. When adding a campaign
 while drafting a new agreement, the start date is ignored and the current
 date-time is used. All dates must be in date-time format as according to
@@ -1052,7 +1052,6 @@ See more about [charge failure reason](#charge-failure-reasons).
 
 See: [Charge states](#charge-states).
 
-
 ### List charges
 
 All charges, including the optional initial charge, for an agreement can be retrieved with the
@@ -1069,13 +1068,13 @@ and to use the API to make sure everything is in sync.
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `PENDING`  | Agreement has been created, but not approved by the user in Vipps yet |
 | 2 | `ACTIVE` | The agreement has been confirmed by the end user in Vipps and can receive charges |
-| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by the [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint, or by the user by cancelling or rejecting the agreement. |
+| 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint, or by the user by cancelling or rejecting the agreement. |
 | 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in Vipps |
 
 ### Update an agreement
 
 A merchant can update an agreement by calling the
-[`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint.
+[`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint.
 The following properties are available for updating:
 
 ```json
