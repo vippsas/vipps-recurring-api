@@ -138,7 +138,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\",\n \"productName\": \"Minimal Draft Agreement\"\n}"
+							"raw": "{\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -426,7 +426,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"EVENT_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"eventDate\": \"2040-12-25T00:00:00Z\",\n    \"eventText\": \"Until Christmas\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"campaign\": {\n    \"type\": \"EVENT_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"eventDate\": \"2040-12-25T00:00:00Z\",\n    \"eventText\": \"Until Christmas\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -498,7 +498,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"{{transactionType}}\"\n },\n \"campaign\": {\n    \"type\": \"FULL_FLEX_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"interval\": {\n        \"unit\" : \"WEEK\",\n        \"count\" :  4\n    },\n    \"end\": \"2030-01-01T00:00:00Z\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"campaign\": {\n    \"type\": \"FULL_FLEX_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"interval\": {\n        \"unit\" : \"WEEK\",\n        \"count\" :  4\n    },\n    \"end\": \"2030-01-01T00:00:00Z\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -570,7 +570,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -642,7 +642,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"currency\": \"NOK\",\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"isApp\": false,\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"price\": {{price}},\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -714,7 +714,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"campaign\": {\n    \"type\" : \"PRICE_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n  \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"currency\": \"NOK\",\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"campaign\": {\n    \"type\" : \"PRICE_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n  \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -1316,7 +1316,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n   \"transactionType\": \"RESERVE_CAPTURE\"\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"RESERVE_CAPTURE\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
