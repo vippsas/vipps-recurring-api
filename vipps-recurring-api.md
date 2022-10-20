@@ -249,9 +249,9 @@ An optional _and recommended_ `orderId` field can be set in the [`POST:/agreemen
 ```json
 {
   "amount": 49900,
-  "currency": "NOK",
   "description": "Premier League subscription",
   "due": "2030-12-31",
+  "transactionType": "DIRECT_CAPTURE",
   "retryDays": 5,
   "orderId": "acmeshop123order123abc"
 }
@@ -307,13 +307,17 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 
 ```json
 {
-  "currency": "NOK",
   "customerPhoneNumber":"90000000",
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit" : "MONTH",
+    "count": 1
+  },
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
-  "price": 49900,
+  "pricing": {
+    "amount": 49900,
+    "currency": "NOK"
+  },
   "productDescription": "Access to all games of English top football",
   "productName": "Premier League subscription"
 }
@@ -348,9 +352,9 @@ for more details.
 The request parameters have the following size limits
 (see the [`POST:/agreements`][draft-agreement-endpoint] endpoint for more details):
 
-* `productName`: Max length 45 characters
-* `productDescription`: Max length 100 characters
-* `price`: Greater than 100, meaning 1 NOK.
+* `productName`: Max length 45 characters.
+* `productDescription`: Max length 100 characters.
+* `pricing.amount`: Greater than 100, meaning 1 NOK.
 
 Agreements may be initiated with or without an [initial charge](#initial-charge).
 
@@ -420,7 +424,6 @@ The [`POST:/agreements`][draft-agreement-endpoint] endpoint will return the foll
 ```json
 {
   "vippsConfirmationUrl": "https://api.vipps.no/dwo-api-application/v1/deeplink/vippsgateway?v=2/token=eyJraWQiOiJqd3RrZXkiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDE0MmIxYy02YjI",
-  "agreementResource": "https://api.vipps.no-recurring/v2/agreements/agr_TGSuPyV",
   "agreementId": "agr_TGSuPyV"
 }
 ```
@@ -490,10 +493,8 @@ OR
 Example for a subscription every 30th day:
 ```json
 {
-  "interval": {
-    "unit": "DAY",
-    "count": 30
-  }
+  "interval": "DAY",
+  "intervalCount": 30
 }
 ```
 
@@ -591,19 +592,22 @@ of 499 NOK:
 
 ```json
 {
-  "currency": "NOK",
   "customerPhoneNumber": "90000000",
   "initialCharge": {
      "amount": 49900,
-     "currency": "NOK",
      "description": "Premier League subscription",
      "transactionType": "DIRECT_CAPTURE"
   },
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit" : "MONTH",
+    "count": 1
+  },
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
-  "price": 49900,
+  "pricing": {
+    "amount": 49900,
+    "currency": "NOK"
+  },
   "productDescription": "Access to all games of English top football",
   "productName": "Premier League subscription"
 }
@@ -616,7 +620,6 @@ Change the `transactionType` field to `RESERVE_CAPTURE` to reserve the initial c
   "initialCharge": {
     "transactionType": "RESERVE_CAPTURE",
     "amount": 19900,
-    "currency": "NOK",
     "description": "Phone"
   }
 }
@@ -801,11 +804,16 @@ This is an example response from a call to the
   "stop": null,
   "status": "ACTIVE",
   "productName": "Premier League subscription",
-  "price": 49900,
   "productDescription": "Access to all games of English top football",
-  "interval": "MONTH",
-  "intervalCount": 1,
-  "currency": "NOK",
+  "pricing": {
+    "type": "LEGACY",
+    "amount": 49900,
+    "currency": "NOK"
+  },
+  "interval": {
+    "unit" : "MONTH",
+    "count": 1
+  },
   "campaign": null
 }
 ```
@@ -914,7 +922,7 @@ This is an example of a request body for the [`POST:/agreements/{agreementId}/ch
 ```json
 {
   "amount": 49900,
-  "currency": "NOK",
+  "transactionType": "DIRECT_CAPTURE",
   "description": "October",
   "due": "2018-09-01",
   "retryDays": 5
@@ -975,22 +983,6 @@ This results in a _very_ high success rate for charges.
 
 A charge can be retrieved with the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
 
-Example response:
-
-```json
-{
-  "amount": 39900,
-  "amountRefunded": 39900,
-  "description": "Premier League subscription: September",
-  "due": "2019-06-01T00:00:00Z",
-  "id": "chg_WCVbcAbRCmu2zk",
-  "status": "PENDING",
-  "transactionId": "5001419121",
-  "type": "RECURRING",
-  "failureReason": "user_action_required",
-  "failureDescription": "User action required"
-}
-```
 #### Details on charges
 The response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint
 contains the history of the charge and not just the current status.
@@ -1275,13 +1267,18 @@ Example of request with scope:
 
 ```json
 {
-  "currency": "NOK",
   "customerPhoneNumber":"90000000",
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit": "MONTH",
+    "count": 1
+  },
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
-  "price": 49900,
+  "pricing": {
+    "type": "LEGACY",
+    "amount": 49900,
+    "currency": "NOK"
+  },
   "productDescription": "Access to all games of English top football",
   "productName": "Premier League subscription",
   "scope": "address name email birthDate phoneNumber"
@@ -1444,12 +1441,15 @@ Create agreement request:
 
 ```json
 {
-  "variableAmount": {
-    "suggestedMaxAmount": 200000
+  "pricing": {
+    "suggestedMaxAmount": 200000,
+    "currency": "NOK",
+    "type": "VARIABLE"
   },
-  "currency": "NOK",
-  "interval": "MONTH",
-  "intervalCount": 1,
+  "interval": {
+    "unit" : "MONTH",
+    "count": 1
+  },
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
   "customerPhoneNumber": "90000000",
@@ -1488,18 +1488,21 @@ GET agreement response:
     "stop": null,
     "status": "ACTIVE",
     "productName": "Power company A",
-    "price": 0,
+    "pricing": {
+      "type": "VARIABLE",
+      "suggestedMaxAmount": 200000,
+      "maxAmount": 180000,
+      "currency": "NOK"
+    },
     "productDescription": "Access to subscription",
-    "interval": "MONTH",
-    "intervalCount": 1,
-    "currency": "NOK",
+    "interval": {
+      "unit": "MONTH",
+      "count": 1,
+      "text": "hver måned"
+    },
     "campaign": null,
     "sub": null,
-    "userinfoUrl": null,
-    "variableAmount": {
-        "suggestedMaxAmount": 200000,
-        "maxAmount": 180000
-    }
+    "userinfoUrl": null
 }
 ```
 
