@@ -262,7 +262,7 @@ See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 
 ## How can I delete an agreement? 
 
-Agreements can be stopped by calling the [`update agreement`][update-agreement-endpoint] endpoint. 
+Agreements can be stopped by calling the [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint. 
 See [Stop an agreement](vipps-recurring-api.md#stop-an-agreement).
 
 ## Can a user cancel the agreement through the Vipps app?
@@ -306,7 +306,7 @@ See [If a user's card expires: What happens on the next charge?](#if-a-users-car
 A charge will be displayed to the user 6 days before the charge is due to be processed.
 The charge will then appear in the app.
 
-You can still retrieve all relevant charges through the [`list charges`][list-charges-endpoint] endpoint.
+You can still retrieve all relevant charges through the [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
 
 ## If a user adds or updates a card in vipps, will new recurring charges be made to that card?
 No, currently the payment card tied to an agreement will not be updated automatically.
@@ -334,7 +334,7 @@ and [Vipps Recurring API](vipps-recurring-api.md#userinfo).
 This is done by adding a `scope` parameter to the initiate calls:
 [`initiate payment`](https://vippsas.github.io/vipps-developer-docs/api/ecom#tag/Vipps-eCom-API/operation/initiatePaymentV3UsingPOST) (eCom)
 and
-[`draft agreement`][draft-agreement-endpoint] (Recurring):
+[`POST:/agreements`][draft-agreement-endpoint] (Recurring):
 
 - address
 - birthDate
