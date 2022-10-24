@@ -5,26 +5,21 @@ sidebar_position: 100
 ---
 END_METADATA -->
 
-# Vipps Recurring API V2
+# Migration guide from V2 to V3
 
-V2 API is now deprecated. 
-Please check the [migration guide](#migration-guide) to see the differences between Recurring API v2 and v3.
-
-## Migration guide
-
-### Campaign
+## Campaign
 The Recurring API V3 adds new campaign types.
 See [Campaigns][campaigns] in the API Guide.
 
-### Reserve capture
+## Reserve capture
 The Recurring API V3 adds the functionality to do reserve and capture on recurring charges.
 See [Reserve capture][reserve-capture] in the API Guide.
 
-### Partial capture
+## Partial capture
 The Recurring API V3 adds the functionality to do partial capture on reserved charges.
 See [partial capture][partial-capture] in the API Guide.
 
-### Response statuses
+## Response statuses
 
 The API V3 returns different response status for some endpoints:
 
@@ -37,7 +32,7 @@ The API V3 returns different response status for some endpoints:
 
 **Note** In the future the API might return `202 Accepted` for some operations if the request is processed asynchronously.
 
-### Error responses
+## Error responses
 
 In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement, 
@@ -59,7 +54,7 @@ the response will be the following:
 }
 ```
 
-### New price representation 
+## New price representation 
 
 The Recurring API V3 introduces a new JSON representation for agreement price.
 
@@ -127,7 +122,7 @@ V3 request body
 }
 ```
 
-### New interval representation
+## New interval representation
 The Recurring API V3 introduces a new JSON representation for agreement interval.
 
 Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
@@ -156,7 +151,7 @@ V3 request body
 }
 ```
 
-### More details on charges
+## More details on charges
 
 In the API V3, the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint 
 contains the history of the charge and not just the current status.
@@ -210,17 +205,17 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 }
 ````
 
-### Idempotency key
+## Idempotency key
 The misspelled `Idempotent-Key` header is deprecated.
 The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints. 
 See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/idempotency-key-header-v3-api-coming-soon) in the API Guide.
 
-### Product description guidelines
+## Product description guidelines
 We do not recommend you to use `Product Description` for agreements with a campaign.
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
 `Product description` will be, at a point in the future, phased out in order to improve user experience.
 
-### Update an agreement
+## Update an agreement
 
 In the API V3, it is possible to update the following fields on an agreement: 
 - product name
@@ -245,6 +240,3 @@ See [Response statuses](#response-statuses)
 [partial-capture]: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api/#partial-capture-coming-soon
 [reserve-capture]: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api/#reserve-capture
 [campaigns]: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api/#campaigns
-
-
-
