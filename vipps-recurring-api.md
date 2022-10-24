@@ -708,7 +708,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 ##### Full flex campaign
 
 **Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
-See [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+See [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
 ![full-flex-campaign](images/campaigns/full-flex-campaign.png)
 
@@ -954,7 +954,7 @@ Example response:
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will soon be replaced by an event log. Subscribe to the technical newsletter
-to get updates: https://github.com/vippsas/vipps-developers/tree/master/newsletters
+to get updates: [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 See more about [charge failure reason](#charge-failure-reasons).
 
@@ -1074,7 +1074,7 @@ depending on your systems.
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will soon be replaced by an event log. Subscribe to the technical newsletter
-to get updates: https://github.com/vippsas/vipps-developers/tree/master/newsletters
+to get updates: [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 When fetching a charge through the API, you can find two fields in the response
 body to identify why the charge failed `failureReason` and `failureDescription`.
@@ -1543,7 +1543,8 @@ problem.
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
 fraudulent and wrongful behaviour, and increase the stability and security of
-our API. The limits should not affect normal behaviour, but please contact us
+our API. The limits should not affect normal behaviour, but please 
+[contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
 if you notice any unexpected behaviour.
 
 The "Key" column specifies what we consider to be the unique identifier, and
@@ -1737,9 +1738,9 @@ Ideally, this flow is intended for when you have a combination of an additional 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
 a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
-Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/ListAgreements
 [draft-agreement-endpoint-v2]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
