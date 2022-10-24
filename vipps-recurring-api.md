@@ -1630,6 +1630,7 @@ This API returns the following HTTP statuses in the responses:
 |----------------------------|-------------------------------------------------------------------|
 | `200 OK`                   | Request successful                                                |
 | `204 No content`           | Request successful                                                |
+| `202 Accepted`             | Request accepted, the requested action will be attempted          |
 | `400 Bad Request`          | Invalid request, see the error for details                        |
 | `401 Unauthorized`         | Invalid credentials                                               |
 | `403 Forbidden`            | Authentication ok, but credentials lacks authorization            |
@@ -1639,7 +1640,12 @@ This API returns the following HTTP statuses in the responses:
 | `429 Too Many Requests`    | Look at [table below to view current rate limits](#rate-limiting) |
 | `500 Server Error`         | An internal Vipps problem.                                        |
 
-**Note** In the future the API might return 202 Accepted for some operations if the request is processed asynchronously.
+**Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should 
+retry the request or poll the resource to see if an operation has been performed. 
+This will follow the spec as defined [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After), 
+and will either be a http-date or a number indicating a delay in seconds. 
+This will mostly apply to 429 responses, but may also appear in certain other circumstances where it would be natural 
+to retry the request at a later point in time.
 
 ### Error responses
 All error responses contains an `error` object in the body, with details of the
@@ -1695,6 +1701,13 @@ what we "use to count". The limits are of course not _total_ limits.
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
 too many CreateCharge calls for the same charge. The overall limit for number of
 different payments is far higher than 2.
+
+**Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should
+retry the request or poll the resource to see if an operation has been performed.
+This will follow the spec as defined [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After),
+and will either be a http-date or a number indicating a delay in seconds.
+This will mostly apply to 429 responses, but may also appear in certain other circumstances where it would be natural
+to retry the request at a later point in time.
 
 ## Partner keys
 
