@@ -30,7 +30,12 @@ The API V3 returns different response status for some endpoints:
 | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`* | 
 | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   | `200 OK`           | `204 No Content` or `202 Accepted`* | 
 
-**Note** In the future the API might return `202 Accepted` for some operations if the request is processed asynchronously.
+**Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should
+retry the request or poll the resource to see if an operation has been performed.
+This will follow the spec as defined [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After),
+and will either be a http-date or a number indicating a delay in seconds.
+This will mostly apply to 429 responses, but may also appear in certain other circumstances where it would be natural
+to retry the request at a later point in time.
 
 ## Error responses
 
@@ -60,9 +65,9 @@ The Recurring API V3 introduces a new JSON representation for agreement price.
 
 There is no change on the charge limits rules. Going forward, we will look into how we can implement charge limits in a better way, that takes care of the merchants needs.
 
+### Fixed amount agreement
 To draft an agreement with a fixed amount with the same charge limit as in V2, `pricing.type` should be set to `LEGACY`.
-
-**Note**: `pricing.type` is an optional field. If not provided in the request the type will be defaulted to `LEGACY`.
+**Note**: `pricing.type` is an optional field. If not provided in the request, `pricing.type` will be defaulted to `LEGACY`.
 
 Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
@@ -91,6 +96,7 @@ V3 request body
 }
 ```
 
+### Variable amount
 To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
 Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
@@ -208,7 +214,7 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 ## Idempotency key
 The misspelled `Idempotent-Key` header is deprecated.
 The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints. 
-See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/idempotency-key-header-v3-api-coming-soon) in the API Guide.
+See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#idempotency-key-header-v3-api-coming-soon) in the API Guide.
 
 ## Product description guidelines
 We do not recommend you to use `Product Description` for agreements with a campaign.
