@@ -69,13 +69,21 @@ Document version 2.6.1.
     - [Create an agreement](#create-an-agreement)
     - [Accept an agreement](#accept-an-agreement)
     - [Intervals](#intervals)
+      - [Example in the V2 api:](#example-in-the-v2-api)
     - [Initial charge](#initial-charge)
     - [Campaigns](#campaigns)
+      - [Campaigns in V2 API](#campaigns-in-v2-api)
+      - [(Coming soon - WORK IN PROGRESS) Campaigns in V3 API](#coming-soon---work-in-progress-campaigns-in-v3-api)
+        - [Price campaign](#price-campaign)
+        - [Period campaign](#period-campaign)
+        - [Event campaign](#event-campaign)
+        - [Full flex campaign](#full-flex-campaign)
+        - [Product description guidelines for agreements with campaigns.](#product-description-guidelines-for-agreements-with-campaigns)
     - [Retrieve an agreement](#retrieve-an-agreement)
   - [Charges](#charges)
     - [Create a charge](#create-a-charge)
     - [Capture a charge](#capture-a-charge)
-    - [Partial capture(Coming soon)](#partial-capture-coming-soon)
+    - [Partial capture (Coming soon)](#partial-capture-coming-soon)
     - [Amount changes](#amount-changes)
     - [Charge descriptions](#charge-descriptions)
     - [Cancel a charge](#cancel-a-charge)
@@ -234,13 +242,12 @@ in the Getting started guide, for details.
 
 ## Idempotency Key header (V3 API Coming Soon)
 
-The `Idempotency-Key` header must be set in each `POST` or `PATCH` request.
-This way, if a request fails for any reason, it can be retried with the same `Idempotency-Key`.
-Also, in the case of retries, it will prevent duplicating operations.
+The `Idempotency-Key` header must be set in any request that creates or modifies a resource (`POST`, `PUT`, `PATCH` or `DELETE`).
+This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency-key should prevent operations and side-effects from being performed more than once, and you should receive the same response as if you only sent one request.
 
-See the
-[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#idempotency-header)
-for more details.
+**Important:** If the response is a client-error (4xx), you will continue to get the same error as long as you use the same idempotency-key, as the requested operation is not retried.
+
+**Important:** If you reuse an idempotency-key on a different request, you will get a 409 CONFLICT
 
 ## orderId recommendations
 
