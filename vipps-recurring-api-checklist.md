@@ -57,8 +57,8 @@ Document version 1.2.9.
 2. Vipps completes customer control (KYC, PEP, AML, etc).
 3. The merchant receives an email from Vipps saying that they can log in with bankID on [portal.vipps.no](https://portal.vipps.no) and retrieve API keys.
 4. The merchant completes all checklist items.
-5. The merchant [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with the MSN to check.
-   Vipps will check agreements and charges in the [Vipps test environment](https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md), showing that all checklist items have been fulfilled:
+5. The merchant [contacts Vipps](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact) with the MSN to check.
+   Vipps will check agreements and charges in the [Vipps test environment](https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md), showing that all checklist items have been fulfilled:
     - A complete Agreement ending in `ACTIVE`.
     - A complete Agreement ending in `STOPPED`.
     - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
@@ -95,4 +95,4 @@ Sign up for our [Technical newsletter for developers](https://vippsas.github.io/
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/RefundCharge
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md
+[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md
