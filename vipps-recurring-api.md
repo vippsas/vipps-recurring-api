@@ -144,8 +144,8 @@ There are two happy-flows based on how the sale unit is set up:
 One for "direct capture" and one for "reserve capture".
 This is specified with the `transactionType`, and for "direct capture"
 the sale unit must be configured for this by Vipps.
-See the eCom FAQ for the difference:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+See the Vipps FAQ for the difference:
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
@@ -538,8 +538,8 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the eCom FAQ for more details.
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be
 used when selling physical goods bundled with an agreement - such as a phone
@@ -776,8 +776,8 @@ An [agreement](#agreements) has payments, called charges.
 
 ### Create a charge
 
-*Recurring has functionality to charge a variable amount each interval. See:
-[Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).*
+_Recurring has functionality to charge a variable amount each interval. See:
+[Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount)._
 
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur (it is minimum one day in the test environment).
@@ -799,12 +799,13 @@ A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the eCom FAQ for more details.
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
 
 The advantage to using reserve capture is that you can release the reservation immediately:
+
 - For a reserved payment, the merchant can make a /cancel call to immediately release the reservation and make it available in the customer's account.
 - For a captured payment, the merchant must make a /refund call. It then takes a few days before the amount is available in the customer's account.
 
@@ -833,8 +834,8 @@ Partial capture may be used in cases where a partial order is shipped or for oth
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [For how long is a payment reserved](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq/#for-how-long-is-a-payment-reserved)
-in the eCom FAQ for more details.
+See [For how long is a payment reserved](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#for-how-long-is-a-payment-reserved)
+in the Vipps FAQ for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
 
@@ -1662,6 +1663,7 @@ The endpoint is only available in our test environment.
 Since Vipps is a mobile entity the amount of control Vipps have over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
 
 Examples of some, but not all, factors out of Vipps control.
+
 - Configurations set by the OS itself, for example the default browser.
 - User configurations of browsers.
 - Users closing app immediately upon purchase.
