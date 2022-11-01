@@ -111,8 +111,6 @@ Document version 2.6.1.
   - [Partner keys](#partner-keys)
   - [Polling guidelines](#polling-guidelines)
   - [Timeouts](#timeouts)
-    - [Using a phone](#using-a-phone)
-    - [Using a laptop/desktop](#using-a-laptopdesktop)
   - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
   - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
@@ -1611,41 +1609,17 @@ See:
 
 ## Polling guidelines
 
-General guidelines for polling with the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint:
+General guidelines for polling with the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
+endpoint can be found at:
 
-1. Start after 5 seconds
-2. Check every 2 seconds
 
-These are reasonable values, but different merchants have different use cases,
-and values should be adapted to the specific case.
-
-See [Timeouts](#timeouts) for details about timeouts.
+See [Polling guidelines](https://github.com/vippsas/vipps-developers/blob/master/common-topics/polling-guidelines.md) in Common topics, for details.
 
 ## Timeouts
 
-### Using a phone
-
-Both the deeplink URL, which causes the app-switch to Vipps, and the landing
-page displayed in browsers, is valid for 5 minutes.
-
-If the user does not act on the app-switch (such as not attempting to log into
-Vipps) within 5 minutes, the payment times out.
-
-After the app-switch to Vipps, the user has another 5 minutes to complete the
-payment in Vipps.
-
-This means that the user has a total of 10 minutes to complete the payment.
-
-### Using a laptop/desktop
-
-If the user is using a laptop/desktop device, and the user must confirm or
-enter the phone number on the landing page within 5 minutes.
-If the user does not do so, the payment times out.
-
-After the user has clicked "OK" on the landing page, the user
-has an additional 5 minutes to complete the payment in Vipps.
-
-This means that the user has a total of 10 minutes to complete the payment.
+See [Timeouts](https://github.com/vippsas/vipps-developers/blob/master/common-topics/timeouts.md)
+in Common topics for details.
 
 ## Testing
 
@@ -1660,24 +1634,7 @@ The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
 
-Since Vipps is a mobile entity the amount of control Vipps have over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
-
-Examples of some, but not all, factors out of Vipps control.
-
-- Configurations set by the OS itself, for example the default browser.
-- User configurations of browsers.
-- Users closing app immediately upon purchase.
-
-Therefore, Vipps recommends having a stateless approach in the site that is supposed to be the end session. An example would a polling based result handling from a value in the redirect url.
-
-Example for demonstration purposes that should be handled.
-
-- User starts is in web session in a Chrome Browser.
-- A Vipps purchase is started, a redirect URL is defined by the Merchant.
-- The user completes the purchase.
-- The Vipps app redirects the user.
-- The OS defaults to a Safari Browser for the redirect.
-- The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
+See [Recommendations regarding handling redirects](https://github.com/vippsas/vipps-developers/blob/master/common-topics/redirects.md) in Common topics for details.
 
 ## When to use campaigns or initial charge
 
