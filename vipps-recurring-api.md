@@ -236,8 +236,12 @@ The `Idempotency-Key` header must be set in each `POST` or `PATCH` request.
 This way, if a request fails for any reason, it can be retried with the same `Idempotency-Key`.
 Also, in the case of retries, it will prevent duplicating operations.
 
+**Important:** If the response is a client-error (4xx), you will continue to get the same error as long as you use the same idempotency-key, as the requested operation is not retried.
+
+**Important:** If you reuse an idempotency-key on a different request, you will get a 409 CONFLICT.
+
 See the
-[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#idempotency-header)
+[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md#idempotency)
 for more details.
 
 ## orderId recommendations
