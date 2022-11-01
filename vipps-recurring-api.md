@@ -320,7 +320,7 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 ```
 
 **Note:** To create agreements with support for variable amounts on charges, see
-[Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).
+[Recurring agreements with variable amount](#recurring-agreements-with-variable-amount).
 
 The `merchantAgreementUrl` is a link to the customer's account page on your website, where they
 can manage the agreement (e.g., change, pause, cancel the agreement).
@@ -590,7 +590,7 @@ when the product is shipped.
 
 A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
-Campaigns cannot be used in combination with [variable amount](#Recurring-agreements-with-variable-amount).
+Campaigns cannot be used in combination with [variable amount](#recurring-agreements-with-variable-amount).
 
 #### Campaigns in V2 API
 
@@ -777,7 +777,7 @@ An [agreement](#agreements) has payments, called charges.
 ### Create a charge
 
 _Recurring has functionality to charge a variable amount each interval. See:
-[Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount)._
+[Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)._
 
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur (it is minimum one day in the test environment).
@@ -1562,7 +1562,7 @@ what we "use to count". The limits are of course not _total_ limits.
 | [FetchCharge][fetch-charge-endpoint]               | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId  |
 | [ListCharges][list-charges-endpoint]               | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId               |
 | [FetchAgreement][fetch-agreement-endpoint]         | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId               |
-| [DraftAgreement][draft-agreement-endpoint]         | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
+| [DraftAgreement][draft-agreement-endpoint-v2]         | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
 
 **Please note:** The "Key" column is important. The above means that we allow two
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
