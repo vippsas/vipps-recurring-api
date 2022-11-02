@@ -4606,6 +4606,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Continuation-Token: 497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span> \
   -H <span class="hljs-string">&#x27;Merchant-Serial-Number: 123456&#x27;</span> \
   -H <span class="hljs-string">&#x27;Vipps-System-Name: woocommerce&#x27;</span> \
   -H <span class="hljs-string">&#x27;Vipps-System-Version: 5.4&#x27;</span> \
@@ -4620,6 +4621,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
 <span class="hljs-attribute">Content-Type</span>: application/json
+<span class="hljs-attribute">Continuation-Token</span>: 497f6eca-6276-4993-bfeb-53cbbbba6f08
 <span class="hljs-attribute">Merchant-Serial-Number</span>: 123456
 <span class="hljs-attribute">Vipps-System-Name</span>: woocommerce
 <span class="hljs-attribute">Vipps-System-Version</span>: 5.4
@@ -4634,6 +4636,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Continuation-Token&#x27;</span>:<span class="hljs-string">&#x27;497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span>:<span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>:<span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span>:<span class="hljs-string">&#x27;5.4&#x27;</span>,
@@ -4663,6 +4666,7 @@ headers = {
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Continuation-Token&#x27;</span> =&gt; <span class="hljs-string">&#x27;497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span> =&gt; <span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;5.4&#x27;</span>,
@@ -4684,6 +4688,7 @@ headers = {
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+  <span class="hljs-string">&#x27;Continuation-Token&#x27;</span>: <span class="hljs-string">&#x27;497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span>: <span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>: <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span>: <span class="hljs-string">&#x27;5.4&#x27;</span>,
@@ -4701,6 +4706,7 @@ print(r.json())
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
+    <span class="hljs-string">&#x27;Continuation-Token&#x27;</span> =&gt; <span class="hljs-string">&#x27;497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span>,
     <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span> =&gt; <span class="hljs-string">&#x27;123456&#x27;</span>,
     <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
     <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;5.4&#x27;</span>,
@@ -4759,6 +4765,7 @@ System.out.println(response.toString());
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
+        <span class="hljs-string">&quot;Continuation-Token&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;497f6eca-6276-4993-bfeb-53cbbbba6f08&quot;</span>},
         <span class="hljs-string">&quot;Merchant-Serial-Number&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;123456&quot;</span>},
         <span class="hljs-string">&quot;Vipps-System-Name&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;woocommerce&quot;</span>},
         <span class="hljs-string">&quot;Vipps-System-Version&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;5.4&quot;</span>},
@@ -4814,6 +4821,13 @@ Use the <code>createdAfter</code> query to paginate the response.</p>
 <td>string</td>
 <td>false</td>
 <td>The content type must be <code>application/json</code></td>
+</tr>
+<tr>
+<td>Continuation-Token</td>
+<td>header</td>
+<td>string(uuid)</td>
+<td>false</td>
+<td>When returned from an endpoint, this indicates that there is more data than can be returned in one response.</td>
 </tr>
 <tr>
 <td>Merchant-Serial-Number</td>
@@ -4876,6 +4890,10 @@ Use the <code>createdAfter</code> query to paginate the response.</p>
 <h4 id="detailed-descriptions-7">Detailed descriptions</h4>
 <p><strong>Ocp-Apim-Subscription-Key</strong>: The subscription key for your API product is available on <a href="http://portal.vipps.no">portal.vipps.no</a>, under the 'Utvikler' tab.
 Keep it secret.</p>
+<p><strong>Continuation-Token</strong>: When returned from an endpoint, this indicates that there is more data than can be returned in one response.
+Repeating the request with the received token in the Continuation-Token header will return the next page of data.
+When not returned, the end of the data has been reached.</p>
+<p>Continuation-Tokens are short-lived, so they cannot be used several minutes/hours after received.</p>
 <p><strong>Merchant-Serial-Number</strong>: The Merchant Serial Number (MSN) is a unique id for the sale unit
 that this payment is made for.
 This is a required parameter if you are a Vipps Recurring partner
@@ -9398,6 +9416,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements/{agreementId}/charges \
   -H <span class="hljs-string">&#x27;Accept: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Authorization: string&#x27;</span> \
   -H <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Continuation-Token: 497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span> \
   -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
   -H <span class="hljs-string">&#x27;Merchant-Serial-Number: 123456&#x27;</span> \
   -H <span class="hljs-string">&#x27;Vipps-System-Name: woocommerce&#x27;</span> \
@@ -9411,6 +9430,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements/{agreementId}/charges \
 <span class="hljs-attribute">Accept</span>: application/json
 <span class="hljs-attribute">Authorization</span>: string
 <span class="hljs-attribute">Ocp-Apim-Subscription-Key</span>: 0f14ebcab0ec4b29ae0cb90d91b4a84a
+<span class="hljs-attribute">Continuation-Token</span>: 497f6eca-6276-4993-bfeb-53cbbbba6f08
 <span class="hljs-attribute">Content-Type</span>: application/json
 <span class="hljs-attribute">Merchant-Serial-Number</span>: 123456
 <span class="hljs-attribute">Vipps-System-Name</span>: woocommerce
@@ -9424,6 +9444,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements/{agreementId}/charges \
   <span class="hljs-string">&#x27;Accept&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>:<span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>:<span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Continuation-Token&#x27;</span>:<span class="hljs-string">&#x27;497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span>:<span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>:<span class="hljs-string">&#x27;woocommerce&#x27;</span>,
@@ -9452,6 +9473,7 @@ headers = {
   <span class="hljs-string">&#x27;Accept&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Continuation-Token&#x27;</span> =&gt; <span class="hljs-string">&#x27;497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span> =&gt; <span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
@@ -9472,6 +9494,7 @@ headers = {
   <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Authorization&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
   <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span>: <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+  <span class="hljs-string">&#x27;Continuation-Token&#x27;</span>: <span class="hljs-string">&#x27;497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span>,
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
   <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span>: <span class="hljs-string">&#x27;123456&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>: <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
@@ -9488,6 +9511,7 @@ print(r.json())
 <pre class="highlight tab tab-php"><code> <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Authorization&#x27;</span> =&gt; <span class="hljs-string">&#x27;string&#x27;</span>,
     <span class="hljs-string">&#x27;Ocp-Apim-Subscription-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;0f14ebcab0ec4b29ae0cb90d91b4a84a&#x27;</span>,
+    <span class="hljs-string">&#x27;Continuation-Token&#x27;</span> =&gt; <span class="hljs-string">&#x27;497f6eca-6276-4993-bfeb-53cbbbba6f08&#x27;</span>,
     <span class="hljs-string">&#x27;Content-Type&#x27;</span> =&gt; <span class="hljs-string">&#x27;application/json&#x27;</span>,
     <span class="hljs-string">&#x27;Merchant-Serial-Number&#x27;</span> =&gt; <span class="hljs-string">&#x27;123456&#x27;</span>,
     <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
@@ -9545,6 +9569,7 @@ System.out.println(response.toString());
         <span class="hljs-string">&quot;Accept&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Authorization&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;string&quot;</span>},
         <span class="hljs-string">&quot;Ocp-Apim-Subscription-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;0f14ebcab0ec4b29ae0cb90d91b4a84a&quot;</span>},
+        <span class="hljs-string">&quot;Continuation-Token&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;497f6eca-6276-4993-bfeb-53cbbbba6f08&quot;</span>},
         <span class="hljs-string">&quot;Content-Type&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;application/json&quot;</span>},
         <span class="hljs-string">&quot;Merchant-Serial-Number&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;123456&quot;</span>},
         <span class="hljs-string">&quot;Vipps-System-Name&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;woocommerce&quot;</span>},
@@ -9591,6 +9616,13 @@ Supports filtering on status using query parameter.</p>
 <td>string</td>
 <td>true</td>
 <td>The subscription key for your API product is available on <a href="http://portal.vipps.no">portal.vipps.no</a>, under the 'Utvikler' tab.</td>
+</tr>
+<tr>
+<td>Continuation-Token</td>
+<td>header</td>
+<td>string(uuid)</td>
+<td>false</td>
+<td>When returned from an endpoint, this indicates that there is more data than can be returned in one response.</td>
 </tr>
 <tr>
 <td>Content-Type</td>
@@ -9653,6 +9685,10 @@ Supports filtering on status using query parameter.</p>
 <h4 id="detailed-descriptions-18">Detailed descriptions</h4>
 <p><strong>Ocp-Apim-Subscription-Key</strong>: The subscription key for your API product is available on <a href="http://portal.vipps.no">portal.vipps.no</a>, under the 'Utvikler' tab.
 Keep it secret.</p>
+<p><strong>Continuation-Token</strong>: When returned from an endpoint, this indicates that there is more data than can be returned in one response.
+Repeating the request with the received token in the Continuation-Token header will return the next page of data.
+When not returned, the end of the data has been reached.</p>
+<p>Continuation-Tokens are short-lived, so they cannot be used several minutes/hours after received.</p>
 <p><strong>Merchant-Serial-Number</strong>: The Merchant Serial Number (MSN) is a unique id for the sale unit
 that this payment is made for.
 This is a required parameter if you are a Vipps Recurring partner
