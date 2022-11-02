@@ -19,13 +19,13 @@ See the
 for all the details.
 
 See also:
-[Vipps eCom API FAQ](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md).
+[Vipps API FAQ](https://github.com/vippsas/vipps-developers/tree/master/faqs).
 
 See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.6.1.
+Document version: 1.6.2.
 
 <!-- START_TOC -->
 
@@ -357,8 +357,8 @@ other API to look up a user's address, retrieve a user's purchases, etc.
 
 ## For how long is a payment reserved?
 
-See [For how long is a payment reserved?](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq/#for-how-long-is-a-payment-reserved)
-in eCom api faq.
+See [For how long is a payment reserved?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#for-how-long-is-a-payment-reserved)
+in Vipps FAQs.
 
 ## When do users get push messages?
 
