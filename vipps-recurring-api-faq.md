@@ -19,13 +19,13 @@ See the
 for all the details.
 
 See also:
-[Vipps eCom API FAQ](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md).
+[Vipps API FAQ](https://github.com/vippsas/vipps-developers/tree/master/faqs).
 
 See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.6.1.
+Document version: 1.6.2.
 
 <!-- START_TOC -->
 
@@ -262,7 +262,7 @@ See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 
 ## How can I delete an agreement? 
 
-Agreements can be stopped by calling the [`update agreement`][update-agreement-endpoint] endpoint. 
+Agreements can be stopped by calling the [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint. 
 See [Stop an agreement](vipps-recurring-api.md#stop-an-agreement).
 
 ## Can a user cancel the agreement through the Vipps app?
@@ -306,7 +306,7 @@ See [If a user's card expires: What happens on the next charge?](#if-a-users-car
 A charge will be displayed to the user 6 days before the charge is due to be processed.
 The charge will then appear in the app.
 
-You can still retrieve all relevant charges through the [`list charges`][list-charges-endpoint] endpoint.
+You can still retrieve all relevant charges through the [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
 
 ## If a user adds or updates a card in vipps, will new recurring charges be made to that card?
 No, currently the payment card tied to an agreement will not be updated automatically.
@@ -334,7 +334,7 @@ and [Vipps Recurring API](vipps-recurring-api.md#userinfo).
 This is done by adding a `scope` parameter to the initiate calls:
 [`initiate payment`](https://vippsas.github.io/vipps-developer-docs/api/ecom#tag/Vipps-eCom-API/operation/initiatePaymentV3UsingPOST) (eCom)
 and
-[`draft agreement`][draft-agreement-endpoint] (Recurring):
+[`POST:/agreements`][draft-agreement-endpoint] (Recurring):
 
 - address
 - birthDate
@@ -357,8 +357,8 @@ other API to look up a user's address, retrieve a user's purchases, etc.
 
 ## For how long is a payment reserved?
 
-See [For how long is a payment reserved?](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq/#for-how-long-is-a-payment-reserved)
-in eCom api faq.
+See [For how long is a payment reserved?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#for-how-long-is-a-payment-reserved)
+in Vipps FAQs.
 
 ## When do users get push messages?
 
@@ -387,9 +387,9 @@ and are then invoiced for the Vipps fees.
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
 a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
-Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
 [fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement

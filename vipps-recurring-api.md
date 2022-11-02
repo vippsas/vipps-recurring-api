@@ -64,18 +64,27 @@ Document version 2.6.1.
   - [Authentication and authorization](#authentication-and-authorization)
   - [Vipps HTTP headers](#vipps-http-headers)
   - [Idempotency Key header (V3 API Coming Soon)](#idempotency-key-header-v3-api-coming-soon)
+  - [Continuation-Token header (V3 API Coming Soon)](#continuation-token-header-v3-api-coming-soon)
   - [orderId recommendations](#orderid-recommendations)
   - [Agreements](#agreements)
     - [Create an agreement](#create-an-agreement)
     - [Accept an agreement](#accept-an-agreement)
     - [Intervals](#intervals)
+      - [Example in the V2 api:](#example-in-the-v2-api)
     - [Initial charge](#initial-charge)
     - [Campaigns](#campaigns)
+      - [Campaigns in V2 API](#campaigns-in-v2-api)
+      - [(Coming soon - WORK IN PROGRESS) Campaigns in V3 API](#coming-soon---work-in-progress-campaigns-in-v3-api)
+        - [Price campaign](#price-campaign)
+        - [Period campaign](#period-campaign)
+        - [Event campaign](#event-campaign)
+        - [Full flex campaign](#full-flex-campaign)
+        - [Product description guidelines for agreements with campaigns.](#product-description-guidelines-for-agreements-with-campaigns)
     - [Retrieve an agreement](#retrieve-an-agreement)
   - [Charges](#charges)
     - [Create a charge](#create-a-charge)
     - [Capture a charge](#capture-a-charge)
-    - [Partial capture(Coming soon)](#partial-capture-coming-soon)
+    - [Partial capture (Coming soon)](#partial-capture-coming-soon)
     - [Amount changes](#amount-changes)
     - [Charge descriptions](#charge-descriptions)
     - [Cancel a charge](#cancel-a-charge)
@@ -111,8 +120,6 @@ Document version 2.6.1.
   - [Partner keys](#partner-keys)
   - [Polling guidelines](#polling-guidelines)
   - [Timeouts](#timeouts)
-    - [Using a phone](#using-a-phone)
-    - [Using a laptop/desktop](#using-a-laptopdesktop)
   - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
   - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
@@ -144,8 +151,8 @@ There are two happy-flows based on how the sale unit is set up:
 One for "direct capture" and one for "reserve capture".
 This is specified with the `transactionType`, and for "direct capture"
 the sale unit must be configured for this by Vipps.
-See the eCom FAQ for the difference:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+See the Vipps FAQ for the difference:
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
@@ -229,7 +236,7 @@ in the Getting started guide, for details.
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#vipps-http-headers)
+See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md)
 in the Getting started guide, for details.
 
 ## Idempotency Key header (V3 API Coming Soon)
@@ -238,9 +245,17 @@ The `Idempotency-Key` header must be set in each `POST` or `PATCH` request.
 This way, if a request fails for any reason, it can be retried with the same `Idempotency-Key`.
 Also, in the case of retries, it will prevent duplicating operations.
 
+**Important:** If the response is a client-error (4xx), you will continue to get the same error as long as you use the same idempotency-key, as the requested operation is not retried.
+
+**Important:** If you reuse an idempotency-key on a different request, you will get a 409 CONFLICT.
+
 See the
-[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#idempotency-header)
+[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md#idempotency)
 for more details.
+
+## Continuation-Token header (V3 API Coming Soon)
+
+The `Continuation-Token` header is introduced on endpoints that returns multiple items to allow pagination. When returned from the API, it indicates that there are more items to be received. In order to receive the next page, repeat the request adding the received token in the `Continuation-Token`-header.
 
 ## orderId recommendations
 
@@ -324,7 +339,7 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 ```
 
 **Note:** To create agreements with support for variable amounts on charges, see
-[Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).
+[Recurring agreements with variable amount](#recurring-agreements-with-variable-amount).
 
 The `merchantAgreementUrl` is a link to the customer's account page on your website, where they
 can manage the agreement (e.g., change, pause, cancel the agreement).
@@ -579,8 +594,8 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the eCom FAQ for more details.
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be
 used when selling physical goods bundled with an agreement - such as a phone
@@ -633,7 +648,7 @@ when the product is shipped.
 
 A campaign in recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
-Campaigns cannot be used in combination with [variable amount](#Recurring-agreements-with-variable-amount).
+Campaigns cannot be used in combination with [variable amount](#recurring-agreements-with-variable-amount).
 
 #### Campaigns in V2 API
 
@@ -751,7 +766,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 ##### Full flex campaign
 
 **Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
-See [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+See [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
 ![full-flex-campaign](images/campaigns/full-flex-campaign.png)
 
@@ -824,8 +839,8 @@ An [agreement](#agreements) has payments, called charges.
 
 ### Create a charge
 
-*Recurring has functionality to charge a variable amount each interval. See:
-[Recurring agreements with variable amount](#Recurring-agreements-with-variable-amount).*
+_Recurring has functionality to charge a variable amount each interval. See:
+[Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)._
 
 Each specific charge on an agreement must be scheduled by the merchant, a
 minimum of two days before the payment will occur (it is minimum one day in the test environment).
@@ -847,12 +862,13 @@ A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the eCom FAQ for more details.
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
 
 The advantage to using reserve capture is that you can release the reservation immediately:
+
 - For a reserved payment, the merchant can make a /cancel call to immediately release the reservation and make it available in the customer's account.
 - For a captured payment, the merchant must make a /refund call. It then takes a few days before the amount is available in the customer's account.
 
@@ -881,8 +897,8 @@ Partial capture may be used in cases where a partial order is shipped or for oth
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [For how long is a payment reserved](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api-faq/#for-how-long-is-a-payment-reserved)
-in the eCom FAQ for more details.
+See [For how long is a payment reserved](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#for-how-long-is-a-payment-reserved)
+in the Vipps FAQ for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
 
@@ -1038,7 +1054,7 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will soon be replaced by an event log. Subscribe to the technical newsletter
-to get updates: https://github.com/vippsas/vipps-developers/tree/master/newsletters
+to get updates: [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 See more about [charge failure reason](#charge-failure-reasons).
 
@@ -1166,7 +1182,7 @@ depending on your systems.
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will soon be replaced by an event log. Subscribe to the technical newsletter
-to get updates: https://github.com/vippsas/vipps-developers/tree/master/newsletters
+to get updates: [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 When fetching a charge through the API, you can find two fields in the response
 body to identify why the charge failed `failureReason` and `failureDescription`.
@@ -1678,7 +1694,8 @@ This means, in the future, `detail` and `extraDetails` content can change for so
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
 fraudulent and wrongful behaviour, and increase the stability and security of
-our API. The limits should not affect normal behaviour, but please contact us
+our API. The limits should not affect normal behaviour, but please 
+[contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
 if you notice any unexpected behaviour.
 
 The "Key" column specifies what we consider to be the unique identifier, and
@@ -1695,7 +1712,7 @@ what we "use to count". The limits are of course not _total_ limits.
 | [FetchCharge][fetch-charge-endpoint]               | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId  |
 | [ListCharges][list-charges-endpoint]               | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId               |
 | [FetchAgreement][fetch-agreement-endpoint]         | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId               |
-| [DraftAgreement][draft-agreement-endpoint]         | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
+| [DraftAgreement][draft-agreement-endpoint-v2]         | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
 
 **Please note:** The "Key" column is important. The above means that we allow two
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
@@ -1751,41 +1768,17 @@ See:
 
 ## Polling guidelines
 
-General guidelines for polling with the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint:
+General guidelines for polling with the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
+endpoint can be found at:
 
-1. Start after 5 seconds
-2. Check every 2 seconds
 
-These are reasonable values, but different merchants have different use cases,
-and values should be adapted to the specific case.
-
-See [Timeouts](#timeouts) for details about timeouts.
+See [Polling guidelines](https://github.com/vippsas/vipps-developers/blob/master/common-topics/polling-guidelines.md) in Common topics, for details.
 
 ## Timeouts
 
-### Using a phone
-
-Both the deeplink URL, which causes the app-switch to Vipps, and the landing
-page displayed in browsers, is valid for 5 minutes.
-
-If the user does not act on the app-switch (such as not attempting to log into
-Vipps) within 5 minutes, the payment times out.
-
-After the app-switch to Vipps, the user has another 5 minutes to complete the
-payment in Vipps.
-
-This means that the user has a total of 10 minutes to complete the payment.
-
-### Using a laptop/desktop
-
-If the user is using a laptop/desktop device, and the user must confirm or
-enter the phone number on the landing page within 5 minutes.
-If the user does not do so, the payment times out.
-
-After the user has clicked "OK" on the landing page, the user
-has an additional 5 minutes to complete the payment in Vipps.
-
-This means that the user has a total of 10 minutes to complete the payment.
+See [Timeouts](https://github.com/vippsas/vipps-developers/blob/master/common-topics/timeouts.md)
+in Common topics for details.
 
 ## Testing
 
@@ -1800,23 +1793,7 @@ The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
 
-Since Vipps is a mobile entity the amount of control Vipps have over the redirect back to the merchant after the purchase is completed is limited. A merchant must not assume that Vipps will redirect to the exact same session and for example rely entirely on cookies in order to handle the redirect event. For example the redirect could happen to another browser.
-
-Examples of some, but not all, factors out of Vipps control.
-- Configurations set by the OS itself, for example the default browser.
-- User configurations of browsers.
-- Users closing app immediately upon purchase.
-
-Therefore, Vipps recommends having a stateless approach in the site that is supposed to be the end session. An example would a polling based result handling from a value in the redirect url.
-
-Example for demonstration purposes that should be handled.
-
-- User starts is in web session in a Chrome Browser.
-- A Vipps purchase is started, a redirect URL is defined by the Merchant.
-- The user completes the purchase.
-- The Vipps app redirects the user.
-- The OS defaults to a Safari Browser for the redirect.
-- The merchant handles the redirect without the customer noticing any discrepancies from the browser switch.
+See [Recommendations regarding handling redirects](https://github.com/vippsas/vipps-developers/blob/master/common-topics/redirects.md) in Common topics for details.
 
 ## When to use campaigns or initial charge
 
@@ -1879,9 +1856,9 @@ Ideally, this flow is intended for when you have a combination of an additional 
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
 a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
-Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
@@ -1896,4 +1873,4 @@ Sign up for our [Technical newsletter for developers](https://github.com/vippsas
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md
+[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md
