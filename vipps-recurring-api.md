@@ -151,8 +151,9 @@ There are two happy-flows based on how the sale unit is set up:
 One for "direct capture" and one for "reserve capture".
 This is specified with the `transactionType`, and for "direct capture"
 the sale unit must be configured for this by Vipps.
-See the Vipps FAQ for the difference:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+
+For more details, see
+[Common topics: Reserve and capture](https://github.com/vippsas/vipps-developers/blob/master/common-topics/reserve-and-capture.md).
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
@@ -392,6 +393,10 @@ user to the Vipps landing page in a desktop flow (with `https://`),
 or to Vipps in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
+See
+[Vipps landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md)
+from Common topics, for more details about the landing page.
+
 #### Pricing representation
 
 There is two different types of pricing available:
@@ -471,49 +476,6 @@ If the user does not have Vipps installed:
 ### Intervals
 
 Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31.
-
-#### Example in the V2 api:
-
-Example for a bi-weekly subscription:
-```json
-{
-  "interval": "WEEK",
-  "intervalCount": 2
-}
-```
-
-Example for a quarterly subscription
-```json
-{
-  "interval": "MONTH",
-  "intervalCount": 3
-}
-```
-
-Examples for a yearly subscription
-```json
-{
-  "interval": "YEAR",
-  "intervalCount": 1
-}
-```
-OR
-```json
-{
-  "interval": "MONTH",
-  "intervalCount": 12
-}
-```
-
-Example for a subscription every 30th day:
-```json
-{
-  "interval": "DAY",
-  "intervalCount": 30
-}
-```
-
-Example in the V3 api (Coming soon - WORK IN PROGRESS):
 
 Example for a bi-weekly subscription:
 ```json
@@ -874,7 +836,7 @@ The advantage to using reserve capture is that you can release the reservation i
 
 See the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint definition for examples.
 
-Also see check [orderId recommendations](#orderid-recommendations) before creating charges.
+Also see check [orderId recommendations](https://github.com/vippsas/vipps-developers/blob/master/common-topics/orderid.md) before creating charges.
 
 ### Capture a charge
 

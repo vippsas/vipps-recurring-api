@@ -107,7 +107,7 @@ For details about the calls, see [Agreement v2 endpoints][agreement-endpoints] i
 
    If you authorized the agreement, the status should be ACTIVE in the response.
    If you didn't go through with the authorization, the status will be PENDING for a
-   [maximum of 10 minutes](vipps-recurring-api.md#timeouts),
+   [maximum of 10 minutes](https://github.com/vippsas/vipps-developers/blob/master/common-topics/timeouts.md),
    before it goes to `EXPIRED`.
 
 #### Create an agreement with an initial charge
