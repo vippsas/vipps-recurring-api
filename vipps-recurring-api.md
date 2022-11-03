@@ -389,6 +389,10 @@ user to the Vipps landing page in a desktop flow (with `https://`),
 or to Vipps in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
+See
+[Vipps landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md)
+from Common topics, for more details about the landing page.
+
 ### Accept an agreement
 
 The [`POST:/agreements`][draft-agreement-endpoint-v2] endpoint will return the following JSON structure.
