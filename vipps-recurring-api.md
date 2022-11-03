@@ -827,7 +827,7 @@ The advantage to using reserve capture is that you can release the reservation i
 
 See the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint definition for examples.
 
-Also see check [orderId recommendations](#orderid-recommendations) before creating charges.
+Also see check [orderId recommendations](https://github.com/vippsas/vipps-developers/blob/master/common-topics/orderid.md) before creating charges.
 
 ### Capture a charge
 
