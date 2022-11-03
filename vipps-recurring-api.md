@@ -1505,19 +1505,19 @@ merchant's main URL, like `https://example.com`, etc.
 
 This API returns the following HTTP statuses in the responses:
 
-| HTTP status                | Description                                                       |
-|----------------------------|-------------------------------------------------------------------|
-| `200 OK`                   | Request successful                                                |
-| `204 No content`           | Request successful                                                |
-| `202 Accepted`             | Request accepted, the requested action will be attempted          |
-| `400 Bad Request`          | Invalid request, see the error for details                        |
-| `401 Unauthorized`         | Invalid credentials                                               |
-| `403 Forbidden`            | Authentication ok, but credentials lacks authorization            |
-| `404 Not Found`            | The resource was not found                                        |
-| `409 Conflict`             | Unsuccessful due to conflicting resource                          |
-| `422 Unprocessable Entity` | Vipps could not process                                           |
-| `429 Too Many Requests`    | Look at [table below to view current rate limits](#rate-limiting) |
-| `500 Server Error`         | An internal Vipps problem.                                        |
+| HTTP status                | Description                                                                                                                   |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| `200 OK`                   | Request successful                                                                                                            |
+| `204 No content`           | Request successful                                                                                                            |
+| `202 Accepted`             | Request accepted, indicates that the request has been accepted for processing, but the processing has not been completed yet. |
+| `400 Bad Request`          | Invalid request, see the error for details                                                                                    |
+| `401 Unauthorized`         | Invalid credentials                                                                                                           |
+| `403 Forbidden`            | Authentication ok, but credentials lacks authorization                                                                        |
+| `404 Not Found`            | The resource was not found                                                                                                    |
+| `409 Conflict`             | Unsuccessful due to conflicting resource                                                                                      |
+| `422 Unprocessable Entity` | Vipps could not process                                                                                                       |
+| `429 Too Many Requests`    | Look at [table below to view current rate limits](#rate-limiting)                                                             |
+| `500 Server Error`         | An internal Vipps problem.                                                                                                    |
 
 **Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should 
 retry the request or poll the resource to see if an operation has been performed. 
@@ -1575,7 +1575,7 @@ what we "use to count". The limits are of course not _total_ limits.
 | [FetchCharge][fetch-charge-endpoint]               | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId  |
 | [ListCharges][list-charges-endpoint]               | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId               |
 | [FetchAgreement][fetch-agreement-endpoint]         | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId               |
-| [DraftAgreement][draft-agreement-endpoint-v2]         | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
+| [DraftAgreement][draft-agreement-endpoint-v2]      | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
 
 **Please note:** The "Key" column is important. The above means that we allow two
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
