@@ -1133,38 +1133,14 @@ The user gets more information in Vipps regarding why the Charge did not get cha
 ## Userinfo
 
 Vipps offers the possibility for merchants to ask for the user's profile information as part of the payment flow.
-This is done through Vipps Userinfo which
-You can learn more at the [OIDC Standard](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
-To enable the possibility to fetch profile information for a user the merchant can add a `scope`
+To enable the possibility to fetch profile information for a user the merchant can add a
+[`scope`](https://github.com/vippsas/vipps-developers/blob/master/common-topics/userinfo.md#scope)
 parameter to the [`POST:/agreements`][draft-agreement-endpoint-v2] call.
 
-If the user has not already consented to sharing information from Vipps to the
-merchant the user will be asked for such consent before activating the agreement.
-Once the agreement has been accepted the merchant can get the profile information
-from our Userinfo endpoint.
-
-A users consent to share information with a merchant applies across our services. Thus, if the merchant implements Vipps login in addition to profile information as part of the agreement flow, the merchant can also use Vipps to log the user in without the need for additional consents.
-
-### Scope
-
-| scope            | Description                                                                                                                                                                                                                                                                | User consent required |
-|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
-| `address`        | A list containing the user's addresses. The list always contains the home address from the National Population Register, and can also include work address and other addresses added by the user in Vipps.                                                                 | yes                   |
-| `birthDate`      | Birth date. Verified with BankID.                                                                                                                                                                                                                                          | yes                   |
-| `email`          | Email address. The flag `email_verified : true` (or `false`) in the response indicates whether the email address is verified.                                                                                                                                              | yes                   |
-| `name`           | First, middle and given name. Verified with the National Population Register.                                                                                                                                                                                              | yes                   |
-| `phoneNumber`    | Phone number. Verified when creating the Vipps account.                                                                                                                                                                                                                    | yes                   |
-| `nin`            | Norwegian national identity number. Verified with BankID. **NB:** Merchants need to apply for access to NIN. See: [Who can get access to NIN and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-nin-and-how)    | yes                   |
-| `accountNumbers` | User bank account numbers. **NB:** Merchants need to apply for access to accountNumbers. See: [Who can get access to account numbers and how?](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#who-can-get-access-to-accountnumbers-and-how) | yes                   |  
-
-See the API specification for the formats and other details for each scope.
-
-**Please note:** If the e-mail address that is delivered has the flag `email_verified : false`
-this address should not be used to link the user to an existing account without
-further authentication. Such authentication could be to prompt the user to
-log in to the original account or confirm the account linking by having a
-confirmation link sent to the email address.
+See
+[User information](https://github.com/vippsas/vipps-developers/blob/master/common-topics/userinfo.md)
+in the Common topics for details.
 
 ### Userinfo call by call guide
 
@@ -1185,7 +1161,7 @@ and will result in a `HTTP Unauthorized 401` error.
 
 ### Example calls
 
-To request this scope add the scope to the initial [`POST:/agreements`][draft-agreement-endpoint-v2] call
+To request this scope, add the scope to the initial [`POST:/agreements`][draft-agreement-endpoint-v2] call.
 
 Example of request with scope:
 
@@ -1211,7 +1187,9 @@ complete a valid agreement and consent to all values in order to complete the
 session. If a user chooses to reject the terms the agreement will not be
 processed. Unless the whole flow is completed, this will be handled as a regular failed agreement by the recurring APIs.
 
-Once the user completes the session a unique identifier `sub` can be retrieved with the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint alongside the full URL to Userinfo.
+Once the user completes the session a unique identifier `sub` can be retrieved with the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
+endpoint, alongside the full URL to Userinfo.
 
 Example `sub` and `userinfoUrl` format:
 
@@ -1223,7 +1201,7 @@ Example `sub` and `userinfoUrl` format:
 ```
 
 This `sub` is a link between the merchant and the user and can be used to retrieve
-the user's details from the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint
+the user's details from the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint.
 
 The `sub` is based on the user's national identity number ("fødselsnummer"
 in Norway), and does not change (except in very special cases).
@@ -1241,94 +1219,17 @@ transaction and the fetching of the profile data.
 
 This endpoint returns the payload with the information that the user has consented to share.
 
-Call the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier. See below on how to construct the call.
+Call the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier.
 
-**Request**
-
-*Headers*
-
-| Header        | Description             |
-|---------------|-------------------------|
-| Authorization | "Bearer {Access Token}" |
-
-The access token is received on a successful request to the token endpoint described in
-[Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
-in the Getting started guide.
-
-**Important note:** Subscription key used for the Recurring API must _not_ be
-included. This is because userinfo is part of Vipps Login and is therefore
-_not_ under the same subscription, and will result in a `HTTP Unauthorized 401` error.
-
-**Example response:**
-
-```json
-{
-    "sub": "c06c4afe-d9e1-4c5d-939a-177d752a0944",
-    "birthdate": "1815-12-10",
-    "email": "user@example.com",
-    "email_verified": true,
-    "nin": "10121550047",
-    "name": "Ada Lovelace",
-    "given_name": "Ada",
-    "family_name": "Lovelace",
-    "sid": "7d78a726-af92-499e-b857-de263ef9a969",
-    "phone_number": "4712345678",
-    "address": {
-        "street_address": "Suburbia 23",
-        "postal_code": "2101",
-        "region": "OSLO",
-        "country": "NO",
-        "formatted": "Suburbia 23\\n2101 OSLO\\nNO",
-        "address_type": "home"
-    },
-    "other_addresses": [
-        {
-            "street_address": "Fancy Office Street 2",
-            "postal_code": "0218",
-            "region": "OSLO",
-            "country": "NO",
-            "formatted": "Fancy Office Street 2\\n0218 OSLO\\nNO",
-            "address_type": "work"
-        },
-        {
-            "street_address": "Summer House Lane 14",
-            "postal_code": "1452",
-            "region": "OSLO",
-            "country": "NO",
-            "formatted": "Summer House Lane 14\\n1452 OSLO\\nNO",
-            "address_type": "other"
-        }
-    ],
-    "accounts": [
-        {
-            "account_name": "My savings",
-            "account_number": "12064590675",
-            "bank_name": "My bank"
-        }
-    ]
-}
-```
-
-![Userinfo sequence](images/userinfo-direct.png)
+See
+[Userinfo call](https://github.com/vippsas/vipps-developers/blob/master/common-topics/userinfo.md#userinfo-call)
+in Common topics for details.
 
 ### Consent
 
-A user's consent to share information with a merchant applies across all Vipps
-services. Thus, if the merchant implements Vipps Login in addition to profile
-information as part of the agreement flow, the merchant can also use Vipps to
-log the user in without the need for additional consent.
-
-The user is presented with a consent card that must be accepted before
-approving the agreement in Vipps. The following screens shows examples
-of consent cards for Android(left) and iOS(right):
-
-![Consent card](images/share-user-info.png)
-
-**Please note:** This operation has an "all or nothing" approach, so a user
-must accept the agreement and consent to _all_ values in order to complete the
-session. If a user chooses to reject the terms the agreement will not be
-activated. Unless the whole flow is completed, this will be handled as a
-failed agreement by the Recurring API.
+See
+[Consent](https://github.com/vippsas/vipps-developers/blob/master/common-topics/userinfo.md#consent)
+in Common topics for details.
 
 ## Recurring agreements with variable amount
 
