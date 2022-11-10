@@ -757,7 +757,7 @@ See [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-devel
 ##### Product description guidelines for agreements with campaigns.
 We do not recommend you to use `Product Description` for agreements with a campaign.
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
-`Product description` will be, at a point in the future, phased out in order to improve user experience.
+At a point in the future, `product description` in combination with `campaigns` will be phased out in order to improve user experience.
 
 ### Retrieve an agreement
 
