@@ -312,9 +312,7 @@ for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
-An agreement is between the Vipps user and the merchant.
-Think of it as a subscription.
-An agreement has payments, called [charges](#charges).
+An agreement is between the Vipps user and the merchant. Think of it as a payment agreement that allows you (the merchant) to recurringly charge the customer without them having to manually approve every time. See [charges](#charges).
 
 ### Create an agreement
 
@@ -391,6 +389,8 @@ user can then approve the agreement.
 See
 [Vipps landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md)
 from Common topics, for more details about the landing page.
+
+**Note:** If payment should be required to activate an agreement, you need to specify an initial charge. If you are dealing with physical goods, this should be a RESERVE_CAPTURE, but for digital goods where the customer instantly gains access, DIRECT_CAPTURE might be easier to manage. See [Initial charge](#initial-charge)
 
 ### Accept an agreement
 
