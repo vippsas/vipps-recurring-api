@@ -47,7 +47,7 @@ See also:
 
 API version: 2.0.0.
 
-Document version 2.6.1.
+Document version 2.6.2.
 
 <!-- START_TOC -->
 
@@ -1464,7 +1464,7 @@ problem.
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
 fraudulent and wrongful behaviour, and increase the stability and security of
-our API. The limits should not affect normal behaviour, but please 
+our API. The limits should not affect normal behaviour, but please
 [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
 if you notice any unexpected behaviour.
 
@@ -1590,6 +1590,8 @@ Here we also show `productName` and the agreement explanation on the agreement, 
 Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobile phone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, and have to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
+
+**Please note:** If you require a payment to be completed at the same time that the agreement is created, you must use initial charge.
 
 ### Campaign
 
