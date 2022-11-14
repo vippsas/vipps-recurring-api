@@ -4611,8 +4611,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
   -H <span class="hljs-string">&#x27;Vipps-System-Name: woocommerce&#x27;</span> \
   -H <span class="hljs-string">&#x27;Vipps-System-Version: 5.4&#x27;</span> \
   -H <span class="hljs-string">&#x27;Vipps-System-Plugin-Name: vipps-woocommerce&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Vipps-System-Plugin-Version: 1.2.1&#x27;</span> \
-  -H <span class="hljs-string">&#x27;Idempotency-Key: kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>
+  -H <span class="hljs-string">&#x27;Vipps-System-Plugin-Version: 1.2.1&#x27;</span>
 
 </code></pre>
 <pre class="highlight tab tab-http"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">https://api.vipps.no/recurring/v3/agreements</span> HTTP/1.1
@@ -4627,7 +4626,6 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
 <span class="hljs-attribute">Vipps-System-Version</span>: 5.4
 <span class="hljs-attribute">Vipps-System-Plugin-Name</span>: vipps-woocommerce
 <span class="hljs-attribute">Vipps-System-Plugin-Version</span>: 1.2.1
-<span class="hljs-attribute">Idempotency-Key</span>: kRk3uEeiogxLu1yGSZRlNgsIv3TuNS
 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code>
@@ -4641,8 +4639,7 @@ curl -X GET https://api.vipps.no/recurring/v3/agreements \
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>:<span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span>:<span class="hljs-string">&#x27;5.4&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span>:<span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
-  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>:<span class="hljs-string">&#x27;1.2.1&#x27;</span>,
-  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span>:<span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>:<span class="hljs-string">&#x27;1.2.1&#x27;</span>
 };
 
 fetch(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v3/agreements&#x27;</span>,
@@ -4671,8 +4668,7 @@ headers = {
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;5.4&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
-  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;1.2.1&#x27;</span>,
-  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;1.2.1&#x27;</span>
 }
 
 result = RestClient.get <span class="hljs-string">&#x27;https://api.vipps.no/recurring/v3/agreements&#x27;</span>,
@@ -4693,8 +4689,7 @@ headers = {
   <span class="hljs-string">&#x27;Vipps-System-Name&#x27;</span>: <span class="hljs-string">&#x27;woocommerce&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span>: <span class="hljs-string">&#x27;5.4&#x27;</span>,
   <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span>: <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
-  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>: <span class="hljs-string">&#x27;1.2.1&#x27;</span>,
-  <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span>: <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>
+  <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span>: <span class="hljs-string">&#x27;1.2.1&#x27;</span>
 }
 
 r = requests.get(<span class="hljs-string">&#x27;https://api.vipps.no/recurring/v3/agreements&#x27;</span>, headers = headers)
@@ -4712,7 +4707,6 @@ print(r.json())
     <span class="hljs-string">&#x27;Vipps-System-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;5.4&#x27;</span>,
     <span class="hljs-string">&#x27;Vipps-System-Plugin-Name&#x27;</span> =&gt; <span class="hljs-string">&#x27;vipps-woocommerce&#x27;</span>,
     <span class="hljs-string">&#x27;Vipps-System-Plugin-Version&#x27;</span> =&gt; <span class="hljs-string">&#x27;1.2.1&#x27;</span>,
-    <span class="hljs-string">&#x27;Idempotency-Key&#x27;</span> =&gt; <span class="hljs-string">&#x27;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&#x27;</span>,
 );
 
 $client = <span class="hljs-keyword">new</span> \GuzzleHttp\Client();
@@ -4771,7 +4765,6 @@ System.out.println(response.toString());
         <span class="hljs-string">&quot;Vipps-System-Version&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;5.4&quot;</span>},
         <span class="hljs-string">&quot;Vipps-System-Plugin-Name&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;vipps-woocommerce&quot;</span>},
         <span class="hljs-string">&quot;Vipps-System-Plugin-Version&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;1.2.1&quot;</span>},
-        <span class="hljs-string">&quot;Idempotency-Key&quot;</span>: []<span class="hljs-keyword">string</span>{<span class="hljs-string">&quot;kRk3uEeiogxLu1yGSZRlNgsIv3TuNS&quot;</span>},
     }
 
     data := bytes.NewBuffer([]<span class="hljs-keyword">byte</span>{jsonReq})
@@ -4878,13 +4871,6 @@ Use the <code>createdAfter</code> query to paginate the response.</p>
 <td>false</td>
 <td>Filter by createdAfter timestamp for paginating.</td>
 </tr>
-<tr>
-<td>Idempotency-Key</td>
-<td>header</td>
-<td><a href="#schemaidempotencykeyformat">IdempotencyKeyFormat</a></td>
-<td>true</td>
-<td>An Idempotency key must be provided to ensure idempotent requests.</td>
-</tr>
 </tbody>
 </table>
 <h4 id="detailed-descriptions-7">Detailed descriptions</h4>
@@ -4901,8 +4887,6 @@ making payments on behalf of a merchant.
 The partner must use the merchant's MSN (not the partner's MSN).
 This parameter is optional, and recommended, for regular Vipps
 merchants making payments for themselves.</p>
-<p><strong>Idempotency-Key</strong>: An Idempotency key must be provided to ensure idempotent requests.
-Key size can be between 1 to 40 characters.</p>
 <h4 id="enumerated-values-5">Enumerated Values</h4>
 <table>
 <thead>
