@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3fb4d75a-c8c8-4585-9295-d04f89b804b5",
+		"_postman_id": "a691c7d1-1f54-45ba-8942-b92d8bc28f58",
 		"name": "Recurring Payments v3 - Collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -134,11 +134,16 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Idempotency-key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\",\n \"productName\": \"{{productName}}\"\n}"
+							"raw": "{\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": {{intervalCount}}\n },\n \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\",\n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -205,6 +210,11 @@
 							{
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-key",
+								"value": "{{idempotency_key}}",
 								"type": "default"
 							}
 						],
@@ -278,6 +288,11 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -349,6 +364,11 @@
 							{
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
 								"type": "default"
 							}
 						],
@@ -422,6 +442,11 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -493,6 +518,11 @@
 							{
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
 								"type": "default"
 							}
 						],
@@ -566,6 +596,11 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -637,6 +672,11 @@
 							{
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
 								"type": "default"
 							}
 						],
@@ -710,6 +750,11 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -743,7 +788,6 @@
 									"var str = jsonData.vippsConfirmationUrl",
 									"var str2 = str.split('=', 3)[2]",
 									"postman.setEnvironmentVariable(\"landing_page_url\", str2);",
-									"console.log(jsonData.access_token);",
 									"",
 									""
 								],
@@ -791,6 +835,11 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -818,209 +867,6 @@
 					"response": []
 				},
 				{
-					"name": "Stop Agreement",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{merchantSerialNumber}}"
-							},
-							{
-								"key": "Vipps-System-Name",
-								"value": "{{vipps_system_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Version",
-								"value": "{{vipps_system_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Name",
-								"value": "{{vipps_system_plugin_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Version",
-								"value": "{{vipps_system_plugin_version}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"status\": \"STOPPED\"\r\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v3",
-								"agreements",
-								"{{agreementId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Agreement",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{merchantSerialNumber}}"
-							},
-							{
-								"key": "Vipps-System-Name",
-								"value": "{{vipps_system_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Version",
-								"value": "{{vipps_system_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Name",
-								"value": "{{vipps_system_plugin_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Version",
-								"value": "{{vipps_system_plugin_version}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"productName\":\"{{productName_updated}}\"\r\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v3",
-								"agreements",
-								"{{agreementId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "(Test only) Force accept agreement",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "bearer {{token}}"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{merchantSerialNumber}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}"
-							},
-							{
-								"key": "Vipps-System-Name",
-								"value": "{{vipps_system_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Version",
-								"value": "{{vipps_system_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Name",
-								"value": "{{vipps_system_plugin_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Version",
-								"value": "{{vipps_system_plugin_version}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"customerPhoneNumber\": \"{{mobileNumber}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/accept",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v3",
-								"agreements",
-								"{{agreementId}}",
-								"accept"
-							]
-						},
-						"description": "Drafts an agreement that can be approved by end user"
-					},
-					"response": []
-				},
-				{
 					"name": "Get Agreement",
 					"event": [
 						{
@@ -1028,8 +874,7 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"sub\", jsonData.sub);",
-									"//pm.environment.set(\"agreementId\", pm.response.json().id);"
+									"postman.setEnvironmentVariable(\"sub\", jsonData.sub);"
 								],
 								"type": "text/javascript"
 							}
@@ -1088,7 +933,18 @@
 					"response": []
 				},
 				{
-					"name": "Fetch Agreements",
+					"name": "List Agreements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"continuation_token\", pm.response.headers.get(\"Continuation-Token\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1123,10 +979,16 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Continuation-Token",
+								"value": "{{continuation_token}}",
+								"type": "default",
+								"disabled": true
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements?status={{status_agreements}}",
+							"raw": "{{base_url}}/recurring/v3/agreements",
 							"host": [
 								"{{base_url}}"
 							],
@@ -1138,11 +1000,499 @@
 							"query": [
 								{
 									"key": "status",
-									"value": "{{status_agreements}}"
+									"value": "{{status_agreements}}",
+									"disabled": true
+								},
+								{
+									"key": "createdAfter",
+									"value": "1644572442944",
+									"disabled": true
 								}
 							]
 						},
 						"description": "Does a GET and retrieves all agreements based on the MerchantId in the header"
+					},
+					"response": []
+				},
+				{
+					"name": "(Test only) Force accept agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"customerPhoneNumber\": \"{{mobileNumber}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/accept",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}",
+								"accept"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
+					"name": "Stop Agreement",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"status\": \"STOPPED\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Agreement - Product name",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"productName\":\"{{productName_updated}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Agreement - Product description",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"productName\":\"{{productDescription_updated}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Agreement - Merchant agreement url",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"merchantAgreementUrl\":\"{{merchantAgreementUrl}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Agreement - Legacy pricing amount",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"pricing\": {\r\n        \"amount\": {{price}}\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Agreement - Suggested max amount",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"pricing\": {\r\n        \"suggestedMaxAmount\": {{price}}\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements",
+								"{{agreementId}}"
+							]
+						}
 					},
 					"response": []
 				}
@@ -1187,7 +1537,7 @@
 							},
 							{
 								"key": "Idempotency-Key",
-								"value": "{{Idempotency-Key-Create}}"
+								"value": "{{idempotency_key}}"
 							},
 							{
 								"key": "Authorization",
@@ -1224,7 +1574,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"DIRECT_CAPTURE\"\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"DIRECT_CAPTURE\",\r\n  \"orderId\": \"{{merchantOrderId}}\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
@@ -1316,7 +1666,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"RESERVE_CAPTURE\"\r\n}"
+							"raw": "{\r\n  \"amount\": {{amount_charge}},\r\n  \"description\": \"{{description_charge}}\",\r\n  \"due\": \"{{due}}\",\r\n  \"retryDays\": {{retryDays}},\r\n  \"transactionType\": \"RESERVE_CAPTURE\",\r\n  \"orderId\": \"{{merchantOrderId}}\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
@@ -1545,6 +1895,11 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
 							}
 						],
 						"body": {
@@ -1627,6 +1982,17 @@
 				},
 				{
 					"name": "List Charges",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"continuation_token\", pm.response.headers.get(\"Continuation-Token\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1665,16 +2031,22 @@
 								"key": "Vipps-System-Plugin-Version",
 								"value": "{{vipps_system_plugin_version}}",
 								"type": "default"
+							},
+							{
+								"key": "Continuation-Token",
+								"value": "{{contination_token}}",
+								"type": "default",
+								"disabled": true
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/recurring/v2/agreements/{{agreementId}}/charges",
+							"raw": "{{base_url}}/recurring/v3/agreements/{{agreementId}}/charges",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"recurring",
-								"v2",
+								"v3",
 								"agreements",
 								"{{agreementId}}",
 								"charges"
@@ -1704,7 +2076,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "Bearer {{login_token}}"
+								"value": "Bearer {{access_token}}"
 							},
 							{
 								"key": "Merchant-Serial-Number",
