@@ -411,7 +411,6 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - $ref: "#/components/parameters/AgreementStatusQuery"
         - $ref: "#/components/parameters/CreatedAfterQuery"
-        - $ref: "#/components/parameters/Idempotency-Key"
       responses:
         '200':
           description: OK
