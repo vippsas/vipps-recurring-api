@@ -403,6 +403,7 @@ paths:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
         - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Continuation-Token"
         - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
         - $ref: "#/components/parameters/Vipps-System-Version"
@@ -658,6 +659,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Idempotency-Key"
         - $ref: "#/components/parameters/Content-Type"
         - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
@@ -676,7 +678,7 @@ paths:
         '204':
           description: No content
         '202':
-          description: Accepted
+          description: Accepted. Request accepted, the action will likely succeed but has not yet been enacted.
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -693,6 +695,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Idempotency-Key"
         - $ref: "#/components/parameters/Content-Type"
         - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
@@ -931,6 +934,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Continuation-Token"
         - $ref: "#/components/parameters/Content-Type"
         - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
@@ -1033,6 +1037,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Authorization"
         - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Idempotency-Key"
         - $ref: "#/components/parameters/Content-Type"
         - $ref: "#/components/parameters/Merchant-Serial-Number"
         - $ref: "#/components/parameters/Vipps-System-Name"
@@ -1045,7 +1050,7 @@ paths:
         '204':
           description: No content
         '202':
-          description: Accepted
+          description: Accepted. Request accepted, the action will likely succeed but has not yet been enacted.
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1082,7 +1087,7 @@ paths:
         '204':
           description: No content
         '202':
-          description: Accepted
+          description: Accepted. Request accepted, the action will likely succeed but has not yet been enacted.
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1117,7 +1122,7 @@ paths:
         '204':
           description: No content
         '202':
-          description: Accepted
+          description: Accepted. Request accepted, the action will likely succeed but has not yet been enacted.
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false
@@ -1241,6 +1246,20 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/IdempotencyKeyFormat'
+
+    Continuation-Token:
+      in: header
+      name: Continuation-Token
+      description: |-
+        When returned from an endpoint, this indicates that there is more data than can be returned in one response.
+        Repeating the request with the received token in the Continuation-Token header will return the next page of data.
+        When not returned, the end of the data has been reached.
+
+        Continuation-Tokens are short-lived, so they cannot be used several minutes/hours after received.
+      required: false
+      schema:
+        type: string
+        format: uuid
 
     Merchant-Serial-Number:
       name: Merchant-Serial-Number
