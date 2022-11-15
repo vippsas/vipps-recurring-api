@@ -170,7 +170,7 @@ The general process is:
 - Log in on
   [portal.vipps.no](https://portal.vipps.no)
   and enter a new agreement with Vipps for the new orgno.
-- Order "Vipps Faste betalinger" for the new orno. on
+- Order "Vipps Faste betalinger" for the new orgno. on
   [portal.vipps.no](https://portal.vipps.no).
 - Inform all existing customers of the new orgno,
   and the planned date of the change.
