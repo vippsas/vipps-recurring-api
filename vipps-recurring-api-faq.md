@@ -19,10 +19,10 @@ See the
 for all the details.
 
 See also:
-[Vipps API FAQ](https://github.com/vippsas/vipps-developers/tree/master/faqs).
+[Vipps API FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/).
 
 See also:
-[Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
+[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
 guide.
 
 Document version: 1.6.2.
@@ -80,7 +80,7 @@ that the Vipps Recurring API is not yet activated for this sale unit.
 
 The Vipps Recurring API is available for existing customers that
 have "Vipps på Nett", a direct integration with the
-[Vipps eCom API](https://github.com/vippsas/vipps-ecom-api),
+[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/),
 and have completed some additional Know Your Customer (KYC) checks required by [Finanstilsynet](https://www.finanstilsynet.no).
 
 Vipps is required to perform some extra compliance checks before
@@ -318,7 +318,7 @@ users as described in
 
 ## How can I change partner for my integration with Vipps?
 
-See [How to change partners for a merchant](https://github.com/vippsas/vipps-partner#how-to-change-partners-for-a-merchant).
+See [How to change partners for a merchant](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/#how-to-change-partners-for-a-merchant).
 
 **Please note:** The MSN (the number) does _not_ change when changing partners.
 
@@ -328,7 +328,7 @@ Yes.
 
 Vipps offers the possibility for merchants, as part of the payment flow, to request the user's information. 
 For example if you wish to retrieve the user's email as part of a User profile setup. 
-This is supported in both [Vipps eCom API](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
+This is supported in both [Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api#userinfo)
 and [Vipps Recurring API](vipps-recurring-api.md#userinfo).
 
 This is done by adding a `scope` parameter to the initiate calls:
@@ -345,10 +345,10 @@ and
 - accountNumbers
 
 The userinfo endpoint is shared with
-[Vipps Login](https://github.com/vippsas/vipps-login-api)
+[Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/)
 and the merchant needs to have activated Vipps Login on their account to use
 this feature. Information on how to do this can be found
-[here](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api-faq.md#how-can-i-activate-and-set-up-vipps-login).
+[here](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/vipps-login-api-faq#how-can-i-activate-and-set-up-vipps-login).
 Using the Vipps Login service itself is optional.
 
 **Please note:** Vipps users have not consented to Vipps providing any
@@ -357,7 +357,7 @@ other API to look up a user's address, retrieve a user's purchases, etc.
 
 ## For how long is a payment reserved?
 
-See [For how long is a payment reserved?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#for-how-long-is-a-payment-reserved)
+See [For how long is a payment reserved?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
 in Vipps FAQs.
 
 ## When do users get push messages?

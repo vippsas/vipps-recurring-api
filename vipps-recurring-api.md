@@ -32,9 +32,11 @@ To get access to the Recurring API in production, order Vipps "Faste Betalinger"
 
 **IMPORTANT:** Before activating recurring payments for you,
 Vipps must perform some extra Know Your Customer (KYC) checks, as required by [Finanstilsynet](https://www.finanstilsynet.no).
-You will also need to set up a direct agreement for use of "Vipps på Nett" ([Vipps eCom API](https://github.com/vippsas/vipps-ecom-api)).
+You will also need to set up a direct agreement for use of "Vipps på Nett" ([Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/)).
 
-As a merchant, you can check if you have access to recurring payments through [portal.vipps.no](https://portal.vipps.no). Partners can check if a merchant has access to recurring payments through the [Vipps Partner API](https://github.com/vippsas/vipps-partner-api/blob/main/vipps-partner-api.md#get-information-about-a-sale-unit-based-on-msn).
+As a merchant, you can check if you have access to recurring payments through [portal.vipps.no](https://portal.vipps.no).
+Partners can check if a merchant has access to recurring payments through the
+[Vipps Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sale-unit-based-on-msn).
 
 See a detailed example of [how it works](vipps-login-recurring-howitworks.md).
 
@@ -47,7 +49,7 @@ See also:
 
 API version: 2.0.0.
 
-Document version 2.6.1.
+Document version 2.6.2.
 
 <!-- START_TOC -->
 
@@ -153,7 +155,7 @@ This is specified with the `transactionType`, and for "direct capture"
 the sale unit must be configured for this by Vipps.
 
 For more details, see
-[Common topics: Reserve and capture](https://github.com/vippsas/vipps-developers/blob/master/common-topics/reserve-and-capture.md).
+[Common topics: Reserve and capture](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/reserve-and-capture).
 
 **Note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
@@ -230,14 +232,14 @@ See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way 
 
 All Vipps API calls are authenticated with an access token and an API subscription key.
 See
-[Get an access token](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#get-an-access-token)
+[Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token)
 in the Getting started guide, for details.
 
 ## Vipps HTTP headers
 
 We recommend using the standard Vipps HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md)
+See [Vipps HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
 in the Getting started guide, for details.
 
 ## Idempotency Key header (V3 API Coming Soon)
@@ -250,7 +252,7 @@ This way, if a request fails for any technical reason, or there is a networking 
 **Important:** If you reuse an idempotency-key on a different request, you will get a 409 CONFLICT.
 
 See the
-[Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md#idempotency)
+[Idempotency header](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers#idempotency)
 for more details.
 
 ## Continuation-Token header (V3 API Coming Soon)
@@ -357,7 +359,7 @@ strongly recommend using
 [Vipps Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not need a username or password, but is logged
 in automatically through Vipps. See the
-[Login API documentation](https://github.com/vippsas/vipps-login-api)
+[Login API documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/)
 for more details.
 
 The request parameters have the following size limits
@@ -389,7 +391,7 @@ or to Vipps in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
 See
-[Vipps landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md)
+[Vipps landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page)
 from Common topics, for more details about the landing page.
 
 ### Accept an agreement
@@ -557,7 +559,7 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be
@@ -818,7 +820,7 @@ A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
@@ -830,7 +832,7 @@ The advantage to using reserve capture is that you can release the reservation i
 
 See the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint definition for examples.
 
-Also see check [orderId recommendations](https://github.com/vippsas/vipps-developers/blob/master/common-topics/orderid.md) before creating charges.
+Also see check [orderId recommendations](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/orderid) before creating charges.
 
 ### Capture a charge
 
@@ -853,7 +855,7 @@ Partial capture may be used in cases where a partial order is shipped or for oth
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [For how long is a payment reserved](https://github.com/vippsas/vipps-developers/blob/master/faqs/reserve-and-capture-faq.md#for-how-long-is-a-payment-reserved)
+See [For how long is a payment reserved](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
 in the Vipps FAQ for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
@@ -1139,11 +1141,11 @@ The user gets more information in Vipps regarding why the Charge did not get cha
 Vipps offers the possibility for merchants to ask for the user's profile information as part of the payment flow.
 
 To enable the possibility to fetch profile information for a user the merchant can add a
-[`scope`](https://github.com/vippsas/vipps-developers/blob/master/common-topics/userinfo.md#scope)
+[`scope`](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo#scope)
 parameter to the [`POST:/agreements`][draft-agreement-endpoint-v2] call.
 
 See
-[User information](https://github.com/vippsas/vipps-developers/blob/master/common-topics/userinfo.md)
+[User information](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo)
 in the Common topics for details.
 
 ### Userinfo call by call guide
@@ -1226,13 +1228,13 @@ This endpoint returns the payload with the information that the user has consent
 Call the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier.
 
 See
-[Userinfo call](https://github.com/vippsas/vipps-developers/blob/master/common-topics/userinfo.md#userinfo-call)
+[Userinfo call](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo#userinfo-call)
 in Common topics for details.
 
 ### Consent
 
 See
-[Consent](https://github.com/vippsas/vipps-developers/blob/master/common-topics/userinfo.md#consent)
+[Consent](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo#consent)
 in Common topics for details.
 
 ## Recurring agreements with variable amount
@@ -1506,7 +1508,7 @@ re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
 
 Here's an example of headers (please refer to the
-[OpenAPI/Swagger specification](https://vippsas.github.io/vipps-recurring-api/)
+[OpenAPI specification](https://vippsas.github.io/vipps-recurring-api/)
 for all the details):
 
 ```http
@@ -1527,7 +1529,7 @@ partner's MSN. This parameter is also recommended for regular Vipps
 merchants making API calls for themselves.
 
 See:
-[Vipps Partners](https://github.com/vippsas/vipps-partner).
+[Vipps Partners](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/).
 
 ## Polling guidelines
 
@@ -1536,11 +1538,11 @@ General guidelines for polling with the
 endpoint can be found at:
 
 
-See [Polling guidelines](https://github.com/vippsas/vipps-developers/blob/master/common-topics/polling-guidelines.md) in Common topics, for details.
+See [Polling guidelines](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/polling-guidelines) in Common topics, for details.
 
 ## Timeouts
 
-See [Timeouts](https://github.com/vippsas/vipps-developers/blob/master/common-topics/timeouts.md)
+See [Timeouts](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/timeouts)
 in Common topics for details.
 
 ## Testing
@@ -1556,7 +1558,7 @@ The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
 
-See [Recommendations regarding handling redirects](https://github.com/vippsas/vipps-developers/blob/master/common-topics/redirects.md) in Common topics for details.
+See [Recommendations regarding handling redirects](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/redirects) in Common topics for details.
 
 ## When to use campaigns or initial charge
 
@@ -1637,4 +1639,4 @@ Sign up for our [Technical newsletter for developers](https://vippsas.github.io/
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/RefundCharge
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md
+[vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment
