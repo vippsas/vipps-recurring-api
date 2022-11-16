@@ -42,7 +42,7 @@ See a detailed example of [how it works](vipps-login-recurring-howitworks.md).
 
 See also:
 
-* [API Reference](https://vippsas.github.io/vipps-recurring-api/)
+* [OpenAPI Reference](https://vippsas.github.io/vipps-developer-docs/api/recurring/)
 * [Quick start guide](vipps-recurring-api-quick-start.md)
 * [Integration checklist](vipps-recurring-api-checklist.md)
 * [FAQ](vipps-recurring-api-faq.md)
@@ -1508,7 +1508,7 @@ re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
 
 Here's an example of headers (please refer to the
-[OpenAPI specification](https://vippsas.github.io/vipps-recurring-api/)
+[OpenAPI specification](https://vippsas.github.io/vipps-developer-docs/api/recurring/)
 for all the details):
 
 ```http
