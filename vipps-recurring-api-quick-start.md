@@ -41,7 +41,7 @@ Document version 1.1.1.
 ### Prerequisites
 
 Review
-[Vipps quick start guides](https://github.com/vippsas/vipps-developers/blob/master/vipps-quick-start-guides.md)
+[Vipps quick start guides](https://github.com/vippsas/vipps-developers/blob/master/developer-resources/quick-start-guides.md)
 for information about getting your test environment set up.
 
 ### Step 1: Get the Vipps Postman collection and environment
@@ -54,8 +54,8 @@ Save the following files to your computer:
 ### Step 2: Import the Vipps Postman files
 
 1. In Postman, click *Import* in the upper-left corner.
-2. In the dialog that opens, with *File* selected, click *Upload Files*.
-3. Select the two files you have just downloaded and click *Import*.
+1. In the dialog that opens, with *File* selected, click *Upload Files*.
+1. Select the two files you have just downloaded and click *Import*.
 
 ### Step 3: Setup Postman environment
 
@@ -108,7 +108,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 
    If you confirmed the agreement, the status should be ACTIVE in the response.
    If you didn't go through with the confirmation, the status will be PENDING for a
-   [maximum of 10 minutes](vipps-recurring-api.md#timeouts),
+   [maximum of 10 minutes](https://github.com/vippsas/vipps-developers/blob/master/common-topics/timeouts.md),
    before it goes to `EXPIRED`.
 
 #### Create an agreement with an initial charge
@@ -291,9 +291,9 @@ When you create an agreement with a reserved charge, you will need to capture th
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-ecom-api/issues),
 a [pull request](https://github.com/vippsas/vipps-ecom-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
-Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
@@ -310,4 +310,4 @@ Sign up for our [Technical newsletter for developers](https://github.com/vippsas
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md
+[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md

@@ -14,24 +14,24 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-API version: 2.0
+API version: 3.0
 
-Document version 1.2.9.
+Document version 3.0.0.
 
 ## Checklist
 
 - [ ] Integrate _all_ the [API endpoints](vipps-recurring-api.md) described in our guide:
-    - [ ] Agreement: Create an agreement [`POST:/recurring/v2/agreements`][draft-agreement-endpoint]
-    - [ ] Agreement: Retrieve an agreement [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint]
-    - [ ] Agreement: Update an agreement [`PATCH:/recurring/v2/agreements/{agreementId}`][update-agreement-put-endpoint]
-    - [ ] Agreement: List charges [`GET:/recurring/v2/agreements/{agreementId}/charges`][list-charges-endpoint]
-    - [ ] Charge: Create Charge [`POST:/recurring/v2/agreements/{agreementId}/charges`][create-charge-endpoint]
-    - [ ] Charge: Retrieve a charge [`GET:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]
-    - [ ] Charge: Cancel a charge [`DELETE:/recurring/v2/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
-    - [ ] Charge: Refund a charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]
-    - [ ] Charge: Capture a reserved initial charge [`POST:/recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]
+    - [ ] Agreement: Create an agreement [`POST:/agreements`][draft-agreement-endpoint]
+    - [ ] Agreement: Retrieve an agreement [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
+    - [ ] Agreement: Update an agreement [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]
+    - [ ] Agreement: List charges [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]
+    - [ ] Charge: Create Charge [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]
+    - [ ] Charge: Retrieve a charge [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]
+    - [ ] Charge: Cancel a charge [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
+    - [ ] Charge: Refund a charge [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]
+    - [ ] Charge: Capture a reserved charge [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]
     - For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
-  - [ ] Send the [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md#vipps-http-headers)
+  - [ ] Send the [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md)
         in all API requests for better tracking and troubleshooting
         (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
       - [ ] `Merchant-Serial-Number`
@@ -40,7 +40,7 @@ Document version 1.2.9.
       - [ ] `Vipps-System-Plugin-Name`
       - [ ] `Vipps-System-Plugin-Version`
 - [ ] Avoid Integration pitfalls
-    - [ ] The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/recurring/v2/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement.
+    - [ ] The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement.
     - [ ] Monitor the error messages Vipps returns from the APIs, and correct problems as quickly as possible. It's recommended to log errors emitted by our APIs, this makes it easier to pinpoint what has gone wrong.
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
     - [ ] The merchant must have a way for the user to manage and stop subscription in merchantAgreementUrl in their Agreement. This should result in a timely update of the Vipps Agreement.
@@ -57,8 +57,8 @@ Document version 1.2.9.
 2. Vipps completes customer control (KYC, PEP, AML, etc).
 3. The merchant receives an email from Vipps saying that they can log in with bankID on [portal.vipps.no](https://portal.vipps.no) and retrieve API keys.
 4. The merchant completes all checklist items.
-5. The merchant [contacts Vipps](https://github.com/vippsas/vipps-developers/blob/master/contact.md) with the MSN to check.
-   Vipps will check agreements and charges in the [Vipps test environment](https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md), showing that all checklist items have been fulfilled:
+5. The merchant [contacts Vipps](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact) with the MSN to check.
+   Vipps will check agreements and charges in the [Vipps test environment](https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md), showing that all checklist items have been fulfilled:
     - A complete Agreement ending in `ACTIVE`.
     - A complete Agreement ending in `STOPPED`.
     - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
@@ -77,22 +77,20 @@ Document version 1.2.9.
 We're always happy to help with code or other questions you might have!
 Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
 a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
-or [contact us](https://github.com/vippsas/vipps-developers/blob/master/contact.md).
+or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
-Sign up for our [Technical newsletter for developers](https://github.com/vippsas/vipps-developers/tree/master/newsletters).
+Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
-[list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/ListAgreements
-[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
-[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
-[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
-[update-agreement-put-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPut
-[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/acceptUsingPATCH
-[list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/ListCharges
-[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CreateCharge
-[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/FetchCharge
-[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CancelCharge
-[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/CaptureCharge
-[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/RefundCharge
+[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
+[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
+[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
+[list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
+[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
+[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
+[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
+[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
+[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/vipps-test-environment.md
+[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md
