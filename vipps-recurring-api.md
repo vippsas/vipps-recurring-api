@@ -47,7 +47,7 @@ See also:
 
 API version: 2.0.0.
 
-Document version 2.6.1.
+Document version 2.6.2.
 
 <!-- START_TOC -->
 
@@ -102,7 +102,6 @@ Document version 2.6.1.
   - [Charge failure reasons](#charge-failure-reasons)
     - [Deprecated failureReasons](#deprecated-failurereasons)
   - [Userinfo](#userinfo)
-    - [Scope](#scope)
     - [Userinfo call by call guide](#userinfo-call-by-call-guide)
     - [Example calls](#example-calls)
     - [Userinfo call](#userinfo-call)
@@ -119,6 +118,7 @@ Document version 2.6.1.
   - [Rate limiting](#rate-limiting)
   - [Partner keys](#partner-keys)
   - [Polling guidelines](#polling-guidelines)
+  - [Notifications to customers for failed charges](#notifications-to-customers-for-failed-charges)
   - [Timeouts](#timeouts)
   - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
@@ -1537,6 +1537,14 @@ endpoint can be found at:
 
 
 See [Polling guidelines](https://github.com/vippsas/vipps-developers/blob/master/common-topics/polling-guidelines.md) in Common topics, for details.
+
+## Notifications to customers for failed charges
+
+We notify the customer in two ways, through push notifications and failure texts on the charge.
+When a charge fails to be processed, we send the customer a push notification letting them know the charge failed to process. This push message is sent every time we try to process the charge, see [charge times](#charge-times) for when we process charges. We also set a failure text on the charge, which will be visible to the customer in Vipps under the "payments" tab on the "due" charge.
+
+The push and setting of failure message on the charge will happen *every* time we try to process. For example if the charge has 3 retryDays and it fails to process every day. We will send push message 2 times a day (when we process charges) for 3 days (as long as we retry).
+See the [FAQ](vipps-recurring-api-faq.md#when-do-users-get-push-messages) for more information about failure text on the charge.
 
 ## Timeouts
 
