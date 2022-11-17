@@ -100,7 +100,7 @@ with the correct `scope`.
 
 ## Can I look up which user owns an agreement?
 
-No. See: [Can I look up a user's information?](#can-i-look-up-a-users-information) and [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
+No. See: [Can I look up a user's information?](#can-i-look-up-a-users-information) and [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user).
 
 ## How can I convert existing agreements to Vipps agreements?
 
