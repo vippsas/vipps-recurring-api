@@ -31,6 +31,7 @@ Document version: 1.6.2.
 
 ## Table of Contents
 
+* [How do I migrate to the V3 API](#how-do-i-migrate-to-the-v3-api)
 * [Does Vipps automatically create charges for an agreement?](#does-vipps-automatically-create-charges-for-an-agreement)
 * [Do I need to store card data?](#do-i-need-to-store-card-data)
 * [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
@@ -61,6 +62,10 @@ Document version: 1.6.2.
 * [Questions?](#questions)
 
 <!-- END_TOC -->
+
+## How do I migrate to the v3 API? 
+Please check the [migration guide](v2-to-v3-migration-guide#migration-guide-from-v2-to-v3) to see the differences between Recurring API v2 and v3.
+Please also check the [V3 API definitions](https://vippsas.github.io/vipps-developer-docs/api/recurring) 
 
 ## Does Vipps automatically create charges for an agreement?
 
