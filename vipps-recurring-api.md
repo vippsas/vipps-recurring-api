@@ -63,18 +63,17 @@ Document version 2.6.1.
   - [API endpoints](#api-endpoints)
   - [Authentication and authorization](#authentication-and-authorization)
   - [Vipps HTTP headers](#vipps-http-headers)
-  - [Idempotency Key header (V3 API Coming Soon)](#idempotency-key-header-v3-api-coming-soon)
-  - [Continuation-Token header (V3 API Coming Soon)](#continuation-token-header-v3-api-coming-soon)
+  - [Idempotency Key header](#idempotency-key-header)
+  - [Continuation-Token header](#continuation-token-header)
   - [orderId recommendations](#orderid-recommendations)
   - [Agreements](#agreements)
     - [Create an agreement](#create-an-agreement)
     - [Accept an agreement](#accept-an-agreement)
     - [Intervals](#intervals)
-      - [Example in the V2 api:](#example-in-the-v2-api)
     - [Initial charge](#initial-charge)
     - [Campaigns](#campaigns)
       - [Campaigns in V2 API](#campaigns-in-v2-api)
-      - [(Coming soon - WORK IN PROGRESS) Campaigns in V3 API](#coming-soon---work-in-progress-campaigns-in-v3-api)
+      - [Campaigns in V3 API](#campaigns-in-v3-api)
         - [Price campaign](#price-campaign)
         - [Period campaign](#period-campaign)
         - [Event campaign](#event-campaign)
@@ -84,7 +83,7 @@ Document version 2.6.1.
   - [Charges](#charges)
     - [Create a charge](#create-a-charge)
     - [Capture a charge](#capture-a-charge)
-    - [Partial capture (Coming soon)](#partial-capture-coming-soon)
+    - [Partial capture](#partial-capture)
     - [Amount changes](#amount-changes)
     - [Charge descriptions](#charge-descriptions)
     - [Cancel a charge](#cancel-a-charge)
@@ -181,7 +180,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 ### Reserve capture
 
-**Note:** Reserve capture on recurring charges is available in the recurring API v3 (Coming soon - WORK IN PROGRESS)
+**Note:** Reserve capture on recurring charges is available in the recurring API v3.
 In the API V2, reserve capture is only available on initial charges.
 
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
@@ -240,8 +239,8 @@ We recommend using the standard Vipps HTTP headers for all requests.
 See [Vipps HTTP headers](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md)
 in the Getting started guide, for details.
 
-## Idempotency Key header (V3 API Coming Soon)
-
+## Idempotency Key header
+**V3 api only**
 The `Idempotency-Key` header must be set in any request that creates or modifies a resource (`POST`, `PUT`, `PATCH` or `DELETE`).
 This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency-key should prevent operations and side-effects from being performed more than once, and you should receive the same response as if you only sent one request.
 
@@ -253,8 +252,8 @@ See the
 [Idempotency header](https://github.com/vippsas/vipps-developers/blob/master/common-topics/http-headers.md#idempotency)
 for more details.
 
-## Continuation-Token header (V3 API Coming Soon)
-
+## Continuation-Token header
+**V3 api only**
 The `Continuation-Token` header is introduced on endpoints that returns multiple items to allow pagination. When returned from the API, it indicates that there are more items to be received. In order to receive the next page, repeat the request adding the received token in the `Continuation-Token`-header.
 
 ## orderId recommendations
@@ -640,7 +639,7 @@ date-time is used. All dates must be in date-time format as according to
 | `end`           | End date of campaign offer, can not be in the past                                                                      |
 | `campaignPrice` | The price that will be shown for comparison                                                                             |
 
-#### (Coming soon - WORK IN PROGRESS) Campaigns in V3 API
+#### Campaigns in V3 API
 In V3, we introduce 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign.
 See more about the different campaign types in the table below.
 
@@ -819,7 +818,7 @@ upcoming charge. The user is only shown one charge per agreement, in order to
 not overwhelm the user when doing daily or weekly charges.
 
 A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
-**Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api (Coming soon - WORK IN PROGRESS)
+**Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api.
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
@@ -840,7 +839,7 @@ Also see check [orderId recommendations](https://github.com/vippsas/vipps-develo
 ### Capture a charge
 
 Capture payment allows the merchant to capture the reserved amount of a charge.
-The API allows for both a full amount capture and a partial amount capture (partial amount only available in API V3)(Coming soon)
+The API allows for both a full amount capture and a partial amount capture (**V3 api only**)
 
 The amount to capture cannot be higher than the reserved amount.
 According to Norwegian regulations, capture cannot be done before the goods have been shipped.
@@ -852,8 +851,8 @@ Capture is done with the [`POST:/agreements/{agreementId}/charges/{chargeId}/cap
 
 Capture can be made up to 180 days after reservation. Attempting to capture an older payment will result in `HTTP 400 Bad Request`.
 
-### Partial capture (Coming soon)
-
+### Partial capture
+**V3 api only**
 Partial capture may be used in cases where a partial order is shipped or for other reasons.
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
@@ -1709,7 +1708,7 @@ Ideally, this flow is intended for when you have a combination of an additional 
 **Agreement screens with initial and campaign v2**
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
 
-**(Coming soon WORK IN PROGRESS) Agreement screens with initial and campaign v3**
+**Agreement screens with initial and campaign v3**
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/price-campaign-with-initial-charge.png)
 
 
