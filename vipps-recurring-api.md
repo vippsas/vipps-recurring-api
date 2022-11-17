@@ -118,7 +118,7 @@ Document version 2.6.2.
   - [Rate limiting](#rate-limiting)
   - [Partner keys](#partner-keys)
   - [Polling guidelines](#polling-guidelines)
-  - [Notifications to customers for failed charges](#notifications-to-customers-for-failed-charges)
+  - [Notifications to users for failed charges](#notifications-to-users-for-failed-charges)
   - [Timeouts](#timeouts)
   - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
@@ -1538,13 +1538,22 @@ endpoint can be found at:
 
 See [Polling guidelines](https://github.com/vippsas/vipps-developers/blob/master/common-topics/polling-guidelines.md) in Common topics, for details.
 
-## Notifications to customers for failed charges
+## Notifications to users for failed charges
 
-We notify the customer in two ways, through push notifications and failure texts on the charge.
-When a charge fails to be processed, we send the customer a push notification letting them know the charge failed to process. This push message is sent every time we try to process the charge, see [charge times](#charge-times) for when we process charges. We also set a failure text on the charge, which will be visible to the customer in Vipps under the "payments" tab on the "due" charge.
+We notify the user in two ways, through push notifications and failure texts on the charge.
+When a charge fails to be processed, we send the user a push notification letting them know the charge failed to process. 
+This push message is sent every time we try to process the charge, see [charge times](#charge-times) for when the processing of charges happen.
+More information about how and when we send push notifications can be found in the [FAQ](vipps-recurring-api-faq.md#when-do-users-get-push-messages).
 
-The push and setting of failure message on the charge will happen *every* time we try to process. For example if the charge has 3 retryDays and it fails to process every day. We will send push message 2 times a day (when we process charges) for 3 days (as long as we retry).
-See the [FAQ](vipps-recurring-api-faq.md#when-do-users-get-push-messages) for more information about failure text on the charge.
+**Note:** We send push notification for failed payments regardless if `Notification upon payment` is toggled on or off on the agreement. 
+This toggle only determine if the user will get notified when a charge is successfully charged.
+
+In addition to sending push notifications, a failure texts is also set on the charge.
+By letting the customer know why the charge failed we enable them to fix the underlying issue before the "retryDays" are over.
+For more information about what the failure texts are, see the  [FAQ](vipps-recurring-api-faq.md#what-is-shown-to-users-when-charge-processing-fails).
+
+**Note:** These exact reasons why the charge fails is not shown in the recurring API, only to the customers (users).
+See the [merchant charge failure reason](#Charge-failure-reasons) for an overview of what is available in the merchant API.
 
 ## Timeouts
 
