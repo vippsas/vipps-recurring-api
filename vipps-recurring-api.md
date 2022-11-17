@@ -45,7 +45,7 @@ See also:
 * [Integration checklist](vipps-recurring-api-checklist.md)
 * [FAQ](vipps-recurring-api-faq.md)
 
-API version: 2.0.0.
+API version: 3.0.0.
 
 Document version 2.6.2.
 
