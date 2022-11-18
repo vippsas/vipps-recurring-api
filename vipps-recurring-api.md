@@ -311,9 +311,7 @@ for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
-An agreement is between the Vipps user and the merchant.
-Think of it as a subscription.
-An agreement has payments, called [charges](#charges).
+An agreement is between the Vipps user and the merchant. Think of it as a payment agreement that allows you (the merchant) to recurringly charge the customer without them having to manually approve every time. See [charges](#charges).
 
 ### Create an agreement
 
@@ -395,6 +393,11 @@ See
 [Vipps landing page](https://github.com/vippsas/vipps-developers/blob/master/common-topics/vipps-landing-page.md)
 from Common topics, for more details about the landing page.
 
+
+**Note:** If payment should be required to activate an agreement, you need to specify an initial charge.
+If you are dealing with physical goods, this should be a RESERVE_CAPTURE, but for digital goods where the customer instantly gains access, DIRECT_CAPTURE might be easier to manage.
+See [Initial charge](#initial-charge).
+
 #### Pricing representation
 
 There is two different types of pricing available:
@@ -434,6 +437,7 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
 ```
 
 **Please note**: Going forward, new types will be introduced. We will look into how we can implement charge limits in a better way, that takes care of the merchants needs. 
+
 
 ### Accept an agreement
 
@@ -1751,4 +1755,4 @@ Sign up for our [Technical newsletter for developers](https://vippsas.github.io/
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://github.com/vippsas/vipps-developers/blob/master/developer-resources/test-environment.md
+[vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment
