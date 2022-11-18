@@ -17,8 +17,8 @@ END_METADATA -->
 Vipps Login and Vipps Recurring can be used together making registration and payment simple for your customers.
 
 For the complete API documentation go to
-* [Vipps Login API](https://github.com/vippsas/vipps-login-api)
-* [Vipps Recurring API](https://github.com/vippsas/vipps-recurring-api)
+* [Vipps Login API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/)
+* [Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/)
 
 ## The process
 
@@ -71,12 +71,12 @@ The user is sent back to the merchant’s website or app, and the subscription i
 
 ## Great! Now you know how you can use Vipps Login and Vipps Recurring together.
 
-Take a look at the technical documentation in the [Vipps Login API Guide](https://github.com/vippsas/vipps-login-api/blob/master/vipps-login-api.md), and the [Vipps Recurring API Guide](https://github.com/vippsas/vipps-recurring-api/blob/master/vipps-recurring-api.md)
+Take a look at the technical documentation in the [Vipps Login API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/vipps-login-api), and the [Vipps Recurring API Guide](vipps-recurring-api.md).
 
 
 ## Questions?
 
 We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-login-api/issues),
-a [pull request](https://github.com/vippsas/vipps-login-api/pulls),
+Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
+a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
 or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
