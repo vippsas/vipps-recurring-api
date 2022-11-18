@@ -65,9 +65,10 @@ Document version: 1.6.3.
 
 <!-- END_TOC -->
 
-## How do I migrate to the v3 API? 
-Please check the [migration guide](v2-to-v3-migration-guide#migration-guide-from-v2-to-v3) to see the differences between Recurring API v2 and v3.
-Please also check the [V3 API definitions](https://vippsas.github.io/vipps-developer-docs/api/recurring) 
+## How do I migrate to the v3 API?
+
+Please check the [migration guide](v2-to-v3-migration-guide.md) to see the differences between Recurring API v2 and v3.
+Please also check the [V3 API definitions](https://vippsas.github.io/vipps-developer-docs/api/recurring).
 
 ## Does Vipps automatically create charges for an agreement?
 
