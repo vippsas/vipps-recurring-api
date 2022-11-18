@@ -25,7 +25,7 @@ See also:
 [Getting Started](https://github.com/vippsas/vipps-developers/blob/master/vipps-getting-started.md)
 guide.
 
-Document version: 1.6.2.
+Document version: 1.6.3.
 
 <!-- START_TOC -->
 
@@ -41,6 +41,7 @@ Document version: 1.6.2.
 * [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
 * [How can I change partners for a merchant?](#how-can-i-change-partners-for-a-merchant)
 * [At what time during the day are charges made?](#at-what-time-during-the-day-are-charges-made)
+* [How can I make a charge when the agreement is created](#how-can-i-make-a-charge-when-the-agreement-is-created)
 * [How do I check my customer's status?](#how-do-i-check-my-customers-status)
 * [A customer's charge failed, but I did not receive any warning](#a-customers-charge-failed-but-did-not-receive-any-warning)
 * [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
@@ -237,6 +238,11 @@ Charge _attempts_ are made two times during the day: 08:00 og 16:00 UTC.
 Subsequent attempts are made according to the `retryDays` specified.
 This applies for both our production and test environment (MT).
 
+## How can I make a charge when the agreement is created
+
+You need to use
+[Initial charge](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#initial-charge).
+
 ## How do I check my customer's status?
 
 Get details about a specific Agreement:
@@ -270,9 +276,9 @@ the user.
 
 See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 
-## How can I delete an agreement? 
+## How can I delete an agreement?
 
-Agreements can be stopped by calling the [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint. 
+Agreements can be stopped by calling the [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
 See [Stop an agreement](vipps-recurring-api.md#stop-an-agreement).
 
 ## Can a user cancel the agreement through the Vipps app?
@@ -291,7 +297,7 @@ Agreement.
 
 ## What happens to charges if the corresponding agreement is cancelled?
 All charges in a `PENDING`, `DUE` or `RESERVED` state will be cancelled if the Agreement is stopped.  
-**Note**: This also includes the `initial charge` if it's currently `RESERVED`. 
+**Note**: This also includes the `initial charge` if it's currently `RESERVED`.
 So if the merchant needs to charge the user for the initial charge; then this needs to be done before the agreement is stopped.
 
 ## If a user's card expires: What happens on the next charge?
@@ -336,8 +342,8 @@ See [How to change partners for a merchant](https://github.com/vippsas/vipps-par
 
 Yes.
 
-Vipps offers the possibility for merchants, as part of the payment flow, to request the user's information. 
-For example if you wish to retrieve the user's email as part of a User profile setup. 
+Vipps offers the possibility for merchants, as part of the payment flow, to request the user's information.
+For example if you wish to retrieve the user's email as part of a User profile setup.
 This is supported in both [Vipps eCom API](https://github.com/vippsas/vipps-ecom-api/blob/master/vipps-ecom-api.md#userinfo)
 and [Vipps Recurring API](vipps-recurring-api.md#userinfo).
 
@@ -415,4 +421,3 @@ Sign up for our [Technical newsletter for developers](https://vippsas.github.io/
 [fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
 [update-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
 [list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/ListCharges
-

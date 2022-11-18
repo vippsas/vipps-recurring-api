@@ -1559,7 +1559,7 @@ This means, in the future, `detail` and `extraDetails` content can change for so
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
 fraudulent and wrongful behaviour, and increase the stability and security of
-our API. The limits should not affect normal behaviour, but please 
+our API. The limits should not affect normal behaviour, but please
 [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
 if you notice any unexpected behaviour.
 
@@ -1710,6 +1710,8 @@ Initial charges are designed to be used whenever there is an additional cost in 
 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, and have to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
 
+**Please note:** If you require a payment to be completed at the same time that the agreement is created, you must use initial charge.
+
 ### Campaign
 
 See [Campaigns](#campaigns) for details about campaigns.
@@ -1756,3 +1758,4 @@ Sign up for our [Technical newsletter for developers](https://vippsas.github.io/
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
 [vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment
+
