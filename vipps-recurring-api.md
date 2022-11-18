@@ -313,9 +313,7 @@ for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
-An agreement is between the Vipps user and the merchant.
-Think of it as a subscription.
-An agreement has payments, called [charges](#charges).
+An agreement is between the Vipps user and the merchant. Think of it as a payment agreement that allows you (the merchant) to recurringly charge the customer without them having to manually approve every time. See [charges](#charges).
 
 ### Create an agreement
 
@@ -397,6 +395,11 @@ See
 [Vipps landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page)
 from Common topics, for more details about the landing page.
 
+
+**Note:** If payment should be required to activate an agreement, you need to specify an initial charge.
+If you are dealing with physical goods, this should be a RESERVE_CAPTURE, but for digital goods where the customer instantly gains access, DIRECT_CAPTURE might be easier to manage.
+See [Initial charge](#initial-charge).
+
 #### Pricing representation
 
 There is two different types of pricing available:
@@ -436,6 +439,7 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
 ```
 
 **Please note**: Going forward, new types will be introduced. We will look into how we can implement charge limits in a better way, that takes care of the merchants needs. 
+
 
 ### Accept an agreement
 
@@ -1557,7 +1561,7 @@ This means, in the future, `detail` and `extraDetails` content can change for so
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
 fraudulent and wrongful behaviour, and increase the stability and security of
-our API. The limits should not affect normal behaviour, but please 
+our API. The limits should not affect normal behaviour, but please
 [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
 if you notice any unexpected behaviour.
 
@@ -1707,6 +1711,8 @@ Here we also show `productName` and the agreement explanation on the agreement, 
 Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobile phone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, and have to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
+
+**Please note:** If you require a payment to be completed at the same time that the agreement is created, you must use initial charge.
 
 ### Campaign
 
