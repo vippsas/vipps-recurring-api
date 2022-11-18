@@ -36,6 +36,7 @@ Document version: 1.6.2.
 * [Do I need to store card data?](#do-i-need-to-store-card-data)
 * [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
 * [Can I look up a user's information?](#can-i-look-up-a-users-information)
+* [Can I look up which user owns an agreement?](#can-i-look-up-which-user-owns-an-agreement)
 * [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
 * [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
 * [How can I change partners for a merchant?](#how-can-i-change-partners-for-a-merchant)
@@ -101,6 +102,10 @@ Vipps can only provide user information with the user's consent.
 The merchant must ask the user for consent when creating the agreement using
 [Userinfo](vipps-recurring-api.md#userinfo)
 with the correct `scope`.
+
+## Can I look up which user owns an agreement?
+
+No. See: [Can I look up a user's information?](#can-i-look-up-a-users-information) and [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user).
 
 ## How can I convert existing agreements to Vipps agreements?
 
