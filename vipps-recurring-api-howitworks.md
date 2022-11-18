@@ -17,7 +17,7 @@ END_METADATA -->
 Vipps Recurring can be used for subscriptions, donations or other recurring payments.
 
 For technical documentation go to:
-[Vipps Recurring API](https://github.com/vippsas/vipps-recurring-api).
+[Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/).
 
 ## The recurring payment process
 
@@ -61,7 +61,7 @@ The user can see their active subscriptions, as well as stopped subscriptions, a
 
 ## 6. Manage agreements
 
-If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://github.com/vippsas/vipps-login-api) to make login to the merchant’s site go smoothly.
+If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 
