@@ -17,10 +17,8 @@ tags:
   - name: Authorization Service
   - name: Agreement v2 endpoints
   - name: Agreement v3 endpoints
-    description: Coming soon - WORK IN PROGRESS
   - name: Charge v2 endpoints
   - name: Charge v3 endpoints
-    description: Coming soon - WORK IN PROGRESS
   - name: Userinfo Endpoint
 
 paths:
