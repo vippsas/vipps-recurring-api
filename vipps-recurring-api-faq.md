@@ -31,10 +31,12 @@ Document version: 1.6.2.
 
 ## Table of Contents
 
+* [How do I migrate to the V3 API](#how-do-i-migrate-to-the-v3-api)
 * [Does Vipps automatically create charges for an agreement?](#does-vipps-automatically-create-charges-for-an-agreement)
 * [Do I need to store card data?](#do-i-need-to-store-card-data)
 * [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
 * [Can I look up a user's information?](#can-i-look-up-a-users-information)
+* [Can I look up which user owns an agreement?](#can-i-look-up-which-user-owns-an-agreement)
 * [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
 * [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
 * [How can I change partners for a merchant?](#how-can-i-change-partners-for-a-merchant)
@@ -61,6 +63,10 @@ Document version: 1.6.2.
 * [Questions?](#questions)
 
 <!-- END_TOC -->
+
+## How do I migrate to the v3 API? 
+Please check the [migration guide](v2-to-v3-migration-guide#migration-guide-from-v2-to-v3) to see the differences between Recurring API v2 and v3.
+Please also check the [V3 API definitions](https://vippsas.github.io/vipps-developer-docs/api/recurring) 
 
 ## Does Vipps automatically create charges for an agreement?
 
@@ -96,6 +102,10 @@ Vipps can only provide user information with the user's consent.
 The merchant must ask the user for consent when creating the agreement using
 [Userinfo](vipps-recurring-api.md#userinfo)
 with the correct `scope`.
+
+## Can I look up which user owns an agreement?
+
+No. See: [Can I look up a user's information?](#can-i-look-up-a-users-information) and [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user).
 
 ## How can I convert existing agreements to Vipps agreements?
 
@@ -170,7 +180,7 @@ The general process is:
 - Log in on
   [portal.vipps.no](https://portal.vipps.no)
   and enter a new agreement with Vipps for the new orgno.
-- Order "Vipps Faste betalinger" for the new orno. on
+- Order "Vipps Faste betalinger" for the new orgno. on
   [portal.vipps.no](https://portal.vipps.no).
 - Inform all existing customers of the new orgno,
   and the planned date of the change.
@@ -362,16 +372,26 @@ in Vipps FAQs.
 
 ## When do users get push messages?
 
-| Event                                           | Push message text (Norwegian)                                                       | Push message text (English)                                                                    |
-|-------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| Agreement request                               | Bekreft fast betaling                                                               | Confirm recurring payment                                                                      |
-| Charge processed successfully                   | Fast betaling til `merchant name` har blitt gjennomført                             | Payment to `merchant name` has been processed                                                  |
-| Insufficient funds                              | Pass på at du har nok penger. Vi prøver igjen litt senere.                          | Make sure you have enough money. We'll try again later.                                        |
-| Invalid payment source (retryable)              | Kortet er ugyldig, prøv å endre det og kontakt `merchant name` å fortsette avtalen. | The card is invalid, try changing it and contacting `merchant name` to continue the agreement. |
-| Invalid payment source (not retryable)          | Kortet er ugyldig, prøv et annet.                                                   | The card is invalid, try another.                                                              |
-| Charge amount too high (variable amount)        | Beløpet er høyere enn det avtalte maksimumsbeløpet.                                 | The amount is higher than the agreed maximum amount.                                           |
-| Future charge amount too high (variable amount) | Du må øke maksbeløpet i avtalen med `merchant name`                                 | You have to change the maximum amount in the agreement. If not, the payment will fail.         |
+| Event                                           | Push message text (Norwegian)                                                       | Push message text (English)                                                              |
+|-------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| Agreement request                               | Bekreft fast betaling                                                               | Confirm recurring payment                                                                |
+| Charge processed successfully                   | Fast betaling til `merchant name` har blitt gjennomført                             | Payment to `merchant name` has been processed                                            |
+| Insufficient funds                              | Pass på at du har nok penger. Vi prøver igjen litt senere.                          |  Make sure you have enough money. We'll try again later.                                 |
+| Invalid payment source (retryable)              | Kortet er ugyldig, prøv et annet.                                                   | The card is invalid, try another                                                         |
+| Invalid payment source (not retryable)          | Kortet er ugyldig, prøv å endre det og kontakt %s å fortsette avtalen.              | The card is invalid, try changing it and contacting %s to continue the agreement.        |
+| Charge amount too high (variable amount)        | Beløpet er høyere enn det avtalte maksimumsbeløpet.                                 | The amount is higher than the agreed maximum amount                                      |
+| Future charge amount too high (variable amount) | Du må øke maksbeløpet i avtalen med `merchant name`                                 | You have to change the maximum amount in the agreement. If not, the payment will fail.   |
 
+## What is shown to users when charge processing fails?
+
+We set the failure reason on the charge based on why the processing failed.
+
+| Reason                                           | Charge failure text (Norwegian)                                                     | Charge failure text (English)                                                            |
+|-------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| Insufficient funds                              | Betalingen feilet. Pass på at du har nok penger på konto eller bytt kort. Vi prøver igjen senere. | Payment failed. Make sure you have enough money or change card. We'll try again later.   |
+| Invalid payment source                          | Kortet som er knyttet til avtalen din er ugyldig. Bytt til et annet.                | The card associated with your agreement is invalid. Switch to another.                   |
+| Charge amount too high (variable amount)        | Betalingen feilet. Endre maksbeløpet i avtalen under. Vi prøver igjen senere.       | Payment failed. Change the maximum amount in the agreement below. We'll try again later. |
+| Future charge amount too high (variable amount) | Betalingen kommer til å feile. Endre maksbeløpet i avtalen under.                   | Payment will fail. Change the maximum amount in the agreement below.                     |
 
 ## Settlement
 The settlements are done trough Vipps.

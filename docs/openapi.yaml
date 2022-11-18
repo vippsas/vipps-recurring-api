@@ -17,10 +17,8 @@ tags:
   - name: Authorization Service
   - name: Agreement v2 endpoints
   - name: Agreement v3 endpoints
-    description: Coming soon - WORK IN PROGRESS
   - name: Charge v2 endpoints
   - name: Charge v3 endpoints
-    description: Coming soon - WORK IN PROGRESS
   - name: Userinfo Endpoint
 
 paths:
@@ -411,7 +409,6 @@ paths:
         - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
         - $ref: "#/components/parameters/AgreementStatusQuery"
         - $ref: "#/components/parameters/CreatedAfterQuery"
-        - $ref: "#/components/parameters/Idempotency-Key"
       responses:
         '200':
           description: OK
