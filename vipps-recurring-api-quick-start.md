@@ -34,7 +34,7 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 
 <!-- END_TOC -->
 
-Document version 1.1.1.
+Document version 1.1.2.
 
 ## Postman
 
@@ -50,6 +50,9 @@ Save the following files to your computer:
 
 * [Vipps Recurring API Postman collection](tools/vipps-recurring-v3-api-postman-collection.json)
 * [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+
+The Postman collection contains examples of all the various campaign types,
+so it's easy to see what they look like in Vipps.
 
 ### Step 2: Import the Vipps Postman files
 
@@ -184,7 +187,7 @@ If you need to get access to some user information in addition to the recurring 
 2. Run `Get Agreement` to see the properties of the agreement.
 
 3. Run `Update agreement` which modifies some properties by using the
-   [`PATCH:/agreements/{{agreementId}}`][update-agreement-patch-endpoint] endpoint. 
+   [`PATCH:/agreements/{{agreementId}}`][update-agreement-patch-endpoint] endpoint.
 
 4. Run `Get Agreement` to see the updated properties.
 
