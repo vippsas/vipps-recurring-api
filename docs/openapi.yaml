@@ -705,7 +705,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ForceAcceptAgreement'
+              $ref: '#/components/schemas/ForceAcceptAgreementV3'
       responses:
         '200':
           description: OK
@@ -2697,6 +2697,16 @@ components:
         - customerPhoneNumber
       properties:
         customerPhoneNumber:
+          type: string
+          example: '96969696'
+          
+    ForceAcceptAgreementV3:
+      title: Force accept agreement request
+      type: object
+      required:
+        - phoneNumber
+      properties:
+        phoneNumber:
           type: string
           example: '96969696'
 
