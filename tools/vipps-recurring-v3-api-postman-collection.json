@@ -84,7 +84,97 @@
 			"name": "Agreement Controller",
 			"item": [
 				{
-					"name": "Draft Agreement - Minimal",
+					"name": "Draft Agreement - Profile sharing flow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"agreementId\", jsonData.agreementId)",
+									"var str = jsonData.vippsConfirmationUrl",
+									"var str2 = str.split('=', 3)[2]",
+									"postman.setEnvironmentVariable(\"landing_page_url\", str2);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\",\n \"scope\": \"address name email birthDate phoneNumber\",\n \"productName\": \"{{productName}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
+					"name": "Draft Agreement - Legacy pricing",
 					"event": [
 						{
 							"listen": "test",
@@ -161,7 +251,161 @@
 					"response": []
 				},
 				{
-					"name": "Draft Agreement - Variable amount",
+					"name": "Draft Agreement - Legacy pricing and reserve initial charge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
+					"name": "Draft Agreement - Legacy pricing and direct capture initial charge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
+					"name": "Draft Agreement - Variable pricing",
 					"event": [
 						{
 							"listen": "test",
@@ -315,6 +559,83 @@
 					"response": []
 				},
 				{
+					"name": "Draft Agreement - Price campaign and initial charge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"campaign\": {\n    \"type\" : \"PRICE_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n  \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
 					"name": "Draft Agreement - Period campaign",
 					"event": [
 						{
@@ -375,6 +696,83 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n \"campaign\": {\n    \"type\" : \"PERIOD_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"period\": {\n        \"unit\" : \"DAY\",\n        \"count\": \"2\"\n    }\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
+					"name": "Draft Agreement - Period campaign and initial charge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"campaign\": {\n    \"type\" : \"PERIOD_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"period\": {\n        \"unit\" : \"DAY\",\n        \"count\": \"2\"\n    }\n },\n  \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
@@ -469,6 +867,83 @@
 					"response": []
 				},
 				{
+					"name": "Draft Agreement - Event campaign and initial charge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "bearer {{access_token}}"
+							},
+							{
+								"key": "Ocp-Apim-Subscription-Key",
+								"value": "{{Ocp-Apim-Subscription-Key}}"
+							},
+							{
+								"key": "Merchant-Serial-Number",
+								"value": "{{merchantSerialNumber}}"
+							},
+							{
+								"key": "Vipps-System-Name",
+								"value": "{{vipps_system_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Version",
+								"value": "{{vipps_system_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Name",
+								"value": "{{vipps_system_plugin_name}}",
+								"type": "default"
+							},
+							{
+								"key": "Vipps-System-Plugin-Version",
+								"value": "{{vipps_system_plugin_version}}",
+								"type": "default"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "{{idempotency_key}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"campaign\": {\n    \"type\": \"EVENT_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"eventDate\": \"2040-12-25T00:00:00Z\",\n    \"eventText\": \"Until Christmas\"\n },\n  \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/recurring/v3/agreements",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"recurring",
+								"v3",
+								"agreements"
+							]
+						},
+						"description": "Drafts an agreement that can be approved by end user"
+					},
+					"response": []
+				},
+				{
 					"name": "Draft Agreement - Full flex campaign",
 					"event": [
 						{
@@ -546,7 +1021,7 @@
 					"response": []
 				},
 				{
-					"name": "Draft Agreement - Reserve initial charge",
+					"name": "Draft Agreement - Full flex campaign and initial charge",
 					"event": [
 						{
 							"listen": "test",
@@ -605,251 +1080,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"RESERVE_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v3",
-								"agreements"
-							]
-						},
-						"description": "Drafts an agreement that can be approved by end user"
-					},
-					"response": []
-				},
-				{
-					"name": "Draft Agreement - Direct initial charge",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{merchantSerialNumber}}"
-							},
-							{
-								"key": "Vipps-System-Name",
-								"value": "{{vipps_system_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Version",
-								"value": "{{vipps_system_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Name",
-								"value": "{{vipps_system_plugin_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Version",
-								"value": "{{vipps_system_plugin_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Idempotency-Key",
-								"value": "{{idempotency_key}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v3",
-								"agreements"
-							]
-						},
-						"description": "Drafts an agreement that can be approved by end user"
-					},
-					"response": []
-				},
-				{
-					"name": "Draft Agreement - Campaign and initial charge",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.environment.set(\"agreementId\", pm.response.json().agreementId);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "bearer {{access_token}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{merchantSerialNumber}}"
-							},
-							{
-								"key": "Vipps-System-Name",
-								"value": "{{vipps_system_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Version",
-								"value": "{{vipps_system_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Name",
-								"value": "{{vipps_system_plugin_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Version",
-								"value": "{{vipps_system_plugin_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Idempotency-Key",
-								"value": "{{idempotency_key}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"campaign\": {\n    \"type\" : \"PRICE_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"end\": \"2040-01-01T00:00:00Z\"\n },\n  \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/recurring/v3/agreements",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"recurring",
-								"v3",
-								"agreements"
-							]
-						},
-						"description": "Drafts an agreement that can be approved by end user"
-					},
-					"response": []
-				},
-				{
-					"name": "Draft Agreement - Profile flow",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"agreementId\", jsonData.agreementId)",
-									"var str = jsonData.vippsConfirmationUrl",
-									"var str2 = str.split('=', 3)[2]",
-									"postman.setEnvironmentVariable(\"landing_page_url\", str2);",
-									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "bearer {{access_token}}"
-							},
-							{
-								"key": "Merchant-Serial-Number",
-								"value": "{{merchantSerialNumber}}"
-							},
-							{
-								"key": "Ocp-Apim-Subscription-Key",
-								"value": "{{Ocp-Apim-Subscription-Key}}"
-							},
-							{
-								"key": "Vipps-System-Name",
-								"value": "{{vipps_system_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Version",
-								"value": "{{vipps_system_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Name",
-								"value": "{{vipps_system_plugin_name}}",
-								"type": "default"
-							},
-							{
-								"key": "Vipps-System-Plugin-Version",
-								"value": "{{vipps_system_plugin_version}}",
-								"type": "default"
-							},
-							{
-								"key": "Idempotency-Key",
-								"value": "{{idempotency_key}}",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\",\n \"scope\": \"address name email birthDate phoneNumber\",\n \"productName\": \"{{productName}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n \"campaign\": {\n    \"type\": \"FULL_FLEX_CAMPAIGN\",\n    \"price\": {{campaignPrice}},\n    \"interval\": {\n        \"unit\" : \"WEEK\",\n        \"count\" :  4\n    },\n    \"end\": \"2030-01-01T00:00:00Z\"\n },\n \"initialCharge\": {\n   \"amount\": {{amount_initial}},\n   \"description\": \"{{description_initial}}\",\n   \"transactionType\": \"DIRECT_CAPTURE\"\n },\n \"interval\": {\n    \"unit\" : \"{{interval}}\",\n    \"count\": \"{{intervalCount}}\"\n },\n  \"pricing\": {\n    \"amount\": {{price}},\n    \"currency\": \"NOK\"\n },\n \"merchantRedirectUrl\": \"{{merchantRedirectUrl}}\",\n \"merchantAgreementUrl\": \"{{merchantAgreementUrl}}\",\n \"customerPhoneNumber\": \"{{mobileNumber}}\", \n \"productName\": \"{{productName}}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/recurring/v3/agreements",
