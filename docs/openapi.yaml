@@ -1608,7 +1608,7 @@ components:
           $ref: '#/components/schemas/campaignV3'
         pricing:
           $ref: '#/components/schemas/pricingRequest'
-        customerPhoneNumber:
+        phoneNumber:
           type: string
           description: |-
             Customers phone number (if available). Used to simplify the
