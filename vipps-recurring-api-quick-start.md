@@ -48,7 +48,7 @@ for information about getting your test environment set up.
 
 Save the following files to your computer:
 
-* [Vipps Recurring API Postman collection](tools/vipps-recurring-api-postman-collection.json)
+* [Vipps Recurring API Postman collection](tools/vipps-recurring-v3-api-postman-collection.json)
 * [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
 
 ### Step 2: Import the Vipps Postman files

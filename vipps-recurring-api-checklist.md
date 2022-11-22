@@ -30,7 +30,7 @@ Document version 3.0.0.
     - [ ] Charge: Cancel a charge [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
     - [ ] Charge: Refund a charge [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]
     - [ ] Charge: Capture a reserved charge [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]
-    - For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
+    - For examples of requests and responses, see the [Postman collection](./tools/vipps-recurring-v3-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
   - [ ] Send the [Vipps HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
         in all API requests for better tracking and troubleshooting
         (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
