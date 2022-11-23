@@ -91,7 +91,7 @@ V3 request body
     "currency": "NOK"
   },
   "productName": "MyNews Digital",
-  "customerPhoneNumber": "45678272",
+  "phoneNumber": "45678272",
   "...": "..."
 }
 ```
@@ -123,7 +123,7 @@ V3 request body
     "currency": "NOK"
   },
   "productName": "MyNews Digital",
-  "customerPhoneNumber": "45678272",
+  "phoneNumber": "45678272",
   "...": "..."
 }
 ```
@@ -139,7 +139,7 @@ V2 request body
   "interval": "MONTH",
   "intervalCount": 1,
   "productName": "MyNews Digital",
-  "customerPhoneNumber": "45678272",
+  "phoneNumber": "45678272",
   "...": "..."
 }
 ```
@@ -152,7 +152,7 @@ V3 request body
     "count": 1
   },
   "productName": "MyNews Digital",
-  "customerPhoneNumber": "45678272",
+  "phoneNumber": "45678272",
   "...": "..."
 }
 ```

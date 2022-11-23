@@ -321,7 +321,7 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 
 ```json
 {
-  "customerPhoneNumber":"90000000",
+  "phoneNumber":"90000000",
   "interval": {
     "unit" : "MONTH",
     "count": 1
@@ -416,7 +416,7 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
     "currency": "NOK"
   },
   "productName": "MyNews Digital",
-  "customerPhoneNumber": "45678272",
+  "phoneNumber": "45678272",
   "...": "..."
 }
 ```
@@ -433,7 +433,7 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
     "currency": "NOK"
   },
   "productName": "MyNews Digital",
-  "customerPhoneNumber": "45678272",
+  "phoneNumber": "45678272",
   "...": "..."
 }
 ```
@@ -573,7 +573,7 @@ of 499 NOK:
 
 ```json
 {
-  "customerPhoneNumber": "90000000",
+  "phoneNumber": "90000000",
   "initialCharge": {
      "amount": 49900,
      "description": "Premier League subscription",
@@ -1224,7 +1224,7 @@ Example of request with scope:
 
 ```json
 {
-  "customerPhoneNumber":"90000000",
+  "phoneNumber":"90000000",
   "interval": {
     "unit": "MONTH",
     "count": 1
@@ -1334,7 +1334,7 @@ Create agreement request:
   },
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
-  "customerPhoneNumber": "90000000",
+  "phoneNumber": "90000000",
   "productDescription": "Access to subscription",
   "productName": "Power company A"
 }
