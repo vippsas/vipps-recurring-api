@@ -5,7 +5,7 @@ sidebar_position: 10
 ---
 END_METADATA -->
 
-# Vipps Recurring API: How It Works
+# Vipps Recurring API with variable amount: How It Works
 
 <!-- START_COMMENT -->
 
