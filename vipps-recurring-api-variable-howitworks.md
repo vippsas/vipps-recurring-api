@@ -19,7 +19,7 @@ For technical documentation go to:
 
 ## Recurring variable amount pricing
 
-ToDo: Flow picture
+![recurring process](images/vipps-recurring-api-howitworks/vipps-recurring-process.svg)
 
 ## 1. Buy a subscription with Vipps
 
