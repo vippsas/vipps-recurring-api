@@ -1562,6 +1562,7 @@ Darkula color scheme from the JetBrains family of IDEs
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;php&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -1995,6 +1996,11 @@ Darkula color scheme from the JetBrains family of IDEs
                 
                   <li>
                     <a href="#tocs_forceacceptagreement" class="toc-h2 toc-link" data-title="">ForceAcceptAgreement</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_forceacceptagreementv3" class="toc-h2 toc-link" data-title="">ForceAcceptAgreementV3</a>
                     
                   </li>
                 
@@ -5725,7 +5731,7 @@ More information about this can be found in the API documentation.</p>
 <td>The suggested max amount that the customer should choose, required if type is VARIABLE.</td>
 </tr>
 <tr>
-<td>» customerPhoneNumber</td>
+<td>» phoneNumber</td>
 <td>body</td>
 <td>string</td>
 <td>false</td>
@@ -5847,7 +5853,7 @@ For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 ør
 <p><strong>»» suggestedMaxAmount</strong>: The suggested max amount that the customer should choose, required if type is VARIABLE.</p>
 <p>Amounts are specified in minor units.
 For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
-<p><strong>» customerPhoneNumber</strong>: Customers phone number (if available). Used to simplify the
+<p><strong>» phoneNumber</strong>: Customers phone number (if available). Used to simplify the
 following Vipps interaction. MSISDN: <a href="https://www.msisdn.org">https://www.msisdn.org</a></p>
 <p><strong>» initialCharge</strong>: An initial charge for a new agreement.
 The charge will be processed immediately when the user approves the agreement.</p>
@@ -6786,7 +6792,7 @@ curl -X PATCH https://api.vipps.no/recurring/v3/agreements/{agreementId}/accept 
 
 </code></pre>
 <pre class="highlight tab tab-javascript"><code><span class="hljs-keyword">const</span> inputBody = <span class="hljs-string">&#x27;{
-  &quot;customerPhoneNumber&quot;: &quot;96969696&quot;
+  &quot;phoneNumber&quot;: &quot;96969696&quot;
 }&#x27;</span>;
 <span class="hljs-keyword">const</span> headers = {
   <span class="hljs-string">&#x27;Content-Type&#x27;</span>:<span class="hljs-string">&#x27;application/json&#x27;</span>,
@@ -6948,7 +6954,7 @@ This endpoint can only be used in the test environment.</p>
 <p>Body parameter</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;96969696&quot;</span>
+  <span class="hljs-attr">&quot;phoneNumber&quot;</span>: <span class="hljs-string">&quot;96969696&quot;</span>
 }
 </code></pre>
 <h3 id="force-accept-an-agreement--only-available-in-test-environment--parameters">Parameters</h3>
@@ -7036,12 +7042,12 @@ This endpoint can only be used in the test environment.</p>
 <tr>
 <td>body</td>
 <td>body</td>
-<td><a href="#schemaforceacceptagreement">ForceAcceptAgreement</a></td>
+<td><a href="#schemaforceacceptagreementv3">ForceAcceptAgreementV3</a></td>
 <td>true</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» customerPhoneNumber</td>
+<td>» phoneNumber</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
@@ -12933,7 +12939,7 @@ System.out.println(response.toString());
     <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">1500</span>,
     <span class="hljs-attr">&quot;suggestedMaxAmount&quot;</span>: <span class="hljs-number">3000</span>
   },
-  <span class="hljs-attr">&quot;customerPhoneNumber&quot;</span>: <span class="hljs-string">&quot;4791234567&quot;</span>,
+  <span class="hljs-attr">&quot;phoneNumber&quot;</span>: <span class="hljs-string">&quot;4791234567&quot;</span>,
   <span class="hljs-attr">&quot;initialCharge&quot;</span>: {
     <span class="hljs-attr">&quot;amount&quot;</span>: <span class="hljs-number">234</span>,
     <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;Månedsabonnement&quot;</span>,
@@ -12982,7 +12988,7 @@ System.out.println(response.toString());
 <td>none</td>
 </tr>
 <tr>
-<td>customerPhoneNumber</td>
+<td>phoneNumber</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
@@ -15134,6 +15140,38 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_forceacceptagreementv3">ForceAcceptAgreementV3</h2>
+<p><a id="schemaforceacceptagreementv3"></a>
+<a id="schema_ForceAcceptAgreementV3"></a>
+<a id="tocSforceacceptagreementv3"></a>
+<a id="tocsforceacceptagreementv3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;phoneNumber&quot;</span>: <span class="hljs-string">&quot;96969696&quot;</span>
+}
+
+</code></pre>
+<p>Force accept agreement request</p>
+<h3 id="properties-41">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>phoneNumber</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_errorfromazure">ErrorFromAzure</h2>
 <p><a id="schemaerrorfromazure"></a>
 <a id="schema_ErrorFromAzure"></a>
@@ -15153,7 +15191,7 @@ System.out.println(response.toString());
 <p>An error from Microsoft Azure. Vipps has limited control of these errors,
 and can not give as detailed information as with the errors from our own code.
 The most important property is the HTTP status code.</p>
-<h3 id="properties-41">Properties</h3>
+<h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15216,7 +15254,7 @@ The most important property is the HTTP status code.</p>
 
 </code></pre>
 <p>Error response</p>
-<h3 id="properties-42">Properties</h3>
+<h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15273,7 +15311,7 @@ The most important property is the HTTP status code.</p>
 ]
 
 </code></pre>
-<h3 id="properties-43">Properties</h3>
+<h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15316,7 +15354,7 @@ The most important property is the HTTP status code.</p>
 
 </code></pre>
 <p>Error response</p>
-<h3 id="properties-44">Properties</h3>
+<h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15439,7 +15477,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-45">Properties</h3>
+<h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15556,7 +15594,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-46">Properties</h3>
+<h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15607,7 +15645,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-47">Properties</h3>
+<h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15684,7 +15722,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-48">Properties</h3>
+<h3 id="properties-49">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15766,7 +15804,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-49">Properties</h3>
+<h3 id="properties-50">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15845,7 +15883,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-50">Properties</h3>
+<h3 id="properties-51">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15910,6 +15948,7 @@ The most important property is the HTTP status code.</p>
 </table>
 <!-- Renderer: Shins v2.6.0 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
