@@ -49,7 +49,7 @@ See also:
 
 API version: 3.0.0.
 
-Document version 2.6.2.
+Document version 2.6.3.
 
 <!-- START_TOC -->
 
@@ -421,7 +421,7 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
 }
 ```
 
-Second one is `VARIABLE`. See [variable amount](#recurring-agreements-with-variable-amount). 
+Second one is `VARIABLE`. See [variable amount](#recurring-agreements-with-variable-amount).
 
 Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint:
 
@@ -438,7 +438,7 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
 }
 ```
 
-**Please note**: Going forward, new types will be introduced. We will look into how we can implement charge limits in a better way, that takes care of the merchants needs. 
+**Please note**: Going forward, new types will be introduced. We will look into how we can implement charge limits in a better way, that takes care of the merchants needs.
 
 
 ### Accept an agreement
@@ -1475,9 +1475,7 @@ Display of charge failure due to a charge being higher than the `maxAmount` in V
 
 _This functionality is only available for special cases._
 
-Skipping the landing page is only reserved for physical points of sale and vending machines, when there is no display available.
-
-This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps.
+See: [The Vipps landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page).
 
 If the `skipLandingPage` property is set to `true` in the
 [`POST:/agreements`][draft-agreement-endpoint]
@@ -1485,24 +1483,6 @@ call, it will cause a push notification to be sent to the given phone number
 immediately, without loading the landing page.
 
 If the sale unit is not whitelisted, the request will fail and an error message will be returned.
-
-If you want to check if a sale unit is allowed to use `skipLandingPage`:
-
-1. Draft an agreement with `"skipLandingPage": true`.
-2. Check the response code and message.
-   The API will return an error if attempting to use `skipLandingPage` without being whitelisted.
-
-If you need to skip the landing page for a different reason: contact your
-Key Account Manager. If you do not have a KAM: Please log in on
-[portal.vipps.no](https://portal.vipps.no),
-find the right sale unit and click the email link under the "i" information
-bubble. Include a detailed description of why it is not possible to display
-the landing page.
-
-**Please note:** When using `skipLandingPage`, the user is not sent to a URL
-after completion of the payment. The "result page" is just the confirmation in
-Vipps. The `fallback` URL sent in the API request can therefore be the
-merchant's main URL, like `https://example.com`, etc.
 
 ## HTTP responses
 
@@ -1522,11 +1502,11 @@ This API returns the following HTTP statuses in the responses:
 | `429 Too Many Requests`    | Look at [table below to view current rate limits](#rate-limiting)                                                             |
 | `500 Server Error`         | An internal Vipps problem.                                                                                                    |
 
-**Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should 
-retry the request or poll the resource to see if an operation has been performed. 
-This will follow the spec as defined [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After), 
-and will either be a http-date or a number indicating a delay in seconds. 
-This will mostly apply to 429 responses, but may also appear in certain other circumstances where it would be natural 
+**Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should
+retry the request or poll the resource to see if an operation has been performed.
+This will follow the spec as defined [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After),
+and will either be a http-date or a number indicating a delay in seconds.
+This will mostly apply to 429 responses, but may also appear in certain other circumstances where it would be natural
 to retry the request at a later point in time.
 
 ### Error responses
@@ -1553,7 +1533,7 @@ the response will be the following:
 }
 ```
 
-**Please note**: We are still working on improving error responses. 
+**Please note**: We are still working on improving error responses.
 This means, in the future, `detail` and `extraDetails` content can change for some error responses.
 
 ## Rate limiting
@@ -1644,11 +1624,11 @@ See [Polling guidelines](https://vippsas.github.io/vipps-developer-docs/docs/vip
 ## Notifications to users for failed charges
 
 We notify the user in two ways, through push notifications and failure texts on the charge.
-When a charge fails to be processed, we send the user a push notification letting them know the charge failed to process. 
+When a charge fails to be processed, we send the user a push notification letting them know the charge failed to process.
 This push message is sent every time we try to process the charge, see [charge times](#charge-times) for when the processing of charges happen.
 More information about how and when we send push notifications can be found in the [FAQ](vipps-recurring-api-faq.md#when-do-users-get-push-messages).
 
-**Note:** We send push notification for failed payments regardless if `Notification upon payment` is toggled on or off on the agreement. 
+**Note:** We send push notification for failed payments regardless if `Notification upon payment` is toggled on or off on the agreement.
 This toggle only determine if the user will get notified when a charge is successfully charged.
 
 In addition to sending push notifications, a failure texts is also set on the charge.
