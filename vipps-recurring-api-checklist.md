@@ -16,7 +16,7 @@ END_METADATA -->
 
 API version: 3.0
 
-Document version 3.0.0.
+Document version 3.1.0.
 
 ## Checklist
 
@@ -57,20 +57,21 @@ Document version 3.0.0.
 2. Vipps completes customer control (KYC, PEP, AML, etc).
 3. The merchant receives an email from Vipps saying that they can log in with bankID on [portal.vipps.no](https://portal.vipps.no) and retrieve API keys.
 4. The merchant completes all checklist items.
-5. The merchant [contacts Vipps](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact) with the MSN to check.
-   Vipps will check agreements and charges in the [Vipps test environment](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment), showing that all checklist items have been fulfilled:
+5. The merchant verifies the integration in the test environment by checking that
+   there are test agreements and charges in the
+   [Vipps test environment](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment),
+   with the following states:
     - A complete Agreement ending in `ACTIVE`.
     - A complete Agreement ending in `STOPPED`.
     - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
     - A complete `"type":"RECURRING"` Charge ending in  `REFUNDED`.
-6. The merchant receives an email from Vipps saying that the MSN is OK.
-7. The recurring merchant starts using the MSN and API keys for the production environment.
-8. The merchant verifies that what worked in the test environment also work in the production environment.
+6. The recurring merchant starts using the MSN and API keys for the production environment.
+7. The merchant verifies that what worked in the test environment also work in the production environment.
    **Please note:** Vipps does not do any kind of activation or make any changes based on this checklist.
    The API keys for the production environment are made available on
    [portal.vipps.no](https://portal.vipps.no)
    as soon as the customer control (see step 2) is completed, independently of this checklist.
-9. The Merchant goes live 🎉
+8. The Merchant goes live 🎉
 
 ## Questions?
 
