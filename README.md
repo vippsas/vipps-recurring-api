@@ -26,7 +26,7 @@ have "Vipps på Nett", a direct integration with the
 and have completed some additional KYC checks required by Finanstilsynet.
 Vipps is required to perform some extra compliance checks before
 activating the Vipps Recurring API.
-please order “Vipps Faste betalinger on
+please order “Vipps Faste betalinger" on
 [portal.vipps.no](https://portal.vipps.no)
 to get access to the Recurring API in production.
 
