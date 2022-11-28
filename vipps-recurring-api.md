@@ -1298,11 +1298,11 @@ in Common topics for details.
 Recurring with variable amounts offer merchants a way to charge users a different
 amount each interval, as long as the amount is lower than the user's specified max amount.
 
-Instead of setting a price when drafting a new agreement, the new
-`suggestedMaxAmount` field is set to what the maximum price could be each interval.
-`suggestedMaxAmount` is then presented to the user when accepting an agreement,
-as a suggestion that indicates the maximum price that could potentially be charged
-within each interval.
+To create a variable amount agreement, use the `VARIABLE` type in `Pricing`.
+With `VARIABLE` pricing, you no longer specify a price, but a `suggestedMaxAmount` for the user.
+This field should be set to what the maximum price could be each interval. 
+This `suggestedMaxAmount` is presented to the user together with a list of auto generated  amount suggestions that is created by Vipps.
+The `suggestedMaxAmount` is however pre-selected for the user.
 
 The user chooses a max amount themselves when accepting the agreement, but we
 recommended the user to choose the same amount as `suggestedMaxAmount`. The max
@@ -1340,9 +1340,6 @@ Create agreement request:
 }
 ```
 
-**Please note:** There is no need to supply the agreement with a `price` field,
-this will be ignored since the user picks the allowed max amount themselves.
-
 **Restrictions when using variable amount:**
 
 - There is currently a limit of **20 000 NOK** for the `suggestedMaxAmount`.
@@ -1350,6 +1347,14 @@ this will be ignored since the user picks the allowed max amount themselves.
 
 The user will be presented with the variable agreement in Vipps,
 where they can change the max amount they allow to be charged each interval.
+
+In this example the `suggestedMaxAmount` is 5 000 kr, this amount gets pre-selected in Vipps.
+The user clicks on "maksbeløp" (max amount) and opens the list of auto generated suggestions together with the `suggestedMaxAmount`.
+The text above the list explains that the merchant recommends the user to set their max amount to 5 000 kr.
+The user proceeds with 5 000 kr and accepts the agreement.
+
+**Note:** The auto generated list is based on the `suggestedMaxAmount` and can not be changed by the merchant individually.
+It will however change if `suggestedMaxAmount` changes, which can be done in the `PATCH agreement` endpoint.
 
 Accepting agreement in Vipps:
 ![variable_amount_accept](images/variable_amount_accept.png)

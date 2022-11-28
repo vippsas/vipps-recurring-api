@@ -59,6 +59,8 @@ Document version: 1.6.3.
 * [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
 * [For how long is a payment reserved?](#for-how-long-is-a-payment-reserved)
 * [When do users get push messages?](#when-do-users-get-push-messages)
+* [What is shown to users when charge processing fails?](#what-is-shown-to-users-when-charge-processing-fails)
+* [Can I decide the users suggested max amount list](#can-i-decide-the-users-suggested-max-amount-list)
 * [Settlement](#settlement)
 * [Invoicing](#invoicing)
 * [Questions?](#questions)
@@ -379,26 +381,34 @@ in Vipps FAQs.
 
 ## When do users get push messages?
 
-| Event                                           | Push message text (Norwegian)                                                       | Push message text (English)                                                              |
-|-------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| Agreement request                               | Bekreft fast betaling                                                               | Confirm recurring payment                                                                |
-| Charge processed successfully                   | Fast betaling til `merchant name` har blitt gjennomført                             | Payment to `merchant name` has been processed                                            |
-| Insufficient funds                              | Pass på at du har nok penger. Vi prøver igjen litt senere.                          |  Make sure you have enough money. We'll try again later.                                 |
-| Invalid payment source (retryable)              | Kortet er ugyldig, prøv et annet.                                                   | The card is invalid, try another                                                         |
-| Invalid payment source (not retryable)          | Kortet er ugyldig, prøv å endre det og kontakt %s å fortsette avtalen.              | The card is invalid, try changing it and contacting %s to continue the agreement.        |
-| Charge amount too high (variable amount)        | Beløpet er høyere enn det avtalte maksimumsbeløpet.                                 | The amount is higher than the agreed maximum amount                                      |
-| Future charge amount too high (variable amount) | Du må øke maksbeløpet i avtalen med `merchant name`                                 | You have to change the maximum amount in the agreement. If not, the payment will fail.   |
+| Event                                           | Push message text (Norwegian)                                                       | Push message text (English)                                                             |
+|-------------------------------------------------|-------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| Agreement request                               | Bekreft fast betaling                                                               | Confirm recurring payment                                                               |
+| Charge processed successfully                   | Fast betaling til `sales unit name` har blitt gjennomført                           | Payment to `sales unit name` has been processed                                         |
+| Insufficient funds                              | Pass på at du har nok penger. Vi prøver igjen litt senere.                          | Make sure you have enough money. We'll try again later.                                 |
+| Invalid payment source (retryable)              | Kortet er ugyldig, prøv et annet.                                                   | The card is invalid, try another                                                        |
+| Invalid payment source (not retryable)          | Kortet er ugyldig, prøv å endre det og kontakt %s å fortsette avtalen.              | The card is invalid, try changing it and contacting %s to continue the agreement.       |
+| Charge amount too high (variable amount)        | Beløpet er høyere enn det avtalte maksimumsbeløpet.                                 | The amount is higher than the agreed maximum amount                                     |
+| Future charge amount too high (variable amount) | Du må øke maksbeløpet i avtalen med `sales unit name`                               | You have to change the maximum amount in the agreement. If not, the payment will fail.  |
 
 ## What is shown to users when charge processing fails?
 
 We set the failure reason on the charge based on why the processing failed.
 
-| Reason                                           | Charge failure text (Norwegian)                                                     | Charge failure text (English)                                                            |
-|-------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| Insufficient funds                              | Betalingen feilet. Pass på at du har nok penger på konto eller bytt kort. Vi prøver igjen senere. | Payment failed. Make sure you have enough money or change card. We'll try again later.   |
-| Invalid payment source                          | Kortet som er knyttet til avtalen din er ugyldig. Bytt til et annet.                | The card associated with your agreement is invalid. Switch to another.                   |
-| Charge amount too high (variable amount)        | Betalingen feilet. Endre maksbeløpet i avtalen under. Vi prøver igjen senere.       | Payment failed. Change the maximum amount in the agreement below. We'll try again later. |
-| Future charge amount too high (variable amount) | Betalingen kommer til å feile. Endre maksbeløpet i avtalen under.                   | Payment will fail. Change the maximum amount in the agreement below.                     |
+| Reason                                           | Charge failure text (Norwegian)                                                                   | Charge failure text (English)                                                            |
+|--------------------------------------------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| Insufficient funds                               | Betalingen feilet. Pass på at du har nok penger på konto eller bytt kort. Vi prøver igjen senere. | Payment failed. Make sure you have enough money or change card. We'll try again later.   |
+| Invalid payment source                           | Kortet som er knyttet til avtalen din er ugyldig. Bytt til et annet.                              | The card associated with your agreement is invalid. Switch to another.                   |
+| Charge amount too high (variable amount)         | Betalingen feilet. Endre maksbeløpet i avtalen under. Vi prøver igjen senere.                     | Payment failed. Change the maximum amount in the agreement below. We'll try again later. |
+| Future charge amount too high (variable amount)  | Betalingen kommer til å feile. Endre maksbeløpet i avtalen under.                                 | Payment will fail. Change the maximum amount in the agreement below.                     |
+
+## Can I decide the users suggested max amount list
+
+No.
+The suggested amount list that the user can choose a max amount from,
+is automatically generated by Vipps based on the suggestedMaxAmount sent in.
+
+If the suggestedMaxAmount is changed, so will the suggested amount list change.
 
 ## Settlement
 The settlements are done trough Vipps.
