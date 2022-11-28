@@ -2692,7 +2692,7 @@ components:
       properties:
         customerPhoneNumber:
           type: string
-          example: '96969696'
+          example: '91234567'
 
     ForceAcceptAgreementV3:
       title: Force accept agreement request
@@ -2702,7 +2702,7 @@ components:
       properties:
         phoneNumber:
           type: string
-          example: '96969696'
+          example: '91234567'
 
     ErrorFromAzure:
       type: object
