@@ -1354,7 +1354,7 @@ The user clicks on "maksbeløp" (max amount) and opens the list of auto generate
 The text above the list explains that the merchant recommends the user to set their max amount to 5 000 kr.
 The user proceeds with 5 000 kr and accepts the agreement.
 
-**Note:** The auto generated list is based on the `suggestedMaxAmount` and can not be changed my the merchant individually.
+**Note:** The auto generated list is based on the `suggestedMaxAmount` and can not be changed by the merchant individually.
 It will however change if `suggestedMaxAmount` changes, which can be done in the `PATCH agreement` endpoint.
 
 Accepting agreement in Vipps:
