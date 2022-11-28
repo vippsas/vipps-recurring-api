@@ -1351,7 +1351,7 @@ where they can change the max amount they allow to be charged each interval.
 
 In this example the `suggestedMaxAmount` is 5 000 kr, this amount gets pre-selected in Vipps.
 The user clicks on "maksbeløp" (max amount) and opens the list of auto generated suggestions together with the `suggestedMaxAmount`.
-The text above the list explains that the merchant recomends the user to set their max amount to 5 000 kr.
+The text above the list explains that the merchant recommends the user to set their max amount to 5 000 kr.
 The user proceeds with 5 000 kr and accepts the agreement.
 
 **Note:** The auto generated list is based on the `suggestedMaxAmount` and can not be changed my the merchant individually.
