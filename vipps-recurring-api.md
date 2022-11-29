@@ -1092,7 +1092,7 @@ Request body for stopping an agreement:
 }
 ```
 
-Stopping an agreement results in cancellation of any charges that are DUE/PENDING at the time of stopping it,
+Stopping an agreement results in cancellation of any charges that are DUE/PENDING/RESERVED at the time of stopping it,
 and it will not be possible to create new charges for a stopped agreement.
 
 We recommend that the recurring agreement remains `ACTIVE` for as long as the
