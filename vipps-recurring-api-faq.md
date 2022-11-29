@@ -61,8 +61,9 @@ Document version: 1.6.3.
 - [Common problems/errors](#common-problemserrors)
   - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
   - [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
+- [Notifications and error messages](#notifications-and-error-messages)
   - [When do users get push messages?](#when-do-users-get-push-messages)
-- [What is shown to users when charge processing fails?](#what-is-shown-to-users-when-charge-processing-fails)
+  - [What is shown to users when charge processing fails?](#what-is-shown-to-users-when-charge-processing-fails)
 - [Admin/partners](#adminpartners)
   - [How can I change partners for a merchant?](#how-can-i-change-partners-for-a-merchant)
   - [How can I change partner for my integration with Vipps?](#how-can-i-change-partner-for-my-integration-with-vipps)
@@ -131,12 +132,12 @@ See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 ### A charge failed, but the customer did not receive any warning
 The customer may not have notifications turned on. We always send notifications to the user when a charge processing attempt is not successful, and the user gets a more detailed message when looking at the charge/agreement in the app.
 
-## What happens to charges if the corresponding agreement is cancelled?
+### What happens to charges if the corresponding agreement is cancelled?
 All charges in a `PENDING`, `DUE` or `RESERVED` state will be cancelled if the Agreement is stopped.  
 **Note**: This also includes the `initial charge` if it's currently `RESERVED`.
 So if the merchant needs to charge the user for the initial charge; then this needs to be done before the agreement is stopped.
 
-## If a user's card expires: What happens on the next charge?
+### If a user's card expires: What happens on the next charge?
 
 The user is responsible for keeping their payment sources updated.
 
@@ -149,18 +150,18 @@ have multiple cards registered in Vipps.
 Vipps also has standard functionality that automatically sends the user a push
 notification when a card that is _not_ used for recurring payments expires.
 
-## What happens to pending charges if the user deletes the payment card?
+### What happens to pending charges if the user deletes the payment card?
 
 See [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
 
-## How does a user see the charges I create?
+### How does a user see the charges I create?
 
 The charge will then appear in the app after it goes into the `DUE`-state.
 A charge will remain in `PENDING` state until the dueDate is less than 30 days away.
 
 You can retrieve all relevant charges through the [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
 
-## If a user adds or updates a card in vipps, will new recurring charges be made to that card?
+### If a user adds or updates a card in vipps, will new recurring charges be made to that card?
 No, currently the payment card tied to an agreement will not be updated automatically.
 
 Users may want to charge different Agreements to different cards, and we do
@@ -168,7 +169,7 @@ not want to automatically make changes to payment sources. Instead, we notify
 users as described in
 [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
 
-## For how long is a payment reserved?
+### For how long is a payment reserved?
 
 See [For how long is a payment reserved?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
 in Vipps FAQs.
@@ -368,6 +369,8 @@ Using the Vipps Login service itself is optional.
 information to third parties, and Vipps does not allow it. There is no
 other API to look up a user's address, retrieve a user's purchases, etc.
 
+## Notifications and error messages
+
 ### When do users get push messages?
 
 | Event                                           | Push message text (Norwegian)                                                       | Push message text (English)                                                             |
@@ -380,7 +383,7 @@ other API to look up a user's address, retrieve a user's purchases, etc.
 | Charge amount too high (variable amount)        | Beløpet er høyere enn det avtalte maksimumsbeløpet.                                 | The amount is higher than the agreed maximum amount                                     |
 | Future charge amount too high (variable amount) | Du må øke maksbeløpet i avtalen med `sales unit name`                               | You have to change the maximum amount in the agreement. If not, the payment will fail.  |
 
-## What is shown to users when charge processing fails?
+### What is shown to users when charge processing fails?
 
 We set the failure reason on the charge based on why the processing failed.
 
