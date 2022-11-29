@@ -138,7 +138,7 @@ So if the merchant needs to charge the user for the initial charge; then this ne
 
 ## If a user's card expires: What happens on the next charge?
 
-The user is responsible for keeping their payment sources update.
+The user is responsible for keeping their payment sources updated.
 
 If a payment fails the user will receive a push notification, informing them to
 update their payment source.
