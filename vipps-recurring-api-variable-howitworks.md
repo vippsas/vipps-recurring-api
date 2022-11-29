@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
-title: How It Works
-sidebar_position: 10
+title: How It Works with variable amount
+sidebar_position: 13
 ---
 END_METADATA -->
 
