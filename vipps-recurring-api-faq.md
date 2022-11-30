@@ -321,7 +321,7 @@ Agreements are not actually moved. Your new saleunit will get new agreements
 identical to the old ones, but with new agreementIds. The old agreements will
 be stopped. This is done to prevent any confusion around charges, refunds, etc.
 between the two MSNs. Charges done by the old MSN are in the old agreement,
-while the new MSN uses only the new agreement
+while the new MSN uses only the new agreement. The name of the new org will have the new juridical name. Sales unit name can be the same. 
 
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
