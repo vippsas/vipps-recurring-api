@@ -32,7 +32,7 @@ A user choose Vipps as payment method for a subscription on a merchant's website
 If the agreement was started on a desktop device, the user will be sent to the Vipps landing page.
 The user confirms their number and is prompted to log in to Vipps.
 
-If the agreement was started from a mobile device, the app will automatically swtich over to Vipps.
+If the agreement was started from a mobile device, the app will automatically switch over to Vipps.
 
 ![Vipps landing page](images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
