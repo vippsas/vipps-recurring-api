@@ -21,7 +21,7 @@ For technical documentation go to:
 
 ## 1. Buy a subscription with Vipps
 
-A user choose Vipps as payment method for a subscription on a merchant's website or app.
+A user chooses Vipps as payment method for a subscription on a merchant's website or app.
 
 ![Buy subscription with Vipps](images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
