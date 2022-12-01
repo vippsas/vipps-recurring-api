@@ -123,11 +123,11 @@ Document version 2.6.3.
   - [Timeouts](#timeouts)
   - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
-  - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
-    - [Normal agreement flow](#normal-agreement-flow)
-    - [Initial charge flow](#initial-charge-flow)
-    - [Campaign](#campaign)
-    - [Initial charge and campaign](#initial-charge-and-campaign)
+  - [Different agreement types and when to use them](#different-agreement-types-and-when-to-use-them)
+    - [Normal agreement](#normal-agreement)
+    - [Agreement with initial charge](#agreement-with-initial-charge)
+    - [Agreement with campaign](#agreement-with-campaign)
+    - [Agreement with initial charge and campaign](#agreement-with-initial-charge-and-campaign)
   - [Questions?](#questions)
 
 <!-- END_TOC -->
@@ -244,7 +244,7 @@ in the Getting started guide, for details.
 ## Idempotency Key header
 **V3 api only**
 The `Idempotency-Key` header must be set in any request that creates or modifies a resource (`POST`, `PUT`, `PATCH` or `DELETE`).
-This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency-key should prevent operations and side-effects from being performed more than once, and you should receive the same response as if you only sent one request.
+This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency-key should prevent operations and side effects from being performed more than once, and you should receive the same response as if you only sent one request.
 
 **Important:** If the response is a client-error (4xx), you will continue to get the same error as long as you use the same idempotency-key, as the requested operation is not retried.
 
@@ -1663,32 +1663,31 @@ The endpoint is only available in our test environment.
 
 See [Recommendations regarding handling redirects](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/redirects) in Common topics for details.
 
-## When to use campaigns or initial charge
+## Different agreement types and when to use them
 
 Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilising the normal agreements, initial charges, campaigns, or a combination of those.
 
 This can be a bit confusing when deciding on which implementation to go for.
 In short our advice is to implement support for all our flows, and also implement features in your own systems for moving between the flows depending on the use case.
 
-First a short description on the flows.
-
-### Normal agreement flow
+### Normal agreement
 
 ![Normal_agreement](images/normal_agreement.png)
 
-In the normal agreement, the user gets presented with the agreement, agrees to that, and gets sent to a confirmation screen.
+This is the preferred flow whenever there is no campaign or no required payment on the start of an agreement.
+
+In the normal agreement, the user gets presented with the agreement, agrees to it, and gets sent to a confirmation screen.
 On the agreement we present the start date, the price of the agreements, the `productName` and the `product description` which are all defined by the merchant.
 We also present an agreement explanation which is used to describe the agreement interval to the user.
-For example, for an agreement with `interval=WEEK` and `intervalCount=2`, the agreement explanation will be `hver 2.uke til du sier opp` or `every 2 weeks until cancelled`
+For example, for an agreement with `interval.unit=YEAR` and `interval.count=1`, the agreement explanation will be `hvert år til du sier opp` or `every year until cancelled`
 
-
-This is the preferred flow whenever there is no campaigns or similar present.
-
-### Initial charge flow
+### Agreement with initial charge
 
 ![flow_Initial_charge](images/normal_agreement_with_initial_charge.png)
 
-When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
+If you require a payment to be completed at the same time that the agreement is created, you must use initial charge.
+
+When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. Then, when the user proceeds to confirm the agreement, the payment of the initial charge will be processed.
 
 Here we also show `productName` and the agreement explanation on the agreement, as well as `description` on the initial charge. `productName` and `initial charge description` are defined by the merchant. The agreement explanation is created by Vipps based on the interval and the campaign if specified.
 
@@ -1696,23 +1695,22 @@ Initial charges are designed to be used whenever there is an additional cost in 
 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, and have to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
 
-**Please note:** If you require a payment to be completed at the same time that the agreement is created, you must use initial charge.
 
-### Campaign
-
-See [Campaigns](#campaigns) for details about campaigns.
-
-When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
+### Agreement with campaign
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
+See [Campaigns](#campaigns) and [How it works: Campaigns](vipps-recurring-api-campaigns-howitworks.md) for details about campaigns.
+
+When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
+
 **Note:** Campaign is not supported for `variableAmount` agreements.
 
-### Initial charge and campaign
-
-In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
+### Agreement with initial charge and campaign
 
 Ideally, this flow is intended for when you have a combination of an additional cost when setting up the agreement, presented as the initial charge, as well as having a limited time offer on the actual subscription.
+
+In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
 **Agreement screens with initial and campaign v2**
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
