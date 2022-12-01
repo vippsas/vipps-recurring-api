@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: How It Works: Campaigns
-sidebar_position: 13
+sidebar_position: 15
 ---
 END_METADATA -->
 
