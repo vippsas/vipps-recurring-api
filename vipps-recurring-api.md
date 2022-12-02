@@ -70,6 +70,7 @@ Document version 2.6.3.
   - [orderId recommendations](#orderid-recommendations)
   - [Agreements](#agreements)
     - [Create an agreement](#create-an-agreement)
+      - [Pricing representation](#pricing-representation)
     - [Accept an agreement](#accept-an-agreement)
     - [Intervals](#intervals)
     - [Initial charge](#initial-charge)
@@ -92,6 +93,7 @@ Document version 2.6.3.
     - [Charge times](#charge-times)
     - [Charge retries](#charge-retries)
     - [Retrieve a charge](#retrieve-a-charge)
+      - [Details on charges](#details-on-charges)
     - [List charges](#list-charges)
   - [Manage charges and agreements](#manage-charges-and-agreements)
     - [Agreement states](#agreement-states)
@@ -116,6 +118,7 @@ Document version 2.6.3.
       - [Charge amount higher than the user's max amount](#charge-amount-higher-than-the-users-max-amount)
   - [Skip landing page](#skip-landing-page)
   - [HTTP responses](#http-responses)
+    - [Error responses](#error-responses)
   - [Rate limiting](#rate-limiting)
   - [Partner keys](#partner-keys)
   - [Polling guidelines](#polling-guidelines)
@@ -947,6 +950,8 @@ should always ask the user to check in Vipps if a charge has failed.
 
 Vipps will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
+
+Retry days are not tied to the agreement’s interval. This means that a charge can be retried for a maximum of 14 days even though the next interval has started. For example, an agreement with daily interval can have a charge retried for multiple days, and it is possible to create new daily charges while others are still retrying.
 
 The status of a charge will be `DUE` while Vipps is taking care of business,
 from the `due` date until the charge has succeeded, or until the
