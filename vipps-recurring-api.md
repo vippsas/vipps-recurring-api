@@ -808,7 +808,7 @@ _Recurring has functionality to charge a variable amount each interval. See:
 [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)._
 
 Each specific charge on an agreement must be scheduled by the merchant, a
-minimum of two days before the payment will occur (it is minimum one day in the test environment).
+minimum of two days before the payment will occur (it is minimum one day in the test environment). This is because the user should be able to see the upcoming charge in the Vipps app. The user will find this under the "Payments tab".
 
 Charge the customer for each period with the
 [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
