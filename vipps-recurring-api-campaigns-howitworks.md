@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: How It Works: Campaigns
+title: How it works for campaigns
 sidebar_position: 14
 ---
 END_METADATA -->
