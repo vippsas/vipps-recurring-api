@@ -1721,7 +1721,7 @@ In addition to campaigns and initial charges being available as individual flows
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
 
 **Agreement screens with initial and campaign v3**
-![screen_initial_charge_legacy_campaign](images/campaigns/screens/price-campaign-with-initial-charge.png)
+![screen_initial_charge_legacy_campaign](images/campaigns/screens/period-campaign-with-initial-charge.png)
 
 
 ## Questions?
