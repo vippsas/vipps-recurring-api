@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: How It Works: Initial charge
+title: How It Works with initial charge
 sidebar_position: 12
 ---
 END_METADATA -->
