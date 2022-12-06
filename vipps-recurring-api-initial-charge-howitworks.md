@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: How It Works: Initial charge
-sidebar_position: 13
+sidebar_position: 12
 ---
 END_METADATA -->
 
