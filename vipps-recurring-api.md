@@ -818,7 +818,7 @@ Charge the customer for each period with the
 `due` will define for which date the charge will be performed.
 This date has to be at a minimum two days in the
 future (it is minimum one day in the test environment), and all charges `due` in
-30 days or less are visible for users in Vipps.
+35 days or less are visible for users in Vipps.
 
 Example: If the charge is _created_ on the 25th, the earliest the charge can be
 _due_ is the 27th (25+2). This is so that the user can be informed about the
@@ -1118,15 +1118,17 @@ This table has all the details for the charge states returned by the
 
 | State                | Description                                                                                                                                   |
 |:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-| `PENDING`            | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps. |
+| `PENDING`            | The charge has been created, but is not yet be visible in Vipps.  |
 | `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                       |
-| `PROCESSING`         | The charge status is unknown but should be processed.                                                                                         |
-| `CHARGED`            | The charge has been successfully completed.                                                                                                   |
+| `PROCESSING`         | The charge is being processed right now.                                                                                         |
+| `UNKNOWN`         | The charge status is unknown. This is usally very transient and will be resolved shortly.                                                                                        |
+| `CHARGED`            | The charge has been successfully processed, and the available amount has been captured.                                                                                                   |
 | `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                |
 | `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                      |
 | `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded.                                                                                              |
-| `RESERVED`           | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully.                      |
-| `CANCELLED`          | The charge has been cancelled by the merchant.                                                                                                |
+| `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]                      |
+| `PARTIALLY_CAPTURED`  | The some of the reserved amount has been captured. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer.
+| `CANCELLED`          | The charge has been cancelled.                                                                                               |
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
