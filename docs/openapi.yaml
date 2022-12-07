@@ -2199,11 +2199,20 @@ components:
             Needs to be UTC.
 
     campaignResponseV3:
-      title: Campaign response
+      oneOf:
+        - $ref: '#components/schemas/priceCampaignResponseV3'
+        - $ref: '#components/schemas/periodCampaignResponseV3'
+        - $ref: '#components/schemas/eventCampaignResponseV3'
+        - $ref: '#components/schemas/fullFlexCampaignResponseV3'
+        - $ref: '#components/schemas/legacyCampaignResponseV3'
+
+    priceCampaignResponseV3:
+      title: Price Campaign
       type: object
       required:
         - type
         - price
+        - end
       properties:
         type:
           type: string
@@ -2228,6 +2237,76 @@ components:
           description: |-
             The date and time the campaign ends.
             Needs to be UTC.
+        explanation:
+          type: string
+          example: Ordinary price 399 kr starts 6/12/2022
+          description: The text displayed in the Vipps app to explain the campaign to the user
+
+    periodCampaignResponseV3:
+      title: Period Campaign
+      type: object
+      required:
+        - type
+        - price
+        - end
+        - period
+      properties:
+        type:
+          type: string
+          description: The type of campaign. This decides which properties are required
+          enum:
+            - PRICE_CAMPAIGN
+            - PERIOD_CAMPAIGN
+            - EVENT_CAMPAIGN
+            - FULL_FLEX_CAMPAIGN
+        price:
+          type: integer
+          format: int32
+          example: 1500
+          description: |-
+            The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+
+            Price is specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        end:
+          type: string
+          example: '2019-06-01T00:00:00Z'
+          description: |-
+            The date and time the campaign ends.
+            Needs to be UTC.
+        period:
+          $ref: '#/components/schemas/TimePeriod'
+        explanation:
+          type: string
+          example: Ordinary price 399 kr starts 6/12/2022
+          description: The text displayed in the Vipps app to explain the campaign to the user
+
+    eventCampaignResponseV3:
+      title: Event Campaign
+      type: object
+      required:
+        - type
+        - price
+        - eventText
+        - eventDate
+      properties:
+        type:
+          type: string
+          description: The type of campaign. This decides which properties are required
+          enum:
+            - PRICE_CAMPAIGN
+            - PERIOD_CAMPAIGN
+            - EVENT_CAMPAIGN
+            - FULL_FLEX_CAMPAIGN
+        price:
+          type: integer
+          format: int32
+          example: 1500
+          description: |-
+            The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+
+            Price is specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         eventDate:
           type: string
           example: '2019-06-01T00:00:00Z'
@@ -2238,10 +2317,83 @@ components:
           type: string
           example: Until Christmas
           description: A short text that describes the event
+        explanation:
+          type: string
+          example: Ordinary price 399 kr starts 6/12/2022
+          description: The text displayed in the Vipps app to explain the campaign to the user
+
+    fullFlexCampaignResponseV3:
+      title: Full Flex Campaign
+      type: object
+      required:
+        - type
+        - price
+        - end
+        - interval
+      properties:
+        type:
+          type: string
+          description: The type of campaign. This decides which properties are required
+          enum:
+            - PRICE_CAMPAIGN
+            - PERIOD_CAMPAIGN
+            - EVENT_CAMPAIGN
+            - FULL_FLEX_CAMPAIGN
+            - LEGACY_CAMPAIGN
+        price:
+          type: integer
+          format: int32
+          example: 1500
+          description: |-
+            The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+
+            Price is specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        end:
+          type: string
+          example: '2019-06-01T00:00:00Z'
+          description: |-
+            The date and time the campaign ends.
+            Needs to be UTC.
         interval:
           $ref: '#/components/schemas/TimePeriod'
-        period:
-          $ref: '#/components/schemas/TimePeriod'
+        explanation:
+          type: string
+          example: Ordinary price 399 kr starts 6/12/2022
+          description: The text displayed in the Vipps app to explain the campaign to the user
+
+    legacyCampaignResponseV3:
+      title: Legacy Campaign
+      type: object
+      required:
+        - type
+        - price
+        - end
+      properties:
+        type:
+          type: string
+          description: The type of campaign. This decides which properties are required
+          enum:
+            - PRICE_CAMPAIGN
+            - PERIOD_CAMPAIGN
+            - EVENT_CAMPAIGN
+            - FULL_FLEX_CAMPAIGN
+            - LEGACY_CAMPAIGN
+        price:
+          type: integer
+          format: int32
+          example: 1500
+          description: |-
+            The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+
+            Price is specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        end:
+          type: string
+          example: '2019-06-01T00:00:00Z'
+          description: |-
+            The date and time the campaign ends.
+            Needs to be UTC.
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
