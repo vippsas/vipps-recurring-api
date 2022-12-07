@@ -2089,7 +2089,7 @@ components:
             This is a required field for `EVENT_CAMPAIGN`, and is illegal for other types.
             But: If you add this type of info, you also need to add that interval
             and end is used by `FULL_FLEX_CAMPAIGN` and that periodis used by `PERIOD_CAMPAIGN`, etc.
-            Musst be UTC.
+            Must be UTC.
         eventText:
           type: string
           minimum: 1
