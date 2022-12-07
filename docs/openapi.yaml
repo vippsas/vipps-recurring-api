@@ -2086,7 +2086,8 @@ components:
           example: '2019-06-01T00:00:00Z'
           description: |-
             The date and time the campaign ends.
-            Needs to be UTC.
+            This is a required field for some campaign types: `PERIOD_CAMPAIGN`, `EVENT_CAMPAIGN` and `ULL_FLEX_CAMPAIGN`.
+            Musst be UTC.
         eventText:
           type: string
           minimum: 1
@@ -2133,7 +2134,8 @@ components:
           example: '2019-06-01T00:00:00Z'
           description: |-
             The date and time the campaign ends.
-            Needs to be UTC.
+            This is a required field for some campaign types: `PERIOD_CAMPAIGN`, `EVENT_CAMPAIGN` and `ULL_FLEX_CAMPAIGN`.
+            Musst be UTC.
         eventText:
           type: string
           example: Until Christmas
@@ -2699,7 +2701,7 @@ components:
         customerPhoneNumber:
           type: string
           example: '96969696'
-          
+
     ForceAcceptAgreementV3:
       title: Force accept agreement request
       type: object
