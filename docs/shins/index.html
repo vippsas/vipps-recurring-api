@@ -1567,6 +1567,11 @@ Darkula color scheme from the JetBrains family of IDEs
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;php&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -1945,6 +1950,31 @@ Darkula color scheme from the JetBrains family of IDEs
                 
                   <li>
                     <a href="#tocs_campaignresponsev3" class="toc-h2 toc-link" data-title="">campaignResponseV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_pricecampaignresponsev3" class="toc-h2 toc-link" data-title="">priceCampaignResponseV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_periodcampaignresponsev3" class="toc-h2 toc-link" data-title="">periodCampaignResponseV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_eventcampaignresponsev3" class="toc-h2 toc-link" data-title="">eventCampaignResponseV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_fullflexcampaignresponsev3" class="toc-h2 toc-link" data-title="">fullFlexCampaignResponseV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_legacycampaignresponsev3" class="toc-h2 toc-link" data-title="">legacyCampaignResponseV3</a>
                     
                   </li>
                 
@@ -4951,22 +4981,7 @@ merchants making payments for themselves.</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>[
   {
-    <span class="hljs-attr">&quot;campaign&quot;</span>: {
-      <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
-      <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
-      <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-      <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-      <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-      <span class="hljs-attr">&quot;interval&quot;</span>: {
-        <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-        <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-      },
-      <span class="hljs-attr">&quot;period&quot;</span>: {
-        <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-        <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-      },
-      <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
-    },
+    <span class="hljs-attr">&quot;campaign&quot;</span>: {},
     <span class="hljs-attr">&quot;pricing&quot;</span>: {
       <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
       <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
@@ -5047,81 +5062,130 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 </tr>
 <tr>
 <td>»» campaign</td>
-<td><a href="#schemacampaignresponsev3">campaignResponseV3</a></td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
+</tbody>
+</table>
+<p><em>oneOf</em></p>
+<table>
+<thead>
 <tr>
-<td>»»» type</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>The type of campaign. This decides which properties are required</td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>»»» price</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>none</td>
-<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
-</tr>
-<tr>
-<td>»»» end</td>
-<td>string</td>
+<td>»»» <em>anonymous</em></td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
+<td>none</td>
 </tr>
+</tbody>
+</table>
+<p><em>xor</em></p>
+<table>
+<thead>
 <tr>
-<td>»»» eventDate</td>
-<td>string</td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
-<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
+<td>none</td>
 </tr>
+</tbody>
+</table>
+<p><em>xor</em></p>
+<table>
+<thead>
 <tr>
-<td>»»» eventText</td>
-<td>string</td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
-<td>A short text that describes the event</td>
+<td>none</td>
 </tr>
+</tbody>
+</table>
+<p><em>xor</em></p>
+<table>
+<thead>
 <tr>
-<td>»»» interval</td>
-<td><a href="#schematimeperiod">TimePeriod</a></td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>»»» <em>anonymous</em></td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
-<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
-</tr>
-<tr>
-<td>»»»» unit</td>
-<td>string</td>
-<td>true</td>
 <td>none</td>
-<td>Unit for time period</td>
 </tr>
+</tbody>
+</table>
+<p><em>xor</em></p>
+<table>
+<thead>
 <tr>
-<td>»»»» count</td>
-<td>integer(int32)</td>
-<td>true</td>
-<td>none</td>
-<td>Number of units in the time period. Example: unit=week, count=2 to define two weeks</td>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>»»» period</td>
-<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td>»»» <em>anonymous</em></td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
-<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
-</tr>
-<tr>
-<td>»»» explanation</td>
-<td>string</td>
-<td>false</td>
 <td>none</td>
-<td>The text displayed in the Vipps app to explain the campaign to the user</td>
 </tr>
+</tbody>
+</table>
+<p><em>continued</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>»» pricing</td>
 <td><a href="#schemapricingresponse">pricingResponse</a></td>
@@ -5266,38 +5330,6 @@ from Microsoft Azure (where we rely on standard functionality).|Inline|</p>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>type</td>
-<td>PRICE_CAMPAIGN</td>
-</tr>
-<tr>
-<td>type</td>
-<td>PERIOD_CAMPAIGN</td>
-</tr>
-<tr>
-<td>type</td>
-<td>EVENT_CAMPAIGN</td>
-</tr>
-<tr>
-<td>type</td>
-<td>FULL_FLEX_CAMPAIGN</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>YEAR</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>MONTH</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>WEEK</td>
-</tr>
-<tr>
-<td>unit</td>
-<td>DAY</td>
-</tr>
 <tr>
 <td>type</td>
 <td>LEGACY</td>
@@ -6413,22 +6445,7 @@ merchants making payments for themselves.</p>
 <p>200 Response</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">&quot;campaign&quot;</span>: {
-    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
-    <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
-    <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-    <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-    <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-    <span class="hljs-attr">&quot;interval&quot;</span>: {
-      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-    },
-    <span class="hljs-attr">&quot;period&quot;</span>: {
-      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-    },
-    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
-  },
+  <span class="hljs-attr">&quot;campaign&quot;</span>: {},
   <span class="hljs-attr">&quot;pricing&quot;</span>: {
     <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
     <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
@@ -13479,22 +13496,7 @@ System.out.println(response.toString());
 <a id="tocSagreementresponsev3"></a>
 <a id="tocsagreementresponsev3"></a></p>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">&quot;campaign&quot;</span>: {
-    <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
-    <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
-    <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-    <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-    <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-    <span class="hljs-attr">&quot;interval&quot;</span>: {
-      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-    },
-    <span class="hljs-attr">&quot;period&quot;</span>: {
-      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-    },
-    <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
-  },
+  <span class="hljs-attr">&quot;campaign&quot;</span>: {},
   <span class="hljs-attr">&quot;pricing&quot;</span>: {
     <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
     <span class="hljs-attr">&quot;currency&quot;</span>: <span class="hljs-string">&quot;NOK&quot;</span>,
@@ -14414,26 +14416,130 @@ System.out.println(response.toString());
 <a id="schema_campaignResponseV3"></a>
 <a id="tocScampaignresponsev3"></a>
 <a id="tocscampaignresponsev3"></a></p>
+<pre class="highlight tab tab-json"><code>{}
+
+</code></pre>
+<h3 id="properties-29">Properties</h3>
+<p>oneOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schema#components/schemas/pricecampaignresponsev3">#components/schemas/priceCampaignResponseV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>xor</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schema#components/schemas/periodcampaignresponsev3">#components/schemas/periodCampaignResponseV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>xor</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schema#components/schemas/eventcampaignresponsev3">#components/schemas/eventCampaignResponseV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>xor</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schema#components/schemas/fullflexcampaignresponsev3">#components/schemas/fullFlexCampaignResponseV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>xor</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schema#components/schemas/legacycampaignresponsev3">#components/schemas/legacyCampaignResponseV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_pricecampaignresponsev3">priceCampaignResponseV3</h2>
+<p><a id="schemapricecampaignresponsev3"></a>
+<a id="schema_priceCampaignResponseV3"></a>
+<a id="tocSpricecampaignresponsev3"></a>
+<a id="tocspricecampaignresponsev3"></a></p>
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
   <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-  <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-  <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-  <span class="hljs-attr">&quot;interval&quot;</span>: {
-    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-  },
-  <span class="hljs-attr">&quot;period&quot;</span>: {
-    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-  },
   <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
 }
 
 </code></pre>
-<p>Campaign response</p>
-<h3 id="properties-29">Properties</h3>
+<p>Price Campaign</p>
+<h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14462,37 +14568,9 @@ System.out.println(response.toString());
 <tr>
 <td>end</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The date and time the campaign ends.<br />Needs to be UTC.</td>
-</tr>
-<tr>
-<td>eventDate</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
-</tr>
-<tr>
-<td>eventText</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>A short text that describes the event</td>
-</tr>
-<tr>
-<td>interval</td>
-<td><a href="#schematimeperiod">TimePeriod</a></td>
-<td>false</td>
-<td>none</td>
-<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
-</tr>
-<tr>
-<td>period</td>
-<td><a href="#schematimeperiod">TimePeriod</a></td>
-<td>false</td>
-<td>none</td>
-<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
 </tr>
 <tr>
 <td>explanation</td>
@@ -14530,6 +14608,376 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
+<h2 id="tocs_periodcampaignresponsev3">periodCampaignResponseV3</h2>
+<p><a id="schemaperiodcampaignresponsev3"></a>
+<a id="schema_periodCampaignResponseV3"></a>
+<a id="tocSperiodcampaignresponsev3"></a>
+<a id="tocsperiodcampaignresponsev3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+  <span class="hljs-attr">&quot;period&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+  },
+  <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
+}
+
+</code></pre>
+<p>Period Campaign</p>
+<h3 id="properties-31">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>price</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
+</tr>
+<tr>
+<td>period</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td>true</td>
+<td>none</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
+</tr>
+<tr>
+<td>explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-29">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_eventcampaignresponsev3">eventCampaignResponseV3</h2>
+<p><a id="schemaeventcampaignresponsev3"></a>
+<a id="schema_eventCampaignResponseV3"></a>
+<a id="tocSeventcampaignresponsev3"></a>
+<a id="tocseventcampaignresponsev3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+  <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
+  <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
+}
+
+</code></pre>
+<p>Event Campaign</p>
+<h3 id="properties-32">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>price</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>eventDate</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
+</tr>
+<tr>
+<td>eventText</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>A short text that describes the event</td>
+</tr>
+<tr>
+<td>explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-30">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_fullflexcampaignresponsev3">fullFlexCampaignResponseV3</h2>
+<p><a id="schemafullflexcampaignresponsev3"></a>
+<a id="schema_fullFlexCampaignResponseV3"></a>
+<a id="tocSfullflexcampaignresponsev3"></a>
+<a id="tocsfullflexcampaignresponsev3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+  },
+  <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
+}
+
+</code></pre>
+<p>Full Flex Campaign</p>
+<h3 id="properties-33">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>price</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
+</tr>
+<tr>
+<td>interval</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td>true</td>
+<td>none</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
+</tr>
+<tr>
+<td>explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-31">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>LEGACY_CAMPAIGN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_legacycampaignresponsev3">legacyCampaignResponseV3</h2>
+<p><a id="schemalegacycampaignresponsev3"></a>
+<a id="schema_legacyCampaignResponseV3"></a>
+<a id="tocSlegacycampaignresponsev3"></a>
+<a id="tocslegacycampaignresponsev3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+  <span class="hljs-attr">&quot;explanation&quot;</span>: <span class="hljs-string">&quot;Ordinary price 399 kr starts 6/12/2022&quot;</span>
+}
+
+</code></pre>
+<p>Legacy Campaign</p>
+<h3 id="properties-34">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>price</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
+</tr>
+<tr>
+<td>explanation</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>The text displayed in the Vipps app to explain the campaign to the user</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-32">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>LEGACY_CAMPAIGN</td>
+</tr>
+</tbody>
+</table>
 <h2 id="tocs_pricingrequest">pricingRequest</h2>
 <p><a id="schemapricingrequest"></a>
 <a id="schema_pricingRequest"></a>
@@ -14544,7 +14992,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>pricing</p>
-<h3 id="properties-30">Properties</h3>
+<h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14586,7 +15034,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-29">Enumerated Values</h4>
+<h4 id="enumerated-values-33">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14620,7 +15068,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>pricing</p>
-<h3 id="properties-31">Properties</h3>
+<h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14669,7 +15117,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-30">Enumerated Values</h4>
+<h4 id="enumerated-values-34">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14700,7 +15148,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>pricing</p>
-<h3 id="properties-32">Properties</h3>
+<h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14743,7 +15191,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>InitialCharge</p>
-<h3 id="properties-33">Properties</h3>
+<h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14792,7 +15240,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-31">Enumerated Values</h4>
+<h4 id="enumerated-values-35">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14825,7 +15273,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>InitialCharge</p>
-<h3 id="properties-34">Properties</h3>
+<h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14867,7 +15315,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-32">Enumerated Values</h4>
+<h4 id="enumerated-values-36">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14902,7 +15350,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>CreateCharge</p>
-<h3 id="properties-35">Properties</h3>
+<h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14974,7 +15422,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>CreateCharge</p>
-<h3 id="properties-36">Properties</h3>
+<h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15041,7 +15489,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Charge reference</p>
-<h3 id="properties-37">Properties</h3>
+<h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15082,7 +15530,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>ChargeResponse</p>
-<h3 id="properties-38">Properties</h3>
+<h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15166,7 +15614,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-33">Enumerated Values</h4>
+<h4 id="enumerated-values-37">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -15228,7 +15676,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>ChargeResponse</p>
-<h3 id="properties-39">Properties</h3>
+<h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15333,7 +15781,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-34">Enumerated Values</h4>
+<h4 id="enumerated-values-38">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -15372,7 +15820,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Refund charge request</p>
-<h3 id="properties-40">Properties</h3>
+<h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15412,7 +15860,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Capture charge request</p>
-<h3 id="properties-41">Properties</h3>
+<h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15452,7 +15900,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Time Period request</p>
-<h3 id="properties-42">Properties</h3>
+<h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15480,7 +15928,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-35">Enumerated Values</h4>
+<h4 id="enumerated-values-39">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -15520,7 +15968,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Time Period response</p>
-<h3 id="properties-43">Properties</h3>
+<h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15555,7 +16003,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-36">Enumerated Values</h4>
+<h4 id="enumerated-values-40">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -15593,7 +16041,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Force accept agreement request</p>
-<h3 id="properties-44">Properties</h3>
+<h3 id="properties-49">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15625,7 +16073,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Force accept agreement request</p>
-<h3 id="properties-45">Properties</h3>
+<h3 id="properties-50">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15665,7 +16113,7 @@ System.out.println(response.toString());
 <p>An error from Microsoft Azure. Vipps has limited control of these errors,
 and can not give as detailed information as with the errors from our own code.
 The most important property is the HTTP status code.</p>
-<h3 id="properties-46">Properties</h3>
+<h3 id="properties-51">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15728,7 +16176,7 @@ The most important property is the HTTP status code.</p>
 
 </code></pre>
 <p>Error response</p>
-<h3 id="properties-47">Properties</h3>
+<h3 id="properties-52">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15785,7 +16233,7 @@ The most important property is the HTTP status code.</p>
 ]
 
 </code></pre>
-<h3 id="properties-48">Properties</h3>
+<h3 id="properties-53">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15828,7 +16276,7 @@ The most important property is the HTTP status code.</p>
 
 </code></pre>
 <p>Error response</p>
-<h3 id="properties-49">Properties</h3>
+<h3 id="properties-54">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15951,7 +16399,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-50">Properties</h3>
+<h3 id="properties-55">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16068,7 +16516,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-51">Properties</h3>
+<h3 id="properties-56">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16119,7 +16567,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-52">Properties</h3>
+<h3 id="properties-57">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16196,7 +16644,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-53">Properties</h3>
+<h3 id="properties-58">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16245,7 +16693,7 @@ The most important property is the HTTP status code.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-37">Enumerated Values</h4>
+<h4 id="enumerated-values-41">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -16278,7 +16726,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-54">Properties</h3>
+<h3 id="properties-59">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16357,7 +16805,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-55">Properties</h3>
+<h3 id="properties-60">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -16422,6 +16870,11 @@ The most important property is the HTTP status code.</p>
 </table>
 <!-- Renderer: Shins v2.6.0 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
