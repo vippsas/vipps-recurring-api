@@ -1563,6 +1563,10 @@ Darkula color scheme from the JetBrains family of IDEs
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
   </head>
 
   <body data-languages="[&quot;shell&quot;,&quot;http&quot;,&quot;javascript&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;php&quot;,&quot;java&quot;,&quot;go&quot;]">
@@ -1916,6 +1920,26 @@ Darkula color scheme from the JetBrains family of IDEs
                 
                   <li>
                     <a href="#tocs_campaignv3" class="toc-h2 toc-link" data-title="">campaignV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_pricecampaignv3" class="toc-h2 toc-link" data-title="">priceCampaignV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_periodcampaignv3" class="toc-h2 toc-link" data-title="">periodCampaignV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_eventcampaignv3" class="toc-h2 toc-link" data-title="">eventCampaignV3</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tocs_fullflexcampaignv3" class="toc-h2 toc-link" data-title="">fullFlexCampaignV3</a>
                     
                   </li>
                 
@@ -5635,65 +5659,149 @@ More information about this can be found in the API documentation.</p>
 <tr>
 <td>» campaign</td>
 <td>body</td>
-<td><a href="#schemacampaignv3">campaignV3</a>¦null</td>
+<td>any</td>
 <td>false</td>
 <td>none</td>
 </tr>
 <tr>
-<td>»» type</td>
+<td>»» <em>anonymous</em></td>
+<td>body</td>
+<td><a href="#schemapricecampaignv3">priceCampaignV3</a>¦null</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» type</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
 <td>The type of campaign. This decides which properties are required</td>
 </tr>
 <tr>
-<td>»» price</td>
+<td>»»» price</td>
 <td>body</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</td>
 </tr>
 <tr>
-<td>»» eventDate</td>
+<td>»»» end</td>
 <td>body</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>The date and time the campaign ends.</td>
 </tr>
 <tr>
-<td>»» eventText</td>
+<td>»» <em>anonymous</em></td>
 <td>body</td>
-<td>string</td>
+<td><a href="#schemaperiodcampaignv3">periodCampaignV3</a>¦null</td>
 <td>false</td>
-<td>A short text that describes the event</td>
+<td>none</td>
 </tr>
 <tr>
-<td>»» interval</td>
+<td>»»» type</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>»»» price</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</td>
+</tr>
+<tr>
+<td>»»» period</td>
 <td>body</td>
 <td><a href="#schematimeperiod">TimePeriod</a></td>
-<td>false</td>
+<td>true</td>
 <td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
 </tr>
 <tr>
-<td>»»» unit</td>
+<td>»»»» unit</td>
 <td>body</td>
 <td>string</td>
 <td>true</td>
 <td>Unit for time period</td>
 </tr>
 <tr>
-<td>»»» count</td>
+<td>»»»» count</td>
 <td>body</td>
 <td>integer(int32)</td>
 <td>true</td>
 <td>Number of units in the time period. Example: unit=week, count=2 to define two weeks</td>
 </tr>
 <tr>
-<td>»» period</td>
+<td>»» <em>anonymous</em></td>
+<td>body</td>
+<td><a href="#schemaeventcampaignv3">eventCampaignV3</a>¦null</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>»»» price</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</td>
+</tr>
+<tr>
+<td>»»» eventDate</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>The date and time the campaign ends.</td>
+</tr>
+<tr>
+<td>»»» eventText</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>A short text that describes the event</td>
+</tr>
+<tr>
+<td>»» <em>anonymous</em></td>
+<td>body</td>
+<td><a href="#schemafullflexcampaignv3">fullFlexCampaignV3</a>¦null</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>»»» price</td>
+<td>body</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</td>
+</tr>
+<tr>
+<td>»»» interval</td>
 <td>body</td>
 <td><a href="#schematimeperiod">TimePeriod</a></td>
-<td>false</td>
+<td>true</td>
 <td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
+</tr>
+<tr>
+<td>»»» end</td>
+<td>body</td>
+<td>string</td>
+<td>true</td>
+<td>The date and time the campaign ends.</td>
 </tr>
 <tr>
 <td>» pricing</td>
@@ -5842,10 +5950,23 @@ making payments on behalf of a merchant.
 The partner must use the merchant's MSN (not the partner's MSN).
 This parameter is optional, and recommended, for regular Vipps
 merchants making payments for themselves.</p>
-<p><strong>»» price</strong>: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</p>
+<p><strong>»»» price</strong>: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</p>
 <p>Price is specified in minor units.
 For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
-<p><strong>»» eventDate</strong>: The date and time the campaign ends.
+<p><strong>»»» end</strong>: The date and time the campaign ends.
+Needs to be UTC.</p>
+<p><strong>»»» price</strong>: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</p>
+<p>Price is specified in minor units.
+For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
+<p><strong>»»» price</strong>: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</p>
+<p>Price is specified in minor units.
+For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
+<p><strong>»»» eventDate</strong>: The date and time the campaign ends.
+Needs to be UTC.</p>
+<p><strong>»»» price</strong>: The price of the agreement in the discount period. The lowering of the price will be displayed in-app.</p>
+<p>Price is specified in minor units.
+For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</p>
+<p><strong>»»» end</strong>: The date and time the campaign ends.
 Needs to be UTC.</p>
 <p><strong>»» amount</strong>: The price of the agreement, required if type is LEGACY or not present.</p>
 <p>Amounts are specified in minor units.
@@ -5879,36 +6000,84 @@ the request will fail and an error message will be returned (statusCode=403).</p
 </thead>
 <tbody>
 <tr>
-<td>»» type</td>
+<td>»»» type</td>
 <td>PRICE_CAMPAIGN</td>
 </tr>
 <tr>
-<td>»» type</td>
+<td>»»» type</td>
 <td>PERIOD_CAMPAIGN</td>
 </tr>
 <tr>
-<td>»» type</td>
+<td>»»» type</td>
 <td>EVENT_CAMPAIGN</td>
 </tr>
 <tr>
-<td>»» type</td>
+<td>»»» type</td>
 <td>FULL_FLEX_CAMPAIGN</td>
 </tr>
 <tr>
-<td>»»» unit</td>
+<td>»»» type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»»» unit</td>
 <td>YEAR</td>
 </tr>
 <tr>
-<td>»»» unit</td>
+<td>»»»» unit</td>
 <td>MONTH</td>
 </tr>
 <tr>
-<td>»»» unit</td>
+<td>»»»» unit</td>
 <td>WEEK</td>
 </tr>
 <tr>
-<td>»»» unit</td>
+<td>»»»» unit</td>
 <td>DAY</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>»»» type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
 </tr>
 <tr>
 <td>»» type</td>
@@ -12922,16 +13091,7 @@ System.out.println(response.toString());
   <span class="hljs-attr">&quot;campaign&quot;</span>: {
     <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
     <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
-    <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-    <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-    <span class="hljs-attr">&quot;interval&quot;</span>: {
-      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-    },
-    <span class="hljs-attr">&quot;period&quot;</span>: {
-      <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-      <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-    }
+    <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
   },
   <span class="hljs-attr">&quot;pricing&quot;</span>: {
     <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;LEGACY&quot;</span>,
@@ -13838,12 +13998,178 @@ System.out.println(response.toString());
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
   <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
-  <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
-  <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>,
-  <span class="hljs-attr">&quot;interval&quot;</span>: {
-    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
-    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
-  },
+  <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
+}
+
+</code></pre>
+<h3 id="properties-24">Properties</h3>
+<p>oneOf</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemapricecampaignv3">priceCampaignV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>xor</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemaperiodcampaignv3">periodCampaignV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>xor</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemaeventcampaignv3">eventCampaignV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>xor</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemafullflexcampaignv3">fullFlexCampaignV3</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_pricecampaignv3">priceCampaignV3</h2>
+<p><a id="schemapricecampaignv3"></a>
+<a id="schema_priceCampaignV3"></a>
+<a id="tocSpricecampaignv3"></a>
+<a id="tocspricecampaignv3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
+}
+
+</code></pre>
+<p>Price campaign</p>
+<h3 id="properties-25">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>price</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-24">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_periodcampaignv3">periodCampaignV3</h2>
+<p><a id="schemaperiodcampaignv3"></a>
+<a id="schema_periodCampaignV3"></a>
+<a id="tocSperiodcampaignv3"></a>
+<a id="tocsperiodcampaignv3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
   <span class="hljs-attr">&quot;period&quot;</span>: {
     <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
     <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
@@ -13851,8 +14177,84 @@ System.out.println(response.toString());
 }
 
 </code></pre>
-<p>Campaign request</p>
-<h3 id="properties-24">Properties</h3>
+<p>Period campaign</p>
+<h3 id="properties-26">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>price</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
+</tr>
+<tr>
+<td>period</td>
+<td><a href="#schematimeperiod">TimePeriod</a></td>
+<td>true</td>
+<td>none</td>
+<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-25">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_eventcampaignv3">eventCampaignV3</h2>
+<p><a id="schemaeventcampaignv3"></a>
+<a id="schema_eventCampaignV3"></a>
+<a id="tocSeventcampaignv3"></a>
+<a id="tocseventcampaignv3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;eventDate&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>,
+  <span class="hljs-attr">&quot;eventText&quot;</span>: <span class="hljs-string">&quot;Until Christmas&quot;</span>
+}
+
+</code></pre>
+<p>Event campaign</p>
+<h3 id="properties-27">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -13881,34 +14283,106 @@ System.out.println(response.toString());
 <tr>
 <td>eventDate</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 <tr>
 <td>eventText</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>A short text that describes the event</td>
+</tr>
+</tbody>
+</table>
+<h4 id="enumerated-values-26">Enumerated Values</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>PRICE_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>PERIOD_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>EVENT_CAMPAIGN</td>
+</tr>
+<tr>
+<td>type</td>
+<td>FULL_FLEX_CAMPAIGN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tocs_fullflexcampaignv3">fullFlexCampaignV3</h2>
+<p><a id="schemafullflexcampaignv3"></a>
+<a id="schema_fullFlexCampaignV3"></a>
+<a id="tocSfullflexcampaignv3"></a>
+<a id="tocsfullflexcampaignv3"></a></p>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;PRICE_CAMPAIGN&quot;</span>,
+  <span class="hljs-attr">&quot;price&quot;</span>: <span class="hljs-number">1500</span>,
+  <span class="hljs-attr">&quot;interval&quot;</span>: {
+    <span class="hljs-attr">&quot;unit&quot;</span>: <span class="hljs-string">&quot;WEEK&quot;</span>,
+    <span class="hljs-attr">&quot;count&quot;</span>: <span class="hljs-number">2</span>
+  },
+  <span class="hljs-attr">&quot;end&quot;</span>: <span class="hljs-string">&quot;2019-06-01T00:00:00Z&quot;</span>
+}
+
+</code></pre>
+<p>Full flex campaign</p>
+<h3 id="properties-28">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>The type of campaign. This decides which properties are required</td>
+</tr>
+<tr>
+<td>price</td>
+<td>integer(int32)</td>
+<td>true</td>
+<td>none</td>
+<td>The price of the agreement in the discount period. The lowering of the price will be displayed in-app.<br /><br />Price is specified in minor units.<br />For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.</td>
 </tr>
 <tr>
 <td>interval</td>
 <td><a href="#schematimeperiod">TimePeriod</a></td>
-<td>false</td>
+<td>true</td>
 <td>none</td>
 <td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
 </tr>
 <tr>
-<td>period</td>
-<td><a href="#schematimeperiod">TimePeriod</a></td>
-<td>false</td>
+<td>end</td>
+<td>string</td>
+<td>true</td>
 <td>none</td>
-<td>A period of time, defined by a unit (DAY, WEEK, ...) and a count (number of said units)</td>
+<td>The date and time the campaign ends.<br />Needs to be UTC.</td>
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-24">Enumerated Values</h4>
+<h4 id="enumerated-values-27">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -13959,7 +14433,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Campaign response</p>
-<h3 id="properties-25">Properties</h3>
+<h3 id="properties-29">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14029,7 +14503,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-25">Enumerated Values</h4>
+<h4 id="enumerated-values-28">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14070,7 +14544,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>pricing</p>
-<h3 id="properties-26">Properties</h3>
+<h3 id="properties-30">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14112,7 +14586,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-26">Enumerated Values</h4>
+<h4 id="enumerated-values-29">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14146,7 +14620,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>pricing</p>
-<h3 id="properties-27">Properties</h3>
+<h3 id="properties-31">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14195,7 +14669,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-27">Enumerated Values</h4>
+<h4 id="enumerated-values-30">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14226,7 +14700,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>pricing</p>
-<h3 id="properties-28">Properties</h3>
+<h3 id="properties-32">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14269,7 +14743,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>InitialCharge</p>
-<h3 id="properties-29">Properties</h3>
+<h3 id="properties-33">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14318,7 +14792,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-28">Enumerated Values</h4>
+<h4 id="enumerated-values-31">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14351,7 +14825,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>InitialCharge</p>
-<h3 id="properties-30">Properties</h3>
+<h3 id="properties-34">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14393,7 +14867,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-29">Enumerated Values</h4>
+<h4 id="enumerated-values-32">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14428,7 +14902,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>CreateCharge</p>
-<h3 id="properties-31">Properties</h3>
+<h3 id="properties-35">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14500,7 +14974,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>CreateCharge</p>
-<h3 id="properties-32">Properties</h3>
+<h3 id="properties-36">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14567,7 +15041,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Charge reference</p>
-<h3 id="properties-33">Properties</h3>
+<h3 id="properties-37">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14608,7 +15082,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>ChargeResponse</p>
-<h3 id="properties-34">Properties</h3>
+<h3 id="properties-38">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14692,7 +15166,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-30">Enumerated Values</h4>
+<h4 id="enumerated-values-33">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14754,7 +15228,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>ChargeResponse</p>
-<h3 id="properties-35">Properties</h3>
+<h3 id="properties-39">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14859,7 +15333,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-31">Enumerated Values</h4>
+<h4 id="enumerated-values-34">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -14898,7 +15372,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Refund charge request</p>
-<h3 id="properties-36">Properties</h3>
+<h3 id="properties-40">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14938,7 +15412,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Capture charge request</p>
-<h3 id="properties-37">Properties</h3>
+<h3 id="properties-41">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -14978,7 +15452,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Time Period request</p>
-<h3 id="properties-38">Properties</h3>
+<h3 id="properties-42">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15006,7 +15480,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-32">Enumerated Values</h4>
+<h4 id="enumerated-values-35">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -15046,7 +15520,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Time Period response</p>
-<h3 id="properties-39">Properties</h3>
+<h3 id="properties-43">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15081,7 +15555,7 @@ System.out.println(response.toString());
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-33">Enumerated Values</h4>
+<h4 id="enumerated-values-36">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -15119,7 +15593,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Force accept agreement request</p>
-<h3 id="properties-40">Properties</h3>
+<h3 id="properties-44">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15151,7 +15625,7 @@ System.out.println(response.toString());
 
 </code></pre>
 <p>Force accept agreement request</p>
-<h3 id="properties-41">Properties</h3>
+<h3 id="properties-45">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15191,7 +15665,7 @@ System.out.println(response.toString());
 <p>An error from Microsoft Azure. Vipps has limited control of these errors,
 and can not give as detailed information as with the errors from our own code.
 The most important property is the HTTP status code.</p>
-<h3 id="properties-42">Properties</h3>
+<h3 id="properties-46">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15254,7 +15728,7 @@ The most important property is the HTTP status code.</p>
 
 </code></pre>
 <p>Error response</p>
-<h3 id="properties-43">Properties</h3>
+<h3 id="properties-47">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15311,7 +15785,7 @@ The most important property is the HTTP status code.</p>
 ]
 
 </code></pre>
-<h3 id="properties-44">Properties</h3>
+<h3 id="properties-48">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15354,7 +15828,7 @@ The most important property is the HTTP status code.</p>
 
 </code></pre>
 <p>Error response</p>
-<h3 id="properties-45">Properties</h3>
+<h3 id="properties-49">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15477,7 +15951,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-46">Properties</h3>
+<h3 id="properties-50">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15594,7 +16068,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-47">Properties</h3>
+<h3 id="properties-51">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15645,7 +16119,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-48">Properties</h3>
+<h3 id="properties-52">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15722,7 +16196,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-49">Properties</h3>
+<h3 id="properties-53">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15771,7 +16245,7 @@ The most important property is the HTTP status code.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="enumerated-values-34">Enumerated Values</h4>
+<h4 id="enumerated-values-37">Enumerated Values</h4>
 <table>
 <thead>
 <tr>
@@ -15804,7 +16278,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-50">Properties</h3>
+<h3 id="properties-54">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15883,7 +16357,7 @@ The most important property is the HTTP status code.</p>
 }
 
 </code></pre>
-<h3 id="properties-51">Properties</h3>
+<h3 id="properties-55">Properties</h3>
 <table>
 <thead>
 <tr>
@@ -15948,6 +16422,10 @@ The most important property is the HTTP status code.</p>
 </table>
 <!-- Renderer: Shins v2.6.0 -->
 <!-- Generator: Widdershins v4.0.1 -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
+<!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
 <!-- backwards compatibility -->
