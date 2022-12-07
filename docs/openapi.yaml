@@ -2061,6 +2061,8 @@ components:
         - $ref: '#/components/schemas/periodCampaignV3'
         - $ref: '#/components/schemas/eventCampaignV3'
         - $ref: '#/components/schemas/fullFlexCampaignV3'
+      discriminator:
+        propertyName: type
 
     priceCampaignV3:
       title: Price campaign
@@ -2205,6 +2207,8 @@ components:
         - $ref: '#components/schemas/eventCampaignResponseV3'
         - $ref: '#components/schemas/fullFlexCampaignResponseV3'
         - $ref: '#components/schemas/legacyCampaignResponseV3'
+      discriminator:
+        propertyName: type
 
     priceCampaignResponseV3:
       title: Price Campaign
