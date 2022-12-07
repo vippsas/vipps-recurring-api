@@ -2134,7 +2134,7 @@ components:
           example: '2019-06-01T00:00:00Z'
           description: |-
             The date and time the campaign ends.
-            This is a required field for some campaign types: `PERIOD_CAMPAIGN`, `EVENT_CAMPAIGN` and `ULL_FLEX_CAMPAIGN`.
+            This is a required field when usin `EVENT_CAMPAIGN`.
             Musst be UTC.
         eventText:
           type: string
