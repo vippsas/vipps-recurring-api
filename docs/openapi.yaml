@@ -2056,12 +2056,20 @@ components:
             Needs to be UTC.
 
     campaignV3:
-      title: Campaign request
-      type: object
+      oneOf:
+        - $ref: '#/components/schemas/priceCampaignV3'
+        - $ref: '#/components/schemas/periodCampaignV3'
+        - $ref: '#/components/schemas/eventCampaignV3'
+        - $ref: '#/components/schemas/fullFlexCampaignV3'
+
+    priceCampaignV3:
+      title: Price campaign
+      type:  object
       nullable: true
       required:
         - type
         - price
+        - end
       properties:
         type:
           type: string
@@ -2074,7 +2082,69 @@ components:
         price:
           type: integer
           format: int32
-          minimum: 0
+          example: 1500
+          description: |-
+            The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+
+            Price is specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        end:
+          type: string
+          example: '2019-06-01T00:00:00Z'
+          description: |-
+            The date and time the campaign ends.
+            Needs to be UTC.
+
+    periodCampaignV3:
+      title: Period campaign
+      type:  object
+      nullable: true
+      required:
+        - type
+        - price
+        - period
+      properties:
+        type:
+          type: string
+          description: The type of campaign. This decides which properties are required
+          enum:
+            - PRICE_CAMPAIGN
+            - PERIOD_CAMPAIGN
+            - EVENT_CAMPAIGN
+            - FULL_FLEX_CAMPAIGN
+        price:
+          type: integer
+          format: int32
+          example: 1500
+          description: |-
+            The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+
+            Price is specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+        period:
+          $ref: '#/components/schemas/TimePeriod'
+
+    eventCampaignV3:
+      title: Event campaign
+      type:  object
+      nullable: true
+      required:
+        - type
+        - price
+        - eventText
+        - eventDate
+      properties:
+        type:
+          type: string
+          description: The type of campaign. This decides which properties are required
+          enum:
+            - PRICE_CAMPAIGN
+            - PERIOD_CAMPAIGN
+            - EVENT_CAMPAIGN
+            - FULL_FLEX_CAMPAIGN
+        price:
+          type: integer
+          format: int32
           example: 1500
           description: |-
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
@@ -2089,14 +2159,44 @@ components:
             Needs to be UTC.
         eventText:
           type: string
-          minimum: 1
-          maximum: 15
           example: Until Christmas
           description: A short text that describes the event
+
+    fullFlexCampaignV3:
+      title: Full flex campaign
+      type:  object
+      nullable: true
+      required:
+        - type
+        - price
+        - interval
+        - end
+      properties:
+        type:
+          type: string
+          description: The type of campaign. This decides which properties are required
+          enum:
+            - PRICE_CAMPAIGN
+            - PERIOD_CAMPAIGN
+            - EVENT_CAMPAIGN
+            - FULL_FLEX_CAMPAIGN
+        price:
+          type: integer
+          format: int32
+          example: 1500
+          description: |-
+            The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
+
+            Price is specified in minor units.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         interval:
           $ref: '#/components/schemas/TimePeriod'
-        period:
-          $ref: '#/components/schemas/TimePeriod'
+        end:
+          type: string
+          example: '2019-06-01T00:00:00Z'
+          description: |-
+            The date and time the campaign ends.
+            Needs to be UTC.
 
     campaignResponseV3:
       title: Campaign response
@@ -2699,7 +2799,7 @@ components:
         customerPhoneNumber:
           type: string
           example: '96969696'
-          
+
     ForceAcceptAgreementV3:
       title: Force accept agreement request
       type: object
