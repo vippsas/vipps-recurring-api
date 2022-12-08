@@ -1526,7 +1526,7 @@ All error responses contains an `error` object in the body, with details of the
 problem.
 
 HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-For example, when calling [`PUT:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement,
+For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint with a stopped agreement,
 the response will be the following:
 
 ```json
