@@ -2202,11 +2202,11 @@ components:
 
     campaignResponseV3:
       oneOf:
-        - $ref: '#components/schemas/priceCampaignResponseV3'
-        - $ref: '#components/schemas/periodCampaignResponseV3'
-        - $ref: '#components/schemas/eventCampaignResponseV3'
-        - $ref: '#components/schemas/fullFlexCampaignResponseV3'
-        - $ref: '#components/schemas/legacyCampaignResponseV3'
+        - $ref: '#/components/schemas/priceCampaignResponseV3'
+        - $ref: '#/components/schemas/periodCampaignResponseV3'
+        - $ref: '#/components/schemas/eventCampaignResponseV3'
+        - $ref: '#/components/schemas/fullFlexCampaignResponseV3'
+        - $ref: '#/components/schemas/legacyCampaignResponseV3'
       discriminator:
         propertyName: type
 
