@@ -215,7 +215,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | Operation                                       | Description                                           | Endpoint                                                                               |
 |-------------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------|
 | List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                          |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint-v2]                                      |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint]                                         |
 | [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
 | [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
 | [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
@@ -1116,19 +1116,19 @@ to set up a new agreement.
 This table has all the details for the charge states returned by the
 [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
 
-| State                | Description                                                                                                                                   |
-|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-| `PENDING`            | The charge has been created, but is not yet be visible in Vipps.  |
-| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                       |
-| `PROCESSING`         | The charge is being processed right now.                                                                                         |
-| `UNKNOWN`         | The charge status is unknown. This is usally very transient and will be resolved shortly.                                                                                        |
-| `CHARGED`            | The charge has been successfully processed, and the available amount has been captured.                                                                                                   |
-| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                |
-| `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                      |
-| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded.                                                                                              |
-| `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]                      |
-| `PARTIALLY_CAPTURED`  | The some of the reserved amount has been captured. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer.
-| `CANCELLED`          | The charge has been cancelled.                                                                                               |
+| State                | Description                                                                                                                                                               |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PENDING`            | The charge has been created, but is not yet be visible in Vipps.                                                                                                          |
+| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                                                   |
+| `PROCESSING`         | The charge is being processed right now.                                                                                                                                  |
+| `UNKNOWN`            | The charge status is unknown. This is usally very transient and will be resolved shortly.                                                                                 |
+| `CHARGED`            | The charge has been successfully processed, and the available amount has been captured.                                                                                   |
+| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                                            |
+| `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                                                  |
+| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded.                                                                                                                          |
+| `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]                       |
+| `PARTIALLY_CAPTURED` | The some of the reserved amount has been captured. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer. |
+| `CANCELLED`          | The charge has been cancelled.                                                                                                                                            |
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
@@ -1200,7 +1200,7 @@ Vipps offers the possibility for merchants to ask for the user's profile informa
 
 To enable the possibility to fetch profile information for a user the merchant can add a
 [`scope`](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo#scope)
-parameter to the [`POST:/agreements`][draft-agreement-endpoint-v2] call.
+parameter to the [`POST:/agreements`][draft-agreement-endpoint] call.
 
 See
 [User information](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo)
@@ -1570,7 +1570,7 @@ what we "use to count". The limits are of course not _total_ limits.
 | [FetchCharge][fetch-charge-endpoint]               | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId  |
 | [ListCharges][list-charges-endpoint]               | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId               |
 | [FetchAgreement][fetch-agreement-endpoint]         | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId               |
-| [DraftAgreement][draft-agreement-endpoint-v2]      | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
+| [DraftAgreement][draft-agreement-endpoint]         | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
 
 **Please note:** The "Key" column is important. The above means that we allow two
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
