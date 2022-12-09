@@ -316,12 +316,26 @@ The general process is:
   and the planned date of the change.
 - Send a confirmation to avtale@vipps.no that all customers have been informed,
   including a copy of the information sent.
+- Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
+  - Vippsnr's of the saleunit the agreements should be migrated from and to
+  - A decision on how to handle existing agreements in the new saleunit (in case you have started using it)
+  - Final confirmation of date and time for migration.
+- After the migration is performed, you will get a file that maps from old to new agreement id
+  - this is a csv where each line is an agreement, and the columns are old id and new id
+- You then need to update your systems so you start using the new agreement ids
 
-Agreements are not actually moved. Your new saleunit will get new agreements
+
+Brukerne vil kunne finne den gamle avtalen under "Avsluttede faste betalinger". Der vil de finne historikk for den frem til migreringstidspunktet.
+Som en følge av dette vil det ikke være mulig for dere å se eller gjøre noe med tidligere trekk fra den nye salgsenheten, siden de nye avtalene ikke har noen trekk.
+Avtalene i den gamle salgsenheten vil bli stoppet, og det vil ikke være mulig å lage nye trekk på dem.
+OBS; vi anbefaler å ta vare på alle avtaleIder en kunde noen gang har vært tilknyttet, slik at dere har mulighet til å finne tilbake til tidligere avtaler osv. Vi vet at mange kun tar vare på "nyeste", og dermed ikke har mulighet til å finne ut om en kunde kan ha flere aktive avtaler osv. :sweat_smile:
+
+><b>NOTE:</b> Agreements are not actually moved. Your new saleunit will get new agreements
 identical to the old ones, but with new agreementIds. The old agreements will
-be stopped. This is done to prevent any confusion around charges, refunds, etc.
-between the two MSNs. Charges done by the old MSN are in the old agreement,
-while the new MSN uses only the new agreement. The name of the new org will have the new juridical name. Sales unit name can be the same. 
+be stopped. This means the user will still be able to see the old agreement in the app, under "Stopped agreements".
+<br/>This is done because the underlying payments are tied to the saleunit, so the new saleunit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
+<br/>Charges done by the old MSN are in the old agreement,
+while the new MSN uses only the new agreement. The name of the new org will have the new juridical name. Sales unit name can be the same.
 
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
