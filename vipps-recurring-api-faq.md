@@ -30,6 +30,8 @@ Document version: 1.6.3.
 <!-- START_TOC -->
 
 ## Table of Contents
+- [Known issues](#known-issues)
+  - [Why do I get an error when trying to refund an initial charge after FORCE accepting an agreement? (TEST ONLY)](#why-do-i-get-an-error-when-trying-to-refund-an-initial-charge-after-force-accepting-an-agreement--test-only-)
 - [Migration](#migration)
   - [How do I migrate to the v3 API?](#how-do-i-migrate-to-the-v3-api)
 - [Charges/Payments](#chargespayments)
@@ -37,14 +39,14 @@ Document version: 1.6.3.
   - [Does Vipps automatically create charges for an agreement?](#does-vipps-automatically-create-charges-for-an-agreement)
   - [At what time during the day are charges processed?](#at-what-time-during-the-day-are-charges-processed)
   - [When are charges processed?](#when-are-charges-processed)
-  - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
+  - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds--networking-issues-etc-)
   - [How can I require an initial payment from the user for setting up the agreement?](#how-can-i-require-an-initial-payment-from-the-user-for-setting-up-the-agreement)
   - [Can the charge amount be different from the agreement price?](#can-the-charge-amount-be-different-from-the-agreement-price)
   - [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
   - [When can I send charges to a user?](#when-can-i-send-charges-to-a-user)
   - [A charge failed, but the customer did not receive any warning](#a-charge-failed-but-the-customer-did-not-receive-any-warning)
   - [What happens to charges if the corresponding agreement is cancelled?](#what-happens-to-charges-if-the-corresponding-agreement-is-cancelled)
-  - [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
+  - [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires--what-happens-on-the-next-charge)
   - [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
   - [How does a user see the charges I create?](#how-does-a-user-see-the-charges-i-create)
   - [If a user adds or updates a card in vipps, will new recurring charges be made to that card?](#if-a-user-adds-or-updates-a-card-in-vipps-will-new-recurring-charges-be-made-to-that-card)
@@ -62,7 +64,7 @@ Document version: 1.6.3.
   - [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
   - [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
 - [Common problems/errors](#common-problemserrors)
-  - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
+  - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation-)
   - [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
 - [Notifications and error messages](#notifications-and-error-messages)
   - [When do users get push messages?](#when-do-users-get-push-messages)
@@ -75,6 +77,14 @@ Document version: 1.6.3.
 - [Questions?](#questions)
 
 <!-- END_TOC -->
+
+## Known issues
+
+### Why do I get an error when trying to refund an initial charge after force accepting an agreement? (TEST ONLY)
+
+There is currently an issue with the `force accept agreement` endpoint.
+We have a bug that causes the first attempt to refund an initial charge to fail due to some data not in sync. But it should work on the second attempt.
+This issue happens only with force accept, it does not apply if the agreement is accepted in the app.
 
 ## Migration
 
@@ -158,7 +168,7 @@ notification when a card that is _not_ used for recurring payments expires.
 
 ### What happens to pending charges if the user deletes the payment card?
 
-See [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
+See [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires--what-happens-on-the-next-charge)
 
 ### How does a user see the charges I create?
 
