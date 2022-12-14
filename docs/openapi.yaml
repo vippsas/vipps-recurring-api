@@ -2088,7 +2088,7 @@ components:
             The date and time the campaign ends.
             This is a required field for `EVENT_CAMPAIGN`, and is illegal for other types.
             But: If you add this type of info, you also need to add that interval
-            and end is used by `FULL_FLEX_CAMPAIGN` and that periodis used by `PERIOD_CAMPAIGN`, etc.
+            and end is used by `FULL_FLEX_CAMPAIGN` and that period is used by `PERIOD_CAMPAIGN`, etc.
             Must be UTC.
         eventText:
           type: string
