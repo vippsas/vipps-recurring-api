@@ -2400,7 +2400,7 @@ components:
             If the charge is `DIRECT_CAPTURE`, the charge is processed and charged on due date.
             If the charge is `RESERVE_CAPTURE`, the charge is `RESERVED` on due date.
 
-            Must be in the format `YYYY-MM-DD`
+            Must be in the format `YYYY-MM-DD` and ISO 8601.
           example: '2030-12-31'
         retryDays:
           type: integer
