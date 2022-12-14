@@ -2349,7 +2349,7 @@ components:
           type: string
           description: |-
             The date when the charge is due to be processed.
-            Must be in the format `YYYY-MM-DD`.
+            Must be in the format `YYYY-MM-DD` and ISO 8601.
           example: '2030-12-31'
         retryDays:
           type: integer
