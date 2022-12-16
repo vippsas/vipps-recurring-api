@@ -30,8 +30,6 @@ Document version: 1.6.3.
 <!-- START_TOC -->
 
 ## Table of Contents
-- [Known issues](#known-issues)
-  - [Why do I get an error when trying to refund an initial charge after FORCE accepting an agreement? (TEST ONLY)](#why-do-i-get-an-error-when-trying-to-refund-an-initial-charge-after-force-accepting-an-agreement--test-only-)
 - [Migration](#migration)
   - [How do I migrate to the v3 API?](#how-do-i-migrate-to-the-v3-api)
 - [Charges/Payments](#chargespayments)
@@ -77,14 +75,6 @@ Document version: 1.6.3.
 - [Questions?](#questions)
 
 <!-- END_TOC -->
-
-## Known issues
-
-### Why do I get an error when trying to refund an initial charge after force accepting an agreement? (TEST ONLY)
-
-There is currently an issue with the `force accept agreement` endpoint.
-We have a bug that causes the first attempt to refund an initial charge to fail due to some data not in sync. But it should work on the second attempt.
-This issue happens only with force accept, it does not apply if the agreement is accepted in the app.
 
 ## Migration
 
