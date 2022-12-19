@@ -2265,7 +2265,7 @@
 							},
 							{
 								"key": "Continuation-Token",
-								"value": "{{contination_token}}",
+								"value": "{{continuation_token}}",
 								"type": "default",
 								"disabled": true
 							}

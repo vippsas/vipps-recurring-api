@@ -316,7 +316,7 @@ for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
-An agreement is between the Vipps user and the merchant. Think of it as a payment agreement that allows you (the merchant) to recurringly charge the customer without them having to manually approve every time. See [charges](#charges).
+An agreement is between the Vipps user and the merchant. This payment agreement allows you to routinely charge the customer without requiring them to manually approve every time. See [charges](#charges).
 
 ### Create an agreement
 
@@ -1121,7 +1121,7 @@ This table has all the details for the charge states returned by the
 | `PENDING`            | The charge has been created, but is not yet be visible in Vipps.                                                                                                          |
 | `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                                                   |
 | `PROCESSING`         | The charge is being processed right now.                                                                                                                                  |
-| `UNKNOWN`            | The charge status is unknown. This is usally very transient and will be resolved shortly.                                                                                 |
+| `UNKNOWN`            | The charge status is unknown. This is usually very transient and will be resolved shortly.                                                                                 |
 | `CHARGED`            | The charge has been successfully processed, and the available amount has been captured.                                                                                   |
 | `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                                            |
 | `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                                                  |
@@ -1551,10 +1551,10 @@ This means, in the future, `detail` and `extraDetails` content can change for so
 ## Rate limiting
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
-fraudulent and wrongful behaviour, and increase the stability and security of
-our API. The limits should not affect normal behaviour, but please
+fraudulent and wrongful behavior, and increase the stability and security of
+our API. The limits should not affect normal behavior, but please
 [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
-if you notice any unexpected behaviour.
+if you notice any unexpected behavior.
 
 The "Key" column specifies what we consider to be the unique identifier, and
 what we "use to count". The limits are of course not _total_ limits.
@@ -1672,7 +1672,7 @@ See [Recommendations regarding handling redirects](https://vippsas.github.io/vip
 
 ## Different agreement types and when to use them
 
-Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilising the normal agreements, initial charges, campaigns, or a combination of those.
+Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilizing the normal agreements, initial charges, campaigns, or a combination of those.
 
 This can be a bit confusing when deciding on which implementation to go for.
 In short our advice is to implement support for all our flows, and also implement features in your own systems for moving between the flows depending on the use case.
