@@ -124,13 +124,13 @@ If you want to give members a discounted subscription fee when they have been su
 - Update existing agreements as previous scenario.
 - Use a `FULL_FLEX_CAMPAIGN` to display to the new customers that they will get a better price if they stay subscribed.
 
-Here is an example of the latter, where they pay 50kr/week until march 1st, then 200kr/month after that:
+Here is an example of the latter, where they pay 69kr/week until march 1st, then 200kr/month after that:
 
 ```json
 {
   ...
   "initialCharge": {
-     "amount": 5000,
+     "amount": 6900,
      "description": "Initial charge",
      "transactionType": "DIRECT_CAPTURE"
   },
@@ -141,7 +141,7 @@ Here is an example of the latter, where they pay 50kr/week until march 1st, then
   "interval": { "unit": "MONTH", "count": 1 },
   "campaign": {
     "type": "FULL_FLEX_CAMPAIGN",
-    "price": 5000,
+    "price": 6900,
     "interval": {
       "unit": "WEEK",
       "count": 1
