@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: Implementation Inspiration
-sidebar_position: 13
+sidebar_position: 16
 ---
 END_METADATA -->
 
