@@ -2020,15 +2020,20 @@ components:
           format: int32
           example: 1500
           description: |-
-            The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
-
+            The price of the agreement in the discount period.
+            The lowering of the price will be displayed in-app.
             Price is specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         end:
           type: string
           format: date-time
           example: '2022-12-31T00:00:00Z'
-          description: The date and time the campaign ends. Must be UTC.
+          description: |-
+            The date and time the campaign ends.
+            This is a required field for `EVENT_CAMPAIGN`, and is illegal for other types.
+            But: If you add this type of info, you also need to add that interval
+            and end is used by `FULL_FLEX_CAMPAIGN` and that period is used by `PERIOD_CAMPAIGN`, etc.
+            Must be UTC.
 
     campaignResponseV2:
       title: Campaign response
@@ -2040,7 +2045,6 @@ components:
           example: 1500
           description: |-
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
-
             Price is specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         start:
@@ -2052,7 +2056,10 @@ components:
           type: string
           format: date-time
           example: '2022-12-31T00:00:00Z'
-          description: The date and time the campaign ends. Must be UTC.
+          description: |-
+            The date and time the campaign ends.
+            This is a required field when using `EVENT_CAMPAIGN`.
+            Must be UTC.
     campaignV3:
       oneOf:
         - $ref: '#/components/schemas/priceCampaignV3'
