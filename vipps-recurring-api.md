@@ -70,6 +70,7 @@ Document version 2.6.3.
   - [orderId recommendations](#orderid-recommendations)
   - [Agreements](#agreements)
     - [Create an agreement](#create-an-agreement)
+      - [Pricing representation](#pricing-representation)
     - [Accept an agreement](#accept-an-agreement)
     - [Intervals](#intervals)
     - [Initial charge](#initial-charge)
@@ -92,6 +93,7 @@ Document version 2.6.3.
     - [Charge times](#charge-times)
     - [Charge retries](#charge-retries)
     - [Retrieve a charge](#retrieve-a-charge)
+      - [Details on charges](#details-on-charges)
     - [List charges](#list-charges)
   - [Manage charges and agreements](#manage-charges-and-agreements)
     - [Agreement states](#agreement-states)
@@ -116,6 +118,7 @@ Document version 2.6.3.
       - [Charge amount higher than the user's max amount](#charge-amount-higher-than-the-users-max-amount)
   - [Skip landing page](#skip-landing-page)
   - [HTTP responses](#http-responses)
+    - [Error responses](#error-responses)
   - [Rate limiting](#rate-limiting)
   - [Partner keys](#partner-keys)
   - [Polling guidelines](#polling-guidelines)
@@ -123,11 +126,11 @@ Document version 2.6.3.
   - [Timeouts](#timeouts)
   - [Testing](#testing)
   - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
-  - [When to use campaigns or initial charge](#when-to-use-campaigns-or-initial-charge)
-    - [Normal agreement flow](#normal-agreement-flow)
-    - [Initial charge flow](#initial-charge-flow)
-    - [Campaign](#campaign)
-    - [Initial charge and campaign](#initial-charge-and-campaign)
+  - [Different agreement types and when to use them](#different-agreement-types-and-when-to-use-them)
+    - [Normal agreement](#normal-agreement)
+    - [Agreement with initial charge](#agreement-with-initial-charge)
+    - [Agreement with campaign](#agreement-with-campaign)
+    - [Agreement with initial charge and campaign](#agreement-with-initial-charge-and-campaign)
   - [Questions?](#questions)
 
 <!-- END_TOC -->
@@ -212,7 +215,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | Operation                                       | Description                                           | Endpoint                                                                               |
 |-------------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------|
 | List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                          |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint-v2]                                      |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint]                                         |
 | [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
 | [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
 | [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
@@ -244,7 +247,7 @@ in the Getting started guide, for details.
 ## Idempotency Key header
 **V3 api only**
 The `Idempotency-Key` header must be set in any request that creates or modifies a resource (`POST`, `PUT`, `PATCH` or `DELETE`).
-This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency-key should prevent operations and side-effects from being performed more than once, and you should receive the same response as if you only sent one request.
+This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency-key should prevent operations and side effects from being performed more than once, and you should receive the same response as if you only sent one request.
 
 **Important:** If the response is a client-error (4xx), you will continue to get the same error as long as you use the same idempotency-key, as the requested operation is not retried.
 
@@ -313,7 +316,7 @@ for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
-An agreement is between the Vipps user and the merchant. Think of it as a payment agreement that allows you (the merchant) to recurringly charge the customer without them having to manually approve every time. See [charges](#charges).
+An agreement is between the Vipps user and the merchant. This payment agreement allows you to routinely charge the customer without requiring them to manually approve every time. See [charges](#charges).
 
 ### Create an agreement
 
@@ -808,14 +811,14 @@ _Recurring has functionality to charge a variable amount each interval. See:
 [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)._
 
 Each specific charge on an agreement must be scheduled by the merchant, a
-minimum of two days before the payment will occur (it is minimum one day in the test environment).
+minimum of two days before the payment will occur (it is minimum one day in the test environment). This is because the user should be able to see the upcoming charge in the Vipps app. The user will find this under the "Payments tab".
 
 Charge the customer for each period with the
 [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 `due` will define for which date the charge will be performed.
 This date has to be at a minimum two days in the
 future (it is minimum one day in the test environment), and all charges `due` in
-30 days or less are visible for users in Vipps.
+35 days or less are visible for users in Vipps.
 
 Example: If the charge is _created_ on the 25th, the earliest the charge can be
 _due_ is the 27th (25+2). This is so that the user can be informed about the
@@ -947,6 +950,8 @@ should always ask the user to check in Vipps if a charge has failed.
 
 Vipps will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
+
+Retry days are not tied to the agreement’s interval. This means that a charge can be retried for a maximum of 14 days even though the next interval has started. For example, an agreement with daily interval can have a charge retried for multiple days, and it is possible to create new daily charges while others are still retrying.
 
 The status of a charge will be `DUE` while Vipps is taking care of business,
 from the `due` date until the charge has succeeded, or until the
@@ -1092,7 +1097,7 @@ Request body for stopping an agreement:
 }
 ```
 
-Stopping an agreement results in cancellation of any charges that are DUE/PENDING at the time of stopping it,
+Stopping an agreement results in cancellation of any charges that are DUE/PENDING/RESERVED at the time of stopping it,
 and it will not be possible to create new charges for a stopped agreement.
 
 We recommend that the recurring agreement remains `ACTIVE` for as long as the
@@ -1111,17 +1116,19 @@ to set up a new agreement.
 This table has all the details for the charge states returned by the
 [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
 
-| State                | Description                                                                                                                                   |
-|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-| `PENDING`            | The charge has been created, but _may_ not yet be visible in Vipps. **Please note:** All charges due in 30 days or less are visible in Vipps. |
-| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                       |
-| `PROCESSING`         | The charge status is unknown but should be processed.                                                                                         |
-| `CHARGED`            | The charge has been successfully completed.                                                                                                   |
-| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                |
-| `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                      |
-| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded.                                                                                              |
-| `RESERVED`           | An initial charge with `transactionType` set to `RESERVE_CAPTURE` changes state to `CHARGED` when captured successfully.                      |
-| `CANCELLED`          | The charge has been cancelled by the merchant.                                                                                                |
+| State                | Description                                                                                                                                                               |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PENDING`            | The charge has been created, but is not yet be visible in Vipps.                                                                                                          |
+| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                                                   |
+| `PROCESSING`         | The charge is being processed right now.                                                                                                                                  |
+| `UNKNOWN`            | The charge status is unknown. This is usually very transient and will be resolved shortly.                                                                                 |
+| `CHARGED`            | The charge has been successfully processed, and the available amount has been captured.                                                                                   |
+| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                                            |
+| `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                                                  |
+| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded.                                                                                                                          |
+| `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]                       |
+| `PARTIALLY_CAPTURED` | The some of the reserved amount has been captured. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer. |
+| `CANCELLED`          | The charge has been cancelled.                                                                                                                                            |
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
@@ -1193,7 +1200,7 @@ Vipps offers the possibility for merchants to ask for the user's profile informa
 
 To enable the possibility to fetch profile information for a user the merchant can add a
 [`scope`](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo#scope)
-parameter to the [`POST:/agreements`][draft-agreement-endpoint-v2] call.
+parameter to the [`POST:/agreements`][draft-agreement-endpoint] call.
 
 See
 [User information](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo)
@@ -1298,11 +1305,11 @@ in Common topics for details.
 Recurring with variable amounts offer merchants a way to charge users a different
 amount each interval, as long as the amount is lower than the user's specified max amount.
 
-Instead of setting a price when drafting a new agreement, the new
-`suggestedMaxAmount` field is set to what the maximum price could be each interval.
-`suggestedMaxAmount` is then presented to the user when accepting an agreement,
-as a suggestion that indicates the maximum price that could potentially be charged
-within each interval.
+To create a variable amount agreement, use the `VARIABLE` type in `Pricing`.
+With `VARIABLE` pricing, you no longer specify a price, but a `suggestedMaxAmount` for the user.
+This field should be set to what the maximum price could be each interval. 
+This `suggestedMaxAmount` is presented to the user together with a list of auto generated  amount suggestions that is created by Vipps.
+The `suggestedMaxAmount` is however pre-selected for the user.
 
 The user chooses a max amount themselves when accepting the agreement, but we
 recommended the user to choose the same amount as `suggestedMaxAmount`. The max
@@ -1340,9 +1347,6 @@ Create agreement request:
 }
 ```
 
-**Please note:** There is no need to supply the agreement with a `price` field,
-this will be ignored since the user picks the allowed max amount themselves.
-
 **Restrictions when using variable amount:**
 
 - There is currently a limit of **20 000 NOK** for the `suggestedMaxAmount`.
@@ -1350,6 +1354,14 @@ this will be ignored since the user picks the allowed max amount themselves.
 
 The user will be presented with the variable agreement in Vipps,
 where they can change the max amount they allow to be charged each interval.
+
+In this example the `suggestedMaxAmount` is 5 000 kr, this amount gets pre-selected in Vipps.
+The user clicks on "maksbeløp" (max amount) and opens the list of auto generated suggestions together with the `suggestedMaxAmount`.
+The text above the list explains that the merchant recommends the user to set their max amount to 5 000 kr.
+The user proceeds with 5 000 kr and accepts the agreement.
+
+**Note:** The auto generated list is based on the `suggestedMaxAmount` and can not be changed by the merchant individually.
+It will however change if `suggestedMaxAmount` changes, which can be done in the `PATCH agreement` endpoint.
 
 Accepting agreement in Vipps:
 ![variable_amount_accept](images/variable_amount_accept.png)
@@ -1514,7 +1526,7 @@ All error responses contains an `error` object in the body, with details of the
 problem.
 
 HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-For example, when calling [`PUT:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement,
+For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint with a stopped agreement,
 the response will be the following:
 
 ```json
@@ -1539,10 +1551,10 @@ This means, in the future, `detail` and `extraDetails` content can change for so
 ## Rate limiting
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
-fraudulent and wrongful behaviour, and increase the stability and security of
-our API. The limits should not affect normal behaviour, but please
+fraudulent and wrongful behavior, and increase the stability and security of
+our API. The limits should not affect normal behavior, but please
 [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
-if you notice any unexpected behaviour.
+if you notice any unexpected behavior.
 
 The "Key" column specifies what we consider to be the unique identifier, and
 what we "use to count". The limits are of course not _total_ limits.
@@ -1558,7 +1570,7 @@ what we "use to count". The limits are of course not _total_ limits.
 | [FetchCharge][fetch-charge-endpoint]               | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId  |
 | [ListCharges][list-charges-endpoint]               | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId               |
 | [FetchAgreement][fetch-agreement-endpoint]         | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId               |
-| [DraftAgreement][draft-agreement-endpoint-v2]      | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
+| [DraftAgreement][draft-agreement-endpoint]         | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
 
 **Please note:** The "Key" column is important. The above means that we allow two
 CreateCharge calls per minute per unique agreementId and chargeId. This is to prevent
@@ -1658,32 +1670,31 @@ The endpoint is only available in our test environment.
 
 See [Recommendations regarding handling redirects](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/redirects) in Common topics for details.
 
-## When to use campaigns or initial charge
+## Different agreement types and when to use them
 
-Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilising the normal agreements, initial charges, campaigns, or a combination of those.
+Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilizing the normal agreements, initial charges, campaigns, or a combination of those.
 
 This can be a bit confusing when deciding on which implementation to go for.
 In short our advice is to implement support for all our flows, and also implement features in your own systems for moving between the flows depending on the use case.
 
-First a short description on the flows.
-
-### Normal agreement flow
+### Normal agreement
 
 ![Normal_agreement](images/normal_agreement.png)
 
-In the normal agreement, the user gets presented with the agreement, agrees to that, and gets sent to a confirmation screen.
+This is the preferred flow whenever there is no campaign or no required payment on the start of an agreement.
+
+In the normal agreement, the user gets presented with the agreement, agrees to it, and gets sent to a confirmation screen.
 On the agreement we present the start date, the price of the agreements, the `productName` and the `product description` which are all defined by the merchant.
 We also present an agreement explanation which is used to describe the agreement interval to the user.
-For example, for an agreement with `interval=WEEK` and `intervalCount=2`, the agreement explanation will be `hver 2.uke til du sier opp` or `every 2 weeks until cancelled`
+For example, for an agreement with `interval.unit=YEAR` and `interval.count=1`, the agreement explanation will be `hvert år til du sier opp` or `every year until cancelled`
 
-
-This is the preferred flow whenever there is no campaigns or similar present.
-
-### Initial charge flow
+### Agreement with initial charge
 
 ![flow_Initial_charge](images/normal_agreement_with_initial_charge.png)
 
-When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. The user then proceed to confirm the agreement, and finally they will have to go through the actual payment of the initial charge.
+If you require a payment to be completed at the same time that the agreement is created, you must use initial charge.
+
+When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. Then, when the user proceeds to confirm the agreement, the payment of the initial charge will be processed.
 
 Here we also show `productName` and the agreement explanation on the agreement, as well as `description` on the initial charge. `productName` and `initial charge description` are defined by the merchant. The agreement explanation is created by Vipps based on the interval and the campaign if specified.
 
@@ -1691,29 +1702,28 @@ Initial charges are designed to be used whenever there is an additional cost in 
 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, and have to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
 
-**Please note:** If you require a payment to be completed at the same time that the agreement is created, you must use initial charge.
 
-### Campaign
-
-See [Campaigns](#campaigns) for details about campaigns.
-
-When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
+### Agreement with campaign
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
+See [Campaigns](#campaigns) and [How it works: Campaigns](vipps-recurring-api-campaigns-howitworks.md) for details about campaigns.
+
+When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
+
 **Note:** Campaign is not supported for `variableAmount` agreements.
 
-### Initial charge and campaign
-
-In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
+### Agreement with initial charge and campaign
 
 Ideally, this flow is intended for when you have a combination of an additional cost when setting up the agreement, presented as the initial charge, as well as having a limited time offer on the actual subscription.
+
+In addition to campaigns and initial charges being available as individual flows, they can also be combined. In this case, the user would see first a summary of both the agreement, including the campaign as described in the sections on campaigns, as well as the initial charge. Again, all fields described in previous flows are available for the merchant to display information to the user.
 
 **Agreement screens with initial and campaign v2**
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/legacy-campaign-with-initial-charge.png)
 
 **Agreement screens with initial and campaign v3**
-![screen_initial_charge_legacy_campaign](images/campaigns/screens/price-campaign-with-initial-charge.png)
+![screen_initial_charge_legacy_campaign](images/campaigns/screens/period-campaign-with-initial-charge.png)
 
 
 ## Questions?
@@ -1738,4 +1748,4 @@ Sign up for our [Technical newsletter for developers](https://vippsas.github.io/
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment
+[vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment

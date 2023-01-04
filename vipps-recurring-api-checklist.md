@@ -59,7 +59,7 @@ Document version 3.1.0.
 4. The merchant completes all checklist items.
 5. The merchant verifies the integration in the test environment by checking that
    there are test agreements and charges in the
-   [Vipps test environment](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment),
+   [Vipps test environment](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment),
    with the following states:
     - A complete Agreement ending in `ACTIVE`.
     - A complete Agreement ending in `STOPPED`.
@@ -94,4 +94,4 @@ Sign up for our [Technical newsletter for developers](https://vippsas.github.io/
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Authorization-Service/operation/getAccessToken
-[vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/developer-resources/test-environment
+[vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment
