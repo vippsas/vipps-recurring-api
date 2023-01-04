@@ -4,7 +4,7 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-  version: 2.6.12
+  version: 2.6.13
   title: Recurring Payments Merchant API
 
 servers:
@@ -2026,8 +2026,9 @@ components:
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         end:
           type: string
-          example: '2019-06-01T00:00:00Z'
-          description: The date and time the campaign ends. Needs to be UTC
+          format: date-time
+          example: '2022-12-31T00:00:00Z'
+          description: The date and time the campaign ends. Must be UTC.
 
     campaignResponseV2:
       title: Campaign response
@@ -2044,17 +2045,14 @@ components:
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         start:
           type: string
-          example: '2019-06-01T00:00:00Z'
-          description: |-
-            The date and time the campaign ends.
-            Needs to be UTC.
+          format: date-time
+          example: '2022-12-31T00:00:00Z'
+          description: The date and time the campaign starts. Must be UTC.
         end:
           type: string
-          example: '2019-07-01T00:00:00Z'
-          description: |-
-            The date and time the campaign ends.
-            Needs to be UTC.
-
+          format: date-time
+          example: '2022-12-31T00:00:00Z'
+          description: The date and time the campaign ends. Must be UTC.
     campaignV3:
       oneOf:
         - $ref: '#/components/schemas/priceCampaignV3'
@@ -2155,10 +2153,9 @@ components:
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         eventDate:
           type: string
-          example: '2019-06-01T00:00:00Z'
-          description: |-
-            The date and time the campaign ends.
-            Needs to be UTC.
+          format: date-time
+          example: '2022-12-31T00:00:00Z'
+          description: The date and time the campaign ends. Must be UTC.
         eventText:
           type: string
           example: Until Christmas
@@ -2237,10 +2234,10 @@ components:
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         end:
           type: string
-          example: '2019-06-01T00:00:00Z'
+          format: date-time
+          example: '2022-12-31T00:00:00Z'
           description: |-
-            The date and time the campaign ends.
-            Needs to be UTC.
+            The date and time the campaign ends. Must be UTC.
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
@@ -2313,10 +2310,9 @@ components:
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
         eventDate:
           type: string
-          example: '2019-06-01T00:00:00Z'
-          description: |-
-            The date and time the campaign ends.
-            Needs to be UTC.
+          format: date-time
+          example: '2022-12-31T00:00:00Z'
+          description: The date and time the campaign ends. Must be UTC.
         eventText:
           type: string
           example: Until Christmas
@@ -2539,7 +2535,7 @@ components:
             - DIRECT_CAPTURE
         orderId:
           type: string
-          example: abc123
+          example: acme-shop-123-order123abc
           description: An optional orderId for the payment, auto generated otherwise
 
     InitialChargeV3:
@@ -2575,7 +2571,7 @@ components:
             - DIRECT_CAPTURE
         orderId:
           type: string
-          example: abc123
+          example: acme-shop-123-order123abc
           description: An optional orderId for the payment, auto generated otherwise
 
     CreateChargeV2:
@@ -2610,8 +2606,7 @@ components:
           type: string
           description: |-
             The date when the charge is due to be processed.
-
-            Must be in the format `yyyy-MM-dd`
+            Must be in the format `YYYY-MM-DD` and ISO 8601.
           example: '2030-12-31'
         retryDays:
           type: integer
@@ -2624,7 +2619,7 @@ components:
           type: string
           maximum: 50
           pattern: "^[a-zA-Z\\d-]+"
-          example: abc123
+          example: acme-shop-123-order123abc
           description: An optional orderId for the payment, auto generated otherwise
 
     CreateChargeV3:
@@ -2659,10 +2654,10 @@ components:
           description: |-
             The date when the charge is due to be processed.
 
-            If the charge is DIRECT_CAPTURE, the charge is processed and charged on due date.
-            If the charge is RESERVE_CAPTURE, the charge is RESERVED on due date.
+            If the charge is `DIRECT_CAPTURE`, the charge is processed and charged on due date.
+            If the charge is `RESERVE_CAPTURE`, the charge is `RESERVED` on due date.
 
-            Must be in the format `yyyy-MM-dd`
+            Must be in the format `YYYY-MM-DD` and ISO 8601.
           example: '2030-12-31'
         retryDays:
           type: integer
@@ -2675,7 +2670,7 @@ components:
           type: string
           maximum: 50
           pattern: "^[a-zA-Z\\d-]+"
-          example: abc123
+          example: acme-shop-123-order123abc
           description: An optional orderId for the payment, auto generated otherwise
 
     ChargeReference:
@@ -2954,8 +2949,7 @@ components:
       properties:
         customerPhoneNumber:
           type: string
-          example: '96969696'
-
+          example: '91234567'
     ForceAcceptAgreementV3:
       title: Force accept agreement request
       type: object
@@ -2964,7 +2958,7 @@ components:
       properties:
         phoneNumber:
           type: string
-          example: '96969696'
+          example: '91234567'
 
     ErrorFromAzure:
       type: object
