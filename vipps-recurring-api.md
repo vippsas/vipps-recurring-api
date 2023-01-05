@@ -482,7 +482,7 @@ If the user does not have Vipps installed:
 
 ### Intervals
 
-Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31.
+Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31. The interval defines how often the user can be charged. 
 
 Example for a bi-weekly subscription:
 ```json
@@ -493,6 +493,8 @@ Example for a bi-weekly subscription:
   }
 }
 ```
+User can be charged twice a week, regardless of the day in the week.
+ (e.g., First charge can be due on Monday and second charge on Wednesday).
 
 Example for a quarterly subscription
 ```json
@@ -503,6 +505,8 @@ Example for a quarterly subscription
   }
 }
 ```
+User can be charged once every 3 month, regardless of the day in the month.
+(e.g., First charge can be due on 05.01.2023 and second on 02.04.2023)
 
 Examples for a yearly subscription
 ```json
@@ -522,6 +526,9 @@ OR
   }
 }
 ```
+User can be charged once every year, regardless of the day in the year.
+(e.g., First charge can be due on 02.06.2022 and second charge on any date in 2023, 01.01.2023)
+
 
 Example for a subscription every 30th day:
 ```json
@@ -532,6 +539,8 @@ Example for a subscription every 30th day:
   }
 }
 ```
+User can be charged once every 30 days, regardless of the day in the month.
+(e.g., First charge can be due on 12.06.2022 and second charge on 04.07.2022) 
 
 **Please note:** It is not possible to change intervals. If the user has
 accepted a yearly interval, the agreement cannot be changed to a monthly
@@ -807,19 +816,29 @@ An [agreement](#agreements) has payments, called charges.
 
 ### Create a charge
 
-_Recurring has functionality to charge a variable amount each interval. See:
-[Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)._
-
 Each specific charge on an agreement must be scheduled by the merchant.  
+
 To create a charge use the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
+
+Also see check [orderId recommendations](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/orderid) before creating charges.
+
+For agreements of type `variable`, also see [Recurring agreements with variable amount](#create-charge).
+
+#### Due date
+
 `due` will define for which date the charge will be performed.
-This date has to be a minimum two days (one day in the test environment). in the future and maximum two years in advance. 
+This date has to be minimum two days (one day in the test environment) in the future and maximum two years in advance. 
 The minimum is set to two days because the user should be able to see the upcoming charge in the Vipps app. All charges `due` in 35 days or less are visible under the "Payments tab" in the Vipps app. 
 
 Example: If the charge is _created_ on the 25th, the earliest the charge can be
 _due_ is the 27th (25+2). This is so that the user can be informed about the
 upcoming charge. The user is only shown one charge per agreement, in order to
 not overwhelm the user when doing daily or weekly charges.
+
+#### Amount
+
+
+#### Charge type
 
 A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
 **Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api.
@@ -835,10 +854,6 @@ The advantage to using reserve capture is that you can release the reservation i
 
 - For a reserved payment, the merchant can make a /cancel call to immediately release the reservation and make it available in the customer's account.
 - For a captured payment, the merchant must make a /refund call. It then takes a few days before the amount is available in the customer's account.
-
-See the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint definition for examples.
-
-Also see check [orderId recommendations](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/orderid) before creating charges.
 
 ### Capture a charge
 
@@ -1315,9 +1330,7 @@ that when you set the `suggestedMaxAmount`, that you set a realistic amount -
 as setting it to unrealistic amounts might scare off the user when they accept
 the agreement.
 
-### How it works
-
-#### Create agreement
+### Create agreement
 
 Create an agreement and specify that it's with `variableAmount` and set a
 `suggestedMaxAmount` (in øre).
@@ -1365,11 +1378,11 @@ Accepting agreement in Vipps:
 Variable amount and initial charge can be combined:
 ![variable_amount_accept_initial](images/variable_amount_accept_initial.png)
 
-#### Get agreement
+### Get agreement
 
-Retrieving the agreement shows the `maxAmount` that was picked by the user.
+Retrieving the agreement shows the `maxAmount` picked by the user.
 
-GET agreement response:
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] response:
 
 ```json
 {
@@ -1380,8 +1393,8 @@ GET agreement response:
     "productName": "Power company A",
     "pricing": {
       "type": "VARIABLE",
-      "suggestedMaxAmount": 200000,
-      "maxAmount": 180000,
+      "suggestedMaxAmount": 500000,
+      "maxAmount": 1800000,
       "currency": "NOK"
     },
     "productDescription": "Access to subscription",
@@ -1396,9 +1409,9 @@ GET agreement response:
 }
 ```
 
-#### Change suggestedMaxAmount
+### Change suggestedMaxAmount
 
-It's possible to change the suggestedMaxAmount on the agreement by calling the update agreement endpoint with the PATCH request below.
+It's possible to change the suggestedMaxAmount on the agreement by calling the update agreement endpoint with the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] request below.
 
 ```json
 {
@@ -1408,73 +1421,22 @@ It's possible to change the suggestedMaxAmount on the agreement by calling the u
 
 **Note:** The user will not be alerted by this change by Vipps.
 
-#### Create charge
+### Create charge
 
-There are changes in how the interval and amount calculation works for agreements
-with `variable amount`. The amount of the charge/charges in the interval can not
-be higher than either the `suggestedMaxAmount` or `maxAmount` field, depending on
-which is highest. The user will be notified if a charge is created with an amount higher than their specified max amount, and they are encouraged to alter the max amount to a higher amount.
+The amount of the charge/charges in the interval can not be higher than the `suggestedMaxAmount` or `maxAmount` field, depending on which is highest. 
 
-Changes in how intervals and charge rules work:
+Examples:
+- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` choosen by the user is 2 000 kr then the charge amount can not be higher than 5 000 kr
+- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` choosen by the user is 7 000 kr then the charge amount can not be higher than 7 000 kr 
 
-**Yearly:**
+### Charge amount higher than the user's max amount
 
-Can be charged once a year, regardless of the day in the year.
-
-Example:
-
-- First charge can be 02.06.2022
-- Second could be any date in 2023, for example 01.01.2023
-
-**Monthly:**
-
-Can be charged once a calendar month, regardless of the day in the month.
-
-Example:
-
-- First charge can be 03.03.2022
-- Second could be any day the next month, for example 04.20.2022
-
-**Weekly:**
-
-Can be charged once a week, regardless of the day in the week.
-
-Example:
-
-- First charge can be on a Wednesday
-- Second charge could be on a Monday the next week
-
-**Daily:**
-
-Once a day, same as without variable amount.
-
-**Please note:** In the examples above the `intervalCount` is 1.
-This can be changed as described in the [Intervals](#intervals) section.
-
-#### Charge amount higher than the user's max amount
-
-If the created charge is above the user's `maxAmount`, the charge will be set
-to `DUE`. If the user does not update their `maxAmount` to the same or a higher
-amount than the charge, it will fail when `due` + `retryDays` is reached, and
+If the amount of a charge is below (or equal) the `suggestMaxAmount` but above the user's `maxAmount`, the charge will be set
+to `DUE` and the user will be notified and encouraged to alter the max amount to a hight amount. 
+If the user does not update their `maxAmount` to the same or a higher amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
-GET charge response where amount is higher than the user's max amount:
-
-```json
-{
-    "id": "chr-ZZt75qs",
-    "status": "DUE",
-    "due": "2021-06-19T00:01:00Z",
-    "amount": 190000,
-    "amountRefunded": 0,
-    "transactionId": null,
-    "description": "Monthly payment",
-    "type": "RECURRING"
-}
-```
-
-The user will also see a failure description on the charge in the app and a
-push notification will be sent .
+The user will also see a failure description on the charge in the Vipps app.
 
 Display of charge failure due to a charge being higher than the `maxAmount` in Vipps:
 ![variable_amount_charge](images/variable_amount_charge.png)
