@@ -482,7 +482,7 @@ If the user does not have Vipps installed:
 
 ### Intervals
 
-Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31. The interval defines how often the user can be charged. 
+Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31. The interval defines how often the user will be charged. 
 
 Example for a bi-weekly subscription:
 ```json
