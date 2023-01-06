@@ -173,7 +173,7 @@ paths:
                   intervalCount: 1
                   isApp: false
                   merchantRedirectUrl: https://example.com/redirect
-                  merchantAgreementUrl: https://example.com/agreement 
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
