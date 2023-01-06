@@ -172,8 +172,8 @@ paths:
                   interval: MONTH
                   intervalCount: 1
                   isApp: false
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement 
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
@@ -189,8 +189,8 @@ paths:
                   interval: MONTH
                   intervalCount: 1
                   isApp: false
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
@@ -211,8 +211,8 @@ paths:
                   interval: MONTH
                   intervalCount: 1
                   isApp: false
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productDescription: Power on web
                   productName: MyNews Digital
@@ -226,8 +226,8 @@ paths:
                   interval: MONTH
                   intervalCount: 1
                   isApp: false
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: Power on web
@@ -463,8 +463,8 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
               With Initial Charge:
@@ -477,8 +477,8 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
                   initialCharge:
@@ -496,8 +496,8 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
                   campaign:
@@ -514,8 +514,8 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
                   campaign:
@@ -539,8 +539,8 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
                   campaign:
@@ -562,8 +562,8 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
                   campaign:
@@ -583,8 +583,8 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
               With Profile Flow:
@@ -597,8 +597,8 @@ paths:
                   interval:
                     unit: MONTH
                     count: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   productName: MyNews Digital
                   scope: address name email birthDate phoneNumber
@@ -1630,13 +1630,13 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/vipps-subscriptions/1234/
+          example: https://www.example.com/agreement
         merchantRedirectUrl:
           type: string
           description: |-
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application.
-          example: https://api.example.com/vipps-landing
+          example: https://www.example.com/redirect
         productName:
           type: string
           description: Product name (short)
@@ -1796,7 +1796,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/vipps-subscriptions/1234/
+          example: https://www.example.com/agreement
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
@@ -1860,7 +1860,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/vipps-subscriptions/1234/
+          example: https://www.example.com/agreement
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
@@ -1915,7 +1915,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/vipps-subscriptions/1234/
+          example: https://www.example.com/agreement
         status:
           type: string
           example: STOPPED
@@ -1942,7 +1942,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/vipps-subscriptions/1234/
+          example: https://www.example.com/agreement
         status:
           type: string
           example: STOPPED
