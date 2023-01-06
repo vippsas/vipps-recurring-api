@@ -1426,8 +1426,8 @@ It's possible to change the suggestedMaxAmount on the agreement by calling the u
 The amount of the charge/charges in the interval can not be higher than the `suggestedMaxAmount` or `maxAmount` field, depending on which is highest. 
 
 Examples:
-- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` choosen by the user is 2 000 kr then the charge amount can not be higher than 5 000 kr
-- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` choosen by the user is 7 000 kr then the charge amount can not be higher than 7 000 kr 
+- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 2 000 kr then the charge amount can not be higher than 5 000 kr
+- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 7 000 kr then the charge amount can not be higher than 7 000 kr 
 
 ### Charge amount higher than the user's max amount
 
