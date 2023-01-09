@@ -15,13 +15,16 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
+💥 **Important:** This is work in progress. 💥
+
 In Recurring api, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
+This document describes the possible problem types that can be returned by the API. 
 For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement, 
 the response will be the following:
 
 ```json
 {
-    "type": "https://vipps.no/problems/recurring/illegal-agreement-update", // TODO change
+    "type": "https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#illegal-agreement-update",
     "title": "Bad Request",
     "status": 400,
     "detail": "Illegal update",
@@ -35,7 +38,6 @@ the response will be the following:
 }
 ```
 
-This documents the possible problems that can be returned by the API. 
 
 API version: 3.0.0.
 
@@ -51,6 +53,7 @@ Document version 1.0.0.
     - [Validation error](#validation-error)
     - [Invalid agreement id](#invalid-agreement-id)
     - [Invalid json](#invalid-json)
+    - [Unsupported media type](#unsupported-media-type)
     - [Not authorized](#not-authorized)
     - [Idempotency key header](#idempotency-key-header)
     - [Charge amount too high](#charge-amount-too-high)
@@ -71,33 +74,52 @@ Document version 1.0.0.
 ## Problems
 
 ### Validation error
+Missing data in json or inconsistencies. 
 
 ### Invalid agreement id
+Agreement Id is invalid.
 
 ### Invalid json
+Json body is invalid.
+
+### Unsupported media type
+Content-type is not supported.
 
 ### Not authorized
+JWT token is invalid.
 
 ### Idempotency key header
+Missing or invalid Idempotency key header.
 
 ### Charge amount too high
+Amount set for charge is too high.
 
 ### Charge amount too high for interval
+Amount for interval is exceeded. Check if other charges has already been created for this interval. 
 
 ### Charge due too soon
+Charge must be due minimum 2 days in the future.
 
 ### Charge due in too long
+Max due date is one year from today. 
 
 ### Unsupported feature
+Feature not supported. Please contact Vipps.
 
 ### Illegal agreement update
+Agreement cannot be updated. Might be still stopped or pending.
 
 ### Invalid suggested max amount
+Suggested max amount is invalid.
 
 ### Cancel charge failed
+Could not cancel charge.
 
 ### Charge creation failed
+Could not create charge.
 
 ### Charge capture failed
+Could not capture charge.
 
 ### Missing request header
+Missing headers. 
