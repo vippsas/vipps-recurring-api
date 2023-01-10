@@ -17,7 +17,7 @@ END_METADATA -->
 
 In Recurring api, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 This document describes the possible problem types that can be returned by the API. 
-For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement, 
+For example, when calling [`PATCH:/agreements/{agreementId}`](update-agreement-endpoint) endpoint with a stopped agreement, 
 the response will be the following:
 
 ```json
