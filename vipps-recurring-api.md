@@ -1489,7 +1489,7 @@ the response will be the following:
 
 ```json
 {
-    "type": "https://vipps.no/problems/recurring/illegal-agreement-update",
+    "type": "https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#illegal-agreement-update",
     "title": "Bad Request",
     "status": 400,
     "detail": "Illegal update",

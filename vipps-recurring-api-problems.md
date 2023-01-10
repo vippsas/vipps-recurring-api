@@ -17,7 +17,7 @@ END_METADATA -->
 
 In Recurring api, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 This document describes the possible problem types that can be returned by the API. 
-For example, when calling [`PATCH:/agreements/{agreementId}`](update-agreement-endpoint) endpoint with a stopped agreement, 
+For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint with a stopped agreement, 
 the response will be the following:
 
 ```json
@@ -128,3 +128,6 @@ Could not capture charge.
 
 ### Missing request header
 Missing headers. See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
+
+
+[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3

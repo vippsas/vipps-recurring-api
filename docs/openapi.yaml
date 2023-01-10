@@ -3036,7 +3036,7 @@ components:
         type:
           type: string
           description: Path to type of error
-          example: https://vipps.no/problems/recurring/validation-error
+          example: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#validation-error
         title:
           type: string
           description: Short description of the error
