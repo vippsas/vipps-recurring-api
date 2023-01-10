@@ -111,7 +111,7 @@ See [Create a charge](https://vippsas.github.io/vipps-developer-docs/docs/APIs/r
 Feature not supported. Please contact Vipps.
 
 ### Illegal agreement update
-Agreement cannot be updated. Might be still stopped or pending.
+Agreement cannot be updated. Might be stopped or pending.
 
 ### Invalid suggested max amount
 Suggested max amount is invalid or too high. 
