@@ -74,16 +74,17 @@ Document version 1.0.0.
 ## Problems
 
 ### Validation error
-Missing data in json or inconsistencies. 
+Missing data or inconsistencies in json. Please verify the request json body.
 
 ### Invalid agreement id
-Agreement Id is invalid.
+Agreement Id is invalid. Please verify the agreement Id is present and in the correct format. 
+Example: agr_5kSeqz
 
 ### Invalid json
-Json body is invalid.
+Json body is invalid. Please verify the request json body.
 
 ### Unsupported media type
-Content-type is not supported.
+Media type indicated in Content-type header is not supported.
 
 ### Not authorized
 JWT token is invalid.
@@ -98,10 +99,10 @@ Amount set for charge is too high.
 Amount for interval is exceeded. Check if other charges has already been created for this interval. 
 
 ### Charge due too soon
-Charge must be due minimum 2 days in the future.
+Charge date due must be minimum 2 days in the future.
 
 ### Charge due in too long
-Max due date is one year from today. 
+Charge due date must be maximum 2 years in the future.
 
 ### Unsupported feature
 Feature not supported. Please contact Vipps.
@@ -110,7 +111,7 @@ Feature not supported. Please contact Vipps.
 Agreement cannot be updated. Might be still stopped or pending.
 
 ### Invalid suggested max amount
-Suggested max amount is invalid.
+Suggested max amount is invalid or too high. 
 
 ### Cancel charge failed
 Could not cancel charge.
