@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: FAQ
+title: Problem types
 sidebar_position: 90
 pagination_next: null
 ---
