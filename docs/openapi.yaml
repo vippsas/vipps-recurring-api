@@ -4,7 +4,7 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-  version: 2.6.13
+  version: 2.6.14
   title: Recurring Payments Merchant API
 
 servers:
@@ -1551,6 +1551,7 @@ components:
           example: false
         merchantAgreementUrl:
           type: string
+          maxLength: 1024
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
@@ -1559,6 +1560,7 @@ components:
           example: https://www.example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
+          maxLength: 1024
           description: |-
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application.
@@ -1625,6 +1627,7 @@ components:
           example: false
         merchantAgreementUrl:
           type: string
+          maxLength: 1024
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
@@ -1633,6 +1636,7 @@ components:
           example: https://www.example.com/agreement
         merchantRedirectUrl:
           type: string
+          maxLength: 1024
           description: |-
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application.
