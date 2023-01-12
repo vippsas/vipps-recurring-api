@@ -1915,6 +1915,7 @@ components:
           example: Access to all games of English top football
         merchantAgreementUrl:
           type: string
+          maxLength: 1024
           description: URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
@@ -1942,6 +1943,7 @@ components:
           maxLength: 100
         merchantAgreementUrl:
           type: string
+          maxLength: 1024
           description: URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
