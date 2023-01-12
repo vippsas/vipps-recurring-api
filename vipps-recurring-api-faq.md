@@ -8,13 +8,6 @@ END_METADATA -->
 
 # Vipps Recurring API: Frequently Asked Questions
 
-<!-- START_COMMENT -->
-
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-<!-- END_COMMENT -->
-
 See the
 [Vipps Recurring API](vipps-recurring-api.md)
 for all the details.
@@ -26,11 +19,13 @@ See also:
 [Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
 guide.
 
-Document version: 1.6.3.
+<!-- START_COMMENT -->
 
-<!-- START_TOC -->
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 ## Table of Contents
+
 - [Migration](#migration)
   - [How do I migrate to the v3 API?](#how-do-i-migrate-to-the-v3-api)
 - [Charges/Payments](#chargespayments)
@@ -75,7 +70,7 @@ Document version: 1.6.3.
   - [Invoicing](#invoicing)
 - [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## Migration
 

@@ -49,14 +49,10 @@ See also:
 
 API version: 3.0.0.
 
-Document version 2.6.3.
-
-<!-- START_TOC -->
+<!-- START_COMMENT -->
 
 ## Table of Contents
 
-- [Vipps Recurring API](#vipps-recurring-api)
-  - [Table of Contents](#table-of-contents)
   - [Terminology](#terminology)
   - [Flow diagram](#flow-diagram)
   - [Call by call guide](#call-by-call-guide)
@@ -133,7 +129,7 @@ Document version 2.6.3.
     - [Agreement with initial charge and campaign](#agreement-with-initial-charge-and-campaign)
   - [Questions?](#questions)
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## Terminology
 

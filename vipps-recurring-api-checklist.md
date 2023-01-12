@@ -16,8 +16,6 @@ END_METADATA -->
 
 API version: 3.0
 
-Document version 3.1.0.
-
 ## Checklist
 
 - [ ] Integrate _all_ the [API endpoints](vipps-recurring-api.md) described in our guide:

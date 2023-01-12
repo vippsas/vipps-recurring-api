@@ -7,18 +7,14 @@ END_METADATA -->
 
 # Quick start
 
-<!-- START_COMMENT -->
-
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-<!-- END_COMMENT -->
-
 Use the Recurring API to create different types of agreements, get information about agreements, update and stop agreements.
 After creating the agreements, you still need to send the charge requests.
 So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
 
-<!-- START_TOC -->
+<!-- START_COMMENT -->
+
+ℹ️ Please use the new documentation:
+[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 ## Table of Contents
 
@@ -32,9 +28,7 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
   * [Create charges](#create-charges)
 * [Questions?](#questions)
 
-<!-- END_TOC -->
-
-Document version 1.1.2.
+<!-- END_COMMENT -->
 
 ## Postman
 
