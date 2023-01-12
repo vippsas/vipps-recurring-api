@@ -8,13 +8,6 @@ END_METADATA -->
 
 # Vipps Recurring API problems details
 
-<!-- START_COMMENT -->
-
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-<!-- END_COMMENT -->
-
 In Recurring api, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 This document describes the possible problem types that can be returned by the API. 
 For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint with a stopped agreement, 
@@ -36,17 +29,12 @@ the response will be the following:
 }
 ```
 
-
 API version: 3.0.0.
 
-Document version 1.0.0.
-
-<!-- START_TOC -->
+<!-- START_COMMENT -->
 
 ## Table of Contents
 
-- [Vipps Recurring API](#vipps-recurring-api-problems)
-  - [Table of Contents](#table-of-contents)
   - [Problems](#problems)
     - [Validation error](#validation-error)
     - [Invalid agreement id](#invalid-agreement-id)
@@ -67,7 +55,7 @@ Document version 1.0.0.
     - [Missing request header](#missing-request-header)
 
 
-<!-- END_TOC -->
+<!-- END_COMMENT -->
 
 ## Problems
 
