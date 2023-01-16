@@ -20,7 +20,7 @@ This page is meant to give some inspiration for how you can utilize the features
 
 ## Unique agreements/campaigns
 
-In recurring, every agreement is unique, and every campaign is unique to the specific agreement they belong to. This means that you as an integrator have the ability to taylor agreements and campaigns to your individual users.
+In recurring, every agreement is unique, and every campaign is unique to the specific agreement they belong to. This means that you as an integrator have the ability to tailor agreements and campaigns to your individual users.
 This can be used to give customers special deals on special occasions, based on referrals, etc.
 
 ## Birthday discount
@@ -89,7 +89,7 @@ If you want to use referrals, you can do this in many ways. A commonly used way 
 
 To reward the user that referred them, you can change their agreement price and description like this:
 
-[`PATCH:/agreements/{agreementId}`][force-accept-agreement-endpoint]
+[`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]
 
 ```json
 {
@@ -122,9 +122,9 @@ To remove the discount, you simply update the agreement again with the original 
 If you want to give members a discounted subscription fee when they have been subscribed for a long time, you can do this in a couple of ways:
 
 - Update existing agreements as previous scenario.
-- Use a `FULL_FLEX_CAMPAIGN` to display to the new customers that they will get a better price if they stay subscribed.
+- Use a `FULL_FLEX_CAMPAIGN` to display to the new customers that they will get a better price if they stay subscribed. See [full flex campaign](vipps-recurring-api.md#full-flex-campaign) for more details.
 
-Here is an example of the latter, where they pay 69kr/week until march 1st, then 200kr/month after that:
+Here is an example of the latter, where they pay 69kr/week until March 1st, then 200kr/month after that:
 
 ```json
 {
