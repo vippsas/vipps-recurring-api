@@ -1523,7 +1523,7 @@ components:
           type: string
           description: |-
             Customers phone number (if available). Used to simplify the
-            following Vipps interaction. MSISDN: https://www.msisdn.org
+            following Vipps interaction. MSISDN: https://en.wikipedia.org/wiki/MSISDN
           maxLength: 15
           example: "4791234567"
         initialCharge:
@@ -1614,7 +1614,7 @@ components:
           type: string
           description: |-
             Customers phone number (if available). Used to simplify the
-            following Vipps interaction. MSISDN: https://www.msisdn.org
+            following Vipps interaction. MSISDN: https://en.wikipedia.org/wiki/MSISDN
           maxLength: 15
           example: "4791234567"
         initialCharge:
