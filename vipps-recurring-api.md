@@ -32,7 +32,7 @@ To get access to the Recurring API in production, order Vipps "Faste Betalinger"
 
 **IMPORTANT:** Before activating recurring payments for you,
 Vipps must perform some extra Know Your Customer (KYC) checks, as required by [Finanstilsynet](https://www.finanstilsynet.no).
-You will also need to set up a direct agreement for use of "Vipps på Nett" ([Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/)).
+You will also need to set up a direct agreement for use of "Vipps på Nett" ([Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api)).
 
 As a merchant, you can check if you have access to recurring payments through [portal.vipps.no](https://portal.vipps.no).
 Partners can check if a merchant has access to recurring payments through the
@@ -42,7 +42,7 @@ See a detailed example of [how it works](vipps-login-recurring-howitworks.md).
 
 See also:
 
-* [OpenAPI Reference](https://vippsas.github.io/vipps-developer-docs/api/recurring/)
+* [OpenAPI Reference](https://vippsas.github.io/vipps-developer-docs/api/recurring)
 * [Quick start guide](vipps-recurring-api-quick-start.md)
 * [Integration checklist](vipps-recurring-api-checklist.md)
 * [FAQ](vipps-recurring-api-faq.md)
@@ -359,7 +359,7 @@ strongly recommend using
 [Vipps Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not need a username or password, but is logged
 in automatically through Vipps. See the
-[Login API documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/)
+[Login API documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api)
 for more details.
 
 The request parameters have the following size limits
@@ -1555,7 +1555,7 @@ re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
 
 Here's an example of headers (please refer to the
-[OpenAPI specification](https://vippsas.github.io/vipps-developer-docs/api/recurring/)
+[OpenAPI specification](https://vippsas.github.io/vipps-developer-docs/api/recurring)
 for all the details):
 
 ```http
@@ -1576,7 +1576,7 @@ partner's MSN. This parameter is also recommended for regular Vipps
 merchants making API calls for themselves.
 
 See:
-[Vipps Partners](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/).
+[Vipps Partners](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner).
 
 ## Polling guidelines
 

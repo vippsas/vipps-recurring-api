@@ -13,7 +13,7 @@ See the
 for all the details.
 
 See also:
-[Vipps API FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/).
+[Vipps API FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs).
 
 See also:
 [Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
@@ -351,7 +351,7 @@ that the Vipps Recurring API is not yet activated for this sale unit.
 
 The Vipps Recurring API is available for existing customers that
 have "Vipps på Nett", a direct integration with the
-[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/),
+[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api),
 and have completed some additional Know Your Customer (KYC) checks required by [Finanstilsynet](https://www.finanstilsynet.no).
 
 Vipps is required to perform some extra compliance checks before
@@ -384,7 +384,7 @@ and
 - accountNumbers
 
 The userinfo endpoint is shared with
-[Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/)
+[Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api)
 and the merchant needs to have activated Vipps Login on their account to use
 this feature. Information on how to do this can be found
 [here](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/vipps-login-api-faq#how-can-i-activate-and-set-up-vipps-login).

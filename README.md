@@ -25,7 +25,7 @@ Information about this product in Norwegian, see
 
 **IMPORTANT:** The Vipps Recurring API is available for existing customers that
 have "Vipps på Nett", a direct integration with the
-[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/),
+[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api),
 and have completed some additional KYC checks required by Finanstilsynet.
 Vipps is required to perform some extra compliance checks before
 activating the Vipps Recurring API.

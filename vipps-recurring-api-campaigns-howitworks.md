@@ -15,7 +15,7 @@ END_METADATA -->
 <!-- END_COMMENT -->
 
 For technical documentation go to:
-[Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/).
+[Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
 ## Recurring with campaign
 
@@ -67,7 +67,7 @@ Campaign information will be displayed on the active and stopped subscriptions u
 
 ## 6. Manage agreements
 
-If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/) to make login to the merchant’s site go smoothly.
+If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 
