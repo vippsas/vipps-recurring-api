@@ -26,7 +26,6 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 * [Make API calls](#make-api-calls)
   * [Create agreements](#create-agreements)
   * [Create charges](#create-charges)
-* [Questions?](#questions)
 
 <!-- END_COMMENT -->
 
@@ -283,14 +282,6 @@ When you create an agreement with a reserved charge, you will need to capture th
 
 5. Send `Get Charge` again, to see that the status is now "CHARGED".
 
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
-a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
