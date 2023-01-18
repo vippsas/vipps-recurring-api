@@ -127,7 +127,6 @@ API version: 3.0.0.
     - [Agreement with initial charge](#agreement-with-initial-charge)
     - [Agreement with campaign](#agreement-with-campaign)
     - [Agreement with initial charge and campaign](#agreement-with-initial-charge-and-campaign)
-  - [Questions?](#questions)
 
 <!-- END_COMMENT -->
 
@@ -1679,15 +1678,6 @@ In addition to campaigns and initial charges being available as individual flows
 **Agreement screens with initial and campaign v3**
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/period-campaign-with-initial-charge.png)
 
-
-## Questions?
-
-We're always happy to help with code or other questions you might have!
-Please create an [issue](https://github.com/vippsas/vipps-recurring-api/issues),
-a [pull request](https://github.com/vippsas/vipps-recurring-api/pulls),
-or [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
-
-Sign up for our [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 [list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
