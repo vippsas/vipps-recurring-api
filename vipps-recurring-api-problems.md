@@ -53,6 +53,7 @@ API version: 3.0.0.
     - [Charge creation failed](#charge-creation-failed)
     - [Charge capture failed](#charge-capture-failed)
     - [Missing request header](#missing-request-header)
+    - [Invalid sale unit](#invalid-sale-unit)
 
 
 <!-- END_COMMENT -->
@@ -117,5 +118,7 @@ Could not capture charge.
 ### Missing request header
 Missing headers. See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
 
+### Invalid sale unit
+The Sale unit is not allowed to use Recurring.
 
 [update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
