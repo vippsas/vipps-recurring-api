@@ -16,7 +16,7 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 ℹ️ Please use the new documentation:
 [Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
-## Table of Contents
+## Table of contents
 
 * [Postman](#postman)
   * [Prerequisites](#prerequisites)

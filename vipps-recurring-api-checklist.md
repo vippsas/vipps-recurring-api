@@ -5,7 +5,7 @@ sidebar_position: 40
 ---
 END_METADATA -->
 
-# Vipps Recurring API Checklist
+# Checklist
 
 <!-- START_COMMENT -->
 
@@ -16,7 +16,7 @@ END_METADATA -->
 
 API version: 3.0
 
-## Checklist
+## Checklist for full integration
 
 - [ ] Integrate _all_ the [API endpoints](vipps-recurring-api.md) described in our guide:
     - [ ] Agreement: Create an agreement [`POST:/agreements`][draft-agreement-endpoint]

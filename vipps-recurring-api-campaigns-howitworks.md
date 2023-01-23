@@ -5,7 +5,7 @@ sidebar_position: 14
 ---
 END_METADATA -->
 
-# Vipps Recurring API with campaigns: How It Works
+# How it works with campaign
 
 <!-- START_COMMENT -->
 
@@ -41,9 +41,11 @@ The user receives a push notification on their phone. They log in to Vipps and a
 If there is an initial charge to be paid, the user confirms the payment in this step as well.
 
 ### Agreement with campaign
+
 ![Accept agreement](images/vipps-recurring-api-howitworks-campaigns/agreement-campaign-flow.png)
 
 ### Agreement with campaign and initial charge
+
 ![Accept agreement](images/vipps-recurring-api-howitworks-campaigns/agreement-campaign-initial-charge-flow.png)
 
 ## 4. Confirmation of subscription
@@ -72,4 +74,3 @@ If the user clicks on “Manage agreement” in the previous step, they will be 
 ![Manage agreements](images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 
 ## Great! Now you know how the Vipps Recurring agreements with campaign process works.
-

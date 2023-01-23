@@ -1,11 +1,11 @@
 <!-- START_METADATA
 ---
-title: API Guide
+title: API guide
 sidebar_position: 30
 ---
 END_METADATA -->
 
-# Vipps Recurring API
+# API guide
 
 <!-- START_COMMENT -->
 
@@ -51,7 +51,7 @@ API version: 3.0.0.
 
 <!-- START_COMMENT -->
 
-## Table of Contents
+## Table of contents
 
   - [Terminology](#terminology)
   - [Flow diagram](#flow-diagram)
@@ -240,6 +240,7 @@ See [Vipps HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vip
 in the Getting started guide, for details.
 
 ## Idempotency Key header
+
 **V3 api only**
 The `Idempotency-Key` header must be set in any request that creates or modifies a resource (`POST`, `PUT`, `PATCH` or `DELETE`).
 This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency-key should prevent operations and side effects from being performed more than once, and you should receive the same response as if you only sent one request.
@@ -253,6 +254,7 @@ See the
 for more details.
 
 ## Continuation-Token header
+
 **V3 api only**
 The `Continuation-Token` header is introduced on endpoints that returns multiple items to allow pagination. When returned from the API, it indicates that there are more items to be received. In order to receive the next page, repeat the request adding the received token in the `Continuation-Token`-header.
 
@@ -343,7 +345,7 @@ can manage the agreement (e.g., change, pause, cancel the agreement).
 Vipps does not offer any form of agreement management, as this may include
 quite complex operations (e.g., changing subscription types,
 temporary address change).
-The URL is opened in the standard web browser.  
+The URL is opened in the standard web browser.
 The integrator ***must*** implement such functionality for the customer to manage the agreement in their system.
 
 **Please note:** If the user closes Vipps before the redirect is done,
@@ -480,6 +482,7 @@ If the user does not have Vipps installed:
 Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31. The interval defines how often the user will be charged. 
 
 Example for a bi-weekly subscription:
+
 ```json
 {
   "interval": {
@@ -488,10 +491,12 @@ Example for a bi-weekly subscription:
   }
 }
 ```
+
 User can be charged twice a week, regardless of the day in the week.
  (e.g., First charge can be due on Monday and second charge on Wednesday).
 
 Example for a quarterly subscription
+
 ```json
 {
   "interval": {
@@ -500,10 +505,12 @@ Example for a quarterly subscription
   }
 }
 ```
+
 User can be charged once every 3 month, regardless of the day in the month.
 (e.g., First charge can be due on 05.01.2023 and second on 02.04.2023)
 
 Examples for a yearly subscription
+
 ```json
 {
   "interval": {
@@ -512,7 +519,9 @@ Examples for a yearly subscription
   }
 }
 ```
+
 OR
+
 ```json
 {
   "interval": {
@@ -521,11 +530,13 @@ OR
   }
 }
 ```
+
 User can be charged once every year, regardless of the day in the year.
 (e.g., First charge can be due on 02.06.2022 and second charge on any date in 2023, 01.01.2023)
 
 
 Example for a subscription every 30th day:
+
 ```json
 {
   "interval": {
@@ -534,6 +545,7 @@ Example for a subscription every 30th day:
   }
 }
 ```
+
 User can be charged once every 30 days, regardless of the day in the month.
 (e.g., First charge can be due on 12.06.2022 and second charge on 04.07.2022) 
 
@@ -653,6 +665,7 @@ date-time is used. All dates must be in date-time format as according to
 | `campaignPrice` | The price that will be shown for comparison                                                                             |
 
 #### Campaigns in V3 API
+
 In V3, we introduce 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign.
 See more about the different campaign types in the table below.
 
@@ -679,6 +692,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
   }
 }
 ```
+
 | Field   | Description                                                                 |
 |---------|-----------------------------------------------------------------------------|
 | `type`  | The type of the campaign                                                    |
@@ -703,6 +717,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
   }
 }
 ```
+
 | Field    | Description                                                                                                             |
 |----------|-------------------------------------------------------------------------------------------------------------------------|
 | `type`   | The type of the campaign                                                                                                |
@@ -725,6 +740,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
   }
 }
 ```
+
 | Field       | Description                                               |
 |-------------|-----------------------------------------------------------|
 | `type`      | The type of the campaign                                  |
@@ -756,6 +772,7 @@ See [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-devel
   }
 }
 ```
+
 | Field      | Description                                                                                                                       |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------|
 | `type`     | The type of the campaign                                                                                                          |
@@ -766,6 +783,7 @@ See [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-devel
 ![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
 ##### Product description guidelines for agreements with campaigns.
+
 We do not recommend you to use `Product Description` for agreements with a campaign.
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
 
@@ -866,6 +884,7 @@ Capture is done with the [`POST:/agreements/{agreementId}/charges/{chargeId}/cap
 Capture can be made up to 180 days after reservation. Attempting to capture an older payment will result in `HTTP 400 Bad Request`.
 
 ### Partial capture
+
 **V3 api only**
 Partial capture may be used in cases where a partial order is shipped or for other reasons.
 Partial capture can be called as many times as required while remaining reserved amount is available.
@@ -976,6 +995,7 @@ This results in a _very_ high success rate for charges.
 A charge can be retrieved with the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
 
 #### Details on charges
+
 The response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint
 contains the history of the charge and not just the current status.
 It also contains a summary of the total of amounts captured, refunded and cancelled.
@@ -1418,11 +1438,12 @@ It's possible to change the suggestedMaxAmount on the agreement by calling the u
 
 ### Create charge
 
-The amount of the charge/charges in the interval can not be higher than the `suggestedMaxAmount` or `maxAmount` field, depending on which is highest. 
+The amount of the charge/charges in the interval can not be higher than the `suggestedMaxAmount` or `maxAmount` field, depending on which is highest.
 
 Examples:
+
 - If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 2 000 kr then the charge amount can not be higher than 5 000 kr
-- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 7 000 kr then the charge amount can not be higher than 7 000 kr 
+- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 7 000 kr then the charge amount can not be higher than 7 000 kr
 
 ### Charge amount higher than the user's max amount
 

@@ -6,7 +6,7 @@ pagination_next: null
 ---
 END_METADATA -->
 
-# Vipps Recurring API: Frequently Asked Questions
+# Frequently asked questions
 
 See the
 [Vipps Recurring API](vipps-recurring-api.md)
@@ -33,14 +33,14 @@ guide.
   - [Does Vipps automatically create charges for an agreement?](#does-vipps-automatically-create-charges-for-an-agreement)
   - [At what time during the day are charges processed?](#at-what-time-during-the-day-are-charges-processed)
   - [When are charges processed?](#when-are-charges-processed)
-  - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails--insufficient-funds--networking-issues-etc-)
+  - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
   - [How can I require an initial payment from the user for setting up the agreement?](#how-can-i-require-an-initial-payment-from-the-user-for-setting-up-the-agreement)
   - [Can the charge amount be different from the agreement price?](#can-the-charge-amount-be-different-from-the-agreement-price)
   - [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
   - [When can I send charges to a user?](#when-can-i-send-charges-to-a-user)
   - [A charge failed, but the customer did not receive any warning](#a-charge-failed-but-the-customer-did-not-receive-any-warning)
   - [What happens to charges if the corresponding agreement is cancelled?](#what-happens-to-charges-if-the-corresponding-agreement-is-cancelled)
-  - [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires--what-happens-on-the-next-charge)
+  - [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
   - [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
   - [How does a user see the charges I create?](#how-does-a-user-see-the-charges-i-create)
   - [If a user adds or updates a card in vipps, will new recurring charges be made to that card?](#if-a-user-adds-or-updates-a-card-in-vipps-will-new-recurring-charges-be-made-to-that-card)
@@ -58,7 +58,7 @@ guide.
   - [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
   - [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
 - [Common problems/errors](#common-problemserrors)
-  - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation-)
+  - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
   - [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
 - [Notifications and error messages](#notifications-and-error-messages)
   - [When do users get push messages?](#when-do-users-get-push-messages)
@@ -93,14 +93,17 @@ No. Vipps handles all payment details.
  For more details, see our [call-by-call guide](vipps-recurring-api.md#call-by-call-guide)
 
 ### At what time during the day are charges processed?
+
 Charges are processed up to two times every day: 07:00 and 15:00 UTC.
 Retries are attempted according to the `retryDays` specified.
 This applies for both our production and test environment (MT).
 
 ### When are charges processed?
+
 Charges are processed at least twice a day from the `dueDate` until `dueDate+retryDays`.
 
 ### I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)
+
 The field `retryDays` in an Agreement allows for this functionality, Vipps will
 retry once each day until the value is reached. The valid values are none
 (defaulting to 0) or 0-14. We strongly recommend having more than 1 retry day
@@ -112,9 +115,11 @@ You need to use
 [Initial charge](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#initial-charge).
 
 ### Can the charge amount be different from the agreement price?
+
 Yes. See [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user).
 
 ### Are there any limits on charging a user?
+
 Yes. Within the `interval` period of the agreement, the merchant can charge at
 most **5 times** the agreement price cumulatively. There is no limit on the
 number of charges which can be sent in the `interval` period.
@@ -126,14 +131,17 @@ It is the merchant's responsibility to make sure the user is informed and unders
 the price of the Agreement.
 
 ### When can I send charges to a user?
+
 You can create charges once the user's agreement is ACTIVE
 
 See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 
 ### A charge failed, but the customer did not receive any warning
+
 The customer may not have notifications turned on. We always send notifications to the user when a charge processing attempt is not successful, and the user gets a more detailed message when looking at the charge/agreement in the app.
 
 ### What happens to charges if the corresponding agreement is cancelled?
+
 All charges in a `PENDING`, `DUE` or `RESERVED` state will be cancelled if the Agreement is stopped.  
 **Note**: This also includes the `initial charge` if it's currently `RESERVED`.
 So if the merchant needs to charge the user for the initial charge; then this needs to be done before the agreement is stopped.
@@ -153,16 +161,18 @@ notification when a card that is _not_ used for recurring payments expires.
 
 ### What happens to pending charges if the user deletes the payment card?
 
-See [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires--what-happens-on-the-next-charge)
+See [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
 
 ### How does a user see the charges I create?
 
 The charge will then appear in the app after it goes into the `DUE`-state.
 A charge will remain in `PENDING` state until the dueDate is less than 30 days away.
 
-You can retrieve all relevant charges through the [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
+You can retrieve all relevant charges through the
+[`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
 
 ### If a user adds or updates a card in vipps, will new recurring charges be made to that card?
+
 No, currently the payment card tied to an agreement will not be updated automatically.
 
 Users may want to charge different Agreements to different cards, and we do
@@ -174,7 +184,6 @@ users as described in
 
 See [For how long is a payment reserved?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
 in Vipps FAQs.
-
 
 ## Variable amount
 
@@ -211,7 +220,8 @@ with the correct `scope`. The requested information is only available for a limi
 
 ### Can I look up which user owns an agreement?
 
-No. See: [Can I look up a user's information?](#can-i-look-up-a-users-information) and [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user).
+No. See: [Can I look up a user's information?](#can-i-look-up-a-users-information) and
+[Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user).
 
 ### How can I convert existing agreements to Vipps agreements?
 
@@ -233,10 +243,12 @@ change to Vipps in different ways:
 
 ### How can I delete an agreement?
 
-Agreements can be stopped by calling the [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
+Agreements can be stopped by calling the
+[`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
 See [Stop an agreement](vipps-recurring-api.md#stop-an-agreement).
 
 ### Can a user cancel the agreement through the Vipps app?
+
 No, the user needs to contact the merchant which can then cancel or modify the
 agreement as they see fit.
 
@@ -259,6 +271,7 @@ Merchants sometimes need to move customer agreements from one merchant
 to another, or from one sale unit to another.
 
 Clarification of terms:
+
 * Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
 * Sale unit: A merchant can have one or more sale units. It may be different
   brands, different physical locations, different services, etc.
@@ -300,6 +313,7 @@ Typical cases:
    The users may need to enter new agreements with the new orgno.
 
 The general process is:
+
 - Contact Vipps (your KAM or partner manager) to plan the switch, and
   the date and time for moving the agreements.
 - Log in on
@@ -312,23 +326,22 @@ The general process is:
 - Send a confirmation to avtale@vipps.no that all customers have been informed,
   including a copy of the information sent.
 - Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
-  - Vippsnr's of the saleunit the agreements should be migrated from and to
-  - A decision on how to handle existing agreements in the new saleunit (in case you have started using it)
+  - Vippsnummer of the sale unit the agreements should be migrated from and to
+  - A decision on how to handle existing agreements in the new sale unit (in case you have started using it)
   - Final confirmation of date and time for migration.
 - After the migration is performed, you will get a file that maps from old to new agreement id
   - this is a csv where each line is an agreement, and the columns are old id and new id
 - You then need to update your systems so you start using the new agreement ids
-
 
 Brukerne vil kunne finne den gamle avtalen under "Avsluttede faste betalinger". Der vil de finne historikk for den frem til migreringstidspunktet.
 Som en følge av dette vil det ikke være mulig for dere å se eller gjøre noe med tidligere trekk fra den nye salgsenheten, siden de nye avtalene ikke har noen trekk.
 Avtalene i den gamle salgsenheten vil bli stoppet, og det vil ikke være mulig å lage nye trekk på dem.
 OBS; vi anbefaler å ta vare på alle avtaleIder en kunde noen gang har vært tilknyttet, slik at dere har mulighet til å finne tilbake til tidligere avtaler osv. Vi vet at mange kun tar vare på "nyeste", og dermed ikke har mulighet til å finne ut om en kunde kan ha flere aktive avtaler osv. :sweat_smile:
 
-><b>NOTE:</b> Agreements are not actually moved. Your new saleunit will get new agreements
+><b>NOTE:</b> Agreements are not actually moved. Your new sale unit will get new agreements
 identical to the old ones, but with new agreementIds. The old agreements will
 be stopped. This means the user will still be able to see the old agreement in the app, under "Stopped agreements".
-<br/>This is done because the underlying payments are tied to the saleunit, so the new saleunit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
+<br/>This is done because the underlying payments are tied to the sale unit, so the new sale unit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
 <br/>Charges done by the old MSN are in the old agreement,
 while the new MSN uses only the new agreement. The name of the new org will have the new juridical name. Sales unit name can be the same.
 
@@ -337,6 +350,7 @@ For all requests to move agreements: Please contact your KAM, your partner or
 
 **Please note:** If the merchant deactivates a MSN that has active
 agreements, it will no longer be possible to:
+
 - Manage the agreements
 - Perform new charges
 - Make refunds
@@ -433,6 +447,7 @@ they can submit it through you as a new partner.
 The partner orders at Vipps (partnerbestelling@vipps.no) must receive an e-mail
 from the user site or partner stating that they wish to change partner with the
 following information:
+
 * Name of user location
 * Organization number
 * Name of new partner
@@ -457,10 +472,12 @@ See [How to change partners for a merchant](https://vippsas.github.io/vipps-deve
 **Please note:** The MSN (the number) does _not_ change when changing partners.
 
 ### Settlement
+
 The settlements are done trough Vipps.
 The merchant does not need any other partner or agreement.
 
 ### Invoicing
+
 Merchants with a "net settlement" contract receive the users' payments excluding the Vipps fees.
 Merchants with a "gross settlement" contract receive the users' payments including the Vipps fees,
 and are then invoiced for the Vipps fees.

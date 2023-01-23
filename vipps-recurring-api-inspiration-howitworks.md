@@ -1,11 +1,11 @@
 <!-- START_METADATA
 ---
-title: Implementation Inspiration
+title: Implementation inspiration
 sidebar_position: 16
 ---
 END_METADATA -->
 
-# Implementation Inspiration
+# Implementation inspiration
 
 <!-- START_COMMENT -->
 

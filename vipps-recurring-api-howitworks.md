@@ -1,11 +1,11 @@
 <!-- START_METADATA
 ---
-title: How It Works
+title: How it works
 sidebar_position: 10
 ---
 END_METADATA -->
 
-# Vipps Recurring API: How It Works
+# How it works
 
 <!-- START_COMMENT -->
 
