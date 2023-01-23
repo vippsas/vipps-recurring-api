@@ -53,82 +53,84 @@ API version: 3.0.0.
 
 ## Table of contents
 
-  - [Terminology](#terminology)
-  - [Flow diagram](#flow-diagram)
-  - [Call by call guide](#call-by-call-guide)
-    - [Direct capture](#direct-capture)
-    - [Reserve capture](#reserve-capture)
-  - [API endpoints](#api-endpoints)
-  - [Authentication and authorization](#authentication-and-authorization)
-  - [Vipps HTTP headers](#vipps-http-headers)
-  - [Idempotency Key header](#idempotency-key-header)
-  - [Continuation-Token header](#continuation-token-header)
-  - [orderId recommendations](#orderid-recommendations)
-  - [Agreements](#agreements)
-    - [Create an agreement](#create-an-agreement)
-      - [Pricing representation](#pricing-representation)
-    - [Accept an agreement](#accept-an-agreement)
-    - [Merchant redirect url](#merchant-redirect-url)
-    - [Merchant agreement url](#merchant-agreement-url)
-    - [Intervals](#intervals)
-    - [Initial charge](#initial-charge)
-    - [Campaigns](#campaigns)
-      - [Campaigns in V2 API](#campaigns-in-v2-api)
-      - [Campaigns in V3 API](#campaigns-in-v3-api)
-        - [Price campaign](#price-campaign)
-        - [Period campaign](#period-campaign)
-        - [Event campaign](#event-campaign)
-        - [Full flex campaign](#full-flex-campaign)
-        - [Product description guidelines for agreements with campaigns.](#product-description-guidelines-for-agreements-with-campaigns)
-    - [Retrieve an agreement](#retrieve-an-agreement)
-  - [Charges](#charges)
-    - [Create a charge](#create-a-charge)
-    - [Capture a charge](#capture-a-charge)
-    - [Partial capture](#partial-capture)
-    - [Amount changes](#amount-changes)
-    - [Charge descriptions](#charge-descriptions)
-    - [Cancel a charge](#cancel-a-charge)
-    - [Charge times](#charge-times)
-    - [Charge retries](#charge-retries)
-    - [Retrieve a charge](#retrieve-a-charge)
-      - [Details on charges](#details-on-charges)
-    - [List charges](#list-charges)
-  - [Manage charges and agreements](#manage-charges-and-agreements)
-    - [Agreement states](#agreement-states)
-    - [Update an agreement](#update-an-agreement)
-    - [Pause an agreement](#pause-an-agreement)
-    - [Stop an agreement](#stop-an-agreement)
-    - [Charge states](#charge-states)
-    - [Example charge flows](#example-charge-flows)
-  - [Charge failure reasons](#charge-failure-reasons)
-    - [Deprecated failureReasons](#deprecated-failurereasons)
-  - [Userinfo](#userinfo)
-    - [Userinfo call by call guide](#userinfo-call-by-call-guide)
-    - [Example calls](#example-calls)
-    - [Userinfo call](#userinfo-call)
-    - [Consent](#consent)
-  - [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)
-    - [How it works](#how-it-works)
-      - [Create agreement](#create-agreement)
-      - [Get agreement](#get-agreement)
-      - [Change suggestedMaxAmount](#change-suggestedmaxamount)
-      - [Create charge](#create-charge)
-      - [Charge amount higher than the user's max amount](#charge-amount-higher-than-the-users-max-amount)
-  - [Skip landing page](#skip-landing-page)
-  - [HTTP responses](#http-responses)
-    - [Error responses](#error-responses)
-  - [Rate limiting](#rate-limiting)
-  - [Partner keys](#partner-keys)
-  - [Polling guidelines](#polling-guidelines)
-  - [Notifications to users for failed charges](#notifications-to-users-for-failed-charges)
-  - [Timeouts](#timeouts)
-  - [Testing](#testing)
-  - [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
-  - [Different agreement types and when to use them](#different-agreement-types-and-when-to-use-them)
-    - [Normal agreement](#normal-agreement)
-    - [Agreement with initial charge](#agreement-with-initial-charge)
-    - [Agreement with campaign](#agreement-with-campaign)
-    - [Agreement with initial charge and campaign](#agreement-with-initial-charge-and-campaign)
+* [Terminology](#terminology)
+* [Flow diagram](#flow-diagram)
+* [Call by call guide](#call-by-call-guide)
+  * [Direct capture](#direct-capture)
+  * [Reserve capture](#reserve-capture)
+* [API endpoints](#api-endpoints)
+* [Authentication and authorization](#authentication-and-authorization)
+* [Vipps HTTP headers](#vipps-http-headers)
+* [Idempotency Key header](#idempotency-key-header)
+* [Continuation-Token header](#continuation-token-header)
+* [orderId recommendations](#orderid-recommendations)
+* [Agreements](#agreements)
+  * [Create an agreement](#create-an-agreement)
+    * [Pricing representation](#pricing-representation)
+  * [Accept an agreement](#accept-an-agreement)
+  * [Merchant redirect URL](#merchant-redirect-url)
+  * [Merchant agreement URL](#merchant-agreement-url)
+  * [Intervals](#intervals)
+  * [Initial charge](#initial-charge)
+  * [Campaigns](#campaigns)
+    * [Campaigns in V2 API](#campaigns-in-v2-api)
+    * [Campaigns in V3 API](#campaigns-in-v3-api)
+      * [Price campaign](#price-campaign)
+      * [Period campaign](#period-campaign)
+      * [Event campaign](#event-campaign)
+      * [Full flex campaign](#full-flex-campaign)
+      * [Product description guidelines for agreements with campaigns.](#product-description-guidelines-for-agreements-with-campaigns)
+  * [Retrieve an agreement](#retrieve-an-agreement)
+* [Charges](#charges)
+  * [Create a charge](#create-a-charge)
+    * [Due date](#due-date)
+    * [Amount](#amount)
+    * [Charge type](#charge-type)
+  * [Capture a charge](#capture-a-charge)
+  * [Partial capture](#partial-capture)
+  * [Amount changes](#amount-changes)
+  * [Charge descriptions](#charge-descriptions)
+  * [Cancel a charge](#cancel-a-charge)
+  * [Charge times](#charge-times)
+  * [Charge retries](#charge-retries)
+  * [Retrieve a charge](#retrieve-a-charge)
+    * [Details on charges](#details-on-charges)
+  * [List charges](#list-charges)
+* [Manage charges and agreements](#manage-charges-and-agreements)
+  * [Agreement states](#agreement-states)
+  * [Update an agreement](#update-an-agreement)
+  * [Pause an agreement](#pause-an-agreement)
+  * [Stop an agreement](#stop-an-agreement)
+  * [Charge states](#charge-states)
+  * [Example charge flows](#example-charge-flows)
+* [Charge failure reasons](#charge-failure-reasons)
+  * [Deprecated failureReasons](#deprecated-failurereasons)
+* [Userinfo](#userinfo)
+  * [Userinfo call by call guide](#userinfo-call-by-call-guide)
+  * [Example calls](#example-calls)
+  * [Userinfo call](#userinfo-call)
+  * [Consent](#consent)
+* [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount)
+  * [Create agreement](#create-agreement)
+  * [Get agreement](#get-agreement)
+  * [Change suggestedMaxAmount](#change-suggestedmaxamount)
+  * [Create charge](#create-charge)
+  * [Charge amount higher than the user's max amount](#charge-amount-higher-than-the-users-max-amount)
+* [Skip landing page](#skip-landing-page)
+* [HTTP responses](#http-responses)
+  * [Error responses](#error-responses)
+* [Rate limiting](#rate-limiting)
+* [Partner keys](#partner-keys)
+* [Polling guidelines](#polling-guidelines)
+* [Notifications to users for failed charges](#notifications-to-users-for-failed-charges)
+* [Timeouts](#timeouts)
+* [Testing](#testing)
+* [Recommendations regarding handling redirects](#recommendations-regarding-handling-redirects)
+* [Different agreement types and when to use them](#different-agreement-types-and-when-to-use-them)
+  * [Normal agreement](#normal-agreement)
+  * [Agreement with initial charge](#agreement-with-initial-charge)
+  * [Agreement with campaign](#agreement-with-campaign)
+  * [Agreement with initial charge and campaign](#agreement-with-initial-charge-and-campaign)
 
 <!-- END_COMMENT -->
 
@@ -455,7 +457,7 @@ If the user does not have Vipps installed:
 * `"isApp": true`: The user will get an error message saying that the link can
   not be opened.
 
-### Merchant redirect url
+### Merchant redirect URL
 
 The user will be redirected to the `merchantRedirectUrl` whether the agreement is **approved or canceled**.
 It is therefore important that you actively check the agreement's status with the
@@ -466,19 +468,23 @@ the `merchantRedirectUrl` will not be used. It is therefore important that you
 actively check the payment with the
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
 
-
-### Merchant agreement url
+### Merchant agreement URL
 
 The `merchantAgreementUrl` is a link to the customer's account page on your website, where they
 can manage the agreement (e.g., change, pause, cancel the agreement).
-Vipps does not offer any form of agreement management, as this may include
-quite complex operations (e.g., changing subscription types,
-temporary address change).
 The URL is opened in the standard web browser.
-The integrator ***must*** implement such functionality for the customer to manage the agreement in their system.
 
-Vipps does not have any specific requirements for the security of the page, other than using https, but
-strongly recommend using
+**Please note:** Vipps does not offer any form of agreement management, as this
+may include quite complex operations (e.g., changing subscription types,
+temporary address change, pausing the agreement, etc).
+
+**Important:** The integrator **must** implement such functionality for the
+customer to manage the agreement in their system.
+It is the integrator's responsibility to make sure the `merchantAgreementUrl`
+in the agreement works for the user.
+
+Vipps does not have any specific requirements for the security of the page,
+other than using HTTPS, but strongly recommend using
 [Vipps Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not need a username or password, but is logged
 in automatically through Vipps. See the
@@ -487,7 +493,9 @@ for more details.
 
 ### Intervals
 
-Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY` and frequency as a count. The count can be any number between 1 and 31. The interval defines how often the user will be charged. 
+Intervals are defined with an interval type `YEAR`, `MONTH`, `WEEK`, or `DAY`
+and frequency as a count. The count can be any number between 1 and 31.
+The interval defines how often the user will be charged.
 
 Example for a bi-weekly subscription:
 
@@ -555,7 +563,7 @@ Example for a subscription every 30th day:
 ```
 
 User can be charged once every 30 days, regardless of the day in the month.
-(e.g., First charge can be due on 12.06.2022 and second charge on 04.07.2022) 
+(e.g., First charge can be due on 12.06.2022 and second charge on 04.07.2022)
 
 **Please note:** It is not possible to change intervals. If the user has
 accepted a yearly interval, the agreement cannot be changed to a monthly
@@ -848,8 +856,8 @@ For agreements of type `variable`, also see [Recurring agreements with variable 
 #### Due date
 
 `due` will define for which date the charge will be performed.
-This date has to be minimum two days (one day in the test environment) in the future and maximum two years in advance. 
-The minimum is set to two days because the user should be able to see the upcoming charge in the Vipps app. All charges `due` in 35 days or less are visible under the "Payments tab" in the Vipps app. 
+This date has to be minimum two days (one day in the test environment) in the future and maximum two years in advance.
+The minimum is set to two days because the user should be able to see the upcoming charge in the Vipps app. All charges `due` in 35 days or less are visible under the "Payments tab" in the Vipps app.
 
 Example: If the charge is _created_ on the 25th, the earliest the charge can be
 _due_ is the 27th (25+2). This is so that the user can be informed about the
@@ -1341,7 +1349,7 @@ amount each interval, as long as the amount is lower than the user's specified m
 
 To create a variable amount agreement, use the `VARIABLE` type in `Pricing`.
 With `VARIABLE` pricing, you no longer specify a price, but a `suggestedMaxAmount` for the user.
-This field should be set to what the maximum price could be each interval. 
+This field should be set to what the maximum price could be each interval.
 This `suggestedMaxAmount` is presented to the user together with a list of auto generated  amount suggestions that is created by Vipps.
 The `suggestedMaxAmount` is however pre-selected for the user.
 
@@ -1456,7 +1464,7 @@ Examples:
 ### Charge amount higher than the user's max amount
 
 If the amount of a charge is below (or equal) the `suggestMaxAmount` but above the user's `maxAmount`, the charge will be set
-to `DUE` and the user will be notified and encouraged to alter the max amount to a hight amount. 
+to `DUE` and the user will be notified and encouraged to alter the max amount to a hight amount.
 If the user does not update their `maxAmount` to the same or a higher amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
