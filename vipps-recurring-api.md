@@ -68,6 +68,8 @@ API version: 3.0.0.
     - [Create an agreement](#create-an-agreement)
       - [Pricing representation](#pricing-representation)
     - [Accept an agreement](#accept-an-agreement)
+    - [Merchant redirect url](#merchant-redirect-url)
+    - [Merchant agreement url](#merchant-agreement-url)
     - [Intervals](#intervals)
     - [Initial charge](#initial-charge)
     - [Campaigns](#campaigns)
@@ -340,29 +342,6 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 **Note:** To create agreements with support for variable amounts on charges, see
 [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount).
 
-The `merchantAgreementUrl` is a link to the customer's account page on your website, where they
-can manage the agreement (e.g., change, pause, cancel the agreement).
-Vipps does not offer any form of agreement management, as this may include
-quite complex operations (e.g., changing subscription types,
-temporary address change).
-The URL is opened in the standard web browser.
-The integrator ***must*** implement such functionality for the customer to manage the agreement in their system.
-
-**Please note:** If the user closes Vipps before the redirect is done,
-the `merchantRedirectUrl` will not be used. It is therefore important that you
-actively check the payment with the
-[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
-
-The `merchantAgreementUrl` is just a normal link to a page where the customer
-can log in and manage the agreement.
-Vipps does not have any specific requirements for the security of the page, other than using https, but
-strongly recommend using
-[Vipps Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
-so the user does not need a username or password, but is logged
-in automatically through Vipps. See the
-[Login API documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api)
-for more details.
-
 The request parameters have the following size limits
 (see the [`POST:/agreements`][draft-agreement-endpoint] endpoint for more details):
 
@@ -476,6 +455,35 @@ If the user does not have Vipps installed:
 * `"isApp": true`: The user will get an error message saying that the link can
   not be opened.
 
+### Merchant redirect url
+
+The user will be redirected to the `merchantRedirectUrl` whether the agreement is **approved or canceled**.
+It is therefore important that you actively check the agreement's status with the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint before marking the agreement as ACTIVE in your system.
+
+**Please note:** If the user closes Vipps before the redirect is done,
+the `merchantRedirectUrl` will not be used. It is therefore important that you
+actively check the payment with the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
+
+
+### Merchant agreement url
+
+The `merchantAgreementUrl` is a link to the customer's account page on your website, where they
+can manage the agreement (e.g., change, pause, cancel the agreement).
+Vipps does not offer any form of agreement management, as this may include
+quite complex operations (e.g., changing subscription types,
+temporary address change).
+The URL is opened in the standard web browser.
+The integrator ***must*** implement such functionality for the customer to manage the agreement in their system.
+
+Vipps does not have any specific requirements for the security of the page, other than using https, but
+strongly recommend using
+[Vipps Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
+so the user does not need a username or password, but is logged
+in automatically through Vipps. See the
+[Login API documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api)
+for more details.
 
 ### Intervals
 
