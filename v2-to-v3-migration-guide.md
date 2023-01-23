@@ -12,14 +12,17 @@ END_METADATA -->
 ## What is new in V3
 
 ### Campaign
+
 The Recurring API V3 adds new campaign types.
 See [Campaigns](vipps-recurring-api.md#campaigns-in-v3-api) in the API Guide.
 
 ### Reserve capture
+
 The Recurring API V3 adds the functionality to do reserve and capture on recurring charges.
 See [Reserve capture](vipps-recurring-api.md#reserve-capture) in the API Guide.
 
 ### Partial capture
+
 The Recurring API V3 adds the functionality to do partial capture on reserved charges.
 See [partial capture](vipps-recurring-api.md#partial-capture) in the API Guide.
 
@@ -84,6 +87,7 @@ To draft an agreement with a fixed amount with the same charge limit as in V2, `
 Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
+
 ```json
 {
   "currency": "NOK",
@@ -95,6 +99,7 @@ V2 request body
 ```
 
 V3 request body
+
 ```json
 {
   "pricing": {
@@ -109,11 +114,13 @@ V3 request body
 ```
 
 ### Variable amount
+
 To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
 Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
+
 ```json
 {
   "currency": "NOK",
@@ -141,6 +148,7 @@ V3 request body
 ```
 
 ## New interval representation
+
 The Recurring API V3 introduces a new JSON representation for agreement interval.
 
 Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
@@ -157,6 +165,7 @@ V2 request body
 ```
 
 V3 request body
+
 ```json
 {
   "interval": {
@@ -224,18 +233,20 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 ````
 
 ## Idempotency key
+
 The misspelled `Idempotent-Key` header is deprecated.
 The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints. 
 See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#idempotency-key-header-v3-api-coming-soon) in the API Guide.
 
 ## Product description guidelines
+
 We do not recommend you to use `Product Description` for agreements with a campaign.
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
 See [Campaigns in v3](vipps-recurring-api.md#campaigns-in-v3-api) in the API Guide.
 
 ## Update an agreement
 
-In the API V3, it is possible to update the same fields on an agreement as in V2 except campaign. A campaigns can not be updated after creation. 
+In the API V3, it is possible to update the same fields on an agreement as in V2 except campaign. A campaigns can not be updated after creation.
 
 | Field in V2          | Field in V3                 |
 |----------------------|-----------------------------|

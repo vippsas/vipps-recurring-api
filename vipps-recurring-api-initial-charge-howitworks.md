@@ -1,11 +1,11 @@
 <!-- START_METADATA
 ---
-title: How It Works with initial charge
+title: How it works with initial charge
 sidebar_position: 12
 ---
 END_METADATA -->
 
-# How It Works: Initial charge
+# How it works with initial charge
 
 <!-- START_COMMENT -->
 
@@ -15,12 +15,15 @@ END_METADATA -->
 <!-- END_COMMENT -->
 
 ## Introduction
+
 The initial charge is used to require the user to pay an amount before the agreement is activated. Commonly this is set to the same amount as the agreement pricing (or the campaign price if applicable), but you can also set it to a larger amount in case they need to pay an additional fee, ie the discounted price of the phone if they purchase a smart phone with a subscription.
 
-> <b>Note:</b> Initial charge can be used regardless of campaigns etc.
+*Note:* Initial charge can be used regardless of campaigns etc.
 
 ## Appearance
+
 When the initial charge amount matches the agreement (or campaign) pricing, the initial charge is not explicitly displayed, but the buttons will say "Betal og start" instead of "Bekreft og start":
+
 ```json
 {
   ...
@@ -44,9 +47,11 @@ When the initial charge amount matches the agreement (or campaign) pricing, the 
   ...
 }
 ```
+
 ![recurring process](images/campaigns/screens/period-campaign-with-same-initial-charge.png)
 
 If the amount is dissimilar, the initial charge will show up as a separate bubble instead:
+
 ```json
 {
   ...
@@ -70,4 +75,5 @@ If the amount is dissimilar, the initial charge will show up as a separate bubbl
   ...
 }
 ```
+
 ![recurring process](images/campaigns/screens/period-campaign-with-initial-charge.png)
