@@ -34,15 +34,15 @@ The API V3 returns different response status for some endpoints:
 
 | Endpoint                                                                               | V2 response status | V3 response status                  |
 |----------------------------------------------------------------------------------------|--------------------|-------------------------------------|
-| [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint]                         | `200 OK`           | `204 No Content` or `202 Accepted`* | 
-| [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        | `200 OK`           | `204 No Content` or `202 Accepted`* | 
-| [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`* | 
-| [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   | `200 OK`           | `204 No Content` or `202 Accepted`* | 
+| [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint]                         | `200 OK`           | `204 No Content` or `202 Accepted`* |
+| [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        | `200 OK`           | `204 No Content` or `202 Accepted`* |
+| [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`* |
+| [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   | `200 OK`           | `204 No Content` or `202 Accepted`* |
 
 `204 No Content` indicates that the request was successfully processed.
 
-`202 Accepted` indicates also that the request was successful but the processing has not been completed yet. 
-The request is processed asynchronously and once it is completed, the agreement or charge will be updated. 
+`202 Accepted` indicates also that the request was successful but the processing has not been completed yet.
+The request is processed asynchronously and once it is completed, the agreement or charge will be updated.
 Polling can be done to check the status. See [polling guidelines](vipps-recurring-api.md#polling-guidelines) in the API Guide.
 
 **Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should
@@ -55,26 +55,11 @@ to retry the request at a later point in time.
 ## Error responses
 
 In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint with a stopped agreement, 
-the response will be the following:
 
-```json
-{
-    "type": "https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#illegal-agreement-update",
-    "title": "Bad Request",
-    "status": 400,
-    "detail": "Illegal update",
-    "instance": "/vipps-recurring-merchant-api/v3/agreements/agr_nmgWS4e",
-    "contextId": "ef087f56-4281-494d-9591-5e4cf6fe05b5",
-    "extraDetails": [
-        {
-            "status": "Cannot modify an agreement which is not active."
-        }
-    ]
-}
-```
+See:
+[Errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/errors).
 
-## New price representation 
+## New price representation
 
 The Recurring API V3 introduces a new JSON representation for agreement price.
 
@@ -180,9 +165,9 @@ V3 request body
 
 ## More details on charges
 
-In the API V3, the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint 
+In the API V3, the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint
 contains the history of the charge and not just the current status.
-It also contains a summary of the total of amounts captured, refunded and cancelled. 
+It also contains a summary of the total of amounts captured, refunded and cancelled.
 
 Truncated example of the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
 
@@ -235,7 +220,7 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 ## Idempotency key
 
 The misspelled `Idempotent-Key` header is deprecated.
-The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints. 
+The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints.
 See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#idempotency-key-header-v3-api-coming-soon) in the API Guide.
 
 ## Product description guidelines
@@ -251,7 +236,7 @@ In the API V3, it is possible to update the same fields on an agreement as in V2
 | Field in V2          | Field in V3                 |
 |----------------------|-----------------------------|
 | productName          | productName                 |
-| productDescription   | productDescription          | 
+| productDescription   | productDescription          |
 | status               | status                      |
 | merchantAgreementUrl | merchantAgreementUrl        |
 | price                | pricing.amount              |

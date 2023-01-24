@@ -1512,31 +1512,11 @@ This will mostly apply to 429 responses, but may also appear in certain other ci
 to retry the request at a later point in time.
 
 ### Error responses
-All error responses contains an `error` object in the body, with details of the
-problem.
 
 HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint with a stopped agreement,
-the response will be the following:
 
-```json
-{
-    "type": "https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#illegal-agreement-update",
-    "title": "Bad Request",
-    "status": 400,
-    "detail": "Illegal update",
-    "instance": "/vipps-recurring-merchant-api/v3/agreements/agr_nmgWS4e",
-    "contextId": "ef087f56-4281-494d-9591-5e4cf6fe05b5",
-    "extraDetails": [
-        {
-            "status": "Cannot modify an agreement which is not active."
-        }
-    ]
-}
-```
-
-**Please note**: We are still working on improving error responses.
-This means, in the future, `detail` and `extraDetails` content can change for some error responses.
+See:
+[Errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/errors).
 
 ## Rate limiting
 

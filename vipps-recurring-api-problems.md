@@ -9,25 +9,9 @@ END_METADATA -->
 # Problem types
 
 In Recurring API, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-This document describes the possible problem types that can be returned by the API. 
-For example, when calling [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint with a stopped agreement, 
-the response will be the following:
 
-```json
-{
-    "type": "https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#illegal-agreement-update",
-    "title": "Bad Request",
-    "status": 400,
-    "detail": "Illegal update",
-    "instance": "/vipps-recurring-merchant-api/v3/agreements/agr_nmgWS4e",
-    "contextId": "ef087f56-4281-494d-9591-5e4cf6fe05b5",
-    "extraDetails": [
-        {
-            "status": "Cannot modify an agreement which is not active."
-        }
-    ]
-}
-```
+See:
+[Errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/errors)
 
 API version: 3.0.0.
 
@@ -35,25 +19,25 @@ API version: 3.0.0.
 
 ## Table of contents
 
-  - [Problems](#problems)
-    - [Validation error](#validation-error)
-    - [Invalid agreement id](#invalid-agreement-id)
-    - [Invalid json](#invalid-json)
-    - [Unsupported media type](#unsupported-media-type)
-    - [Not authorized](#not-authorized)
-    - [Idempotency key header](#idempotency-key-header)
-    - [Charge amount too high](#charge-amount-too-high)
-    - [Charge amount too high for interval](#charge-amount-too-high-for-interval)
-    - [Charge due too soon](#charge-due-too-soon)
-    - [Charge due in too long](#charge-due-in-too-long)
-    - [Unsupported feature](#unsupported-feature)
-    - [Illegal agreement update](#illegal-agreement-update)
-    - [Invalid suggested max amount](#invalid-suggested-max-amount)
-    - [Cancel charge failed](#cancel-charge-failed)
-    - [Charge creation failed](#charge-creation-failed)
-    - [Charge capture failed](#charge-capture-failed)
-    - [Missing request header](#missing-request-header)
-    - [Invalid sale unit](#invalid-sale-unit)
+- [Problems](#problems)
+  - [Validation error](#validation-error)
+  - [Invalid agreement id](#invalid-agreement-id)
+  - [Invalid json](#invalid-json)
+  - [Unsupported media type](#unsupported-media-type)
+  - [Not authorized](#not-authorized)
+  - [Idempotency key header](#idempotency-key-header)
+  - [Charge amount too high](#charge-amount-too-high)
+  - [Charge amount too high for interval](#charge-amount-too-high-for-interval)
+  - [Charge due too soon](#charge-due-too-soon)
+  - [Charge due in too long](#charge-due-in-too-long)
+  - [Unsupported feature](#unsupported-feature)
+  - [Illegal agreement update](#illegal-agreement-update)
+  - [Invalid suggested max amount](#invalid-suggested-max-amount)
+  - [Cancel charge failed](#cancel-charge-failed)
+  - [Charge creation failed](#charge-creation-failed)
+  - [Charge capture failed](#charge-capture-failed)
+  - [Missing request header](#missing-request-header)
+  - [Invalid sale unit](#invalid-sale-unit)
 
 
 <!-- END_COMMENT -->
@@ -67,7 +51,7 @@ See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
 
 ### Invalid agreement id
 
-Agreement Id is invalid. Please verify the agreement Id is present and in the correct format. 
+Agreement Id is invalid. Please verify the agreement Id is present and in the correct format.
 See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
 
 ### Invalid json
@@ -94,7 +78,7 @@ Amount set for charge is too high.
 
 ### Charge amount too high for interval
 
-Amount for interval is exceeded. Check if other charges has already been created for this interval. 
+Amount for interval is exceeded. Check if other charges has already been created for this interval.
 
 ### Charge due too soon
 
