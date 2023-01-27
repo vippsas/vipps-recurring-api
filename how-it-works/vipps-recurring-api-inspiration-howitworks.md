@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: Implementation inspiration
+title: "Implementation inspiration"
 sidebar_position: 16
 ---
 END_METADATA -->
@@ -52,7 +52,7 @@ If you have a user that has deactivated their subscription, and you want to give
 }
 ```
 
-![Drafted agreement with birthday discount for one month](images/howitworks-inspiration/birthday-discount.jpg)
+![Drafted agreement with birthday discount for one month](../images/howitworks-inspiration/birthday-discount.jpg)
 
 ## Referrals
 
@@ -85,7 +85,7 @@ If you want to use referrals, you can do this in many ways. A commonly used way 
 }
 ```
 
-![Drafted agreement with birthday discount for one month](images/howitworks-inspiration/referral-discount.jpg)
+![Drafted agreement with birthday discount for one month](../images/howitworks-inspiration/referral-discount.jpg)
 
 To reward the user that referred them, you can change their agreement price and description like this:
 
@@ -100,7 +100,7 @@ To reward the user that referred them, you can change their agreement price and 
 }
 ```
 
-![Drafted agreement with birthday discount for one month](images/howitworks-inspiration/agreement-with-referral-discount.jpg)
+![Drafted agreement with birthday discount for one month](../images/howitworks-inspiration/agreement-with-referral-discount.jpg)
 
 ## Additional services/purchases
 
@@ -122,7 +122,7 @@ To remove the discount, you simply update the agreement again with the original 
 If you want to give members a discounted subscription fee when they have been subscribed for a long time, you can do this in a couple of ways:
 
 - Update existing agreements as previous scenario.
-- Use a `FULL_FLEX_CAMPAIGN` to display to the new customers that they will get a better price if they stay subscribed. See [full flex campaign](vipps-recurring-api.md#full-flex-campaign) for more details.
+- Use a `FULL_FLEX_CAMPAIGN` to display to the new customers that they will get a better price if they stay subscribed. See [full flex campaign](../vipps-recurring-api.md#full-flex-campaign) for more details.
 
 Here is an example of the latter, where they pay 69kr/week until March 1st, then 200kr/month after that:
 
@@ -151,7 +151,7 @@ Here is an example of the latter, where they pay 69kr/week until March 1st, then
 }
 ```
 
-![Agreement with loyalty campaign](images/howitworks-inspiration/loyalty-campaign.jpg)
+![Agreement with loyalty campaign](../images/howitworks-inspiration/loyalty-campaign.jpg)
 
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
