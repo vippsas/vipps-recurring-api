@@ -1,18 +1,11 @@
 <!-- START_METADATA
 ---
-title: "Recurring API with Vipps Login"
+title: "Vipps Login"
 sidebar_position: 15
 ---
 END_METADATA -->
 
-# Recurring API with Vipps Login
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-<!-- END_COMMENT -->
+# How Recurring works with Vipps Login
 
 Vipps Login and Vipps Recurring can be used together making registration and payment simple for your customers.
 

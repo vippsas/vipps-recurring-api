@@ -647,7 +647,7 @@ when the product is shipped.
 
 ### Campaigns
 
-A campaign in recurring is a period where the price is lower than usual, and
+A _campaign_ in Recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
 Campaigns cannot be used in combination with [variable amount](#recurring-agreements-with-variable-amount).
 

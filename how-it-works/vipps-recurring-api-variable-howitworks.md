@@ -1,11 +1,11 @@
 <!-- START_METADATA
 ---
-title: "Recurring API with variable amount"
+title: "Variable amount"
 sidebar_position: 13
 ---
 END_METADATA -->
 
-# Recurring API with variable amount
+# How Recurring works with variable amount
 
 <!-- START_COMMENT -->
 

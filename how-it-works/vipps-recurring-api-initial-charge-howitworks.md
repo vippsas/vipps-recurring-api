@@ -1,11 +1,11 @@
 <!-- START_METADATA
 ---
-title: "Recurring API with initial charge"
+title: "Initial charge"
 sidebar_position: 12
 ---
 END_METADATA -->
 
-# Recurring API with initial charge
+# How Recurring works with initial charge
 
 <!-- START_COMMENT -->
 

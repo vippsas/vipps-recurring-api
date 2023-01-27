@@ -35,18 +35,18 @@ to get access to the Recurring API in production.
 
 ## How it works
 
-* [How it works](./how-it-works/vipps-recurring-api-howitworks.md): An overview of how the Recurring API works.
-* [Vipps Login + Vipps Recurring](./how-it-works/vipps-login-recurring-howitworks.md): Learn how you can use Login and Recurring together.
-* [How it works: Recurring API with variable amount](./how-it-works/vipps-recurring-api-variable-howitworks.md): Learn about using variable amounts.
-* [How it works: Recurring API with campaign](./how-it-works/vipps-recurring-api-campaigns-howitworks.md): Learn about using Recurring campaigns.
-* [Recurring API with Vipps Login](./how-it-works/vipps-login-recurring-howitworks.md): Learn about using Recurring with Vipps login.
+* [How Vipps Recurring works](./how-it-works/vipps-recurring-api-howitworks.md): An overview of how the Recurring API works.
+* [How Recurring works with Vipps Login](./how-it-works/vipps-login-recurring-howitworks.md): Learn how you can use Login and Recurring together.
+* [How Recurring works with variable amount](./how-it-works/vipps-recurring-api-variable-howitworks.md): Learn about using variable amounts.
+* [How Recurring works with campaign](./how-it-works/vipps-recurring-api-campaigns-howitworks.md): Learn about using Recurring campaigns.
+* [How Recurring works with Vipps Login](./how-it-works/vipps-login-recurring-howitworks.md): Learn about using Recurring with Vipps login.
 * [Implementation inspiration](./how-it-works/vipps-recurring-api-inspiration-howitworks.md): Get inspiration for how to use Recurring.
 
 
 ## Getting started
 
 See
-[Getting started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
+[Vipps Getting started guide](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 Review the detailed documentation found here:

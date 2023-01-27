@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: "Implementation inspiration"
+title: "Inspiration"
 sidebar_position: 16
 ---
 END_METADATA -->
@@ -14,13 +14,11 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-## Introduction
-
-This page is meant to give some inspiration for how you can utilize the features of recurring to meet a variety of needs, from special one-of agreements to referral discounts and loyalty programs.
+This page is meant to give some inspiration for how you can utilize the features of Recurring to meet a variety of needs, from special one-of agreements to referral discounts and loyalty programs.
 
 ## Unique agreements/campaigns
 
-In recurring, every agreement is unique, and every campaign is unique to the specific agreement they belong to. This means that you as an integrator have the ability to tailor agreements and campaigns to your individual users.
+In Recurring, every agreement is unique, and every campaign is unique to the specific agreement they belong to. This means that you as an integrator have the ability to tailor agreements and campaigns to your individual users.
 This can be used to give customers special deals on special occasions, based on referrals, etc.
 
 ## Birthday discount

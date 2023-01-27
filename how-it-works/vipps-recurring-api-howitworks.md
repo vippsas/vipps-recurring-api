@@ -1,6 +1,6 @@
 <!-- START_METADATA
 ---
-title: "How Vipps Recurring works"
+title: "Vipps Recurring"
 sidebar_position: 10
 ---
 END_METADATA -->

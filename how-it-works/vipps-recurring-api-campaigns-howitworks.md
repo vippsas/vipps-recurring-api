@@ -1,23 +1,16 @@
 <!-- START_METADATA
 ---
-title: "Recurring API with campaign"
+title: "Campaign"
 sidebar_position: 14
 ---
 END_METADATA -->
 
-# Recurring API with campaign
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-<!-- END_COMMENT -->
+# How Recurring works with campaign
 
 For technical documentation go to:
 [Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-## Recurring with campaign
+
 
 ## 1. Buy a subscription with Vipps
 
