@@ -1,11 +1,11 @@
 <!-- START_METADATA
 ---
-title: How It Works with variable amount
+title: "Variable amount"
 sidebar_position: 13
 ---
 END_METADATA -->
 
-# Vipps Recurring API with variable amount: How It Works
+# How Recurring works with variable amount
 
 <!-- START_COMMENT -->
 
@@ -19,13 +19,13 @@ For technical documentation go to:
 
 ## Recurring variable amount pricing
 
-![recurring process](images/vipps-recurring-api-howitworks/vipps-recurring-process.svg)
+![recurring process](../images/vipps-recurring-api-howitworks/vipps-recurring-process.svg)
 
 ## 1. Buy a subscription with Vipps
 
 A user chooses Vipps as payment method for a subscription on a merchant's website or app. 
 
-![Buy subscription with Vipps](images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
+![Buy subscription with Vipps](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
 ## 2. The Vipps landing page
 
@@ -34,7 +34,7 @@ The user confirms their number and is prompted to log in to Vipps.
 
 If the agreement was started from a mobile device, the app will automatically switch over to Vipps.
 
-![Vipps landing page](images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
+![Vipps landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
 ## 3. Accept agreement in Vipps
 
@@ -45,13 +45,13 @@ If there is an initial charge to be paid, the user confirms the payment in this 
 In this step the user can choose the max amount that they will allow the merchant to charge each interval. 
 The suggested amount from the merchant is preselected in the list.
 
-![Buy subscription with Vipps](images/vipps-recurring-api-variable-howitworks/variable_amount_accept.png)
+![Buy subscription with Vipps](../images/vipps-recurring-api-variable-howitworks/variable_amount_accept.png)
 
 ## 5. Confirmation of subscription
 
 The user is redirected back to the merchant’s website or app, and the subscription is confirmed on the merchant’s page.
 
-![Confirmation of subscription](images/vipps-recurring-api-howitworks/vipps-recurring-step4.svg)
+![Confirmation of subscription](../images/vipps-recurring-api-howitworks/vipps-recurring-step4.svg)
 
 ## 6. Due charges
 
@@ -66,7 +66,7 @@ An explanation text is also shown on the charge in Vipps.
 
 This notification and failure text is triggered and shown when the charge is set as due.
 
-![Failure text](images/vipps-recurring-api-variable-howitworks/variable_amount_notification.png)
+![Failure text](../images/vipps-recurring-api-variable-howitworks/variable_amount_notification.png)
 
 ## 7. Overview and manage agreement
 
@@ -74,8 +74,8 @@ The user can see their active subscriptions, as well as stopped subscriptions, a
 
 If the user clicks on max amount, they can choose a new max amount for the agreement.
 
-![Change max amount](images/vipps-recurring-api-variable-howitworks/variable_amount_manage.png)
+![Change max amount](../images/vipps-recurring-api-variable-howitworks/variable_amount_manage.png)
 
 If the user clicks on `Manage agreement` (*Administrer abonnement*) in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
 
-![Manage agreements](images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
+![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)

@@ -1,11 +1,11 @@
 <!-- START_METADATA
 ---
-title: How it works with initial charge
+title: "Initial charge"
 sidebar_position: 12
 ---
 END_METADATA -->
 
-# How it works with initial charge
+# How Recurring works with initial charge
 
 <!-- START_COMMENT -->
 
@@ -48,7 +48,7 @@ When the initial charge amount matches the agreement (or campaign) pricing, the 
 }
 ```
 
-![recurring process](images/campaigns/screens/period-campaign-with-same-initial-charge.png)
+![recurring process](../images/campaigns/screens/period-campaign-with-same-initial-charge.png)
 
 If the amount is dissimilar, the initial charge will show up as a separate bubble instead:
 
@@ -76,4 +76,4 @@ If the amount is dissimilar, the initial charge will show up as a separate bubbl
 }
 ```
 
-![recurring process](images/campaigns/screens/period-campaign-with-initial-charge.png)
+![recurring process](../images/campaigns/screens/period-campaign-with-initial-charge.png)

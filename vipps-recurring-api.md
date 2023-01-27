@@ -38,7 +38,7 @@ As a merchant, you can check if you have access to recurring payments through [p
 Partners can check if a merchant has access to recurring payments through the
 [Vipps Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sale-unit-based-on-msn).
 
-See a detailed example of [how it works](vipps-login-recurring-howitworks.md).
+See a detailed example of [how it works](./how-it-works/vipps-login-recurring-howitworks.md).
 
 See also:
 
@@ -647,7 +647,7 @@ when the product is shipped.
 
 ### Campaigns
 
-A campaign in recurring is a period where the price is lower than usual, and
+A _campaign_ in Recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
 Campaigns cannot be used in combination with [variable amount](#recurring-agreements-with-variable-amount).
 
@@ -1677,7 +1677,7 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
-See [Campaigns](#campaigns) and [How it works: Campaigns](vipps-recurring-api-campaigns-howitworks.md) for details about campaigns.
+See [Campaigns](#campaigns) and [How it works: Campaigns](./how-it-works/vipps-recurring-api-campaigns-howitworks.md) for details about campaigns.
 
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
 
