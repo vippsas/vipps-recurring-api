@@ -864,6 +864,9 @@ _due_ is the 27th (25+2). This is so that the user can be informed about the
 upcoming charge. The user is only shown one charge per agreement, in order to
 not overwhelm the user when doing daily or weekly charges.
 
+**Note**: You can request to be put on a "one day minimum" allow list if you have a need to be able to create charges that are DUE 1 day after being created. This means that a charge can be created to be DUE the next day.
+Example: If the charge is _created_ at any time on the 25th, the charge can be due and processed at the 26th.
+
 #### Amount
 
 
