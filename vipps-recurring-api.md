@@ -233,8 +233,7 @@ See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way 
 
 All Vipps API calls are authenticated with an access token and an API subscription key.
 See
-[Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started#get-an-access-token)
-in the Getting started guide, for details.
+[Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/APIs/access-token-api#get-an-access-token), for details.
 
 ## Vipps HTTP headers
 
