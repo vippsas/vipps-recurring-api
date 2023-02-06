@@ -22,52 +22,6 @@ tags:
   - name: Userinfo Endpoint
 
 paths:
-  /accesstoken/get:
-    post:
-      tags:
-        - Authorization Service
-      summary: Fetch authorization token
-      operationId: getAccessToken
-      description: >-
-        The access token endpoint is used to get the JWT (JSON Web Token) that
-        must be passed in every API request in the Authorization header.
-        The access token is a base64-encoded string value that must be
-        acquired first before making any Vipps API calls.
-        The access token is valid for 1 hour in the test environment
-        and 24 hours in the production environment.
-      parameters:
-        - name: client_id
-          in: header
-          required: true
-          description: >-
-            The `client_id` is available on portal.vipps.no, under the 'Utvikler' tab.
-          schema:
-            type: string
-          example: fb492b5e-7907-4d83-ba20-c7fb60ca35de
-        - name: client_secret
-          in: header
-          required: true
-          description: >-
-            The `client_secret` is available on portal.vipps.no, under the 'Utvikler' tab.
-            Keep it secret.
-          schema:
-            type: string
-          example: Y8Kteew6GE2ZmeycEt6egg==
-        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
-        - $ref: "#/components/parameters/Vipps-System-Name"
-        - $ref: "#/components/parameters/Vipps-System-Version"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
-        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AccessTokenResponse"
-        default:
-          $ref: '#/components/responses/ErrorResponseV2'
-
   /recurring/v2/agreements:
     get:
       tags:
@@ -3225,31 +3179,6 @@ components:
           type: object
           additionalProperties:
             type: object
-
-    AccessTokenResponse:
-      type: object
-      properties:
-        token_type:
-          type: string
-          example: Bearer
-        expires_in:
-          type: string
-          example: "3600"
-        ext_expires_in:
-          type: string
-          example: "3600"
-        expires_on:
-          type: string
-          example: "1569831424"
-        not_before:
-          type: string
-          example: "1569827524"
-        resource:
-          type: string
-          example: 00000003-0000-0000-d000-000000000000
-        access_token:
-          type: string
-          example: "aGFoYWhhaGFoYWhhaGFoYWhoYWhhYWhhaGEK..."
 
   responses:
     ErrorResponseV2:
