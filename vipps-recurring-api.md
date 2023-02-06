@@ -158,7 +158,7 @@ the sale unit must be configured for this by Vipps.
 For more details, see
 [Common topics: Reserve and capture](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/reserve-and-capture).
 
-**Note:** Vipps will *only* perform a payment transaction on an agreement that
+**Please note:** Vipps will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 You can also [manage charges and agreements](#manage-charges-and-agreements).
 
@@ -173,7 +173,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
    See [Initial charge](#initial-charge).
 3. Retrieve the agreement by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
-   **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
+   **Please note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. All future charges can be created by using the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
    For direct capture you must set `"transactionType": "DIRECT_CAPTURE"`.
    See [Create a charge](#create-a-charge).
@@ -184,7 +184,7 @@ For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 ### Reserve capture
 
-**Note:** Reserve capture on recurring charges is available in the recurring API v3.
+**Please note:** Reserve capture on recurring charges is available in the recurring API v3.
 In the API V2, reserve capture is only available on initial charges.
 
 For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
@@ -196,7 +196,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
    See [Initial charge](#initial-charge).
 3. Retrieve the agreement by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
    See [Retrieve an agreement](#retrieve-an-agreement).
-   **Note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
+   **Please note:** At this point the agreement will be `ACTIVE` if the user completed step 2.
 4. All future charges can be created by using the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
    For reserve capture you must set `"transactionType": "RESERVE_CAPTURE"`.
    See [Create a charge](#create-a-charge).
@@ -340,7 +340,7 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 }
 ```
 
-**Note:** To create agreements with support for variable amounts on charges, see
+**Please note:** To create agreements with support for variable amounts on charges, see
 [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount).
 
 The request parameters have the following size limits
@@ -376,7 +376,7 @@ See
 from Common topics, for more details about the landing page.
 
 
-**Note:** If payment should be required to activate an agreement, you need to specify an initial charge.
+**Please note:** If payment should be required to activate an agreement, you need to specify an initial charge.
 If you are dealing with physical goods, this should be a RESERVE_CAPTURE, but for digital goods where the customer instantly gains access, DIRECT_CAPTURE might be easier to manage.
 See [Initial charge](#initial-charge).
 
@@ -763,13 +763,13 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 | `eventDate` | The date of the event marking the end of the campaign     |
 | `eventText` | The event text to display to the end user                 |
 
-**Note:** We recommend to start the event text with lowercase for better user experience. See example below.
+**Please note:** We recommend to start the event text with lowercase for better user experience. See example below.
 
 ![screen-event-campaign](images/campaigns/screens/event-campaign.png)
 
 ##### Full flex campaign
 
-**Note:** Contact Vipps before creating a draft agreement with a full flex campaign.
+**Please note:** Contact Vipps before creating a draft agreement with a full flex campaign.
 See [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
 
 ![full-flex-campaign](images/campaigns/full-flex-campaign.png)
@@ -863,8 +863,11 @@ _due_ is the 27th (25+2). This is so that the user can be informed about the
 upcoming charge. The user is only shown one charge per agreement, in order to
 not overwhelm the user when doing daily or weekly charges.
 
-**Note**: You can request to be put on a "one day minimum" allow list if you have a need to be able to create charges that are DUE 1 day after being created. This means that a charge can be created to be DUE the next day.
-Example: If the charge is _created_ at any time on the 25th, the charge can be due and processed at the 26th.
+**Please note**: You can request to be put on a "one day minimum" allow list if
+you have a need to be able to create charges that are `DUE` 1 day after being
+created. This means that a charge can be created to be `DUE` the next day.
+Example: If the charge is _created_ at any time on the 25th, the charge can be
+due and processed at the 26th.
 
 #### Amount
 
@@ -872,7 +875,7 @@ Example: If the charge is _created_ at any time on the 25th, the charge can be d
 #### Charge type
 
 A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
-**Note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api.
+**Please note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api.
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
@@ -889,7 +892,7 @@ The advantage to using reserve capture is that you can release the reservation i
 ### Capture a charge
 
 Capture payment allows the merchant to capture the reserved amount of a charge.
-The API allows for both a full amount capture and a partial amount capture (**V3 api only**)
+The API allows for both a full amount capture and a partial amount capture (**V3 API only**)
 
 The amount to capture cannot be higher than the reserved amount.
 According to Norwegian regulations, capture cannot be done before the goods have been shipped.
@@ -897,13 +900,14 @@ The `description` text is mandatory and is displayed to the end user in the Vipp
 
 Capture is done with the [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] endpoint.
 
-**Please note:** It is important to check the response of the /capture call. The capture is only successful when the response is `HTTP 204 No Content`.
+**Please note:** It is important to check the response of the `/capture` call.
+The capture is only successful when the response is `HTTP 204 No Content`.
 
 Capture can be made up to 180 days after reservation. Attempting to capture an older payment will result in `HTTP 400 Bad Request`.
 
 ### Partial capture
 
-**V3 api only**
+**V3 API only:**
 Partial capture may be used in cases where a partial order is shipped or for other reasons.
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
@@ -924,7 +928,7 @@ For example, in the agreement
 a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
 hindrance the agreement `price` can be [updated](#update-an-agreement).
 
-**Note:** Although it is _technically_ possible to increase the price 10
+**Please note:** Although it is _technically_ possible to increase the price 10
 times, we **strongly** recommend to be as user-friendly as possible, and
 to make sure the user understands any changes and get updated information.
 
@@ -956,14 +960,14 @@ This is an example of a request body for the [`POST:/agreements/{agreementId}/ch
 }
 ```
 
-**Note:** `description` cannot be longer than 45 characters.
+**Please note:** `description` cannot be longer than 45 characters.
 
 ### Cancel a charge
 
-You can cancel charges that are in the `pending`, `due` or `reserved` state.
+You can cancel charges that are in the `PENDING`, `DUE` or `RESERVED` state.
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
 
-**Note:** If you cancel an agreement, there is no need to cancel the charges that belong to the agreement. This will be done automatically by Vipps.
+**Please note:** If you cancel an agreement, there is no need to cancel the charges that belong to the agreement. This will be done automatically by Vipps.
 
 A charge can be cancelled with the [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] endpoint.
 
@@ -975,32 +979,38 @@ The processing of charges typically takes around one hour, however this varies, 
 This is the same both for our production and test environment.
 Subsequent attempts are made according to the `retryDays` specified.
 
-**Note:** Payments _might_ get processed any time during the day
-(07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
-
-**Note:** Since payments _can_ be processed any time (07:00UTC - 23:59 UTC) it is advisable to fetch the charge at/after 00:00 UTC the day after the last retry day to be sure you get the last status.
-
 When a charge has reached its `due` date, the status of the charge will be
 `DUE` until the charge is successful, for as long as the merchant has
-specified with `retryDays`.
+specified with `retryDays`. On other words: There are no status updates
+while Vipps is attempting to charge.
 
 **Important:** Vipps does not "leak" the customers' information about insufficient funds,
 blocked cards, etc. Users are informed about all such problems in Vipps,
 which is the only place they can be corrected. The merchant's customer service
 should always ask the user to check in Vipps if a charge has failed.
 
+**Please note:** Payments _might_ get processed any time during the day
+(07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
+
+**Please note:** Since payments _can_ be processed any time (07:00UTC - 23:59 UTC)
+it is advisable to fetch the charge at/after 00:00 UTC the day after the last
+retry day to be sure you get the last status.
+
 ### Charge retries
 
 Vipps will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
 
-Retry days are not tied to the agreement’s interval. This means that a charge can be retried for a maximum of 14 days even though the next interval has started. For example, an agreement with daily interval can have a charge retried for multiple days, and it is possible to create new daily charges while others are still retrying.
+Retry days are not tied to the agreement’s interval. This means that a charge
+can be retried for a maximum of 14 days even though the next interval has started.
+For example, an agreement with daily interval can have a charge retried for
+multiple days, and it is possible to create new daily charges while others are
+still retrying.
 
 The status of a charge will be `DUE` while Vipps is taking care of business,
 from the `due` date until the charge has succeeded, or until the
 `retryDays` have passed without a successful charge.
 The final status will be `CHARGED` or `FAILED`.
-See the API documentation for more details.
 
 See: [Charge states](#charge-states).
 
@@ -1067,7 +1077,7 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 ````
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
-will soon be replaced by an event log. Subscribe to the technical newsletter
+will be replaced by an event log. Subscribe to the technical newsletter
 to get updates: [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 See more about [charge failure reason](#charge-failure-reasons).
@@ -1197,7 +1207,7 @@ depending on your systems.
 ## Charge failure reasons
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
-will soon be replaced by an event log. Subscribe to the technical newsletter
+will be replaced by an event log. Subscribe to the technical newsletter
 to get updates: [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
 
 When fetching a charge through the API, you can find two fields in the response
@@ -1402,7 +1412,7 @@ The user clicks on "maksbeløp" (max amount) and opens the list of auto generate
 The text above the list explains that the merchant recommends the user to set their max amount to 5 000 kr.
 The user proceeds with 5 000 kr and accepts the agreement.
 
-**Note:** The auto generated list is based on the `suggestedMaxAmount` and can not be changed by the merchant individually.
+**Please note:** The auto generated list is based on the `suggestedMaxAmount` and can not be changed by the merchant individually.
 It will however change if `suggestedMaxAmount` changes, which can be done in the `PATCH agreement` endpoint.
 
 Accepting agreement in Vipps:
@@ -1452,7 +1462,7 @@ It's possible to change the suggestedMaxAmount on the agreement by calling the u
 }
 ```
 
-**Note:** The user will not be alerted by this change by Vipps.
+**Please note:** The user will not be alerted by this change by Vipps.
 
 ### Create charge
 
@@ -1612,14 +1622,14 @@ When a charge fails to be processed, we send the user a push notification lettin
 This push message is sent every time we try to process the charge, see [charge times](#charge-times) for when the processing of charges happen.
 More information about how and when we send push notifications can be found in the [FAQ](vipps-recurring-api-faq.md#when-do-users-get-push-messages).
 
-**Note:** We send push notification for failed payments regardless if `Notification upon payment` is toggled on or off on the agreement.
+**Please note:** We send push notification for failed payments regardless if `Notification upon payment` is toggled on or off on the agreement.
 This toggle only determine if the user will get notified when a charge is successfully charged.
 
 In addition to sending push notifications, a failure texts is also set on the charge.
 By letting the customer know why the charge failed we enable them to fix the underlying issue before the "retryDays" are over.
 For more information about what the failure texts are, see the  [FAQ](vipps-recurring-api-faq.md#what-is-shown-to-users-when-charge-processing-fails).
 
-**Note:** These exact reasons why the charge fails is not shown in the recurring API, only to the customers (users).
+**Please note:** These exact reasons why the charge fails is not shown in the recurring API, only to the customers (users).
 See the [merchant charge failure reason](#Charge-failure-reasons) for an overview of what is available in the merchant API.
 
 ## Timeouts
@@ -1683,7 +1693,7 @@ See [Campaigns](#campaigns) and [How it works: Campaigns](./how-it-works/vipps-r
 
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
 
-**Note:** Campaign is not supported for `variableAmount` agreements.
+**Please note:** Campaign is not supported for `variableAmount` agreements.
 
 ### Agreement with initial charge and campaign
 
