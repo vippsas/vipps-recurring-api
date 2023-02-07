@@ -283,7 +283,7 @@ When you create an agreement with a reserved charge, you will need to capture th
 5. Send `Get Charge` again, to see that the status is now "CHARGED".
 
 
-[list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring/#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
+[list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [agreement-endpoints]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints
 [fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
