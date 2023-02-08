@@ -296,6 +296,6 @@ When you create an agreement with a reserved charge, you will need to capture th
 [cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
 [capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
-[userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo
+[userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/userinfo#operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
 [vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment
