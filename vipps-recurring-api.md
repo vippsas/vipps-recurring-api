@@ -1253,12 +1253,12 @@ The user gets more information in Vipps regarding why the Charge did not get cha
 Vipps offers the possibility for merchants to ask for the user's profile information as part of the payment flow.
 
 To enable the possibility to fetch profile information for a user the merchant can add a
-[`scope`](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo#scope)
+[`scope`](https://vippsas.github.io/vipps-developer-docs/docs/APIs/userinfo-api#scope)
 parameter to the [`POST:/agreements`][draft-agreement-endpoint] call.
 
-See
-[User information](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo)
-in the Common topics for details.
+See the
+[Userinfo API guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/userinfo-api)
+for details.
 
 ### Userinfo call by call guide
 
@@ -1344,15 +1344,9 @@ This endpoint returns the payload with the information that the user has consent
 
 Call the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier.
 
-See
-[Userinfo call](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo#userinfo-call)
-in Common topics for details.
-
-### Consent
-
-See
-[Consent](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/userinfo#consent)
-in Common topics for details.
+See the
+[Userinfo call](https://vippsas.github.io/vipps-developer-docs/docs/APIs/userinfo-api#userinfo-call)
+for details.
 
 ## Recurring agreements with variable amount
 
@@ -1719,6 +1713,6 @@ In addition to campaigns and initial charges being available as individual flows
 [cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
 [capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
-[userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Userinfo-Endpoint/operation/getUserinfo
+[userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo
 [access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
 [vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment
