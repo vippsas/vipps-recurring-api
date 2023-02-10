@@ -2965,7 +2965,7 @@ components:
               text:
                 type: string
                 description: Details for the error of a specific field
-                example: must not be empt
+                example: must not be empty
   responses:
     ErrorResponseV2:
       description: |-
