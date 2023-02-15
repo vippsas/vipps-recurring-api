@@ -27,25 +27,36 @@ The overall flow is:
 * If the agreement is active, Vipps authorizes the charge.
 * The customer can find a full overview in Vipps, including a link to the merchant's website.
 
-To get access to the Recurring API in production, order Vipps "Faste Betalinger" (_recurring payments_) on
+See
+[How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
+for details.
+
+**Important:** The Vipps Recurring API requires additional compliance checks
+(more than what is required for the
+[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api)),
+as required by
+[Finanstilsynet](https://www.finanstilsynet.no) (the financial authorities).
+
+To get access to the Recurring API in production, please order "Vipps Faste Betalinger"
+(_recurring payments_) on
 [portal.vipps.no](https://portal.vipps.no).
+It is the same order form as "Vipps på Nett"
+([Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api)).
+You will then get a new sale unit (MSN) that can be used for recurring payments.
 
-**IMPORTANT:** Before activating recurring payments for you,
-Vipps must perform some extra Know Your Customer (KYC) checks, as required by [Finanstilsynet](https://www.finanstilsynet.no).
-You will also need to set up a direct agreement for use of "Vipps på Nett" ([Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api)).
+If you need to use an existing sale unit that already has access to the eCom API
+for the Recurring API too, please contact your KAM or
+[customer service](https://vipps.no/kontakt-oss/). Please have this information ready:
+* Estimated total annual turnover for the sale unit. Example: 100 MNOK.
+* Percentage of the payment volume that will be through recurring payments. Example: 50 MNOK.
+* The length of the agreements. Example: Annual and monthly.
+* The distribution (in %) of the lengths. Example: 80 % annual, 20 % monthly
+Varighet på abonnementene og fordelingen av disse (f.eks. 80% årlig betaling, 20% månedlig)
 
-As a merchant, you can check if you have access to recurring payments through [portal.vipps.no](https://portal.vipps.no).
+**Please note:** As a merchant, you can check if you have access to recurring payments through
+[portal.vipps.no](https://portal.vipps.no).
 Partners can check if a merchant has access to recurring payments through the
 [Vipps Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sale-unit-based-on-msn).
-
-See a detailed example of [how it works](./how-it-works/vipps-login-recurring-howitworks.md).
-
-See also:
-
-* [OpenAPI Reference](https://vippsas.github.io/vipps-developer-docs/api/recurring)
-* [Quick start guide](vipps-recurring-api-quick-start.md)
-* [Integration checklist](vipps-recurring-api-checklist.md)
-* [FAQ](vipps-recurring-api-faq.md)
 
 API version: 3.0.0.
 
