@@ -19,17 +19,7 @@ to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
-The overall flow is:
-
-1. The merchant creates a draft agreement and proposes it to the customer via Vipps.
-2. The customer approves the agreement in Vipps.
-3. The merchant sends a charge request to Vipps at least two days before due date
-4. If the agreement is active, Vipps authorizes the charge.
-5. The customer can find a full overview in Vipps, including a link to the merchant's website.
-
-See the
-[How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
-guides for details.
+## Requirements
 
 **Important:** The Vipps Recurring API requires additional compliance checks
 (more than what is required for the
@@ -51,12 +41,11 @@ for the Recurring API too, please contact your KAM or
 * Percentage of the payment volume that will be through recurring payments. Example: 50 MNOK.
 * The length of the agreements. Example: Annual and monthly.
 * The distribution (in %) of the lengths. Example: 80 % annual, 20 % monthly
-Varighet på abonnementene og fordelingen av disse (f.eks. 80% årlig betaling, 20% månedlig)
 
-**Please note:** As a merchant, you can check if you have access to recurring payments through
-[portal.vipps.no](https://portal.vipps.no).
-Partners can check if a merchant has access to recurring payments through the
-[Vipps Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sale-unit-based-on-msn).
+**Please note:** You can check if you have access to the Recurring API:
+* As a merchant: Check your sale unit(a) on [portal.vipps.no](https://portal.vipps.no).
+* As a partner: Check the sale unit(s) with the
+  [Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sale-unit-based-on-msn).
 
 API version: 3.0.0.
 
@@ -68,7 +57,19 @@ API version: 3.0.0.
 | Charge      | A single payment within an agreement.                                                                        |
 | Idempotency | The property of endpoints to be called multiple times without changing the result after the initial request. |
 
-## Flow diagram
+## Flow
+
+The overall flow is:
+
+1. The merchant creates a draft agreement and proposes it to the customer via Vipps.
+2. The customer approves the agreement in Vipps.
+3. The merchant sends a charge request to Vipps at least two days before due date
+4. If the agreement is active, Vipps authorizes the charge.
+5. The customer can find a full overview in Vipps, including a link to the merchant's website.
+
+See the
+[How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
+guides for details.
 
 This diagram shows a simplified payment flow:
 
