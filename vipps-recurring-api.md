@@ -21,15 +21,15 @@ that will be automatically processed on the due date.
 
 The overall flow is:
 
-* The merchant creates a draft agreement and proposes it to the customer via Vipps.
-* The customer approves the agreement in Vipps.
-* The merchant sends a charge request to Vipps at least two days before due date
-* If the agreement is active, Vipps authorizes the charge.
-* The customer can find a full overview in Vipps, including a link to the merchant's website.
+1. The merchant creates a draft agreement and proposes it to the customer via Vipps.
+2. The customer approves the agreement in Vipps.
+3. The merchant sends a charge request to Vipps at least two days before due date
+4. If the agreement is active, Vipps authorizes the charge.
+5. The customer can find a full overview in Vipps, including a link to the merchant's website.
 
-See
+See the
 [How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
-for details.
+guides for details.
 
 **Important:** The Vipps Recurring API requires additional compliance checks
 (more than what is required for the
