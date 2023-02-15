@@ -23,15 +23,13 @@ This allows your customers to pay subscriptions, donate, or make other recurring
 Information about this product in Norwegian, see
 [Faste betalinger med Vipps](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
-**IMPORTANT:** The Vipps Recurring API is available for existing customers that
-have "Vipps på Nett", a direct integration with the
-[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api),
-and have completed some additional KYC checks required by Finanstilsynet.
-Vipps is required to perform some extra compliance checks before
-activating the Vipps Recurring API.
-please order “Vipps Faste betalinger" on
-[portal.vipps.no](https://portal.vipps.no)
-to get access to the Recurring API in production.
+**IMPORTANT:** The Vipps Recurring API is available for customers that
+have "Vipps på Nett"
+([Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api))
+and have completed additional compliance checks.
+See the intro to the
+[API guide](vipps-recurring-api.md)
+for details.
 
 ## How it works
 
