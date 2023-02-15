@@ -969,7 +969,15 @@ If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the 
 
 **Please note:** If you cancel an agreement, there is no need to cancel the charges that belong to the agreement. This will be done automatically by Vipps.
 
-A charge can be cancelled with the [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] endpoint.
+A charge can be cancelled with the
+[`POST:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
+endpoint.
+
+### Refund a charge
+
+A charge can be refunded with the
+[`POST:/agreements/{agreementId}/charges/{chargeId}/refund][refund-charge-endpoint]
+endpoint.
 
 ### Charge times
 
@@ -1711,6 +1719,7 @@ In addition to campaigns and initial charges being available as individual flows
 [create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
 [fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
 [cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
+[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
 [refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/userinfo#operation/getUserinfo
