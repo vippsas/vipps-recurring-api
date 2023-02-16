@@ -4,14 +4,14 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-  version: 2.6.14
+  version: 2.6.15
   title: Recurring Payments Merchant API
 
 servers:
   - url: https://api.vipps.no
-    description: Production environment
+    description: Production environment (uses the production API keys, the official app and live data)
   - url: https://apitest.vipps.no
-    description: Merchant Test environment
+    description: Test environment (uses the test API keys, the test app and test data)
 
 tags:
   - name: Agreement v2 endpoints
