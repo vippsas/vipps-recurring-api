@@ -92,8 +92,8 @@ paths:
                   currency: NOK
                   interval: MONTH
                   intervalCount: 1
-                  merchantRedirectUrl: https://merchant.redirect.url.no
-                  merchantAgreementUrl: https://merchant.agreement.url.no
+                  merchantRedirectUrl: https://example.com/redirect
+                  merchantAgreementUrl: https://example.com/agreement
                   customerPhoneNumber: '45678272'
                   price: 2500
                   productDescription: MyNews on web
@@ -1445,7 +1445,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/vipps-subscriptions/1234/
+          example: https://example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
           maxLength: 1024
@@ -1521,14 +1521,14 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/agreement
+          example: https://example.com/agreement
         merchantRedirectUrl:
           type: string
           maxLength: 1024
           description: |-
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application.
-          example: https://www.example.com/redirect
+          example: https://example.com/redirect
         productName:
           type: string
           description: Product name (short)
@@ -1688,7 +1688,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/agreement
+          example: https://example.com/agreement
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
@@ -1752,7 +1752,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/agreement
+          example: https://example.com/agreement
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
@@ -1808,7 +1808,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/agreement
+          example: https://example.com/agreement
         status:
           type: string
           example: STOPPED
@@ -1836,7 +1836,7 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             We recommend letting users log in with Vipps, not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://www.example.com/agreement
+          example: https://example.com/agreement
         status:
           type: string
           example: STOPPED

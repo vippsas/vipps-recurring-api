@@ -1048,7 +1048,7 @@ The following properties are available for updating:
 {
   "productName": "A new name",
   "productDescription": "A new description",
-  "merchantAgreementUrl": "https://www.example.com/vipps-subscriptions/1234/",
+  "merchantAgreementUrl": "https://example.com/vipps-subscriptions/1234/",
   "pricing": {
     "amount": 25000,
     "suggestedMaxAmount": 300000
