@@ -1452,7 +1452,7 @@ components:
           description: |-
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application.
-          example: https://api.example.com/vipps-landing
+          example: https://example.com/vipps-landing
         price:
           type: integer
           format: int32
