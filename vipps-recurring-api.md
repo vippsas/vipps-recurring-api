@@ -394,6 +394,8 @@ the `merchantRedirectUrl` will not be used. It is therefore important that you
 actively check the payment with the
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
 
+**Please note:** Activation of the agreement is not guaranteed to be finished by the time the user is redirected back to the `merchantRedirectUrl`. The agreement could stil have the status `PENDING`, so it is important to continue to poll the status of the agreement until a final status is returned by the API.
+
 ### Merchant agreement URL
 
 The `merchantAgreementUrl` is a link to the customer's account page on your website, where they
