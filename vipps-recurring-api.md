@@ -739,7 +739,7 @@ processed, the agreement status will change to `ACTIVE`.
 
 The approved agreement is retrieved from the
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint
-with `"status":"ACTIVE"` when the customer has approved the agreement.
+with `"status":"ACTIVE"` when the customer has approved the agreement. It is important to keep retrieving the agreement until the status is `ACTIVE`, `STOPPED` or `EXPIRED`.
 
 See [Agreement states](#agreement-states).
 
