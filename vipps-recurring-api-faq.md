@@ -56,7 +56,7 @@ guide.
   - [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
   - [How can I delete an agreement?](#how-can-i-delete-an-agreement)
   - [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
-  - [How can I move agreements between merchants and sale units?](#how-can-i-move-agreements-between-merchants-and-sale-units)
+  - [How can I move agreements between merchants and sales units?](#how-can-i-move-agreements-between-merchants-and-sales-units)
 - [Common problems/errors](#common-problemserrors)
   - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
   - [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
@@ -262,21 +262,21 @@ This can add more complexity than Vipps can present in a good way, and our
 approach is therefore to send the user to the merchant for managing the
 Agreement.
 
-### How can I move agreements between merchants and sale units?
+### How can I move agreements between merchants and sales units?
 
 **Please note:** We are working out the details for this process, please contact
 us if you need help with this.
 
 Merchants sometimes need to move customer agreements from one merchant
-to another, or from one sale unit to another.
+to another, or from one sales unit to another.
 
 Clarification of terms:
 
 * Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
-* Sale unit: A merchant can have one or more sale units. It may be different
+* Sales unit: A merchant can have one or more sales units. It may be different
   brands, different physical locations, different services, etc.
-* MSN: The unique id of a sale unit.
-  MSN is short for "Merchant Serial Number", but (sadly) identifies a sale unit, not a merchant.
+* MSN: The unique id of a sales unit.
+  MSN is short for "Merchant Serial Number", but (sadly) identifies a sales unit, not a merchant.
 
 First of all: A merchant very rarely "changes organization number".
 That only occurs in special cases.
@@ -326,8 +326,8 @@ The general process is:
 - Send a confirmation to avtale@vipps.no that all customers have been informed,
   including a copy of the information sent.
 - Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
-  - Vippsnummer of the sale unit the agreements should be migrated from and to
-  - A decision on how to handle existing agreements in the new sale unit (in case you have started using it)
+  - Vippsnummer of the sales unit the agreements should be migrated from and to
+  - A decision on how to handle existing agreements in the new sales unit (in case you have started using it)
   - Final confirmation of date and time for migration.
 - After the migration is performed, you will get a file that maps from old to new agreement id
   - this is a csv where each line is an agreement, and the columns are old id and new id
@@ -338,10 +338,10 @@ Som en følge av dette vil det ikke være mulig for dere å se eller gjøre noe 
 Avtalene i den gamle salgsenheten vil bli stoppet, og det vil ikke være mulig å lage nye trekk på dem.
 OBS; vi anbefaler å ta vare på alle avtaleIder en kunde noen gang har vært tilknyttet, slik at dere har mulighet til å finne tilbake til tidligere avtaler osv. Vi vet at mange kun tar vare på "nyeste", og dermed ikke har mulighet til å finne ut om en kunde kan ha flere aktive avtaler osv. :sweat_smile:
 
-><b>NOTE:</b> Agreements are not actually moved. Your new sale unit will get new agreements
+><b>NOTE:</b> Agreements are not actually moved. Your new sales unit will get new agreements
 identical to the old ones, but with new agreementIds. The old agreements will
 be stopped. This means the user will still be able to see the old agreement in the app, under "Stopped agreements".
-<br/>This is done because the underlying payments are tied to the sale unit, so the new sale unit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
+<br/>This is done because the underlying payments are tied to the sales unit, so the new sales unit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
 <br/>Charges done by the old MSN are in the old agreement,
 while the new MSN uses only the new agreement. The name of the new org will have the new juridical name. Sales unit name can be the same.
 
@@ -360,7 +360,7 @@ agreements, it will no longer be possible to:
 ### Why do I get the error `merchant.not.allowed.for.recurring.operation`?
 
 The `merchant.not.allowed.for.recurring.operation` error indicates
-that the Vipps Recurring API is not yet activated for this sale unit.
+that the Vipps Recurring API is not yet activated for this sales unit.
 
 The Vipps Recurring API is available for existing customers that
 have "Vipps på Nett", a direct integration with the

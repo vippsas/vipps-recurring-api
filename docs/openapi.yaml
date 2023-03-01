@@ -1149,7 +1149,7 @@ components:
       name: Merchant-Serial-Number
       in: header
       description: |-
-        The Merchant Serial Number (MSN) is a unique id for the sale unit
+        The Merchant Serial Number (MSN) is a unique id for the sales unit
         that this payment is made for.
         This is a required parameter if you are a Vipps Recurring partner
         making payments on behalf of a merchant.
@@ -1480,7 +1480,7 @@ components:
           type: boolean
           description: |-
             If the property is set to `true`, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
-            This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps. If the sale unit is not whitelisted,
+            This feature has to be specially enabled by Vipps for eligible sales units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
           example: false
 
@@ -1546,7 +1546,7 @@ components:
           type: boolean
           description: |-
             If the property is set to `true`, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
-            This feature has to be specially enabled by Vipps for eligible sale units: The sale units must be whitelisted by Vipps. If the sale unit is not whitelisted,
+            This feature has to be specially enabled by Vipps for eligible sales units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
           example: false
 

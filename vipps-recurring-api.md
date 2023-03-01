@@ -32,20 +32,20 @@ To get access to the Recurring API in production, please order "Vipps Faste Beta
 [portal.vipps.no](https://portal.vipps.no).
 It is the same order form as "Vipps på Nett"
 ([Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api)).
-You will then get a new sale unit (MSN) that can be used for recurring payments.
+You will then get a new sales unit (MSN) that can be used for recurring payments.
 
-If you need to use an existing sale unit that already has access to the eCom API
+If you need to use an existing sales unit that already has access to the eCom API
 for the Recurring API too, please contact your KAM or
 [customer service](https://vipps.no/kontakt-oss/). Please have this information ready:
-* Estimated total annual turnover for the sale unit. Example: 100 MNOK.
+* Estimated total annual turnover for the sales unit. Example: 100 MNOK.
 * Percentage of the payment volume that will be through recurring payments. Example: 50 MNOK.
 * The length of the agreements. Example: Annual and monthly.
 * The distribution (in %) of the lengths. Example: 80 % annual, 20 % monthly
 
 **Please note:** You can check if you have access to the Recurring API:
-* As a merchant: Check your sale unit(a) on [portal.vipps.no](https://portal.vipps.no).
-* As a partner: Check the sale unit(s) with the
-  [Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sale-unit-based-on-msn).
+* As a merchant: Check your sales unit(s) on [portal.vipps.no](https://portal.vipps.no).
+* As a partner: Check the sales unit(s) with the
+  [Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sales-unit-based-on-msn).
 
 API version: 3.0.0.
 
@@ -77,10 +77,10 @@ This diagram shows a simplified payment flow:
 
 ## Call by call guide
 
-There are two happy-flows based on how the sale unit is set up:
+There are two happy-flows based on how the sales unit is set up:
 One for "direct capture" and one for "reserve capture".
 This is specified with the `transactionType`, and for "direct capture"
-the sale unit must be configured for this by Vipps.
+the sales unit must be configured for this by Vipps.
 
 For more details, see
 [Common topics: Reserve and capture](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/reserve-and-capture).
@@ -236,8 +236,8 @@ format than `123456`.
 Leading zeros should be avoided, as some applications (like Excel)
 tend to remove them, and this may cause misunderstandings.
 
-With multiple sale units, prefixing the `orderId` with the MSN
-for each sale unit is recommended: If the MSN is `654321`, the
+With multiple sales units, prefixing the `orderId` with the MSN
+for each sales unit is recommended: If the MSN is `654321`, the
 `orderId` values could start at `654321000000000001` and increment by 1
 for each order, or some similar, unique and readable pattern.
 
@@ -1427,7 +1427,7 @@ If the `skipLandingPage` property is set to `true` in the
 call, it will cause a push notification to be sent to the given phone number
 immediately, without loading the landing page.
 
-If the sale unit is not whitelisted, the request will fail and an error message will be returned.
+If the sales unit is not whitelisted, the request will fail and an error message will be returned.
 
 ## HTTP responses
 
