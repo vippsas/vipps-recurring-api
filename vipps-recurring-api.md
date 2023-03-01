@@ -43,7 +43,7 @@ for the Recurring API too, please contact your KAM or
 * The distribution (in %) of the lengths. Example: 80 % annual, 20 % monthly
 
 **Please note:** You can check if you have access to the Recurring API:
-* As a merchant: Check your sales unit(a) on [portal.vipps.no](https://portal.vipps.no).
+* As a merchant: Check your sales unit(s) on [portal.vipps.no](https://portal.vipps.no).
 * As a partner: Check the sales unit(s) with the
   [Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sales-unit-based-on-msn).
 
