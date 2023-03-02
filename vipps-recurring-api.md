@@ -1068,8 +1068,7 @@ in a `400 Bad Request` response.
 
 ### Pause an agreement
 
-If there should be a pause in an agreement, like a temporary stop of a
-subscription: Simply do not create any charges during the pause.
+Today unfortunately we do not have a pause/freeze status. This is something we are looking into. If there should be a pause in an agreement, like a temporary stop of a subscription: Simply do not create any charges during the pause. We recommend to use Agreement Description to communicate to the user that the agreement is paused/freezed.
 
 We recommended not to set the agreement status to `STOPPED`. `STOPPED` agreements cannot be reactivated.
 
