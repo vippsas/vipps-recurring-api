@@ -38,6 +38,11 @@ API version: 3.0.0.
   - [Charge capture failed](#charge-capture-failed)
   - [Missing request header](#missing-request-header)
   - [Invalid sales unit](#invalid-sales-unit)
+  - [Resource not found](#resource-not-found)
+  - [Operation failed](#operation-failed)
+  - [Conflict](#conflict)
+  - [Idempotency conflict](#idempotency-conflict)
+  - [Invalid method](#invalid-method)
 
 
 <!-- END_COMMENT -->
@@ -123,3 +128,18 @@ Missing headers. See [API specs](https://vippsas.github.io/vipps-developer-docs/
 The Sales unit is not allowed to use Recurring.
 
 [update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+
+### Resource not found
+The specified resource was not found. See details for additional information.
+
+### Operation failed
+The requested operation could not be performed. See details for additional information.
+
+### Conflict
+The requested operation could not be performed due to a conflicting request/state. See details for additional information.
+
+### Idempotency conflict
+The specified idempotency-key has previously been used in a different context. See details for additional information.
+
+### Invalid method
+The method used for the request is not permitted for this endpoint.
