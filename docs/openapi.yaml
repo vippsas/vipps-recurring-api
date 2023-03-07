@@ -1130,7 +1130,7 @@ components:
         Key must not contain '#', '?', '/' or '\\'
       required: true
       schema:
-        $ref: '#/components/schemas/IdempotencyKeyFormat'
+        type: string
 
     Continuation-Token:
       in: header
@@ -1241,12 +1241,6 @@ components:
       bearerFormat: JWT
 
   schemas:
-    IdempotencyKeyFormat:
-      type: string
-      maxLength: 40
-      pattern: ^[a-zA-Z0-9]*$
-      example: kRk3uEeiogxLu1yGSZRlNgsIv3TuNS
-
     AgreementStatus:
       type: string
       description: Status of the agreement.
