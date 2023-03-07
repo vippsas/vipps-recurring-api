@@ -1127,6 +1127,7 @@ components:
       description: |-
         An Idempotency key must be provided to ensure idempotent requests.
         Key size can be between 1 to 40 characters.
+        Key must not contain '#', '?', '/' or '\\'
       required: true
       schema:
         $ref: '#/components/schemas/IdempotencyKeyFormat'
