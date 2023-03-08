@@ -659,7 +659,7 @@ paths:
             schema:
               $ref: '#/components/schemas/ForceAcceptAgreementV3'
       responses:
-        '200':
+        '204':
           description: OK
           content:
             application/json:
