@@ -34,12 +34,14 @@ for details.
 ## How it works
 
 * [How Vipps Recurring works](./how-it-works/vipps-recurring-api-howitworks.md): An overview of how the Recurring API works.
-* [How Recurring works with Vipps Login](./how-it-works/vipps-login-recurring-howitworks.md): Learn how you can use Login and Recurring together.
 * [How Recurring works with variable amount](./how-it-works/vipps-recurring-api-variable-howitworks.md): Learn about using variable amounts.
 * [How Recurring works with campaign](./how-it-works/vipps-recurring-api-campaigns-howitworks.md): Learn about using Recurring campaigns.
-* [How Recurring works with Vipps Login](./how-it-works/vipps-login-recurring-howitworks.md): Learn about using Recurring with Vipps login.
 * [Implementation inspiration](./how-it-works/vipps-recurring-api-inspiration-howitworks.md): Get inspiration for how to use Recurring.
 
+## Related solutions
+
+* [Simplifying registration and payment (Recurring with Login)](https://vippsas.github.io/vipps-developer-docs/docs/vipps-solutions/recurring-and-login)
+* [Parking and "Pay-as-you-go"](https://vippsas.github.io/vipps-developer-docs/docs/vipps-solutions/parking)
 
 ## Getting started
 
