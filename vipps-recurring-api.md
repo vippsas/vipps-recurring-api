@@ -1,16 +1,21 @@
 <!-- START_METADATA
 ---
-title: API guide
+title: Recurring API guide
+sidebar_label: API guide
 sidebar_position: 30
+description: Recurring API guide.
+pagination_prev: Null
+pagination_next: Null
 ---
 END_METADATA -->
 
 # API guide
 
+
 <!-- START_COMMENT -->
 
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 

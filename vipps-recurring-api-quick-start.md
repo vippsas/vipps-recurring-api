@@ -1,7 +1,11 @@
 <!-- START_METADATA
 ---
-title: Quick start
+title: Quick start for the Recurring API
+sidebar_label: Quick start
 sidebar_position: 20
+description: Quick start guide for the using the Recurring API with Postman.
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -13,19 +17,8 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 
 <!-- START_COMMENT -->
 
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-## Table of contents
-
-* [Postman](#postman)
-  * [Prerequisites](#prerequisites)
-  * [Step 1: Get the Vipps Postman collection and environment](#step-1-get-the-vipps-postman-collection-and-environment)
-  * [Step 2: Import the Vipps Postman files](#step-2-import-the-vipps-postman-files)
-  * [Step 3: Set up Postman environment](#step-3-setup-postman-environment)
-* [Make API calls](#make-api-calls)
-  * [Create agreements](#create-agreements)
-  * [Create charges](#create-charges)
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 

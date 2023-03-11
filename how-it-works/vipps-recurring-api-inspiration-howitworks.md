@@ -1,7 +1,11 @@
 <!-- START_METADATA
 ---
-title: "Inspiration"
+title: Implementation inspiration
+sidebar_label: Inspiration
 sidebar_position: 16
+description: Implementation inspiration
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -9,8 +13,8 @@ END_METADATA -->
 
 <!-- START_COMMENT -->
 
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 

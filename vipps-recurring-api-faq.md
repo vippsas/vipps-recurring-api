@@ -1,8 +1,11 @@
 <!-- START_METADATA
 ---
-title: FAQ
+title: Recurring API frequently asked questions
+sidebar_label: FAQ
 sidebar_position: 45
+description: Recurring API frequently asked questions
 pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -21,53 +24,8 @@ guide.
 
 <!-- START_COMMENT -->
 
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
-
-## Table of Contents
-
-- [Migration](#migration)
-  - [How do I migrate to the v3 API?](#how-do-i-migrate-to-the-v3-api)
-- [Charges/Payments](#chargespayments)
-  - [Do I need to store card data?](#do-i-need-to-store-card-data)
-  - [Does Vipps automatically create charges for an agreement?](#does-vipps-automatically-create-charges-for-an-agreement)
-  - [At what time during the day are charges processed?](#at-what-time-during-the-day-are-charges-processed)
-  - [When are charges processed?](#when-are-charges-processed)
-  - [I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)](#i-dont-want-a-charge-to-fail-the-first-time-the-transaction-fails-insufficient-funds--networking-issues-etc)
-  - [How can I require an initial payment from the user for setting up the agreement?](#how-can-i-require-an-initial-payment-from-the-user-for-setting-up-the-agreement)
-  - [Can the charge amount be different from the agreement price?](#can-the-charge-amount-be-different-from-the-agreement-price)
-  - [Are there any limits on charging a user?](#are-there-any-limits-on-charging-a-user)
-  - [When can I send charges to a user?](#when-can-i-send-charges-to-a-user)
-  - [A charge failed, but the customer did not receive any warning](#a-charge-failed-but-the-customer-did-not-receive-any-warning)
-  - [What happens to charges if the corresponding agreement is cancelled?](#what-happens-to-charges-if-the-corresponding-agreement-is-cancelled)
-  - [If a user's card expires: What happens on the next charge?](#if-a-users-card-expires-what-happens-on-the-next-charge)
-  - [What happens to pending charges if the user deletes the payment card?](#what-happens-to-pending-charges-if-the-user-deletes-the-payment-card)
-  - [How does a user see the charges I create?](#how-does-a-user-see-the-charges-i-create)
-  - [If a user adds or updates a card in vipps, will new recurring charges be made to that card?](#if-a-user-adds-or-updates-a-card-in-vipps-will-new-recurring-charges-be-made-to-that-card)
-  - [For how long is a payment reserved?](#for-how-long-is-a-payment-reserved)
-- [Variable amount](#variable-amount)
-  - [Can I decide the users suggested max amount list](#can-i-decide-the-users-suggested-max-amount-list)
-- [Agreements and users](#agreements-and-users)
-  - [Why do you allow drafting multiple agreements for the same user?](#why-do-you-allow-drafting-multiple-agreements-for-the-same-user)
-  - [How do I prevent drafting multiple agreements for the same user?](#how-do-i-prevent-drafting-multiple-agreements-for-the-same-user)
-  - [How do I check my customer's status?](#how-do-i-check-my-customers-status)
-  - [Can I look up a user's information?](#can-i-look-up-a-users-information)
-  - [Can I look up which user owns an agreement?](#can-i-look-up-which-user-owns-an-agreement)
-  - [How can I convert existing agreements to Vipps agreements?](#how-can-i-convert-existing-agreements-to-vipps-agreements)
-  - [How can I delete an agreement?](#how-can-i-delete-an-agreement)
-  - [Can a user cancel the agreement through the Vipps app?](#can-a-user-cancel-the-agreement-through-the-vipps-app)
-  - [How can I move agreements between merchants and sales units?](#how-can-i-move-agreements-between-merchants-and-sales-units)
-- [Common problems/errors](#common-problemserrors)
-  - [Why do I get the error `merchant.not.allowed.for.recurring.operation`?](#why-do-i-get-the-error-merchantnotallowedforrecurringoperation)
-  - [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user)
-- [Notifications and error messages](#notifications-and-error-messages)
-  - [When do users get push messages?](#when-do-users-get-push-messages)
-  - [What is shown to users when charge processing fails?](#what-is-shown-to-users-when-charge-processing-fails)
-- [Admin/partners](#adminpartners)
-  - [How can I change partners for a merchant?](#how-can-i-change-partners-for-a-merchant)
-  - [How can I change partner for my integration with Vipps?](#how-can-i-change-partner-for-my-integration-with-vipps)
-  - [Settlement](#settlement)
-  - [Invoicing](#invoicing)
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 

@@ -1,7 +1,11 @@
 <!-- START_METADATA
 ---
-title: "Initial charge"
+title: How Recurring works with initial charge
+sidebar_label: Initial charge
 sidebar_position: 12
+description: How Recurring works with initial charge
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -9,8 +13,8 @@ END_METADATA -->
 
 <!-- START_COMMENT -->
 
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 

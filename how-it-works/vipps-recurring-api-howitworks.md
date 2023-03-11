@@ -1,23 +1,27 @@
 <!-- START_METADATA
 ---
-title: "Vipps Recurring"
+title: How Recurring works
+sidebar_label: Campaign
 sidebar_position: 10
+description: How Recurring works
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
-# How Vipps Recurring works
+# How Recurring works
 
 <!-- START_COMMENT -->
 
-ℹ️ Please use the new documentation:
-[Vipps Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
 
 <!-- END_COMMENT -->
 
-Vipps Recurring can be used for subscriptions, donations or other recurring payments.
+Recurring can be used for subscriptions, donations or other recurring payments.
 
 For technical documentation go to:
-[Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
 ## The recurring payment process
 

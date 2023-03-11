@@ -1,13 +1,17 @@
 <!-- START_METADATA
 ---
-title: "Vipps Login"
+title: How Recurring works with the Login API
+sidebar_label: With the Login API
 sidebar_position: 15
+description: How Login works with the Login API.
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
-# How Recurring works with Vipps Login
+# How Recurring works with the Login API
 
-Vipps Login and Vipps Recurring can be used together making registration and payment simple for your customers.
+The recurring API and Login API can be used together making registration and payment simple for your customers.
 
 For the complete API documentation go to
 

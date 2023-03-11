@@ -1,8 +1,11 @@
 <!-- START_METADATA
 ---
 title: Problem types
+sidebar_label: Problem types
 sidebar_position: 90
+description: Problem types for the Recurring API can be found here.
 pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
@@ -17,33 +20,8 @@ API version: 3.0.0.
 
 <!-- START_COMMENT -->
 
-## Table of contents
-
-- [Problems](#problems)
-  - [Validation error](#validation-error)
-  - [Invalid agreement id](#invalid-agreement-id)
-  - [Invalid json](#invalid-json)
-  - [Unsupported media type](#unsupported-media-type)
-  - [Not authorized](#not-authorized)
-  - [Idempotency key header](#idempotency-key-header)
-  - [Charge amount too high](#charge-amount-too-high)
-  - [Charge amount too high for interval](#charge-amount-too-high-for-interval)
-  - [Charge due too soon](#charge-due-too-soon)
-  - [Charge due in too long](#charge-due-in-too-long)
-  - [Unsupported feature](#unsupported-feature)
-  - [Illegal agreement update](#illegal-agreement-update)
-  - [Invalid suggested max amount](#invalid-suggested-max-amount)
-  - [Cancel charge failed](#cancel-charge-failed)
-  - [Charge creation failed](#charge-creation-failed)
-  - [Charge capture failed](#charge-capture-failed)
-  - [Missing request header](#missing-request-header)
-  - [Invalid sales unit](#invalid-sales-unit)
-  - [Resource not found](#resource-not-found)
-  - [Operation failed](#operation-failed)
-  - [Conflict](#conflict)
-  - [Idempotency conflict](#idempotency-conflict)
-  - [Invalid method](#invalid-method)
-
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 

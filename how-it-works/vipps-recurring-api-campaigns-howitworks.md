@@ -1,16 +1,25 @@
 <!-- START_METADATA
 ---
-title: "Campaign"
+title: How Recurring works with campaign
+sidebar_label: Campaign
 sidebar_position: 14
+description: How Recurring works with campaign
+pagination_next: null
+pagination_prev: null
 ---
 END_METADATA -->
 
 # How Recurring works with campaign
 
+<!-- START_COMMENT -->
+
+ℹ️ Please use the website:
+[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+
+<!-- END_COMMENT -->
+
 For technical documentation go to:
 [Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
-
-
 
 ## 1. Buy a subscription with Vipps
 
