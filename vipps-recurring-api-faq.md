@@ -322,7 +322,7 @@ The general process is:
 - Order "Vipps Faste betalinger" for the new orgno. on
   [portal.vipps.no](https://portal.vipps.no).
 - Inform all existing customers of the new orgno,
-  and the planned date of the change. If it´s a new company number, we need a confirmation from you that you have informed your end-users that the agreement is being transferred. If it´s just a transfer from old to new salesunit on the same company number we don´t need this.
+  and the planned date of the change. If it's a new company number, we need a confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same compan,y number we don't need this.
 - Send a confirmation to avtale@vipps.no that all customers have been informed,
   including a copy of the information sent.
 - Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
@@ -338,11 +338,13 @@ Som en følge av dette vil det ikke være mulig for dere å se eller gjøre noe 
 Avtalene i den gamle salgsenheten vil bli stoppet, og det vil ikke være mulig å lage nye trekk på dem.
 OBS; vi anbefaler å ta vare på alle avtaleIder en kunde noen gang har vært tilknyttet, slik at dere har mulighet til å finne tilbake til tidligere avtaler osv. Vi vet at mange kun tar vare på "nyeste", og dermed ikke har mulighet til å finne ut om en kunde kan ha flere aktive avtaler osv. :sweat_smile:
 
-><b>NOTE:</b> Agreements are not actually moved. Your new sales unit will get new agreements
+**NOTE:** Agreements are not actually moved. Your new sales unit will get new agreements
 identical to the old ones, but with new agreementIds. The old agreements will
 be stopped. This means the user will still be able to see the old agreement in the app, under "Stopped agreements".
-<br/>This is done because the underlying payments are tied to the sales unit, so the new sales unit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
-<br/>Charges done by the old MSN are in the old agreement,
+
+This is done because the underlying payments are tied to the sales unit, so the new sales unit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
+
+Charges done by the old MSN are in the old agreement,
 while the new MSN uses only the new agreement. The name of the new org will have the new juridical name. Sales unit name can be the same.
 
 For all requests to move agreements: Please contact your KAM, your partner or
