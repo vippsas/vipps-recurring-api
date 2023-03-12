@@ -27,20 +27,20 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 ### Prerequisites
 
 Review
-[Vipps quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/quick-start-guides)
+[quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/quick-start-guides)
 for information about getting your test environment set up.
 
-### Step 1: Get the Vipps Postman collection and environment
+### Step 1: Get the Postman collection and environment
 
 Save the following files to your computer:
 
-* [Vipps Recurring API Postman collection](tools/vipps-recurring-v3-api-postman-collection.json)
-* [Vipps API Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+* [Recurring API Postman collection](tools/vipps-recurring-v3-api-postman-collection.json)
+* [Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
 
 The Postman collection contains examples of all the various campaign types,
-so it's easy to see what they look like in Vipps.
+so it's easy to see what they look like in the app.
 
-### Step 2: Import the Vipps Postman files
+### Step 2: Import the Postman files
 
 1. In Postman, click *Import* in the upper-left corner.
 1. In the dialog that opens, with *File* selected, click *Upload Files*.
