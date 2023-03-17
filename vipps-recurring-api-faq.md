@@ -36,6 +36,11 @@ guide.
 Please check the [migration guide](v2-to-v3-migration-guide.md) to see the differences between Recurring API v2 and v3.
 Please also check the [V3 API definitions](https://vippsas.github.io/vipps-developer-docs/api/recurring).
 
+### Can I manage agreements and charges created with v2 API using v3 API?
+
+All agreements and charges created with v2 API can be retrieved and managed using the v3 API and vice-versa. 
+Also, if an agreement was created with v2 API, it is possible to create a charge for this agreement with v3 API and vice-versa. 
+
 
 ## Charges/Payments
 
