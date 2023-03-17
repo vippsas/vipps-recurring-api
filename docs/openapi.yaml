@@ -44,7 +44,7 @@ paths:
         - $ref: "#/components/parameters/CreatedAfterQuery"
       responses:
         '200':
-          description: OK
+          description: OK'
           content:
             application/json:
               schema:
@@ -65,7 +65,7 @@ paths:
         This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
-        You **have** to implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`.
+        You **have** to implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`.
         We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
 
         Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType.
@@ -383,7 +383,7 @@ paths:
         This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
-        You **have** to implement polling on the agreement to check when the status changes to active instead of relaying on the redirect back to the `merchantRedirectUrl`.
+        You **have** to implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`.
         We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
 
         Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType.

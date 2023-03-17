@@ -394,7 +394,7 @@ If the user **accepts or rejects** the agreement the user will be redirected bac
 
 Activation of the agreement is not guaranteed to be finished by the time the user is redirected back to the `merchantRedirectUrl`. The agreement could still have the status `PENDING`. Also, if the user closes Vipps before the redirect is done, the `merchantRedirectUrl` will not be used.
 
-Therefore, it is important to actively check the agreement's status with the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint instead of relaying on the redirect to the `merchantRedirectUrl`. 
+Therefore, it is important to actively check the agreement's status with the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint instead of relying on the redirect to the `merchantRedirectUrl`. 
 
 Once a final status (ACTIVE, EXPIRED or STOPPED) is returned by the API, the agreement can be updated in your system.
 See (#rate-limiting) for more details about polling. 
