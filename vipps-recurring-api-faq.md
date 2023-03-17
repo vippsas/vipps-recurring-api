@@ -19,7 +19,7 @@ See also:
 [Vipps API FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs).
 
 See also:
-[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
+[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started)
 guide.
 
 <!-- START_COMMENT -->

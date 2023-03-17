@@ -45,7 +45,7 @@ for details.
 ## Getting started
 
 See
-[Getting started guide](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/vipps-getting-started)
+[Getting started guide](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 Review the detailed documentation found here:
