@@ -1,15 +1,13 @@
 <!-- START_METADATA
 ---
-title: How the Recurring API works
-sidebar_label: How it works
+title: Introduction
+sidebar_label: Introduction
 sidebar_position: 1
 description: View the Recurring API how-it-works guides for illustrations of the main flows.
 pagination_next: null
 pagination_prev: null
 ---
 END_METADATA -->
-
-# How the Recurring API works
 
 <!-- START_COMMENT -->
 

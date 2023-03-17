@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: How Recurring works
-sidebar_label: Campaign
+sidebar_label: Legacy pricing
 sidebar_position: 10
 description: How Recurring works
 pagination_next: null
