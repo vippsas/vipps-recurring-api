@@ -1,9 +1,9 @@
 <!-- START_METADATA
 ---
-title: How Recurring works
+title: How Recurring works with basic agreement
 sidebar_label: Basic agreement
 sidebar_position: 10
-description: How Recurring works
+description: How Recurring works with basic agreement
 pagination_next: null
 pagination_prev: null
 ---
