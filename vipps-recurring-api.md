@@ -390,7 +390,7 @@ If the user does not have Vipps installed:
 
 ### Agreement activation or rejection
 
-If the user accepts or rejects the agreement the user will be redirected back to the`merchantRedirectUrl`.
+If the user **accepts or rejects** the agreement the user will be redirected back to the`merchantRedirectUrl`.
 
 Activation of the agreement is not guaranteed to be finished by the time the user is redirected back to the `merchantRedirectUrl`. The agreement could still have the status `PENDING`. Also, if the user closes Vipps before the redirect is done, the `merchantRedirectUrl` will not be used.
 
