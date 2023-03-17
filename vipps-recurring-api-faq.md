@@ -285,7 +285,7 @@ The general process is:
 - Order "Vipps Faste betalinger" for the new orgno. on
   [portal.vipps.no](https://portal.vipps.no).
 - Inform all existing customers of the new orgno,
-  and the planned date of the change. If it's a new company number, we need a confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same compan,y number we don't need this.
+  and the planned date of the change. If it's a new company number, we need a confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same company number, we don't need this.
 - Send a confirmation to avtale@vipps.no that all customers have been informed,
   including a copy of the information sent.
 - Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
