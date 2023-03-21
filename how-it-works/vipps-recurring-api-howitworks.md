@@ -28,24 +28,24 @@ For technical documentation go to:
 ![recurring process](../images/vipps-recurring-api-howitworks/vipps-recurring-process.svg)
 
 
-## 1. Buy a subscription with Vipps
+## 1. Buy a subscription with Vipps MobilePay
 
-A user chooses Vipps as payment method for a subscription on a merchant’s website or app.
+A user chooses Vipps or MobilePay as payment method for a subscription on a merchant’s website or app.
 
 ![Buy subscription with Vipps](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
-## 2. The Vipps landing page
+## 2. The Vipps MobilePay landing page
 
-If the agreement was started on a desktop device, the user will be sent to the Vipps landing page.
-The user confirms their number and is prompted to log in to Vipps.
+If the agreement was started on a desktop device, the user will be sent to the Vipps MobilePay landing page.
+The user confirms their number and is prompted to log in to Vipps or MobilePay.
 
-If the agreement was started from a mobile device, the app will automatically switch over to Vipps.
+If the agreement was started from a mobile device, the app will automatically switch over to Vipps or MobilePay.
 
 ![Vipps landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
-## 3. Accept agreement in Vipps
+## 3. Accept agreement in Vipps or MobilePay
 
-The user receives a push notification on their phone. They log in to Vipps and accept the agreement.
+The user receives a push notification on their phone. They log in to Vipps or MobilePay and accept the agreement.
 
 If there is an initial charge to be paid, the user confirms the payment in this step as well.
 
@@ -61,7 +61,7 @@ Please note: Activation of the agreement is not guaranteed to be finished by the
 
 ## 5. Overview of agreements and charges
 
-The user can see their active subscriptions, as well as stopped subscriptions, and get an overview of previous charges in Vipps.
+The user can see their active subscriptions, as well as stopped subscriptions, and get an overview of previous charges in Vipps or MobilePay.
 
 ![Overview of agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step5.png)
 
@@ -71,6 +71,6 @@ If the user clicks on “Manage agreement” in the previous step, they will be 
 
 ![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 
-## Great! Now you know how the Vipps Recurring payment process works.
+## Great! Now you know how the Recurring payment process works.
 
 Take a look at the technical documentation in the [Vipps Recurring API Guide](../vipps-recurring-api.md).
