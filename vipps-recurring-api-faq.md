@@ -320,6 +320,10 @@ agreements, it will no longer be possible to:
 - Perform new charges
 - Make refunds
 
+### Can I look up an agreementId if I have the chargeId?
+
+No. There is no way to find an agreement based on a charge. This is information you must keep track on at your end.
+
 ## Common problems/errors
 
 ### Why do I get the error `merchant.not.allowed.for.recurring.operation`?
