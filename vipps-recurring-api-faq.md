@@ -320,7 +320,7 @@ agreements, it will no longer be possible to:
 - Perform new charges
 - Make refunds
 
-### Can Iook up an agreementId if I have the chargeId?
+### Can I look up an agreementId if I have the chargeId?
 
 No. There is no way to find an agreement based on a charge. This is information you must keep track on at your end.
 
