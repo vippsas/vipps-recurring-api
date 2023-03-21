@@ -1692,7 +1692,10 @@ components:
         userinfoUrl:
           type: string
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
-          description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
+          description: |-
+            The full path of the URL for the userinfo endpoint where the user data can be retrieved:
+            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-developer-docs/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
+            This will be null if profile data was not requested.
           nullable: true
         variableAmount:
           $ref: '#/components/schemas/variableAmountResponse'
@@ -1756,7 +1759,10 @@ components:
         userinfoUrl:
           type: string
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
-          description: The full path of the URL for the userinfo endpoint where the user data can be retrieved. Will be null if profile data was not requested.
+          description: |-
+            The full path of the URL for the userinfo endpoint where the user data can be retrieved.:
+            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-developer-docs/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
+            This will be null if profile data was not requested.
           nullable: true
 
     PatchAgreementV2:
