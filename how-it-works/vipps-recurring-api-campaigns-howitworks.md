@@ -21,24 +21,24 @@ END_METADATA -->
 For technical documentation go to:
 [Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
 
-## 1. Buy a subscription with Vipps
+## 1. Buy a subscription with VippsMobilePay
 
-A user chooses Vipps as payment method for a subscription on a merchant's website or app.
+A user chooses Vipps or MobilePAy as payment method for a subscription on a merchant's website or app.
 
 ![Buy subscription with Vipps](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
-## 2. The Vipps landing page
+## 2. The Vipps or MobilePay landing page
 
-If the agreement was started on a desktop device, the user will be sent to the Vipps landing page.
-The user confirms their number and is prompted to log in to Vipps.
+If the agreement was started on a desktop device, the user will be sent to the Vipps or MobilePay landing page.
+The user confirms their number and is prompted to log in to Vipps or MobilePay.
 
-If the agreement was started from a mobile device, the app will automatically switch over to Vipps.
+If the agreement was started from a mobile device, the app will automatically switch over to Vipps or MobilePay.
 
-![Vipps landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
+![Vipps or MobilePay landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
-## 3. Accept agreement in Vipps
+## 3. Accept agreement in Vipps or MobilePay
 
-The user receives a push notification on their phone. They log in to Vipps and accept the agreement.
+The user receives a push notification on their phone. They log in to Vipps or MobilePay and accept the agreement.
 
 If there is an initial charge to be paid, the user confirms the payment in this step as well.
 
@@ -58,7 +58,7 @@ The user is redirected back to the merchant’s website or app, and the subscrip
 
 ## 5. Overview of agreements and charges
 
-The user can see their active subscriptions, as well as stopped subscriptions, and get an overview of previous charges in Vipps.
+The user can see their active subscriptions, as well as stopped subscriptions, and get an overview of previous charges in Vipps or MobilePay.
 Campaign information will be displayed on the active and stopped subscriptions until the campaign has expired. After that, the regular price and interval will be displayed.
 
 ### Agreement with running campaign
@@ -71,8 +71,8 @@ Campaign information will be displayed on the active and stopped subscriptions u
 
 ## 6. Manage agreements
 
-If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
+If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [VippsMobilePay Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 
-## Great! Now you know how the Vipps Recurring agreements with campaign process works.
+## Great! Now you know how the VippsMobilePay Recurring agreements with campaign process works.
