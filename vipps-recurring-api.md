@@ -438,8 +438,8 @@ Example for a bi-weekly subscription:
 }
 ```
 
-User can be charged twice a week, regardless of the day in the week.
- (e.g., First charge can be due on Monday and second charge on Wednesday).
+Users can be charged the full amount every two weeks, regardless of the day in the week.
+(E.g. First charge can be due on Wednesday of week 1 and the second charge can be due on Monday of week 3).
 
 Example for a quarterly subscription
 
@@ -452,8 +452,8 @@ Example for a quarterly subscription
 }
 ```
 
-User can be charged once every 3 month, regardless of the day in the month.
-(e.g., First charge can be due on 05.01.2023 and second on 02.04.2023)
+Users can be charged the full amount every third month, regardless of the day in the month.
+(E.g. First charge can be due on 05.01.2023 and second on 02.04.2023)
 
 Examples for a yearly subscription
 
@@ -477,9 +477,8 @@ OR
 }
 ```
 
-User can be charged once every year, regardless of the day in the year.
-(e.g., First charge can be due on 02.06.2022 and second charge on any date in 2023, 01.01.2023)
-
+Users can be charged the full amount once every year, regardless of the day in the year.
+(E.g. First charge can be due on 02.06.2022 and second charge on any day in 2023, for example on 01.01.2023)
 
 Example for a subscription every 30th day:
 
@@ -492,15 +491,13 @@ Example for a subscription every 30th day:
 }
 ```
 
-User can be charged once every 30 days, regardless of the day in the month.
-(e.g., First charge can be due on 12.06.2022 and second charge on 04.07.2022)
+Users can be charged the full amount once every 30 days, regardless of the day in the month.
+(E.g. First charge can be due on 12.06.2022 and second charge on 04.07.2022)
 
-**Please note:** It is not possible to change intervals. If the user has
-accepted a yearly interval, the agreement cannot be changed to a monthly
-agreement. This requires a new agreement and a new consent from the user.
+**Please note:** It is not possible to change intervals. If the user has accepted a yearly interval, the agreement cannot be changed to a monthly agreement.
+This requires a new agreement and a new consent from the user.
 It _is_ possible to make a monthly agreement and charge some months only.
-The general rule: Be as customer friendly and easy to understand
-as possible.
+The general rule: Be as customer friendly and easy to understand as possible.
 
 ### Initial charge
 
