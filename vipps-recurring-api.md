@@ -19,20 +19,20 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-The Vipps Recurring API delivers recurring payment functionality for a merchant
+The VippsMobilePay Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
 ## Requirements
 
-**Important:** The Vipps Recurring API requires additional compliance checks
+**Important:** The VippsMobilePay Recurring API requires additional compliance checks
 (more than what is required for the
 [Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api)),
 as required by
 [Finanstilsynet](https://www.finanstilsynet.no) (the financial authorities).
 
-To get access to the Recurring API in production, please order "Vipps Faste Betalinger"
+To get access to the Recurring API in production, please order "VippsMobilePay Faste Betalinger/Recurring"
 (_recurring payments_) on
 [portal.vipps.no](https://portal.vipps.no).
 It is the same order form as "Vipps på Nett"
@@ -66,11 +66,11 @@ API version: 3.0.0.
 
 The overall flow is:
 
-1. The merchant creates a draft agreement and proposes it to the customer via Vipps.
-2. The customer approves the agreement in Vipps.
-3. The merchant sends a charge request to Vipps at least two days before due date
-4. If the agreement is active, Vipps authorizes the charge.
-5. The customer can find a full overview in Vipps, including a link to the merchant's website.
+1. The merchant creates a draft agreement and proposes it to the customer via Vipps or MobilePay.
+2. The customer approves the agreement in Vipps or MobilePay.
+3. The merchant sends a charge request to Vipps or MobilePay at least two days before due date
+4. If the agreement is active, VippsMobilePay authorizes the charge.
+5. The customer can find a full overview in Vipps or MobilePay, including a link to the merchant's website.
 
 See the
 [How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
@@ -85,12 +85,12 @@ This diagram shows a simplified payment flow:
 There are two happy-flows based on how the sales unit is set up:
 One for "direct capture" and one for "reserve capture".
 This is specified with the `transactionType`, and for "direct capture"
-the sales unit must be configured for this by Vipps.
+the sales unit must be configured for this by VippsMobilePay.
 
 For more details, see
 [Common topics: Reserve and capture](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/reserve-and-capture).
 
-**Please note:** Vipps will *only* perform a payment transaction on an agreement that
+**Please note:** VippsMobilePay will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 You can also [manage charges and agreements](#manage-charges-and-agreements).
 
@@ -99,8 +99,8 @@ You can also [manage charges and agreements](#manage-charges-and-agreements).
 For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint] endpoint.
-   The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
-2. The user approves the agreement in Vipps:
+   The user can now confirm the agreement in Vipps or MobilePay (the app). See [Create a new agreement](#create-an-agreement).
+2. The user approves the agreement in Vipps or MobilePay:
    This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
    See [Initial charge](#initial-charge).
 3. Retrieve the agreement by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
@@ -123,7 +123,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
-2. The user approves the agreement in Vipps:
+2. The user approves the agreement in Vipps or MobilePay:
    This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
    See [Initial charge](#initial-charge).
 3. Retrieve the agreement by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
@@ -169,9 +169,9 @@ See
 
 ## Vipps HTTP headers
 
-We recommend using the standard Vipps HTTP headers for all requests.
+We recommend using the standard VippsMobilePay HTTP headers for all requests.
 
-See [Vipps HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
+See [VippsMobilePay HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
 in the Getting started guide, for details.
 
 ## Idempotency Key header
@@ -248,7 +248,7 @@ for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
-An agreement is between the Vipps user and the merchant. This payment agreement allows you to routinely charge the customer without requiring them to manually approve every time. See [charges](#charges).
+An agreement is between the Vipps or MobilePay user and the merchant. This payment agreement allows you to routinely charge the customer without requiring them to manually approve every time. See [charges](#charges).
 
 ### Create an agreement
 
@@ -298,13 +298,13 @@ This `agreementResource` is a complete URL for performing a
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
 request.
 
-The `vippsConfirmationUrl` should be used to redirect the
-user to the Vipps landing page in a desktop flow (with `https://`),
-or to Vipps in a mobile flow (with `vipps://`), where the
+The `vippsMobilePayConfirmationUrl` should be used to redirect the
+user to the VippsMobilePay landing page in a desktop flow (with `https://`),
+or to Vipps or MobilePay in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
 See
-[Vipps landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page)
+[VippsMobilePay landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page)
 from Common topics, for more details about the landing page.
 
 
@@ -364,9 +364,9 @@ The [`POST:/agreements`][draft-agreement-endpoint] endpoint will return the foll
 }
 ```
 
-The `vippsConfirmationUrl` should be used to redirect the user to the Vipps landing
+The `vippsConfirmationUrl` should be used to redirect the user to the VippsMobilepay landing
 page. The user can then confirm their identity and receive a prompt to accept the
-agreement within Vipps.
+agreement within Vipps or MobilePay.
 
 If the payment is initiated in a native app, it is possible to explicitly force
 a `vipps://` URL by sending the `isApp` parameter in the initiate call:
@@ -374,17 +374,17 @@ a `vipps://` URL by sending the `isApp` parameter in the initiate call:
 * `"isApp": false`: The URL is `https://`, which handles
   everything automatically for you.
   The phone's operating system will know, through "universal linking", that
-  the `https://api.vipps.no` URL should open the Vipps app, and not the default
+  the `https://api.vipps.no` URL should open the Vipps or MobilePay app, and not the default
   web browser.
   **Please note:** In some cases, this requires the user to approve that
   Vipps is opened, but this is usually only the first time.
 * `"isApp": true`: The URL is for a deeplink, for forced app-switch to Vipps, with `vipps://`.
   **Please note:** In our test environment (MT), the scheme is `vippsMT://`
 
-If the user does not have Vipps installed:
+If the user does not have Vipps or MobilePay installed:
 
-* `"isApp":false`: The Vipps landing page will be shown,
-   and the user can enter a phone number and pay on a device with Vipps installed.
+* `"isApp":false`: The VippsMobilaPay landing page will be shown,
+   and the user can enter a phone number and pay on a device with Vipps or MobilePay installed.
 * `"isApp": true`: The user will get an error message saying that the link can
   not be opened.
 
@@ -404,7 +404,7 @@ The `merchantAgreementUrl` is a link to the customer's account page on your webs
 can manage the agreement (e.g., change, pause, cancel the agreement).
 The URL is opened in the standard web browser.
 
-**Please note:** Vipps does not offer any form of agreement management, as this
+**Please note:** VippsMobilaPay does not offer any form of agreement management, as this
 may include quite complex operations (e.g., changing subscription types,
 temporary address change, pausing the agreement, etc).
 
@@ -415,9 +415,9 @@ in the agreement works for the user.
 
 Vipps does not have any specific requirements for the security of the page,
 other than using HTTPS, but strongly recommend using
-[Vipps Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
+[VippsMobilePay Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not need a username or password, but is logged
-in automatically through Vipps. See the
+in automatically through VippsMobilePay. See the
 [Login API documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api)
 for more details.
 
