@@ -84,9 +84,9 @@ flowchart
     B --> |User ignores agreement| C2(Agreement status: EXPIRED)
     B --> |User declines agreement| C3(Agreement status: STOPPED)
     C1 --> |Merchant creates charge| D1(Charge status: PENDING)
-    D1 --> |Charge is authorized by Vipps| D2(Charge status: DUE)
+    D1 --> |Charge is visible to the user in Vipps or MobilePay| D2(Charge status: DUE)
     D2 --> |Charge is processed on due date| D3(Charge status: CHARGED/RESERVED)
-```
+```    
 
 See the
 [How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
