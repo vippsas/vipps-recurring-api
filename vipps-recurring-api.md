@@ -68,15 +68,30 @@ The overall flow is:
 
 1. The merchant creates a draft agreement and proposes it to the customer via Vipps.
 2. The customer approves the agreement in Vipps.
-3. The merchant sends a charge request to Vipps at least two days before due date
+3. The customer can find a full overview of the agreement in Vipps, including a link to the merchant's website.
+4. The merchant sends a charge request to Vipps at least two days before due date
 4. If the agreement is active, Vipps authorizes the charge.
-5. The customer can find a full overview in Vipps, including a link to the merchant's website.
+5. Charge will be processed on due date.
+
+
+``` mermaid
+flowchart LR
+    A(*)
+    B(Agreement status: PENDING)
+    A --> |Merchant creates agreement| B
+    B --> |User approves agreement| C1(Agreement status: ACTIVE)
+    B --> |User ignores agreement| C2(Agreement status: EXPIRED)
+    B --> |User declines agreement| C3(Agreement status: STOPPED)
+    C1 --> |Merchant creates charge| D1(Charge status: PENDING)
+    D1 --> |Charge is authorized by Vipps| D2(Charge status: DUE)
+    D2 --> |Charge is processed on due date| D3(Charge status: CHARGED/RESERVED)
+```
 
 See the
 [How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
 guides for details.
 
-This diagram shows a simplified payment flow:
+This diagram shows a simplified flow:
 
 ![Recurring agreement flow](images/Recurring-createagreement.svg)
 
