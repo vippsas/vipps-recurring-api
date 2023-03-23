@@ -66,13 +66,14 @@ API version: 3.0.0.
 
 The overall flow is:
 
-1. The merchant creates a draft agreement and proposes it to the customer via Vipps.
-2. The customer approves the agreement in Vipps.
-3. The customer can find a full overview of the agreement in Vipps, including a link to the merchant's website.
-4. The merchant sends a charge request to Vipps at least two days before due date
-4. If the agreement is active, Vipps authorizes the charge.
+1. The merchant creates a draft agreement and proposes it to the customer via Vipps or MobilePay.
+2. The customer approves the agreement in Vipps or MobilePay.
+3. The customer can find a full overview of the agreement in Vipps or MobilePay, including a link to the merchant's website.
+4. The merchant sends a charge request to Vipps or MobilePay at least two days before due date
+4. If the agreement is active, Vipps or MobilePay authorizes the charge.
 5. Charge will be processed on due date.
 
+This diagram shows a simplified flow:
 
 ``` mermaid
 flowchart
@@ -90,10 +91,6 @@ flowchart
 See the
 [How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
 guides for details.
-
-This diagram shows a simplified flow:
-
-![Recurring agreement flow](images/Recurring-createagreement.svg)
 
 ## Call by call guide
 
