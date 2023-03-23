@@ -47,9 +47,10 @@ API version: 3.0
     - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://github.com/vippsas/vipps-design-guidelines)
     - [ ] The merchant must have a way for the user to manage and stop subscription in merchantAgreementUrl in their Agreement. This should result in a timely update of the Vipps Agreement.
     - [ ] Vipps never generates charges automatically on behalf of the Merchant. Every charge is the responsibility of the Merchant.
-    - [ ] Make sure your customer service, etc. has all the tools and information they need
-          available in _your_ system, through the APIs listed in the first item in this checklist,
-          and that they do not need to visit
+    - [ ] Make sure your users (meaning the merchant's employees), customer service, etc.
+          have all the tools and information they need available in _your_ system, through
+          the APIs listed in the first item in this checklist.
+          It should never be necessary to to visit
           [portal.vipps.no](https://portal.vipps.no)
           for normal work.
 

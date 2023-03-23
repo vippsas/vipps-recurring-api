@@ -68,17 +68,29 @@ The overall flow is:
 
 1. The merchant creates a draft agreement and proposes it to the customer via Vipps or MobilePay.
 2. The customer approves the agreement in Vipps or MobilePay.
-3. The merchant sends a charge request to Vipps or MobilePay at least two days before due date
-4. If the agreement is active, VippsMobilePay authorizes the charge.
-5. The customer can find a full overview in Vipps or MobilePay, including a link to the merchant's website.
+3. The customer can find a full overview of the agreement in Vipps or MobilePay, including a link to the merchant's website.
+4. The merchant sends a charge request to Vipps or MobilePay at least two days before due date
+4. If the agreement is active, Vipps or MobilePay authorizes the charge.
+5. Charge will be processed on due date.
+
+This diagram shows a simplified flow:
+
+``` mermaid
+flowchart
+    A(*)
+    B(Agreement status: PENDING)
+    A --> |Merchant creates agreement| B
+    B --> |User approves agreement| C1(Agreement status: ACTIVE)
+    B --> |User ignores agreement| C2(Agreement status: EXPIRED)
+    B --> |User declines agreement| C3(Agreement status: STOPPED)
+    C1 --> |Merchant creates charge| D1(Charge status: PENDING)
+    D1 --> |Charge is authorized by Vipps| D2(Charge status: DUE)
+    D2 --> |Charge is processed on due date| D3(Charge status: CHARGED/RESERVED)
+```
 
 See the
 [How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
 guides for details.
-
-This diagram shows a simplified payment flow:
-
-![Recurring agreement flow](images/Recurring-createagreement.svg)
 
 ## Call by call guide
 
@@ -438,8 +450,8 @@ Example for a bi-weekly subscription:
 }
 ```
 
-User can be charged twice a week, regardless of the day in the week.
- (e.g., First charge can be due on Monday and second charge on Wednesday).
+Users can be charged the full amount every two weeks, regardless of the day in the week.
+(E.g. First charge can be due on Wednesday of week 1 and the second charge can be due on Monday of week 3).
 
 Example for a quarterly subscription
 
@@ -452,8 +464,8 @@ Example for a quarterly subscription
 }
 ```
 
-User can be charged once every 3 month, regardless of the day in the month.
-(e.g., First charge can be due on 05.01.2023 and second on 02.04.2023)
+Users can be charged the full amount every third month, regardless of the day in the month.
+(E.g. First charge can be due on 05.01.2023 and second on 02.04.2023)
 
 Examples for a yearly subscription
 
@@ -477,9 +489,8 @@ OR
 }
 ```
 
-User can be charged once every year, regardless of the day in the year.
-(e.g., First charge can be due on 02.06.2022 and second charge on any date in 2023, 01.01.2023)
-
+Users can be charged the full amount once every year, regardless of the day in the year.
+(E.g. First charge can be due on 02.06.2022 and second charge on any day in 2023, for example on 01.01.2023)
 
 Example for a subscription every 30th day:
 
@@ -492,15 +503,13 @@ Example for a subscription every 30th day:
 }
 ```
 
-User can be charged once every 30 days, regardless of the day in the month.
-(e.g., First charge can be due on 12.06.2022 and second charge on 04.07.2022)
+Users can be charged the full amount once every 30 days, regardless of the day in the month.
+(E.g. First charge can be due on 12.06.2022 and second charge on 04.07.2022)
 
-**Please note:** It is not possible to change intervals. If the user has
-accepted a yearly interval, the agreement cannot be changed to a monthly
-agreement. This requires a new agreement and a new consent from the user.
+**Please note:** It is not possible to change intervals. If the user has accepted a yearly interval, the agreement cannot be changed to a monthly agreement.
+This requires a new agreement and a new consent from the user.
 It _is_ possible to make a monthly agreement and charge some months only.
-The general rule: Be as customer friendly and easy to understand
-as possible.
+The general rule: Be as customer friendly and easy to understand as possible.
 
 ### Initial charge
 
