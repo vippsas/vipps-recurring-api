@@ -50,7 +50,7 @@ so it's easy to see what they look like in the app.
 
 1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
 2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
-3. Fill in the `Current Value` for the following fields to get started. For the first keys, go to *Vipps Portal* > *Utvikler* ->  *Test Keys*.
+3. Fill in the `Current Value` for the following fields to get started. For the first keys, go to *VippsMobilePay Portal* > *Utvikler* ->  *Test Keys*.
    * `client_id` - Merchant key is required for getting the access token.
    * `client_secret` - Merchant key is required for getting the access token.
    * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
@@ -86,8 +86,8 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 3. Send the `Draft Agreement - Minimal` request.
    This demonstrates how to create a simple agreement using [`POST:/agreements`][draft-agreement-endpoint] endpoint.
 
-   Ctrl+click the link, it will take you to the Vipps landing page.
-   Enter your test phone number and complete the authorization in the Vipps app in your mobile test app.
+   Ctrl+click the link, it will take you to the VippsMobilePay landing page.
+   Enter your test phone number and complete the authorization in the Vipps or MobilePay app in your mobile test app.
 
    You should now have an active agreement. The variable `agreementId` is set in the environment.
 
