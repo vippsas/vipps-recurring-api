@@ -75,7 +75,7 @@ The overall flow is:
 
 
 ``` mermaid
-flowchart LR
+flowchart
     A(*)
     B(Agreement status: PENDING)
     A --> |Merchant creates agreement| B
