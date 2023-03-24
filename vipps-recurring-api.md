@@ -395,7 +395,7 @@ a `vipps://` URL by sending the `isApp` parameter in the initiate call:
 
 If the user does not have Vipps or MobilePay installed:
 
-* `"isApp":false`: The Vipps MobilPay landing page will be shown,
+* `"isApp":false`: The Vipps MobilePay landing page will be shown,
    and the user can enter a phone number and pay on a device with Vipps or MobilePay installed.
 * `"isApp": true`: The user will get an error message saying that the link can
   not be opened.
@@ -416,7 +416,7 @@ The `merchantAgreementUrl` is a link to the customer's account page on your webs
 can manage the agreement (e.g., change, pause, cancel the agreement).
 The URL is opened in the standard web browser.
 
-**Please note:** Vipps MobilPay does not offer any form of agreement management, as this
+**Please note:** Vipps MobilePay does not offer any form of agreement management, as this
 may include quite complex operations (e.g., changing subscription types,
 temporary address change, pausing the agreement, etc).
 
