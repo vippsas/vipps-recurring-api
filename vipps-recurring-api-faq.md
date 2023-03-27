@@ -16,16 +16,16 @@ See the
 for all the details.
 
 See also:
-[Vipps API FAQ](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs).
+[Vipps API FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs).
 
 See also:
-[Getting Started](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started)
+[Getting Started](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
 guide.
 
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 
@@ -34,7 +34,7 @@ guide.
 ### How do I migrate to the v3 API?
 
 Please check the [migration guide](v2-to-v3-migration-guide.md) to see the differences between Recurring API v2 and v3.
-Please also check the [V3 API definitions](https://vippsas.github.io/vipps-developer-docs/api/recurring).
+Please also check the [V3 API definitions](https://developer.vippsmobilepay.com/api/recurring).
 
 ### Can I manage agreements and charges created with v2 API using v3 API?
 
@@ -75,7 +75,7 @@ to account for possible networking issues etc.
 ### How can I require an initial payment from the user for setting up the agreement?
 
 You need to use
-[Initial charge](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#initial-charge).
+[Initial charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#initial-charge).
 
 ### Can the charge amount be different from the agreement price?
 
@@ -145,7 +145,7 @@ users as described in
 
 ### For how long is a payment reserved?
 
-See [For how long is a payment reserved?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
+See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
 in Vipps FAQs.
 
 ## Variable amount
@@ -333,7 +333,7 @@ that the Vipps Recurring API is not yet activated for this sales unit.
 
 The Vipps Recurring API is available for existing customers that
 have "Vipps på Nett", a direct integration with the
-[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api),
+[Vipps eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api),
 and have completed some additional Know Your Customer (KYC) checks required by [Finanstilsynet](https://www.finanstilsynet.no).
 
 Vipps is required to perform some extra compliance checks before
@@ -349,11 +349,11 @@ Yes.
 
 Vipps offers the possibility for merchants, as part of the payment flow, to request the user's information.
 For example if you wish to retrieve the user's email as part of a User profile setup.
-This is supported in both [Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api/vipps-ecom-api#userinfo)
+This is supported in both [Vipps eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api#userinfo)
 and [Vipps Recurring API](vipps-recurring-api.md#userinfo).
 
 This is done by adding a `scope` parameter to the initiate calls:
-[`initiate payment`](https://vippsas.github.io/vipps-developer-docs/api/ecom#tag/Vipps-eCom-API/operation/initiatePaymentV3UsingPOST) (eCom)
+[`initiate payment`](https://developer.vippsmobilepay.com/api/ecom#tag/Vipps-eCom-API/operation/initiatePaymentV3UsingPOST) (eCom)
 and
 [`POST:/agreements`][draft-agreement-endpoint] (Recurring):
 
@@ -366,10 +366,10 @@ and
 - accountNumbers
 
 The userinfo endpoint is shared with
-[Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api)
+[Vipps Login](https://developer.vippsmobilepay.com/docs/APIs/login-api)
 and the merchant needs to have activated Vipps Login on their account to use
 this feature. Information on how to do this can be found
-[here](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api/vipps-login-api-faq#how-can-i-activate-and-set-up-vipps-login).
+[here](https://developer.vippsmobilepay.com/docs/APIs/login-api/vipps-login-api-faq#how-can-i-activate-and-set-up-vipps-login).
 Using the Vipps Login service itself is optional.
 
 **Please note:** Vipps users have not consented to Vipps providing any
@@ -436,7 +436,7 @@ further without coming to a blank page.
 
 ### How can I change partner for my integration with Vipps?
 
-See [How to change partners for a merchant](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner/how-to-change-partners).
+See [How to change partners for a merchant](https://developer.vippsmobilepay.com/docs/vipps-partner/how-to-change-partners).
 
 **Please note:** The MSN (the number) does _not_ change when changing partners.
 
@@ -452,7 +452,7 @@ Merchants with a "gross settlement" contract receive the users' payments includi
 and are then invoiced for the Vipps fees.
 
 
-[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
-[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
-[update-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
-[list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v2-endpoints/operation/ListCharges
+[draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
+[fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
+[update-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
+[list-charges-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v2-endpoints/operation/ListCharges

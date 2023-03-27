@@ -15,7 +15,7 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 
@@ -28,7 +28,7 @@ that will be automatically processed on the due date.
 
 **Important:** The Vipps MobilePay Recurring API requires additional compliance checks
 (more than what is required for the
-[Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api)),
+[Vipps eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api)),
 as required by
 [Finanstilsynet](https://www.finanstilsynet.no) (the financial authorities).
 
@@ -36,7 +36,7 @@ To get access to the Recurring API in production, please order "Vipps MobilePay 
 (_recurring payments_) on
 [portal.vipps.no](https://portal.vipps.no).
 It is the same order form as "Vipps på Nett"
-([Vipps eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api)).
+([Vipps eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api)).
 You will then get a new sales unit (MSN) that can be used for recurring payments.
 
 If you need to use an existing sales unit that already has access to the eCom API
@@ -50,7 +50,7 @@ for the Recurring API too, please contact your KAM or
 **Please note:** You can check if you have access to the Recurring API:
 * As a merchant: Check your sales unit(s) on [portal.vipps.no](https://portal.vipps.no).
 * As a partner: Check the sales unit(s) with the
-  [Partner API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sales-unit-based-on-msn).
+  [Partner API](https://developer.vippsmobilepay.com/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sales-unit-based-on-msn).
 
 API version: 3.0.0.
 
@@ -89,7 +89,7 @@ flowchart
 ```
 
 See the
-[How it works](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/how-it-works)
+[How it works](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/how-it-works)
 guides for details.
 
 ## Call by call guide
@@ -100,7 +100,7 @@ This is specified with the `transactionType`, and for "direct capture"
 the sales unit must be configured for this by Vipps MobilePay.
 
 For more details, see
-[Common topics: Reserve and capture](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/reserve-and-capture).
+[Common topics: Reserve and capture](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/reserve-and-capture).
 
 **Please note:** Vipp sMobilePay will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
@@ -177,13 +177,13 @@ See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way 
 
 All Vipps API calls are authenticated with an access token and an API subscription key.
 See
-[Get an access token](https://vippsas.github.io/vipps-developer-docs/docs/APIs/access-token-api#get-an-access-token), for details.
+[Get an access token](https://developer.vippsmobilepay.com/docs/APIs/access-token-api#get-an-access-token), for details.
 
 ## Vipps HTTP headers
 
 We recommend using the standard Vipps MobilePay HTTP headers for all requests.
 
-See [Vipps MobilePay HTTP headers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers)
+See [Vipps MobilePay HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers)
 in the Getting started guide, for details.
 
 ## Idempotency Key header
@@ -197,7 +197,7 @@ This way, if a request fails for any technical reason, or there is a networking 
 **Important:** If you reuse an idempotency-key on a different request, you will get a 409 CONFLICT.
 
 See the
-[Idempotency header](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/http-headers#idempotency)
+[Idempotency header](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers#idempotency)
 for more details.
 
 ## Continuation-Token header
@@ -316,7 +316,7 @@ or to Vipps or MobilePay in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
 See
-[Vipps MobilePay landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page)
+[Vipps MobilePay landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page)
 from Common topics, for more details about the landing page.
 
 
@@ -430,7 +430,7 @@ other than using HTTPS, but strongly recommend using
 [Vipps MobilePay Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
 so the user does not need a username or password, but is logged
 in automatically through Vipps MobilePay. See the
-[Login API documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api)
+[Login API documentation](https://developer.vippsmobilepay.com/docs/APIs/login-api)
 for more details.
 
 ### Intervals
@@ -534,7 +534,7 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be
@@ -710,7 +710,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 ##### Full flex campaign
 
 **Please note:** Contact Vipps before creating a draft agreement with a full flex campaign.
-See [contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact).
+See [contact us](https://developer.vippsmobilepay.com/docs/vipps-developers/contact).
 
 ![full-flex-campaign](images/campaigns/full-flex-campaign.png)
 
@@ -788,7 +788,7 @@ Each specific charge on an agreement must be scheduled by the merchant.
 
 To create a charge use the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 
-Also see check [orderId recommendations](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/orderid) before creating charges.
+Also see check [orderId recommendations](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid) before creating charges.
 
 For agreements of type `variable`, also see [Recurring agreements with variable amount](#create-charge).
 
@@ -819,7 +819,7 @@ A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
@@ -852,7 +852,7 @@ Partial capture may be used in cases where a partial order is shipped or for oth
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [For how long is a payment reserved](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
+See [For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
 in the Vipps FAQ for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
@@ -1026,7 +1026,7 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will be replaced by an event log. Subscribe to the technical newsletter
-to get updates: [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
+to get updates: [Technical newsletter for developers](https://developer.vippsmobilepay.com/docs/vipps-developers/newsletters).
 
 See more about [charge failure reason](#charge-failure-reasons).
 
@@ -1155,7 +1155,7 @@ depending on your systems.
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will be replaced by an event log. Subscribe to the technical newsletter
-to get updates: [Technical newsletter for developers](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/newsletters).
+to get updates: [Technical newsletter for developers](https://developer.vippsmobilepay.com/docs/vipps-developers/newsletters).
 
 When fetching a charge through the API, you can find two fields in the response
 body to identify why the charge failed `failureReason` and `failureDescription`.
@@ -1200,11 +1200,11 @@ The user gets more information in Vipps regarding why the Charge did not get cha
 Vipps offers the possibility for merchants to ask for the user's profile information as part of the payment flow.
 
 To enable the possibility to fetch profile information for a user the merchant can add a
-[`scope`](https://vippsas.github.io/vipps-developer-docs/docs/APIs/userinfo-api#scope)
+[`scope`](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api#scope)
 parameter to the [`POST:/agreements`][draft-agreement-endpoint] call.
 
 See the
-[Userinfo API guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/userinfo-api)
+[Userinfo API guide](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api)
 for details.
 
 ### Userinfo call by call guide
@@ -1292,7 +1292,7 @@ This endpoint returns the payload with the information that the user has consent
 Call the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier.
 
 See the
-[Userinfo call](https://vippsas.github.io/vipps-developer-docs/docs/APIs/userinfo-api#userinfo-call)
+[Userinfo call](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api#userinfo-call)
 for details.
 
 ## Recurring agreements with variable amount
@@ -1430,7 +1430,7 @@ Display of charge failure due to a charge being higher than the `maxAmount` in V
 
 _This functionality is only available for special cases._
 
-See: [The Vipps landing page](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/vipps-landing-page).
+See: [The Vipps landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page).
 
 If the `skipLandingPage` property is set to `true` in the
 [`POST:/agreements`][draft-agreement-endpoint]
@@ -1469,14 +1469,14 @@ to retry the request at a later point in time.
 HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 
 See:
-[Errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/errors).
+[Errors](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/errors).
 
 ## Rate limiting
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
 fraudulent and wrongful behavior, and increase the stability and security of
 our API. The limits should not affect normal behavior, but please
-[contact us](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/contact)
+[contact us](https://developer.vippsmobilepay.com/docs/vipps-developers/contact)
 if you notice any unexpected behavior.
 
 The "Key" column specifies what we consider to be the unique identifier, and
@@ -1524,7 +1524,7 @@ re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
 
 Here's an example of headers (please refer to the
-[OpenAPI specification](https://vippsas.github.io/vipps-developer-docs/api/recurring)
+[OpenAPI specification](https://developer.vippsmobilepay.com/api/recurring)
 for all the details):
 
 ```http
@@ -1545,7 +1545,7 @@ partner's MSN. This parameter is also recommended for regular Vipps
 merchants making API calls for themselves.
 
 See:
-[Vipps Partners](https://vippsas.github.io/vipps-developer-docs/docs/vipps-partner).
+[Vipps Partners](https://developer.vippsmobilepay.com/docs/vipps-partner).
 
 ## Polling guidelines
 
@@ -1554,7 +1554,7 @@ General guidelines for polling with the
 endpoint can be found at:
 
 
-See [Polling guidelines](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/polling-guidelines) in Common topics, for details.
+See [Polling guidelines](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/polling-guidelines) in Common topics, for details.
 
 ## Notifications to users for failed charges
 
@@ -1575,7 +1575,7 @@ See the [merchant charge failure reason](#Charge-failure-reasons) for an overvie
 
 ## Timeouts
 
-See [Timeouts](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/timeouts)
+See [Timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts)
 in Common topics for details.
 
 ## Testing
@@ -1591,7 +1591,7 @@ The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
 
-See [Recommendations regarding handling redirects](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/redirects) in Common topics for details.
+See [Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/redirects) in Common topics for details.
 
 ## Different agreement types and when to use them
 
@@ -1649,18 +1649,18 @@ In addition to campaigns and initial charges being available as individual flows
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/period-campaign-with-initial-charge.png)
 
 
-[list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
-[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
-[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
-[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
-[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
-[list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
-[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
-[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
-[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
-[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
-[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
-[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
-[userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/userinfo#operation/getUserinfo
-[access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment
+[list-agreements-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
+[draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
+[fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
+[update-agreement-patch-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+[force-accept-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
+[list-charges-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
+[create-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
+[fetch-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
+[cancel-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
+[refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
+[capture-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
+[refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
+[userinfo-endpoint]: https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo
+[access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
+[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment

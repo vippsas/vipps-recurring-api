@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   description: >-
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
-    For details, see the [Recurring API Guide](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+    For details, see the [Recurring API Guide](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
   version: 2.6.15
   title: Recurring Payments Merchant API
@@ -1114,7 +1114,7 @@ components:
         The access token is a base64-encoded string that is required for all API calls.
         It is a JWT (JSON Web Token).
         The access token is fetched from the
-            [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+            [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
             endpoint.
         It is valid for 1 hour in the test environment and 24 hours in the production environment.
       required: true
@@ -1236,7 +1236,7 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Bearer 'auth token', from [`POST:/accesstoken/get`](https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
+      description: Bearer 'auth token', from [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
             endpoint.
       bearerFormat: JWT
 
@@ -1694,7 +1694,7 @@ components:
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
           description: |-
             The full path of the URL for the userinfo endpoint where the user data can be retrieved:
-            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-developer-docs/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
+            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://developer.vippsmobilepay.com/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
             This will be null if profile data was not requested.
           nullable: true
         variableAmount:
@@ -1761,7 +1761,7 @@ components:
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
           description: |-
             The full path of the URL for the userinfo endpoint where the user data can be retrieved.:
-            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://vippsas.github.io/vipps-developer-docs/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
+            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://developer.vippsmobilepay.com/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
             This will be null if profile data was not requested.
           nullable: true
 
@@ -2931,7 +2931,7 @@ components:
         type:
           type: string
           description: Path to type of error
-          example: https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#validation-error
+          example: https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-problems#validation-error
         title:
           type: string
           description: Short description of the error

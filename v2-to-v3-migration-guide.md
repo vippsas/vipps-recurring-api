@@ -59,7 +59,7 @@ to retry the request at a later point in time.
 In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 
 See:
-[Errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/errors).
+[Errors](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/errors).
 
 ## New price representation
 
@@ -102,7 +102,7 @@ V3 request body
 
 ### Variable amount
 
-To draft agreement with a [variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
+To draft agreement with a [variable amount](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
 Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
@@ -223,7 +223,7 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 
 The misspelled `Idempotent-Key` header is deprecated.
 The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints.
-See [Idempotency key header](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#idempotency-key-header-v3-api-coming-soon) in the API Guide.
+See [Idempotency key header](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#idempotency-key-header-v3-api-coming-soon) in the API Guide.
 
 ## Product description guidelines
 
@@ -251,10 +251,10 @@ Also, the API V3 returns different response status. It will return `204 No Conte
 See [Response statuses](#response-statuses)
 
 
-[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
-[update-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
-[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
-[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
-[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
-[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
-[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
+[draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
+[update-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+[create-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
+[cancel-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
+[capture-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
+[refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
+[fetch-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3

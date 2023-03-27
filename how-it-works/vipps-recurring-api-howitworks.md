@@ -14,14 +14,14 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/).
 
 <!-- END_COMMENT -->
 
 Recurring can be used for subscriptions, donations or other recurring payments.
 
 For technical documentation go to:
-[Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Recurring API](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 ## The recurring payment process
 
@@ -67,7 +67,7 @@ The user can see their active subscriptions, as well as stopped subscriptions, a
 
 ## 6. Manage agreements
 
-If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
+If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://developer.vippsmobilepay.com/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 
