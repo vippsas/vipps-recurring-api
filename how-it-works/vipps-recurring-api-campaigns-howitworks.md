@@ -14,12 +14,12 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 
 For technical documentation go to:
-[Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps Recurring API](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 ## 1. Buy a subscription with Vipps MobilePay
 
@@ -71,7 +71,7 @@ Campaign information will be displayed on the active and stopped subscriptions u
 
 ## 6. Manage agreements
 
-If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps MobilePay Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
+If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps MobilePay Login](https://developer.vippsmobilepay.com/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 

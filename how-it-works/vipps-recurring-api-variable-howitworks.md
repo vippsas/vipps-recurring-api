@@ -10,12 +10,12 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 
 For technical documentation go to:
-[Vipps Recurring API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps Recurring API](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 ## Recurring variable amount pricing
 
@@ -76,6 +76,6 @@ If the user clicks on max amount, they can choose a new max amount for the agree
 
 ![Change max amount](../images/vipps-recurring-api-variable-howitworks/variable_amount_manage.png)
 
-If the user clicks on `Manage agreement` (*Administrer abonnement*) in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://vippsas.github.io/vipps-developer-docs/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
+If the user clicks on `Manage agreement` (*Administrer abonnement*) in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://developer.vippsmobilepay.com/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)

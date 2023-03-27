@@ -14,14 +14,14 @@ END_METADATA -->
 In Recurring API, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 
 See:
-[Errors](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/errors)
+[Errors](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/errors)
 
 API version: 3.0.0.
 
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 
@@ -30,12 +30,12 @@ API version: 3.0.0.
 ### Validation error
 
 Missing data or inconsistencies in json. Please verify the request json body.
-See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
+See [API specs](https://developer.vippsmobilepay.com/api/recurring).
 
 ### Invalid agreement id
 
 Agreement Id is invalid. Please verify the agreement Id is present and in the correct format.
-See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
+See [API specs](https://developer.vippsmobilepay.com/api/recurring).
 
 ### Invalid json
 
@@ -44,7 +44,7 @@ Json body is invalid. Please verify the request json body.
 ### Unsupported media type
 
 Media type indicated in Content-type header is not supported.
-See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
+See [API specs](https://developer.vippsmobilepay.com/api/recurring).
 
 ### Not authorized
 
@@ -53,7 +53,7 @@ JWT token is invalid.
 ### Idempotency key header
 
 Missing or invalid Idempotency key header.
-See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
+See [API specs](https://developer.vippsmobilepay.com/api/recurring).
 
 ### Charge amount too high
 
@@ -66,12 +66,12 @@ Amount for interval is exceeded. Check if other charges has already been created
 ### Charge due too soon
 
 Charge date due must be minimum 2 days in the future.
-See [Create a charge](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).
+See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).
 
 ### Charge due in too long
 
 Charge due date must be maximum 2 years in the future.
-See [Create a charge](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).
+See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).
 
 ### Unsupported feature
 
@@ -84,7 +84,7 @@ Agreement cannot be updated. Might be stopped or pending.
 ### Invalid suggested max amount
 
 Suggested max amount is invalid or too high.
-See [Recurring agreements with variable amount](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount).
+See [Recurring agreements with variable amount](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount).
 
 ### Cancel charge failed
 
@@ -100,12 +100,12 @@ Could not capture charge.
 
 ### Missing request header
 
-Missing headers. See [API specs](https://vippsas.github.io/vipps-developer-docs/api/recurring).
+Missing headers. See [API specs](https://developer.vippsmobilepay.com/api/recurring).
 
 ### Invalid sales unit
 The Sales unit is not allowed to use Recurring.
 
-[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+[update-agreement-patch-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
 
 ### Resource not found
 The specified resource was not found. See details for additional information.

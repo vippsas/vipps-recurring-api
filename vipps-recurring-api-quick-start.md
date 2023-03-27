@@ -18,7 +18,7 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 
@@ -27,7 +27,7 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 ### Prerequisites
 
 Review
-[quick start guides](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/quick-start-guides)
+[quick start guides](https://developer.vippsmobilepay.com/docs/vipps-developers/quick-start-guides)
 for information about getting your test environment set up.
 
 ### Step 1: Get the Postman collection and environment
@@ -70,7 +70,7 @@ This provides you with access to the API.
 The access token is valid for 1 hour in the test environment
 and 24 hours in the production environment.
 See the
-[API reference](https://vippsas.github.io/vipps-developer-docs/api/recurring)
+[API reference](https://developer.vippsmobilepay.com/api/recurring)
 for details about the calls.
 
 ### Create agreements
@@ -97,7 +97,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 
    If you confirmed the agreement, the status should be ACTIVE in the response.
    If you didn't go through with the confirmation, the status will be PENDING for a
-   [maximum of 10 minutes](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/common-topics/timeouts),
+   [maximum of 10 minutes](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts),
    before it goes to `EXPIRED`.
 
 #### Create an agreement with an initial charge
@@ -276,19 +276,19 @@ When you create an agreement with a reserved charge, you will need to capture th
 5. Send `Get Charge` again, to see that the status is now "CHARGED".
 
 
-[list-agreements-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
-[draft-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
-[agreement-endpoints]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints
-[fetch-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
-[update-agreement-patch-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
-[force-accept-agreement-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
-[charge-endpoints]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints
-[list-charges-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
-[create-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
-[fetch-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
-[cancel-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
-[capture-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
-[refund-charge-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
-[userinfo-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/userinfo#operation/getUserinfo
-[access-token-endpoint]: https://vippsas.github.io/vipps-developer-docs/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[vipps-test-environment]: https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/test-environment
+[list-agreements-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
+[draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
+[agreement-endpoints]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints
+[fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
+[update-agreement-patch-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+[force-accept-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
+[charge-endpoints]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints
+[list-charges-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
+[create-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
+[fetch-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
+[cancel-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
+[capture-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
+[refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
+[userinfo-endpoint]: https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo
+[access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
+[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment

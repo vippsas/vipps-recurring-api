@@ -12,7 +12,7 @@ END_METADATA -->
 <!-- START_COMMENT -->
 
 ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api).
+[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 <!-- END_COMMENT -->
 
@@ -24,7 +24,7 @@ Information about this product in Norwegian, see
 
 **IMPORTANT:** The Vipps Recurring API is available for customers that
 have "Vipps på Nett"
-([eCom API](https://vippsas.github.io/vipps-developer-docs/docs/APIs/ecom-api))
+([eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api))
 and have completed additional compliance checks.
 See the intro to the
 [API guide](vipps-recurring-api.md)
@@ -39,13 +39,13 @@ for details.
 
 ## Related solutions
 
-* [Simplifying registration and payment (Recurring with Login)](https://vippsas.github.io/vipps-developer-docs/docs/vipps-solutions/recurring-and-login)
-* [Parking and "Pay-as-you-go"](https://vippsas.github.io/vipps-developer-docs/docs/vipps-solutions/parking)
+* [Simplifying registration and payment (Recurring with Login)](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login)
+* [Parking and "Pay-as-you-go"](https://developer.vippsmobilepay.com/docs/vipps-solutions/parking)
 
 ## Getting started
 
 See
-[Getting started guide](https://vippsas.github.io/vipps-developer-docs/docs/vipps-developers/getting-started)
+[Getting started guide](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
 for information about API keys, product activation, how to make API calls, etc.
 
 Review the detailed documentation found here:
@@ -54,4 +54,4 @@ Review the detailed documentation found here:
 * [API guide](vipps-recurring-api.md): Developer guide for the Recurring API.
 * [API checklist](vipps-recurring-api-checklist.md): For direct and POS integrations.
 * [API FAQ](vipps-recurring-api-faq.md): Questions and answers.
-* [API reference](https://vippsas.github.io/vipps-developer-docs/api/recurring): Recurring API reference specifications.
+* [API reference](https://developer.vippsmobilepay.com/api/recurring): Recurring API reference specifications.
