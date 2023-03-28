@@ -971,7 +971,7 @@ This results in a _very_ high success rate for charges.
 
 To retrieve a charge, we recommend to use the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
 
-**Please note:** The endpoint [`GET:/charges/{chargeId}`][fetch-charge-endpoint] is **not** intended for automation. 
+**Please note:** The endpoint [`GET:/charges/{chargeId}`][fetch-charge-by-id-endpoint] is **not** intended for automation. 
 There is a stricter rate limiting (See [Rate limiting](#rate-limiting)) on this endpoint because it is more expensive to fetch a charge without the agreementId.
 Its purpose is to simplify investigations when the merchant lost track of which charge belongs to which agreement.
 It should **not** be used as a substitute for the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
