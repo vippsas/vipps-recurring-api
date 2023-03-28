@@ -2707,6 +2707,7 @@ components:
         - id
         - status
         - currency
+        - agreementId
       properties:
         amount:
           type: integer
@@ -2733,6 +2734,8 @@ components:
           description: Identifier for this charge (for this customer's subscription).
           maxLength: 15
           example: chr_WCVbcA
+        agreementId: 
+          $ref: "#/components/parameters/AgreementId"
         status:
           $ref: "#/components/schemas/ChargeStatus"
         transactionId:
