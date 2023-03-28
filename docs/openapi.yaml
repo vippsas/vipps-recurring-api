@@ -1544,6 +1544,10 @@ components:
             This feature has to be specially enabled by Vipps for eligible sales units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
           example: false
+        externalId:
+          type: string
+          description: An optional external id for the agreement
+          maxLength: 64
 
     DraftAgreementResponseV2:
       title: DraftAgreementResponse
