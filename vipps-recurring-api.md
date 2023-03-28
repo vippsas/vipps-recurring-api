@@ -155,20 +155,20 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 ## API endpoints
 
-| Operation                                       | Description                                           | Endpoint                                                                               |
-|-------------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------------------------------|
-| List agreements                                 | List all agreements for a merchant.                   | [`GET:/agreements`][list-agreements-endpoint]                                          |
-| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                        | [`POST:/agreements`][draft-agreement-endpoint]                                         |
-| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                 | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
-| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                 | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
-| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                       | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
-| [List charges](#list-charges)                   | Get all charges for an agreement.                     | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
-| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                 | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
-| Retrieve a charge                               | Retrieve all details of a charge.                     | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
-| Retrieve a charge by id                         | Retrieve all details of a charge by id.               | [`GET:/charges/{chargeId}`][fetch-charge-endpoint]                                     |
-| [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.     | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
-| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged. | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
-| Refund a charge                                 | Refund a charge that has been performed.              | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
+| Operation                                       | Description                                                                                                                 | Endpoint                                                                               |
+|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| List agreements                                 | List all agreements for a merchant.                                                                                         | [`GET:/agreements`][list-agreements-endpoint]                                          |
+| [Create an agreement](#create-an-agreement)     | Create a new, draft agreement.                                                                                              | [`POST:/agreements`][draft-agreement-endpoint]                                         |
+| [Retrieve an agreement](#retrieve-an-agreement) | Retrieve the details of an agreement.                                                                                       | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]                            |
+| [Update an agreement](#update-an-agreement)     | Update an agreement with new details.                                                                                       | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
+| [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                                                                                             | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
+| [List charges](#list-charges)                   | Get all charges for an agreement.                                                                                           | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
+| [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                                                                                       | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
+| Retrieve a charge                               | Retrieve all details of a charge.                                                                                           | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
+| Retrieve a charge by id                         | Retrieve a single charge just by chargeId. Useful for investigating claims from customers, but not intended for automation. | [`GET:/charges/{chargeId}`][fetch-charge-endpoint]                                     |
+| [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.                                                                           | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
+| [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged.                                                                       | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
+| Refund a charge                                 | Refund a charge that has been performed.                                                                                    | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
 
 See [Authentication and authorization](#authentication-and-authorization).
 
