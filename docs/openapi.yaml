@@ -945,7 +945,7 @@ paths:
     get:
       tags:
         - Charge v3 endpoints
-      summary: Fetch a Charge
+      summary: Fetch a charge
       description: Fetch a single charge for a user.
       operationId: FetchChargeV3
       parameters:
@@ -973,7 +973,7 @@ paths:
     delete:
       tags:
         - Charge v3 endpoints
-      summary: Cancel a Charge
+      summary: Cancel a charge
       description: |-
         Cancels a pending, due or reserved charge.
         When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge
@@ -1000,6 +1000,34 @@ paths:
           description: No content
         '202':
           description: Accepted. Request accepted, the action will likely succeed but has not yet been enacted.
+        default:
+          $ref: '#/components/responses/ErrorResponseV3'
+      deprecated: false
+
+  /recurring/v3/charges/{chargeId}:
+    get:
+      tags:
+        - Charge v3 endpoints
+      summary: Fetch a charge by id
+      description: Fetch a single charge for a user.
+      operationId: FetchChargeByIdV3
+      parameters:
+        - $ref: "#/components/parameters/Authorization"
+        - $ref: "#/components/parameters/Ocp-Apim-Subscription-Key"
+        - $ref: "#/components/parameters/Content-Type"
+        - $ref: "#/components/parameters/Merchant-Serial-Number"
+        - $ref: "#/components/parameters/Vipps-System-Name"
+        - $ref: "#/components/parameters/Vipps-System-Version"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Name"
+        - $ref: "#/components/parameters/Vipps-System-Plugin-Version"
+        - $ref: "#/components/parameters/ChargeId"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponseV3'
         default:
           $ref: '#/components/responses/ErrorResponseV3'
       deprecated: false

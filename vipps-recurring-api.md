@@ -1491,6 +1491,7 @@ what we "use to count". The limits are of course not _total_ limits.
 | [ListAgreements][list-agreements-endpoint]         | 5 per minute   | (per merchant)                                    | Five calls per minute per merchant                        |
 | [UpdateAgreement][update-agreement-patch-endpoint] | 5 per minute   | agreementId                                       | Five calls per minute per unique agreementId              |
 | [FetchCharge][fetch-charge-endpoint]               | 10 per minute  | agreementId + chargeId                            | Ten calls per minute per unique agreementId and chargeId  |
+| [FetchChargeById][fetch-charge-by-id-endpoint]     | 100 per minute | chargeId                                          | Hundred calls per minutes per merchant                    |
 | [ListCharges][list-charges-endpoint]               | 10 per minute  | agreementId                                       | Ten calls per minute per unique agreementId               |
 | [FetchAgreement][fetch-agreement-endpoint]         | 120 per minute | agreementId                                       | 120 calls per minute per unique agreementId               |
 | [DraftAgreement][draft-agreement-endpoint]         | 300 per minute | (per merchant)                                    | 300 calls per minute per merchant                         |
@@ -1657,6 +1658,7 @@ In addition to campaigns and initial charges being available as individual flows
 [list-charges-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
 [create-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
 [fetch-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
+[fetch-charge-by-id-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeByIdV3
 [cancel-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
 [refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [capture-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
