@@ -164,8 +164,8 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | [Stop an agreement](#stop-an-agreement)         | Update the status to `STOPPED`.                                                                                             | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]                   |
 | [List charges](#list-charges)                   | Get all charges for an agreement.                                                                                           | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
 | [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                                                                                       | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
-| Retrieve a charge                               | Retrieve all details of a charge.                                                                                           | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
-| Retrieve a charge by id                         | Retrieve a single charge just by chargeId. Useful for investigating claims from customers, but not intended for automation. | [`GET:/charges/{chargeId}`][fetch-charge-endpoint]                                     |
+| [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                                                                                           | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
+| [Retrieve a charge by id](#retrieve-a-charge)   | Retrieve a single charge just by chargeId. Useful for investigating claims from customers, but not intended for automation. | [`GET:/charges/{chargeId}`][fetch-charge-by-id-endpoint]                               |
 | [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.                                                                           | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
 | [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged.                                                                       | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
 | Refund a charge                                 | Refund a charge that has been performed.                                                                                    | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
@@ -966,6 +966,15 @@ See: [Charge states](#charge-states).
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
 This results in a _very_ high success rate for charges.
+
+### Retrieve a charge
+
+To retrieve a charge, we recommend to use the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
+
+**Please note:** The endpoint [`GET:/charges/{chargeId}`][fetch-charge-endpoint] is **not** intended for automation. 
+There is a stricter rate limiting (See [Rate limiting](#rate-limiting)) on this endpoint because it is more expensive to fetch a charge without the agreementId.
+Its purpose is to simplify investigations when the merchant lost track of which charge belongs to which agreement.
+It should **not** be used as a substitute for the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
 
 #### Details on charges
 
