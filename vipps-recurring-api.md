@@ -875,7 +875,7 @@ to make sure the user understands any changes and get updated information.
 
 ### Charge descriptions
 
-When charges are shown to users in Vipps, they will have a title, and a
+When charges are shown to users in the app, they will have a title, and a
 description. The title of a charge is derived directly from
 `{agreement.productName}` whereas the description is set per charge, i.e.
 `{charge.description}`. For example, a charge on an agreement with product
