@@ -1009,7 +1009,7 @@ paths:
       tags:
         - Charge v3 endpoints
       summary: Fetch a charge by id
-      description: Fetch a single charge for a user.
+      description: Fetch a single charge just by chargeId. Useful for investigating claims from customers, but not intended for automation.
       operationId: FetchChargeByIdV3
       parameters:
         - $ref: "#/components/parameters/Authorization"
