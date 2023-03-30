@@ -36,7 +36,7 @@ If the agreement was started from a mobile device, the app will automatically sw
 
 ![Vipps landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
-## 3. Accept agreement in Vipps or MobilePay
+## 3. Accept agreement 
 
 The user receives a push notification on their phone. They log in to Vipps or MobilePay and accept the agreement.
 
