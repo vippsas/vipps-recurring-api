@@ -21,13 +21,13 @@ END_METADATA -->
 For technical documentation go to:
 [Vipps Recurring API](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
-## 1. Buy a subscription with Vipps MobilePay
+## 1. Buy a subscription 
 
 A user chooses Vipps or MobilePAy as payment method for a subscription on a merchant's website or app.
 
 ![Buy subscription with Vipps](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
-## 2. The Vipps or MobilePay landing page
+## 2. The landing page
 
 If the agreement was started on a desktop device, the user will be sent to the Vipps or MobilePay landing page.
 The user confirms their number and is prompted to log in to Vipps or MobilePay.
@@ -36,7 +36,7 @@ If the agreement was started from a mobile device, the app will automatically sw
 
 ![Vipps or MobilePay landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
-## 3. Accept agreement in Vipps or MobilePay
+## 3. Accept agreement  
 
 The user receives a push notification on their phone. They log in to Vipps or MobilePay and accept the agreement.
 
@@ -75,4 +75,4 @@ If the user clicks on “Manage agreement” in the previous step, they will be 
 
 ![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 
-## Great! Now you know how the Vipps MobilePay Recurring agreements with campaign process works.
+## Great! Now you know how the Recurring agreements with campaign process works.
