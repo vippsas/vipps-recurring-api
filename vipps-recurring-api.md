@@ -1192,7 +1192,7 @@ The user will be able to see these failures in Vipps and take the necessary acti
 
 Example if a user has an expired card:
 
-![app-expired-card](/images/agreement-charge-failure-app/agreement_charge_failure_reason.png)
+![app-expired-card](images/agreement-charge-failure-app/agreement_charge_failure_reason.png)
 
 ### Deprecated failureReasons
 
