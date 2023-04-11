@@ -1095,7 +1095,7 @@ When a user notifies the merchant that they want to cancel a subscription or
 service, the merchant must ensure that the status of the recurring agreement is
 set to `STOPPED` at a suitable time.
 
-A merchant can stopped an agreement by calling the [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint.
+A merchant can stopped an agreement by calling the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint.
 Request body for stopping an agreement:
 
 ```json
