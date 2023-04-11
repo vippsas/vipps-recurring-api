@@ -1306,7 +1306,7 @@ components:
         captured:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The total amount which has been captured/charged, in case of status charged/partial capture.
             Amounts are specified in minor units.
@@ -1322,7 +1322,7 @@ components:
         cancelled:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The total amount which has been cancelled.
 
@@ -1346,7 +1346,9 @@ components:
       properties:
         occurred:
           type: string
-          description: Date and time of the event
+          description: |-
+            Date and time of the event, on the format
+            `2022-09-05T14:25:55Z`.
           example: 2022-09-05T14:25:55Z
         event:
           type: string
@@ -1361,7 +1363,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The amount related to the operation.
             Amounts are specified in minor units.
@@ -1454,20 +1456,26 @@ components:
         isApp:
           type: boolean
           description: |-
-            This parameter indicates whether payment request is triggered from
+            This optional parameter indicates whether payment request is triggered from
             Mobile App or Web browser. Based on this value, response will be
             redirect URL for Vipps landing page or deeplink URL to connect vipps
             App. When isApp is set to true, URLs passed to Vipps will not be
             validated as regular URLs.
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp
           example: false
+          default: false
         merchantAgreementUrl:
           type: string
           maxLength: 1024
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
+            The page must offer actual managemewnt, not jut information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
           example: https://example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
@@ -1502,9 +1510,14 @@ components:
         skipLandingPage:
           type: boolean
           description: |-
-            If the property is set to `true`, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
-            This feature has to be specially enabled by Vipps for eligible sales units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
+            If the property is set to `true`, it will cause a push notification
+            to be sent to the given phone number immediately, without loading
+            the landing page.
+            This feature has to be specially enabled by Vipps for eligible sales
+            units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page
+          default: false
           example: false
 
     DraftAgreementV3:
@@ -1534,17 +1547,28 @@ components:
           $ref: '#/components/schemas/TimePeriod'
         isApp:
           type: boolean
-          description: If merchant is redirecting user from an app or a mobile device.
+          description: |-
+            This optional parameter indicates whether payment request is triggered from
+            Mobile App or Web browser. Based on this value, response will be
+            redirect URL for Vipps landing page or deeplink URL to connect vipps
+            App. When isApp is set to true, URLs passed to Vipps will not be
+            validated as regular URLs.
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp
           example: false
+          default: false
         merchantAgreementUrl:
           type: string
           maxLength: 1024
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual managemewnt, not jut information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
           maxLength: 1024
@@ -1568,9 +1592,14 @@ components:
         skipLandingPage:
           type: boolean
           description: |-
-            If the property is set to `true`, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
-            This feature has to be specially enabled by Vipps for eligible sales units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
+            If the property is set to `true`, it will cause a push notification
+            to be sent to the given phone number immediately, without loading
+            the landing page.
+            This feature has to be specially enabled by Vipps for eligible sales
+            units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page
+          default: false
           example: false
         externalId:
           type: string
@@ -1713,9 +1742,13 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual managemewnt, not jut information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
@@ -1780,9 +1813,13 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual managemewnt, not jut information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
@@ -1837,11 +1874,16 @@ components:
         merchantAgreementUrl:
           type: string
           maxLength: 1024
-          description: URL where Vipps can send the customer to view/manage their
+          description: |-
+            URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual managemewnt, not jut information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         status:
           type: string
           example: STOPPED
@@ -1865,11 +1907,16 @@ components:
         merchantAgreementUrl:
           type: string
           maxLength: 1024
-          description: URL where Vipps can send the customer to view/manage their
+          description: |-
+            URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual managemewnt, not jut information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         status:
           type: string
           example: STOPPED
@@ -2448,7 +2495,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The amount that must be paid or approved before starting the agreement.
 
@@ -2486,7 +2533,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The amount that must be payed or approved before starting the agreement.
 
@@ -2522,7 +2569,7 @@ components:
           type: integer
           format: int32
           minimum: 100
-          example: 234
+          example: 19900
           description: |-
             Amount to be paid by the customer.
 
@@ -2569,7 +2616,7 @@ components:
           type: integer
           format: int32
           minimum: 100
-          example: 234
+          example: 19900
           description: |-
             Amount to be paid by the customer.
 
@@ -2632,7 +2679,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             Amount to be paid by the customer.
 
@@ -2716,7 +2763,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             Amount to be paid by the customer.
 
@@ -2738,7 +2785,7 @@ components:
           description: Identifier for this charge (for this customer's subscription).
           maxLength: 15
           example: chr_WCVbcA
-        agreementId: 
+        agreementId:
           $ref: "#/components/parameters/AgreementId"
         status:
           $ref: "#/components/schemas/ChargeStatus"
