@@ -1203,7 +1203,7 @@ The user gets more information in Vipps regarding why the Charge did not get cha
 
 ## Userinfo
 
-Vipps offers the possibility for merchants to ask for the user's profile information as part of the payment flow.
+Vipps offers the possibility for merchants to ask for the user's profile information as part of the payment flow. This is also called "Profile Sharing".
 
 To enable the possibility to fetch profile information for a user the merchant can add a
 [`scope`](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api#scope)
