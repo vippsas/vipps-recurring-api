@@ -1186,6 +1186,14 @@ Here is a list of possible values for `failureReason`, their respective descript
 | non_technical_error    | Payment failed. Could be that the user has deleted their Vipps profile.                                                                                                                                                                     | The user needs to take action in Vipps.                                                                                                                                                  |
 | technical_error        | Payment failed due to a technical error in Recurring or a downstream service                                                                                                                                                                | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge.                             |
 
+### App
+
+The user will be able to see these failures in Vipps and take the necessary action.
+
+Example if a user has an expired card:
+
+![app-expired-card](/images/agreement-charge-failure-app/agreement_charge_failure_reason.png)
+
 ### Deprecated failureReasons
 
 The following `failureReasons` are no longer exposed on charges:
