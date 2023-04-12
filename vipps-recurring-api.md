@@ -363,9 +363,6 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
 }
 ```
 
-**Please note**: Going forward, new types will be introduced. We will look into how we can implement charge limits in a better way, that takes care of the merchants needs.
-
-
 ### Accept an agreement
 
 The [`POST:/agreements`][draft-agreement-endpoint] endpoint will return the following JSON structure.
