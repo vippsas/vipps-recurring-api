@@ -52,7 +52,7 @@ Example: `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api
 | charge-creation-failed              | [Charge creation failed](#charge-creation-failed)                           |
 | charge-capture-failed               | [Charge capture failed](#charge-capture-failed)                             |
 | missing-request-header              | [Missiong request header](#missing-request-header)                          |
-| invalid-sale-unit                   | [Invalid sale unit](#invalid-sale-unit)                                     |
+| invalid-sales-unit                   | [Invalid sales unit](#invalid-sales-unit)                                     |
 | resource-not-found                  | [Resource not found](#resource-not-found)                                   |
 | operation-failed                    | [Operation failed](#operation-failed)                                       |
 | conflict                            | [Conflict](#conflict)                                                       |
