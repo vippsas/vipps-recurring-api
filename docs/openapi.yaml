@@ -1229,6 +1229,7 @@ components:
       description: The name of the ecommerce solution. One word in lowercase letters is good.
       schema:
         type: string
+        maxLength: 30
       example: woocommerce
     Vipps-System-Version:
       name: Vipps-System-Version
@@ -1236,6 +1237,7 @@ components:
       description: The version number of the ecommerce solution.
       schema:
         type: string
+        maxLength: 30
       example: "5.4"
     Vipps-System-Plugin-Name:
       name: Vipps-System-Plugin-Name
@@ -1243,6 +1245,7 @@ components:
       description: The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
       schema:
         type: string
+        maxLength: 30
       example: "vipps-woocommerce"
     Vipps-System-Plugin-Version:
       name: Vipps-System-Plugin-Version
@@ -1250,6 +1253,7 @@ components:
       description: The version number of the ecommerce plugin (if applicable).
       schema:
         type: string
+        maxLength: 30
       example: "1.2.1"
 
     Content-Type:
