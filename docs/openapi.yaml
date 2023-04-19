@@ -14,9 +14,11 @@ servers:
     description: Test environment (uses the test API keys, the test app and test data)
 
 tags:
-  - name: Agreement v2 endpoints
+  - name: Agreement v2 endpoints (Deprecated)
+    description: Will not be available from June 1, 2023
   - name: Agreement v3 endpoints
-  - name: Charge v2 endpoints
+  - name: Charge v2 endpoints (Deprecated)
+    description: Will not be available from June 1, 2023
   - name: Charge v3 endpoints
 
 paths:

@@ -24,6 +24,8 @@ to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
+ **Important:** The Recurring v2 API will be phased out and will not be available from June 1, 2023. See the [migration guide](/v2-to-v3-migration-guide.md) for an overview of what has changed from v2 to v3.
+
 ## Requirements
 
 **Important:** The Vipps MobilePay Recurring API requires additional compliance checks
