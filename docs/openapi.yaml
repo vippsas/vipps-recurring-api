@@ -14,18 +14,19 @@ servers:
     description: Test environment (uses the test API keys, the test app and test data)
 
 tags:
-  - name: Agreement v2 endpoints (Deprecated)
+  - name: Agreement v2 endpoints (deprecated)
     description: Will not be available from June 1, 2023
   - name: Agreement v3 endpoints
-  - name: Charge v2 endpoints (Deprecated)
+  - name: Charge v2 endpoints (deprecated)
     description: Will not be available from June 1, 2023
   - name: Charge v3 endpoints
 
 paths:
   /recurring/v2/agreements:
     get:
+      deprecated: true
       tags:
-        - Agreement v2 endpoints
+        - Agreement v2 endpoints (deprecated)
       summary: List Agreements
       description: |-
         The API call allows merchant to fetch all agreements.
@@ -56,11 +57,11 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponseV2'
 
-      deprecated: false
 
     post:
+      deprecated: true
       tags:
-        - Agreement v2 endpoints
+        - Agreement v2 endpoints (deprecated)
       summary: Create a new Agreement, to be confirmed in Vipps
       description: |-
         The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
@@ -196,12 +197,12 @@ paths:
                 $ref: '#/components/schemas/DraftAgreementResponseV2'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
   /recurring/v2/agreements/{agreementId}:
     get:
+      deprecated: true
       tags:
-        - Agreement v2 endpoints
+        - Agreement v2 endpoints (deprecated)
       summary: Fetch an Agreement
       description: |-
         Fetch a single agreement for a user.
@@ -226,11 +227,11 @@ paths:
                 $ref: '#/components/schemas/AgreementResponseV2'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
     put:
+      deprecated: true
       tags:
-        - Agreement v2 endpoints
+        - Agreement v2 endpoints (deprecated)
       summary: Update an Agreement
       description: |-
         Updates the agreement.
@@ -264,11 +265,11 @@ paths:
                 $ref: '#/components/schemas/AgreementReference'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
     patch:
+      deprecated: true
       tags:
-        - Agreement v2 endpoints
+        - Agreement v2 endpoints (deprecated)
       summary: Update an Agreement
       description: |-
         Updates the agreement.
@@ -302,12 +303,12 @@ paths:
                 $ref: '#/components/schemas/AgreementReference'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
   /recurring/v2/agreements/{agreementId}/accept:
     patch:
+      deprecated: true
       tags:
-        - Agreement v2 endpoints
+        - Agreement v2 endpoints (deprecated)
       summary: Force accept an Agreement (Only available in test environment)
       description: |-
         Forces an agreement to be accepted by the given customer phone number.
@@ -338,7 +339,6 @@ paths:
                 type: object
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
   /recurring/v3/agreements:
     get:
@@ -673,8 +673,9 @@ paths:
 
   /recurring/v2/agreements/{agreementId}/charges:
     get:
+      deprecated: true
       tags:
-        - Charge v2 endpoints
+        - Charge v2 endpoints (deprecated)
       summary: List Charges
       description: |-
         Fetches all charges for a single agreement, including the optional initial charge.
@@ -702,11 +703,11 @@ paths:
                   $ref: '#/components/schemas/ChargeResponseV2'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
     post:
+      deprecated: true
       tags:
-        - Charge v2 endpoints
+        - Charge v2 endpoints (deprecated)
       summary: Create a new charge
       description: |-
         Creates a new recurring charge *(payment)* that will charge the user on the date specified.
@@ -738,12 +739,12 @@ paths:
                 $ref: '#/components/schemas/ChargeReference'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
   /recurring/v2/agreements/{agreementId}/charges/{chargeId}:
     get:
+      deprecated: true
       tags:
-        - Charge v2 endpoints
+        - Charge v2 endpoints (deprecated)
       summary: Fetch a Charge
       description: Fetch a single charge for a user.
       operationId: FetchCharge
@@ -767,11 +768,11 @@ paths:
                 $ref: '#/components/schemas/ChargeResponseV2'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
     delete:
+      deprecated: true
       tags:
-        - Charge v2 endpoints
+        - Charge v2 endpoints (deprecated)
       summary: Cancel a Charge
       description: |-
         Cancels a pending, due or reserved charge.
@@ -802,12 +803,12 @@ paths:
                 $ref: '#/components/schemas/ChargeResponseV2'
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
   /recurring/v2/agreements/{agreementId}/charges/{chargeId}/capture:
     post:
+      deprecated: true
       tags:
-        - Charge v2 endpoints
+        - Charge v2 endpoints (deprecated)
       summary: Capture a reserved charge
       description: |-
         Captures a reserved charge.
@@ -834,12 +835,12 @@ paths:
                 type: object
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
   /recurring/v2/agreements/{agreementId}/charges/{chargeId}/refund:
     post:
+      deprecated: true
       tags:
-        - Charge v2 endpoints
+        - Charge v2 endpoints (deprecated)
       summary: Refund a charge
       description: |-
         Refunds a charge, can also do a partial refund (refunding a smaller part of the payment).
@@ -871,7 +872,6 @@ paths:
                 type: object
         default:
           $ref: '#/components/responses/ErrorResponseV2'
-      deprecated: false
 
   /recurring/v3/agreements/{agreementId}/charges:
     get:
