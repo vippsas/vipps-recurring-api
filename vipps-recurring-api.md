@@ -24,6 +24,8 @@ to create a payment agreement with a customer for fixed interval payments.
 When the agreement is accepted by the end user, the merchant can send charges
 that will be automatically processed on the due date.
 
+ **Important:** The Recurring v2 API will be phased out and will not be available from June 1, 2023. See the [migration guide](/v2-to-v3-migration-guide.md) for an overview of what has changed from v2 to v3.
+
 ## Requirements
 
 **Important:** The Vipps MobilePay Recurring API requires additional compliance checks
@@ -362,9 +364,6 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
   "...": "..."
 }
 ```
-
-**Please note**: Going forward, new types will be introduced. We will look into how we can implement charge limits in a better way, that takes care of the merchants needs.
-
 
 ### Accept an agreement
 
@@ -1095,7 +1094,7 @@ When a user notifies the merchant that they want to cancel a subscription or
 service, the merchant must ensure that the status of the recurring agreement is
 set to `STOPPED` at a suitable time.
 
-A merchant can stopped an agreement by calling the [`PUT:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint.
+A merchant can stopped an agreement by calling the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint.
 Request body for stopping an agreement:
 
 ```json
@@ -1185,6 +1184,14 @@ Here is a list of possible values for `failureReason`, their respective descript
 | charge_amount_too_high | Amount is higher than the user's specified max amount                                                                                                                                                                                       | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed. |
 | non_technical_error    | Payment failed. Could be that the user has deleted their Vipps profile.                                                                                                                                                                     | The user needs to take action in Vipps.                                                                                                                                                  |
 | technical_error        | Payment failed due to a technical error in Recurring or a downstream service                                                                                                                                                                | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge.                             |
+
+### App
+
+The user will be able to see these failures in Vipps and take the necessary action.
+
+Example if a user has an expired card:
+
+![app-expired-card](images/agreement-charge-failure-app/agreement_charge_failure_reason.png)
 
 ### Deprecated failureReasons
 

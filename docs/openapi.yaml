@@ -14,9 +14,11 @@ servers:
     description: Test environment (uses the test API keys, the test app and test data)
 
 tags:
-  - name: Agreement v2 endpoints
+  - name: Agreement v2 endpoints (Deprecated)
+    description: Will not be available from June 1, 2023
   - name: Agreement v3 endpoints
-  - name: Charge v2 endpoints
+  - name: Charge v2 endpoints (Deprecated)
+    description: Will not be available from June 1, 2023
   - name: Charge v3 endpoints
 
 paths:
@@ -1229,6 +1231,7 @@ components:
       description: The name of the ecommerce solution. One word in lowercase letters is good.
       schema:
         type: string
+        maxLength: 30
       example: woocommerce
     Vipps-System-Version:
       name: Vipps-System-Version
@@ -1236,6 +1239,7 @@ components:
       description: The version number of the ecommerce solution.
       schema:
         type: string
+        maxLength: 30
       example: "5.4"
     Vipps-System-Plugin-Name:
       name: Vipps-System-Plugin-Name
@@ -1243,6 +1247,7 @@ components:
       description: The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
       schema:
         type: string
+        maxLength: 30
       example: "vipps-woocommerce"
     Vipps-System-Plugin-Version:
       name: Vipps-System-Plugin-Version
@@ -1250,6 +1255,7 @@ components:
       description: The version number of the ecommerce plugin (if applicable).
       schema:
         type: string
+        maxLength: 30
       example: "1.2.1"
 
     Content-Type:
@@ -1470,19 +1476,21 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            The page must offer actual managemewnt, not jut information about how to
+            The page must offer management tools, not jut information about how to
             contact customer service, etc.
-            We recommend letting users log in with Vipps, not with username and password:
-            https://developer.vippsmobilepay.com/docs/APIs/login-api
-            We do not have any specific requirements for the security of the
-            page other than requiring HTTPS.
+            We recommend letting users
+            [log in with Vipps](https://developer.vippsmobilepay.com/docs/APIs/login-api),
+            not with username and password.
+            We do not have any specific requirements for the security of the page other than requiring HTTPS.
+            Only HTTP or HTTPS scheme is allowed. 
           example: https://example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
           maxLength: 1024
           description: |-
             URL where customer should be redirected after the agreement has been
-            approved/rejected in the Vipps mobile application.
+            approved/rejected in the Vipps mobile application. 
+            HTTPS and deeplinks are allowed (example: myApp://home)
           example: https://example.com/vipps-landing
         price:
           type: integer
@@ -1564,10 +1572,11 @@ components:
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             The page must offer actual managemewnt, not jut information about how to
             contact customer service, etc.
-            We recommend letting users log in with Vipps, not with username and password:
-            https://developer.vippsmobilepay.com/docs/APIs/login-api
-            We do not have any specific requirements for the security of the
-            page other than requiring HTTPS.
+            We recommend letting users
+            [log in with Vipps](https://developer.vippsmobilepay.com/docs/APIs/login-api),
+            not with username and password.
+            We do not have any specific requirements for the security of the page other than requiring HTTPS.
+            Only HTTPS scheme is allowed. 
           example: https://example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
@@ -1575,6 +1584,7 @@ components:
           description: |-
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application.
+            HTTPS and deeplinks are allowed (example: myApp://home)
           example: https://example.com/redirect
         productName:
           type: string
