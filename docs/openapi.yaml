@@ -1476,7 +1476,7 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            The page must offer management tools, not jut information about how to
+            The page must offer management tools, not just information about how to
             contact customer service, etc.
             We recommend letting users
             [log in with Vipps](https://developer.vippsmobilepay.com/docs/APIs/login-api),
@@ -1570,7 +1570,7 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            The page must offer actual management, not jut information about how to
+            The page must offer actual management, not just information about how to
             contact customer service, etc.
             We recommend letting users
             [log in with Vipps](https://developer.vippsmobilepay.com/docs/APIs/login-api),
@@ -1752,7 +1752,7 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            The page must offer actual managemewnt, not jut information about how to
+            The page must offer actual management, not just information about how to
             contact customer service, etc.
             We recommend letting users log in with Vipps, not with username and password:
             https://developer.vippsmobilepay.com/docs/APIs/login-api
@@ -1823,7 +1823,7 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            The page must offer actual managemewnt, not jut information about how to
+            The page must offer actual management, not just information about how to
             contact customer service, etc.
             We recommend letting users log in with Vipps, not with username and password:
             https://developer.vippsmobilepay.com/docs/APIs/login-api
@@ -1887,7 +1887,7 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            The page must offer actual managemewnt, not jut information about how to
+            The page must offer actual management, not just information about how to
             contact customer service, etc.
             We recommend letting users log in with Vipps, not with username and password:
             https://developer.vippsmobilepay.com/docs/APIs/login-api
@@ -1920,7 +1920,7 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            The page must offer actual managemewnt, not jut information about how to
+            The page must offer actual management, not just information about how to
             contact customer service, etc.
             We recommend letting users log in with Vipps, not with username and password:
             https://developer.vippsmobilepay.com/docs/APIs/login-api
