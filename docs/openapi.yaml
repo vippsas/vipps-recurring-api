@@ -2545,7 +2545,7 @@ components:
           format: int32
           example: 19900
           description: |-
-            The amount that must be payed or approved before starting the agreement.
+            The amount that must be paid or approved before starting the agreement.
 
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
