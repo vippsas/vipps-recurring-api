@@ -1312,7 +1312,7 @@ components:
         captured:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The total amount which has been captured/charged, in case of status charged/partial capture.
             Amounts are specified in minor units.
@@ -1328,7 +1328,7 @@ components:
         cancelled:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The total amount which has been cancelled.
 
@@ -1352,7 +1352,9 @@ components:
       properties:
         occurred:
           type: string
-          description: Date and time of the event
+          description: |-
+            Date and time of the event, on the format
+            `2022-09-05T14:25:55Z`.
           example: 2022-09-05T14:25:55Z
         event:
           type: string
@@ -1367,7 +1369,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The amount related to the operation.
             Amounts are specified in minor units.
@@ -1460,19 +1462,25 @@ components:
         isApp:
           type: boolean
           description: |-
-            This parameter indicates whether payment request is triggered from
+            This optional parameter indicates whether payment request is triggered from
             Mobile App or Web browser. Based on this value, response will be
             redirect URL for Vipps landing page or deeplink URL to connect vipps
             App. When isApp is set to true, URLs passed to Vipps will not be
             validated as regular URLs.
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp
           example: false
+          default: false
         merchantAgreementUrl:
           type: string
           maxLength: 1024
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
+            The page must offer management tools, not just information about how to
+            contact customer service, etc.
+            We recommend letting users
+            [log in with Vipps](https://developer.vippsmobilepay.com/docs/APIs/login-api),
+            not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
             Only HTTP or HTTPS scheme is allowed. 
           example: https://example.com/vipps-subscriptions/1234/
@@ -1510,9 +1518,14 @@ components:
         skipLandingPage:
           type: boolean
           description: |-
-            If the property is set to `true`, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
-            This feature has to be specially enabled by Vipps for eligible sales units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
+            If the property is set to `true`, it will cause a push notification
+            to be sent to the given phone number immediately, without loading
+            the landing page.
+            This feature has to be specially enabled by Vipps for eligible sales
+            units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page
+          default: false
           example: false
 
     DraftAgreementV3:
@@ -1542,18 +1555,29 @@ components:
           $ref: '#/components/schemas/TimePeriod'
         isApp:
           type: boolean
-          description: If merchant is redirecting user from an app or a mobile device.
+          description: |-
+            This optional parameter indicates whether payment request is triggered from
+            Mobile App or Web browser. Based on this value, response will be
+            redirect URL for Vipps landing page or deeplink URL to connect vipps
+            App. When isApp is set to true, URLs passed to Vipps will not be
+            validated as regular URLs.
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp
           example: false
+          default: false
         merchantAgreementUrl:
           type: string
           maxLength: 1024
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
+            The page must offer actual management, not just information about how to
+            contact customer service, etc.
+            We recommend letting users
+            [log in with Vipps](https://developer.vippsmobilepay.com/docs/APIs/login-api),
+            not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
             Only HTTPS scheme is allowed. 
-          example: https://example.com/agreement
+          example: https://example.com/vipps-subscriptions/1234/
         merchantRedirectUrl:
           type: string
           maxLength: 1024
@@ -1578,9 +1602,14 @@ components:
         skipLandingPage:
           type: boolean
           description: |-
-            If the property is set to `true`, it will cause a push notification to be sent to the given phone number immediately, without loading the landing page.
-            This feature has to be specially enabled by Vipps for eligible sales units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
+            If the property is set to `true`, it will cause a push notification
+            to be sent to the given phone number immediately, without loading
+            the landing page.
+            This feature has to be specially enabled by Vipps for eligible sales
+            units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page
+          default: false
           example: false
         externalId:
           type: string
@@ -1723,9 +1752,13 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual management, not just information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
@@ -1790,9 +1823,13 @@ components:
           description: |-
             URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual management, not just information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
@@ -1821,7 +1858,7 @@ components:
             The suggested max amount that the customer should choose.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         campaign:
           $ref: '#/components/schemas/campaignV2'
         price:
@@ -1833,7 +1870,7 @@ components:
             The price of the agreement.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         productName:
           type: string
           description: Product name (short)
@@ -1847,11 +1884,16 @@ components:
         merchantAgreementUrl:
           type: string
           maxLength: 1024
-          description: URL where Vipps can send the customer to view/manage their
+          description: |-
+            URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual management, not just information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         status:
           type: string
           example: STOPPED
@@ -1875,11 +1917,16 @@ components:
         merchantAgreementUrl:
           type: string
           maxLength: 1024
-          description: URL where Vipps can send the customer to view/manage their
+          description: |-
+            URL where Vipps can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
-            We recommend letting users log in with Vipps, not with username and password.
-            We do not have any specific requirements for the security of the page other than requiring HTTPS.
-          example: https://example.com/agreement
+            The page must offer actual management, not just information about how to
+            contact customer service, etc.
+            We recommend letting users log in with Vipps, not with username and password:
+            https://developer.vippsmobilepay.com/docs/APIs/login-api
+            We do not have any specific requirements for the security of the
+            page other than requiring HTTPS.
+          example: https://example.com/vipps-subscriptions/1234/
         status:
           type: string
           example: STOPPED
@@ -1919,7 +1966,7 @@ components:
             The suggested max amount that the customer should choose.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
 
     variableAmountResponse:
       title: Variable Amount response
@@ -1933,7 +1980,7 @@ components:
             The suggested max amount that the customer should choose.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         maxAmount:
           type: integer
           format: int32
@@ -1942,7 +1989,7 @@ components:
             The max amount chosen by the customer.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
 
     campaignV2:
       title: Campaign request
@@ -1960,7 +2007,7 @@ components:
             The price of the agreement in the discount period.
             The lowering of the price will be displayed in-app.
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         end:
           type: string
           format: date-time
@@ -1983,7 +2030,7 @@ components:
           description: |-
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         start:
           type: string
           format: date-time
@@ -2031,7 +2078,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         end:
           type: string
           example: '2019-06-01T00:00:00Z'
@@ -2064,7 +2111,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         period:
           $ref: '#/components/schemas/TimePeriod'
 
@@ -2094,7 +2141,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         eventDate:
           type: string
           format: date-time
@@ -2131,7 +2178,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         interval:
           $ref: '#/components/schemas/TimePeriod'
         end:
@@ -2175,7 +2222,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         end:
           type: string
           format: date-time
@@ -2212,7 +2259,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         end:
           type: string
           example: '2019-06-01T00:00:00Z'
@@ -2251,7 +2298,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         eventDate:
           type: string
           format: date-time
@@ -2292,7 +2339,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         end:
           type: string
           example: '2019-06-01T00:00:00Z'
@@ -2331,7 +2378,7 @@ components:
             The price of the agreement in the discount period. The lowering of the price will be displayed in-app.
 
             Price is specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         end:
           type: string
           example: '2019-06-01T00:00:00Z'
@@ -2364,7 +2411,7 @@ components:
             The price of the agreement, required if type is LEGACY or not present.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         suggestedMaxAmount:
           type: integer
           format: int32
@@ -2375,7 +2422,7 @@ components:
             The suggested max amount that the customer should choose, required if type is VARIABLE.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
 
     pricingResponse:
       title: pricing
@@ -2397,7 +2444,7 @@ components:
             The price of the agreement, present if type is LEGACY.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         suggestedMaxAmount:
           type: integer
           format: int32
@@ -2406,7 +2453,7 @@ components:
             The suggested max amount that the customer should choose, present if type is VARIABLE.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         maxAmount:
           type: integer
           format: int32
@@ -2415,7 +2462,7 @@ components:
             The max amount chosen by the customer.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
 
     PricingUpdateRequest:
       title: pricing
@@ -2430,7 +2477,7 @@ components:
             The price of the agreement, can only be updated if agreement type is LEGACY
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         suggestedMaxAmount:
           type: integer
           format: int32
@@ -2441,7 +2488,7 @@ components:
             The suggested max amount that the customer should choose, can only be updated if agreement type is VARIABLE.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
 
     InitialChargeV2:
       title: InitialCharge
@@ -2458,7 +2505,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             The amount that must be paid or approved before starting the agreement.
 
@@ -2496,9 +2543,9 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
-            The amount that must be payed or approved before starting the agreement.
+            The amount that must be paid or approved before starting the agreement.
 
             Amounts are specified in minor units.
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
@@ -2532,7 +2579,7 @@ components:
           type: integer
           format: int32
           minimum: 100
-          example: 234
+          example: 19900
           description: |-
             Amount to be paid by the customer.
 
@@ -2579,7 +2626,7 @@ components:
           type: integer
           format: int32
           minimum: 100
-          example: 234
+          example: 19900
           description: |-
             Amount to be paid by the customer.
 
@@ -2642,7 +2689,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             Amount to be paid by the customer.
 
@@ -2726,7 +2773,7 @@ components:
         amount:
           type: integer
           format: int32
-          example: 234
+          example: 19900
           description: |-
             Amount to be paid by the customer.
 
@@ -2748,7 +2795,7 @@ components:
           description: Identifier for this charge (for this customer's subscription).
           maxLength: 15
           example: chr_WCVbcA
-        agreementId: 
+        agreementId:
           $ref: "#/components/parameters/AgreementId"
         status:
           $ref: "#/components/schemas/ChargeStatus"
@@ -2807,7 +2854,7 @@ components:
             The amount to refund on a captured/charged charge.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         description:
           type: string
           minimum: 1
@@ -2830,7 +2877,7 @@ components:
             The amount to capture on a reserved charge.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 15 kr = 1500 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
         description:
           type: string
           minimum: 1
