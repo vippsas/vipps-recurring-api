@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Recurring API frequently asked questions
 sidebar_label: FAQ
@@ -7,7 +6,6 @@ description: Recurring API frequently asked questions
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Frequently asked questions
 
@@ -21,13 +19,6 @@ See also:
 See also:
 [Getting Started](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
 guide.
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
-<!-- END_COMMENT -->
 
 ## Migration
 

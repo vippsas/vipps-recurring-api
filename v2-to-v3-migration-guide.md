@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Recurring API V2 to V3 migration guide
 sidebar_label: V2 to V3 migration guide
@@ -7,7 +6,6 @@ description: Recurring API V2 to V3 migration guide.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Migration guide from V2 to V3
 

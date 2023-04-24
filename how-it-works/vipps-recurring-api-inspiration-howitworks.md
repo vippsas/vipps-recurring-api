@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Implementation inspiration
 sidebar_label: Inspiration
@@ -7,16 +6,8 @@ description: Implementation inspiration
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Implementation inspiration
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
-<!-- END_COMMENT -->
 
 This page is meant to give some inspiration for how you can utilize the features of Recurring to meet a variety of needs, from special one-of agreements to referral discounts and loyalty programs.
 

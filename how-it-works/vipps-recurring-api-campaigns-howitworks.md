@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: How Recurring works with campaign
 sidebar_label: Campaign
@@ -7,16 +6,8 @@ description: How Recurring works with campaign
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # How Recurring works with campaign
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
-<!-- END_COMMENT -->
 
 For technical documentation go to:
 [Vipps Recurring API](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).

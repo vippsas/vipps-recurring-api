@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: How Recurring works with basic agreement
 sidebar_label: Basic agreement
@@ -7,16 +6,10 @@ description: How Recurring works with basic agreement
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # How Recurring works
 
-<!-- START_COMMENT -->
 
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/).
-
-<!-- END_COMMENT -->
 
 Recurring can be used for subscriptions, donations or other recurring payments.
 

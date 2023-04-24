@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Recurring API checklist
 sidebar_label: Checklist
@@ -7,16 +6,8 @@ description: Checklist for full integration with the Recurring API.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Checklist
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
-<!-- END_COMMENT -->
 
 API version: 3.0
 

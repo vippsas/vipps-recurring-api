@@ -1,20 +1,13 @@
-<!-- START_METADATA
 ---
 title: "How it works"
 sidebar_position: 1
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # How it works
 
-<!-- START_COMMENT -->
 
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/).
-
-<!-- END_COMMENT -->
 
 * [How Recurring works](vipps-recurring-api-howitworks.md)
 * [Recurring API with initial charge](vipps-recurring-api-initial-charge-howitworks.md)

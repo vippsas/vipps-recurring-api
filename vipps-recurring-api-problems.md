@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Problem types
 sidebar_label: Problem types
@@ -7,7 +6,6 @@ description: Problem types for the Recurring API can be found here.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Problems
 
@@ -16,13 +14,6 @@ In Recurring API, HTTP responses for errors follow the [RFC 7807](https://www.rf
 See [Errors](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/errors) for more details about the format.
 
 API version: 3.0.0.
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
-<!-- END_COMMENT -->
 
 ## Problem types
 

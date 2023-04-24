@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Recurring API guide
 sidebar_label: API guide
@@ -7,17 +6,9 @@ description: Recurring API guide.
 pagination_prev: Null
 pagination_next: Null
 ---
-END_METADATA -->
 
 # API guide
 
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
-<!-- END_COMMENT -->
 
 The Vipps MobilePay Recurring API delivers recurring payment functionality for a merchant
 to create a payment agreement with a customer for fixed interval payments.

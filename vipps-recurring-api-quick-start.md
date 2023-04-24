@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: Quick start for the Recurring API
 sidebar_label: Quick start
@@ -7,20 +6,12 @@ description: Quick start guide for the using the Recurring API with Postman.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # Quick start
 
 Use the Recurring API to create different types of agreements, get information about agreements, update and stop agreements.
 After creating the agreements, you still need to send the charge requests.
 So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
-
-<!-- START_COMMENT -->
-
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
-<!-- END_COMMENT -->
 
 ## Postman
 

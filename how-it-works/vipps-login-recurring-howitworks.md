@@ -1,4 +1,3 @@
-<!-- START_METADATA
 ---
 title: How Recurring works with the Login API
 sidebar_label: With the Login API
@@ -7,7 +6,6 @@ description: How Login works with the Login API.
 pagination_next: null
 pagination_prev: null
 ---
-END_METADATA -->
 
 # How Recurring works with the Login API
 
