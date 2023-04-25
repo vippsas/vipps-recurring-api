@@ -34,7 +34,7 @@ for information about getting your test environment set up.
 
 Save the following files to your computer:
 
-* [Recurring API Postman collection](tools/vipps-recurring-v3-api-postman-collection.json)
+* [Recurring API Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json)
 * [Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
 
 The Postman collection contains examples of all the various campaign types,
