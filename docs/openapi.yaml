@@ -1619,8 +1619,6 @@ components:
           type: string
           enum:
             - NO
-            - DK
-            - FI
           description: An optional country code for the agreement
 
     DraftAgreementResponseV2:
@@ -1667,6 +1665,7 @@ components:
       type: object
       required:
         - agreementId
+        - uuid
       properties:
         agreementId:
           type: string
@@ -1675,6 +1674,10 @@ components:
             Initially the agreement is in a pending state waiting for user approval.
             It enters active state once the user has approved it in Vipps.
           example: agr_5kSeqz
+        uuid:
+          type: string
+          format: uuid
+          description: Uuid representation of agreementId
         vippsConfirmationUrl:
           type: string
           description: |-
@@ -1790,6 +1793,8 @@ components:
         - interval
         - pricing
         - productName
+        - uuid
+        - countryCode
       properties:
         campaign:
           $ref: '#/components/schemas/campaignResponseV3'
@@ -1850,6 +1855,19 @@ components:
             [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://developer.vippsmobilepay.com/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
             This will be null if profile data was not requested.
           nullable: true
+        externalId:
+          type: string
+          description: An optional external id for the agreement
+          maxLength: 64
+        countryCode:
+          type: string
+          enum:
+            - NO
+          description: An optional country code for the agreement
+        uuid:
+          type: string
+          format: uuid
+          description: Uuid representation of id
 
     PatchAgreementV2:
       title: PatchAgreement
@@ -2784,6 +2802,7 @@ components:
         - status
         - currency
         - agreementId
+        - externalId
       properties:
         amount:
           type: integer
@@ -2812,6 +2831,10 @@ components:
           example: chr_WCVbcA
         agreementId:
           $ref: "#/components/parameters/AgreementId"
+        externalId:
+          type: string
+          description: An optional external id for the agreement
+          maxLength: 64
         status:
           $ref: "#/components/schemas/ChargeStatus"
         transactionId:
