@@ -1677,7 +1677,7 @@ components:
         uuid:
           type: string
           format: uuid
-          description: Uuid representation of agreementId
+          description: UUID representation of agreementId
         vippsConfirmationUrl:
           type: string
           description: |-
@@ -1867,7 +1867,7 @@ components:
         uuid:
           type: string
           format: uuid
-          description: Uuid representation of id
+          description: UUID representation of id
 
     PatchAgreementV2:
       title: PatchAgreement
@@ -2694,7 +2694,7 @@ components:
           description: An optional orderId for the payment, auto generated otherwise
         externalId:
           type: string
-          description: An optional external id for the agreement
+          description: An optional external id for the charge
           maxLength: 64
 
     ChargeReference:
@@ -2833,7 +2833,7 @@ components:
           $ref: "#/components/parameters/AgreementId"
         externalId:
           type: string
-          description: An optional external id for the agreement
+          description: An optional external id for the charge
           maxLength: 64
         status:
           $ref: "#/components/schemas/ChargeStatus"
