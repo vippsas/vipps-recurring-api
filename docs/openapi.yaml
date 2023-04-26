@@ -1615,11 +1615,16 @@ components:
           type: string
           description: An optional external id for the agreement
           maxLength: 64
+          minLength: 1
+          pattern: '^.{1,64}$'
+          example: 'external-id-2468'
         countryCode:
           type: string
+          example: 'NO'
+          pattern: '^[A-Z]{2}$'
           enum:
             - NO
-          description: An optional country code for the agreement
+          description: An optional country code for the agreement according to ISO 3166-2 (two capital letters)
 
     DraftAgreementResponseV2:
       title: DraftAgreementResponse
@@ -1677,7 +1682,9 @@ components:
         uuid:
           type: string
           format: uuid
-          description: UUID representation of agreementId
+          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'
+          description: UUID (RFC 4122) representation of agreementId
+          example: '9c2ca95c-245f-4a2e-aab2-4a08eb78e6fb'
         vippsConfirmationUrl:
           type: string
           description: |-
@@ -1859,15 +1866,22 @@ components:
           type: string
           description: An optional external id for the agreement
           maxLength: 64
+          minLength: 1
+          pattern: '^.{1,64}$'
+          example: 'external-id-2468'
         countryCode:
           type: string
+          example: 'NO'
+          pattern: '^[A-Z]{2}$'
           enum:
             - NO
-          description: An optional country code for the agreement
+          description: An optional country code for the agreement according to ISO 3166-2 (two capital letters)
         uuid:
           type: string
           format: uuid
-          description: UUID representation of id
+          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'
+          description: UUID (RFC 4122) representation of id
+          example: '9c2ca95c-245f-4a2e-aab2-4a08eb78e6fb'
 
     PatchAgreementV2:
       title: PatchAgreement
@@ -2591,8 +2605,11 @@ components:
           description: An optional orderId for the payment, auto generated otherwise
         externalId:
           type: string
-          description: An optional external id for the agreement
+          description: An optional external id for the charge
           maxLength: 64
+          minLength: 1
+          pattern: '^.{1,64}$'
+          example: 'external-id-2468'
 
     CreateChargeV2:
       title: CreateCharge
@@ -2696,6 +2713,9 @@ components:
           type: string
           description: An optional external id for the charge
           maxLength: 64
+          minLength: 1
+          pattern: '^.{1,64}$'
+          example: 'external-id-2468'
 
     ChargeReference:
       type: object
@@ -2835,6 +2855,9 @@ components:
           type: string
           description: An optional external id for the charge
           maxLength: 64
+          minLength: 1
+          pattern: '^.{1,64}$'
+          example: 'external-id-2468'
         status:
           $ref: "#/components/schemas/ChargeStatus"
         transactionId:
