@@ -1615,6 +1615,13 @@ components:
           type: string
           description: An optional external id for the agreement
           maxLength: 64
+        countryCode:
+          type: string
+          enum:
+            - NO
+            - DK
+            - FI
+          description: An optional country code for the agreement
 
     DraftAgreementResponseV2:
       title: DraftAgreementResponse
@@ -2564,6 +2571,10 @@ components:
           type: string
           example: acme-shop-123-order123abc
           description: An optional orderId for the payment, auto generated otherwise
+        externalId:
+          type: string
+          description: An optional external id for the agreement
+          maxLength: 64
 
     CreateChargeV2:
       title: CreateCharge
@@ -2663,6 +2674,10 @@ components:
           pattern: "^[a-zA-Z\\d-]+"
           example: acme-shop-123-order123abc
           description: An optional orderId for the payment, auto generated otherwise
+        externalId:
+          type: string
+          description: An optional external id for the agreement
+          maxLength: 64
 
     ChargeReference:
       type: object
