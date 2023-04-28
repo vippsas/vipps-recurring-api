@@ -26,8 +26,8 @@ API version: 3.0.0.
 
 ## Problem types
 
-The `type` is the primary identifier for a problem. It is an URL to a page with more details regarding the problem. 
-Each problem type returned by the recurring api starts with `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#` followed by a problem identifier. 
+The `type` is the primary identifier for a problem. It is a URL to a page with more details regarding the problem.
+Each problem type returned by the Recurring API starts with `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#` followed by a problem identifier.
 
 Example: `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#invalid-agreement-id`
 
@@ -61,17 +61,17 @@ Example: `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api
 
 ### Validation error
 
-Missing data or inconsistencies in json. Please verify the request json body.
+Missing data or inconsistencies in JSON. Please verify the request JSON body.
 See [API specs](https://developer.vippsmobilepay.com/api/recurring).
 
-### Invalid agreement id
+### Invalid agreement ID
 
-Agreement Id is invalid. Please verify the agreement Id is present and in the correct format.
+Agreement ID is invalid. Please verify the agreement ID is present and in the correct format.
 See [API specs](https://developer.vippsmobilepay.com/api/recurring).
 
-### Invalid json
+### Invalid JSON
 
-Json body is invalid. Please verify the request json body.
+JSON body is invalid. Please verify the request JSON body.
 
 ### Unsupported media type
 

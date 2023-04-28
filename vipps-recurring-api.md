@@ -44,12 +44,14 @@ You will then get a new sales unit (MSN) that can be used for recurring payments
 If you need to use an existing sales unit that already has access to the eCom API
 for the Recurring API too, please contact your KAM or
 [customer service](https://vipps.no/kontakt-oss/). Please have this information ready:
+
 * Estimated total annual turnover for the sales unit. Example: 100 MNOK.
 * Percentage of the payment volume that will be through recurring payments. Example: 50 MNOK.
 * The length of the agreements. Example: Annual and monthly.
 * The distribution (in %) of the lengths. Example: 80 % annual, 20 % monthly
 
 **Please note:** You can check if you have access to the Recurring API:
+
 * As a merchant: Check your sales unit(s) on [portal.vipps.no](https://portal.vipps.no).
 * As a partner: Check the sales unit(s) with the
   [Partner API](https://developer.vippsmobilepay.com/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sales-unit-based-on-msn).
@@ -69,11 +71,11 @@ API version: 3.0.0.
 The overall flow is:
 
 1. The merchant creates a draft agreement and proposes it to the customer via Vipps or MobilePay.
-2. The customer approves the agreement in Vipps or MobilePay.
-3. The customer can find a full overview of the agreement in Vipps or MobilePay, including a link to the merchant's website.
-4. The merchant sends a charge request to Vipps or MobilePay at least two days before due date
-4. If the agreement is active, Vipps or MobilePay authorizes the charge.
-5. Charge will be processed on due date.
+1. The customer approves the agreement in Vipps or MobilePay.
+1. The customer can find a full overview of the agreement in Vipps or MobilePay, including a link to the merchant's website.
+1. The merchant sends a charge request to Vipps or MobilePay at least two days before due date
+1. If the agreement is active, Vipps or MobilePay authorizes the charge.
+1. Charge will be processed on due date.
 
 This diagram shows a simplified flow:
 
@@ -104,7 +106,7 @@ the sales unit must be configured for this by Vipps MobilePay.
 For more details, see
 [Common topics: Reserve and capture](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/reserve-and-capture).
 
-**Please note:** Vipp sMobilePay will *only* perform a payment transaction on an agreement that
+**Please note:** Vipps MobilePay will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 You can also [manage charges and agreements](#manage-charges-and-agreements).
 
@@ -154,7 +156,6 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 5. If there is a product that is shipped to the customer, the charge should be captured at this point.
    Capture the charge by calling the [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] endpoint.
 
-
 ## API endpoints
 
 | Operation                                       | Description                                                                                                                 | Endpoint                                                                               |
@@ -167,7 +168,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 | [List charges](#list-charges)                   | Get all charges for an agreement.                                                                                           | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]                       |
 | [Create a charge](#create-a-charge)             | Create a new charge for an agreement.                                                                                       | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]                     |
 | [Retrieve a charge](#retrieve-a-charge)         | Retrieve all details of a charge.                                                                                           | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]            |
-| [Retrieve a charge by id](#retrieve-a-charge)   | Retrieve a single charge just by chargeId. Useful for investigating claims from customers, but not intended for automation. | [`GET:/charges/{chargeId}`][fetch-charge-by-id-endpoint]                               |
+| [Retrieve a charge by ID](#retrieve-a-charge)   | Retrieve a single charge just by `chargeId`. Useful for investigating claims from customers, but not intended for automation. | [`GET:/charges/{chargeId}`][fetch-charge-by-id-endpoint]                               |
 | [Capture a charge](#capture-a-charge)           | Each charge must first be created, then captured.                                                                           | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
 | [Cancel a charge](#cancel-a-charge)             | Cancel an existing charge before the user is charged.                                                                       | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        |
 | Refund a charge                                 | Refund a charge that has been performed.                                                                                    | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   |
@@ -191,13 +192,13 @@ in the Getting started guide, for details.
 
 ## Idempotency Key header
 
-**V3 api only**
+**V3 API only**
 The `Idempotency-Key` header must be set in any request that creates or modifies a resource (`POST`, `PUT`, `PATCH` or `DELETE`).
-This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency-key should prevent operations and side effects from being performed more than once, and you should receive the same response as if you only sent one request.
+This way, if a request fails for any technical reason, or there is a networking issue, it can be retried with the same `Idempotency-Key`. The idempotency key should prevent operations and side effects from being performed more than once, and you should receive the same response as if you only sent one request.
 
-**Important:** If the response is a client-error (4xx), you will continue to get the same error as long as you use the same idempotency-key, as the requested operation is not retried.
+**Important:** If the response is a client-error (4xx), you will continue to get the same error as long as you use the same idempotency key, as the requested operation is not retried.
 
-**Important:** If you reuse an idempotency-key on a different request, you will get a 409 CONFLICT.
+**Important:** If you reuse an idempotency key on a different request, you will get a 409 CONFLICT.
 
 See the
 [Idempotency header](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers#idempotency)
@@ -205,7 +206,7 @@ for more details.
 
 ## Continuation-Token header
 
-**V3 api only**
+**V3 API only**
 The `Continuation-Token` header is introduced on endpoints that returns multiple items to allow pagination. When returned from the API, it indicates that there are more items to be received. In order to receive the next page, repeat the request adding the received token in the `Continuation-Token`-header.
 
 ## orderId recommendations
@@ -228,14 +229,14 @@ The `orderId` replaces the `chargeId`.
 **Important:** If the `orderId` is provided:
 
 * The value of the `orderId` is used for all instances of `chargeId`
-* The `orderId` (and `chargeId`) is sed for all subsequent identification
+* The `orderId` (and `chargeId`) is used for all subsequent identification
   of the charge.
 * The `orderId` is used in the settlement files.
 
 This `orderId` must be unique across all Recurring and eCom
 transactions for the given `merchantSerialNumber`.
 
-If the field is _not_ provided, Vipps will automatically create a unique id
+If the field is _not_ provided, Vipps will automatically create a unique ID
 prefixed with `chr-`: `chr-xxxxxxx`(where each x is an alphanumeric character).
 
 If you ever have a problem that requires us to search in our logs, we will need
@@ -306,7 +307,7 @@ There are 100 øre in 1 krone.
 | # | Agreement      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
 | 1 | `Agreement starting now`  | Agreement with an `initialcharge` that uses `DIRECT_CAPTURE` will only be `active` if the initial charge is processed successfully |
-| 2 | `Agreement starting in future`  | Agreement without an `initialcharge`, or with `initialcharge` that uses `RESERVE_CAPTURE`, can be approved but no payment will happen until the first charge is provided |
+| 2 | `Agreement starting in future`  | Agreement without an `initialcharge`, or with `initialcharge` that uses `RESERVE_CAPTURE`, can be approved, but no payment will happen until the first charge is provided |
 
 The response contains an `agreementResource`, a `vippsConfirmationUrl` and an `agreementId`.
 This `agreementResource` is a complete URL for performing a
@@ -329,7 +330,7 @@ See [Initial charge](#initial-charge).
 
 #### Pricing representation
 
-There is two different types of pricing available:
+There are two different types of pricing available:
 
 First one is `LEGACY`, this is the default type. See [Amount changes](#amount-changes) for the limit rules.
 
@@ -418,7 +419,7 @@ The URL is opened in the standard web browser.
 
 **Please note:** Vipps MobilePay does not offer any form of agreement management, as this
 may include quite complex operations (e.g., changing subscription types,
-temporary address change, pausing the agreement, etc).
+temporary address change, pausing the agreement, etc.).
 
 **Important:** The integrator **must** implement such functionality for the
 customer to manage the agreement in their system.
@@ -427,8 +428,7 @@ in the agreement works for the user.
 
 Vipps does not have any specific requirements for the security of the page,
 other than using HTTPS, but strongly recommend using
-[Vipps MobilePay Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
-so the user does not need a username or password, but is logged
+[Vipps MobilePay Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/), so the user does not need a username or password, but is logged
 in automatically through Vipps MobilePay. See the
 [Login API documentation](https://developer.vippsmobilepay.com/docs/APIs/login-api)
 for more details.
@@ -534,8 +534,8 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the Vipps FAQ for more details.
+[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the FAQ.
 
 `RESERVE_CAPTURE` must be
 used when selling physical goods bundled with an agreement - such as a phone
@@ -703,7 +703,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 | `eventDate` | The date of the event marking the end of the campaign     |
 | `eventText` | The event text to display to the end user                 |
 
-**Please note:** We recommend to start the event text with lowercase for better user experience. See example below.
+**Please note:** We recommend starting the event text with lowercase for better user experience. See example below.
 
 ![screen-event-campaign](images/campaigns/screens/event-campaign.png)
 
@@ -737,7 +737,7 @@ See [contact us](https://developer.vippsmobilepay.com/docs/vipps-developers/cont
 
 ![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
-##### Product description guidelines for agreements with campaigns.
+##### Product description guidelines for agreements with campaigns
 
 We do not recommend you to use `Product Description` for agreements with a campaign.
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
@@ -745,7 +745,7 @@ We see that the user experience is not optimal when a lot of text is "squeezed" 
 ### Retrieve an agreement
 
 A newly created agreement will be in status `PENDING` for 10 minutes before it expires.
-If the customer approves the agreement, and the initialCharge (if provided) is successfully
+If the customer approves the agreement, and the `initialCharge` (if provided) is successfully
 processed, the agreement status will change to `ACTIVE`.
 
 The approved agreement is retrieved from the
@@ -815,7 +815,7 @@ due and processed at the 26th.
 #### Charge type
 
 A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_CAPTURE`.
-**Please note:** `RESERVE_CAPTURE` transaction type is only available in the V3 api.
+**Please note:** `RESERVE_CAPTURE` transaction type is only available in the V3 API.
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
@@ -869,8 +869,8 @@ a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
 hindrance the agreement `price` can be [updated](#update-an-agreement).
 
 **Please note:** Although it is _technically_ possible to increase the price 10
-times, we **strongly** recommend to be as user-friendly as possible, and
-to make sure the user understands any changes and get updated information.
+times, we **strongly** recommend that you are as user-friendly as possible.
+Make sure the user understands any changes and are provided with updated information.
 
 ### Charge descriptions
 
@@ -968,9 +968,9 @@ This results in a _very_ high success rate for charges.
 
 ### Retrieve a charge
 
-To retrieve a charge, we recommend to use the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
+To retrieve a charge, we recommend using the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
 
-**Please note:** The endpoint [`GET:/charges/{chargeId}`][fetch-charge-by-id-endpoint] is **not** intended for automation. 
+**Please note:** The endpoint [`GET:/charges/{chargeId}`][fetch-charge-by-id-endpoint] is **not** intended for automation.
 There is a stricter rate limiting (See [Rate limiting](#rate-limiting)) on this endpoint because it is more expensive to fetch a charge without the agreementId.
 Its purpose is to simplify investigations when the merchant lost track of which charge belongs to which agreement.
 It should **not** be used as a substitute for the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint.
@@ -1084,7 +1084,7 @@ in a `400 Bad Request` response.
 
 ### Pause an agreement
 
-Today unfortunately we do not have a pause/freeze status. This is something we are looking into. If there should be a pause in an agreement, like a temporary stop of a subscription: Simply do not create any charges during the pause. We recommend to use Agreement Description to communicate to the user that the agreement is paused/freezed.
+Today unfortunately we do not have a pause/freeze status. This is something we are looking into. If there should be a pause in an agreement, like a temporary stop of a subscription: Simply do not create any charges during the pause. We recommend to use Agreement Description to communicate to the user that the agreement is paused/frozen.
 
 We recommended not to set the agreement status to `STOPPED`. `STOPPED` agreements cannot be reactivated.
 
@@ -1107,7 +1107,7 @@ Stopping an agreement results in cancellation of any charges that are DUE/PENDIN
 and it will not be possible to create new charges for a stopped agreement.
 
 We recommend that the recurring agreement remains `ACTIVE` for as long as the
-user has access to the service.    
+user has access to the service.
 For example; if the user cancels their subscription, but they are still able to
 use the service until the end of the billing cycle, the agreement should only be
 set to `STOPPED` at the end of the billing cycle.
@@ -1122,19 +1122,19 @@ to set up a new agreement.
 This table has all the details for the charge states returned by the
 [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
 
-| State                | Description                                                                                                                                                               |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PENDING`            | The charge has been created, but is not yet be visible in Vipps.                                                                                                          |
-| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`.                                                                                   |
-| `PROCESSING`         | The charge is being processed right now.                                                                                                                                  |
-| `UNKNOWN`            | The charge status is unknown. This is usually very transient and will be resolved shortly.                                                                                 |
-| `CHARGED`            | The charge has been successfully processed, and the available amount has been captured.                                                                                   |
-| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant.                                            |
-| `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date.                                                                                  |
-| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded.                                                                                                                          |
-| `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]                       |
-| `PARTIALLY_CAPTURED` | The some of the reserved amount has been captured. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer. |
-| `CANCELLED`          | The charge has been cancelled.                                                                                                                                            |
+| State                | Description |
+|----------------------|-------------|
+| `PENDING`            | The charge has been created, but is not yet be visible in Vipps. |
+| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`. |
+| `PROCESSING`         | The charge is being processed right now. |
+| `UNKNOWN`            | The charge status is unknown. This is usually very transient and will be resolved shortly. |
+| `CHARGED`            | The charge has been successfully processed, and the available amount has been captured. |
+| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant. |
+| `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. |
+| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded. |
+| `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
+| `PARTIALLY_CAPTURED` | Part of the reserved amount has been captured. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer. |
+| `CANCELLED`          | The charge has been cancelled. |
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
@@ -1178,12 +1178,12 @@ An example from a response:
 
 Here is a list of possible values for `failureReason`, their respective descriptions and possible actions that the user/merchant could take.
 
-| Reason                 | Description                                                                                                                                                                                                                                 | Action                                                                                                                                                                                   |
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| user_action_required   | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open Vipps and check the payment there to see why it is not paid. | User will get notified in Vipps and need to take action. This could be to add funds to the card or change the card on the agreement.                                                     |
-| charge_amount_too_high | Amount is higher than the user's specified max amount                                                                                                                                                                                       | The user have a lower `maxAmount` on the variableAmount agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed. |
-| non_technical_error    | Payment failed. Could be that the user has deleted their Vipps profile.                                                                                                                                                                     | The user needs to take action in Vipps.                                                                                                                                                  |
-| technical_error        | Payment failed due to a technical error in Recurring or a downstream service                                                                                                                                                                | As long as the charge is not in status `FAILED` we are retrying to payment. Contact Vipps for more information if this failure show up on a `FAILED` charge.                             |
+| Reason                 | Description | Action |
+|------------------------|-------------|--------|
+| user_action_required   | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open Vipps and check the payment there to see why it is not paid. | User will get notified in Vipps and need to take action. This could be to add funds to the card or change the card on the agreement. |
+| charge_amount_too_high | Amount is higher than the user's specified max amount. | The user has a lower `maxAmount` on the `variableAmount` agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed. |
+| non_technical_error    | Payment failed. Could be that the user has deleted their Vipps profile. | The user needs to take action in Vipps. |
+| technical_error        | Payment failed due to a technical error in Recurring or a downstream service. | As long as the charge is not in the status `FAILED`, we are retrying the payment. Contact Vipps for more information if this failure shows up on a `FAILED` charge. |
 
 ### App
 
@@ -1206,7 +1206,7 @@ The following `failureReasons` are no longer exposed on charges:
 | internal_error         | Internal Error / Something went wrong                                                    | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information.                                          |
 
 
-The user gets more information in Vipps regarding why the Charge did not get charged. If they contact you about failing charges, you should refer them to Vipps. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
+The user gets more information in Vipps regarding why the charge did not get processed. If they contact you about failing charges, you should refer them to Vipps. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
 
 ## Userinfo
 
@@ -1408,7 +1408,7 @@ Retrieving the agreement shows the `maxAmount` picked by the user.
 
 ### Change suggestedMaxAmount
 
-It's possible to change the suggestedMaxAmount on the agreement by calling the update agreement endpoint with the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] request below.
+It's possible to change the `suggestedMaxAmount` on the agreement by calling the update agreement endpoint with the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] request below.
 
 ```json
 {
@@ -1552,7 +1552,7 @@ Vipps-System-Plugin-Version: 4.5.6
 Content-Type: application/json
 ```
 
-**Please note:** The Merchant Serial Number (MSN) is a unique id for the sale
+**Please note:** The Merchant Serial Number (MSN) is a unique ID for the sale
 unit. This is a required parameter if you are a Vipps partner making API requests
 on behalf of a merchant. The partner must use the _merchant's_ MSN, not the
 partner's MSN. This parameter is also recommended for regular Vipps
@@ -1582,15 +1582,14 @@ This toggle only determine if the user will get notified when a charge is succes
 
 In addition to sending push notifications, a failure texts is also set on the charge.
 By letting the customer know why the charge failed we enable them to fix the underlying issue before the "retryDays" are over.
-For more information about what the failure texts are, see the  [FAQ](vipps-recurring-api-faq.md#what-is-shown-to-users-when-charge-processing-fails).
+For more information about what the failure texts are, see the [FAQ](vipps-recurring-api-faq.md#what-is-shown-to-users-when-charge-processing-fails).
 
 **Please note:** These exact reasons why the charge fails is not shown in the recurring API, only to the customers (users).
-See the [merchant charge failure reason](#Charge-failure-reasons) for an overview of what is available in the merchant API.
+See [charge failure reason](#charge-failure-reasons) for an overview of what is available in the merchant API.
 
 ## Timeouts
 
-See [Timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts)
-in Common topics for details.
+See [Common topics: Timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts).
 
 ## Testing
 

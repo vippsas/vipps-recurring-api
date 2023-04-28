@@ -50,7 +50,7 @@ so it's easy to see what they look like in the app.
 
 1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
 2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
-3. Fill in the `Current Value` for the following fields to get started. For the first keys, go to *Vipps MobilePay Portal* > *Utvikler* ->  *Test Keys*.
+3. Fill in the `Current Value` for the following fields to get started. For the first keys, go to *Vipps MobilePay Portal* > *Utvikler* -> *Test Keys*.
    * `client_id` - Merchant key is required for getting the access token.
    * `client_secret` - Merchant key is required for getting the access token.
    * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
@@ -168,7 +168,7 @@ If you need to get access to some user information in addition to the recurring 
 
 #### Update an agreement
 
-1. Set `agreementId` to the id of an ACTIVE agreement.
+1. Set `agreementId` to the ID of an ACTIVE agreement.
 
 2. Run `Get Agreement` to see the properties of the agreement.
 
@@ -179,7 +179,7 @@ If you need to get access to some user information in addition to the recurring 
 
 #### Stop an agreement
 
-1. Set `agreementId` to the id of an ACTIVE agreement.
+1. Set `agreementId` to the ID of an ACTIVE agreement.
 
 2. Send the `Stop agreement` request, where the status is set to `STOPPED` in the body of [`PATCH:/agreements/{{agreementId}}`][update-agreement-patch-endpoint].
 
@@ -199,7 +199,7 @@ you must create charge requests for the recurring payments.
 A charge must be scheduled a minimum of two days before the payment will occur (it is minimum one day in the test environment).
 See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details about timing.
 
-1. Set `agreementId` to the id of an ACTIVE agreement.
+1. Set `agreementId` to the ID of an ACTIVE agreement.
 
 2. Set `Idempotency-Key-Create` value.
 
@@ -217,7 +217,7 @@ See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details abo
 
 #### Get a list of charges for an agreement
 
-1. Set `agreementId` to the id of an agreement.
+1. Set `agreementId` to the ID of an agreement.
    Note, you can get a list of all your agreements with the `Fetch Agreements` example.
 
 2. Send `List Charges` which uses [`GET:/agreements/{{agreementId}}/charges`][list-charges-endpoint].
@@ -245,7 +245,7 @@ You can cancel an existing charge before the user is charged.
 
 You can refund a charge that has already been charged.
 
-1. Set `chargeId` to the id of a charge with status of CHARGED.
+1. Set `chargeId` to the ID of a charge with status of CHARGED.
    The easiest way to test this is to run `Draft Agreement - Full`.
    This creates a charge that is immediately processed, and
    it sets the `agreementId` and `chargeId` to the corresponding values.
