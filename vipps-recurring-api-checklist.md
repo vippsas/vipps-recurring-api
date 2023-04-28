@@ -20,44 +20,43 @@ END_METADATA -->
 
 API version: 3.0
 
-## Checklist for full integration
+## Endpoints to integrate
 
-- [ ] Integrate _all_ the [API endpoints](vipps-recurring-api.md) described in our guide:
-    - [ ] Agreement: Create an agreement [`POST:/agreements`][draft-agreement-endpoint]
-    - [ ] Agreement: Retrieve an agreement [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
-    - [ ] Agreement: Update an agreement [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]
-    - [ ] Agreement: List charges [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint]
-    - [ ] Charge: Create Charge [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]
-    - [ ] Charge: Retrieve a charge [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]
-    - [ ] Charge: Cancel a charge [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
-    - [ ] Charge: Refund a charge [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]
-    - [ ] Charge: Capture a reserved charge [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint]
-    - For examples of requests and responses, see the [Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
-  - [ ] Send the [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers)
-        in all API requests for better tracking and troubleshooting
-        (mandatory for partners and platforms, who must send these headers as part of the checklist approval):
-      - [ ] `Merchant-Serial-Number`
-      - [ ] `Vipps-System-Name`
-      - [ ] `Vipps-System-Version`
-      - [ ] `Vipps-System-Plugin-Name`
-      - [ ] `Vipps-System-Plugin-Version`
-- [ ] Avoid Integration pitfalls
-    - [ ] The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement.
-    - [ ] Monitor the error messages Vipps returns from the APIs, and correct problems as quickly as possible. It's recommended to log errors emitted by our APIs, this makes it easier to pinpoint what has gone wrong.
-    - [ ] The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines)
-    - [ ] The merchant must have a way for the user to manage and stop subscription in merchantAgreementUrl in their Agreement. This should result in a timely update of the Vipps Agreement.
-    - [ ] Vipps never generates charges automatically on behalf of the Merchant. Every charge is the responsibility of the Merchant.
-    - [ ] Make sure your users (meaning the merchant's employees), customer service, etc.
-          have all the tools and information they need available in _your_ system, through
-          the APIs listed in the first item in this checklist.
-          It should never be necessary to to visit
-          [portal.vipps.no](https://portal.vipps.no)
-          for normal work.
+Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/recurring/).
+For examples of requests and responses, see the [Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json).
+
+| Endpoint | Comment |
+|----------|---------|
+| Agreement: Create an agreement | [`POST:/agreements`][draft-agreement-endpoint] |
+| Agreement: Retrieve an agreement | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] |
+| Agreement: Update an agreement | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] |
+| Agreement: List charges | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] |
+| Charge: Create Charge | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] |
+| Charge: Retrieve a charge | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] |
+| Charge: Cancel a charge | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] |
+| Charge: Refund a charge | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint] |
+| Charge: Capture a reserved charge | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
+
+## Quality assurance
+
+| Action | Comment |
+|--------|---------|
+|     Handle errors | Monitor the error messages Vipps returns from the APIs and correct problems as quickly as possible. It's recommended to log errors emitted by our APIs. This makes it easier to pinpoint what has gone wrong. |
+|     Include Vipps HTTP headers | Send the [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers) in all API requests for better tracking and troubleshooting (mandatory for partners and platforms, who must send these headers as part of the checklist approval). |
+
+## Avoid integration pitfalls
+
+| Action | Comment   |
+|--------|-----------|
+| Poll for the agreement status | The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement. |
+| Provide subscription tools | The merchant must have a way for the user to manage and stop subscription in `merchantAgreementUrl` in their agreement. This should result in a timely update of the Vipps Agreement. |
+|     Follow design guidelines| The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines). |
+|     Educate customer support| Make sure your customer service, etc. has all the tools and information they need available in _your_ system, through the APIs listed in the first item in this checklist, and that they do not need to visit [portal.vipps.no](https://portal.vipps.no) for normal work. |
 
 ## Flow to go live for direct integrations
 
 1. The merchant orders [Vipps på Nett](https://www.vipps.no/produkter-og-tjenester/bedrift/ta-betalt-paa-nett/ta-betalt-paa-nett/).
-2. Vipps completes customer control (KYC, PEP, AML, etc).
+2. Vipps completes customer control (KYC, PEP, AML, etc.).
 3. The merchant receives an email from Vipps saying that they can log in with bankID on [portal.vipps.no](https://portal.vipps.no) and retrieve API keys.
 4. The merchant completes all checklist items.
 5. The merchant verifies the integration in the test environment by checking that
@@ -74,7 +73,7 @@ API version: 3.0
    The API keys for the production environment are made available on
    [portal.vipps.no](https://portal.vipps.no)
    as soon as the customer control (see step 2) is completed, independently of this checklist.
-8. The Merchant goes live 🎉
+8. The merchant goes live 🎉
 
 
 [draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
