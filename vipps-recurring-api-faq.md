@@ -296,10 +296,11 @@ The general process is:
   - this is a csv where each line is an agreement, and the columns are old id and new id
 - You then need to update your systems so you start using the new agreement ids
 
-Brukerne vil kunne finne den gamle avtalen under "Avsluttede faste betalinger". Der vil de finne historikk for den frem til migreringstidspunktet.
-Som en følge av dette vil det ikke være mulig for dere å se eller gjøre noe med tidligere trekk fra den nye salgsenheten, siden de nye avtalene ikke har noen trekk.
-Avtalene i den gamle salgsenheten vil bli stoppet, og det vil ikke være mulig å lage nye trekk på dem.
-OBS; vi anbefaler å ta vare på alle avtaleIder en kunde noen gang har vært tilknyttet, slik at dere har mulighet til å finne tilbake til tidligere avtaler osv. Vi vet at mange kun tar vare på "nyeste", og dermed ikke har mulighet til å finne ut om en kunde kan ha flere aktive avtaler osv. :sweat_smile:
+Users will be able to find the old agreement under "Avsluttede faste betalinger" ("Canceled subscriptions"). There they will find history, up to the time of migration.
+As a result, it will not be possible for you to see or do anything with previous charges from the new sales unit, since the new agreements have no charges.
+The agreements in the old sales unit will be stopped, and it will not be possible to make new charges on them.
+Note, we recommend taking care of all agreements if a customer has ever been associated, so that you have the opportunity to find back to previous agreements, etc.
+We know that many people only take care of the "newest", and thus do not have the opportunity to find out whether a customer can have several active agreements, etc.
 
 **NOTE:** Agreements are not actually moved. Your new sales unit will get new agreements
 identical to the old ones, but with new agreementIds. The old agreements will
