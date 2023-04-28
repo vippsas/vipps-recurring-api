@@ -38,8 +38,8 @@ Please also check the [V3 API definitions](https://developer.vippsmobilepay.com/
 
 ### Can I manage agreements and charges created with v2 API using v3 API?
 
-All agreements and charges created with v2 API can be retrieved and managed using the v3 API and vice-versa. 
-Also, if an agreement was created with v2 API, it is possible to create a charge for this agreement with v3 API and vice-versa. 
+All agreements and charges created with v2 API can be retrieved and managed using the v3 API and vice-versa.
+Also, if an agreement was created with v2 API, it is possible to create a charge for this agreement with v3 API and vice-versa.
 
 
 ## Charges/Payments
@@ -134,7 +134,7 @@ A charge will remain in `PENDING` state until the dueDate is less than 30 days a
 You can retrieve all relevant charges through the
 [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
 
-### If a user adds or updates a card in vipps, will new recurring charges be made to that card?
+### If a user adds or updates a card in Vipps, will new recurring charges be made to that card?
 
 No, currently the payment card tied to an agreement will not be updated automatically.
 
@@ -162,8 +162,8 @@ If the suggestedMaxAmount is changed, the suggested amount list will also be dif
 
 ### Why do you allow drafting multiple agreements for the same user?
 
-Vipps tries to not interfere with how you choose to run your business. There are cases where one merchant might want to draft multiple subscriptions at the same time for the same user (ie. the user subscribes to multiple services from the merchant), and there are also cases where one person might pay for multiple subscriptions for other reasons (family/relationships/guardianship).
-It is the merchant's responsibility to know which of their users each drafted agreement belongs to, and to prevent drafting multiple agreements if that is not desireable.
+Vipps tries to not interfere with how you choose to run your business. There are cases where one merchant might want to draft multiple subscriptions at the same time for the same user (i.e., the user subscribes to multiple services from the merchant), and there are also cases where one person might pay for multiple subscriptions for other reasons (family/relationships/guardianship).
+It is the merchant's responsibility to know which of their users each drafted agreement belongs to, and to prevent drafting multiple agreements if that is not desirable.
 
 ### How do I prevent drafting multiple agreements for the same user?
 
@@ -241,21 +241,21 @@ Clarification of terms:
 * MSN: The unique id of a sales unit.
   MSN is short for "Merchant Serial Number", but (sadly) identifies a sales unit, not a merchant.
 
-First of all: A merchant very rarely "changes organization number".
+First: A merchant very rarely "changes organization number".
 That only occurs in special cases.
 An organization number uniquely identifies a juridical unit and cannot usually be changed.
 
 Typical cases:
 
-1. If the merchant wants to move agreements from
+* If the merchant wants to move agreements from
    one MSN to another,
    and both MSNs are under the same orgno,
    Vipps may be able to help.
-2. If the merchant wants to move agreements from
+* If the merchant wants to move agreements from
    one orgno to another,
    and both orgnos are owned by the same parent orgno,
    Vipps may be able to help.
-3. If the merchant wants to move agreements from
+* If the merchant wants to move agreements from
    one orgno to another,
    and the orgnos are not owned by a parent company,
    Vipps may be able to help.
@@ -263,12 +263,12 @@ Typical cases:
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
    The users may need to enter new agreements with the new orgno.
-4. If the merchant wants to move agreements between two independent orgnos
+* If the merchant wants to move agreements between two independent orgnos
    (not owned by a parent orgno),
-   splits or fissions out a new orgno,
+   splits out a new orgno,
    is merged with another orgno,
    is acquired by another orgno,
-   etc:
+   etc.:
    Vipps may *_not_* be able to help.
    The users have entered agreements with an orgno, and Vipps may not be able to
    automatically move the agreements without the user's consent to enter
@@ -277,24 +277,25 @@ Typical cases:
 
 The general process is:
 
-- Contact Vipps (your KAM or partner manager) to plan the switch, and
-  the date and time for moving the agreements.
-- Log in on
-  [portal.vipps.no](https://portal.vipps.no)
-  and enter a new agreement with Vipps for the new orgno.
-- Order "Vipps Faste betalinger" for the new orgno. on
-  [portal.vipps.no](https://portal.vipps.no).
-- Inform all existing customers of the new orgno,
-  and the planned date of the change. If it's a new company number, we need a confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same company number, we don't need this.
-- Send a confirmation to avtale@vipps.no that all customers have been informed,
-  including a copy of the information sent.
-- Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
-  - Vippsnummer of the sales unit the agreements should be migrated from and to
-  - A decision on how to handle existing agreements in the new sales unit (in case you have started using it)
-  - Final confirmation of date and time for migration.
-- After the migration is performed, you will get a file that maps from old to new agreement id
-  - this is a csv where each line is an agreement, and the columns are old id and new id
-- You then need to update your systems so you start using the new agreement ids
+1. Contact Vipps (your KAM or partner manager) to plan the switch, and
+   the date and time for moving the agreements.
+2. Log in on
+   [portal.vipps.no](https://portal.vipps.no)
+   and enter a new agreement with Vipps for the new orgno.
+3. Order "Vipps Faste betalinger" for the new orgno. on
+   [portal.vipps.no](https://portal.vipps.no).
+4. Inform all existing customers of the new orgno,
+   and the planned date of the change. If it's a new company number, we need a confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same company number, we don't need this.
+5. Send a confirmation to avtale@vipps.no that all customers have been informed,
+   including a copy of the information sent.
+6. Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
+   * Vippsnummer of the sales unit the agreements should be migrated from and to
+   * A decision on how to handle existing agreements in the new sales unit (in case you have started using it)
+   * Final confirmation of date and time for migration.
+7. After the migration is performed, you will get a file that maps from old to new agreement ID.
+   This is a CSV where each line is an agreement, and the columns are old ID and new ID.
+
+8. You then need to update your systems, so you start using the new agreement IDs
 
 Brukerne vil kunne finne den gamle avtalen under "Avsluttede faste betalinger". Der vil de finne historikk for den frem til migreringstidspunktet.
 Som en følge av dette vil det ikke være mulig for dere å se eller gjøre noe med tidligere trekk fra den nye salgsenheten, siden de nye avtalene ikke har noen trekk.
@@ -305,7 +306,7 @@ OBS; vi anbefaler å ta vare på alle avtaleIder en kunde noen gang har vært ti
 identical to the old ones, but with new agreementIds. The old agreements will
 be stopped. This means the user will still be able to see the old agreement in the app, under "Stopped agreements".
 
-This is done because the underlying payments are tied to the sales unit, so the new sales unit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
+This is done because the underlying payments are tied to the sales unit, so the new sales unit would not have authority to capture/refund etc. old charges in any case. This means that in order to perform refunds etc., you need to request to get the old sale unit re-opened or perform them by other means than Vipps.
 
 Charges done by the old MSN are in the old agreement,
 while the new MSN uses only the new agreement. The name of the new org will have the new juridical name. Sales unit name can be the same.
@@ -313,7 +314,7 @@ while the new MSN uses only the new agreement. The name of the new org will have
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
 
-**Please note:** If the merchant deactivates a MSN that has active
+**Please note:** If the merchant deactivates an MSN that has active
 agreements, it will no longer be possible to:
 
 - Manage the agreements
