@@ -298,9 +298,9 @@ The general process is:
 8. You then need to update your systems, so you start using the new agreement IDs
 
 **Please note:** Agreements are not actually moved. Your new sales unit will get new agreements
-identical to the old ones, but with new agreement IDs. As a result, it will not be possible for you to see or do anything with previous charges using the new sales unit and agreement ids. This is done because the underlying payments are tied to the sales unit, so the new sales unit would not have authority to capture/refund etc. old charges in any case. This means that in order to perform refunds etc., you need to request to get the old sale unit re-opened or perform them by other means than Vipps.
+identical to the old ones, but with new agreement IDs. As a result, it will not be possible for you to see or do anything with previous charges using the new sales unit and agreement IDs. This is done because the underlying payments are tied to the sales unit. so the new sales unit would not have authority to capture/refund etc. old charges in any case. This means that in order to perform refunds etc., you need to request to get the old sale unit re-opened or perform them by other means than Vipps.
 
-The agreements in the old sales unit will be stopped, and it will not be possible to make new charges on them. The user will still be able to see the old agreement in the app, under "Stopped agreements". There they will find the charge history up to the time of migration. 
+The agreements in the old sales unit will be stopped, and it will not be possible to make new charges on them. The user will still be able to see the old agreement in the app, under "Stopped agreements". There they will find the payment history up to the time of migration. 
 We recommend to keep track of all agreements a customer has ever been associated with, so that you have the opportunity to retrieve previous agreements, charges etc. if needed. 
 
 For all requests to move agreements: Please contact your KAM, your partner or
