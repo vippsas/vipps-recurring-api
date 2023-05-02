@@ -759,7 +759,8 @@ This is an example response from a call to the
 
 ```json
 {
-  "id": "agr_5kSeqzFAMkfBbc",
+  "id": "agr_ADbq4JK",
+  "created": "2018-08-22T12:59:56Z",
   "start": "2018-08-22T13:00:00Z",
   "stop": null,
   "status": "ACTIVE",
@@ -772,9 +773,13 @@ This is an example response from a call to the
   },
   "interval": {
     "unit" : "MONTH",
-    "count": 1
+    "count": 2,
+    "text": "every 2 months"
   },
-  "campaign": null
+  "campaign": null,
+  "merchantAgreementUrl": "https://www.merchant.no/subscriptions/1234/",
+  "uuid": "6080c099-d7f2-43ef-a82b-2991ccc3a239",
+  "countryCode": "NO"
 }
 ```
 
