@@ -1802,6 +1802,7 @@ components:
         - productName
         - uuid
         - countryCode
+        - created
       properties:
         campaign:
           $ref: '#/components/schemas/campaignResponseV3'
@@ -1823,6 +1824,11 @@ components:
           type: string
           description: Product description (longer)
           maxLength: 100
+        created:
+          type: string
+          format: date-time
+          description: Date when agreement was created in ISO 8601 format.
+          example: "2019-01-01T00:00:00Z"
         start:
           type: string
           format: date-time
