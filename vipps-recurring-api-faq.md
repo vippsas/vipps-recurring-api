@@ -296,20 +296,11 @@ The general process is:
   - this is a csv where each line is an agreement, and the columns are old id and new id
 - You then need to update your systems so you start using the new agreement ids
 
-Users will be able to find the old agreement under "Avsluttede faste betalinger" ("Canceled subscriptions"). There they will find history, up to the time of migration.
-As a result, it will not be possible for you to see or do anything with previous charges from the new sales unit, since the new agreements have no charges.
-The agreements in the old sales unit will be stopped, and it will not be possible to make new charges on them.
-Note, we recommend taking care of all agreements if a customer has ever been associated, so that you have the opportunity to find back to previous agreements, etc.
-We know that many people only take care of the "newest", and thus do not have the opportunity to find out whether a customer can have several active agreements, etc.
-
 **NOTE:** Agreements are not actually moved. Your new sales unit will get new agreements
-identical to the old ones, but with new agreementIds. The old agreements will
-be stopped. This means the user will still be able to see the old agreement in the app, under "Stopped agreements".
+identical to the old ones, but with new agreement ids. As a result, it will not be possible for you to see or do anything with previous charges using the new sales unit and agreement ids. This is done because the underlying payments are tied to the sales unit, so the new sales unit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc., you need to request to get the old sales unit re-opened or perform them by other means than vipps.
 
-This is done because the underlying payments are tied to the sales unit, so the new sales unit would not have authority to capture/refund etc old charges in any case. This means that in order to perform refunds etc, you need to request to get the old saleunit re-opened or perform them by other means than vipps.
-
-Charges done by the old MSN are in the old agreement,
-while the new MSN uses only the new agreement. The name of the new org will have the new juridical name. Sales unit name can be the same.
+The agreements in the old sales unit will be stopped, and it will not be possible to make new charges on them. The user will still be able to see the old agreement in the app, under "Stopped agreements". There they will find the charge history up to the time of migration. 
+We recommend to keep track of all agreements a customer has ever been associated with, so that you have the opportunity to retrieve previous agreements, charges etc. if needed. 
 
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
