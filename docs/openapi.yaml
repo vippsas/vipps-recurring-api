@@ -1982,6 +1982,13 @@ components:
             We do not have any specific requirements for the security of the
             page other than requiring HTTPS.
           example: https://example.com/vipps-subscriptions/1234/
+        externalId:
+          type: string
+          description: Agreement's external id
+          maxLength: 64
+          minLength: 1
+          pattern: '^.{1,64}$'
+          example: 'external-id-2468'
         status:
           type: string
           example: STOPPED
