@@ -2,7 +2,7 @@
 ---
 title: Recurring API changelog
 sidebar_label: Changelog
-sidebar_position: 26
+sidebar_position: 200
 pagination_next: null
 pagination_prev: null
 ---
