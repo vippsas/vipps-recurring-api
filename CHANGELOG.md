@@ -1,7 +1,7 @@
 <!-- START_METADATA
 ---
 title: Recurring API changelog
-sidebar_label: Recurring Changelog
+sidebar_label: Changelog
 sidebar_position: 200
 pagination_next: null
 pagination_prev: null
