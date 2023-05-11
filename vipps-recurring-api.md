@@ -956,7 +956,7 @@ The maximum number of `retryDays` is 14.
 
 This means that if the user's card has insufficient funds, the card has expired,
 the card is invalid, etc: The user is notified and can correct the problem.
-Vipps will make suer the user is able to pay.
+Vipps will make sure the user is able to pay.
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
 but helps the user to correct any problems in Vipps.
