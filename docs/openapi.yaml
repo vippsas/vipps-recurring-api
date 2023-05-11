@@ -1011,7 +1011,11 @@ paths:
       tags:
         - Charge v3 endpoints
       summary: Fetch a charge by id
-      description: Fetch a single charge just by chargeId. Useful for investigating claims from customers, but not intended for automation.
+      description: |-
+        Fetch a single charge just by `chargeId`, when the `agreementId` is unknown.
+        Useful for investigating claims from customers, but not intended for automation.
+        This is *not* a replacement for the normal endpoint for fetching charges:
+        `GET:/agreements/{agreementId}/charges/{chargeId}`.
       operationId: FetchChargeByIdV3
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -1228,7 +1232,9 @@ components:
     Vipps-System-Name:
       name: Vipps-System-Name
       in: header
-      description: The name of the ecommerce solution. One word in lowercase letters is good.
+      description: |-
+        The name of the ecommerce solution. One word in lowercase letters is good.
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1236,7 +1242,9 @@ components:
     Vipps-System-Version:
       name: Vipps-System-Version
       in: header
-      description: The version number of the ecommerce solution.
+      description: |-
+        The version number of the ecommerce solution.
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1244,7 +1252,9 @@ components:
     Vipps-System-Plugin-Name:
       name: Vipps-System-Plugin-Name
       in: header
-      description: The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
+      description: |-
+        The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1252,7 +1262,9 @@ components:
     Vipps-System-Plugin-Version:
       name: Vipps-System-Plugin-Version
       in: header
-      description: The version number of the ecommerce plugin (if applicable).
+      description: |-
+        The version number of the ecommerce plugin (if applicable).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
