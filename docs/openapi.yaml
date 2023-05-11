@@ -235,7 +235,7 @@ paths:
       summary: Update an Agreement
       description: |-
         Updates the agreement.
-        Note that when updating the status to "STOPPED",
+        Note that when updating the status to `STOPPED`,
         you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPut
@@ -273,7 +273,7 @@ paths:
       summary: Update an Agreement
       description: |-
         Updates the agreement.
-        Note that when updating the status to "STOPPED",
+        Note that when updating the status to `STOPPED`,
         you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPatch
@@ -603,7 +603,7 @@ paths:
       summary: Update an Agreement
       description: |-
         Updates the agreement.
-        Note that when updating the status to "STOPPED",
+        Note that when updating the status to `STOPPED`,
         you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPatchV3
