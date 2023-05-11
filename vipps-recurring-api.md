@@ -954,7 +954,15 @@ retry day to be sure you get the last status.
 Vipps will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
 
-Retry days are not tied to the agreement’s interval. This means that a charge
+This means that if the user's card has insufficient funds, the card has expired,
+the card is invalid, etc: The user is notified and can correct the problem.
+Vipps will make suer the user is able to pay.
+
+**IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
+but helps the user to correct any problems in Vipps.
+This results in a _very_ high success rate for charges.
+
+The `retryDays` are not tied to the agreement’s interval. This means that a charge
 can be retried for a maximum of 14 days even though the next interval has started.
 For example, an agreement with daily interval can have a charge retried for
 multiple days, and it is possible to create new daily charges while others are
@@ -966,10 +974,6 @@ from the `due` date until the charge has succeeded, or until the
 The final status will be `CHARGED` or `FAILED`.
 
 See: [Charge states](#charge-states).
-
-**IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
-but helps the user to correct any problems in Vipps.
-This results in a _very_ high success rate for charges.
 
 ### Retrieve a charge
 
@@ -1134,7 +1138,7 @@ This table has all the details for the charge states returned by the
 | `PROCESSING`         | The charge is being processed right now. |
 | `UNKNOWN`            | The charge status is unknown. This is usually very transient and will be resolved shortly. |
 | `CHARGED`            | The charge has been successfully processed, and the available amount has been captured. |
-| `FAILED`             | The charge has failed because of an expired card, insufficient funds, etc. Vipps does not provide the details to the merchant. |
+| `FAILED`             | The charge has failed because of insufficient funds, no valid cards, etc. Vipps gives the user all possible opportunities to pay, including adding a new card, but does not provide the details to the merchant. |
 | `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. |
 | `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded. |
 | `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
