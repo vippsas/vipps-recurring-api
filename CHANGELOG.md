@@ -32,7 +32,7 @@ All notable changes to the current API will be documented in this file.
 
 ## March 2023
 
-* The new endpoint [`GET:/charges/{chargeId}`][get-charge-by-id] makes it possible to retrieve a charge specified by `chargeId`, without knowing the `agreementId`. The resulting charge now contains the `agreementId`. Its purpose is to simplify investigations when the merchant lost track of which charge belongs to which agreement.
+* The new endpoint [`GET:/charges/{chargeId}`](https://developer.vippsmobilepay.com/api/recurring/#tag/Charge-v3-endpoints/operation/FetchChargeByIdV3) makes it possible to retrieve a charge specified by `chargeId`, without knowing the `agreementId` (unlike [`GET:/agreements/{agreementId}/charges/{chargeId}`](https://developer.vippsmobilepay.com/api/recurring/#tag/Charge-v3-endpoints/operation/FetchChargeV3)). The resulting charge now contains the `agreementId`. Its purpose is to simplify investigations when the merchant lost track of which charge belongs to which agreement.
 
 ## December 2022
 
