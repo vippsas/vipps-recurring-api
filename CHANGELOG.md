@@ -11,7 +11,25 @@ END_METADATA -->
 # Changelog
 
 All notable changes to the current API will be documented in this file. 
+See:
+[API Lifecycle](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/api-lifecycle/).
 
+## May 2023
+
+* New fields returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint: 
+    * `merchantAgreementUrl`: URL where Vipps can send the customer to view/manage their subscription
+    * `merchantRedirectUrl`: URL where customer should be redirected after the agreement has been approved/rejected in the Vipps mobile application
+    * `created`: Date when agreement was created in ISO 8601 format
+
+## April 2023 
+
+* New **optional** field `externalId` for agreements introduced. This field can be used to store an external id for the agreement. Can be set in the request body of the [`POST:/agreements`][draft-agreement-endpoint] request. `externalId` will be returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint. It is also possible to update it using the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint. 
+
+* New **optional** field `countryCode` for agreements introduced. Can be set in the request body of the [`POST:/agreements`][draft-agreement-endpoint] request. `countryCode` will also be returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
+
+* New field `uuid` (UUID representation of agreement id) returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] response. 
+
+* New **optional** field `externalId` for charges introduced. This field can be used to store an external id for the charge. Can be set in the [`POST:/agreements/{agreementId}/charges`][draft-agreement-endpoint] request.
 
 
 ## March 2023
@@ -21,5 +39,12 @@ All notable changes to the current API will be documented in this file.
 ## December 2022
 
 * v3 is now available. v3 includes new and improved functionality for campaigns, the ability to reserve and capture charges, and several technical improvements. The [migration guide](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/v2-to-v3-migration-guide/) and [quick start](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-quick-start/) provide more details for upgrading to v3.  v2 will be phased out and will no longer be available from June 1, 2023.
+
+
+[fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
+[get-charge-by-id]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeByIdV3
+[draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
+[create-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
+[update-agreement-patch-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
 
  
