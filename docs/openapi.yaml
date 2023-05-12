@@ -4,7 +4,7 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
-  version: 2.6.15
+  version: 2.6.16
   title: Recurring Payments Merchant API
 
 servers:
@@ -15,10 +15,10 @@ servers:
 
 tags:
   - name: Agreement v2 endpoints (deprecated)
-    description: Will not be available from June 1, 2023
+    description: Will not be available from November 1, 2023
   - name: Agreement v3 endpoints
   - name: Charge v2 endpoints (deprecated)
-    description: Will not be available from June 1, 2023
+    description: Will not be available from November 1, 2023
   - name: Charge v3 endpoints
 
 paths:
@@ -235,7 +235,7 @@ paths:
       summary: Update an Agreement
       description: |-
         Updates the agreement.
-        Note that when updating the status to "STOPPED",
+        Note that when updating the status to `STOPPED`,
         you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPut
@@ -273,7 +273,7 @@ paths:
       summary: Update an Agreement
       description: |-
         Updates the agreement.
-        Note that when updating the status to "STOPPED",
+        Note that when updating the status to `STOPPED`,
         you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPatch
@@ -603,7 +603,7 @@ paths:
       summary: Update an Agreement
       description: |-
         Updates the agreement.
-        Note that when updating the status to "STOPPED",
+        Note that when updating the status to `STOPPED`,
         you can not re-activate it. If you want to pause an agreement,
         we suggest leaving the agreement active and skipping the creation of charges as long as the agreement is paused in your systems.
       operationId: UpdateAgreementPatchV3
@@ -1011,7 +1011,11 @@ paths:
       tags:
         - Charge v3 endpoints
       summary: Fetch a charge by id
-      description: Fetch a single charge just by chargeId. Useful for investigating claims from customers, but not intended for automation.
+      description: |-
+        Fetch a single charge just by `chargeId`, when the `agreementId` is unknown.
+        Useful for investigating claims from customers, but not intended for automation.
+        This is *not* a replacement for the normal endpoint for fetching charges:
+        `GET:/agreements/{agreementId}/charges/{chargeId}`.
       operationId: FetchChargeByIdV3
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -1228,7 +1232,9 @@ components:
     Vipps-System-Name:
       name: Vipps-System-Name
       in: header
-      description: The name of the ecommerce solution. One word in lowercase letters is good.
+      description: |-
+        The name of the ecommerce solution. One word in lowercase letters is good.
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1236,7 +1242,9 @@ components:
     Vipps-System-Version:
       name: Vipps-System-Version
       in: header
-      description: The version number of the ecommerce solution.
+      description: |-
+        The version number of the ecommerce solution.
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1244,7 +1252,9 @@ components:
     Vipps-System-Plugin-Name:
       name: Vipps-System-Plugin-Name
       in: header
-      description: The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
+      description: |-
+        The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1252,7 +1262,9 @@ components:
     Vipps-System-Plugin-Version:
       name: Vipps-System-Plugin-Version
       in: header
-      description: The version number of the ecommerce plugin (if applicable).
+      description: |-
+        The version number of the ecommerce plugin (if applicable).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
