@@ -332,9 +332,9 @@ See [Initial charge](#initial-charge).
 
 There are two different types of pricing available:
 
-First one is `LEGACY`, this is the default type. See [Amount changes](#amount-changes) for the limit rules.
+The first one is `LEGACY`, this is the default type. See [Amount changes](#amount-changes) for the limit rules.
 
-Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint:
+Here is a truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint:
 
 ```json
 {
@@ -349,9 +349,9 @@ Truncated example of request body for the [`POST:/agreements`][draft-agreement-e
 }
 ```
 
-Second one is `VARIABLE`. See [variable amount](#recurring-agreements-with-variable-amount).
+The second one is `VARIABLE`. See [variable amount](#recurring-agreements-with-variable-amount).
 
-Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint:
+Here is a truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint:
 
 ```json
 {
@@ -506,10 +506,8 @@ Example for a subscription every 30th day:
 Users can be charged the full amount once every 30 days, regardless of the day in the month.
 (E.g. First charge can be due on 12.06.2022 and second charge on 04.07.2022)
 
-**Please note:** It is not possible to change intervals. If the user has accepted a yearly interval, the agreement cannot be changed to a monthly agreement.
-This requires a new agreement and a new consent from the user.
-It _is_ possible to make a monthly agreement and charge some months only.
-The general rule: Be as customer friendly and easy to understand as possible.
+**Please note:** It is not possible to change intervals. See
+[Can I change the charge interval?](vipps-recurring-api-faq.md#can-i-change-the-charge-interval)
 
 ### Initial charge
 

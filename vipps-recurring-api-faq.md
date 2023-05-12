@@ -99,6 +99,17 @@ You can create charges once the user's agreement is ACTIVE
 
 See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 
+### Can I change the charge interval?
+
+No, it is not possible to change intervals. If the user has accepted a yearly interval,
+the agreement cannot be changed to a monthly agreement.
+This requires a new agreement and a new consent from the user.
+It _is_ possible to make a monthly agreement and charge some months only.
+The general rule: Be as customer friendly and easy to understand as possible.
+
+See:
+[`PATCH:/agreements/{agreementId}`](https://developer.vippsmobilepay.com/api/recurring/#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3).
+
 ### A charge failed, but the customer did not receive any warning
 
 The customer may not have notifications turned on. We always send notifications to the user when a charge processing attempt is not successful, and the user gets a more detailed message when looking at the charge/agreement in the app.
@@ -145,8 +156,7 @@ users as described in
 
 ### For how long is a payment reserved?
 
-See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
-in Vipps FAQs.
+See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved).
 
 ## Variable amount
 
