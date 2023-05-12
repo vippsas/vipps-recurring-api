@@ -2698,13 +2698,15 @@ components:
           minimum: 0
           maximum: 14
           example: 5
-          description: The service will attempt to charge the customer for N days
+          description: |-
+            The service will attempt to charge the customer for the number of days
+            specified in `retryDays` after the `due` date.
         orderId:
           type: string
           maximum: 50
           pattern: "^[a-zA-Z\\d-]+"
           example: acme-shop-123-order123abc
-          description: An optional orderId for the payment, auto generated otherwise
+          description: An optional orderId for the payment, auto generated otherwise.
 
     CreateChargeV3:
       title: CreateCharge
@@ -2749,7 +2751,9 @@ components:
           minimum: 0
           maximum: 14
           example: 5
-          description: The service will attempt to charge the customer for N days
+          description: |-
+            The service will attempt to charge the customer for the number of days
+            specified in `retryDays` after the `due` date.
         orderId:
           type: string
           maximum: 50
