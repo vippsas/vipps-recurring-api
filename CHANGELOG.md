@@ -11,8 +11,10 @@ END_METADATA -->
 # Changelog
 
 All notable changes to the current API will be documented in this file. 
+See:
+[API Lifecycle](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/api-lifecycle/).
 
-## Mai 2023
+## May 2023
 
 * New fields returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint: 
     * `merchantAgreementUrl`: URL where Vipps can send the customer to view/manage their subscription
