@@ -1625,7 +1625,10 @@ components:
           example: false
         externalId:
           type: string
-          description: An optional external id for the agreement
+          description: |-
+            An optional external id for the agreement.
+            The `externalId` can be used by the merchant to map the `agreementId`
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -1892,7 +1895,10 @@ components:
           nullable: true
         externalId:
           type: string
-          description: An optional external id for the agreement
+          description: |-
+            An optional external id for the agreement.
+            The `externalId` can be used by the merchant to map the `agreementId`
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -1996,7 +2002,10 @@ components:
           example: https://example.com/vipps-subscriptions/1234/
         externalId:
           type: string
-          description: Agreement's external id
+          description: |-
+            An optional external id for the agreement.
+            The `externalId` can be used by the merchant to map the `agreementId`
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -2640,7 +2649,10 @@ components:
           description: An optional orderId for the payment, auto generated otherwise
         externalId:
           type: string
-          description: An optional external id for the charge
+          description: |-
+            An optional external id for the charge
+            The `externalId` can be used by the merchant to map the `chargeId`
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -2686,13 +2698,15 @@ components:
           minimum: 0
           maximum: 14
           example: 5
-          description: The service will attempt to charge the customer for N days
+          description: |-
+            The service will attempt to charge the customer for the number of days
+            specified in `retryDays` after the `due` date.
         orderId:
           type: string
           maximum: 50
           pattern: "^[a-zA-Z\\d-]+"
           example: acme-shop-123-order123abc
-          description: An optional orderId for the payment, auto generated otherwise
+          description: An optional orderId for the payment, auto generated otherwise.
 
     CreateChargeV3:
       title: CreateCharge
@@ -2737,7 +2751,9 @@ components:
           minimum: 0
           maximum: 14
           example: 5
-          description: The service will attempt to charge the customer for N days
+          description: |-
+            The service will attempt to charge the customer for the number of days
+            specified in `retryDays` after the `due` date.
         orderId:
           type: string
           maximum: 50
@@ -2746,7 +2762,10 @@ components:
           description: An optional orderId for the payment, auto generated otherwise
         externalId:
           type: string
-          description: An optional external id for the charge
+          description: |-
+            An optional external id for the charge
+            The `externalId` can be used by the merchant to map the `chargeId`
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -2888,7 +2907,10 @@ components:
           $ref: "#/components/parameters/AgreementId"
         externalId:
           type: string
-          description: An optional external id for the charge
+          description: |-
+            An optional external id for the charge
+            The `externalId` can be used by the merchant to map the `chargeId`
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
