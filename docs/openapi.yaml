@@ -1628,7 +1628,7 @@ components:
           description: |-
             An optional external id for the agreement.
             The `externalId` can be used by the merchant to map the `agreementId`
-            to an id in a subscxription system or similar.
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -1898,7 +1898,7 @@ components:
           description: |-
             An optional external id for the agreement.
             The `externalId` can be used by the merchant to map the `agreementId`
-            to an id in a subscxription system or similar.
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -2005,7 +2005,7 @@ components:
           description: |-
             An optional external id for the agreement.
             The `externalId` can be used by the merchant to map the `agreementId`
-            to an id in a subscxription system or similar.
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -2652,7 +2652,7 @@ components:
           description: |-
             An optional external id for the charge
             The `externalId` can be used by the merchant to map the `chargeId`
-            to an id in a subscxription system or similar.
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -2761,7 +2761,7 @@ components:
           description: |-
             An optional external id for the charge
             The `externalId` can be used by the merchant to map the `chargeId`
-            to an id in a subscxription system or similar.
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
@@ -2906,7 +2906,7 @@ components:
           description: |-
             An optional external id for the charge
             The `externalId` can be used by the merchant to map the `chargeId`
-            to an id in a subscxription system or similar.
+            to an id in a subscription system or similar.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'
