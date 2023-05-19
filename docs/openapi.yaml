@@ -2877,6 +2877,8 @@ components:
         - currency
         - agreementId
         - externalId
+        - externalAgreementId
+        - retryDays
       properties:
         amount:
           type: integer
@@ -2915,6 +2917,25 @@ components:
           minLength: 1
           pattern: '^.{1,64}$'
           example: 'external-id-2468'
+        externalAgreementId:
+          type: string
+          description: |-
+            An optional external id for the agreement
+            The `externalId` can be used by the merchant to map the `agreementId`
+            to an id in a subscription system or similar.
+          maxLength: 64
+          minLength: 1
+          pattern: '^.{1,64}$'
+          example: 'external-id-2468'
+        retryDays:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 14
+          example: 5
+          description: |-
+            The service will attempt to charge the customer for the number of days
+            specified in `retryDays` after the `due` date.
         status:
           $ref: "#/components/schemas/ChargeStatus"
         transactionId:
