@@ -21,6 +21,10 @@ See:
     * `merchantRedirectUrl`: URL where customer should be redirected after the agreement has been approved/rejected in the Vipps mobile application
     * `created`: Date when agreement was created in ISO 8601 format
 
+* New fields returned by the [`GET:/agreements/{agreementId}/charges/{chargeId}`](https://developer.vippsmobilepay.com/api/recurring/#tag/Charge-v3-endpoints/operation/FetchChargeV3) endpoint: 
+    * `retryDays`: The service will attempt to charge the customer for the number of days specified in `retryDays` after the `due` date
+    * `externalAgreementId`: Can be used by the merchant to map the `agreementId` to an id in a subscription system or similar
+
 ## April 2023 
 
 * New **optional** field `externalId` for agreements introduced. This field can be used to store an external id for the agreement. Can be set in the request body of the [`POST:/agreements`][draft-agreement-endpoint] request. `externalId` will be returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint. It is also possible to update it using the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint. 
