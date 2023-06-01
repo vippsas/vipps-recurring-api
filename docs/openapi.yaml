@@ -1916,6 +1916,14 @@ components:
           pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'
           description: UUID (RFC 4122) representation of id
           example: '9c2ca95c-245f-4a2e-aab2-4a08eb78e6fb'
+        vippsConfirmationUrl:
+          type: string
+          description: |-
+            The `vippsConfirmationUrl` should be used to redirect the
+            user to the Vipps landing page in a desktop flow (with `https://`),
+            or to the Vipps app in a mobile flow (with `vipps://`), where the
+            user can then approve the agreement.
+          example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
 
     PatchAgreementV2:
       title: PatchAgreement
