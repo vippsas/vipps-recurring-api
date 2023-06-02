@@ -16,7 +16,7 @@ See:
 
 ## June 2023
 * A new field is returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint: 
-    * `vippsConfirmationUrl`: used to redirect the user to the Vipps landing page in a desktop flow (with `https://`), or to the Vipps app in a mobile flow (with `vipps://`), where the user can then approve the agreement
+    * `vippsConfirmationUrl`: used to redirect the user to the [Vipps landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page/) in a desktop flow (with `https://`), or to the Vipps app in a mobile flow (with `vipps://`), where the user can then approve the agreement
 
 ## May 2023
 
