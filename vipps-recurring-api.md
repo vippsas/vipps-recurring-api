@@ -582,7 +582,48 @@ A reserved charge can be captured with the
 [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] endpoint
 when the product is shipped.
 
-### Campaigns
+### Retrieve an agreement
+
+A newly created agreement will be in status `PENDING` for 10 minutes before it expires.
+If the customer approves the agreement, and the `initialCharge` (if provided) is successfully
+processed, the agreement status will change to `ACTIVE`.
+
+The approved agreement is retrieved from the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint
+with `"status":"ACTIVE"` when the customer has approved the agreement. It is important to keep retrieving the agreement until the status is `ACTIVE`, `STOPPED` or `EXPIRED`.
+
+See [Agreement states](#agreement-states).
+
+This is an example response from a call to the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint:
+
+```json
+{
+  "id": "agr_ADbq4JK",
+  "created": "2018-08-22T12:59:56Z",
+  "start": "2018-08-22T13:00:00Z",
+  "stop": null,
+  "status": "ACTIVE",
+  "productName": "Premier League subscription",
+  "productDescription": "Access to all games of English top football",
+  "pricing": {
+    "type": "LEGACY",
+    "amount": 49900,
+    "currency": "NOK"
+  },
+  "interval": {
+    "unit" : "MONTH",
+    "count": 2,
+    "text": "every 2 months"
+  },
+  "campaign": null,
+  "merchantAgreementUrl": "https://www.merchant.no/subscriptions/1234/",
+  "uuid": "6080c099-d7f2-43ef-a82b-2991ccc3a239",
+  "countryCode": "NO"
+}
+```
+
+## Campaigns
 
 A _campaign_ in Recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
@@ -632,7 +673,13 @@ See more about the different campaign types in the table below.
 In order to start a campaign, the `campaign` field has to be added to the agreement draft body in the
 [`POST:/agreements`][draft-agreement-endpoint] call.
 
-##### Price campaign
+#### Product description guidelines for agreements with campaigns
+
+We do not recommend you to use `Product Description` for agreements with a campaign.
+We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
+
+
+### Price campaign
 
 ![price-campaign-explanation](images/campaigns/price-campaign.png)  
 
@@ -654,7 +701,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 
 ![screen-price-campaign](images/campaigns/screens/price-campaign.png)
 
-##### Period campaign
+### Period campaign
 
 ![period-campaign-explanation](images/campaigns/period-campaign.png)
 
@@ -679,7 +726,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 
 ![screen-price-campaign](images/campaigns/screens/period-campaign.png)
 
-##### Event campaign
+### Event campaign
 
 ![event-campaign](images/campaigns/event-campaign.png)
 
@@ -705,7 +752,7 @@ In order to start a campaign, the `campaign` field has to be added to the agreem
 
 ![screen-event-campaign](images/campaigns/screens/event-campaign.png)
 
-##### Full flex campaign
+### Full flex campaign
 
 **Please note:** Contact Vipps before creating a draft agreement with a full flex campaign.
 See [contact us](https://developer.vippsmobilepay.com/docs/vipps-developers/contact).
@@ -735,51 +782,7 @@ See [contact us](https://developer.vippsmobilepay.com/docs/vipps-developers/cont
 
 ![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
-##### Product description guidelines for agreements with campaigns
 
-We do not recommend you to use `Product Description` for agreements with a campaign.
-We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
-
-### Retrieve an agreement
-
-A newly created agreement will be in status `PENDING` for 10 minutes before it expires.
-If the customer approves the agreement, and the `initialCharge` (if provided) is successfully
-processed, the agreement status will change to `ACTIVE`.
-
-The approved agreement is retrieved from the
-[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint
-with `"status":"ACTIVE"` when the customer has approved the agreement. It is important to keep retrieving the agreement until the status is `ACTIVE`, `STOPPED` or `EXPIRED`.
-
-See [Agreement states](#agreement-states).
-
-This is an example response from a call to the
-[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint:
-
-```json
-{
-  "id": "agr_ADbq4JK",
-  "created": "2018-08-22T12:59:56Z",
-  "start": "2018-08-22T13:00:00Z",
-  "stop": null,
-  "status": "ACTIVE",
-  "productName": "Premier League subscription",
-  "productDescription": "Access to all games of English top football",
-  "pricing": {
-    "type": "LEGACY",
-    "amount": 49900,
-    "currency": "NOK"
-  },
-  "interval": {
-    "unit" : "MONTH",
-    "count": 2,
-    "text": "every 2 months"
-  },
-  "campaign": null,
-  "merchantAgreementUrl": "https://www.merchant.no/subscriptions/1234/",
-  "uuid": "6080c099-d7f2-43ef-a82b-2991ccc3a239",
-  "countryCode": "NO"
-}
-```
 
 ## Charges
 
