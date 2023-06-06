@@ -287,6 +287,9 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
   "productName": "Premier League subscription"
 }
 ```
+
+#### Agreement fields and their usage in the Vipps MobilePay app
+
 * `pricing`: Price of the subscription. 
 * `interval`: Describes how often the user will be charged. 
 * `productName`: A short description of the subscription. Will be displayed as the agreement name in the Vipps MobilePay app.
@@ -294,7 +297,7 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 * `merchantAgreementUrl`: URL where Vipps can send the customer to view/manage their subscription. See [Merchant agreement URL](#merchant-agreement-url).
 
 
-![Agreement's fields](images/agreement_fields.png)
+![Agreement fields](images/agreement_fields.png)
 
 
 **Please note:** To create agreements with support for variable amounts on charges, see
