@@ -287,16 +287,18 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
   "productName": "Premier League subscription"
 }
 ```
+* `pricing`: Price of the subscription. 
+* `interval`: Describes how often the enduser will charged. 
+* `productName`: A short description of the subscription. Will be displayed as the agreement name in the Vipps MobilePay app.
+* `productDescription`: More details about the subscription. Optional field.  
+* `merchantAgreementUrl`: URL where Vipps can send the customer to view/manage their subscription. See [Merchant agreement URL](#merchant-agreement-url).
+
+
+![Agreement's fields](images/agreement_fields.png)
+
 
 **Please note:** To create agreements with support for variable amounts on charges, see
 [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount).
-
-The request parameters have the following size limits
-(see the [`POST:/agreements`][draft-agreement-endpoint] endpoint for more details):
-
-* `productName`: Max length 45 characters.
-* `productDescription`: Max length 100 characters.
-* `pricing.amount`: Greater than 100, meaning 1 NOK.
 
 Agreements may be initiated with or without an [initial charge](#initial-charge).
 
