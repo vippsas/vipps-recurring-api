@@ -406,43 +406,6 @@ We set the failure reason on the charge based on why the processing failed.
 
 ## Admin/partners
 
-### How can I change partners for a merchant?
-
-**Please note:** We are working out the details for this process, please contact
-us if you need help with this.
-
-Here is the procedure for what you must do when changing partners:
-We need consent from the user site that they will change partners.
-They can submit this directly to Vipps (via partnerbestelling@vipps.no) or
-they can submit it through you as a new partner.
-
-The partner orders at Vipps (partnerbestelling@vipps.no) must receive an e-mail
-from the user site or partner stating that they wish to change partner with the
-following information:
-
-* Name of user location
-* Organization number
-* Name of new partner
-* Name of old partner
-* Which MSN it should be "switched to"
-* Test page if the website changes
-* Date and time of desired transfer from old partner to new partner
-* Signature from customer
-* Possible new price
-
-One thing you should be aware of is that in each agreement there is a `merchantAgreementUrl`
-which is the link each user clicks on to be able to change their subscription.
-In other words, a "My page" for the user. If the link structure is not the same
-in both solutions, you must update all existing agreements with a new URL as
-soon as possible after the move so that the customers can manage the agreements
-further without coming to a blank page.
-
-### How can I change partner for my integration with Vipps?
-
-See [How to change partners for a merchant](https://developer.vippsmobilepay.com/docs/vipps-partner/how-to-change-partners).
-
-**Please note:** The MSN (the number) does _not_ change when changing partners.
-
 ### Settlement
 
 The settlements are done trough Vipps.
