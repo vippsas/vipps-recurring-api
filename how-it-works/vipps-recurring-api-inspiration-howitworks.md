@@ -123,8 +123,8 @@ To remove the discount, you simply update the agreement again with the original 
 
 If you want to give members a discounted subscription fee when they have been subscribed for a long time, you can do this in a couple of ways:
 
-- Update existing agreements as previous scenario.
-- Use a `FULL_FLEX_CAMPAIGN` to display to the new customers that they will get a better price if they stay subscribed. See [full flex campaign](../vipps-recurring-api.md#full-flex-campaign) for more details.
+* Update existing agreements as previous scenario.
+* Use a `FULL_FLEX_CAMPAIGN` to display to the new customers that they will get a better price if they stay subscribed. See [full flex campaign](../vipps-recurring-api.md#full-flex-campaign) for more details.
 
 Here is an example of the latter, where they pay 69kr/week until March 1st, then 200kr/month after that:
 

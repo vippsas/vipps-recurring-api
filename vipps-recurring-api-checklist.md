@@ -63,10 +63,10 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
    there are test agreements and charges in the
    [Vipps test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment),
    with the following states:
-    - A complete Agreement ending in `ACTIVE`.
-    - A complete Agreement ending in `STOPPED`.
-    - A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
-    - A complete `"type":"RECURRING"` Charge ending in  `REFUNDED`.
+   * A complete Agreement ending in `ACTIVE`.
+   * A complete Agreement ending in `STOPPED`.
+   * A complete `"type":"RECURRING"` Charge ending in  `CHARGED`.
+   * A complete `"type":"RECURRING"` Charge ending in  `REFUNDED`.
 6. The recurring merchant starts using the MSN and API keys for the production environment.
 7. The merchant verifies that what worked in the test environment also work in the production environment.
    **Please note:** Vipps does not do any kind of activation or make any changes based on this checklist.

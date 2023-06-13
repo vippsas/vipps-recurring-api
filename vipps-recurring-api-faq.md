@@ -319,9 +319,9 @@ For all requests to move agreements: Please contact your KAM, your partner or
 **Please note:** If the merchant deactivates an MSN that has active
 agreements, it will no longer be possible to:
 
-- Manage the agreements
-- Perform new charges
-- Make refunds
+* Manage the agreements
+* Perform new charges
+* Make refunds
 
 ### Can I look up an agreementId if I have the chargeId?
 
@@ -360,13 +360,13 @@ This is done by adding a `scope` parameter to the initiate calls:
 and
 [`POST:/agreements`][draft-agreement-endpoint] (Recurring):
 
-- address
-- birthDate
-- email
-- name
-- phoneNumber
-- nin (fødselsnummer)
-- accountNumbers
+* address
+* birthDate
+* email
+* name
+* phoneNumber
+* nin (fødselsnummer)
+* accountNumbers
 
 The userinfo endpoint is shared with
 [Vipps Login](https://developer.vippsmobilepay.com/docs/APIs/login-api)

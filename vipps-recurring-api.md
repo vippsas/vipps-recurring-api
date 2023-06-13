@@ -837,8 +837,8 @@ in the Vipps FAQ for more details.
 
 The advantage to using reserve capture is that you can release the reservation immediately:
 
-- For a reserved payment, the merchant can make a /cancel call to immediately release the reservation and make it available in the customer's account.
-- For a captured payment, the merchant must make a /refund call. It then takes a few days before the amount is available in the customer's account.
+* For a reserved payment, the merchant can make a /cancel call to immediately release the reservation and make it available in the customer's account.
+* For a captured payment, the merchant must make a /refund call. It then takes a few days before the amount is available in the customer's account.
 
 ### Capture a charge
 
@@ -1370,8 +1370,8 @@ Create agreement request:
 
 **Restrictions when using variable amount:**
 
-- There is currently a limit of **20 000 NOK** for the `suggestedMaxAmount`.
-- `Campaign` can not be used when the agreement has `variableAmount`.
+* There is currently a limit of **20 000 NOK** for the `suggestedMaxAmount`.
+* `Campaign` can not be used when the agreement has `variableAmount`.
 
 The user will be presented with the variable agreement in Vipps,
 where they can change the max amount they allow to be charged each interval.
@@ -1439,8 +1439,8 @@ The amount of the charge/charges in the interval can not be higher than the `sug
 
 Examples:
 
-- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 2 000 kr then the charge amount can not be higher than 5 000 kr
-- If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 7 000 kr then the charge amount can not be higher than 7 000 kr
+* If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 2 000 kr then the charge amount can not be higher than 5 000 kr
+* If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 7 000 kr then the charge amount can not be higher than 7 000 kr
 
 ### Charge amount higher than the user's max amount
 
