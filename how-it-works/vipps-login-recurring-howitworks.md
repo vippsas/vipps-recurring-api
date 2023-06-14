@@ -13,4 +13,4 @@ END_METADATA -->
 
 The recurring API and Login API can be used together making registration and payment simple for your customers.
 
-See [Simplifying registration and payment](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login) in the Solutions section.
+See [Subscriptions](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login).

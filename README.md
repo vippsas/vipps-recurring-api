@@ -39,7 +39,7 @@ for details.
 
 ## Related solutions
 
-* [Simplifying registration and payment (Recurring with Login)](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login)
+* [Subscriptions](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login)
 * [Parking and "Pay-as-you-go"](https://developer.vippsmobilepay.com/docs/vipps-solutions/parking)
 
 ## Getting started
