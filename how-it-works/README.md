@@ -20,5 +20,6 @@ END_METADATA -->
 * [Recurring API with initial charge](vipps-recurring-api-initial-charge-howitworks.md)
 * [Recurring API with variable amount](vipps-recurring-api-variable-howitworks.md)
 * [Recurring API with campaign](vipps-recurring-api-campaigns-howitworks.md)
-* [Recurring API with Vipps Login](vipps-login-recurring-howitworks.md)
 * [Implementation inspiration](vipps-recurring-api-inspiration-howitworks.md)
+
+See the [Subscriptions](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login) solution for how Login and Recurring can be used together to simplify the payment flow.

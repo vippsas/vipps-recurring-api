@@ -6,6 +6,7 @@ sidebar_position: 15
 description: How Login works with the Login API.
 pagination_next: null
 pagination_prev: null
+draft: true
 ---
 END_METADATA -->
 
@@ -13,4 +14,4 @@ END_METADATA -->
 
 The recurring API and Login API can be used together making registration and payment simple for your customers.
 
-See [Subscriptions](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login).
+See the [Subscriptions](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login) solution for how Login and Recurring can be used together to simplify the payment flow.
