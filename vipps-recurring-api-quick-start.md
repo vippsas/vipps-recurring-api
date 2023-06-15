@@ -46,7 +46,7 @@ so it's easy to see what they look like in the app.
 1. In the dialog that opens, with *File* selected, click *Upload Files*.
 1. Select the two files you have just downloaded and click *Import*.
 
-### Step 3: Setup Postman environment
+### Step 3: Set up Postman environment
 
 1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
 2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
