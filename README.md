@@ -39,7 +39,9 @@ for details.
 * [How Recurring works with campaign](./how-it-works/vipps-recurring-api-campaigns-howitworks.md): Learn about using Recurring campaigns.
 * [Implementation inspiration](./how-it-works/vipps-recurring-api-inspiration-howitworks.md): Get inspiration for how to use Recurring.
 
-## Related solutions
+## Related flows
+
+Examples of how to combine the Recurring API with other APIs for specific use cases:
 
 * [Subscriptions](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login)
 * [Parking and "Pay-as-you-go"](https://developer.vippsmobilepay.com/docs/vipps-solutions/parking)
