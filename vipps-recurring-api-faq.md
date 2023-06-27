@@ -16,9 +16,8 @@ See the
 for all the details.
 
 See also:
-[Vipps API FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs).
-
-See also:
+[Vipps API FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
+and the
 [Getting Started](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
 guide.
 
@@ -43,7 +42,7 @@ See:
 
 ### Can I manage agreements and charges created with v2 API using v3 API?
 
-All agreements and charges created with v2 API can be retrieved and managed using the v3 API and vice-versa.
+Yes. All agreements and charges created with v2 API can be retrieved and managed using the v3 API and vice-versa.
 Also, if an agreement was created with v2 API, it is possible to create a charge for this agreement with v3 API and vice-versa.
 
 ## Charges/Payments
@@ -51,6 +50,7 @@ Also, if an agreement was created with v2 API, it is possible to create a charge
 ### Do I need to store card data?
 
 No. Vipps handles all payment details.
+Merchants don't need to know how the users pay.
 
 ### Does Vipps automatically create charges for an agreement?
 
@@ -64,15 +64,16 @@ No. Vipps handles all payment details.
 ### When are charges processed?
 
 Charges are processed at least twice a day from the `due` date, and for
-the specified `retryDays` after the `due` date.
+the specified number of `retryDays` after the `due` date.
 
 Charges are processed two times every day: 07:00 and 15:00 UTC
 (this may change without notice).
 
 Retries are attempted according to the `retryDays` specified.
-This applies for both our production and test environment (MT).
+This applies for both our production and
+[test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment/).
 
-### I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)
+### I don't want a charge to fail the first time the transaction fails (insufficient funds, networking issues, etc.)
 
 The field `retryDays` in an Agreement allows for this functionality, Vipps will
 retry once each day until the value is reached. The valid values are none
@@ -156,7 +157,7 @@ See [If a user's card expires: What happens on the next charge?](#if-a-users-car
 
 ### How does a user see the charges I create?
 
-The charge will then appear in the app after it goes into the `DUE`-state.
+The charge will be visible for the user in the app when it goes into the `DUE` state.
 A charge will remain in `PENDING` state until the `due` date is less than 30 days away.
 
 You can retrieve all relevant charges through the
@@ -232,12 +233,16 @@ Get details about a specific Agreement:
 Vipps can only provide a user's information with the user's consent.
 The merchant must ask the user for consent when creating the agreement using
 [Userinfo](vipps-recurring-api.md#userinfo)
-with the correct `scope`. The requested information is only available for a
+with the correct
+[`scope`](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api/#scope). 
+The requested information is only available for a
 limited amount of time after the consent is given.
 
 ### Can I look up which user owns an agreement?
 
-No. See: [Can I look up a user's information?](#can-i-look-up-a-users-information) and
+No. See:
+[Can I look up a user's information?](#can-i-look-up-a-users-information)
+and
 [Is there an API for retrieving information about a Vipps user?](#is-there-an-api-for-retrieving-information-about-a-vipps-user).
 
 ### How can I convert existing agreements to Vipps agreements?
@@ -289,7 +294,8 @@ to another, or from one sales unit to another.
 
 Clarification of terms:
 
-* Merchant: A juridical unit, typically called a business or company, identified with organization number ("orgno").
+* Merchant: A juridical unit, typically called a business or company, identified with
+  organization number ("orgno").
 * Sales unit: A merchant can have one or more sales units. It may be different
   brands, different physical locations, different services, etc.
 * MSN: The unique id of a sales unit.
@@ -369,7 +375,8 @@ agreements, it will no longer be possible to:
 
 ### Can I look up an agreementId if I have the chargeId?
 
-No. There is no way to find an agreement based on a charge. This is information you must keep track on at your end.
+Yes. See
+[Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api/#retrieve-a-charge).
 
 ## Common problems/errors
 
