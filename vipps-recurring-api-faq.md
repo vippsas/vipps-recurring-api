@@ -31,16 +31,20 @@ guide.
 
 ## Migration
 
-### How do I migrate to the v3 API?
+### How do I migrate from the Recurring API v2 to v3?
 
-Please check the [migration guide](v2-to-v3-migration-guide.md) to see the differences between Recurring API v2 and v3.
-Please also check the [V3 API definitions](https://developer.vippsmobilepay.com/api/recurring).
+See the [migration guide](v2-to-v3-migration-guide.md) for the differences between the Recurring API v2 and v3.
+Also check the [V3 API definitions](https://developer.vippsmobilepay.com/api/recurring).
+
+### How do I migrate from the MobilePay subscription solution?
+
+See:
+[Migration guide](https://developer.vippsmobilepay.com/docs/vipps-developers/mp-migration-guide#subscriptions-vs-recurring).
 
 ### Can I manage agreements and charges created with v2 API using v3 API?
 
 All agreements and charges created with v2 API can be retrieved and managed using the v3 API and vice-versa.
 Also, if an agreement was created with v2 API, it is possible to create a charge for this agreement with v3 API and vice-versa.
-
 
 ## Charges/Payments
 
@@ -50,20 +54,23 @@ No. Vipps handles all payment details.
 
 ### Does Vipps automatically create charges for an agreement?
 
- No. Vipps does _not_ create charges based on the agreement, this is left up to the merchant to create.
- When a merchant creates a charge, Vipps will actually attempt to charge the customer, starting on the `due date` and for as long as specified in `retryDays`.
+ No. Vipps does _not_ create charges based on the agreement, every charge must be created by the merchant.
+
+ When a merchant creates a charge, we attempt to charge the customer, starting on the `due`
+ date, and for as long after that as specified in `retryDays`.
 
  For more details, see our [call-by-call guide](vipps-recurring-api.md#call-by-call-guide)
 
-### At what time during the day are charges processed?
-
-Charges are processed up to two times every day: 07:00 and 15:00 UTC.
-Retries are attempted according to the `retryDays` specified.
-This applies for both our production and test environment (MT).
-
 ### When are charges processed?
 
-Charges are processed at least twice a day from the `dueDate` until `dueDate+retryDays`.
+Charges are processed at least twice a day from the `due` date, and for
+the specified `retryDays` after the `due` date.
+
+Charges are processed two times every day: 07:00 and 15:00 UTC
+(this may change without notice).
+
+Retries are attempted according to the `retryDays` specified.
+This applies for both our production and test environment (MT).
 
 ### I don't want a charge to fail the first time the transaction fails (insufficient funds / networking issues etc.)
 
@@ -95,7 +102,7 @@ the price of the Agreement.
 
 ### When can I send charges to a user?
 
-You can create charges once the user's agreement is ACTIVE
+You can create charges once the user's agreement is `ACTIVE`.
 
 See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 
@@ -104,6 +111,7 @@ See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 No, it is not possible to change intervals. If the user has accepted a yearly interval,
 the agreement cannot be changed to a monthly agreement.
 This requires a new agreement and a new consent from the user.
+
 It _is_ possible to make a monthly agreement and charge some months only.
 The general rule: Be as customer friendly and easy to understand as possible.
 
@@ -112,7 +120,15 @@ See:
 
 ### A charge failed, but the customer did not receive any warning
 
-The customer may not have notifications turned on. We always send notifications to the user when a charge processing attempt is not successful, and the user gets a more detailed message when looking at the charge/agreement in the app.
+The customer may not have push notifications turned on for the app.
+
+We always send push notifications to the user in the app when a charge processing attempt is not
+successful, and the user gets a more detailed message when looking at the
+charge/agreement in the app.
+
+Merchants should always ask the user to check the status of charges in the app.
+We are not able do manually check charges, unless there is clear indication that
+there is an error on our end.
 
 ### What happens to charges if the corresponding agreement is cancelled?
 
@@ -122,16 +138,17 @@ So if the merchant needs to charge the user for the initial charge; then this ne
 
 ### If a user's card expires: What happens on the next charge?
 
-The user is responsible for keeping their payment sources updated.
+The user is responsible for keeping their payment cards updated.
 
 If a payment fails the user will receive a push notification, informing them to
-update their payment source.
+update their card.
 
 Vipps does not automatically select a new card if a card expires, as users may
-have multiple cards registered in Vipps.
+have multiple cards registered in Vipps. There are also regulatory requirements:
+The user must actively choose a card.
 
-Vipps also has standard functionality that automatically sends the user a push
-notification when a card that is _not_ used for recurring payments expires.
+Vipps also automatically sends the user a push notification when a card that
+is _not_ used for recurring payments expires.
 
 ### What happens to pending charges if the user deletes the payment card?
 
@@ -140,7 +157,7 @@ See [If a user's card expires: What happens on the next charge?](#if-a-users-car
 ### How does a user see the charges I create?
 
 The charge will then appear in the app after it goes into the `DUE`-state.
-A charge will remain in `PENDING` state until the dueDate is less than 30 days away.
+A charge will remain in `PENDING` state until the `due` date is less than 30 days away.
 
 You can retrieve all relevant charges through the
 [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
@@ -158,12 +175,24 @@ users as described in
 
 See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved).
 
+### How can I make refunds?
+
+Refunds must always be done using the API, through the merchant's administration solution.
+
+From the [API checklist](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-checklist/):
+
+> Make sure your customer service, etc. has all the tools and information they need available in your system, through the APIs listed in the first item in this checklist, and that they do not need to visit portal.vipps.no for normal work.
+
+**Important:** If you do manual refunds on
+[portal.vipps.no](https://portal.vipps.no),
+the API may return incorrect details for charges until the same refund operation is
+done using the API.
+
 ## Variable amount
 
 ### Can I decide the users suggested max amount list
 
-No.
-The suggested amount list that the user can choose a max amount from,
+No. The suggested amount list that the user can choose a max amount from,
 is automatically generated by Vipps based on the suggestedMaxAmount sent in.
 
 If the suggestedMaxAmount is changed, the suggested amount list will also be different if the user goes to change max amount.
@@ -172,12 +201,26 @@ If the suggestedMaxAmount is changed, the suggested amount list will also be dif
 
 ### Why do you allow drafting multiple agreements for the same user?
 
-Vipps tries to not interfere with how you choose to run your business. There are cases where one merchant might want to draft multiple subscriptions at the same time for the same user (i.e., the user subscribes to multiple services from the merchant), and there are also cases where one person might pay for multiple subscriptions for other reasons (family/relationships/guardianship).
-It is the merchant's responsibility to know which of their users each drafted agreement belongs to, and to prevent drafting multiple agreements if that is not desirable.
+Vipps tries to not interfere with how you choose to run your business. There are cases where
+one merchant might want to draft multiple subscriptions at the same time for the same user
+(i.e., the user subscribes to multiple services from the merchant), and there are also cases
+where one person might pay for multiple subscriptions for other reasons (family/relationships/guardianship).
+
+It is the merchant's responsibility to know which of their users each drafted agreement belongs to,
+and to prevent drafting multiple agreements if that is not desirable.
 
 ### How do I prevent drafting multiple agreements for the same user?
 
-In order to prevent drafting multiple agreements for the same user, you need to keep track of which of your users any drafted agreement belongs to. Then, when a user does something that triggers a draft, you should first check if they already have an agreement that is `PENDING`, and inform the user that they should finish the agreement activation in the app or the landing page. There might be some cases where the process fails in such a way that the user cannot complete activation, and the agreement is stuck as `PENDING` for an extended period of time. Because of this, it might be a good idea to allow the user to choose to draft a new agreement regardless, but then you need to keep track of that "abandoned" agreement in case you might need to manage it later (stop and issue refund if it gets undesirably activated or similar).
+In order to prevent drafting multiple agreements for the same user, you need to keep track of
+which of your users any drafted agreement belongs to. Then, when a user does something that
+triggers a draft, you should first check if they already have an agreement that is `PENDING`,
+and inform the user that they should finish the agreement activation in the app or the landing page.
+
+There might be some cases where the process fails in such a way that the user cannot complete
+activation, and the agreement is stuck as `PENDING` for an extended period of time. Because of
+this, it might be a good idea to allow the user to choose to draft a new agreement regardless,
+but then you need to keep track of that "abandoned" agreement in case you might need to manage
+it later (stop and issue refund if it gets undesirably activated or similar).
 
 ### How do I check my customer's status?
 
@@ -186,10 +229,11 @@ Get details about a specific Agreement:
 
 ### Can I look up a user's information?
 
-Vipps can only provide user information with the user's consent.
+Vipps can only provide a user's information with the user's consent.
 The merchant must ask the user for consent when creating the agreement using
 [Userinfo](vipps-recurring-api.md#userinfo)
-with the correct `scope`. The requested information is only available for a limited amount of time after the consent is given.
+with the correct `scope`. The requested information is only available for a
+limited amount of time after the consent is given.
 
 ### Can I look up which user owns an agreement?
 
