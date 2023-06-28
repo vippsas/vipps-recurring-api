@@ -799,7 +799,7 @@ Each specific charge on an agreement must be scheduled by the merchant.
 
 To create a charge use the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 
-Also see check [orderId recommendations](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid) before creating charges.
+Also see check [Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid) before creating charges.
 
 For agreements of type `variable`, also see [Recurring agreements with variable amount](#create-charge).
 
