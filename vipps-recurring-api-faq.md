@@ -54,22 +54,22 @@ Merchants don't need to know how the users pay.
 
 ### Does Vipps automatically create charges for an agreement?
 
- No. Vipps does _not_ create charges based on the agreement, every charge must be created by the merchant.
+No. Vipps does _not_ create charges based on the agreement, every charge must be created by the merchant.
 
- When a merchant creates a charge, we attempt to charge the customer, starting on the `due`
- date, and for as long after that as specified in `retryDays`.
+When a merchant creates a charge, we attempt to charge the customer, starting on the `due`
+date, and for as long after that as specified in `retryDays`.
 
- For more details, see our [call-by-call guide](vipps-recurring-api.md#call-by-call-guide)
+For more details, see our [call-by-call guide](vipps-recurring-api.md#call-by-call-guide)
 
 ### When are charges processed?
 
-Charges are processed at least twice a day from the `due` date, and for
+Charges are processed from the `due` date, and for
 the specified number of `retryDays` after the `due` date.
 
 Charges are processed two times every day: 07:00 and 15:00 UTC
 (this may change without notice).
 
-Retries are attempted according to the `retryDays` specified.
+Retries are attempted according to the number of `retryDays` specified.
 This applies for both our production and
 [test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment/).
 
