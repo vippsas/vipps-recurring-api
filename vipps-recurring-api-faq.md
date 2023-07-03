@@ -506,7 +506,7 @@ Merchants with a "gross settlement" contract receive the users' payments includi
 and are then invoiced for the Vipps fees.
 
 
-[draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v2-endpoints/operation/DraftAgreement
-[fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v2-endpoints/operation/FetchAgreement
-[update-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v2-endpoints/operation/UpdateAgreementPatch
-[list-charges-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v2-endpoints/operation/ListCharges
+[draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
+[fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring/#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
+[update-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring/#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
+[list-charges-endpoint]: https://developer.vippsmobilepay.com/api/recurring/#tag/Charge-v3-endpoints/operation/ListChargesV3
