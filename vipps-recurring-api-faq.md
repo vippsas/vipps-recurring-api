@@ -329,7 +329,7 @@ Typical cases:
    is merged with another orgno,
    is acquired by another orgno,
    etc.:
-   Vipps may *_not_* be able to help.
+   Vipps may *not* be able to help.
    The users have entered agreements with an orgno, and Vipps may not be able to
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
@@ -346,7 +346,7 @@ The general process is:
    [portal.vipps.no](https://portal.vipps.no).
 4. Inform all existing customers of the new orgno,
    and the planned date of the change. If it's a new company number, we need a confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same company number, we don't need this.
-5. Send a confirmation to avtale@vipps.no that all customers have been informed,
+5. Send a confirmation to [agreement@vippsmobilepay.com](mailto:agreement@vippsmobilepay.com) that all customers have been informed,
    including a copy of the information sent.
 6. Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
    * Vippsnummer of the sales unit the agreements should be migrated from and to
