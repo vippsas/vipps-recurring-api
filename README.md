@@ -56,6 +56,6 @@ Review the detailed documentation found here:
 
 * [API quick start](vipps-recurring-api-quick-start.md): Quick start.
 * [API guide](vipps-recurring-api.md): Developer guide for the Recurring API.
-* [API checklist](vipps-recurring-api-checklist.md): For direct and POS integrations.
+* [API checklist](vipps-recurring-api-checklist.md): Checklist for Recurring API.
 * [API FAQ](vipps-recurring-api-faq.md): Questions and answers.
 * [API reference](https://developer.vippsmobilepay.com/api/recurring): Recurring API reference specifications.
