@@ -31,125 +31,33 @@ Each problem type returned by the Recurring API starts with `https://vippsas.git
 
 Example: `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#invalid-agreement-id`
 
+
+
 ### Identifiers
 
-| Identifier                          | Details                                                                     |
-|-------------------------------------|-----------------------------------------------------------------------------|
-| validation-error                    | [Validation error](#validation-error)                                       |
-| invalid-agreement-id                | [Invalid agreement id](#invalid-agreement-id)                               |
-| invalid-json                        | [Invalid json](#invalid-json)                                               |
-| unsupported-media-type              | [Unsupported media type](#unsupported-media-type)                           |
-| not-authorized                      | [Not authorized](#not-authorized)                                           |
-| idempotency-key-header              | [Idempotency key header](#idempotency-key-header)                           |
-| charge-amount-too-high              | [Charge amount too high](#charge-amount-too-high)                           |
-| charge-amount-too-high-for-interval | [Charge amount too high for interval](#charge-amount-too-high-for-interval) |
-| charge-due-too-soon                 | [Charge due too soon](#charge-due-too-soon)                                 |
-| charge-due-in-too-long              | [Charge due too long](#charge-due-in-too-long)                              |
-| unsupported-feature                 | [Unsupported feature](#unsupported-feature)                                 |
-| illegal-agreement-update            | [Illegal agreement update](#illegal-agreement-update)                       |
-| invalid-suggested-max-amount        | [Invalid suggested max amount](#invalid-suggested-max-amount)               |
-| cancel-charge-failed                | [Cancel charge failed](#cancel-charge-failed)                               |
-| charge-creation-failed              | [Charge creation failed](#charge-creation-failed)                           |
-| charge-capture-failed               | [Charge capture failed](#charge-capture-failed)                             |
-| missing-request-header              | [Missing request header](#missing-request-header)                           |
-| invalid-sale-unit                   | [Invalid sales unit](#invalid-sale-unit)                                    |
-| resource-not-found                  | [Resource not found](#resource-not-found)                                   |
-| operation-failed                    | [Operation failed](#operation-failed)                                       |
-| conflict                            | [Conflict](#conflict)                                                       |
-| idempotency-conflict                | [Idempotency conflict](#idempotency-conflict)                               |
-| invalid-method                      | [Invalid method](#invalid-method)                                           |
-
-### Validation error
-
-Missing data or inconsistencies in JSON. Please verify the request JSON body.
-See [API specs](https://developer.vippsmobilepay.com/api/recurring).
-
-### Invalid agreement ID
-
-Agreement ID is invalid. Please verify the agreement ID is present and in the correct format.
-See [API specs](https://developer.vippsmobilepay.com/api/recurring).
-
-### Invalid JSON
-
-JSON body is invalid. Please verify the request JSON body.
-
-### Unsupported media type
-
-Media type indicated in Content-type header is not supported.
-See [API specs](https://developer.vippsmobilepay.com/api/recurring).
-
-### Not authorized
-
-JWT token is invalid.
-
-### Idempotency key header
-
-Missing or invalid Idempotency key header.
-See [API specs](https://developer.vippsmobilepay.com/api/recurring).
-
-### Charge amount too high
-
-Amount set for charge is too high.
-
-### Charge amount too high for interval
-
-Amount for interval is exceeded. Check if other charges has already been created for this interval.
-
-### Charge due too soon
-
-Charge date due must be minimum 2 days in the future.
-See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).
-
-### Charge due in too long
-
-Charge due date must be maximum 2 years in the future.
-See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).
-
-### Unsupported feature
-
-Feature not supported. Please contact Vipps.
-
-### Illegal agreement update
-
-Agreement cannot be updated. Might be stopped or pending.
-
-### Invalid suggested max amount
-
-Suggested max amount is invalid or too high.
-See [Recurring agreements with variable amount](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount).
-
-### Cancel charge failed
-
-Could not cancel charge.
-
-### Charge creation failed
-
-Could not create charge.
-
-### Charge capture failed
-
-Could not capture charge.
-
-### Missing request header
-
-Missing headers. See [API specs](https://developer.vippsmobilepay.com/api/recurring).
-
-### Invalid sale unit
-The Sales unit is not allowed to use Recurring.
-
-[update-agreement-patch-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
-
-### Resource not found
-The specified resource was not found. See details for additional information.
-
-### Operation failed
-The requested operation could not be performed. See details for additional information.
-
-### Conflict
-The requested operation could not be performed due to a conflicting request/state. See details for additional information.
-
-### Idempotency conflict
-The specified idempotency-key has previously been used in a different context. See details for additional information.
-
-### Invalid method
-The method used for the request is not permitted for this endpoint.
+| Identifier                          | Details                                                                     | Description                                                                                                                                    |
+|-------------------------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| validation-error                    | [Validation error](#validation-error)                                       | Missing data or inconsistencies in JSON. Please verify the request JSON body. See [API specs](https://developer.vippsmobilepay.com/api/recurring). |
+| invalid-agreement-id                | [Invalid agreement id](#invalid-agreement-id)                               | Agreement ID is invalid. Please verify the agreement ID is present and in the correct format. See [API specs](https://developer.vippsmobilepay.com/api/recurring). |
+| invalid-json                        | [Invalid json](#invalid-json)                                               | JSON body is invalid. Please verify the request JSON body.                                                                                     |
+| unsupported-media-type              | [Unsupported media type](#unsupported-media-type)                           | Media type indicated in Content-type header is not supported. See [API specs](https://developer.vippsmobilepay.com/api/recurring).             |
+| not-authorized                      | [Not authorized](#not-authorized)                                           | JWT token is invalid.                                                                                                                           |
+| idempotency-key-header              | [Idempotency key header](#idempotency-key-header)                           | Missing or invalid Idempotency key header. See [API specs](https://developer.vippsmobilepay.com/api/recurring).                               |
+| charge-amount-too-high              | [Charge amount too high](#charge-amount-too-high)                           | Amount set for charge is too high.                                                                                                             |
+| charge-amount-too-high-for-interval | [Charge amount too high for interval](#charge-amount-too-high-for-interval) | Amount for the interval is exceeded. Check if other charges have already been created for this interval.                                      |
+| charge-due-too-soon                 | [Charge due too soon](#charge-due-too-soon)                                 | Charge date due must be a minimum of 2 days in the future. See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge). |
+| charge-due-in-too-long              | [Charge due too long](#charge-due-in-too-long)                              | Charge due date must be a maximum of 2 years in the future. See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).      |
+| unsupported-feature                 | [Unsupported feature](#unsupported-feature)                                 | Feature not supported. Please contact Vipps.                                                                                                  |
+| illegal-agreement-update            | [Illegal agreement update](#illegal-agreement-update)                       | Agreement cannot be updated. Might be stopped or pending.                                                                                      |
+| invalid-suggested-max-amount        | [Invalid suggested max amount](#invalid-suggested-max-amount)               | Suggested max amount is invalid or too high. See [Recurring agreements with variable amount](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount). |
+| cancel-charge-failed                | [Cancel charge failed](#cancel-charge-failed)                               | Could not cancel the charge.                                                                                                                   |
+| charge-creation-failed              | [Charge creation failed](#charge-creation-failed)                           | Could not create the charge.                                                                                                                   |
+| charge-capture-failed               | [Charge capture failed](#charge-capture-failed)                             | Could not capture the charge.                                                                                                                  |
+| missing-request-header              | [Missing request header](#missing-request-header)                           | Missing headers. See [API specs](https://developer.vippsmobilepay.com/api/recurring).                                                          |
+| invalid-sale-unit                   | [Invalid sales unit](#invalid-sale-unit)                                    | The Sales unit is not allowed to use Recurring. See [update-agreement-patch-endpoint](https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3) |
+| resource-not-found                  | [Resource not found](#resource-not-found)                                   | The specified resource was not found. See details for additional information.                                                                |
+| operation-failed                    | [Operation failed](#operation-failed)                                       | The requested operation could not be performed. See details for additional information.                                                      |
+| conflict                            | [Conflict](#conflict)                                                       | The requested operation could not be performed due to a conflicting request/state. See details for additional information.                    |
+| idempotency-conflict                | [Idempotency conflict](#idempotency-conflict)                               | The specified idempotency-key has previously been used in a different context. See details for additional information.                        |
+     
+ 
