@@ -49,8 +49,7 @@ Also, if an agreement was created with v2 API, it is possible to create a charge
 
 ### Do I need to store card data?
 
-No. We handle all payment details.
-Merchants don't need to know how the users pay.
+No. We handle all payment details. Merchants don't need to know how the users pay.
 
 ### Do you automatically create charges for an agreement?
 
@@ -260,7 +259,7 @@ change to Vipps in different ways:
 * PDF invoice: Include a unique URL for the customer, same as above. You can
   use both a URL and a QR code containing the same URL. Keep in mind that some
   users will see the PDF invoice on their phone, and can not easily scan the QR.
-* Paper invoice: Include a QR code with unique URL for the customer, same as
+* Paper invoice: Include a QR code with a unique URL for the customer, same as
   above.
 
 ### How can I delete an agreement?
@@ -345,14 +344,14 @@ The general process is:
 3. Order "Vipps Faste betalinger" for the new orgno. on
    [portal.vipps.no](https://portal.vipps.no).
 4. Inform all existing customers of the new orgno,
-   and the planned date of the change. If it's a new company number, we need confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same company number, we don't need this.
+   and the planned date of the change. If it's a new company number, we need confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from the old to the new sales unit on the same company number, we don't need this.
 5. Send a confirmation to [agreement@vippsmobilepay.com](mailto:agreement@vippsmobilepay.com) that all customers have been informed,
    including a copy of the information sent.
 6. Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
    * Vippsnummer of the sales unit the agreements should be migrated from and to
    * A decision on how to handle existing agreements in the new sales unit (in case you have started using it)
    * Final confirmation of date and time for migration.
-7. After the migration is performed, you will get a file that maps from old to new agreement ID.
+7. After the migration is performed, you will get a file that maps from the old to the new agreement ID.
    This is a CSV where each line is an agreement, and the columns are old ID and new ID.
 
 8. You then need to update your systems, so you start using the new agreement IDs
@@ -402,7 +401,7 @@ to get access to the Recurring API in production.
 Yes.
 
 Vipps offers the possibility for merchants, as part of the payment flow, to request the user's information.
-For example if you wish to retrieve the user's email as part of a User profile setup.
+For example, if you wish to retrieve the user's email as part of a User profile setup.
 This is supported in both [Vipps eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api/vipps-ecom-api#userinfo)
 and [Vipps Recurring API](vipps-recurring-api.md#userinfo).
 
@@ -439,7 +438,7 @@ other API to look up a user's address, retrieve a user's purchases, etc.
 | Agreement request                               | Bekreft fast betaling                                                               | Confirm recurring payment                                                               |
 | Charge processed successfully                   | Fast betaling til `sales unit name` har blitt gjennomført                           | Payment to `sales unit name` has been processed                                         |
 | Insufficient funds                              | Pass på at du har nok penger. Vi prøver igjen litt senere.                          | Make sure you have enough money. We'll try again later.                                 |
-| Invalid payment source (retryable)              | Kortet er ugyldig, prøv et annet.                                                   | The card is invalid, try another                                                        |
+| Invalid payment source (retriable)              | Kortet er ugyldig, prøv et annet.                                                   | The card is invalid, try another                                                        |
 | Invalid payment source (not retryable)          | Kortet er ugyldig, prøv å endre det og kontakt %s å fortsette avtalen.              | The card is invalid, try changing it and contacting %s to continue the agreement.       |
 | Charge amount too high (variable amount)        | Beløpet er høyere enn det avtalte maksimumsbeløpet.                                 | The amount is higher than the agreed maximum amount                                     |
 | Future charge amount too high (variable amount) | Du må øke maksbeløpet i avtalen med `sales unit name`                               | You have to change the maximum amount in the agreement. If not, the payment will fail.  |
@@ -457,7 +456,7 @@ We set the failure reason on the charge based on why the processing failed.
 
 ## Admin/partners
 
-### How can I change partners for a merchant?
+### How can I change partners for a merchant using the Recurring API?
 
 **Please note:** We are working out the details for this process, please contact
 us if you need help with this.
@@ -468,13 +467,13 @@ They can submit this directly to Vipps (via partnerbestelling@vipps.no) or
 they can submit it through you as a new partner.
 
 The partner orders at Vipps (partnerbestelling@vipps.no) must receive an e-mail
-from the user site or partner stating that they wish to change partner with the
-following information:
+from the user site or partner stating that they wish to change partners with the
+the following information:
 
 * Name of user location
 * Organization number
-* Name of new partner
-* Name of old partner
+* Name of the new partner
+* Name of the old partner
 * Which MSN it should be "switched to"
 * Test page if the website changes
 * Date and time of desired transfer from old partner to new partner
@@ -493,17 +492,7 @@ further without coming to a blank page.
 See [How to change partners for a merchant](https://developer.vippsmobilepay.com/docs/vipps-partner/how-to-change-partners).
 
 **Please note:** The MSN (the number) does _not_ change when changing partners.
-
-### Settlement
-
-The settlements are done trough Vipps.
-The merchant does not need any other partner or agreement.
-
-### Invoicing
-
-Merchants with a "net settlement" contract receive the users' payments excluding the Vipps fees.
-Merchants with a "gross settlement" contract receive the users' payments including the Vipps fees,
-and are then invoiced for the Vipps fees.
+ 
 
 
 [draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring/#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
