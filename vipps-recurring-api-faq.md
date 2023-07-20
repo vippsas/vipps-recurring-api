@@ -12,11 +12,11 @@ END_METADATA -->
 # Frequently asked questions
 
 See the
-[Vipps Recurring API](vipps-recurring-api.md)
+[Recurring API](vipps-recurring-api.md)
 for all the details.
 
 See also:
-[Vipps API FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
+[API FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
 and the
 [Getting Started](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
 guide.
@@ -33,7 +33,7 @@ guide.
 ### How do I migrate from the Recurring API v2 to v3?
 
 See the [migration guide](v2-to-v3-migration-guide.md) for the differences between the Recurring API v2 and v3.
-Also check the [V3 API definitions](https://developer.vippsmobilepay.com/api/recurring).
+Also, check the [V3 API definitions](https://developer.vippsmobilepay.com/api/recurring).
 
 ### How do I migrate from the MobilePay subscription solution?
 
@@ -42,19 +42,19 @@ See:
 
 ### Can I manage agreements and charges created with v2 API using v3 API?
 
-Yes. All agreements and charges created with v2 API can be retrieved and managed using the v3 API and vice-versa.
+Yes. All agreements and charges created with the v2 API can be retrieved and managed using the v3 API and vice-versa.
 Also, if an agreement was created with v2 API, it is possible to create a charge for this agreement with v3 API and vice-versa.
 
 ## Charges/Payments
 
 ### Do I need to store card data?
 
-No. Vipps handles all payment details.
+No. We handle all payment details.
 Merchants don't need to know how the users pay.
 
-### Does Vipps automatically create charges for an agreement?
+### Do you automatically create charges for an agreement?
 
-No. Vipps does _not_ create charges based on the agreement, every charge must be created by the merchant.
+No. We do _not_ create charges based on the agreement, every charge must be created by the merchant.
 
 When a merchant creates a charge, we attempt to charge the customer, starting on the `due`
 date, and for as long after that as specified in `retryDays`.
@@ -70,7 +70,7 @@ Charges are processed two times every day: 07:00 and 15:00 UTC
 (this may change without notice).
 
 Retries are attempted according to the number of `retryDays` specified.
-This applies for both our production and
+This applies to both our production and
 [test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment/).
 
 ### I don't want a charge to fail the first time the transaction fails (insufficient funds, networking issues, etc.)
@@ -111,9 +111,9 @@ See [How do I check my customer's status?](#how-do-i-check-my-customers-status).
 
 No, it is not possible to change intervals. If the user has accepted a yearly interval,
 the agreement cannot be changed to a monthly agreement.
-This requires a new agreement and a new consent from the user.
+This requires a new agreement and new consent from the user.
 
-It _is_ possible to make a monthly agreement and charge some months only.
+It _is_ possible to make a monthly agreement and charge for some months only.
 The general rule: Be as customer friendly and easy to understand as possible.
 
 See:
@@ -128,12 +128,12 @@ successful, and the user gets a more detailed message when looking at the
 charge/agreement in the app.
 
 Merchants should always ask the user to check the status of charges in the app.
-We are not able do manually check charges, unless there is clear indication that
+We are not able to manually check charges unless there is a clear indication that
 there is an error on our end.
 
-### What happens to charges if the corresponding agreement is cancelled?
+### What happens to charges if the corresponding agreement is canceled?
 
-All charges in a `PENDING`, `DUE` or `RESERVED` state will be cancelled if the Agreement is stopped.  
+All charges in a `PENDING`, `DUE` or `RESERVED` state will be canceled if the Agreement is stopped.  
 **Note**: This also includes the `initial charge` if it's currently `RESERVED`.
 So if the merchant needs to charge the user for the initial charge; then this needs to be done before the agreement is stopped.
 
@@ -157,7 +157,7 @@ See [If a user's card expires: What happens on the next charge?](#if-a-users-car
 
 ### How does a user see the charges I create?
 
-The charge will be visible for the user in the app when it goes into the `DUE` state.
+The charge will be visible to the user in the app when it goes into the `DUE` state.
 A charge will remain in `PENDING` state until the `due` date is less than 30 days away.
 
 You can retrieve all relevant charges through the
@@ -182,7 +182,7 @@ Refunds must always be done using the API, through the merchant's administration
 
 From the [API checklist](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-checklist/):
 
-> Make sure your customer service, etc. has all the tools and information they need available in your system, through the APIs listed in the first item in this checklist, and that they do not need to visit portal.vipps.no for normal work.
+> Make sure your customer service, etc. have all the tools and information they need available in your system, through the APIs listed in the first item in this checklist, and that they do not need to visit portal.vipps.no for normal work.
 
 **Important:** If you do manual refunds on
 [portal.vipps.no](https://portal.vipps.no),
@@ -194,9 +194,9 @@ done using the API.
 ### Can I decide the users suggested max amount list
 
 No. The suggested amount list that the user can choose a max amount from,
-is automatically generated by Vipps based on the suggestedMaxAmount sent in.
+is automatically generated by Vipps based on the suggestedMaxAmount sent-in.
 
-If the suggestedMaxAmount is changed, the suggested amount list will also be different if the user goes to change max amount.
+If the suggestedMaxAmount is changed, the suggested amount list will also be different if the user goes to change the max amount.
 
 ## Agreements and users
 
@@ -218,10 +218,10 @@ triggers a draft, you should first check if they already have an agreement that 
 and inform the user that they should finish the agreement activation in the app or the landing page.
 
 There might be some cases where the process fails in such a way that the user cannot complete
-activation, and the agreement is stuck as `PENDING` for an extended period of time. Because of
+activation and the agreement is stuck as `PENDING` for an extended period of time. Because of
 this, it might be a good idea to allow the user to choose to draft a new agreement regardless,
 but then you need to keep track of that "abandoned" agreement in case you might need to manage
-it later (stop and issue refund if it gets undesirably activated or similar).
+it later (stop and issue a refund if it gets undesirably activated or similar).
 
 ### How do I check my customer's status?
 
@@ -230,7 +230,7 @@ Get details about a specific Agreement:
 
 ### Can I look up a user's information?
 
-Vipps can only provide a user's information with the user's consent.
+We can  provide a user's information with the user's consent.
 The merchant must ask the user for consent when creating the agreement using
 [Userinfo](vipps-recurring-api.md#userinfo)
 with the correct
@@ -277,11 +277,11 @@ agreement as they see fit.
 The merchant must provide a link to the "my page" on the merchant's website when creating the agreement.
 See [Create an agreement](vipps-recurring-api.md#create-an-agreement).
 
-Users may want to make other changes to the Agreement than to simply cancel it.
+Users may want to make other changes to the Agreement than simply cancel it.
 A subscription may be paused for a period, it may be changed to a lower
 or higher frequency, additional products or services may be added, etc.
 This can add more complexity than Vipps can present in a good way, and our
-approach is therefore to send the user to the merchant for managing the
+approach is, therefore, to send the user to the merchant for managing the
 Agreement.
 
 ### How can I move agreements between merchants and sales units?
@@ -329,7 +329,7 @@ Typical cases:
    is merged with another orgno,
    is acquired by another orgno,
    etc.:
-   Vipps may *not* be able to help.
+   We may *not* be able to help.
    The users have entered agreements with an orgno, and Vipps may not be able to
    automatically move the agreements without the user's consent to enter
    agreements with the new orgno.
@@ -345,7 +345,7 @@ The general process is:
 3. Order "Vipps Faste betalinger" for the new orgno. on
    [portal.vipps.no](https://portal.vipps.no).
 4. Inform all existing customers of the new orgno,
-   and the planned date of the change. If it's a new company number, we need a confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same company number, we don't need this.
+   and the planned date of the change. If it's a new company number, we need confirmation from you that you have informed your end users that the agreement is being transferred. If it's just a transfer from old to new sales unit on the same company number, we don't need this.
 5. Send a confirmation to [agreement@vippsmobilepay.com](mailto:agreement@vippsmobilepay.com) that all customers have been informed,
    including a copy of the information sent.
 6. Contact your Vipps (your KAM or partner manager) to exchange the necessary information to perform the migration:
@@ -358,10 +358,10 @@ The general process is:
 8. You then need to update your systems, so you start using the new agreement IDs
 
 **Please note:** Agreements are not actually moved. Your new sales unit will get new agreements
-identical to the old ones, but with new agreement IDs. As a result, it will not be possible for you to see or do anything with previous charges using the new sales unit and agreement IDs. This is done because the underlying payments are tied to the sales unit. so the new sales unit would not have authority to capture/refund etc. old charges in any case. This means that in order to perform refunds etc., you need to request to get the old sale unit re-opened or perform them by other means than Vipps.
+identical to the old ones, but with new agreement IDs. As a result, it will not be possible for you to see or do anything with previous charges using the new sales unit and agreement IDs. This is done because the underlying payments are tied to the sales unit. so the new sales unit would not have the authority to capture/refund etc. old charges in any case. This means that in order to perform refunds etc., you need to request to get the old sale unit re-opened or perform them by other means than Vipps.
 
 The agreements in the old sales unit will be stopped, and it will not be possible to make new charges on them. The user will still be able to see the old agreement in the app, under "Stopped agreements". There they will find the payment history up to the time of migration. 
-We recommend to keep track of all agreements a customer has ever been associated with, so that you have the opportunity to retrieve previous agreements, charges etc. if needed. 
+We recommend keeping track of all agreements a customer has ever been associated with so that you have the opportunity to retrieve previous agreements, charges, etc. if needed. 
 
 For all requests to move agreements: Please contact your KAM, your partner or
 [Vipps customer service](https://vipps.no/kontakt-oss/).
