@@ -19,9 +19,9 @@ END_METADATA -->
 <!-- END_COMMENT -->
 
 The Recurring API allows you to set up recurring payments for your customers.
-This allows your customers to pay subscriptions, donate, or make other recurring purchases without keying in card numbers or filling in long forms. In addition, your customers get a good overview of their fixed payments, and they get notification of withdrawals through Vipps.
+This allows your customers to pay subscriptions, donate, or make other recurring purchases without keying in card numbers or filling in long forms. In addition, your customers get a good overview of their fixed payments, and they get notifications of withdrawals through Vipps.
 
-Information about this product in Norwegian, see
+For information about this product in Norwegian, see
 [Faste betalinger med Vipps](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
 **IMPORTANT:** The Vipps Recurring API is available for customers that
