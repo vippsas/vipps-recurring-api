@@ -11,7 +11,7 @@ END_METADATA -->
 
 # Quick start
 
-Use the Recurring API to create different types of agreements, get information about agreements, update and stop agreements.
+Use the Recurring API to create different types of agreements, get information about agreements, and update and stop agreements.
 After creating the agreements, you still need to send the charge requests.
 So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
 
@@ -64,7 +64,7 @@ You can update any of the other environment variables. Be aware of this:
 
 ## Make API calls
 
-For all of the following, you will start by sending request `Get Access Token`.
+For all of the following, you will start by sending a request `Get Access Token`.
 This provides you with access to the API.
 
 The access token is valid for 1 hour in the test environment
@@ -113,7 +113,7 @@ You can create more complex types of agreements by modifying the parameters in [
 
 2. Set `Idempotency-Key-Draft` value.
 
-3. Send request `Get Agreement` for information about this payment by using the
+3. Send a request `Get Agreement` for information about this payment by using the
    [`GET:/agreements/{{agreementId}}`][fetch-agreement-endpoint] endpoint.
 
 #### Create an agreement with a reserve capture
@@ -122,7 +122,7 @@ When you use this, a charge is automatically created for the initial payment, an
 you can capture it when you provide the product or service.
 
 For example, if a customer purchased a mobile phone with a data subscription, you could set up a recurring
-payment agreement where the price of the phone is registered an initial payment with reserve capture.
+payment agreement where the price of the phone is registered as an initial payment with reserve capture.
 Then, you can capture the payment when you ship the phone.
 
 1. Send `Draft Agreement - Reserve Charge`.
@@ -131,11 +131,11 @@ Then, you can capture the payment when you ship the phone.
 
 2. Set `Idempotency-Key-Draft` value.
 
-3. Send request `Get Agreement` for information about this payment by using the
+3. Send a request `Get Agreement` for information about this payment by using the
    [`GET:/agreements/{{agreementId}}`][fetch-agreement-endpoint] endpoint.
 
 4. The `agreementId` and `chargeId` are set in the environment.
-   Take a note of these values, because you will need them when you
+   Take note of these values, because you will need them when you
    [capture the reserved charge](#capture-reserved-charge).
 
 #### Getting access to user info
@@ -149,7 +149,7 @@ If you need to get access to some user information in addition to the recurring 
    Here, the `agreementId` and `landing_page_url` are retrieved from the response and set as variables.
 
 2. Once you complete the session, a unique identifier `sub` can be retrieved in the agreement details.
-   Send request `Get Agreement` for information about this payment by using the
+   Send a request `Get Agreement` for information about this payment by using the
    [`GET:/agreements/{{agreementId}}`][fetch-agreement-endpoint] endpoint.
 
    In this example, `sub` is retrieved from the response and set as a variable.
@@ -196,7 +196,7 @@ For details about the calls, see [Charge endpoints][charge-endpoints] in the Rec
 Although charges for initial payments are created automatically,
 you must create charge requests for the recurring payments.
 
-A charge must be scheduled a minimum of two days before the payment will occur (it is minimum one day in the test environment).
+A charge must be scheduled a minimum of two days before the payment will occur (it is a minimum one day in the test environment).
 See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details about timing.
 
 1. Set `agreementId` to the ID of an ACTIVE agreement.
