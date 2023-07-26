@@ -21,9 +21,9 @@ For technical documentation go to:
 
 ![recurring process](../images/vipps-recurring-api-howitworks/vipps-recurring-process.svg)
 
-## 1. Buy a subscription 
+## 1. Buy a subscription
 
-A user chooses Vipps or MobilePay as payment method for a subscription on a merchant's website or app. 
+A user chooses Vipps or MobilePay as payment method for a subscription on a merchant's website or app.
 
 ![Buy subscription with Vipps](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
@@ -36,13 +36,13 @@ If the agreement was started from a mobile device, the app will automatically sw
 
 ![Vipps landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
-## 3. Accept agreement 
+## 3. Accept agreement
 
 The user receives a push notification on their phone. They log in to Vipps or MobilePay and accept the agreement.
 
 If there is an initial charge to be paid, the user confirms the payment in this step as well.
 
-In this step the user can choose the max amount that they will allow the merchant to charge each interval. 
+In this step the user can choose the max amount that they will allow the merchant to charge each interval.
 The suggested amount from the merchant is preselected in the list.
 
 ![Buy subscription with Vipps](../images/vipps-recurring-api-variable-howitworks/variable_amount_accept.png)
@@ -55,7 +55,7 @@ The user is redirected back to the merchant’s website or app, and the subscrip
 
 ## 6. Due charges
 
-Upcoming charges is displayed in Vipps or MobilePay for the user to see.
+Upcoming charges are displayed in Vipps or MobilePay for the user to see.
 If a charge fails for any reason and there is retry days left, a failure text is visible for the user on the charge.
 This text will explain to the user what went wrong and how they can fix it.
 

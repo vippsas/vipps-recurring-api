@@ -55,7 +55,7 @@ If there is an initial charge to be paid, the user confirms the payment in this 
 
 The user is redirected back to the merchant’s website or app, and the subscription is confirmed on the merchant’s page.
 
-Please note: Activation of the agreement is not guaranteed to be finished by the time the user is redirected back to the merchantRedirectUrl. The agreement could still have the status PENDING, so it is important to continue to poll the status of the agreement until a final status is returned by the API.
+Please note: Activation of the agreement is not guaranteed to be finished by the time the user is redirected back to the `merchantRedirectUrl`. The agreement could still have the status PENDING, so it is important to continue to poll the status of the agreement until a final status is returned by the API.
 
 ![Confirmation of subscription](../images/vipps-recurring-api-howitworks/vipps-recurring-step4.svg)
 

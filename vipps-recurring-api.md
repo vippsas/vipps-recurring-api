@@ -659,7 +659,7 @@ date-time is used. All dates must be in date-time format as according to
 
 | Field           | Description                                                                                                             |
 |-----------------|-------------------------------------------------------------------------------------------------------------------------|
-| `start`         | Start date of campaign offer, if you are creating a agreement this is set to default now, and not an available variable |
+| `start`         | Start date of campaign offer, if you are creating an agreement this is set to default now, and not an available variable |
 | `end`           | End date of campaign offer, can not be in the past                                                                      |
 | `campaignPrice` | The price that will be shown for comparison                                                                             |
 
@@ -961,7 +961,7 @@ Vipps will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
 
 This means that if the user's card has insufficient funds, the card has expired,
-the card is invalid, etc: The user is notified and can correct the problem.
+the card is invalid, etc.: The user is notified and can correct the problem.
 Vipps will make sure the user is able to pay.
 
 **IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
@@ -1445,7 +1445,7 @@ Examples:
 ### Charge amount higher than the user's max amount
 
 If the amount of a charge is below (or equal) the `suggestMaxAmount` but above the user's `maxAmount`, the charge will be set
-to `DUE` and the user will be notified and encouraged to alter the max amount to a hight amount.
+to `DUE` and the user will be notified and encouraged to alter the max amount to a higher amount.
 If the user does not update their `maxAmount` to the same or a higher amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
@@ -1596,7 +1596,7 @@ More information about how and when we send push notifications can be found in t
 This toggle only determine if the user will get notified when a charge is successfully charged.
 
 In addition to sending push notifications, a failure texts is also set on the charge.
-By letting the customer know why the charge failed we enable them to fix the underlying issue before the "retryDays" are over.
+By letting the customer know why the charge failed we enable them to fix the underlying issue before the `retryDays` are over.
 For more information about what the failure texts are, see the [FAQ](vipps-recurring-api-faq.md#what-is-shown-to-users-when-charge-processing-fails).
 
 **Please note:** These exact reasons why the charge fails is not shown in the recurring API, only to the customers (users).
