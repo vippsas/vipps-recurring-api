@@ -34,7 +34,7 @@ The user confirms their number and is prompted to log in to Vipps or MobilePay.
 
 If the agreement was started from a mobile device, the app will automatically switch over to Vipps or MobilePay.
 
-![Vipps landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
+![landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
 ## 3. Accept agreement
 

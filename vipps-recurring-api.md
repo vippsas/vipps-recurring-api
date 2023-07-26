@@ -325,9 +325,8 @@ or to Vipps or MobilePay in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
 See
-[Vipps MobilePay landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page)
+[landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page)
 from Common topics, for more details about the landing page.
-
 
 **Please note:** If payment should be required to activate an agreement, you need to specify an initial charge.
 If you are dealing with physical goods, this should be a RESERVE_CAPTURE, but for digital goods where the customer instantly gains access, DIRECT_CAPTURE might be easier to manage.
@@ -1458,7 +1457,7 @@ Display of charge failure due to a charge being higher than the `maxAmount` in V
 
 _This functionality is only available for special cases._
 
-See: [The Vipps landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page).
+See: [Landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page)
 
 If the `skipLandingPage` property is set to `true` in the
 [`POST:/agreements`][draft-agreement-endpoint]
