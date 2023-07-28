@@ -1503,7 +1503,7 @@ components:
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application. 
             HTTPS and deeplinks are allowed (example: myApp://home)
-          example: https://example.com/vipps-landing
+          example: https://example.com/landing
         price:
           type: integer
           format: int32
@@ -1536,7 +1536,7 @@ components:
             This feature has to be specially enabled by Vipps for eligible sales
             units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page
           default: false
           example: false
 
@@ -1620,7 +1620,7 @@ components:
             This feature has to be specially enabled by Vipps for eligible sales
             units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/vipps-landing-page
+            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page
           default: false
           example: false
         externalId:
@@ -1879,7 +1879,7 @@ components:
             URL where customer should be redirected after the agreement has been
             approved/rejected in the Vipps mobile application. 
             HTTPS and deeplinks are allowed (example: myApp://home)
-          example: https://example.com/vipps-landing 
+          example: https://example.com/landing 
         sub:
           type: string
           example: 8d7de74e-0243-11eb-adc1-0242ac120002
