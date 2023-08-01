@@ -336,7 +336,7 @@ See [Initial charge](#initial-charge).
 
 There are two different types of pricing available:
 
-The first one is `LEGACY`, this is the default type. See [Amount changes](#amount-changes) for the limit rules.
+The first one is `LEGACY`, this is the default type. See [Amount limits](#amount-limits) for the limit rules.
 
 Here is a truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint:
 
@@ -867,7 +867,9 @@ in the Vipps FAQ for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
 
-### Amount changes
+### Amount limits
+
+#### `LEGACY` pricing (default) 
 
 The `amount` of a charge is flexible and does not have to match the
 `price` of the agreement.
@@ -881,6 +883,11 @@ hindrance the agreement `price` can be [updated](#update-an-agreement).
 **Please note:** Although it is _technically_ possible to increase the price 10
 times, we **strongly** recommend that you are as user-friendly as possible.
 Make sure the user understands any changes and are provided with updated information.
+
+#### `VARIABLE` pricing
+
+The user chooses a max amount themselves when accepting the agreement based on the recommended `suggestedMaxAmount`. There is currently a limit of 20 000 NOK for the `suggestedMaxAmount`.
+The max amount can at any time be changed by the user. 
 
 ### Charge descriptions
 
