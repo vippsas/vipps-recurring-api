@@ -50,7 +50,7 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 |--------|-----------|
 | Poll for the agreement status | The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement. |
 | Provide subscription tools | The merchant must have a way for the user to manage and stop subscription in `merchantAgreementUrl` in their agreement. This should result in a timely update of the Vipps Agreement. |
-|     Follow design guidelines| The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines). |
+|     Follow design guidelines| The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/design-guidelines). |
 |     Educate customer support| Make sure your customer service, etc. has all the tools and information they need available in _your_ system, through the APIs listed in the first item in this checklist, and that they do not need to visit [portal.vipps.no](https://portal.vipps.no) for normal work. |
 
 ## Flow to go live for direct integrations
