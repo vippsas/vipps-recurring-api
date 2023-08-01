@@ -489,7 +489,7 @@ further without coming to a blank page.
 
 ### How can I change partner for my integration with Vipps?
 
-See [How to change partners for a merchant](https://developer.vippsmobilepay.com/docs/vipps-partner/how-to-change-partners).
+See [How to change partners for a merchant](https://developer.vippsmobilepay.com/docs/partner/how-to-change-partners).
 
 **Please note:** The MSN (the number) does _not_ change when changing partners.
  

@@ -1573,7 +1573,7 @@ partner's MSN. This parameter is also recommended for regular Vipps
 merchants making API calls for themselves.
 
 See:
-[Vipps Partners](https://developer.vippsmobilepay.com/docs/vipps-partner).
+[Vipps Partners](https://developer.vippsmobilepay.com/docs/partner).
 
 ## Polling guidelines
 
