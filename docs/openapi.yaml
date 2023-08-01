@@ -1404,6 +1404,16 @@ components:
       pattern: ^[A-Z]{3}$
       example: NOK
 
+    CurrencyV3:
+      type: string
+      description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
+      enum:
+        - NOK
+      minLength: 3
+      maxLength: 3
+      pattern: ^[A-Z]{3}$
+      example: NOK  
+
     transactionType:
       type: string
       description: Type of transaction, either direct capture or reserve capture
@@ -2482,8 +2492,10 @@ components:
           description: The text displayed in the Vipps app to explain the campaign to the user
 
     pricingRequest:
-      title: pricing
+      title: DraftAgreementPricingRequest
       type: object
+      required: 
+        - currency
       properties:
         type:
           type: string
@@ -2491,8 +2503,9 @@ components:
           enum:
             - LEGACY
             - VARIABLE
+          default: LEGACY
         currency:
-          $ref: "#/components/schemas/Currency"
+          $ref: "#/components/schemas/CurrencyV3"
         amount:
           type: integer
           format: int32
@@ -2516,7 +2529,7 @@ components:
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
 
     pricingResponse:
-      title: pricing
+      title: AgreementPricingResponse
       type: object
       properties:
         type:
@@ -2556,7 +2569,7 @@ components:
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
 
     PricingUpdateRequest:
-      title: pricing
+      title: UpdateAgreementPricingRequest
       type: object
       properties:
         amount:
