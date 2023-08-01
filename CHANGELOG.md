@@ -12,13 +12,13 @@ END_METADATA -->
 
 All notable changes to the current API will be documented in this file.
 See:
-[API Lifecycle](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/api-lifecycle/).
+[API Lifecycle](https://developer.vippsmobilepay.com/docs/common-topics/api-lifecycle/).
 
 ## June 2023
 
 * A new field is returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint:
   * `vippsConfirmationUrl`: used to redirect the user to the
-    [landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page/)
+    [landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/)
     in a desktop flow (with `https://`), or to the Vipps app in a mobile flow (with `vipps://`), where the user can then approve the agreement
 
 ## May 2023

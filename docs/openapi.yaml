@@ -1234,7 +1234,7 @@ components:
       in: header
       description: |-
         The name of the ecommerce solution. One word in lowercase letters is good.
-        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1244,7 +1244,7 @@ components:
       in: header
       description: |-
         The version number of the ecommerce solution.
-        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1254,7 +1254,7 @@ components:
       in: header
       description: |-
         The name of the ecommerce plugin (if applicable). One word in lowercase letters is good.
-        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1264,7 +1264,7 @@ components:
       in: header
       description: |-
         The version number of the ecommerce plugin (if applicable).
-        See [HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers).
+        See [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers).
       schema:
         type: string
         maxLength: 30
@@ -1479,7 +1479,7 @@ components:
             redirect URL for Vipps landing page or deeplink URL to connect vipps
             App. When isApp is set to true, URLs passed to Vipps will not be
             validated as regular URLs.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp
+            See: https://developer.vippsmobilepay.com/docs/common-topics/isApp
           example: false
           default: false
         merchantAgreementUrl:
@@ -1536,7 +1536,7 @@ components:
             This feature has to be specially enabled by Vipps for eligible sales
             units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page
+            See: https://developer.vippsmobilepay.com/docs/common-topics/landing-page
           default: false
           example: false
 
@@ -1573,7 +1573,7 @@ components:
             redirect URL for Vipps landing page or deeplink URL to connect vipps
             App. When isApp is set to true, URLs passed to Vipps will not be
             validated as regular URLs.
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/isApp
+            See: https://developer.vippsmobilepay.com/docs/common-topics/isApp
           example: false
           default: false
         merchantAgreementUrl:
@@ -1620,7 +1620,7 @@ components:
             This feature has to be specially enabled by Vipps for eligible sales
             units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
-            See: https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page
+            See: https://developer.vippsmobilepay.com/docs/common-topics/landing-page
           default: false
           example: false
         externalId:
