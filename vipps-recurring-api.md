@@ -1139,7 +1139,7 @@ This table has all the details for the charge states returned by the
 | State                | Description |
 |----------------------|-------------|
 | `PENDING`            | The charge has been created, but is not yet be visible in Vipps. |
-| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date for `retryDays`. |
+| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date. |
 | `PROCESSING`         | The charge is being processed right now. |
 | `UNKNOWN`            | The charge status is unknown. This is usually very transient and will be resolved shortly. |
 | `CHARGED`            | The charge has been successfully processed, and the available amount has been captured. |
