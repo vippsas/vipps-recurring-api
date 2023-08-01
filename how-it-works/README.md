@@ -22,4 +22,4 @@ END_METADATA -->
 * [Recurring API with campaign](vipps-recurring-api-campaigns-howitworks.md)
 * [Implementation inspiration](vipps-recurring-api-inspiration-howitworks.md)
 
-See the [Subscriptions](https://developer.vippsmobilepay.com/docs/vipps-solutions/recurring-and-login) solution for how Login and Recurring can be used together to simplify the payment flow.
+See the [Subscriptions](https://developer.vippsmobilepay.com/docs/solutions/recurring-and-login) solution for how Login and Recurring can be used together to simplify the payment flow.
