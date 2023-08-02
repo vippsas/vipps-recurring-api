@@ -104,7 +104,7 @@ This is specified with the `transactionType`, and for "direct capture"
 the sales unit must be configured for this by Vipps MobilePay.
 
 For more details, see
-[Common topics: Reserve and capture](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/reserve-and-capture).
+[Common topics: Reserve and capture](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture).
 
 **Please note:** Vipps MobilePay will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
@@ -187,7 +187,7 @@ See
 
 We recommend using the standard Vipps MobilePay HTTP headers for all requests.
 
-See [Vipps MobilePay HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers)
+See [Vipps MobilePay HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers)
 in the Getting started guide, for details.
 
 ## Idempotency Key header
@@ -201,7 +201,7 @@ This way, if a request fails for any technical reason, or there is a networking 
 **Important:** If you reuse an idempotency key on a different request, you will get a 409 CONFLICT.
 
 See the
-[Idempotency header](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers#idempotency)
+[Idempotency header](https://developer.vippsmobilepay.com/docs/common-topics/http-headers#idempotency)
 for more details.
 
 ## Continuation-Token header
@@ -325,7 +325,7 @@ or to Vipps or MobilePay in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
 See
-[landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page)
+[landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page)
 from Common topics, for more details about the landing page.
 
 **Please note:** If payment should be required to activate an agreement, you need to specify an initial charge.
@@ -536,7 +536,7 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the FAQ.
 
 `RESERVE_CAPTURE` must be
@@ -759,7 +759,7 @@ We see that the user experience is not optimal when a lot of text is "squeezed" 
 ### Full flex campaign
 
 **Please note:** Contact Vipps before creating a draft agreement with a full flex campaign.
-See [contact us](https://developer.vippsmobilepay.com/docs/vipps-developers/contact).
+See [contact us](https://developer.vippsmobilepay.com/docs/contact).
 
 ![full-flex-campaign](images/campaigns/full-flex-campaign.png)
 
@@ -798,7 +798,7 @@ Each specific charge on an agreement must be scheduled by the merchant.
 
 To create a charge use the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 
-Also see check [Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/orderid) before creating charges.
+Also see check [Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/common-topics/orderid) before creating charges.
 
 For agreements of type `variable`, also see [Recurring agreements with variable amount](#create-charge).
 
@@ -829,7 +829,7 @@ A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"?](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the Vipps FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
@@ -862,7 +862,7 @@ Partial capture may be used in cases where a partial order is shipped or for oth
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
+See [For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
 in the Vipps FAQ for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
@@ -1052,7 +1052,7 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will be replaced by an event log. Subscribe to the technical newsletter
-to get updates: [Technical newsletter for developers](https://developer.vippsmobilepay.com/docs/vipps-developers/newsletters).
+to get updates: [Technical newsletter for developers](https://developer.vippsmobilepay.com/docs/newsletters).
 
 See more about [charge failure reason](#charge-failure-reasons).
 
@@ -1181,7 +1181,7 @@ depending on your systems.
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
 will be replaced by an event log. Subscribe to the technical newsletter
-to get updates: [Technical newsletter for developers](https://developer.vippsmobilepay.com/docs/vipps-developers/newsletters).
+to get updates: [Technical newsletter for developers](https://developer.vippsmobilepay.com/docs/newsletters).
 
 When fetching a charge through the API, you can find two fields in the response
 body to identify why the charge failed `failureReason` and `failureDescription`.
@@ -1464,7 +1464,7 @@ Display of charge failure due to a charge being higher than the `maxAmount` in V
 
 _This functionality is only available for special cases._
 
-See: [Landing page](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/landing-page)
+See: [Landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page)
 
 If the `skipLandingPage` property is set to `true` in the
 [`POST:/agreements`][draft-agreement-endpoint]
@@ -1503,14 +1503,14 @@ to retry the request at a later point in time.
 HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 
 See:
-[Errors](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/errors).
+[Errors](https://developer.vippsmobilepay.com/docs/common-topics/errors).
 
 ## Rate limiting
 
 We have added rate-limiting to our API (`HTTP 429 Too Many Requests`) to prevent
 fraudulent and wrongful behavior, and increase the stability and security of
 our API. The limits should not affect normal behavior, but please
-[contact us](https://developer.vippsmobilepay.com/docs/vipps-developers/contact)
+[contact us](https://developer.vippsmobilepay.com/docs/contact)
 if you notice any unexpected behavior.
 
 The "Key" column specifies what we consider to be the unique identifier, and
@@ -1580,7 +1580,7 @@ partner's MSN. This parameter is also recommended for regular Vipps
 merchants making API calls for themselves.
 
 See:
-[Vipps Partners](https://developer.vippsmobilepay.com/docs/vipps-partner).
+[Vipps Partners](https://developer.vippsmobilepay.com/docs/partner).
 
 ## Polling guidelines
 
@@ -1589,7 +1589,7 @@ General guidelines for polling with the
 endpoint can be found at:
 
 
-See [Polling guidelines](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/polling-guidelines) in Common topics, for details.
+See [Polling guidelines](https://developer.vippsmobilepay.com/docs/common-topics/polling-guidelines) in Common topics, for details.
 
 ## Notifications to users for failed charges
 
@@ -1610,7 +1610,7 @@ See [charge failure reason](#charge-failure-reasons) for an overview of what is 
 
 ## Timeouts
 
-See [Common topics: Timeouts](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts).
+See [Common topics: Timeouts](https://developer.vippsmobilepay.com/docs/common-topics/timeouts).
 
 ## Testing
 
@@ -1625,7 +1625,7 @@ The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
 
-See [Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/redirects) in Common topics for details.
+See [Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/common-topics/redirects) in Common topics for details.
 
 ## Different agreement types and when to use them
 
@@ -1698,4 +1698,4 @@ In addition to campaigns and initial charges being available as individual flows
 [refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo
 [access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment
+[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/test-environment

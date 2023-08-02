@@ -16,9 +16,9 @@ See the
 for all the details.
 
 See also:
-[API FAQ](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs)
+[API FAQ](https://developer.vippsmobilepay.com/docs/faqs)
 and the
-[Getting Started](https://developer.vippsmobilepay.com/docs/vipps-developers/getting-started)
+[Getting Started](https://developer.vippsmobilepay.com/docs/getting-started)
 guide.
 
 <!-- START_COMMENT -->
@@ -38,7 +38,7 @@ Also, check the [V3 API definitions](https://developer.vippsmobilepay.com/api/re
 ### How do I migrate from the MobilePay subscription solution?
 
 See:
-[Migration guide](https://developer.vippsmobilepay.com/docs/vipps-developers/mp-migration-guide#subscriptions-vs-recurring).
+[Migration guide](https://developer.vippsmobilepay.com/docs/mp-migration-guide#subscriptions-vs-recurring).
 
 ### Can I manage agreements and charges created with v2 API using v3 API?
 
@@ -70,7 +70,7 @@ Charges are processed two times every day: 07:00 and 15:00 UTC
 
 Retries are attempted according to the number of `retryDays` specified.
 This applies to both our production and
-[test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment/).
+[test environment](https://developer.vippsmobilepay.com/docs/test-environment/).
 
 ### I don't want a charge to fail the first time the transaction fails (insufficient funds, networking issues, etc.)
 
@@ -173,7 +173,7 @@ users as described in
 
 ### For how long is a payment reserved?
 
-See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/vipps-developers/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved).
+See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved).
 
 ### How can I make refunds?
 
@@ -489,7 +489,7 @@ further without coming to a blank page.
 
 ### How can I change partner for my integration with Vipps?
 
-See [How to change partners for a merchant](https://developer.vippsmobilepay.com/docs/vipps-partner/how-to-change-partners).
+See [How to change partners for a merchant](https://developer.vippsmobilepay.com/docs/partner/how-to-change-partners).
 
 **Please note:** The MSN (the number) does _not_ change when changing partners.
  

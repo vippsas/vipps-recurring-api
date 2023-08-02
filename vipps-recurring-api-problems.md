@@ -13,7 +13,7 @@ END_METADATA -->
 
 In Recurring API, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 
-See [Errors](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/errors) for more details about the format.
+See [Errors](https://developer.vippsmobilepay.com/docs/common-topics/errors) for more details about the format.
 
 API version: 3.0.0.
 
@@ -27,9 +27,9 @@ API version: 3.0.0.
 ## Problem types
 
 The `type` is the primary identifier for a problem. It is a URL to a page with more details regarding the problem.
-Each problem type returned by the Recurring API starts with `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#` followed by a problem identifier.
+Each problem type returned by the Recurring API starts with `https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-problems#` followed by a problem identifier.
 
-Example: `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#invalid-agreement-id`
+Example: `https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-problems#invalid-agreement-id`
 
 
 

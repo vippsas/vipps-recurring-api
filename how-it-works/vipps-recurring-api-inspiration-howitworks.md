@@ -167,4 +167,4 @@ Here is an example of the latter, where they pay 69kr/week until March 1st, then
 [refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo
 [access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment
+[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/test-environment

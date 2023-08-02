@@ -27,7 +27,7 @@ So, you use the Recurring API to create charges for an agreement, get lists of c
 ### Prerequisites
 
 Review
-[quick start guides](https://developer.vippsmobilepay.com/docs/vipps-developers/quick-start-guides)
+[quick start guides](https://developer.vippsmobilepay.com/docs/quick-start-guides)
 for information about getting your test environment set up.
 
 ### Step 1: Get the Postman collection and environment
@@ -97,7 +97,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 
    If you confirmed the agreement, the status should be ACTIVE in the response.
    If you didn't go through with the confirmation, the status will be PENDING for a
-   [maximum of 10 minutes](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/timeouts),
+   [maximum of 10 minutes](https://developer.vippsmobilepay.com/docs/common-topics/timeouts),
    before it goes to `EXPIRED`.
 
 #### Create an agreement with an initial charge
@@ -291,4 +291,4 @@ When you create an agreement with a reserved charge, you will need to capture th
 [refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo
 [access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment
+[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/test-environment

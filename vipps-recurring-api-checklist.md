@@ -42,7 +42,7 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 | Action | Comment |
 |--------|---------|
 |     Handle errors | Monitor the error messages Vipps returns from the APIs and correct problems as quickly as possible. It's recommended to log errors emitted by our APIs. This makes it easier to pinpoint what has gone wrong. |
-|     Include Vipps HTTP headers | Send the [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/vipps-developers/common-topics/http-headers) in all API requests for better tracking and troubleshooting (mandatory for partners and platforms, who must send these headers as part of the checklist approval). |
+|     Include Vipps HTTP headers | Send the [Vipps HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers) in all API requests for better tracking and troubleshooting (mandatory for partners and platforms, who must send these headers as part of the checklist approval). |
 
 ## Avoid integration pitfalls
 
@@ -50,7 +50,7 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 |--------|-----------|
 | Poll for the agreement status | The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement. |
 | Provide subscription tools | The merchant must have a way for the user to manage and stop subscription in `merchantAgreementUrl` in their agreement. This should result in a timely update of the Vipps Agreement. |
-|     Follow design guidelines| The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/vipps-design-guidelines). |
+|     Follow design guidelines| The Vipps branding must be according to the [Vipps design guidelines](https://developer.vippsmobilepay.com/docs/design-guidelines). |
 |     Educate customer support| Make sure your customer service, etc. has all the tools and information they need available in _your_ system, through the APIs listed in the first item in this checklist, and that they do not need to visit [portal.vipps.no](https://portal.vipps.no) for normal work. |
 
 ## Flow to go live for direct integrations
@@ -61,7 +61,7 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 4. The merchant completes all checklist items.
 5. The merchant verifies the integration in the test environment by checking that
    there are test agreements and charges in the
-   [Vipps test environment](https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment),
+   [Vipps test environment](https://developer.vippsmobilepay.com/docs/test-environment),
    with the following states:
    * A complete Agreement ending in `ACTIVE`.
    * A complete Agreement ending in `STOPPED`.
@@ -88,4 +88,4 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 [refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
 [userinfo-endpoint]: https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo
 [access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/vipps-developers/test-environment
+[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/test-environment
