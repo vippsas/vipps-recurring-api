@@ -27,9 +27,9 @@ API version: 3.0.0.
 ## Problem types
 
 The `type` is the primary identifier for a problem. It is a URL to a page with more details regarding the problem.
-Each problem type returned by the Recurring API starts with `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#` followed by a problem identifier.
+Each problem type returned by the Recurring API starts with `https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-problems#` followed by a problem identifier.
 
-Example: `https://vippsas.github.io/vipps-developer-docs/docs/APIs/recurring-api/vipps-recurring-api-problems#invalid-agreement-id`
+Example: `https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-problems#invalid-agreement-id`
 
 
 
