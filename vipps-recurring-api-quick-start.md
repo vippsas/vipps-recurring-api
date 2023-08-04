@@ -15,24 +15,15 @@ Use the Recurring API to create different types of agreements, get information a
 After creating the agreements, you still need to send the charge requests.
 So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
 
-<!-- START_COMMENT -->
+## Prerequisites
 
-ℹ️ Please use the website:
-[Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
+You must have already signed up as an organization with Vipps MobilePay and have
+your test credentials from the merchant portal, as described in the
+[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
 
-<!-- END_COMMENT -->
+## Set up
 
-## Postman
-
-### Prerequisites
-
-Review
-[quick start guides](https://developer.vippsmobilepay.com/docs/quick-start-guides)
-for information about getting your test environment set up.
-
-### Step 1: Get the Postman collection and environment
-
-Save the following files to your computer:
+Import the following files into Postman:
 
 * [Recurring API Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json)
 * [Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
@@ -40,22 +31,14 @@ Save the following files to your computer:
 The Postman collection contains examples of all the various campaign types,
 so it's easy to see what they look like in the app.
 
-### Step 2: Import the Postman files
+In Postman, tweak the environment with your own values (see
+[API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys/)):
 
-1. In Postman, click *Import* in the upper-left corner.
-1. In the dialog that opens, with *File* selected, click *Upload Files*.
-1. Select the two files you have just downloaded and click *Import*.
-
-### Step 3: Set up Postman environment
-
-1. Click the down arrow, next to the "eye" icon in the top-right corner, and select the environment you have imported.
-2. Click the "eye" icon and, in the dropdown window, click `Edit` in the top-right corner.
-3. Fill in the `Current Value` for the following fields to get started. For the first keys, go to *Vipps MobilePay Portal* > *Utvikler* -> *Test Keys*.
-   * `client_id` - Merchant key is required for getting the access token.
-   * `client_secret` - Merchant key is required for getting the access token.
-   * `Ocp-Apim-Subscription-Key` - Merchant subscription key.
-   * `merchantSerialNumber` - Merchant id.
-   * `mobileNumber` - The mobile number for the test app profile you have received or registered.
+* `client_id` - Merchant key required for getting the access token.
+* `client_secret` - Merchant key required for getting the access token.
+* `Ocp-Apim-Subscription-Key` - Merchant subscription key.
+* `merchantSerialNumber` - Merchant ID.
+* `mobileNumber` - The phone number for the test app profile you have received or registered.
 
 You can update any of the other environment variables. Be aware of this:
 
@@ -64,7 +47,7 @@ You can update any of the other environment variables. Be aware of this:
 
 ## Make API calls
 
-For all of the following, you will start by sending a request `Get Access Token`.
+For all the following, you will start by sending a request `Get Access Token`.
 This provides you with access to the API.
 
 The access token is valid for 1 hour in the test environment
@@ -83,7 +66,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 
 2. Set `Idempotency-Key-Draft` value.
 
-3. Send the `Draft Agreement - Minimal` request.
+3. Send the `Draft Agreement - Legacy pricing` request.
    This demonstrates how to create a simple agreement using [`POST:/agreements`][draft-agreement-endpoint] endpoint.
 
    Ctrl+click the link, it will take you to the Vipps MobilePay landing page.
@@ -104,7 +87,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 
 You can create more complex types of agreements by modifying the parameters in [`POST:/agreements`][draft-agreement-endpoint] endpoint.
 
-1. Send `Draft Agreement - Direct Charge`.  This demonstrates the addition of an initial charge.
+1. Send `Draft Agreement - Price campaign and initial charge`.  This demonstrates the addition of an initial charge.
 
    Ctrl+click on the link and complete the authorization.
 
@@ -125,7 +108,7 @@ For example, if a customer purchased a mobile phone with a data subscription, yo
 payment agreement where the price of the phone is registered as an initial payment with reserve capture.
 Then, you can capture the payment when you ship the phone.
 
-1. Send `Draft Agreement - Reserve Charge`.
+1. Send `Draft Agreement - Period campaign`.
 
    Ctrl+click on the link and complete the authorization.
 
@@ -142,7 +125,7 @@ Then, you can capture the payment when you ship the phone.
 
 If you need to get access to some user information in addition to the recurring payment agreement, you can use the profile flow.
 
-1. Send request `Draft Agreement - Profile flow`.
+1. Send request `Draft Agreement - Profile sharing flow`.
 
    Provide the `scope` object in the [`POST:/agreements`][draft-agreement-endpoint] call. This contains the information types that you want access to, separated by spaces (e.g., "name address email phoneNumber birthDate").
 
@@ -158,7 +141,7 @@ If you need to get access to some user information in addition to the recurring 
 
 #### Get a list of agreements
 
-1. Send `Fetch Agreements` to get a list of agreements by using the
+1. Send `List Agreements` to get a list of agreements by using the
    [`GET:/agreements`][list-agreements-endpoint] endpoint.
 
    This includes a query `status=ACTIVE`, so it filters out other
@@ -232,7 +215,7 @@ See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details abo
 You can cancel an existing charge before the user is charged.
 
 1. Create a new charge, that we can safely cancel, by sending
-   `Create Charge - Due tomorrow`.
+   `Create Charge - Reserve capture`.
 
    The `chargeId` variable is set to this charge.
 
@@ -246,7 +229,7 @@ You can cancel an existing charge before the user is charged.
 You can refund a charge that has already been charged.
 
 1. Set `chargeId` to the ID of a charge with status of CHARGED.
-   The easiest way to test this is to run `Draft Agreement - Full`.
+   The easiest way to test this is to run `Draft Agreement - Reserve initial charge`.
    This creates a charge that is immediately processed, and
    it sets the `agreementId` and `chargeId` to the corresponding values.
 
@@ -257,14 +240,14 @@ You can refund a charge that has already been charged.
 4. Send `Refund Charge` which uses [`POST:/agreements/{{agreementId}}/charges/{{chargeId}}/refund`][refund-charge-endpoint].
 
 5. Send `Get Charge` to see that the charge is all or partially refunded.
-   To fully refund, set the amount value to the amount remaining (amount - amountRefunded).
+   To fully refund, set the `amount` value to the amount remaining (`amount` - `amountRefunded`).
 
 #### Capture reserved charge
 
 When you create an agreement with a reserved charge, you will need to capture this charge.
 
 1. In the environment, set `agreementId` and `chargeId` to refer to the agreement and charge.
-   If you ran [Create an agreement with a reserve capture](#create-an-agreement-with-a-reserve-capture),
+   If you ran [Draft Agreement - Reserve initial charge](#create-an-agreement-with-a-reserve-capture),
    you can use the values set by the example.
 
 2. Set `Idempotency-Key-Capture` value.
