@@ -22,14 +22,6 @@ Use the Recurring API to create different types of agreements, get information a
 After creating the agreements, you still need to send the charge requests.
 So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
 
-## Prerequisites
-
-You must have already signed up as an organization with Vipps MobilePay and have
-your test credentials from the merchant portal, as described in the
-[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
-
-## Set up
-
 ## Before you begin
 
 This document covers the quick steps for getting started with the Recurring API.
