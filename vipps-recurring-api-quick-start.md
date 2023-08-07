@@ -114,8 +114,6 @@ The property `access_token` should be used for all other API requests in the `Au
 
 ### Step 3 - Create a minimal agreement
 
-For details about the calls, see [Agreement endpoints][agreement-endpoints] in the Recurring API Specifications.
-
 Create an agreement with: [`POST:/agreements`][draft-agreement-endpoint].
 When your test mobile number is provided in `phoneNumber`, it will be pre-filled in the form.
 
@@ -130,7 +128,7 @@ values={[
 ]}>
 <TabItem value="postman">
 
-Set `Idempotency-Key-Draft` value.
+Set the `Idempotency-Key-Draft` value in your Postman environment.
 
 ```bash
 Send request Draft Agreement - Legacy pricing
@@ -172,11 +170,11 @@ curl https://apitest.vipps.no/recurring/v3/agreements/ \
 
 ### Step 4 - Authorize the agreement
 
-Open the `vippsConfirmationUrl` link that is returned, and it will take you to the
+Open the `vippsConfirmationUrl` link that is returned in the previous step. It will take you to the
 [landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/).
 The phone number of your test user should already be filled in, so you only have to click *Next*.
 
-You will be presented with the payment in the app, where you can complete the payment and be directed to the specified `merchantRedirectUrl` under a "best effort" policy.
+You will be presented with the agreement in the app, where you can authorize and be directed to the specified `merchantRedirectUrl` under a "best effort" policy.
 
 :::note
 We cannot guarantee the user will be redirected back to the same browser or session, or that they will at all be redirected back. User interaction can be unpredictable, and the user may choose to fully close the app or browser.
@@ -187,7 +185,7 @@ Take note of the value included in `agreementId`, as you will need this to acces
 
 ### Step 5 - Fetch the agreement
 
-To receive the result of the user action you may poll the status of the payment via the
+To receive the result of the user action, you may poll the status of the agreement with:
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint].
 
 <Tabs
@@ -202,8 +200,6 @@ values={[
 ```bash
 Send request Get Agreement
 ```
-
-This uses the variable `agreementId`, set by the previous step.
 
 </TabItem>
 <TabItem value="curl">
@@ -228,12 +224,11 @@ If you confirmed the agreement, the status should be ACTIVE in the response.
 
 ### Step 6 - Create a charge for the agreement
 
-Create a charge request for a payment for the agreement created above
-by using
+Create a charge with:
 [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint].
 
 Set a unique `orderId` that can be used to access the charge later.
-Also, set a unique `Idempotency-Key` value to ensure the payment is not created more than once.
+Also, set a unique `Idempotency-Key` value to ensure the charge is not created more than once.
 
 <Tabs
 defaultValue="curl"
@@ -244,7 +239,7 @@ values={[
 ]}>
 <TabItem value="postman">
 
-Set `agreementId` to the ID of an ACTIVE agreement.
+Ensure that `agreementId` is set to the ID of an ACTIVE agreement.
 
 Set `Idempotency-Key-Create` value.
 
@@ -252,7 +247,6 @@ Set `Idempotency-Key-Create` value.
 Send request Create Charge - Direct capture
 ```
 
-The `chargeId` variable is set for later use.
 
 </TabItem>
 <TabItem value="curl">
@@ -282,16 +276,17 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 </TabItem>
 </Tabs>
 
-The status will be `PENDING` until the due date, when the payment is processed.
-If you want to check the status after it's paid, set the due date to tomorrow.
+The status will be `PENDING` until the payment is processed.
 
 A charge must be scheduled a minimum of two days before the payment will occur (it is a minimum one day in the test environment).
 See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details about timing.
 
-### Step 7 - Fetch a charge
+### Step 7 - Fetch the charge
 
-To receive the result of the user action you may poll the status of the payment via the
-[`POST:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]
+To get the status of the charge, use:
+[`POST:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint].
+
+The value for `chargeId` must match what you provided for `orderId`.
 
 <Tabs
 defaultValue="curl"
@@ -305,8 +300,6 @@ values={[
 ```bash
 Send request Get Charge
 ```
-
-This uses the variable `orderId`, set by the previous step.
 
 </TabItem>
 <TabItem value="curl">
@@ -327,9 +320,9 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 </TabItem>
 </Tabs>
 
-### (Optional) Step 8 - Cancel a charge
+### (Optional) Step 8 - Cancel the charge
 
-You can cancel an existing charge before the user is charged by using
+To cancel an unpaid charge, use:
 [`DEL:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
 
 <Tabs
@@ -340,8 +333,6 @@ values={[
 {label: 'Postman', value: 'postman'},
 ]}>
 <TabItem value="postman">
-
-Update the `chargeId` to an active charge that has not yet been processed.
 
 ```bash
 Send request Cancel Charge
@@ -369,7 +360,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 
 ### (Optional) Step 9 - Refund a charge
 
-Refund a charge that has already been charged by using
+To refund a charge, use:
 [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint].
 
 <Tabs
@@ -407,6 +398,9 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
   "description":"This charge was refunded with Postman"
 }'
 ```
+
+</TabItem>
+</Tabs>
 
 ### (Optional) Step 10 - Stop an agreement
 
@@ -449,12 +443,16 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID  \
 }'
 ```
 
+</TabItem>
+</Tabs>
+
 ## Next steps
 
-See the [Recurring API guide](api-guide/README.md) to read about the concepts and details.
+See the [Recurring API guide](./vipps-recurring-api.md) to read about the concepts and details.
 
 For more examples, see the step-by-step instructions in the
 [Recurring API Postman guide](vipps-recurring-api-postman-guide.md).
+
 
 [access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
 [draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
