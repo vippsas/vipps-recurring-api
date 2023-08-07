@@ -89,7 +89,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 
 You can create more complex types of agreements by modifying the parameters in [`POST:/agreements`][draft-agreement-endpoint] endpoint.
 
-1. Send `Draft Agreement - Price campaign and initial charge`.  This demonstrates the addition of an initial charge.
+1. Send `Draft Agreement - Legacy pricing and direct capture initial charge`.  This demonstrates the addition of an initial charge.
 
    Ctrl+click on the link and complete the authorization.
 
@@ -110,7 +110,7 @@ For example, if a customer purchased a mobile phone with a data subscription, yo
 payment agreement where the price of the phone is registered as an initial payment with reserve capture.
 Then, you can capture the payment when you ship the phone.
 
-1. Send `Draft Agreement - Period campaign`.
+1. Send `Draft Agreement - Legacy pricing and reserve initial charge`.
 
    Ctrl+click on the link and complete the authorization.
 

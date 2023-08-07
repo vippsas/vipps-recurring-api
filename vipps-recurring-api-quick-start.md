@@ -125,8 +125,11 @@ The property `access_token` should be used for all other API requests in the `Au
 For details about the calls, see [Agreement endpoints][agreement-endpoints] in the Recurring API Specifications.
 
 Create an agreement with: [`POST:/agreements`][draft-agreement-endpoint].
-When your test mobile number
-is provided in `phoneNumber`, it will be pre-filled in the form.
+When your test mobile number is provided in `phoneNumber`, it will be pre-filled in the form.
+
+Note that `orderId` must be unique for each payment you create.
+
+
 
 <Tabs
 defaultValue="curl"
@@ -137,8 +140,10 @@ values={[
 ]}>
 <TabItem value="postman">
 
+Set `Idempotency-Key-Draft` value.
+
 ```bash
-Send request Draft Agreement - Minimal
+Send request Draft Agreement - Legacy pricing
 ```
 
 </TabItem>
@@ -160,7 +165,6 @@ curl --location 'https://apitest.vipps.no/recurring/v3/agreements/' \
 }'
 ```
 
-Note that `orderId` must be unique for each payment you create.
 
 </TabItem>
 </Tabs>
