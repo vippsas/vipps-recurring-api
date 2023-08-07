@@ -121,8 +121,6 @@ When your test mobile number is provided in `phoneNumber`, it will be pre-filled
 
 Note that `orderId` must be unique for each payment you create.
 
-
-
 <Tabs
 defaultValue="curl"
 groupId="sdk-choice"
@@ -142,7 +140,7 @@ Send request Draft Agreement - Legacy pricing
 <TabItem value="curl">
 
 ```bash
-curl --location 'https://apitest.vipps.no/recurring/v3/agreements/' \
+curl https://apitest.vipps.no/recurring/v3/agreements/ \
 -H 'Content-Type: application/json' \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
@@ -151,32 +149,319 @@ curl --location 'https://apitest.vipps.no/recurring/v3/agreements/' \
 -H "Vipps-System-Version: 3.1.2" \
 -H "Vipps-System-Plugin-Name: acme-webshop" \
 -H "Vipps-System-Plugin-Version: 4.5.6" \
+-H "Idempotency-key: UNIQUE-IDEMPOTENCY-KEY" \
 -X POST \
 -d '{
-  "TO BE PROVIDED
+   "interval": {
+      "unit" : "WEEK",
+      "count": 2
+   },
+   "pricing": {
+      "amount": 1000,
+      "currency": "NOK"
+   },
+   "merchantRedirectUrl": "https://example.com/redirect-url",
+   "merchantAgreementUrl": "https://example.com/agreement-url",
+   "phoneNumber": "96574209",
+   "productName": "Postman test product"
 }'
 ```
-
 
 </TabItem>
 </Tabs>
 
+### Step 4 - Authorize the agreement
 
+Open the `vippsConfirmationUrl` link that is returned, and it will take you to the
+[landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/).
+The phone number of your test user should already be filled in, so you only have to click *Next*.
+
+You will be presented with the payment in the app, where you can complete the payment and be directed to the specified `merchantRedirectUrl` under a "best effort" policy.
+
+:::note
+We cannot guarantee the user will be redirected back to the same browser or session, or that they will at all be redirected back. User interaction can be unpredictable, and the user may choose to fully close the app or browser.
+:::
+
+You should now have an active agreement.
+Take note of the value included in `agreementId`, as you will need this to access the agreement later.
+
+### Step 5 - Fetch the agreement
+
+To receive the result of the user action you may poll the status of the payment via the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint].
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+```bash
+Send request Get Agreement
+```
+
+This uses the variable `agreementId`, set by the previous step.
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X GET
+```
+
+</TabItem>
+</Tabs>
+
+If you confirmed the agreement, the status should be ACTIVE in the response.
+
+### Step 6 - Create a charge for the agreement
+
+Create a charge request for a payment for the agreement created above
+by using
+[`POST:/agreements/{agreementId}/charges`][create-charge-endpoint].
+
+Set a unique `orderId` that can be used to access the charge later.
+Also, set a unique `Idempotency-Key` value to ensure the payment is not created more than once.
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+Set `agreementId` to the ID of an ACTIVE agreement.
+
+Set `Idempotency-Key-Create` value.
+
+```bash
+Send request Create Charge - Direct capture
+```
+
+The `chargeId` variable is set for later use.
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charges \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Idempotency-Key: 49ca711a-acee-4d01-993b-9487112e1def" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+-d '{
+  "amount": 1000,
+  "description": "This payment was charged with Postman.",
+  "due": "2023-08-08",
+  "retryDays": 0,
+  "transactionType": "DIRECT_CAPTURE",
+  "orderId": "UNIQUE-ORDERID"
+}'
+```
+
+</TabItem>
+</Tabs>
+
+The status will be `PENDING` until the due date, when the payment is processed.
+If you want to check the status after it's paid, set the due date to tomorrow.
+
+A charge must be scheduled a minimum of two days before the payment will occur (it is a minimum one day in the test environment).
+See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details about timing.
+
+### Step 7 - Fetch a charge
+
+To receive the result of the user action you may poll the status of the payment via the
+[`POST:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint]
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+```bash
+Send request Get Charge
+```
+
+This uses the variable `orderId`, set by the previous step.
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charges/UNIQUE-ORDERID \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X GET
+```
+
+</TabItem>
+</Tabs>
+
+### (Optional) Step 8 - Cancel a charge
+
+You can cancel an existing charge before the user is charged by using
+[`DEL:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+Update the `chargeId` to an active charge that has not yet been processed.
+
+```bash
+Send request Cancel Charge
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charges/UNIQUE-CHARGE-ID \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Idempotency-Key: 86109711-52b5-4d4e-9c0a-8cccf1ff9309" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X DELETE
+```
+
+</TabItem>
+</Tabs>
+
+### (Optional) Step 9 - Refund a charge
+
+Refund a charge that has already been charged by using
+[`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint].
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+Update the `chargeId` to a charge that has been processed.
+
+```bash
+Send request Refund Charge
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charges/UNIQUE-CHARGE-ID \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Idempotency-Key: 5ad7ec7a-cc6e-44c3-807b-812eb011480a" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+-d '{
+  "amount": 1000,
+  "description":"This charge was refunded with Postman"
+}'
+```
+
+### (Optional) Step 10 - Stop an agreement
+
+To stop an agreement,
+send [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]
+with `"status": "STOPPED"`.
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+Set `agreementId` to the ID of an ACTIVE agreement
+
+```bash
+Send request Stop agreement
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID  \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Idempotency-Key: 5ad7ec7a-cc6e-44c3-807b-812eb011480a" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X PATCH \
+-d '{
+  "status": "STOPPED"
+}'
+```
+
+## Next steps
+
+See the [Recurring API guide](api-guide/README.md) to read about the concepts and details.
+
+For more examples, see the step-by-step instructions in the
+[Recurring API Postman guide](vipps-recurring-api-postman-guide.md).
 
 [access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[list-agreements-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [agreement-endpoints]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints
 [fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
 [update-agreement-patch-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
-[force-accept-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
-[charge-endpoints]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints
-[list-charges-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
 [create-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
 [fetch-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
 [cancel-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
-[capture-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
 [refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
-[userinfo-endpoint]: https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo
-[access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/test-environment
