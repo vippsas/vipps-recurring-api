@@ -3,10 +3,17 @@
 title: Quick start for the Recurring API
 sidebar_label: Quick start
 sidebar_position: 20
-description: Quick start guide for the using the Recurring API with Postman.
+description: Quick steps for getting started with the Recurring API.
+toc_min_heading_level: 2
+toc_max_heading_level: 5
 pagination_next: null
 pagination_prev: null
 ---
+
+import ApiSchema from '@theme/ApiSchema';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 END_METADATA -->
 
 # Quick start
@@ -15,263 +22,444 @@ Use the Recurring API to create different types of agreements, get information a
 After creating the agreements, you still need to send the charge requests.
 So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
 
-## Prerequisites
+## Before you begin
 
+This document covers the quick steps for getting started with the Recurring API.
 You must have already signed up as an organization with Vipps MobilePay and have
 your test credentials from the merchant portal, as described in the
 [Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
 
-## Set up
+**Important:** The examples use standard example values that you must change to
+use *your* values. This includes API keys, HTTP headers, reference, etc.
 
-Import the following files into Postman:
+## Your first agreement
+
+### Step 1 - Setup
+
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
+
+**Please note:** Postman is discontinuing their offline version. Use only your test keys and delete them after testing. Ensure that your company allows for cloud use before continuing.
+
+If you wish to use Postman, import the following files:
 
 * [Recurring API Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json)
-* [Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
-
-The Postman collection contains examples of all the various campaign types,
-so it's easy to see what they look like in the app.
+* [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
 In Postman, tweak the environment with your own values (see
 [API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys/)):
 
 * `client_id` - Merchant key required for getting the access token.
 * `client_secret` - Merchant key required for getting the access token.
-* `Ocp-Apim-Subscription-Key` - Merchant subscription key.
-* `merchantSerialNumber` - Merchant ID.
-* `mobileNumber` - The phone number for the test app profile you have received or registered.
+* `Ocp-Apim-Subscription-Key` - The subscription key for making API requests.
+* `merchantSerialNumber` - The unique ID for your sales unit.
+* `mobileNumber` - The phone number for your
+   [test user](https://developer.vippsmobilepay.com/docs/test-environment#test-users).
 
-You can update any of the other environment variables. Be aware of this:
+</TabItem>
+<TabItem value="curl">
 
-* Any currency amount must be an Integer value minimum 100 in øre.
-* Many URLs must be `https`.
+No setup needed :)
 
-## Make API calls
+</TabItem>
+</Tabs>
 
-For all the following, you will start by sending a request `Get Access Token`.
+### Step 2 - Authentication
+
+For all the following, you will need an `access_token` from the
+[Access token API](https://developer.vippsmobilepay.com/docs/APIs/access-token-api):
+[`POST:/accesstoken/get`][access-token-endpoint].
 This provides you with access to the API.
 
-The access token is valid for 1 hour in the test environment
-and 24 hours in the production environment.
-See the
-[API reference](https://developer.vippsmobilepay.com/api/recurring)
-for details about the calls.
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-### Create agreements
+```bash
+Send request Get Access Token
+```
 
-For details about the calls, see [Agreement endpoints][agreement-endpoints] in the Recurring API Specifications.
+</TabItem>
+<TabItem value="curl">
 
-#### Create a minimal agreement
+```bash
+curl https://apitest.vipps.no/accessToken/get \
+-H "client_id: YOUR-CLIENT-ID" \
+-H "client_secret: YOUR-CLIENT-SECRET" \
+-H "Ocp-Apim-Subscription-Key: YOUR-SUBSCRIPTION-KEY" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+--data ''
+```
 
-1. Send request `Get Access Token`. This provides you with access to the API.
+</TabItem>
+</Tabs>
 
-2. Set `Idempotency-Key-Draft` value.
+The property `access_token` should be used for all other API requests in the `Authorization` header as the Bearer token.
 
-3. Send the `Draft Agreement - Legacy pricing` request.
-   This demonstrates how to create a simple agreement using [`POST:/agreements`][draft-agreement-endpoint] endpoint.
+### Step 3 - Create a minimal agreement
 
-   Ctrl+click the link, it will take you to the Vipps MobilePay landing page.
-   Enter your test phone number and complete the authorization in the Vipps or MobilePay app in your mobile test app.
+Create an agreement with: [`POST:/agreements`][draft-agreement-endpoint].
+When your test mobile number is provided in `phoneNumber`, it will be pre-filled in the form.
 
-   You should now have an active agreement. The variable `agreementId` is set in the environment.
+Note that `orderId` must be unique for each payment you create.
 
-4. To get the information about an agreement, send `Get Agreement`. This uses
-   [`GET:/agreements/{{agreementId}}`][fetch-agreement-endpoint].
-   The variable `agreementId` is set by the `Draft Agreement` step.
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-   If you confirmed the agreement, the status should be ACTIVE in the response.
-   If you didn't go through with the confirmation, the status will be PENDING for a
-   [maximum of 10 minutes](https://developer.vippsmobilepay.com/docs/common-topics/timeouts),
-   before it goes to `EXPIRED`.
+Set the `Idempotency-Key-Draft` value in your Postman environment.
 
-#### Create an agreement with an initial charge
+```bash
+Send request Draft Agreement - Legacy pricing
+```
 
-You can create more complex types of agreements by modifying the parameters in [`POST:/agreements`][draft-agreement-endpoint] endpoint.
+</TabItem>
+<TabItem value="curl">
 
-1. Send `Draft Agreement - Legacy pricing and direct capture initial charge`.  This demonstrates the addition of an initial charge.
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/ \
+-H 'Content-Type: application/json' \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-H "Idempotency-key: UNIQUE-IDEMPOTENCY-KEY" \
+-X POST \
+-d '{
+   "interval": {
+      "unit" : "WEEK",
+      "count": 2
+   },
+   "pricing": {
+      "amount": 1000,
+      "currency": "NOK"
+   },
+   "merchantRedirectUrl": "https://example.com/redirect-url",
+   "merchantAgreementUrl": "https://example.com/agreement-url",
+   "phoneNumber": "96574209",
+   "productName": "Postman test product"
+}'
+```
 
-   Ctrl+click on the link and complete the authorization.
+</TabItem>
+</Tabs>
 
-   When you use this, a charge is automatically created for the initial payment and charged.
-   The `agreementId` and `chargeId` are set in the environment.
+### Step 4 - Authorize the agreement
 
-2. Set `Idempotency-Key-Draft` value.
+Open the `vippsConfirmationUrl` link that is returned in the previous step. It will take you to the
+[landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/).
+The phone number of your test user should already be filled in, so you only have to click *Next*.
 
-3. Send a request `Get Agreement` for information about this payment by using the
-   [`GET:/agreements/{{agreementId}}`][fetch-agreement-endpoint] endpoint.
+You will be presented with the agreement in the app, where you can authorize and be directed to the specified `merchantRedirectUrl` under a "best effort" policy.
 
-#### Create an agreement with a reserve capture
+:::note
+We cannot guarantee the user will be redirected back to the same browser or session, or that they will at all be redirected back. User interaction can be unpredictable, and the user may choose to fully close the app or browser.
+:::
 
-When you use this, a charge is automatically created for the initial payment, and
-you can capture it when you provide the product or service.
+You should now have an active agreement.
+Take note of the value included in `agreementId`, as you will need this to access the agreement later.
 
-For example, if a customer purchased a mobile phone with a data subscription, you could set up a recurring
-payment agreement where the price of the phone is registered as an initial payment with reserve capture.
-Then, you can capture the payment when you ship the phone.
+### Step 5 - Fetch the agreement
 
-1. Send `Draft Agreement - Legacy pricing and reserve initial charge`.
+To receive the result of the user action, you may poll the status of the agreement with:
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint].
 
-   Ctrl+click on the link and complete the authorization.
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-2. Set `Idempotency-Key-Draft` value.
+```bash
+Send request Get Agreement
+```
 
-3. Send a request `Get Agreement` for information about this payment by using the
-   [`GET:/agreements/{{agreementId}}`][fetch-agreement-endpoint] endpoint.
+</TabItem>
+<TabItem value="curl">
 
-4. The `agreementId` and `chargeId` are set in the environment.
-   Take note of these values, because you will need them when you
-   [capture the reserved charge](#capture-reserved-charge).
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X GET
+```
 
-#### Getting access to user info
+</TabItem>
+</Tabs>
 
-If you need to get access to some user information in addition to the recurring payment agreement, you can use the profile flow.
+If you confirmed the agreement, the status should be ACTIVE in the response.
 
-1. Send request `Draft Agreement - Profile sharing flow`.
+### Step 6 - Create a charge for the agreement
 
-   Provide the `scope` object in the [`POST:/agreements`][draft-agreement-endpoint] call. This contains the information types that you want access to, separated by spaces (e.g., "name address email phoneNumber birthDate").
+Create a charge with:
+[`POST:/agreements/{agreementId}/charges`][create-charge-endpoint].
 
-   Here, the `agreementId` and `landing_page_url` are retrieved from the response and set as variables.
+Set a unique `orderId` that can be used to access the charge later.
+Also, set a unique `Idempotency-Key` value to ensure the charge is not created more than once.
 
-2. Once you complete the session, a unique identifier `sub` can be retrieved in the agreement details.
-   Send a request `Get Agreement` for information about this payment by using the
-   [`GET:/agreements/{{agreementId}}`][fetch-agreement-endpoint] endpoint.
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-   In this example, `sub` is retrieved from the response and set as a variable.
+Ensure that `agreementId` is set to the ID of an ACTIVE agreement.
 
-3. Send request `Get Userinfo`, from the *User Info* folder. This uses [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] with the `sub` variable from the previous call.
+Set `Idempotency-Key-Create` value.
 
-#### Get a list of agreements
+```bash
+Send request Create Charge - Direct capture
+```
 
-1. Send `List Agreements` to get a list of agreements by using the
-   [`GET:/agreements`][list-agreements-endpoint] endpoint.
 
-   This includes a query `status=ACTIVE`, so it filters out other
-   [agreement states](vipps-recurring-api.md#agreement-states).
+</TabItem>
+<TabItem value="curl">
 
-2. Change or remove the query to see agreements with other states.
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charges \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Idempotency-Key: 49ca711a-acee-4d01-993b-9487112e1def" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+-d '{
+  "amount": 1000,
+  "description": "This payment was charged with Postman.",
+  "due": "2023-08-08",
+  "retryDays": 0,
+  "transactionType": "DIRECT_CAPTURE",
+  "orderId": "UNIQUE-ORDERID"
+}'
+```
 
-#### Update an agreement
+</TabItem>
+</Tabs>
 
-1. Set `agreementId` to the ID of an ACTIVE agreement.
-
-2. Run `Get Agreement` to see the properties of the agreement.
-
-3. Run `Update agreement` which modifies some properties by using the
-   [`PATCH:/agreements/{{agreementId}}`][update-agreement-patch-endpoint] endpoint.
-
-4. Run `Get Agreement` to see the updated properties.
-
-#### Stop an agreement
-
-1. Set `agreementId` to the ID of an ACTIVE agreement.
-
-2. Send the `Stop agreement` request, where the status is set to `STOPPED` in the body of [`PATCH:/agreements/{{agreementId}}`][update-agreement-patch-endpoint].
-
-3. Run `Get Agreement` to see that the status is not "STOPPED".
-
-### Create charges
-
-You will need at least one ACTIVE agreement for these examples.
-
-For details about the calls, see [Charge endpoints][charge-endpoints] in the Recurring API Specifications.
-
-#### Create a charge
-
-Although charges for initial payments are created automatically,
-you must create charge requests for the recurring payments.
+The status will be `PENDING` until the payment is processed.
 
 A charge must be scheduled a minimum of two days before the payment will occur (it is a minimum one day in the test environment).
 See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details about timing.
 
-1. Set `agreementId` to the ID of an ACTIVE agreement.
+### Step 7 - Fetch the charge
 
-2. Set `Idempotency-Key-Create` value.
+To get the status of the charge, use:
+[`POST:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint].
 
-3. Send `Create Charge - Due tomorrow`. This uses the
-   [`create charge`][create-charge-endpoint] endpoint
-   with "due" set to tomorrow's date.
+The value for `chargeId` must match what you provided for `orderId`.
 
-   The `chargeId` variable is set for later use.
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-4. Send `Get Charge`.
-   This uses [`POST:/agreements/{{agreementId}}/charges`][fetch-charge-endpoint]
-   to get information about the charge. The status will be "PENDING" for a while before it goes to "DUE".
+```bash
+Send request Get Charge
+```
 
-5. If you run `Get Charge` again tomorrow, you should see that the status changes to "CHARGED".
+</TabItem>
+<TabItem value="curl">
 
-#### Get a list of charges for an agreement
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charges/UNIQUE-ORDERID \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X GET
+```
 
-1. Set `agreementId` to the ID of an agreement.
-   Note, you can get a list of all your agreements with the `Fetch Agreements` example.
+</TabItem>
+</Tabs>
 
-2. Send `List Charges` which uses [`GET:/agreements/{{agreementId}}/charges`][list-charges-endpoint].
+### (Optional) Step 8 - Cancel the charge
 
-   This includes a query `chargeStatus=DUE` and filters out other
-   [charge states](vipps-recurring-api.md#charge-states).
+To cancel an unpaid charge, use:
+[`DEL:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
 
-3. Change or remove the query to see charges with other states.
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-#### Cancel a charge
+```bash
+Send request Cancel Charge
+```
 
-You can cancel an existing charge before the user is charged.
+</TabItem>
+<TabItem value="curl">
 
-1. Create a new charge, that we can safely cancel, by sending
-   `Create Charge - Reserve capture`.
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charges/UNIQUE-CHARGE-ID \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Idempotency-Key: 86109711-52b5-4d4e-9c0a-8cccf1ff9309" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X DELETE
+```
 
-   The `chargeId` variable is set to this charge.
+</TabItem>
+</Tabs>
 
-2. Send `Cancel Charge` which uses
-   [`DEL:/agreements/{{agreementId}}/charges/{{chargeId}}`][cancel-charge-endpoint].
+### (Optional) Step 9 - Refund a charge
 
-   Send `Get Charge` to see the change of status.
+To refund a charge, use:
+[`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint].
 
-#### Refund a charge
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-You can refund a charge that has already been charged.
+Update the `chargeId` to a charge that has been processed.
 
-1. Set `chargeId` to the ID of a charge with status of CHARGED.
-   The easiest way to test this is to run `Draft Agreement - Reserve initial charge`.
-   This creates a charge that is immediately processed, and
-   it sets the `agreementId` and `chargeId` to the corresponding values.
+```bash
+Send request Refund Charge
+```
 
-2. Set `Idempotency-Key-Refund` value.
+</TabItem>
+<TabItem value="curl">
 
-3. Send `Get Charge` to see the change of status.
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charges/UNIQUE-CHARGE-ID \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Idempotency-Key: 5ad7ec7a-cc6e-44c3-807b-812eb011480a" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X POST \
+-d '{
+  "amount": 1000,
+  "description":"This charge was refunded with Postman"
+}'
+```
 
-4. Send `Refund Charge` which uses [`POST:/agreements/{{agreementId}}/charges/{{chargeId}}/refund`][refund-charge-endpoint].
+</TabItem>
+</Tabs>
 
-5. Send `Get Charge` to see that the charge is all or partially refunded.
-   To fully refund, set the `amount` value to the amount remaining (`amount` - `amountRefunded`).
+### (Optional) Step 10 - Stop an agreement
 
-#### Capture reserved charge
+To stop an agreement,
+send [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]
+with `"status": "STOPPED"`.
 
-When you create an agreement with a reserved charge, you will need to capture this charge.
+<Tabs
+defaultValue="curl"
+groupId="sdk-choice"
+values={[
+{label: 'curl', value: 'curl'},
+{label: 'Postman', value: 'postman'},
+]}>
+<TabItem value="postman">
 
-1. In the environment, set `agreementId` and `chargeId` to refer to the agreement and charge.
-   If you ran [Draft Agreement - Reserve initial charge](#create-an-agreement-with-a-reserve-capture),
-   you can use the values set by the example.
+Set `agreementId` to the ID of an ACTIVE agreement
 
-2. Set `Idempotency-Key-Capture` value.
+```bash
+Send request Stop agreement
+```
 
-3. Send `Get Charge`, to see the status of this charge.
+</TabItem>
+<TabItem value="curl">
 
-4. Send `Capture reserved charge` which uses [`POST:/agreements/{{agreementId}}/charges/{{chargeId}}/capture`][capture-charge-endpoint].
+```bash
+curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID  \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
+-H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
+-H "Merchant-Serial-Number: 123456" \
+-H "Idempotency-Key: 5ad7ec7a-cc6e-44c3-807b-812eb011480a" \
+-H "Vipps-System-Name: acme" \
+-H "Vipps-System-Version: 3.1.2" \
+-H "Vipps-System-Plugin-Name: acme-webshop" \
+-H "Vipps-System-Plugin-Version: 4.5.6" \
+-X PATCH \
+-d '{
+  "status": "STOPPED"
+}'
+```
 
-5. Send `Get Charge` again, to see that the status is now "CHARGED".
+</TabItem>
+</Tabs>
+
+## Next steps
+
+See the [Recurring API guide](./vipps-recurring-api.md) to read about the concepts and details.
+
+For more examples, see the step-by-step instructions in the
+[Recurring API Postman guide](vipps-recurring-api-postman-guide.md).
 
 
-[list-agreements-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
+[access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
 [draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [agreement-endpoints]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints
 [fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
 [update-agreement-patch-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
-[force-accept-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/acceptUsingPATCHV3
-[charge-endpoints]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints
-[list-charges-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/ListChargesV3
 [create-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
 [fetch-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeV3
 [cancel-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CancelChargeV3
-[capture-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CaptureChargeV3
 [refund-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/RefundChargeV3
-[userinfo-endpoint]: https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo
-[access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost
-[vipps-test-environment]: https://developer.vippsmobilepay.com/docs/test-environment
