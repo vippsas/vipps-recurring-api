@@ -2737,6 +2737,7 @@ components:
         - description
         - due
         - retryDays
+        - transactionType
       properties:
         amount:
           type: integer
