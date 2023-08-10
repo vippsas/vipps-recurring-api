@@ -14,6 +14,11 @@ All notable changes to the current API will be documented in this file.
 See:
 [API Lifecycle](https://developer.vippsmobilepay.com/docs/common-topics/api-lifecycle/).
 
+## August 2023
+
+* Removed charge-amount-too-high-for-interval validation used in  charge creation endpoint [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]
+
+
 ## June 2023
 
 * A new field is returned by the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint:
