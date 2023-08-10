@@ -43,7 +43,6 @@ Example: `https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-rec
 | not-authorized                      | JWT token is invalid.                                                                                                                           |
 | idempotency-key-header              | Missing or invalid Idempotency key header. See [API specs](https://developer.vippsmobilepay.com/api/recurring).                               |
 | charge-amount-too-high              | Amount set for charge is too high.                                                                                                             |
-| charge-amount-too-high-for-interval | Amount for the interval is exceeded. Check if other charges have already been created for this interval.                                      |
 | charge-due-too-soon                 | Charge date due must be a minimum of 2 days in the future. See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge). |
 | charge-due-in-too-long              | Charge due date must be a maximum of 2 years in the future. See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).      |
 | unsupported-feature                 | Feature not supported. Please contact Vipps.                                                                                                  |
