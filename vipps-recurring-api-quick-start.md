@@ -160,7 +160,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/ \
    },
    "merchantRedirectUrl": "https://example.com/redirect-url",
    "merchantAgreementUrl": "https://example.com/agreement-url",
-   "phoneNumber": "96574209",
+   "phoneNumber": "91234567",
    "productName": "Postman test product"
 }'
 ```
