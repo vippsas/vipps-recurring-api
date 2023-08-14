@@ -2928,7 +2928,9 @@ components:
           maxLength: 15
           example: chr_WCVbcA
         agreementId:
-          $ref: "#/components/parameters/AgreementId"
+          type: string
+          description: Id of the agreement the charge belongs to
+          example: agr_5kSeqz
         externalId:
           type: string
           description: |-
