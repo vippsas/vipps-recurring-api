@@ -4,7 +4,7 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
-  version: 2.6.15
+  version: 2.6.16
   title: Recurring Payments Merchant API
 
 servers:
@@ -2873,7 +2873,9 @@ components:
           maxLength: 15
           example: chr_WCVbcA
         agreementId:
-          $ref: "#/components/parameters/AgreementId"
+          type: string
+          description: Id of the agreement the charge belongs to
+          example: agr_5kSeqz
         externalId:
           type: string
           description: An optional external id for the charge
