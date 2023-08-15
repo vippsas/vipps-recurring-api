@@ -16,8 +16,8 @@ See:
 
 ## August 2023
 
-* Removed charge-amount-too-high-for-interval validation used in  charge creation endpoint [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint]
-
+* Removed charge-amount-too-high-for-interval validation used in charge creation endpoint [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint].
+  The `suggestedMaxAmount` field for a variable amount agreement should be set to what the maximum amount could be for each charge.
 
 ## June 2023
 
