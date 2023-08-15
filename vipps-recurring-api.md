@@ -1332,12 +1332,12 @@ for details.
 ## Recurring agreements with variable amount
 
 Recurring with variable amounts offer merchants a way to charge users a different
-amount each interval, as long as the amount is lower than the user's specified max amount.
+amount each payment, as long as the amount is lower than the user's specified max amount.
 
 To create a variable amount agreement, use the `VARIABLE` type in `Pricing`.
 With `VARIABLE` pricing, you no longer specify a price, but a `suggestedMaxAmount` for the user.
-This field should be set to what the maximum price could be each interval.
-This `suggestedMaxAmount` is presented to the user together with a list of auto generated  amount suggestions that is created by Vipps.
+This field should be set to what the maximum price could be each payment.
+This `suggestedMaxAmount` is presented to the user together with a list of auto generated amount suggestions that is created by Vipps.
 The `suggestedMaxAmount` is however pre-selected for the user.
 
 The user chooses a max amount themselves when accepting the agreement, but we
