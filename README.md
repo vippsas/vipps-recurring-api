@@ -50,7 +50,7 @@ Examples of how to combine the Recurring API with other APIs for specific use ca
 
 * [API quick start](vipps-recurring-api-quick-start.md):  Run the basic examples in curl or Postman.
 * [API guide](vipps-recurring-api.md): Learn about the Recurring API features.
-* [API checklist](vipps-recurring-api-checklist.md): Complete the checklist to ensure you are ready to go live.
+* [API checklist](vipps-recurring-api-checklist.md): Complete the checklist for direct integration.
 * [API FAQ](vipps-recurring-api-faq.md): Look for your question among those people have asked before.
 * [API reference](https://developer.vippsmobilepay.com/api/recurring): Go straight to the endpoint specifications.
 
