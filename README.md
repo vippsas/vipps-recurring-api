@@ -19,13 +19,13 @@ END_METADATA -->
 <!-- END_COMMENT -->
 
 The Recurring API allows you to set up recurring payments for your customers.
-This allows your customers to pay subscriptions, donate, or make other recurring purchases without keying in card numbers or filling in long forms. In addition, your customers get a good overview of their fixed payments, and they get notifications of withdrawals through Vipps.
+This allows your customers to pay subscriptions, donate, or make other recurring purchases without keying in card numbers or filling in long forms. In addition, your customers get a good overview of their fixed payments, and they get notifications of withdrawals through Vipps MobilePay.
 
 For information about this product in Norwegian, see
-[Faste betalinger med Vipps](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
+[*Faste betalinger med Vipps* (*Recurring payments with Vipps*)](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
-**IMPORTANT:** The Vipps Recurring API is available for customers that
-have "Vipps på Nett"
+**IMPORTANT:** The Recurring API is available for customers that
+have *Vipps på Nett*
 ([eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api))
 and have completed additional compliance checks.
 See the intro to the
@@ -46,16 +46,14 @@ Examples of how to combine the Recurring API with other APIs for specific use ca
 * [Subscriptions](https://developer.vippsmobilepay.com/docs/solutions/recurring-and-login)
 * [Parking and "Pay-as-you-go"](https://developer.vippsmobilepay.com/docs/solutions/parking)
 
-## Getting started
+## Next steps
 
-See
-[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started)
-for information about API keys, product activation, how to make API calls, etc.
+* [API quick start](vipps-recurring-api-quick-start.md):  Run the basic examples in curl or Postman.
+* [API guide](vipps-recurring-api.md): Learn about the Recurring API features.
+* [API checklist](vipps-recurring-api-checklist.md): Complete the checklist for direct integration.
+* [API FAQ](vipps-recurring-api-faq.md): Look for your question among those people have asked before.
+* [API reference](https://developer.vippsmobilepay.com/api/recurring): Go straight to the endpoint specifications.
 
-Review the detailed documentation found here:
-
-* [API quick start](vipps-recurring-api-quick-start.md): Quick start.
-* [API guide](vipps-recurring-api.md): Developer guide for the Recurring API.
-* [API checklist](vipps-recurring-api-checklist.md): Checklist for Recurring API.
-* [API FAQ](vipps-recurring-api-faq.md): Questions and answers.
-* [API reference](https://developer.vippsmobilepay.com/api/recurring): Recurring API reference specifications.
+If you're new to the platform, see
+[Getting started](https://developer.vippsmobilepay.com/docs/getting-started/)
+for information about API keys, product activation, and the test environment.
