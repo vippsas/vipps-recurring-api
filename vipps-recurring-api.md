@@ -54,7 +54,7 @@ for the Recurring API too, please contact your KAM or
 
 * As a merchant: Check your sales unit(s) on [portal.vipps.no](https://portal.vipps.no).
 * As a partner: Check the sales unit(s) with the
-  [Partner API](https://developer.vippsmobilepay.com/docs/APIs/partner-api/vipps-partner-api#get-information-about-a-sales-unit-based-on-msn).
+  [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/management-api-guide/#get-information-about-a-sales-unit).
 
 API version: 3.0.0.
 
