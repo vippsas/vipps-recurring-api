@@ -1467,6 +1467,7 @@ components:
             following Vipps interaction.
             The format is MSISDN: Digits only: Country code and subscriber
             number, but no prefix.
+            If the phone number is a Norwegian phone number `(+47) 91 23 45 67`, the MSISDN representation is `4791234567`.
             See: https://en.wikipedia.org/wiki/MSISDN
           minLength: 10
           maxLength: 15
