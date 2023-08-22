@@ -1464,8 +1464,13 @@ components:
           type: string
           description: |-
             Customers phone number (if available). Used to simplify the
-            following Vipps interaction. MSISDN: https://en.wikipedia.org/wiki/MSISDN
+            following Vipps interaction.
+            The format is MSISDN: Digits only: Country code and subscriber
+            number, but no prefix.
+            See: https://en.wikipedia.org/wiki/MSISDN
+          minLength: 10
           maxLength: 15
+          pattern: '^\d{10,15}$'
           example: "4791234567"
         initialCharge:
           $ref: '#/components/schemas/InitialChargeV2'
