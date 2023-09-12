@@ -1542,9 +1542,8 @@ components:
         scope:
           type: string
           description: |
-            A space-separated string list of required user information (e.g., "name phoneNumber") in
-            accordance with the OpenID Connect specification.
-            See the
+            Space-separated list of the required user information (e.g., "name phoneNumber")
+            for the agreement. See the
             [Userinfo user guide](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api/userinfo-api-guide#scope)
             for details.
             Possible values are:
@@ -1637,7 +1636,18 @@ components:
           maxLength: 100
         scope:
           type: string
-          description: Space separated list of the user profile-data scope to require for the agreement.
+          description: |
+            Space-separated list of the required user information (e.g., "name phoneNumber")
+            for the agreement. See the
+            [Userinfo user guide](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api/userinfo-api-guide#scope)
+            for details.
+            Possible values are:
+            - name
+            - address
+            - email
+            - phoneNumber
+            - birthDate
+            - nin
           example: address name email birthDate phoneNumber
         skipLandingPage:
           type: boolean
