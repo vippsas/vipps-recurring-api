@@ -52,7 +52,7 @@ for the Recurring API too, please contact your KAM or
 
 **Please note:** You can check if you have access to the Recurring API:
 
-* As a merchant: Check your sales unit(s) on [portal.vipps.no](https://portal.vipps.no).
+* As a merchant: Check your sales unit(s) on [portal.vipps.no](https://portal.vipps.no) > *Utvikler*.
 * As a partner: Check the sales unit(s) with the
   [Management API](https://developer.vippsmobilepay.com/docs/APIs/management-api/management-api-guide/#get-information-about-a-sales-unit).
 
