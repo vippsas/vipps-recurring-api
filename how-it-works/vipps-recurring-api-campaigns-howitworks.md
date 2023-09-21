@@ -21,11 +21,11 @@ END_METADATA -->
 For technical documentation go to:
 [Vipps Recurring API](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
-## 1. Buy a subscription 
+## 1. Buy a subscription
 
-A user chooses Vipps or MobilePAy as payment method for a subscription on a merchant's website or app.
+A user chooses Vipps or MobilePay as payment method for a subscription on a merchant's website or app.
 
-![Buy subscription with Vipps](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
+![Buy subscription](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
 ## 2. The landing page
 

@@ -25,7 +25,7 @@ For technical documentation go to:
 
 A user chooses Vipps or MobilePay as payment method for a subscription on a merchant's website or app.
 
-![Buy subscription with Vipps](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
+![Buy subscription](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
 ## 2. The landing page
 
@@ -34,7 +34,7 @@ The user confirms their number and is prompted to log in to Vipps or MobilePay.
 
 If the agreement was started from a mobile device, the app will automatically switch over to Vipps or MobilePay.
 
-![landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
+![Landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
 ## 3. Accept agreement
 
@@ -45,7 +45,7 @@ If there is an initial charge to be paid, the user confirms the payment in this 
 In this step the user can choose the max amount that they will allow the merchant to charge each interval.
 The suggested amount from the merchant is preselected in the list.
 
-![Buy subscription with Vipps](../images/vipps-recurring-api-variable-howitworks/variable_amount_accept.png)
+![Accept agreement](../images/vipps-recurring-api-variable-howitworks/variable_amount_accept.png)
 
 ## 5. Confirmation of subscription
 
@@ -76,6 +76,6 @@ If the user clicks on max amount, they can choose a new max amount for the agree
 
 ![Change max amount](../images/vipps-recurring-api-variable-howitworks/variable_amount_manage.png)
 
-If the user clicks on `Manage agreement` (*Administrer abonnement*) in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://developer.vippsmobilepay.com/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
+If the user clicks on `Manage agreement` (*Administrer abonnement*) in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Login](https://developer.vippsmobilepay.com/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)

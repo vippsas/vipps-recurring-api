@@ -28,11 +28,11 @@ For technical documentation go to:
 ![recurring process](../images/vipps-recurring-api-howitworks/vipps-recurring-process.svg)
 
 
-## 1. Buy a subscription 
+## 1. Buy a subscription
 
 A user chooses Vipps or MobilePay as payment method for a subscription on a merchant’s website or app.
 
-![Buy subscription with Vipps](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
+![Buy subscription](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
 ## 2. The landing page
 
@@ -41,7 +41,7 @@ The user confirms their number and is prompted to log in to Vipps or MobilePay.
 
 If the agreement was started from a mobile device, the app will automatically switch over to Vipps or MobilePay.
 
-![landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
+![Landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
 ## 3. Accept agreement  
 
@@ -67,10 +67,10 @@ The user can see their active subscriptions, as well as stopped subscriptions, a
 
 ## 6. Manage agreements
 
-If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Vipps Login](https://developer.vippsmobilepay.com/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
+If the user clicks on “Manage agreement” in the previous step, they will be sent to the merchant’s site where they can manage their subscriptions. We recommend using [Login](https://developer.vippsmobilepay.com/docs/APIs/login-api) to make login to the merchant’s site go smoothly.
 
 ![Manage agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step6.svg)
 
 ## Great! Now you know how the Recurring payment process works.
 
-Take a look at the technical documentation in the [Vipps Recurring API Guide](../vipps-recurring-api.md).
+Take a look at the technical documentation in the [Recurring API Guide](../vipps-recurring-api.md).
