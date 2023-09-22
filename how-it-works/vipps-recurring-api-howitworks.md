@@ -30,22 +30,22 @@ For technical documentation go to:
 
 ## 1. Buy a subscription
 
-A user chooses Vipps or MobilePay as payment method for a subscription on a merchant’s website or app.
+A user chooses Vipps MobilePay as payment method for a subscription on a merchant’s website or app.
 
 ![Buy subscription](../images/vipps-recurring-api-howitworks/vipps-recurring-step1.svg)
 
 ## 2. The landing page
 
 If the agreement was started on a desktop device, the user will be sent to the Vipps MobilePay landing page.
-The user confirms their number and is prompted to log in to Vipps or MobilePay.
+The user confirms their number and is prompted to log in to Vipps MobilePay.
 
-If the agreement was started from a mobile device, the app will automatically switch over to Vipps or MobilePay.
+If the agreement was started from a mobile device, the app will automatically switch over to Vipps MobilePay.
 
 ![Landing page](../images/vipps-recurring-api-howitworks/vipps-recurring-step2.png)
 
 ## 3. Accept agreement  
 
-The user receives a push notification on their phone. They log in to Vipps or MobilePay and accept the agreement.
+The user receives a push notification on their phone. They log in to Vipps MobilePay and accept the agreement.
 
 If there is an initial charge to be paid, the user confirms the payment in this step as well.
 
@@ -61,7 +61,7 @@ Please note: Activation of the agreement is not guaranteed to be finished by the
 
 ## 5. Overview of agreements and charges
 
-The user can see their active subscriptions, as well as stopped subscriptions, and get an overview of previous charges in Vipps or MobilePay.
+The user can see their active subscriptions, as well as stopped subscriptions, and get an overview of previous charges in Vipps MobilePay.
 
 ![Overview of agreements](../images/vipps-recurring-api-howitworks/vipps-recurring-step5.png)
 

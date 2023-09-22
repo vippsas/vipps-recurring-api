@@ -251,7 +251,7 @@ change to Vipps MobilePay in different ways:
 
 * Email: Email your customers and inform them that they can change
   to Vipps MobilePay. The email should contain a unique URL that leads directly to a
-  webpage with a Vipps or MobilePay payment for that customer. The customer may have to
+  webpage with a Vipps MobilePay payment for that customer. The customer may have to
   [log in](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/)
   may be useful for this.
 * PDF invoice: Include a unique URL for the customer, same as above. You can
