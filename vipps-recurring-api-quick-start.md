@@ -18,23 +18,30 @@ END_METADATA -->
 
 # Quick start
 
-Use the Recurring API to create different types of agreements, get information about agreements, and update and stop agreements.
-After creating the agreements, you still need to send the charge requests.
-So, you use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
+Use the Recurring API to create charges for an agreement, get lists of charges for an agreement, cancel or refund charges, or capture reserved charges.
 
 ## Before you begin
 
-This document covers the quick steps for getting started with the Recurring API.
-You must have already signed up as an organization with Vipps MobilePay and have
-your test credentials from the merchant portal, as described in the
-[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
-
-**Important:** The examples use standard example values that you must change to
+The examples use standard example values that you must change to
 use *your* values. This includes API keys, HTTP headers, reference, etc.
+Note that any currency amount must be an Integer value minimum 100 in øre or cents.
 
 ## Your first agreement
 
 ### Step 1 - Setup
+
+You must have already signed up as an organization with Vipps MobilePay and have
+your test credentials from the merchant portal.
+
+You will need the following values, as described in the
+[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started):
+
+* `client_id` - Client_id for a test sales unit.
+* `client_secret` - Client_id for a test sales unit.
+* `Ocp-Apim-Subscription-Key` - The subscription key for making API requests.
+* `merchantSerialNumber` - The unique ID for a test sales unit.
+* `mobileNumber` - The phone number for your
+   [test user](https://developer.vippsmobilepay.com/docs/test-environment#test-users).
 
 <Tabs
 defaultValue="curl"
@@ -45,28 +52,20 @@ values={[
 ]}>
 <TabItem value="postman">
 
-**Please note:** To prevent your sensitive data and credentials from being synced to the Postman cloud,
-store them in the *Current Value* fields of your Postman environment.
-
 In Postman, import the following files:
 
 * [Recurring API Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json)
 * [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
-Update the *Current Value* field in your Postman environment with your own values (see
-[API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys/)):
+🔥 **Do not use production keys in Postman.** 🔥
 
-* `client_id` - Merchant key required for getting the access token.
-* `client_secret` - Merchant key required for getting the access token.
-* `Ocp-Apim-Subscription-Key` - The subscription key for making API requests.
-* `merchantSerialNumber` - The unique ID for your sales unit.
-* `mobileNumber` - The phone number for your
-   [test user](https://developer.vippsmobilepay.com/docs/test-environment#test-users).
+Update the *Current Value* field in your Postman environment with your **Merchant Test** keys.
+Use *Current Value* field for added security, as these values are not synced to the cloud.
 
 </TabItem>
 <TabItem value="curl">
 
-No setup needed :)
+No additional setup needed :)
 
 </TabItem>
 </Tabs>
@@ -99,7 +98,7 @@ curl https://apitest.vipps.no/accessToken/get \
 -H "client_id: YOUR-CLIENT-ID" \
 -H "client_secret: YOUR-CLIENT-SECRET" \
 -H "Ocp-Apim-Subscription-Key: YOUR-SUBSCRIPTION-KEY" \
--H "Merchant-Serial-Number: 123456" \
+-H "Merchant-Serial-Number: YOUR-MSN" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
 -H "Vipps-System-Plugin-Name: acme-webshop" \
@@ -143,7 +142,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/ \
 -H 'Content-Type: application/json' \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
--H "Merchant-Serial-Number: 123456" \
+-H "Merchant-Serial-Number: YOUR-MSN" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
 -H "Vipps-System-Plugin-Name: acme-webshop" \
@@ -210,7 +209,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
--H "Merchant-Serial-Number: 123456" \
+-H "Merchant-Serial-Number: YOUR-MSN" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
 -H "Vipps-System-Plugin-Name: acme-webshop" \
@@ -257,7 +256,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
--H "Merchant-Serial-Number: 123456" \
+-H "Merchant-Serial-Number: YOUR-MSN" \
 -H "Idempotency-Key: 49ca711a-acee-4d01-993b-9487112e1def" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
@@ -310,7 +309,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
--H "Merchant-Serial-Number: 123456" \
+-H "Merchant-Serial-Number: YOUR-MSN" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
 -H "Vipps-System-Plugin-Name: acme-webshop" \
@@ -347,7 +346,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
--H "Merchant-Serial-Number: 123456" \
+-H "Merchant-Serial-Number: YOUR-MSN" \
 -H "Idempotency-Key: 86109711-52b5-4d4e-9c0a-8cccf1ff9309" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
@@ -387,7 +386,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
--H "Merchant-Serial-Number: 123456" \
+-H "Merchant-Serial-Number: YOUR-MSN" \
 -H "Idempotency-Key: 5ad7ec7a-cc6e-44c3-807b-812eb011480a" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \
@@ -432,7 +431,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID  \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1Ni <truncated>" \
 -H "Ocp-Apim-Subscription-Key: 0f14ebcab0ec4b29ae0cb90d91b4a84a" \
--H "Merchant-Serial-Number: 123456" \
+-H "Merchant-Serial-Number: YOUR-MSN" \
 -H "Idempotency-Key: 5ad7ec7a-cc6e-44c3-807b-812eb011480a" \
 -H "Vipps-System-Name: acme" \
 -H "Vipps-System-Version: 3.1.2" \

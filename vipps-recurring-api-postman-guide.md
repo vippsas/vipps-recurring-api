@@ -15,37 +15,29 @@ This is a guide for the using the Recurring API with Postman, and is an extensio
 [Recurring API quick start guide](vipps-recurring-api-quick-start.md) which shows the
 recommended flow in both Postman and curl.
 
-**Please note:** Postman is discontinuing their offline version. Use only your test keys and delete them after testing. Ensure that your company allows for cloud use before continuing.
-
-## Prerequisites
+## Setup
 
 You must have already signed up as an organization with Vipps MobilePay and have
-your test credentials from the merchant portal, as described in the
-[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started).
+your test credentials from the merchant portal.
 
-## Set up
+You will need the following values, as described in the
+[Getting started guide](https://developer.vippsmobilepay.com/docs/getting-started):
+
+* `client_id` - Client_id for a test sales unit.
+* `client_secret` - Client_id for a test sales unit.
+* `Ocp-Apim-Subscription-Key` - Subscription key for a test sales unit.
+* `merchantSerialNumber` - The unique ID for a test sales unit.
+* `mobileNumber` - The phone number for the test app profile you have received or registered.
 
 Import the following files into Postman:
 
 * [Recurring API Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json)
-* [Global Postman environment](https://raw.githubusercontent.com/vippsas/vipps-developers/master/tools/vipps-api-global-postman-environment.json)
+* [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
-The Postman collection contains examples of all the various campaign types,
-so it's easy to see what they look like in the app.
+🔥 **Do not use production keys in Postman.** 🔥
 
-In Postman, tweak the environment with your own values (see
-[API keys](https://developer.vippsmobilepay.com/docs/common-topics/api-keys/)):
-
-* `client_id` - Merchant key required for getting the access token.
-* `client_secret` - Merchant key required for getting the access token.
-* `Ocp-Apim-Subscription-Key` - Merchant subscription key.
-* `merchantSerialNumber` - Merchant ID.
-* `mobileNumber` - The phone number for the test app profile you have received or registered.
-
-You can update any of the other environment variables. Be aware of this:
-
-* Any currency amount must be an *Integer* value minimum 100 in øre.
-* Many URLs must be `https`.
+Update the *Current Value* field in your Postman environment with your **Merchant Test** keys.
+Use *Current Value* field for added security, as these values are not synced to the cloud.
 
 ## Make API calls
 
