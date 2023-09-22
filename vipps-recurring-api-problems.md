@@ -45,7 +45,7 @@ Example: `https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-rec
 | charge-amount-too-high              | Amount set for charge is too high.                                                                                                             |
 | charge-due-too-soon                 | Charge date due must be a minimum of 2 days in the future. See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge). |
 | charge-due-in-too-long              | Charge due date must be a maximum of 2 years in the future. See [Create a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#create-a-charge).      |
-| unsupported-feature                 | Feature not supported. Please contact Vipps.                                                                                                  |
+| unsupported-feature                 | Feature not supported. Please [contact us](https://developer.vippsmobilepay.com/docs/contact/).                                                                                                  |
 | illegal-agreement-update            | Agreement cannot be updated. Might be stopped or pending.                                                                                      |
 | invalid-suggested-max-amount        | Suggested max amount is invalid or too high. See [Recurring agreements with variable amount](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount). |
 | cancel-charge-failed                | Could not cancel the charge.                                                                                                                   |
@@ -56,4 +56,4 @@ Example: `https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-rec
 | resource-not-found                  | The specified resource was not found. See details for additional information.                                                                |
 | operation-failed                    | The requested operation could not be performed. See details for additional information.                                                      |
 | conflict                            | The requested operation could not be performed due to a conflicting request/state. See details for additional information.                    |
-| idempotency-conflict                | The specified idempotency-key has previously been used in a different context. See details for additional information.                        |
+| idempotency-conflict                | The specified `idempotency-key` has previously been used in a different context. See details for additional information.                        |

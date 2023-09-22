@@ -62,10 +62,10 @@ paths:
       deprecated: true
       tags:
         - Agreement v2 endpoints (deprecated)
-      summary: Create a new Agreement, to be confirmed in Vipps
+      summary: Create a new Agreement, to be confirmed in the app
       description: |-
         The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
-        This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
+        This is used to redirect the user to the landing page, or to the app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
         You **have** to implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`.
@@ -379,10 +379,10 @@ paths:
     post:
       tags:
         - Agreement v3 endpoints
-      summary: Create a new Agreement, to be confirmed in Vipps
+      summary: Create a new Agreement, to be confirmed in the Vipps MobilePay app
       description: |-
         The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
-        This is used to redirect the user to the Vipps landing page, or to the Vipps app if `"isApp":true` is used.
+        This is used to redirect the user to the Vipps MobilePay landing page, or to the Vipps MobilePay app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
         You **have** to implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`.
@@ -781,7 +781,7 @@ paths:
 
         Note if you cancel an agreement,
         there is no need to cancel the charges that belongs to the agreement.
-        This will be done automatically by Vipps.
+        This will be done automatically.
       operationId: CancelCharge
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -983,7 +983,7 @@ paths:
 
         Note if you cancel an agreement,
         there is no need to cancel the charges that belongs to the agreement.
-        This will be done automatically by Vipps.
+        This will be done automatically.
       operationId: CancelChargeV3
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -1185,11 +1185,11 @@ components:
       in: header
       description: |-
         The Merchant Serial Number (MSN) is a unique id for the sales unit
-        that this payment is made for.
-        This is a required parameter if you are a Vipps Recurring partner
+        for which this payment is made.
+        This is a required parameter if you are a Recurring partner
         making payments on behalf of a merchant.
         The partner must use the merchant's MSN (not the partner's MSN).
-        This parameter is optional, and recommended, for regular Vipps
+        This parameter is optional, and recommended, for regular Vipps MobilePay
         merchants making payments for themselves.
       schema:
         type: string
@@ -1464,7 +1464,7 @@ components:
           type: string
           description: |-
             Customers phone number (if available). Used to simplify the
-            following Vipps interaction.
+            following Vipps MobilePay interaction.
             The format is MSISDN: Digits only: Country code and subscriber
             number, but no prefix.
             If the phone number is a Norwegian phone number `(+47) 91 23 45 67`, the MSISDN representation is `4791234567`.
@@ -1492,8 +1492,8 @@ components:
           description: |-
             This optional parameter indicates whether payment request is triggered from
             Mobile App or Web browser. Based on this value, response will be
-            redirect URL for Vipps landing page or deeplink URL to connect vipps
-            App. When isApp is set to true, URLs passed to Vipps will not be
+            redirect URL for Vipps MobilePay landing page or deeplink URL to connect vipps
+            App. When isApp is set to true, URLs passed to us will not be
             validated as regular URLs.
             See: https://developer.vippsmobilepay.com/docs/common-topics/isApp
           example: false
@@ -1502,12 +1502,12 @@ components:
           type: string
           maxLength: 1024
           description: |-
-            URL where Vipps can send the customer to view/manage their
+            URL where you can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             The page must offer management tools, not just information about how to
             contact customer service, etc.
             We recommend letting users
-            [log in with Vipps](https://developer.vippsmobilepay.com/docs/APIs/login-api),
+            [log in](https://developer.vippsmobilepay.com/docs/APIs/login-api),
             not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
             Only HTTP or HTTPS scheme is allowed. 
@@ -1517,7 +1517,7 @@ components:
           maxLength: 1024
           description: |-
             URL where customer should be redirected after the agreement has been
-            approved/rejected in the Vipps mobile application. 
+            approved/rejected in the Vipps MobilePay app. 
             HTTPS and deeplinks are allowed (example: myApp://home)
           example: https://example.com/landing
         price:
@@ -1560,8 +1560,8 @@ components:
             If the property is set to `true`, it will cause a push notification
             to be sent to the given phone number immediately, without loading
             the landing page.
-            This feature has to be specially enabled by Vipps for eligible sales
-            units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
+            This feature has to be specially enabled for eligible sales
+            units: The sales units must be whitelisted by Vipps MobilePay. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
             See: https://developer.vippsmobilepay.com/docs/common-topics/landing-page
           default: false
@@ -1585,7 +1585,7 @@ components:
           type: string
           description: |-
             Customers phone number (if available). Used to simplify the
-            following Vipps interaction. MSISDN: https://en.wikipedia.org/wiki/MSISDN
+            following interaction. MSISDN: https://en.wikipedia.org/wiki/MSISDN
           maxLength: 15
           example: "4791234567"
         initialCharge:
@@ -1597,8 +1597,8 @@ components:
           description: |-
             This optional parameter indicates whether payment request is triggered from
             Mobile App or Web browser. Based on this value, response will be
-            redirect URL for Vipps landing page or deeplink URL to connect vipps
-            App. When isApp is set to true, URLs passed to Vipps will not be
+            redirect URL for Vipps MobilePay landing page or deeplink URL to connect vipps
+            App. When isApp is set to true, URLs passed to us will not be
             validated as regular URLs.
             See: https://developer.vippsmobilepay.com/docs/common-topics/isApp
           example: false
@@ -1607,12 +1607,12 @@ components:
           type: string
           maxLength: 1024
           description: |-
-            URL where Vipps can send the customer to view/manage their
+            URL where we can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             The page must offer actual management, not just information about how to
             contact customer service, etc.
             We recommend letting users
-            [log in with Vipps](https://developer.vippsmobilepay.com/docs/APIs/login-api),
+            [log in](https://developer.vippsmobilepay.com/docs/APIs/login-api),
             not with username and password.
             We do not have any specific requirements for the security of the page other than requiring HTTPS.
             Only HTTPS scheme is allowed. 
@@ -1655,8 +1655,8 @@ components:
             If the property is set to `true`, it will cause a push notification
             to be sent to the given phone number immediately, without loading
             the landing page.
-            This feature has to be specially enabled by Vipps for eligible sales
-            units: The sales units must be whitelisted by Vipps. If the sales unit is not whitelisted,
+            This feature has to be specially enabled for eligible sales
+            units: The sales units must be whitelisted by Vipps MobilePay. If the sales unit is not whitelisted,
             the request will fail and an error message will be returned (statusCode=403).
             See: https://developer.vippsmobilepay.com/docs/common-topics/landing-page
           default: false
@@ -1693,21 +1693,21 @@ components:
           description: |-
             Reference of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
-            It enters active state once the user has approved it in Vipps.
+            It enters active state once the user has approved it in the Vipps MobilePay app.
           example: https://api.vipps.no/v2/agreement/agr_5kSeqz
         agreementId:
           type: string
           description: |-
             Id of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
-            It enters active state once the user has approved it in Vipps.
+            It enters active state once the user has approved it in the Vipps MobilePay app.
           example: agr_5kSeqz
         vippsConfirmationUrl:
           type: string
           description: |-
             The `vippsConfirmationUrl` should be used to redirect the
-            user to the Vipps landing page in a desktop flow (with `https://`),
-            or to the Vipps app in a mobile flow (with `vipps://`), where the
+            user to the Vipps MobilePay landing page in a desktop flow (with `https://`),
+            or to the Vipps MobilePay app in a mobile flow (with `vipps://`), where the
             user can then approve the agreement.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
         chargeId:
@@ -1730,7 +1730,7 @@ components:
           description: |-
             Id of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
-            It enters active state once the user has approved it in Vipps.
+            It enters active state once the user has approved it in the Vipps MobilePay app.
           example: agr_5kSeqz
         uuid:
           type: string
@@ -1742,8 +1742,8 @@ components:
           type: string
           description: |-
             The `vippsConfirmationUrl` should be used to redirect the
-            user to the Vipps landing page in a desktop flow (with `https://`),
-            or to the Vipps app in a mobile flow (with `vipps://`), where the
+            user to the Vipps MobilePay landing page in a desktop flow (with `https://`),
+            or to the Vipps MobilePay app in a mobile flow (with `vipps://`), where the
             user can then approve the agreement.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
         chargeId:
@@ -1820,11 +1820,11 @@ components:
         merchantAgreementUrl:
           type: string
           description: |-
-            URL where Vipps can send the customer to view/manage their
+            URL where we can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             The page must offer actual management, not just information about how to
             contact customer service, etc.
-            We recommend letting users log in with Vipps, not with username and password:
+            We recommend letting users log in with Vipps MobilePay, not with username and password:
             https://developer.vippsmobilepay.com/docs/APIs/login-api
             We do not have any specific requirements for the security of the
             page other than requiring HTTPS.
@@ -1901,11 +1901,11 @@ components:
         merchantAgreementUrl:
           type: string
           description: |-
-            URL where Vipps can send the customer to view/manage their
+            URL where we can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             The page must offer actual management, not just information about how to
             contact customer service, etc.
-            We recommend letting users log in with Vipps, not with username and password:
+            We recommend letting users log in with Vipps MobilePay, not with username and password:
             https://developer.vippsmobilepay.com/docs/APIs/login-api
             We do not have any specific requirements for the security of the
             page other than requiring HTTPS.
@@ -1915,7 +1915,7 @@ components:
           maxLength: 1024
           description: |-
             URL where customer should be redirected after the agreement has been
-            approved/rejected in the Vipps mobile application. 
+            approved/rejected in the Vipps MobilePay app. 
             HTTPS and deeplinks are allowed (example: myApp://home)
           example: https://example.com/landing 
         sub:
@@ -1958,8 +1958,8 @@ components:
           type: string
           description: |-
             The `vippsConfirmationUrl` should be used to redirect the
-            user to the Vipps landing page in a desktop flow (with `https://`),
-            or to the Vipps app in a mobile flow (with `vipps://`), where the
+            user to the Vipps MobilePay landing page in a desktop flow (with `https://`),
+            or to the Vipps MobilePay app in a mobile flow (with `vipps://`), where the
             user can then approve the agreement.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
 
@@ -2004,11 +2004,11 @@ components:
           type: string
           maxLength: 1024
           description: |-
-            URL where Vipps can send the customer to view/manage their
+            URL where we can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             The page must offer actual management, not just information about how to
             contact customer service, etc.
-            We recommend letting users log in with Vipps, not with username and password:
+            We recommend letting users log in with Vipps MobilePay, not with username and password:
             https://developer.vippsmobilepay.com/docs/APIs/login-api
             We do not have any specific requirements for the security of the
             page other than requiring HTTPS.
@@ -2037,11 +2037,11 @@ components:
           type: string
           maxLength: 1024
           description: |-
-            URL where Vipps can send the customer to view/manage their
+            URL where we can send the customer to view/manage their
             subscription. Typically a "My page" where the user can change, pause, cancel, etc.
             The page must offer actual management, not just information about how to
             contact customer service, etc.
-            We recommend letting users log in with Vipps, not with username and password:
+            We recommend letting users log in with Vipps MobilePay, not with username and password:
             https://developer.vippsmobilepay.com/docs/APIs/login-api
             We do not have any specific requirements for the security of the
             page other than requiring HTTPS.
@@ -2077,7 +2077,7 @@ components:
           description: |-
             Id of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
-            It enters active state once the user has approved it in Vipps.
+            It enters active state once the user has approved it in the Vipps MobilePay app.
 
     variableAmount:
       title: Variable Amount request
@@ -2361,7 +2361,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps app to explain the campaign to the user
+          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
 
     periodCampaignResponseV3:
       title: Period Campaign
@@ -2400,7 +2400,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps app to explain the campaign to the user
+          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
 
     eventCampaignResponseV3:
       title: Event Campaign
@@ -2440,7 +2440,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps app to explain the campaign to the user
+          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
 
     fullFlexCampaignResponseV3:
       title: Full Flex Campaign
@@ -2480,7 +2480,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps app to explain the campaign to the user
+          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
 
     legacyCampaignResponseV3:
       title: Legacy Campaign
@@ -2517,7 +2517,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps app to explain the campaign to the user
+          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
 
     pricingRequest:
       title: DraftAgreementPricingRequest
@@ -2895,13 +2895,13 @@ components:
           example: "user_action_required"
           description: >
             Identifies the reason why the charged has been marked as `FAILED`:
-              * `user_action_required` - The user's card can not fulfil the payment. The user needs to take action in Vipps.
+              * `user_action_required` - The user's card can not fulfil the payment. The user needs to take action in the app.
                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
 
-              * `charge_amount_too_high` - The user's max amount is too low. The user needs to update their max amount in Vipps.
+              * `charge_amount_too_high` - The user's max amount is too low. The user needs to update their max amount in the Vipps MobilePay app.
 
               * `non_technical_error` - Something went wrong with charging the user.
-                 Examples: User has deleted their Vipps Profile.
+                 Examples: User has deleted their Vipps MobilePay Profile.
 
               * `technical_error` - Something went wrong in Recurring while performing the payment.
                  Examples: Failure in Recurring, failure in downstream services.
@@ -3010,13 +3010,13 @@ components:
           example: "user_action_required"
           description: >
             Identifies the reason why the charged has been marked as `FAILED`:
-              * `user_action_required` - The user's card can not fulfil the payment, user needs to take action in Vipps.
+              * `user_action_required` - The user's card can not fulfil the payment, user needs to take action in the Vipps MobilePay app.
                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
 
-              * `charge_amount_too_high` - The user's max amount is too low, user needs to update their max amount in Vipps.
+              * `charge_amount_too_high` - The user's max amount is too low, user needs to update their max amount in the Vipps MobilePay app.
 
               * `non_technical_error` - Something went wrong with charging the user.
-                 Examples: User has deleted their Vipps Profile.
+                 Examples: User has deleted their Vipps MobilePay Profile.
 
               * `technical_error` - Something went wrong in Recurring while performing the payment.
                  Examples: Failure in Recurring, failure in downstream services.
@@ -3148,7 +3148,7 @@ components:
     ErrorFromAzure:
       type: object
       description: |-
-        An error from Microsoft Azure. Vipps has limited control of these errors,
+        An error from Microsoft Azure. We have limited control of these errors,
         and can not give as detailed information as with the errors from our own code.
         The most important property is the HTTP status code.
       required:
@@ -3180,7 +3180,7 @@ components:
     ErrorV2:
       title: Error response
       description: |-
-        An error from Vipps.
+        An error from Vipps MobilePay.
         The most important property is the HTTP status code.
         The response body contains more details of the error.
       type: object
@@ -3254,7 +3254,7 @@ components:
     ErrorResponseV2:
       description: |-
         Possible error responses.
-        Errors can be from both Vipps' own code (where we have full control) and
+        Errors can be from both our own code (where we have full control) and
         from Microsoft Azure (where we rely on standard functionality).
       content:
         application/json;charset=UTF-8:
@@ -3266,7 +3266,7 @@ components:
     ErrorResponseV3:
       description: |-
         Possible error responses.
-        Errors can be from both Vipps' own code (where we have full control) and
+        Errors can be from both our own code (where we have full control) and
         from Microsoft Azure (where we rely on standard functionality).
       content:
         application/json;charset=UTF-8:

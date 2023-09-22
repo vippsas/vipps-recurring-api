@@ -11,22 +11,24 @@ END_METADATA -->
 
 # Recurring API
 
-<!-- START_COMMENT -->
+![Vipps](./images/vipps.png) *Available for Vipps now.*
 
+![MobilePay](./images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
+
+<!-- START_COMMENT -->
 ℹ️ Please use the website:
 [Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
 <!-- END_COMMENT -->
 
 The Recurring API allows you to set up recurring payments for your customers.
 This allows your customers to pay subscriptions, donate, or make other recurring purchases without keying in card numbers or filling in long forms. In addition, your customers get a good overview of their fixed payments, and they get notifications of withdrawals through Vipps MobilePay.
 
 For information about this product in Norwegian, see
-[*Faste betalinger med Vipps* (*Recurring payments with Vipps*)](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
+[*Faste betalinger* (*Recurring payments*)](https://www.vipps.no/produkter-og-tjenester/bedrift/faste-betalinger/faste-betalinger/).
 
 **IMPORTANT:** The Recurring API is available for customers that
 have *Vipps på Nett*
-([eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api))
+([ePayment API](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/))
 and have completed additional compliance checks.
 See the intro to the
 [API guide](vipps-recurring-api.md)

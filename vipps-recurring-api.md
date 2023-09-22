@@ -11,12 +11,13 @@ END_METADATA -->
 
 # API guide
 
+![Vipps](./images/vipps.png) *Available for Vipps now.*
+
+![MobilePay](./images/mp.png) *Available for MobilePay in selected markets at the [Vipps MobilePay joint platform launch](https://www.vippsmobilepay.com/#about).*
 
 <!-- START_COMMENT -->
-
 ℹ️ Please use the website:
 [Vipps MobilePay Technical Documentation](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
-
 <!-- END_COMMENT -->
 
 The Vipps MobilePay Recurring API delivers recurring payment functionality for a merchant
@@ -28,20 +29,19 @@ that will be automatically processed on the due date.
 
 ## Requirements
 
-**Important:** The Vipps MobilePay Recurring API requires additional compliance checks
+**Important:** The Recurring API requires additional compliance checks
 (more than what is required for the
-[Vipps eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api)),
+[ePayment API](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/)),
 as required by
 [Finanstilsynet](https://www.finanstilsynet.no) (the financial authorities).
 
-To get access to the Recurring API in production, please order "Vipps MobilePay Faste Betalinger/Recurring"
-(_recurring payments_) on
+To get access to the Recurring API in production, please order *Faste Betalinger* (*recurring payments*) on
 [portal.vipps.no](https://portal.vipps.no).
-It is the same order form as "Vipps på Nett"
-([Vipps eCom API](https://developer.vippsmobilepay.com/docs/APIs/ecom-api)).
+It is the same order form as *Vipps på Nett*
+([ePayment API](https://developer.vippsmobilepay.com/docs/APIs/epayment-api/) ).
 You will then get a new sales unit (MSN) that can be used for recurring payments.
 
-If you need to use an existing sales unit that already has access to the eCom API
+If you need to use an existing sales unit that already has access to the eCom/ePayment API
 for the Recurring API too, please contact your KAM or
 [customer service](https://vipps.no/kontakt-oss/). Please have this information ready:
 
@@ -70,11 +70,11 @@ API version: 3.0.0.
 
 The overall flow is:
 
-1. The merchant creates a draft agreement and proposes it to the customer via Vipps or MobilePay.
-1. The customer approves the agreement in Vipps or MobilePay.
-1. The customer can find a full overview of the agreement in Vipps or MobilePay, including a link to the merchant's website.
-1. The merchant sends a charge request to Vipps or MobilePay at least two days before due date
-1. If the agreement is active, Vipps or MobilePay authorizes the charge.
+1. The merchant creates a draft agreement and proposes it to the customer via Vipps MobilePay.
+1. The customer approves the agreement in Vipps MobilePay.
+1. The customer can find a full overview of the agreement in Vipps MobilePay, including a link to the merchant's website.
+1. The merchant sends a charge request to Vipps MobilePay at least two days before due date
+1. If the agreement is active, Vipps MobilePay authorizes the charge.
 1. Charge will be processed on due date.
 
 This diagram shows a simplified flow:
@@ -88,7 +88,7 @@ flowchart
     B --> |User ignores agreement| C2(Agreement status: EXPIRED)
     B --> |User declines agreement| C3(Agreement status: STOPPED)
     C1 --> |Merchant creates charge| D1(Charge status: PENDING)
-    D1 --> |Charge is visible to the user in Vipps or MobilePay| D2(Charge status: DUE)
+    D1 --> |Charge is visible to the user in Vipps MobilePay| D2(Charge status: DUE)
     D2 --> |Charge is processed on due date| D3(Charge status: CHARGED/RESERVED)
 ```
 
@@ -115,8 +115,8 @@ You can also [manage charges and agreements](#manage-charges-and-agreements).
 For a `"transactionType": "DIRECT_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint] endpoint.
-   The user can now confirm the agreement in Vipps or MobilePay (the app). See [Create a new agreement](#create-an-agreement).
-2. The user approves the agreement in Vipps or MobilePay:
+   The user can now confirm the agreement in Vipps MobilePay (the app). See [Create a new agreement](#create-an-agreement).
+2. The user approves the agreement in Vipps MobilePay:
    This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
    See [Initial charge](#initial-charge).
 3. Retrieve the agreement by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
@@ -139,7 +139,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 1. Create a (draft) agreement using the [`POST:/agreements`][draft-agreement-endpoint] endpoint.
    The user can now confirm the agreement in Vipps (the app). See [Create a new agreement](#create-an-agreement).
-2. The user approves the agreement in Vipps or MobilePay:
+2. The user approves the agreement in Vipps MobilePay:
    This will result in a capture(or reserve) of the initial charge (if one was defined in the first step).
    See [Initial charge](#initial-charge).
 3. Retrieve the agreement by calling the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint.
@@ -179,16 +179,13 @@ See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way 
 
 ## Authentication and authorization
 
-All Vipps API calls are authenticated with an access token and an API subscription key.
+All API calls are authenticated with an access token and an API subscription key.
 See
 [Get an access token](https://developer.vippsmobilepay.com/docs/APIs/access-token-api#get-an-access-token), for details.
 
-## Vipps HTTP headers
+## HTTP headers
 
-We recommend using the standard Vipps MobilePay HTTP headers for all requests.
-
-See [Vipps MobilePay HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers)
-in the Getting started guide, for details.
+Use the standard [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers) for all requests.
 
 ## Idempotency Key header
 
@@ -211,7 +208,7 @@ The `Continuation-Token` header is introduced on endpoints that returns multiple
 
 ## orderId recommendations
 
-An optional _and recommended_ `orderId` field can be set in the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] request.
+An optional *and recommended* `orderId` field can be set in the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] request.
 
 ```json
 {
@@ -236,21 +233,21 @@ The `orderId` replaces the `chargeId`.
 This `orderId` must be unique across all Recurring and eCom
 transactions for the given `merchantSerialNumber`.
 
-If the field is _not_ provided, Vipps will automatically create a unique ID
+If the field is *not* provided, we will automatically create a unique ID
 prefixed with `chr-`: `chr-xxxxxxx`(where each x is an alphanumeric character).
 
 If you ever have a problem that requires us to search in our logs, we will need
 `orderId` values that are "unique enough" to actually find them. An `orderId` that
 is just a number may not be possible to find.
 
-While the minimum length for `orderId` _technically_ is just one character,
+While the minimum length for `orderId` *technically* is just one character,
 we strongly recommend using at least 6 characters, and a combination of numbers
 and characters.
 
 The maximum length of an `orderId` is 50, and can contain alphanumeric characters and dashes:
 a-z, A-Z, 0-9, -. Example: `2c2a838c-5a88-4b3a-ab9f-e884b92b9bec`.
 
-We _strongly_ recommend to use `orderId` format that makes it easy to
+We *strongly* recommend to use `orderId` format that makes it easy to
 search for them in logs. This means that `abc123def456` is a better
 format than `123456`.
 
@@ -264,7 +261,7 @@ for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
-An agreement is between the Vipps or MobilePay user and the merchant. This payment agreement allows you to routinely charge the customer without requiring them to manually approve every time. See [charges](#charges).
+An agreement is between the Vipps MobilePay user and the merchant. This payment agreement allows you to routinely charge the customer without requiring them to manually approve every time. See [charges](#charges).
 
 ### Create an agreement
 
@@ -290,15 +287,13 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 
 #### Agreement fields and their usage in the Vipps MobilePay app
 
-* `pricing`: Price of the subscription. 
-* `interval`: Describes how often the user will be charged. 
+* `pricing`: Price of the subscription.
+* `interval`: Describes how often the user will be charged.
 * `productName`: A short description of the subscription. Will be displayed as the agreement name in the Vipps MobilePay app.
 * `productDescription`: More details about the subscription. Optional field.  
-* `merchantAgreementUrl`: URL where Vipps can send the customer to view/manage their subscription. See [Merchant agreement URL](#merchant-agreement-url).
-
+* `merchantAgreementUrl`: URL where you will send the customer to view/manage their subscription. See [Merchant agreement URL](#merchant-agreement-url).
 
 ![Agreement fields](images/agreement_fields.png)
-
 
 **Please note:** To create agreements with support for variable amounts on charges, see
 [Recurring agreements with variable amount](#recurring-agreements-with-variable-amount).
@@ -321,7 +316,7 @@ request.
 
 The `vippsConfirmationUrl` should be used to redirect the
 user to the Vipps MobilePay landing page in a desktop flow (with `https://`),
-or to Vipps or MobilePay in a mobile flow (with `vipps://`), where the
+or to Vipps MobilePay in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
 See
@@ -383,7 +378,7 @@ The [`POST:/agreements`][draft-agreement-endpoint] endpoint will return the foll
 
 The `vippsConfirmationUrl` should be used to redirect the user to the Vipps MobilePay landing
 page. The user can then confirm their identity and receive a prompt to accept the
-agreement within Vipps or MobilePay.
+agreement within Vipps MobilePay.
 
 If the payment is initiated in a native app, it is possible to explicitly force
 a `vipps://` URL by sending the `isApp` parameter in the initiate call:
@@ -391,17 +386,17 @@ a `vipps://` URL by sending the `isApp` parameter in the initiate call:
 * `"isApp": false`: The URL is `https://`, which handles
   everything automatically for you.
   The phone's operating system will know, through "universal linking", that
-  the `https://api.vipps.no` URL should open the Vipps or MobilePay app, and not the default
+  the `https://api.vipps.no` URL should open the Vipps MobilePay app, and not the default
   web browser.
   **Please note:** In some cases, this requires the user to approve that
-  Vipps is opened, but this is usually only the first time.
+  Vipps MobilePay is opened, but this is usually only the first time.
 * `"isApp": true`: The URL is for a deeplink, for forced app-switch to Vipps, with `vipps://`.
   **Please note:** In our test environment (MT), the scheme is `vippsMT://`
 
-If the user does not have Vipps or MobilePay installed:
+If the user does not have Vipps MobilePay installed:
 
 * `"isApp":false`: The Vipps MobilePay landing page will be shown,
-   and the user can enter a phone number and pay on a device with Vipps or MobilePay installed.
+   and the user can enter a phone number and pay on a device with Vipps MobilePay installed.
 * `"isApp": true`: The user will get an error message saying that the link can
   not be opened.
 
@@ -409,9 +404,12 @@ If the user does not have Vipps or MobilePay installed:
 
 If the user **accepts or rejects** the agreement the user will be redirected back to the`merchantRedirectUrl`.
 
-Activation of the agreement is not guaranteed to be finished by the time the user is redirected back to the `merchantRedirectUrl`. The agreement could still have the status `PENDING`. Also, if the user closes Vipps before the redirect is done, the `merchantRedirectUrl` will not be used.
+Activation of the agreement is not guaranteed to be finished by the time the user is redirected back to the `merchantRedirectUrl`.
+The agreement could still have the status `PENDING`. Also, if the user closes the Vipps MobilePay app before the redirect is done, the `merchantRedirectUrl` will not be used.
 
-Therefore, it is important to actively check the agreement's status with the [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint instead of relying on the redirect to the `merchantRedirectUrl`. See [current rate limits](#rate-limiting) for more details about polling.
+Therefore, it is important to actively check the agreement's status with the
+[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint instead of relying on the redirect to the `merchantRedirectUrl`.
+See [current rate limits](#rate-limiting) for more details about polling.
 
 Once a final status (`ACTIVE`, `EXPIRED` or `STOPPED`) is returned by the API, the agreement can be updated in your system.
 
@@ -430,11 +428,12 @@ customer to manage the agreement in their system.
 It is the integrator's responsibility to make sure the `merchantAgreementUrl`
 in the agreement works for the user.
 
-Vipps does not have any specific requirements for the security of the page,
+We don't have any specific requirements for the security of the page,
 other than using HTTPS, but strongly recommend using
-[Vipps MobilePay Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/), so the user does not need a username or password, but is logged
+[Login](https://www.vipps.no/produkter-og-tjenester/bedrift/logg-inn-med-vipps/logg-inn-med-vipps/),
+so the user does not need a username or password, but is logged
 in automatically through Vipps MobilePay. See the
-[Login API documentation](https://developer.vippsmobilepay.com/docs/APIs/login-api)
+[Login API](https://developer.vippsmobilepay.com/docs/APIs/login-api)
 for more details.
 
 ### Intervals
@@ -517,7 +516,7 @@ Users can be charged the full amount once every 30 days, regardless of the day i
 
 **Please note:** If the subscription is cheaper in the beginning than the normal price later, use
 [campaigns](#campaigns) in combination with initial charge.
-If you use `initialcharge` alone for campaigns, users will be confused by how it appears in Vipps,
+If you use `initialcharge` alone for campaigns, users will be confused by how it appears in Vipps MobilePay,
 as it looks like the full price period starts immediately.
 
 Initial charge will be performed if the `initialcharge` is provided when
@@ -542,7 +541,6 @@ in the FAQ.
 `RESERVE_CAPTURE` must be
 used when selling physical goods bundled with an agreement - such as a phone
 when subscribing to an agreement.
-
 
 This example shows the same agreement as above, with an `initialCharge`
 of 499 NOK:
@@ -629,11 +627,11 @@ This is an example response from a call to the
 
 ## Campaigns
 
-A _campaign_ in Recurring is a period where the price is lower than usual, and
+A *campaign* in Recurring is a period where the price is lower than usual, and
 this is communicated to the customer with the original price shown for comparison.
 Campaigns cannot be used in combination with [variable amount](#recurring-agreements-with-variable-amount).
 
-#### Campaigns in V2 API
+### Campaigns in V2 API
 
 ![screen-legacy-campaign](images/campaigns/screens/legacy-campaign.png)
 
@@ -662,7 +660,7 @@ date-time is used. All dates must be in date-time format as according to
 | `end`           | End date of campaign offer, can not be in the past                                                                      |
 | `campaignPrice` | The price that will be shown for comparison                                                                             |
 
-#### Campaigns in V3 API
+### Campaigns in V3 API
 
 In V3, we introduce 4 different campaign types: price campaign, period campaign, event campaign, and full flex campaign.
 See more about the different campaign types in the table below.
@@ -677,11 +675,10 @@ See more about the different campaign types in the table below.
 In order to start a campaign, the `campaign` field has to be added to the agreement draft body in the
 [`POST:/agreements`][draft-agreement-endpoint] call.
 
-#### Product description guidelines for agreements with campaigns
+### Product description guidelines for agreements with campaigns
 
 We do not recommend you to use `Product Description` for agreements with a campaign.
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
-
 
 ### Price campaign
 
@@ -758,8 +755,7 @@ We see that the user experience is not optimal when a lot of text is "squeezed" 
 
 ### Full flex campaign
 
-**Please note:** Contact Vipps before creating a draft agreement with a full flex campaign.
-See [contact us](https://developer.vippsmobilepay.com/docs/contact).
+**Please note:** [Contact us](https://developer.vippsmobilepay.com/docs/contact) before creating a draft agreement with a full flex campaign.
 
 ![full-flex-campaign](images/campaigns/full-flex-campaign.png)
 
@@ -786,8 +782,6 @@ See [contact us](https://developer.vippsmobilepay.com/docs/contact).
 
 ![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
-
-
 ## Charges
 
 An [agreement](#agreements) has payments, called charges.
@@ -806,21 +800,21 @@ For agreements of type `variable`, also see [Recurring agreements with variable 
 
 `due` will define for which date the charge will be performed.
 This date has to be minimum two days (one day in the test environment) in the future and maximum two years in advance.
-The minimum is set to two days because the user should be able to see the upcoming charge in the Vipps app. All charges `due` in 35 days or less are visible under the "Payments tab" in the Vipps app.
+The minimum is set to two days because the user should be able to see the upcoming charge in the Vipps MobilePay app.
+All charges `due` in 35 days or less are visible under the *Payments* tab in the Vipps MobilePay app.
 
-Example: If the charge is _created_ on the 25th, the earliest the charge can be
-_due_ is the 27th (25+2). This is so that the user can be informed about the
+Example: If the charge is *created* on the 25th, the earliest the charge can be
+*due* is the 27th (25+2). This is so that the user can be informed about the
 upcoming charge. The user is only shown one charge per agreement, in order to
 not overwhelm the user when doing daily or weekly charges.
 
 **Please note**: You can request to be put on a "one day minimum" allow list if
 you have a need to be able to create charges that are `DUE` 1 day after being
 created. This means that a charge can be created to be `DUE` the next day.
-Example: If the charge is _created_ at any time on the 25th, the charge can be
+Example: If the charge is *created* at any time on the 25th, the charge can be
 due and processed at the 26th.
 
 #### Amount
-
 
 #### Charge type
 
@@ -828,9 +822,9 @@ A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 **Please note:** `RESERVE_CAPTURE` transaction type is only available in the V3 API.
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
-reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"?](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
-in the Vipps FAQ for more details.
+reserves the payment for capturing at a later date. See
+[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
+in the FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
 
@@ -846,7 +840,7 @@ The API allows for both a full amount capture and a partial amount capture (**V3
 
 The amount to capture cannot be higher than the reserved amount.
 According to Norwegian regulations, capture cannot be done before the goods have been shipped.
-The `description` text is mandatory and is displayed to the end user in the Vipps app.
+The `description` text is mandatory and is displayed to the end user in the Vipps MobilePay app.
 
 Capture is done with the [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] endpoint.
 
@@ -862,14 +856,14 @@ Partial capture may be used in cases where a partial order is shipped or for oth
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
-in the Vipps FAQ for more details.
+See [FAQ: For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
+for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
 
 ### Amount limits
 
-#### `LEGACY` pricing (default) 
+#### `LEGACY` pricing (default)
 
 The `amount` of a charge is flexible and does not have to match the
 `price` of the agreement.
@@ -880,14 +874,14 @@ For example, in the agreement
 a limit of 2495 NOK (499 x 5) would be in place. If this limit becomes a
 hindrance the agreement `price` can be [updated](#update-an-agreement).
 
-**Please note:** Although it is _technically_ possible to increase the price 10
+**Please note:** Although it is *technically* possible to increase the price 10
 times, we **strongly** recommend that you are as user-friendly as possible.
 Make sure the user understands any changes and are provided with updated information.
 
 #### `VARIABLE` pricing
 
 The user chooses a max amount themselves when accepting the agreement based on the recommended `suggestedMaxAmount`. There is currently a limit of 20 000 NOK for the `suggestedMaxAmount`.
-The max amount can at any time be changed by the user. 
+The max amount can at any time be changed by the user.
 
 ### Charge descriptions
 
@@ -901,8 +895,8 @@ the following screenshot:
 ![Charge description example](images/charge_descriptions_example.png)
 
 When the charge is completed (the money has been moved), the payment will
-show up in the users' payment history. In the payment history a charge from
-Vipps recurring payment will have a description with follow format
+show up in the users' payment history. There, a charge from
+Vipps MobilePay recurring payments will have a description with follow format
 `{agreement.ProductName} - {charge.description}`.
 
 This is an example of a request body for the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] call:
@@ -924,7 +918,7 @@ This is an example of a request body for the [`POST:/agreements/{agreementId}/ch
 You can cancel charges that are in the `PENDING`, `DUE` or `RESERVED` state.
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
 
-**Please note:** If you cancel an agreement, there is no need to cancel the charges that belong to the agreement. This will be done automatically by Vipps.
+**Please note:** If you cancel an agreement, there is no need to cancel the charges that belong to the agreement. We will do this automatically for you.
 
 A charge can be cancelled with the
 [`POST:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]
@@ -938,7 +932,7 @@ endpoint.
 
 ### Charge times
 
-Charge _attempts_ are primarily made two times during the day: 07:00 and 15:00 UTC.
+Charge *attempts* are primarily made two times during the day: 07:00 and 15:00 UTC.
 Vipps may do extra attempts and/or change this without notice.
 The processing of charges typically takes around one hour, however this varies, and we do not guarantee any time.
 This is the same both for our production and test environment.
@@ -946,33 +940,33 @@ Subsequent attempts are made according to the `retryDays` specified.
 
 When a charge has reached its `due` date, the status of the charge will be
 `DUE` until the charge is successful, for as long as the merchant has
-specified with `retryDays`. On other words: There are no status updates
-while Vipps is attempting to charge.
+specified with `retryDays`. In other words, there will be no status updates
+while we are attempting to charge.
 
-**Important:** Vipps does not "leak" the customers' information about insufficient funds,
-blocked cards, etc. Users are informed about all such problems in Vipps,
+**Important:** We do not "leak" the customers' information about insufficient funds,
+blocked cards, or other problems. Users are informed about all such problems in the Vipps MobilePay app,
 which is the only place they can be corrected. The merchant's customer service
-should always ask the user to check in Vipps if a charge has failed.
+should always ask the user to check in the app if a charge has failed.
 
-**Please note:** Payments _might_ get processed any time during the day
+**Please note:** Payments *might* get processed any time during the day
 (07:00 UTC - 23:59 UTC) due to special circumstances requiring it.
 
-**Please note:** Since payments _can_ be processed any time (07:00UTC - 23:59 UTC)
+**Please note:** Since payments *can* be processed any time (07:00UTC - 23:59 UTC)
 it is advisable to fetch the charge at/after 00:00 UTC the day after the last
 retry day to be sure you get the last status.
 
 ### Charge retries
 
-Vipps will retry the charge for the number of days specified in `retryDays`.
+We will retry the charge for the number of days specified in `retryDays`.
 The maximum number of `retryDays` is 14.
 
 This means that if the user's card has insufficient funds, the card has expired,
 the card is invalid, etc.: The user is notified and can correct the problem.
-Vipps will make sure the user is able to pay.
+We will make sure the user is able to pay.
 
-**IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
-but helps the user to correct any problems in Vipps.
-This results in a _very_ high success rate for charges.
+**IMPORTANT:** We don't provide details about each charge attempt to the merchant,
+but we do help the user to correct any problems in the Vipps MobilePay app.
+This results in a *very* high success rate for charges.
 
 The `retryDays` are not tied to the agreement’s interval. This means that a charge
 can be retried for a maximum of 14 days even though the next interval has started.
@@ -1072,10 +1066,10 @@ and to use the API to make sure everything is in sync.
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `PENDING`  | Agreement has been created, but not approved by the user in Vipps yet |
-| 2 | `ACTIVE` | The agreement has been confirmed by the end user in Vipps and can receive charges |
+| 1 | `PENDING`  | Agreement has been created, but not approved by the user in the Vipps MobilePay app yet |
+| 2 | `ACTIVE` | The agreement has been confirmed by the end user in the Vipps MobilePay app and can receive charges |
 | 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint, or by the user by cancelling or rejecting the agreement. |
-| 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in Vipps |
+| 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in the Vipps MobilePay app |
 
 ### Update an agreement
 
@@ -1145,31 +1139,34 @@ This table has all the details for the charge states returned by the
 
 | State                | Description |
 |----------------------|-------------|
-| `PENDING`            | The charge has been created, but is not yet be visible in Vipps. |
-| `DUE`                | The charge is visible in Vipps and will be processed on the `due` date. |
+| `PENDING`            | The charge has been created, but is not yet be visible in the Vipps MobilePay app. |
+| `DUE`                | The charge is visible in the Vipps MobilePay app and will be processed on the `due` date. |
 | `PROCESSING`         | The charge is being processed right now. |
 | `UNKNOWN`            | The charge status is unknown. This is usually very transient and will be resolved shortly. |
 | `CHARGED`            | The charge has been successfully processed, and the available amount has been captured. |
-| `FAILED`             | The charge has failed because of insufficient funds, no valid cards, etc. Vipps gives the user all possible opportunities to pay, including adding a new card, but does not provide the details to the merchant. |
+| `FAILED`             | The charge has failed because of insufficient funds, no valid cards, etc. The Vipps MobilePay app gives the user all possible opportunities to pay, including adding a new card, but does not provide the details to the merchant. |
 | `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. |
 | `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded. |
 | `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
 | `PARTIALLY_CAPTURED` | Part of the reserved amount has been captured. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer. |
 | `CANCELLED`          | The charge has been cancelled. |
 
-**IMPORTANT:** Vipps does not provide details about each charge attempt to the merchant,
-but helps the user to correct any problems in Vipps.
-This results in a _very_ high success rate for charges.
+**IMPORTANT:** We don't provide details about each charge attempt to the merchant,
+but we help the user to correct any problems in the Vipps MobilePay app.
+This results in a *very* high success rate for charges.
 
 ### Example charge flows
 
 Scenario: Everything goes as it should: The user has money, and the charge is successful on the `due` date:
+
 * `PENDING` -> `DUE` (just for the one due day)-> `CHARGED`
 
 Scenario: The user does not have funds and `retryDays = 0`:
+
 * `PENDING` -> `DUE` -> `FAILED`
 
 Scenario: The user does not have funds on the `due` date, `retryDays = 10`, and has funds on the fifth day:
+
 * `PENDING` -> `DUE` (for five days) -> `CHARGED`
 
 **Please note:** Since charges are polled by the merchant, it is possible that
@@ -1201,14 +1198,14 @@ Here is a list of possible values for `failureReason`, their respective descript
 
 | Reason                 | Description | Action |
 |------------------------|-------------|--------|
-| user_action_required   | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open Vipps and check the payment there to see why it is not paid. | User will get notified in Vipps and need to take action. This could be to add funds to the card or change the card on the agreement. |
+| user_action_required   | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open the Vipps MobilePay app and check the payment there to see why it is not paid. | User will get notified in their Vipps MobilePay app and need to take action. This could be to add funds to the card or change the card on the agreement. |
 | charge_amount_too_high | Amount is higher than the user's specified max amount. | The user has a lower `maxAmount` on the `variableAmount` agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed. |
-| non_technical_error    | Payment failed. Could be that the user has deleted their Vipps profile. | The user needs to take action in Vipps. |
-| technical_error        | Payment failed due to a technical error in Recurring or a downstream service. | As long as the charge is not in the status `FAILED`, we are retrying the payment. Contact Vipps for more information if this failure shows up on a `FAILED` charge. |
+| non_technical_error    | Payment failed. Could be that the user has deleted their Vipps MobilePay profile. | The user needs to take action in the app. |
+| technical_error        | Payment failed due to a technical error in Recurring or a downstream service. | As long as the charge is not in the status `FAILED`, we are retrying the payment. [Contact us](https://developer.vippsmobilepay.com/docs/contact/) for more information if this failure shows up on a `FAILED` charge. |
 
 ### App
 
-The user will be able to see these failures in Vipps and take the necessary action.
+The user will be able to see these failures in their Vipps MobilePay app and take the necessary action.
 
 Example if a user has an expired card:
 
@@ -1222,12 +1219,11 @@ The following `failureReasons` are no longer exposed on charges:
 |------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | insufficient_funds     | Payment was declined by the payer bank due to lack of funds.                             | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
 | invalid_card           | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps.                                                                                                                                                   |
-| verification_required  | Payment declined because the issuing bank requires verification.                         | Ask the user to change, or add a new, payment source on their agreement in Vipps. Alternatively removing and then adding the card might solve the issue.                                                                    |
+| verification_required  | Payment declined because the issuing bank requires verification.                         | Ask the user to change, or add a new, payment source on their agreement in the Vipps MobilePay app. Alternatively removing and then adding the card might solve the issue.                                                                    |
 | invalid_payment_source | The provided payment source is disabled or does not exist.                               | User must change payment source for the agreement.                                                                                                                                                                          |
-| internal_error         | Internal Error / Something went wrong                                                    | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact Vipps for more information.                                          |
+| internal_error         | Internal Error / Something went wrong                                                    | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact us for more information.                                          |
 
-
-The user gets more information in Vipps regarding why the charge did not get processed. If they contact you about failing charges, you should refer them to Vipps. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
+The user gets more information in the Vipps MobilePay app regarding why the charge did not get processed. If they contact you about failing charges, you should refer them to the Vipps MobilePay app. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
 
 ## Userinfo
 
@@ -1254,8 +1250,8 @@ a customer.
 5. Using the sub from step 4, call the [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint to retrieve the user's information.
 
 **Important note:** The API call to the [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint
-must _not_ include the subscription key (the `Ocp-Apim-Subscription-Key` header) used for the Recurring API.
-This is because userinfo is part of Vipps Login and is therefore _not_ under the same subscription,
+must *not* include the subscription key (the `Ocp-Apim-Subscription-Key` header) used for the Recurring API.
+This is because userinfo is part of Login and is therefore *not* under the same subscription,
 and will result in a `HTTP Unauthorized 401` error.
 
 ### Example calls
@@ -1311,7 +1307,7 @@ The `sub` is based on the user's national identity number ("fødselsnummer"
 in Norway), and does not change (except in very special cases).
 
 **Please note:** It is recommended to get the user's information directly after
-completing the transaction. There is however a _time limit of 168 hours_
+completing the transaction. There is however a *time limit of 168 hours*
 (one week) to retrieve the consented profile data from the `/userinfo` endpoint to
 better support merchants that depend on manual steps/checks in their process of
 fetching the profile data. The merchant will get the information that is in the
@@ -1455,14 +1451,14 @@ to `DUE` and the user will be notified and encouraged to alter the max amount to
 If the user does not update their `maxAmount` to the same or a higher amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
-The user will also see a failure description on the charge in the Vipps app.
+The user will also see a failure description on the charge in the Vipps MobilePay app.
 
 Display of charge failure due to a charge being higher than the `maxAmount` in Vipps:
 ![variable_amount_charge](images/variable_amount_charge.png)
 
 ## Skip landing page
 
-_This functionality is only available for special cases._
+*This functionality is only available for special cases.*
 
 See: [Landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page)
 
@@ -1487,14 +1483,14 @@ This API returns the following HTTP statuses in the responses:
 | `403 Forbidden`            | Authentication ok, but credentials lacks authorization                                                                        |
 | `404 Not Found`            | The resource was not found                                                                                                    |
 | `409 Conflict`             | Unsuccessful due to conflicting resource                                                                                      |
-| `422 Unprocessable Entity` | Vipps could not process                                                                                                       |
+| `422 Unprocessable Entity` | Vipps MobilePay could not process                                                                                                       |
 | `429 Too Many Requests`    | Look at [table below to view current rate limits](#rate-limiting)                                                             |
-| `500 Server Error`         | An internal Vipps problem.                                                                                                    |
+| `500 Server Error`         | An internal Vipps MobilePay problem.                                                                                                    |
 
 **Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should
 retry the request or poll the resource to see if an operation has been performed.
-This will follow the spec as defined [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After),
-and will either be a http-date or a number indicating a delay in seconds.
+This will follow the [spec](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After),
+and will either be a `http-date` or a number indicating a delay in seconds.
 This will mostly apply to 429 responses, but may also appear in certain other circumstances where it would be natural
 to retry the request at a later point in time.
 
@@ -1514,7 +1510,7 @@ our API. The limits should not affect normal behavior, but please
 if you notice any unexpected behavior.
 
 The "Key" column specifies what we consider to be the unique identifier, and
-what we "use to count". The limits are of course not _total_ limits.
+what we "use to count". The limits are of course not *total* limits.
 
 | API                                                | Limit          | Key used                                          | Explanation                                               |
 |----------------------------------------------------|----------------|---------------------------------------------------|-----------------------------------------------------------|
@@ -1544,22 +1540,22 @@ to retry the request at a later point in time.
 
 ## Partner keys
 
-In addition to the normal [Authentication](#authentication-and-authorization) we offer _partner keys_,
+In addition to the normal [Authentication](#authentication-and-authorization) we offer *partner keys*,
 which let a partner make API calls on behalf of a merchant.
 
-If you are a Vipps partner managing agreements on behalf of Vipps merchants you
+If you are a Vipps MobilePay partner who is managing agreements on behalf of Vipps MobilePay merchants, you
 can use your own API credentials to authenticate, and then send
 the `Merchant-Serial-Number` header to identify which of your merchants you
 are acting on behalf of. The `Merchant-Serial-Number` must be sent in the header
 of all API requests.
 
-By including the [Vipps HTTP Headers](#vipps-http-headers) you will make
+By including the [HTTP Headers](#http-headers) you will make
 it easier to investigate problems, if anything unexpected happens. Partners may
 re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
 
 Here's an example of headers (please refer to the
-[OpenAPI specification](https://developer.vippsmobilepay.com/api/recurring)
+[API specification](https://developer.vippsmobilepay.com/api/recurring)
 for all the details):
 
 ```http
@@ -1574,20 +1570,19 @@ Content-Type: application/json
 ```
 
 **Please note:** The Merchant Serial Number (MSN) is a unique ID for the sale
-unit. This is a required parameter if you are a Vipps partner making API requests
-on behalf of a merchant. The partner must use the _merchant's_ MSN, not the
-partner's MSN. This parameter is also recommended for regular Vipps
+unit. This is a required parameter if you are a Vipps MobilePay partner making API requests
+on behalf of a merchant. The partner must use the *merchant's* MSN, not the
+partner's MSN. This parameter is also recommended for regular Vipps MobilePay
 merchants making API calls for themselves.
 
 See:
-[Vipps Partners](https://developer.vippsmobilepay.com/docs/partner).
+[Vipps MobilePay Partners](https://developer.vippsmobilepay.com/docs/partner).
 
 ## Polling guidelines
 
 General guidelines for polling with the
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
 endpoint can be found at:
-
 
 See [Polling guidelines](https://developer.vippsmobilepay.com/docs/common-topics/polling-guidelines) in Common topics, for details.
 
@@ -1615,12 +1610,12 @@ See [Common topics: Timeouts](https://developer.vippsmobilepay.com/docs/common-t
 ## Testing
 
 To facilitate automated testing in the
-[Vipps Test Environment (MT)][vipps-test-environment],
-the Vipps Recurring API provides a [`force accept agreement`][force-accept-agreement-endpoint] endpoint to avoid manual
-agreement acceptance in the Vipps app:
+[Test Environment (MT)][vipps-test-environment],
+the Recurring API provides a [`force accept agreement`][force-accept-agreement-endpoint] endpoint to avoid manual
+agreement acceptance in the Vipps MobilePay app:
 
-The "force approve" endpoint allows developers to approve a payment through the
-Vipps Recurring API without the use of Vipps. This is useful for automated testing.
+The *force approve* endpoint allows developers to approve a payment through the
+Recurring API without the use of the Vipps MobilePay app. This is useful for automated testing.
 The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
@@ -1629,10 +1624,11 @@ See [Recommendations regarding handling redirects](https://developer.vippsmobile
 
 ## Different agreement types and when to use them
 
-Vipps recurring payments is a fairly flexible service, that allows you as a merchant to tailor the user experience in Vipps to your needs by utilizing the normal agreements, initial charges, campaigns, or a combination of those.
+Vipps MobilePay recurring payments is a fairly flexible service that allows merchants to tailor the user experience in the Vipps MobilePay app
+by utilizing the normal agreements, initial charges, campaigns, or a combination of those.
 
-This can be a bit confusing when deciding on which implementation to go for.
-In short our advice is to implement support for all our flows, and also implement features in your own systems for moving between the flows depending on the use case.
+This can be a bit confusing when deciding on which implementation to use.
+In short, our advice is to implement support for all our flows, and also implement features in your own systems for moving between the flows depending on the use case.
 
 ### Normal agreement
 
@@ -1651,14 +1647,15 @@ For example, for an agreement with `interval.unit=YEAR` and `interval.count=1`, 
 
 If you require a payment to be completed at the same time that the agreement is created, you must use initial charge.
 
-When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in Vipps will change. First the user gets presented with an overview over both the agreement and the initial charge. Then, when the user proceeds to confirm the agreement, the payment of the initial charge will be processed.
+When an initial charge is present and the amount is different from the agreement price (or campaign price), the flow in the app will change. First the user gets presented with an overview over both the agreement and the initial charge. Then, when the user proceeds to confirm the agreement, the payment of the initial charge will be processed.
 
-Here we also show `productName` and the agreement explanation on the agreement, as well as `description` on the initial charge. `productName` and `initial charge description` are defined by the merchant. The agreement explanation is created by Vipps based on the interval and the campaign if specified.
+Here we also show `productName` and the agreement explanation on the agreement, as well as `description` on the initial charge.
+`productName` and `initial charge description` are defined by the merchant.
+The agreement explanation is created by automatically based on the interval and the campaign, if specified.
 
 Initial charges are designed to be used whenever there is an additional cost in setting up the agreement. This could be bundling of a mobile phone together with a mobile subscription, or a TV setup-box when becoming a customer at a cable company. We do not recommend this flow to be used purely for campaigns, as it could be confusing to the user.
 
 As an example: If you have a campaign of 10 NOK for a digital media subscription for 3 months, and the normal price is 299,- monthly, the user would see both the charge of 10 NOK, and have to confirm the agreement for 299,- monthly, which can lead the user to believe that both will be paid upon entering the agreement.
-
 
 ### Agreement with campaign
 
@@ -1681,7 +1678,6 @@ In addition to campaigns and initial charges being available as individual flows
 
 **Agreement screens with initial and campaign v3**
 ![screen_initial_charge_legacy_campaign](images/campaigns/screens/period-campaign-with-initial-charge.png)
-
 
 [list-agreements-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
