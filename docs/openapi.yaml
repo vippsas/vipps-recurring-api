@@ -2927,7 +2927,6 @@ components:
         - currency
         - agreementId
         - externalId
-        - externalAgreementId
         - retryDays
       properties:
         amount:
