@@ -509,8 +509,26 @@ Example for a subscription every 30th day:
 Users can be charged the full amount once every 30 days, regardless of the day in the month.
 (E.g. First charge can be due on 12.06.2022 and second charge on 04.07.2022)
 
-**Please note:** It is not possible to change intervals. See
-[Can I change the charge interval?](vipps-recurring-api-faq.md#can-i-change-the-charge-interval)
+All the examples above show agreements with a recurring type. But agreements can also have a flexible type, 
+which means they don't have an interval.
+
+Example of a request body for the POST:/agreements call, for a flexible agreement :
+    
+```json
+{
+  "phoneNumber":"90000000",
+  "merchantRedirectUrl": "https://example.com/confirmation",
+  "merchantAgreementUrl": "https://example.com/my-customer-agreement",
+  "pricing": {
+    "amount": 49900,
+    "currency": "NOK"
+  },
+  "productDescription": "Access to all games of English top football",
+  "productName": "Premier League subscription"
+}
+```
+
+
 
 ### Initial charge
 
