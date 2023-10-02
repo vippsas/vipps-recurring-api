@@ -1085,6 +1085,7 @@ The following properties are available for updating:
   },
   "interval": {
     "period": {
+        "type": "RECURRING",
         "count": 1,
         "unit": "MONTH"
     }
