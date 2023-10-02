@@ -1084,8 +1084,8 @@ The following properties are available for updating:
     "suggestedMaxAmount": 300000
   },
   "interval": {
+    "type": "RECURRING",
     "period": {
-        "type": "RECURRING",
         "count": 1,
         "unit": "MONTH"
     }
