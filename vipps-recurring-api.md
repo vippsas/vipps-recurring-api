@@ -509,27 +509,6 @@ Example for a subscription every 30th day:
 Users can be charged the full amount once every 30 days, regardless of the day in the month.
 (E.g. First charge can be due on 12.06.2022 and second charge on 04.07.2022)
 
-All the examples above show agreements with a recurring type. But agreements can also have a flexible type, 
-which means they don't have an interval.
-
-Example of a request body for the POST:/agreements call, for a flexible agreement :
-    
-```json
-{
-  "phoneNumber":"90000000",
-  "merchantRedirectUrl": "https://example.com/confirmation",
-  "merchantAgreementUrl": "https://example.com/my-customer-agreement",
-  "pricing": {
-    "amount": 49900,
-    "currency": "NOK"
-  },
-  "productDescription": "Access to all games of English top football",
-  "productName": "Premier League subscription"
-}
-```
-
-
-
 ### Initial charge
 
 **Please note:** If the subscription is cheaper in the beginning than the normal price later, use
@@ -1103,12 +1082,22 @@ The following properties are available for updating:
   "pricing": {
     "amount": 25000,
     "suggestedMaxAmount": 300000
+  },
+  "interval": {
+    "period": {
+        "count": 1,
+        "unit": "MONTH"
+    }
   }
 }
 ```
 
 Updating `amount` is only possible for agreements with `pricing.type:LEGACY`
+
 Updating `suggestedMaxAmount` is only possible for agreements with `pricing.type:VARIABLE`
+
+In order to update the interval from a RECURRING type to a FLEXIBLE type, you need to put an empty `interval` 
+in your `PATCH` request body. This type of update is only available for DK and FI merchants.
 
 **Please note:** As a `PATCH` operation all parameters are optional. However,
 when setting an agreement status to `STOPPED` no other changes are allowed.
