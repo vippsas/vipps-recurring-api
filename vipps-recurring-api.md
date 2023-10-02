@@ -1096,9 +1096,6 @@ Updating `amount` is only possible for agreements with `pricing.type:LEGACY`
 
 Updating `suggestedMaxAmount` is only possible for agreements with `pricing.type:VARIABLE`
 
-In order to update the interval from a RECURRING type to a FLEXIBLE type, you need to put an empty `interval` 
-in your `PATCH` request body. This type of update is only available for DK and FI merchants.
-
 **Please note:** As a `PATCH` operation all parameters are optional. However,
 when setting an agreement status to `STOPPED` no other changes are allowed.
 Attempts at changing other properties while stopping an agreement will result
