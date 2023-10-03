@@ -14,6 +14,11 @@ All notable changes to the current API will be documented in this file.
 See:
 [API Lifecycle](https://developer.vippsmobilepay.com/docs/common-topics/api-lifecycle/).
 
+## October 2023
+
+* New optional field `interval` in the endpoint [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint], 
+  which allows to update the interval of an active agreement.
+
 ## August 2023
 
 * Removed charge-amount-too-high-for-interval validation used in charge creation endpoint [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint].

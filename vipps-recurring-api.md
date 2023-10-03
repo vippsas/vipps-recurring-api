@@ -509,9 +509,6 @@ Example for a subscription every 30th day:
 Users can be charged the full amount once every 30 days, regardless of the day in the month.
 (E.g. First charge can be due on 12.06.2022 and second charge on 04.07.2022)
 
-**Please note:** It is not possible to change intervals. See
-[Can I change the charge interval?](vipps-recurring-api-faq.md#can-i-change-the-charge-interval)
-
 ### Initial charge
 
 **Please note:** If the subscription is cheaper in the beginning than the normal price later, use
@@ -1085,11 +1082,19 @@ The following properties are available for updating:
   "pricing": {
     "amount": 25000,
     "suggestedMaxAmount": 300000
+  },
+  "interval": {
+    "type": "RECURRING",
+    "period": {
+        "count": 1,
+        "unit": "MONTH"
+    }
   }
 }
 ```
 
 Updating `amount` is only possible for agreements with `pricing.type:LEGACY`
+
 Updating `suggestedMaxAmount` is only possible for agreements with `pricing.type:VARIABLE`
 
 **Please note:** As a `PATCH` operation all parameters are optional. However,
