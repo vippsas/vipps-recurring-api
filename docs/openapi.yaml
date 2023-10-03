@@ -2071,14 +2071,12 @@ components:
             
             The interval is specified by the `type` and `period` properties.
             When the type is `RECURRING`, then the property `period` is required.
-            When the type is `FLEXIBLE`, then the property `period` is not allowed.
           properties:
             type:
               type: string
               default: RECURRING
               enum:
                 - RECURRING
-                - FLEXIBLE
               example: RECURRING
             period:
               $ref: '#/components/schemas/TimePeriod'
