@@ -17,7 +17,7 @@ See:
 ## October 2023
 
 * New optional field `interval` in the endpoint [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint], 
-  which allows to update the interval of an agreement.
+  which allows to update the interval of an active agreement.
 
 ## August 2023
 
