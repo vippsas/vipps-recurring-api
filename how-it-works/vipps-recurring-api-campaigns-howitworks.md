@@ -19,7 +19,7 @@ END_METADATA -->
 <!-- END_COMMENT -->
 
 For technical documentation go to:
-[Vipps Recurring API](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
+[Recurring API](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
 ## 1. Buy a subscription
 
