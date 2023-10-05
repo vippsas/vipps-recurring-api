@@ -1210,7 +1210,7 @@ components:
       description: Filter by createdAfter timestamp for paginating.
       schema:
         type: integer
-        format: int32
+        format: int64
       example: 1644572442944
 
     ChargeStatusQuery:
@@ -1748,6 +1748,7 @@ components:
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
         chargeId:
           type: string
+          nullable: true
           description: |-
             The Id of the initialCharge if given, otherwise `null`.
             If an `orderId` is specified this is used as the `chargeId` otherwise it is auto generated.
@@ -1861,6 +1862,7 @@ components:
       properties:
         campaign:
           $ref: '#/components/schemas/campaignResponseV3'
+          nullable: true
         pricing:
           $ref: '#/components/schemas/pricingResponse'
         id:
@@ -2574,8 +2576,20 @@ components:
             For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
 
     pricingResponse:
-      title: AgreementPricingResponse
+      oneOf:
+        - $ref: '#/components/schemas/LegacyPricingResponse'
+        - $ref: '#/components/schemas/VariableAmountPricingResponse'
+      discriminator:
+        propertyName: type
+      
+
+    LegacyPricingResponse:
+      title: LegacyPricingResponse
       type: object
+      required:
+        - type
+        - currency
+        - amount
       properties:
         type:
           type: string
@@ -2593,7 +2607,25 @@ components:
             The price of the agreement, present if type is LEGACY.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.         
+
+    VariableAmountPricingResponse:
+      title: VariableAmountPricingResponse
+      type: object
+      required: 
+        - type
+        - currency
+        - suggestedMaxAmount
+        - maxAmount
+      properties:
+        type:
+          type: string
+          description: The type of pricing. This decides which properties are present.
+          enum:
+            - LEGACY 
+            - VARIABLE
+        currency:
+          $ref: "#/components/schemas/Currency"
         suggestedMaxAmount:
           type: integer
           format: int32
@@ -2611,7 +2643,7 @@ components:
             The max amount chosen by the customer.
 
             Amounts are specified in minor units.
-            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.
+            For Norwegian kroner (NOK) that means 1 kr = 100 øre. Example: 499 kr = 49900 øre.       
 
     PricingUpdateRequest:
       title: UpdateAgreementPricingRequest
@@ -3018,6 +3050,7 @@ components:
           $ref: "#/components/schemas/transactionType"
         failureReason:
           type: string
+          nullable: true
           enum:
             - user_action_required
             - charge_amount_too_high

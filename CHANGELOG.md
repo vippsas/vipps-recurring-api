@@ -16,7 +16,15 @@ See:
 
 ## October 2023
 
-* New optional field `interval` in the endpoint [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint], 
+* Fixes in the Recurring YAML file: 
+  * The **optional** field `externalId` can be set on a initial charge in the request body of the [`POST:/agreements`][draft-agreement-endpoint] request.
+  * `createdAfter` query parameter on the [`GET:/agreements][list-agreements-endpoint] is of type `int64`
+  * `failureReason` field returned in the `ChargeResponseV3` can be null
+  * `chargeId` field in the `DraftAgreementResponseV3` can be null
+  * `campaign` field in the `AgreementResponseV3` can be null
+  * `PricingResponse` can either be of type `VariableAmountPricingResponse` or `LegacyPricingResponse`
+ 
+* New optional field `interval` in the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint, 
   which allows to update the interval of an active agreement.
 
 ## August 2023
@@ -61,6 +69,7 @@ See:
 * v3 is now available. v3 includes new and improved functionality for campaigns, the ability to reserve and capture charges, and several technical improvements. The [migration guide](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/v2-to-v3-migration-guide/) and [quick start](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-quick-start/) provide more details for upgrading to v3.  v2 will be phased out and will no longer be available from November 1, 2023.
 
 [fetch-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/FetchAgreementV3
+[list-agreements-endpoint]: https://developer.vippsmobilepay.com/api/recurring/#tag/Agreement-v3-endpoints/operation/ListAgreementsV3
 [get-charge-by-id]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/FetchChargeByIdV3
 [draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [create-charge-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Charge-v3-endpoints/operation/CreateChargeV3
