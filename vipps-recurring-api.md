@@ -104,7 +104,7 @@ This is specified with the `transactionType`, and for "direct capture"
 the sales unit must be configured for this by Vipps MobilePay.
 
 For more details, see
-[Common topics: Reserve and capture](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture).
+[Knowledge base: Reserve and capture](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture).
 
 **Please note:** Vipps MobilePay will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
@@ -321,7 +321,7 @@ user can then approve the agreement.
 
 See
 [landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page)
-from Common topics, for more details about the landing page.
+from Knowledge base, for more details about the landing page.
 
 **Please note:** If payment should be required to activate an agreement, you need to specify an initial charge.
 If you are dealing with physical goods, this should be a RESERVE_CAPTURE, but for digital goods where the customer instantly gains access, DIRECT_CAPTURE might be easier to manage.
@@ -1589,7 +1589,7 @@ General guidelines for polling with the
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
 endpoint can be found at:
 
-See [Polling guidelines](https://developer.vippsmobilepay.com/docs/common-topics/polling-guidelines) in Common topics, for details.
+See [Polling guidelines](https://developer.vippsmobilepay.com/docs/common-topics/polling-guidelines) in the Knowledge base, for details.
 
 ## Notifications to users for failed charges
 
@@ -1610,7 +1610,7 @@ See [charge failure reason](#charge-failure-reasons) for an overview of what is 
 
 ## Timeouts
 
-See [Common topics: Timeouts](https://developer.vippsmobilepay.com/docs/common-topics/timeouts).
+See [Knowledge base: Timeouts](https://developer.vippsmobilepay.com/docs/common-topics/timeouts).
 
 ## Testing
 
@@ -1625,7 +1625,7 @@ The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
 
-See [Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/common-topics/redirects) in Common topics for details.
+See [Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/common-topics/redirects) in the Knowledge base for details.
 
 ## Different agreement types and when to use them
 
