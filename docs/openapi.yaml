@@ -379,10 +379,10 @@ paths:
     post:
       tags:
         - Agreement v3 endpoints
-      summary: Create a new Agreement, to be confirmed in the Vipps MobilePay app
+      summary: Create a new Agreement, to be confirmed in the Vipps or MobilePay app
       description: |-
         The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
-        This is used to redirect the user to the Vipps MobilePay landing page, or to the Vipps MobilePay app if `"isApp":true` is used.
+        This is used to redirect the user to the Vipps MobilePay landing page, or to the Vipps or MobilePay app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
         You **have** to implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`.
@@ -1517,7 +1517,7 @@ components:
           maxLength: 1024
           description: |-
             URL where customer should be redirected after the agreement has been
-            approved/rejected in the Vipps MobilePay app. 
+            approved/rejected in the Vipps or MobilePay app. 
             HTTPS and deeplinks are allowed (example: myApp://home)
           example: https://example.com/landing
         price:
@@ -1693,21 +1693,21 @@ components:
           description: |-
             Reference of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
-            It enters active state once the user has approved it in the Vipps MobilePay app.
+            It enters active state once the user has approved it in the Vipps or MobilePay app.
           example: https://api.vipps.no/v2/agreement/agr_5kSeqz
         agreementId:
           type: string
           description: |-
             Id of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
-            It enters active state once the user has approved it in the Vipps MobilePay app.
+            It enters active state once the user has approved it in the Vipps or MobilePay app.
           example: agr_5kSeqz
         vippsConfirmationUrl:
           type: string
           description: |-
             The `vippsConfirmationUrl` should be used to redirect the
             user to the Vipps MobilePay landing page in a desktop flow (with `https://`),
-            or to the Vipps MobilePay app in a mobile flow (with `vipps://`), where the
+            or to the Vipps or MobilePay app in a mobile flow (with `vipps://`), where the
             user can then approve the agreement.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
         chargeId:
@@ -1730,7 +1730,7 @@ components:
           description: |-
             Id of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
-            It enters active state once the user has approved it in the Vipps MobilePay app.
+            It enters active state once the user has approved it in the Vipps or MobilePay app.
           example: agr_5kSeqz
         uuid:
           type: string
@@ -1743,7 +1743,7 @@ components:
           description: |-
             The `vippsConfirmationUrl` should be used to redirect the
             user to the Vipps MobilePay landing page in a desktop flow (with `https://`),
-            or to the Vipps MobilePay app in a mobile flow (with `vipps://`), where the
+            or to the Vipps or MobilePay app in a mobile flow (with `vipps://`), where the
             user can then approve the agreement.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
         chargeId:
@@ -1917,7 +1917,7 @@ components:
           maxLength: 1024
           description: |-
             URL where customer should be redirected after the agreement has been
-            approved/rejected in the Vipps MobilePay app. 
+            approved/rejected in the Vipps or MobilePay app. 
             HTTPS and deeplinks are allowed (example: myApp://home)
           example: https://example.com/landing 
         sub:
@@ -1961,7 +1961,7 @@ components:
           description: |-
             The `vippsConfirmationUrl` should be used to redirect the
             user to the Vipps MobilePay landing page in a desktop flow (with `https://`),
-            or to the Vipps MobilePay app in a mobile flow (with `vipps://`), where the
+            or to the Vipps or MobilePay app in a mobile flow (with `vipps://`), where the
             user can then approve the agreement.
           example: https://api.vipps.no/v2/register/U6JUjQXq8HQmmV
 
@@ -2096,7 +2096,7 @@ components:
           description: |-
             Id of a an agreement which user may agree to.
             Initially the agreement is in a pending state waiting for user approval.
-            It enters active state once the user has approved it in the Vipps MobilePay app.
+            It enters active state once the user has approved it in the Vipps or MobilePay app.
 
     variableAmount:
       title: Variable Amount request
@@ -2380,7 +2380,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
+          description: The text displayed in the Vipps or MobilePay app to explain the campaign to the user
 
     periodCampaignResponseV3:
       title: Period Campaign
@@ -2419,7 +2419,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
+          description: The text displayed in the Vipps or MobilePay app to explain the campaign to the user
 
     eventCampaignResponseV3:
       title: Event Campaign
@@ -2459,7 +2459,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
+          description: The text displayed in the Vipps or MobilePay app to explain the campaign to the user
 
     fullFlexCampaignResponseV3:
       title: Full Flex Campaign
@@ -2499,7 +2499,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
+          description: The text displayed in the Vipps or MobilePay app to explain the campaign to the user
 
     legacyCampaignResponseV3:
       title: Legacy Campaign
@@ -2536,7 +2536,7 @@ components:
         explanation:
           type: string
           example: Ordinary price 399 kr starts 6/12/2022
-          description: The text displayed in the Vipps MobilePay app to explain the campaign to the user
+          description: The text displayed in the Vipps or MobilePay app to explain the campaign to the user
 
     pricingRequest:
       title: DraftAgreementPricingRequest
@@ -2947,7 +2947,7 @@ components:
               * `user_action_required` - The user's card can not fulfil the payment. The user needs to take action in the app.
                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
 
-              * `charge_amount_too_high` - The user's max amount is too low. The user needs to update their max amount in the Vipps MobilePay app.
+              * `charge_amount_too_high` - The user's max amount is too low. The user needs to update their max amount in the Vipps or MobilePay app.
 
               * `non_technical_error` - Something went wrong with charging the user.
                  Examples: User has deleted their Vipps MobilePay Profile.
@@ -3059,10 +3059,10 @@ components:
           example: "user_action_required"
           description: >
             Identifies the reason why the charged has been marked as `FAILED`:
-              * `user_action_required` - The user's card can not fulfil the payment, user needs to take action in the Vipps MobilePay app.
+              * `user_action_required` - The user's card can not fulfil the payment, user needs to take action in the Vipps or MobilePay app.
                  Examples: Card is blocked for ecommerce, insufficient funds, expired card.
 
-              * `charge_amount_too_high` - The user's max amount is too low, user needs to update their max amount in the Vipps MobilePay app.
+              * `charge_amount_too_high` - The user's max amount is too low, user needs to update their max amount in the Vipps or MobilePay app.
 
               * `non_technical_error` - Something went wrong with charging the user.
                  Examples: User has deleted their Vipps MobilePay Profile.

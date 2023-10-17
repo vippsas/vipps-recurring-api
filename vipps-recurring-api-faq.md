@@ -160,7 +160,7 @@ A charge will remain in `PENDING` state until the `due` date is less than 30 day
 You can retrieve all relevant charges through the
 [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
 
-### If a user adds or updates a card in the Vipps MobilePay app, will new recurring charges be made to that card?
+### If a user adds or updates a card in the Vipps or MobilePay app, will new recurring charges be made to that card?
 
 No, currently the payment card tied to an agreement will not be updated automatically.
 
@@ -266,7 +266,7 @@ Agreements can be stopped by calling the
 [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
 See [Stop an agreement](vipps-recurring-api.md#stop-an-agreement).
 
-### Can a user cancel the agreement through the Vipps MobilePay app?
+### Can a user cancel the agreement through the Vipps or MobilePay app?
 
 No, the user needs to contact the merchant which can then cancel or modify the
 agreement as they see fit.
