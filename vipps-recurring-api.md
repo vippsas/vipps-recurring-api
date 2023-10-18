@@ -285,11 +285,11 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 }
 ```
 
-#### Agreement fields and their usage in the Vipps MobilePay app
+#### Agreement fields and their usage in the Vipps or MobilePay app
 
 * `pricing`: Price of the subscription.
 * `interval`: Describes how often the user will be charged.
-* `productName`: A short description of the subscription. Will be displayed as the agreement name in the Vipps MobilePay app.
+* `productName`: A short description of the subscription. Will be displayed as the agreement name in the Vipps or MobilePay app.
 * `productDescription`: More details about the subscription. Optional field.  
 * `merchantAgreementUrl`: URL where you will send the customer to view/manage their subscription. See [Merchant agreement URL](#merchant-agreement-url).
 
@@ -386,7 +386,7 @@ a `vipps://` URL by sending the `isApp` parameter in the initiate call:
 * `"isApp": false`: The URL is `https://`, which handles
   everything automatically for you.
   The phone's operating system will know, through "universal linking", that
-  the `https://api.vipps.no` URL should open the Vipps MobilePay app, and not the default
+  the `https://api.vipps.no` URL should open the Vipps or MobilePay app, and not the default
   web browser.
   **Please note:** In some cases, this requires the user to approve that
   Vipps MobilePay is opened, but this is usually only the first time.
@@ -405,7 +405,7 @@ If the user does not have Vipps MobilePay installed:
 If the user **accepts or rejects** the agreement the user will be redirected back to the`merchantRedirectUrl`.
 
 Activation of the agreement is not guaranteed to be finished by the time the user is redirected back to the `merchantRedirectUrl`.
-The agreement could still have the status `PENDING`. Also, if the user closes the Vipps MobilePay app before the redirect is done, the `merchantRedirectUrl` will not be used.
+The agreement could still have the status `PENDING`. Also, if the user closes the Vipps or MobilePay app before the redirect is done, the `merchantRedirectUrl` will not be used.
 
 Therefore, it is important to actively check the agreement's status with the
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] endpoint instead of relying on the redirect to the `merchantRedirectUrl`.
@@ -797,8 +797,8 @@ For agreements of type `variable`, also see [Recurring agreements with variable 
 
 `due` will define for which date the charge will be performed.
 This date has to be minimum two days (one day in the test environment) in the future and maximum two years in advance.
-The minimum is set to two days because the user should be able to see the upcoming charge in the Vipps MobilePay app.
-All charges `due` in 35 days or less are visible under the *Payments* tab in the Vipps MobilePay app.
+The minimum is set to two days because the user should be able to see the upcoming charge in the Vipps or MobilePay app.
+All charges `due` in 35 days or less are visible under the *Payments* tab in the Vipps or MobilePay app.
 
 Example: If the charge is *created* on the 25th, the earliest the charge can be
 *due* is the 27th (25+2). This is so that the user can be informed about the
@@ -837,7 +837,7 @@ The API allows for both a full amount capture and a partial amount capture (**V3
 
 The amount to capture cannot be higher than the reserved amount.
 According to Norwegian regulations, capture cannot be done before the goods have been shipped.
-The `description` text is mandatory and is displayed to the end user in the Vipps MobilePay app.
+The `description` text is mandatory and is displayed to the end user in the Vipps or MobilePay app.
 
 Capture is done with the [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] endpoint.
 
@@ -941,7 +941,7 @@ specified with `retryDays`. In other words, there will be no status updates
 while we are attempting to charge.
 
 **Important:** We do not "leak" the customers' information about insufficient funds,
-blocked cards, or other problems. Users are informed about all such problems in the Vipps MobilePay app,
+blocked cards, or other problems. Users are informed about all such problems in the Vipps or MobilePay app,
 which is the only place they can be corrected. The merchant's customer service
 should always ask the user to check in the app if a charge has failed.
 
@@ -962,7 +962,7 @@ the card is invalid, etc.: The user is notified and can correct the problem.
 We will make sure the user is able to pay.
 
 **IMPORTANT:** We don't provide details about each charge attempt to the merchant,
-but we do help the user to correct any problems in the Vipps MobilePay app.
+but we do help the user to correct any problems in the Vipps or MobilePay app.
 This results in a *very* high success rate for charges.
 
 The `retryDays` are not tied to the agreement’s interval. This means that a charge
@@ -1063,10 +1063,10 @@ and to use the API to make sure everything is in sync.
 
 | # | State      | Description                                                                          |
 |:--|:-----------|:-------------------------------------------------------------------------------------|
-| 1 | `PENDING`  | Agreement has been created, but not approved by the user in the Vipps MobilePay app yet |
-| 2 | `ACTIVE` | The agreement has been confirmed by the end user in the Vipps MobilePay app and can receive charges |
+| 1 | `PENDING`  | Agreement has been created, but not approved by the user in the Vipps or MobilePay app yet |
+| 2 | `ACTIVE` | The agreement has been confirmed by the end user in the Vipps or MobilePay app and can receive charges |
 | 3 | `STOPPED`  | Agreement has been stopped, either by the merchant by the [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] endpoint, or by the user by cancelling or rejecting the agreement. |
-| 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in the Vipps MobilePay app |
+| 4 | `EXPIRED` | The user did not accept, or failed to accept (due to processing an `initialCharge`), the agreement in the Vipps or MobilePay app |
 
 ### Update an agreement
 
@@ -1144,12 +1144,12 @@ This table has all the details for the charge states returned by the
 
 | State                | Description |
 |----------------------|-------------|
-| `PENDING`            | The charge has been created, but is not yet be visible in the Vipps MobilePay app. |
-| `DUE`                | The charge is visible in the Vipps MobilePay app and will be processed on the `due` date. |
+| `PENDING`            | The charge has been created, but is not yet be visible in the Vipps or MobilePay app. |
+| `DUE`                | The charge is visible in the Vipps or MobilePay app and will be processed on the `due` date. |
 | `PROCESSING`         | The charge is being processed right now. |
 | `UNKNOWN`            | The charge status is unknown. This is usually very transient and will be resolved shortly. |
 | `CHARGED`            | The charge has been successfully processed, and the available amount has been captured. |
-| `FAILED`             | The charge has failed because of insufficient funds, no valid cards, etc. The Vipps MobilePay app gives the user all possible opportunities to pay, including adding a new card, but does not provide the details to the merchant. |
+| `FAILED`             | The charge has failed because of insufficient funds, no valid cards, etc. The Vipps or MobilePay app gives the user all possible opportunities to pay, including adding a new card, but does not provide the details to the merchant. |
 | `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. |
 | `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded. |
 | `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
@@ -1157,7 +1157,7 @@ This table has all the details for the charge states returned by the
 | `CANCELLED`          | The charge has been cancelled. |
 
 **IMPORTANT:** We don't provide details about each charge attempt to the merchant,
-but we help the user to correct any problems in the Vipps MobilePay app.
+but we help the user to correct any problems in the Vipps or MobilePay app.
 This results in a *very* high success rate for charges.
 
 ### Example charge flows
@@ -1203,14 +1203,14 @@ Here is a list of possible values for `failureReason`, their respective descript
 
 | Reason                 | Description | Action |
 |------------------------|-------------|--------|
-| user_action_required   | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open the Vipps MobilePay app and check the payment there to see why it is not paid. | User will get notified in their Vipps MobilePay app and need to take action. This could be to add funds to the card or change the card on the agreement. |
+| user_action_required   | Payment failed. Could be lack of funds, card is blocked for ecommerce, card is expired. If you want to send an email or similar to the user, you should encourage them to open the Vipps or MobilePay app and check the payment there to see why it is not paid. | User will get notified in their Vipps or MobilePay app and need to take action. This could be to add funds to the card or change the card on the agreement. |
 | charge_amount_too_high | Amount is higher than the user's specified max amount. | The user has a lower `maxAmount` on the `variableAmount` agreement than the amount of the charge. The user must update their `maxAmount` on the agreement for the charge to be processed. |
 | non_technical_error    | Payment failed. Could be that the user has deleted their Vipps MobilePay profile. | The user needs to take action in the app. |
 | technical_error        | Payment failed due to a technical error in Recurring or a downstream service. | As long as the charge is not in the status `FAILED`, we are retrying the payment. [Contact us](https://developer.vippsmobilepay.com/docs/contact/) for more information if this failure shows up on a `FAILED` charge. |
 
 ### App
 
-The user will be able to see these failures in their Vipps MobilePay app and take the necessary action.
+The user will be able to see these failures in their Vipps or MobilePay app and take the necessary action.
 
 Example if a user has an expired card:
 
@@ -1224,11 +1224,11 @@ The following `failureReasons` are no longer exposed on charges:
 |------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | insufficient_funds     | Payment was declined by the payer bank due to lack of funds.                             | User must either add funds to the card to cover the difference between the amount to be paid. Alternatively they can change to another, or add a new, payment source that is adequately funded to complete the transaction. |
 | invalid_card           | The user tried to pay using a card that has either expired or is disabled by the issuer. | User must change, or add a new, payment source on the agreement in Vipps.                                                                                                                                                   |
-| verification_required  | Payment declined because the issuing bank requires verification.                         | Ask the user to change, or add a new, payment source on their agreement in the Vipps MobilePay app. Alternatively removing and then adding the card might solve the issue.                                                                    |
+| verification_required  | Payment declined because the issuing bank requires verification.                         | Ask the user to change, or add a new, payment source on their agreement in the Vipps or MobilePay app. Alternatively removing and then adding the card might solve the issue.                                                                    |
 | invalid_payment_source | The provided payment source is disabled or does not exist.                               | User must change payment source for the agreement.                                                                                                                                                                          |
 | internal_error         | Internal Error / Something went wrong                                                    | The error could not be identified as one of the above. Try to create the charge again, changing or adding payment sources on the agreement, or contact us for more information.                                          |
 
-The user gets more information in the Vipps MobilePay app regarding why the charge did not get processed. If they contact you about failing charges, you should refer them to the Vipps MobilePay app. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
+The user gets more information in the Vipps or MobilePay app regarding why the charge did not get processed. If they contact you about failing charges, you should refer them to the Vipps or MobilePay app. As long as the charge has `retryDays` left, we will continue to try and process the charge and notify the user.
 
 ## Userinfo
 
@@ -1456,7 +1456,7 @@ to `DUE` and the user will be notified and encouraged to alter the max amount to
 If the user does not update their `maxAmount` to the same or a higher amount than the charge, it will fail when `due` + `retryDays` is reached, and
 the status will be `FAILED`.
 
-The user will also see a failure description on the charge in the Vipps MobilePay app.
+The user will also see a failure description on the charge in the Vipps or MobilePay app.
 
 Display of charge failure due to a charge being higher than the `maxAmount` in Vipps:
 ![variable_amount_charge](images/variable_amount_charge.png)
@@ -1617,10 +1617,10 @@ See [Knowledge base: Timeouts](https://developer.vippsmobilepay.com/docs/common-
 To facilitate automated testing in the
 [Test Environment (MT)][vipps-test-environment],
 the Recurring API provides a [`force accept agreement`][force-accept-agreement-endpoint] endpoint to avoid manual
-agreement acceptance in the Vipps MobilePay app:
+agreement acceptance in the Vipps or MobilePay app:
 
 The *force approve* endpoint allows developers to approve a payment through the
-Recurring API without the use of the Vipps MobilePay app. This is useful for automated testing.
+Recurring API without the use of the Vipps or MobilePay app. This is useful for automated testing.
 The endpoint is only available in our test environment.
 
 ## Recommendations regarding handling redirects
@@ -1629,7 +1629,7 @@ See [Recommendations regarding handling redirects](https://developer.vippsmobile
 
 ## Different agreement types and when to use them
 
-Vipps MobilePay recurring payments is a fairly flexible service that allows merchants to tailor the user experience in the Vipps MobilePay app
+Vipps MobilePay recurring payments is a fairly flexible service that allows merchants to tailor the user experience in the Vipps or MobilePay app
 by utilizing the normal agreements, initial charges, campaigns, or a combination of those.
 
 This can be a bit confusing when deciding on which implementation to use.

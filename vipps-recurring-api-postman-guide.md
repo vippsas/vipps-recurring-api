@@ -65,7 +65,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 
    Ctrl+click the link, it will take you to the
    [landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/).
-   Enter your test phone number and complete the authorization in the Vipps MobilePay app in your mobile test app.
+   Enter your test phone number and complete the authorization in the Vipps or MobilePay app in your mobile test app.
 
    You should now have an active agreement. The variable `agreementId` is set in the environment.
 

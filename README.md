@@ -48,6 +48,11 @@ Examples of how to combine the Recurring API with other APIs for specific use ca
 * [Subscriptions](https://developer.vippsmobilepay.com/docs/solutions/recurring-and-login)
 * [Parking and "Pay-as-you-go"](https://developer.vippsmobilepay.com/docs/solutions/parking)
 
+## Plugins for the Recurring API
+
+* [Vipps Recurring Payments](https://developer.vippsmobilepay.com/docs/plugins-ext/recurring-drupal/)
+* [Vipps Recurring Payments for WooCommerce](https://developer.vippsmobilepay.com/docs/plugins-ext/recurring-woocommerce/)
+
 ## Next steps
 
 * [API quick start](vipps-recurring-api-quick-start.md):  Run the basic examples in curl or Postman.
