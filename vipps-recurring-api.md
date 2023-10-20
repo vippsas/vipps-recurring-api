@@ -183,8 +183,6 @@ All API calls are authenticated with an access token and an API subscription key
 See
 [Get an access token](https://developer.vippsmobilepay.com/docs/APIs/access-token-api#get-an-access-token), for details.
 
-## HTTP headers
-
 Use the standard [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers) for all requests.
 
 ## Idempotency Key header
@@ -261,7 +259,7 @@ for each order, or some similar, unique and readable pattern.
 
 ## Agreements
 
-An agreement is between the Vipps MobilePay user and the merchant. This payment agreement allows you to routinely charge the customer without requiring them to manually approve every time. See [charges](#charges).
+An agreement is between the Vipps MobilePay user and the merchant. This payment agreement allows you to routinely charge the customer without requiring them to manually approve every time. See [charges](#charges) for more details.
 
 ### Create an agreement
 
@@ -291,7 +289,7 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 * `interval`: Describes how often the user will be charged.
 * `productName`: A short description of the subscription. Will be displayed as the agreement name in the Vipps or MobilePay app.
 * `productDescription`: More details about the subscription. Optional field.  
-* `merchantAgreementUrl`: URL where you will send the customer to view/manage their subscription. See [Merchant agreement URL](#merchant-agreement-url).
+* `merchantAgreementUrl`: URL where you will send the customer to view/manage their subscription. See [Merchant agreement URL](#merchant-agreement-url) for more details.
 
 ![Agreement fields](images/agreement_fields.png)
 
@@ -321,7 +319,7 @@ user can then approve the agreement.
 
 See
 [landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page)
-from Knowledge base, for more details about the landing page.
+from Knowledge base, for more details.
 
 **Please note:** If payment should be required to activate an agreement, you need to specify an initial charge.
 If you are dealing with physical goods, this should be a RESERVE_CAPTURE, but for digital goods where the customer instantly gains access, DIRECT_CAPTURE might be easier to manage.
@@ -924,7 +922,7 @@ endpoint.
 ### Refund a charge
 
 A charge can be refunded with the
-[`POST:/agreements/{agreementId}/charges/{chargeId}/refund][refund-charge-endpoint]
+[`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]
 endpoint.
 
 ### Charge times
@@ -1042,12 +1040,9 @@ Truncated example of the response from the [`GET:/agreements/{agreementId}/charg
 ````
 
 **Please note:** `failureReason` and `failureDescription` are experimental, and
-will be replaced by an event log. Subscribe to the technical newsletter
-to get updates: [Technical newsletter for developers](https://developer.vippsmobilepay.com/docs/newsletters).
+will be replaced by an event log. Subscribe to the [Technical newsletter for developers](https://developer.vippsmobilepay.com/docs/newsletters) for updates.
 
-See more about [charge failure reason](#charge-failure-reasons).
-
-See: [Charge states](#charge-states).
+For more details about charges, see [charge states](#charge-states) and [charge failure reasons](#charge-failure-reasons).
 
 ### List charges
 
@@ -1324,10 +1319,10 @@ transaction and the fetching of the profile data.
 
 This endpoint returns the payload with the information that the user has consented to share.
 
-Call the Vipps [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier.
+Call the [`GET:/vipps-userinfo-api/userinfo/{sub}`][userinfo-endpoint] endpoint with the `sub` that was retrieved earlier.
 
 See the
-[Userinfo call](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api#userinfo-call)
+[Userinfo API guide](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api#userinfo-call)
 for details.
 
 ## Recurring agreements with variable amount
@@ -1502,9 +1497,8 @@ to retry the request at a later point in time.
 ### Error responses
 
 HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
-
-See:
-[Errors](https://developer.vippsmobilepay.com/docs/common-topics/errors).
+For more details about error types, see
+[Knowledge base: Errors](https://developer.vippsmobilepay.com/docs/common-topics/errors).
 
 ## Rate limiting
 
@@ -1548,19 +1542,19 @@ to retry the request at a later point in time.
 In addition to the normal [Authentication](#authentication-and-authorization) we offer *partner keys*,
 which let a partner make API calls on behalf of a merchant.
 
-If you are a Vipps MobilePay partner who is managing agreements on behalf of Vipps MobilePay merchants, you
+If you are a [Vipps MobilePay partner](https://developer.vippsmobilepay.com/docs/partner) who is managing agreements on behalf of Vipps MobilePay merchants, you
 can use your own API credentials to authenticate, and then send
 the `Merchant-Serial-Number` header to identify which of your merchants you
 are acting on behalf of. The `Merchant-Serial-Number` must be sent in the header
 of all API requests.
 
-By including the [HTTP Headers](#http-headers) you will make
+By including the [HTTP Headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers/) you will make
 it easier to investigate problems, if anything unexpected happens. Partners may
 re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
 
 Here's an example of headers (please refer to the
-[API specification](https://developer.vippsmobilepay.com/api/recurring)
+[Recurring API specification](https://developer.vippsmobilepay.com/api/recurring)
 for all the details):
 
 ```http
@@ -1580,23 +1574,19 @@ on behalf of a merchant. The partner must use the *merchant's* MSN, not the
 partner's MSN. This parameter is also recommended for regular Vipps MobilePay
 merchants making API calls for themselves.
 
-See:
-[Vipps MobilePay Partners](https://developer.vippsmobilepay.com/docs/partner).
-
 ## Polling guidelines
 
 General guidelines for polling with the
 [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint]
-endpoint can be found at:
-
-See [Polling guidelines](https://developer.vippsmobilepay.com/docs/common-topics/polling-guidelines) in the Knowledge base, for details.
+endpoint can be found at: [Knowledge base: Polling guidelines](https://developer.vippsmobilepay.com/docs/common-topics/polling-guidelines).
+See also [Knowledge base: Timeouts](https://developer.vippsmobilepay.com/docs/common-topics/timeouts).
 
 ## Notifications to users for failed charges
 
 We notify the user in two ways, through push notifications and failure texts on the charge.
 When a charge fails to be processed, we send the user a push notification letting them know the charge failed to process.
 This push message is sent every time we try to process the charge, see [charge times](#charge-times) for when the processing of charges happen.
-More information about how and when we send push notifications can be found in the [FAQ](vipps-recurring-api-faq.md#when-do-users-get-push-messages).
+More information about how and when we send push notifications can be found in the [Recurring API FAQ](vipps-recurring-api-faq.md#when-do-users-get-push-messages).
 
 **Please note:** We send push notification for failed payments regardless if `Notification upon payment` is toggled on or off on the agreement.
 This toggle only determine if the user will get notified when a charge is successfully charged.
@@ -1607,10 +1597,6 @@ For more information about what the failure texts are, see the [FAQ](vipps-recur
 
 **Please note:** These exact reasons why the charge fails is not shown in the recurring API, only to the customers (users).
 See [charge failure reason](#charge-failure-reasons) for an overview of what is available in the merchant API.
-
-## Timeouts
-
-See [Knowledge base: Timeouts](https://developer.vippsmobilepay.com/docs/common-topics/timeouts).
 
 ## Testing
 
@@ -1623,9 +1609,13 @@ The *force approve* endpoint allows developers to approve a payment through the
 Recurring API without the use of the Vipps or MobilePay app. This is useful for automated testing.
 The endpoint is only available in our test environment.
 
-## Recommendations regarding handling redirects
+## Handling redirects
 
-See [Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/common-topics/redirects) in the Knowledge base for details.
+You can redirect the user to a website or app once they have used the Vipps or MobilePay app to log in to your site, complete a payment, accept an agreement, or similar.
+
+We have limited control over the redirect back to the merchant's website after a completed purchase or log-in. Your integration must not assume that the app will redirect to the exact same session. For example, don't rely entirely on cookies in order to handle the redirect event. The redirect may send the user to a different web browser
+
+For more details, see [Knowledge base: Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/common-topics/redirects).
 
 ## Different agreement types and when to use them
 
