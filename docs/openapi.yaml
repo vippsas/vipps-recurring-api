@@ -1406,7 +1406,7 @@ components:
 
     CurrencyV3:
       type: string
-      description: "ISO-4217: https://www.iso.org/iso-4217-currency-codes.html"
+      description: "Only NOK is supported at the moment. Support for EUR and DKK will be provided in early 2024."
       enum:
         - NOK
       minLength: 3
