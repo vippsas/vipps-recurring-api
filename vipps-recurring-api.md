@@ -267,7 +267,7 @@ This is an example of a request body for the [`POST:/agreements`][draft-agreemen
 
 ```json
 {
-  "phoneNumber":"90000000",
+  "phoneNumber":"4791234567",
   "interval": {
     "unit" : "MONTH",
     "count": 1
@@ -341,7 +341,7 @@ Here is a truncated example of request body for the [`POST:/agreements`][draft-a
     "currency": "NOK"
   },
   "productName": "MyNews Digital",
-  "phoneNumber": "45678272",
+  "phoneNumber": "4791234567",
   "...": "..."
 }
 ```
@@ -358,7 +358,7 @@ Here is a truncated example of request body for the [`POST:/agreements`][draft-a
     "currency": "NOK"
   },
   "productName": "MyNews Digital",
-  "phoneNumber": "45678272",
+  "phoneNumber": "4791234567",
   "...": "..."
 }
 ```
@@ -542,7 +542,7 @@ of 499 NOK:
 
 ```json
 {
-  "phoneNumber": "90000000",
+  "phoneNumber": "4791234567",
   "initialCharge": {
      "amount": 49900,
      "description": "Premier League subscription",
@@ -1262,7 +1262,7 @@ Example of request with scope:
 
 ```json
 {
-  "phoneNumber":"90000000",
+  "phoneNumber":"4791234567",
   "interval": {
     "unit": "MONTH",
     "count": 1
@@ -1364,7 +1364,7 @@ Create agreement request:
   },
   "merchantRedirectUrl": "https://example.com/confirmation",
   "merchantAgreementUrl": "https://example.com/my-customer-agreement",
-  "phoneNumber": "90000000",
+  "phoneNumber": "4791234567",
   "productDescription": "Access to subscription",
   "productName": "Power company A"
 }
@@ -1378,10 +1378,10 @@ Create agreement request:
 The user will be presented with the variable agreement in Vipps,
 where they can change the max amount they allow to be charged each interval.
 
-In this example the `suggestedMaxAmount` is 5 000 kr, this amount gets pre-selected in Vipps.
-The user clicks on "maksbeløp" (max amount) and opens the list of auto generated suggestions together with the `suggestedMaxAmount`.
-The text above the list explains that the merchant recommends the user to set their max amount to 5 000 kr.
-The user proceeds with 5 000 kr and accepts the agreement.
+In the example below, the `suggestedMaxAmount` is 5000 kr, this amount gets pre-selected in Vipps.
+The user clicks *maksbeløp* (*max amount*) and opens the list of auto generated suggestions together with the `suggestedMaxAmount`.
+The text above the list explains that the merchant recommends the user to set their max amount to 5000 kr.
+The user proceeds with 5000 kr and accepts the agreement.
 
 **Please note:** The auto generated list is based on the `suggestedMaxAmount` and can not be changed by the merchant individually.
 It will however change if `suggestedMaxAmount` changes, which can be done in the `PATCH agreement` endpoint.
@@ -1433,7 +1433,7 @@ It's possible to change the `suggestedMaxAmount` on the agreement by calling the
 }
 ```
 
-**Please note:** The user will not be alerted by this change by Vipps.
+**Please note:** The user will not be alerted by this change.
 
 ### Create charge
 
@@ -1441,8 +1441,8 @@ The amount of the charge/charges in the interval can not be higher than the `sug
 
 Examples:
 
-* If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 2 000 kr then the charge amount can not be higher than 5 000 kr
-* If `suggestedMaxAmount` is set to 5 000 kr and `maxAmount` chosen by the user is 7 000 kr then the charge amount can not be higher than 7 000 kr
+* If `suggestedMaxAmount` is set to 5000 kr and `maxAmount` chosen by the user is 2000 kr, then the charge amount can not be higher than 5000 kr
+* If `suggestedMaxAmount` is set to 5000 kr and `maxAmount` chosen by the user is 7000 kr, then the charge amount can not be higher than 7000 kr
 
 ### Charge amount higher than the user's max amount
 
@@ -1453,7 +1453,7 @@ the status will be `FAILED`.
 
 The user will also see a failure description on the charge in the Vipps or MobilePay app.
 
-Display of charge failure due to a charge being higher than the `maxAmount` in Vipps:
+Display of charge failure due to a charge being higher than the `maxAmount` in the app:
 ![variable_amount_charge](images/variable_amount_charge.png)
 
 ## Skip landing page

@@ -4,7 +4,7 @@ info:
     Recurring payments is used for subscription payments, such as weekly dues for newspaper access, monthly dues for public transportation, etc.
     For details, see the [Recurring API Guide](https://developer.vippsmobilepay.com/docs/APIs/recurring-api).
 
-  version: 2.6.16
+  version: 2.6.17
   title: Recurring Payments Merchant API
 
 servers:
@@ -97,7 +97,7 @@ paths:
                   intervalCount: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  customerPhoneNumber: '45678272'
+                  customerPhoneNumber: '91234567'
                   price: 2500
                   productDescription: MyNews on web
                   productName: MyNews Digital
@@ -110,7 +110,7 @@ paths:
                   intervalCount: 1
                   merchantRedirectUrl: https://merchant.redirect.url.no
                   merchantAgreementUrl: https://merchant.agreement.url.no
-                  customerPhoneNumber: '45678272'
+                  customerPhoneNumber: '91234567'
                   price: 2500
                   productDescription: MyNews on web
                   productName: MyNews Digital
@@ -129,7 +129,7 @@ paths:
                   isApp: false
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  customerPhoneNumber: '45678272'
+                  customerPhoneNumber: '91234567'
                   price: 2500
                   productDescription: MyNews on web
                   productName: MyNews Digital
@@ -146,7 +146,7 @@ paths:
                   isApp: false
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  customerPhoneNumber: '45678272'
+                  customerPhoneNumber: '91234567'
                   price: 2500
                   productDescription: MyNews on web
                   productName: MyNews Digital
@@ -168,7 +168,7 @@ paths:
                   isApp: false
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  customerPhoneNumber: '45678272'
+                  customerPhoneNumber: '91234567'
                   productDescription: Power on web
                   productName: MyNews Digital
                   skipLandingPage: false
@@ -183,7 +183,7 @@ paths:
                   isApp: false
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  customerPhoneNumber: '45678272'
+                  customerPhoneNumber: '91234567'
                   price: 2500
                   productDescription: Power on web
                   productName: MyNews Digital
@@ -419,7 +419,7 @@ paths:
                     count: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  phoneNumber: '45678272'
+                  phoneNumber: '4791234567'
                   productName: MyNews Digital
               With Initial Charge:
                 description: If you want the customer to pay to activate the agreement, you should add an initial charge. If the amount on the initial charge is not the same as the agreement/campaign price, it will show up as a separate payment bubble in the app.
@@ -433,7 +433,7 @@ paths:
                     count: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  phoneNumber: '45678272'
+                  phoneNumber: '4791234567'
                   productName: MyNews Digital
                   initialCharge:
                     amount: 100
@@ -452,7 +452,7 @@ paths:
                     count: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  phoneNumber: '45678272'
+                  phoneNumber: '4791234567'
                   productName: MyNews Digital
                   campaign:
                     type: PRICE_CAMPAIGN
@@ -470,7 +470,7 @@ paths:
                     count: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  phoneNumber: '45678272'
+                  phoneNumber: '4791234567'
                   productName: MyNews Digital
                   campaign:
                     type: PERIOD_CAMPAIGN
@@ -495,7 +495,7 @@ paths:
                     count: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  phoneNumber: '45678272'
+                  phoneNumber: '4791234567'
                   productName: MyNews Digital
                   campaign:
                     type: EVENT_CAMPAIGN
@@ -518,7 +518,7 @@ paths:
                     count: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  phoneNumber: '45678272'
+                  phoneNumber: '4791234567'
                   productName: MyNews Digital
                   campaign:
                     type: FULL_FLEX_CAMPAIGN
@@ -539,7 +539,7 @@ paths:
                     count: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  phoneNumber: '45678272'
+                  phoneNumber: '4791234567'
                   productName: MyNews Digital
               With Profile Flow:
                 description: User consents to sharing data that can be retrieved after they accept the agreement.
@@ -553,7 +553,7 @@ paths:
                     count: 1
                   merchantRedirectUrl: https://example.com/redirect
                   merchantAgreementUrl: https://example.com/agreement
-                  phoneNumber: '45678272'
+                  phoneNumber: '4791234567'
                   productName: MyNews Digital
                   scope: address name email birthDate phoneNumber
       responses:
@@ -3192,7 +3192,7 @@ components:
       properties:
         phoneNumber:
           type: string
-          example: '91234567'
+          example: '4791234567'
 
     ErrorFromAzure:
       type: object
