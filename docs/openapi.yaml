@@ -1015,7 +1015,7 @@ paths:
         Fetch a single charge just by `chargeId`, when the `agreementId` is unknown.
         Useful for investigating claims from customers, but not intended for automation.
         This is *not* a replacement for the normal endpoint for fetching charges:
-        `GET:/agreements/{agreementId}/charges/{chargeId}`.
+        `GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`.
       operationId: FetchChargeByIdV3
       parameters:
         - $ref: "#/components/parameters/Authorization"

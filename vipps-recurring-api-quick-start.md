@@ -114,7 +114,7 @@ The property `access_token` should be used for all other API requests in the `Au
 
 ### Step 3 - Create a minimal agreement
 
-Create an agreement with: [`POST:/agreements`][draft-agreement-endpoint].
+Create an agreement with: [`POST:/recurring/v3/agreements`][draft-agreement-endpoint].
 When your test mobile number is provided in `phoneNumber`, it will be pre-filled in the form.
 
 Note that `orderId` must be unique for each payment you create.
@@ -186,7 +186,7 @@ Take note of the value included in `agreementId`, as you will need this to acces
 ### Step 5 - Fetch the agreement
 
 To receive the result of the user action, you may poll the status of the agreement with:
-[`GET:/agreements/{agreementId}`][fetch-agreement-endpoint].
+[`GET:/recurring/v3/agreements/{agreementId}`][fetch-agreement-endpoint].
 
 <Tabs
 defaultValue="curl"
@@ -225,7 +225,7 @@ If you confirmed the agreement, the status should be ACTIVE in the response.
 ### Step 6 - Create a charge for the agreement
 
 Create a charge with:
-[`POST:/agreements/{agreementId}/charges`][create-charge-endpoint].
+[`POST:/recurring/v3/agreements/{agreementId}/charges`][create-charge-endpoint].
 
 Set a unique `orderId` that can be used to access the charge later.
 Also, set a unique `Idempotency-Key` value to ensure the charge is not created more than once.
@@ -284,7 +284,7 @@ See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details abo
 ### Step 7 - Fetch the charge
 
 To get the status of the charge, use:
-[`POST:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint].
+[`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint].
 
 The value for `chargeId` must match what you provided for `orderId`.
 
@@ -323,7 +323,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 ### (Optional) Step 8 - Cancel the charge
 
 To cancel an unpaid charge, use:
-[`DEL:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
+[`DELETE:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
 
 <Tabs
 defaultValue="curl"
@@ -361,7 +361,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 ### (Optional) Step 9 - Refund a charge
 
 To refund a charge, use:
-[`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint].
+[`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint].
 
 <Tabs
 defaultValue="curl"
@@ -405,7 +405,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 ### (Optional) Step 10 - Stop an agreement
 
 To stop an agreement,
-send [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]
+send [`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-patch-endpoint]
 with `"status": "STOPPED"`.
 
 <Tabs

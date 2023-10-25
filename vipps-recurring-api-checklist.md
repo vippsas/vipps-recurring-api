@@ -27,15 +27,15 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 
 | Endpoint | Comment |
 |----------|---------|
-| Agreement: Create an agreement | [`POST:/agreements`][draft-agreement-endpoint] |
-| Agreement: Retrieve an agreement | [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] |
-| Agreement: Update an agreement | [`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint] |
-| Agreement: List charges | [`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] |
-| Charge: Create Charge | [`POST:/agreements/{agreementId}/charges`][create-charge-endpoint] |
-| Charge: Retrieve a charge | [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] |
-| Charge: Cancel a charge | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] |
-| Charge: Refund a charge | [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint] |
-| Charge: Capture a reserved charge | [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
+| Agreement: Create an agreement | [`POST:/recurring/v3/agreements`][draft-agreement-endpoint] |
+| Agreement: Retrieve an agreement | [`GET:/recurring/v3/agreements/{agreementId}`][fetch-agreement-endpoint] |
+| Agreement: Update an agreement | [`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-patch-endpoint] |
+| Agreement: List charges | [`GET:/recurring/v3/agreements/{agreementId}/charges`][list-charges-endpoint] |
+| Charge: Create Charge | [`POST:/recurring/v3/agreements/{agreementId}/charges`][create-charge-endpoint] |
+| Charge: Retrieve a charge | [`GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] |
+| Charge: Cancel a charge | [`DELETE:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] |
+| Charge: Refund a charge | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint] |
+| Charge: Capture a reserved charge | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
 
 ## Quality assurance
 
@@ -48,7 +48,7 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 
 | Action | Comment   |
 |--------|-----------|
-| Poll for the agreement status | The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement. |
+| Poll for the agreement status | The Merchant _must not_ rely on `Redirect` alone, but must always poll [`GET:/recurring/v3/agreements/{agreementId}`][fetch-agreement-endpoint] to check the status of the agreement. |
 | Provide subscription tools | The merchant must have a way for the user to manage and stop subscription in `merchantAgreementUrl` in their agreement. This should result in a timely update of the Vipps MobilePay Agreement. |
 |     Follow design guidelines| The Vipps MobilePay branding must be according to the [design guidelines](https://developer.vippsmobilepay.com/docs/design-guidelines). |
 |     Educate customer support| Make sure your customer service, etc. has all the tools and information they need available in _your_ system, through the APIs listed in the first item in this checklist, and that they do not need to visit [portal.vipps.no](https://portal.vipps.no) for normal work. |

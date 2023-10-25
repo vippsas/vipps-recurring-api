@@ -60,7 +60,7 @@ If you have a user that has deactivated their subscription, and you want to give
 
 If you want to use referrals, you can do this in many ways. A commonly used way is to assign your users a referral code (in your systems), which new users then can enter when registering. You can then use a special campaign when drafting their agreements, like this:
 
-[`POST:/agreements`][draft-agreement-endpoint]
+[`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
 
 ```json
 {
@@ -91,7 +91,7 @@ If you want to use referrals, you can do this in many ways. A commonly used way 
 
 To reward the user that referred them, you can change their agreement price and description like this:
 
-[`PATCH:/agreements/{agreementId}`][update-agreement-patch-endpoint]
+[`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-patch-endpoint]
 
 ```json
 {
