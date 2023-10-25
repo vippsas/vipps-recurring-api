@@ -33,7 +33,7 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 | Agreement: List charges | [`GET:/recurring/v3/agreements/{agreementId}/charges`][list-charges-endpoint] |
 | Charge: Create Charge | [`POST:/recurring/v3/agreements/{agreementId}/charges`][create-charge-endpoint] |
 | Charge: Retrieve a charge | [`GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] |
-| Charge: Cancel a charge | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] |
+| Charge: Cancel a charge | [`DELETE:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint] |
 | Charge: Refund a charge | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint] |
 | Charge: Capture a reserved charge | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
 

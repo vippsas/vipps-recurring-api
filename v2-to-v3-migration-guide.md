@@ -37,13 +37,13 @@ The API V3 returns different response status for some endpoints:
 | Endpoint                                                                               | V2 response status | V3 response status                  |
 |----------------------------------------------------------------------------------------|--------------------|-------------------------------------|
 | [`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-endpoint]                         | `200 OK`           | `204 No Content` or `202 Accepted`* |
-| [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        | `200 OK`           | `204 No Content` or `202 Accepted`* |
+| [`DELETE:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        | `200 OK`           | `204 No Content` or `202 Accepted`* |
 | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`* |
 | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   | `200 OK`           | `204 No Content` or `202 Accepted`* |
 
 `204 No Content` indicates that the request was successfully processed.
 
-`202 Accepted` indicates also that the request was successful but the processing has not been completed yet.
+`202 Accepted` indicates also that the request was successful, but the processing has not been completed yet.
 The request is processed asynchronously and once it is completed, the agreement or charge will be updated.
 Polling can be done to check the status. See [polling guidelines](vipps-recurring-api.md#polling-guidelines) in the API Guide.
 

@@ -323,7 +323,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 ### (Optional) Step 8 - Cancel the charge
 
 To cancel an unpaid charge, use:
-[`DEL:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
+[`DELETE:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
 
 <Tabs
 defaultValue="curl"

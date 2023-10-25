@@ -214,7 +214,7 @@ You can cancel an existing charge before the user is charged.
    The `chargeId` variable is set to this charge.
 
 2. Send `Cancel Charge` which uses
-   [`DEL:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
+   [`DELETE:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint].
 
    Send `Get Charge` to see the change of status.
 
