@@ -114,7 +114,7 @@ It *is* possible to make a monthly agreement and charge for some months only.
 The general rule: Be as customer friendly and easy to understand as possible.
 
 See:
-[`PATCH:/agreements/{agreementId}`](https://developer.vippsmobilepay.com/api/recurring/#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3).
+[`PATCH:/recurring/v3/agreements/{agreementId}`](https://developer.vippsmobilepay.com/api/recurring/#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3).
 
 ### A charge failed, but the customer did not receive any warning
 
@@ -158,7 +158,7 @@ The charge will be visible to the user in the app when it goes into the `DUE` st
 A charge will remain in `PENDING` state until the `due` date is less than 30 days away.
 
 You can retrieve all relevant charges through the
-[`GET:/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
+[`GET:/recurring/v3/agreements/{agreementId}/charges`][list-charges-endpoint] endpoint.
 
 ### If a user adds or updates a card in the Vipps or MobilePay app, will new recurring charges be made to that card?
 
@@ -263,7 +263,7 @@ change to Vipps MobilePay in different ways:
 ### How can I delete an agreement?
 
 Agreements can be stopped by calling the
-[`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
+[`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
 See [Stop an agreement](vipps-recurring-api.md#stop-an-agreement).
 
 ### Can a user cancel the agreement through the Vipps or MobilePay app?

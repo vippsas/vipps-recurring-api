@@ -36,10 +36,10 @@ The API V3 returns different response status for some endpoints:
 
 | Endpoint                                                                               | V2 response status | V3 response status                  |
 |----------------------------------------------------------------------------------------|--------------------|-------------------------------------|
-| [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint]                         | `200 OK`           | `204 No Content` or `202 Accepted`* |
+| [`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-endpoint]                         | `200 OK`           | `204 No Content` or `202 Accepted`* |
 | [`DELETE:/agreements/{agreementId}/charges/{chargeId}`][cancel-charge-endpoint]        | `200 OK`           | `204 No Content` or `202 Accepted`* |
-| [`POST:/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`* |
-| [`POST:/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   | `200 OK`           | `204 No Content` or `202 Accepted`* |
+| [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] | `200 OK`           | `204 No Content` or `202 Accepted`* |
+| [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint]   | `200 OK`           | `204 No Content` or `202 Accepted`* |
 
 `204 No Content` indicates that the request was successfully processed.
 
@@ -71,7 +71,7 @@ There is no change on the charge limits rules. We will look into how we can impl
 To draft an agreement with a fixed amount with the same charge limit as in V2, `pricing.type` should be set to `LEGACY`.
 **Please note**: `pricing.type` is an optional field. If not provided in the request, `pricing.type` will be defaulted to `LEGACY`.
 
-Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`POST:/recurring/v3/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 
@@ -104,7 +104,7 @@ V3 request body
 
 To draft agreement with a [variable amount](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
-Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`POST:/recurring/v3/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 
@@ -138,7 +138,7 @@ V3 request body
 
 The Recurring API V3 introduces a new JSON representation for agreement interval.
 
-Truncated example of request body for the [`POST:/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
+Truncated example of request body for the [`POST:/recurring/v3/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
 V2 request body
 ```json
@@ -167,11 +167,11 @@ V3 request body
 
 ## More details on charges
 
-In the API V3, the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint
+In the API V3, the response from the [`GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint
 contains the history of the charge and not just the current status.
 It also contains a summary of the total of amounts captured, refunded and cancelled.
 
-Truncated example of the response from the [`GET:/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
+Truncated example of the response from the [`GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`][fetch-charge-endpoint] endpoint:
 
 ````json
 {
@@ -245,7 +245,7 @@ In the API V3, it is possible to update the same fields on an agreement as in V2
 | suggestedMaxAmount   | pricing.suggestedMaxAmount  |
 | campaign             | **Cannot be updated in V3** |
 
-See the [`PATCH:/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
+See the [`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
 
 Also, the API V3 returns different response status. It will return `204 No Content` or `202 Accepted`.
 See [Response statuses](#response-statuses)
