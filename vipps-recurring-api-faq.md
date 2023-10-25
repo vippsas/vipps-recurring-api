@@ -223,8 +223,8 @@ it later (stop and issue a refund if it gets undesirably activated or similar).
 
 ### How do I check my customer's status?
 
-Get details about a specific Agreement:
-[`fetch agreement endpoint`][fetch-agreement-endpoint].
+Check the status of the user's agreement:
+[Retrieve an agreement](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api/#retrieve-an-agreement).
 
 ### Can I look up a user's information?
 
