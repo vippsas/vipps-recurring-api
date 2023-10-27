@@ -15,11 +15,8 @@ See the
 [Recurring API](vipps-recurring-api.md)
 for all the details.
 
-See also:
-[API FAQ](https://developer.vippsmobilepay.com/docs/faqs)
-and the
-[Getting Started](https://developer.vippsmobilepay.com/docs/getting-started)
-guide.
+For general information and questions, please check in the
+[Knowledge base](https://developer.vippsmobilepay.com/docs/common-topics/).
 
 <!-- START_COMMENT -->
 ℹ️ Please use the website:
@@ -171,7 +168,7 @@ users as described in
 
 ### For how long is a payment reserved?
 
-See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved).
+See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture/#for-how-long-is-a-payment-reserved).
 
 ### How can I make refunds?
 

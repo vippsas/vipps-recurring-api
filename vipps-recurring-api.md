@@ -530,7 +530,7 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture/#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the FAQ.
 
 `RESERVE_CAPTURE` must be
@@ -818,7 +818,7 @@ A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See
-[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture/#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
@@ -851,7 +851,7 @@ Partial capture may be used in cases where a partial order is shipped or for oth
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [FAQ: For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/faqs/reserve-and-capture-faq#for-how-long-is-a-payment-reserved)
+See [FAQ: For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture/#for-how-long-is-a-payment-reserved)
 for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.

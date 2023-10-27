@@ -13,7 +13,7 @@ END_METADATA -->
 
 In Recurring API, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 
-See [Errors](https://developer.vippsmobilepay.com/docs/common-topics/errors) for more details about the format.
+See [HTTP response codes and errors](https://developer.vippsmobilepay.com/docs/common-topics/errors) for more details about the format.
 
 API version: 3.0.0.
 
