@@ -2709,7 +2709,7 @@ components:
           type: string
           example: acme-shop-123-order123abc
           description: |-
-            An optional, bur recommended `orderId` for the charge.
+            An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
             See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
@@ -2748,7 +2748,7 @@ components:
           type: string
           example: acme-shop-123-order123abc
           description: |-
-            An optional, bur recommended `orderId` for the charge.
+            An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
             See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
@@ -2812,7 +2812,7 @@ components:
           pattern: "^[a-zA-Z\\d-]+"
           example: acme-shop-123-order123abc
           description: |-
-            An optional, bur recommended `orderId` for the charge.
+            An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
             See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
@@ -2869,7 +2869,7 @@ components:
           pattern: "^[a-zA-Z\\d-]+"
           example: acme-shop-123-order123abc
           description: |-
-            An optional, bur recommended `orderId` for the charge.
+            An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
             See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
