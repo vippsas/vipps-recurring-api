@@ -2711,7 +2711,7 @@ components:
           description: |-
             An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
-            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/knowledge-base/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
     InitialChargeV3:
       title: InitialCharge
@@ -2750,7 +2750,7 @@ components:
           description: |-
             An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
-            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/knowledge-base/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
         externalId:
           type: string
@@ -2814,7 +2814,7 @@ components:
           description: |-
             An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
-            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/knowledge-base/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
     CreateChargeV3:
       title: CreateCharge
@@ -2871,7 +2871,7 @@ components:
           description: |-
             An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
-            See: https://developer.vippsmobilepay.com/docs/common-topics/orderid/
+            See: https://developer.vippsmobilepay.com/docs/knowledge-base/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
         externalId:
           type: string
