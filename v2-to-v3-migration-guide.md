@@ -59,7 +59,7 @@ to retry the request at a later point in time.
 In V3, HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 
 See:
-[HTTP response codes and errors](https://developer.vippsmobilepay.com/docs/common-topics/errors).
+[HTTP response codes and errors](https://developer.vippsmobilepay.com/docs/knowledge-base/errors).
 
 ## New price representation
 
