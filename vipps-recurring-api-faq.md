@@ -16,7 +16,7 @@ See the
 for all the details.
 
 For general information and questions, please check in the
-[Knowledge base](https://developer.vippsmobilepay.com/docs/common-topics/).
+[Knowledge base](https://developer.vippsmobilepay.com/docs/knowledge-base/).
 
 <!-- START_COMMENT -->
 ℹ️ Please use the website:
@@ -168,7 +168,7 @@ users as described in
 
 ### For how long is a payment reserved?
 
-See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture/#for-how-long-is-a-payment-reserved).
+See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/docs/knowledge-base/reserve-and-capture/#for-how-long-is-a-payment-reserved).
 
 ### How can I make refunds?
 

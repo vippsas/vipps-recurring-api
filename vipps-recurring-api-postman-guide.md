@@ -64,7 +64,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
    This demonstrates how to create a simple agreement using [`POST:/recurring/v3/agreements`][draft-agreement-endpoint] endpoint.
 
    Ctrl+click the link, it will take you to the
-   [landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/).
+   [landing page](https://developer.vippsmobilepay.com/docs/knowledge-base/landing-page/).
    Enter your test phone number and complete the authorization in the Vipps or MobilePay app in your mobile test app.
 
    You should now have an active agreement. The variable `agreementId` is set in the environment.
@@ -75,7 +75,7 @@ For details about the calls, see [Agreement endpoints][agreement-endpoints] in t
 
    If you confirmed the agreement, the status should be ACTIVE in the response.
    If you didn't go through with the confirmation, the status will be PENDING for a
-   [maximum of 10 minutes](https://developer.vippsmobilepay.com/docs/common-topics/timeouts),
+   [maximum of 10 minutes](https://developer.vippsmobilepay.com/docs/knowledge-base/timeouts),
    before it goes to `EXPIRED`.
 
 #### Create an agreement with an initial charge

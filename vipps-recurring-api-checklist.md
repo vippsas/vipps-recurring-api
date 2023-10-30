@@ -42,7 +42,7 @@ For examples of requests and responses, see the [Postman collection](/tools/vipp
 | Action | Comment |
 |--------|---------|
 |     Handle errors | Monitor the error messages Vipps MobilePay returns from the APIs and correct problems as quickly as possible. It's recommended to log errors emitted by our APIs. This makes it easier to pinpoint what has gone wrong. |
-|     Include standard HTTP headers | Send the [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers) in all API requests for better tracking and troubleshooting (mandatory for partners and platforms, who must send these headers as part of the checklist approval). |
+|     Include standard HTTP headers | Send the [HTTP headers](https://developer.vippsmobilepay.com/docs/knowledge-base/http-headers) in all API requests for better tracking and troubleshooting (mandatory for partners and platforms, who must send these headers as part of the checklist approval). |
 
 ## Avoid integration pitfalls
 

@@ -104,7 +104,7 @@ This is specified with the `transactionType`, and for "direct capture"
 the sales unit must be configured for this by Vipps MobilePay.
 
 For more details, see
-[Knowledge base: Reserve and capture](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture).
+[Knowledge base: Reserve and capture](https://developer.vippsmobilepay.com/docs/knowledge-base/reserve-and-capture).
 
 **Please note:** Vipps MobilePay will *only* perform a payment transaction on an agreement that
 the merchant has created a charge for with the [`POST:/recurring/v3/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
@@ -183,7 +183,7 @@ All API calls are authenticated with an access token and an API subscription key
 See
 [Get an access token](https://developer.vippsmobilepay.com/docs/APIs/access-token-api#get-an-access-token), for details.
 
-Use the standard [HTTP headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers) for all requests.
+Use the standard [HTTP headers](https://developer.vippsmobilepay.com/docs/knowledge-base/http-headers) for all requests.
 
 ## Idempotency Key header
 
@@ -196,7 +196,7 @@ This way, if a request fails for any technical reason, or there is a networking 
 **Important:** If you reuse an idempotency key on a different request, you will get a 409 CONFLICT.
 
 See the
-[Idempotency header](https://developer.vippsmobilepay.com/docs/common-topics/http-headers#idempotency)
+[Idempotency header](https://developer.vippsmobilepay.com/docs/knowledge-base/http-headers#idempotency)
 for more details.
 
 ## Continuation-Token header
@@ -318,7 +318,7 @@ or to Vipps MobilePay in a mobile flow (with `vipps://`), where the
 user can then approve the agreement.
 
 See
-[landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page)
+[landing page](https://developer.vippsmobilepay.com/docs/knowledge-base/landing-page)
 from Knowledge base, for more details.
 
 **Please note:** If payment should be required to activate an agreement, you need to specify an initial charge.
@@ -530,7 +530,7 @@ The initial charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See:
-[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture/#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/knowledge-base/reserve-and-capture/#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the FAQ.
 
 `RESERVE_CAPTURE` must be
@@ -787,7 +787,7 @@ Each specific charge on an agreement must be scheduled by the merchant.
 
 To create a charge use the [`POST:/recurring/v3/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 
-Also see check [Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/common-topics/orderid) before creating charges.
+Also see check [Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/knowledge-base/orderid) before creating charges.
 
 For agreements of type `variable`, also see [Recurring agreements with variable amount](#create-charge).
 
@@ -818,7 +818,7 @@ A recurring charge has two forms of transaction, `DIRECT_CAPTURE` and `RESERVE_C
 
 `DIRECT_CAPTURE` processes the payment immediately, while `RESERVE_CAPTURE`
 reserves the payment for capturing at a later date. See
-[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture/#what-is-the-difference-between-reserve-capture-and-direct-capture)
+[What is the difference between "Reserve Capture" and "Direct Capture"](https://developer.vippsmobilepay.com/docs/knowledge-base/reserve-and-capture/#what-is-the-difference-between-reserve-capture-and-direct-capture)
 in the FAQ for more details.
 
 `RESERVE_CAPTURE` must be used when selling physical goods or a need to provide access at a later point.
@@ -851,7 +851,7 @@ Partial capture may be used in cases where a partial order is shipped or for oth
 Partial capture can be called as many times as required while remaining reserved amount is available.
 
 If one or more partial capture have been made, any remaining reserved amount will be automatically released after a few days.
-See [FAQ: For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/common-topics/reserve-and-capture/#for-how-long-is-a-payment-reserved)
+See [FAQ: For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/knowledge-base/reserve-and-capture/#for-how-long-is-a-payment-reserved)
 for more details.
 
 If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
@@ -1460,7 +1460,7 @@ Display of charge failure due to a charge being higher than the `maxAmount` in t
 
 *This functionality is only available for special cases.*
 
-See: [Landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page)
+See: [Landing page](https://developer.vippsmobilepay.com/docs/knowledge-base/landing-page)
 
 If the `skipLandingPage` property is set to `true` in the
 [`POST:/recurring/v3/agreements`][draft-agreement-endpoint]
@@ -1498,7 +1498,7 @@ to retry the request at a later point in time.
 
 HTTP responses for errors follow the [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807) standard.
 For more details about error types, see
-[Knowledge base: Errors](https://developer.vippsmobilepay.com/docs/common-topics/errors).
+[Knowledge base: Errors](https://developer.vippsmobilepay.com/docs/knowledge-base/errors).
 
 ## Rate limiting
 
@@ -1548,7 +1548,7 @@ the `Merchant-Serial-Number` header to identify which of your merchants you
 are acting on behalf of. The `Merchant-Serial-Number` must be sent in the header
 of all API requests.
 
-By including the [HTTP Headers](https://developer.vippsmobilepay.com/docs/common-topics/http-headers/) you will make
+By including the [HTTP Headers](https://developer.vippsmobilepay.com/docs/knowledge-base/http-headers/) you will make
 it easier to investigate problems, if anything unexpected happens. Partners may
 re-use the values of the `Vipps-System-Name` and `Vipps-System-Plugin-Name` in
 the plugins headers if having different values do not make sense.
@@ -1578,8 +1578,8 @@ merchants making API calls for themselves.
 
 General guidelines for polling with the
 [`GET:/recurring/v3/agreements/{agreementId}`][fetch-agreement-endpoint]
-endpoint can be found at: [Knowledge base: Polling guidelines](https://developer.vippsmobilepay.com/docs/common-topics/polling-guidelines).
-See also [Knowledge base: Timeouts](https://developer.vippsmobilepay.com/docs/common-topics/timeouts).
+endpoint can be found at: [Knowledge base: Polling guidelines](https://developer.vippsmobilepay.com/docs/knowledge-base/polling-guidelines).
+See also [Knowledge base: Timeouts](https://developer.vippsmobilepay.com/docs/knowledge-base/timeouts).
 
 ## Notifications to users for failed charges
 
@@ -1615,7 +1615,7 @@ You can redirect the user to a website or app once they have used the Vipps or M
 
 We have limited control over the redirect back to the merchant's website after a completed purchase or log-in. Your integration must not assume that the app will redirect to the exact same session. For example, don't rely entirely on cookies in order to handle the redirect event. The redirect may send the user to a different web browser
 
-For more details, see [Knowledge base: Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/common-topics/redirects).
+For more details, see [Knowledge base: Recommendations regarding handling redirects](https://developer.vippsmobilepay.com/docs/knowledge-base/redirects).
 
 ## Different agreement types and when to use them
 

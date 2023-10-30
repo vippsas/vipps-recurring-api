@@ -171,7 +171,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/ \
 ### Step 4 - Authorize the agreement
 
 Open the `vippsConfirmationUrl` link that is returned in the previous step. It will take you to the
-[landing page](https://developer.vippsmobilepay.com/docs/common-topics/landing-page/).
+[landing page](https://developer.vippsmobilepay.com/docs/knowledge-base/landing-page/).
 The phone number of your test user should already be filled in, so you only have to click *Next*.
 
 You will be presented with the agreement in the app, where you can authorize and be directed to the specified `merchantRedirectUrl` under a "best effort" policy.
