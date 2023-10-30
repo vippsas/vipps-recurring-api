@@ -1807,13 +1807,15 @@ components:
         start:
           type: string
           format: date-time
-          description: Date when agreement was started in ISO 8601 format.
+          description: |-
+            Date and time when agreement was started, in ISO 8601 format.
+            This is when the agreement was activated.
           example: "2019-01-01T00:00:00Z"
           nullable: true
         stop:
           type: string
           format: date-time
-          description: Date when agreement was stopped in ISO 8601 format.
+          description: Date and time when agreement was stopped, in ISO 8601 format.
           nullable: true
           example: null
         status:
@@ -1884,18 +1886,22 @@ components:
         created:
           type: string
           format: date-time
-          description: Date when agreement was created in ISO 8601 format.
+          description: |-
+            Date when agreement was created, in ISO 8601 format.
+            This is when the agreement was initiated with the API.
           example: "2019-01-01T00:00:00Z"
         start:
           type: string
           format: date-time
-          description: Date when agreement was started in ISO 8601 format.
+          description: |-
+            Date and time when agreement was started, in ISO 8601 format.
+            This is when the agreement was activated.
           example: "2019-01-01T00:00:00Z"
           nullable: true
         stop:
           type: string
           format: date-time
-          description: Date when agreement was stopped in ISO 8601 format.
+          description: Date and time when agreement was stopped, in ISO 8601 format.
           nullable: true
           example: null
         status:
