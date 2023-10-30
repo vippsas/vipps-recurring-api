@@ -1840,7 +1840,7 @@ components:
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
           description: |-
             The full path of the URL for the userinfo endpoint where the user data can be retrieved:
-            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://developer.vippsmobilepay.com/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
+            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo).
             This will be null if profile data was not requested.
           nullable: true
         variableAmount:
@@ -1930,7 +1930,7 @@ components:
           example: https://api.vipps.no/vipps-userinfo-api/userinfo/8d7de74e-0243-11eb-adc1-0242ac120002
           description: |-
             The full path of the URL for the userinfo endpoint where the user data can be retrieved.:
-            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://developer.vippsmobilepay.com/api/userinfo#tag/Vipps-Userinfo-API/operation/getUserinfo).
+            [`GET:/vipps-userinfo-api/userinfo/{sub}`](https://developer.vippsmobilepay.com/api/userinfo#operation/getUserinfo).
             This will be null if profile data was not requested.
           nullable: true
         externalId:
