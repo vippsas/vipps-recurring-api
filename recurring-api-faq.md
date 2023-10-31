@@ -12,7 +12,7 @@ END_METADATA -->
 # Frequently asked questions
 
 See the
-[Recurring API](vipps-recurring-api.md)
+[Recurring API](recurring-api-guide.md)
 for all the details.
 
 For general information and questions, please check in the
@@ -53,7 +53,7 @@ No. We do *not* create charges based on the agreement, every charge must be crea
 When a merchant creates a charge, we attempt to charge the customer, starting on the `due`
 date, and for as long after that as specified in `retryDays`.
 
-For more details, see our [call-by-call guide](vipps-recurring-api.md#call-by-call-guide)
+For more details, see our [call-by-call guide](recurring-api-guide.md#call-by-call-guide)
 
 ### When are charges processed?
 
@@ -77,7 +77,7 @@ to account for possible networking issues etc.
 ### How can I require an initial payment from the user for setting up the agreement?
 
 You need to use
-[Initial charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#initial-charge).
+[Initial charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide#initial-charge).
 
 ### Can the charge amount be different from the agreement price?
 
@@ -174,7 +174,7 @@ See [For how long is a payment reserved?](https://developer.vippsmobilepay.com/d
 
 Refunds must always be done using the API, through the merchant's administration solution.
 
-From the [API checklist](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-checklist/):
+From the [API checklist](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-checklist/):
 
 > Make sure your customer service, etc. have all the tools and information they need available in your system, through the APIs listed in the first item in this checklist, and that they do not need to visit portal.vipps.no for normal work.
 
@@ -221,13 +221,13 @@ it later (stop and issue a refund if it gets undesirably activated or similar).
 ### How do I check my customer's status?
 
 Check the status of the user's agreement:
-[Retrieve an agreement](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api/#retrieve-an-agreement).
+[Retrieve an agreement](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide/#retrieve-an-agreement).
 
 ### Can I look up a user's information?
 
 We can  provide a user's information with the user's consent.
 The merchant must ask the user for consent when creating the agreement using
-[Userinfo](vipps-recurring-api.md#userinfo)
+[Userinfo](recurring-api-guide.md#userinfo)
 with the correct
 [`scope`](https://developer.vippsmobilepay.com/docs/APIs/userinfo-api/#scope).
 The requested information is only available for a
@@ -261,7 +261,7 @@ change to Vipps MobilePay in different ways:
 
 Agreements can be stopped by calling the
 [`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-endpoint] endpoint.
-See [Stop an agreement](vipps-recurring-api.md#stop-an-agreement).
+See [Stop an agreement](recurring-api-guide.md#stop-an-agreement).
 
 ### Can a user cancel the agreement through the Vipps or MobilePay app?
 
@@ -269,7 +269,7 @@ No, the user needs to contact the merchant which can then cancel or modify the
 agreement as they see fit.
 
 The merchant must provide a link to the "my page" on the merchant's website when creating the agreement.
-See [Create an agreement](vipps-recurring-api.md#create-an-agreement).
+See [Create an agreement](recurring-api-guide.md#create-an-agreement).
 
 Users may want to make other changes to the Agreement than simply cancel it.
 A subscription may be paused for a period, it may be changed to a lower
@@ -372,7 +372,7 @@ agreements, it will no longer be possible to:
 ### Can I look up an agreementId if I have the chargeId?
 
 Yes. See
-[Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api/#retrieve-a-charge).
+[Retrieve a charge](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide/#retrieve-a-charge).
 
 ## Common problems/errors
 

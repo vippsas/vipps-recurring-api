@@ -279,7 +279,7 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID/charge
 The status will be `PENDING` until the payment is processed.
 
 A charge must be scheduled a minimum of two days before the payment will occur (it is a minimum one day in the test environment).
-See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details about timing.
+See [Direct Capture](recurring-api-guide.md#direct-capture) for more details about timing.
 
 ### Step 7 - Fetch the charge
 
@@ -448,10 +448,10 @@ curl https://apitest.vipps.no/recurring/v3/agreements/UNIQUE-AGREEMENT-ID  \
 
 ## Next steps
 
-See the [Recurring API guide](./vipps-recurring-api.md) to read about the concepts and details.
+See the [Recurring API guide](./recurring-api-guide.md) to read about the concepts and details.
 
 For more examples, see the step-by-step instructions in the
-[Recurring API Postman guide](vipps-recurring-api-postman-guide.md).
+[Recurring API Postman guide](recurring-api-postman-guide.md).
 
 
 [access-token-endpoint]: https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost

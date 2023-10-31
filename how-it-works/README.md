@@ -16,10 +16,10 @@ END_METADATA -->
 
 <!-- END_COMMENT -->
 
-* [How Recurring works](vipps-recurring-api-howitworks.md)
-* [Recurring API with initial charge](vipps-recurring-api-initial-charge-howitworks.md)
-* [Recurring API with variable amount](vipps-recurring-api-variable-howitworks.md)
-* [Recurring API with campaign](vipps-recurring-api-campaigns-howitworks.md)
-* [Implementation inspiration](vipps-recurring-api-inspiration-howitworks.md)
+* [How Recurring works](recurring-api-howitworks.md)
+* [Recurring API with initial charge](recurring-api-initial-charge-howitworks.md)
+* [Recurring API with variable amount](recurring-api-variable-howitworks.md)
+* [Recurring API with campaign](recurring-api-campaigns-howitworks.md)
+* [Implementation inspiration](recurring-api-inspiration-howitworks.md)
 
 See the [Subscriptions](https://developer.vippsmobilepay.com/docs/solutions/recurring-and-login) solution for how Login and Recurring can be used together to simplify the payment flow.
