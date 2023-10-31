@@ -12,7 +12,7 @@ END_METADATA -->
 # Recurring API extended Postman guide
 
 This is a guide for the using the Recurring API with Postman, and is an extension of the
-[Recurring API quick start guide](vipps-recurring-api-quick-start.md) which shows the
+[Recurring API quick start guide](recurring-api-quick-start.md) which shows the
 recommended flow in both Postman and curl.
 
 ## Setup
@@ -31,7 +31,7 @@ You will need the following values, as described in the
 
 Import the following files into Postman:
 
-* [Recurring API Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json)
+* [Recurring API Postman collection](/tools/recurring-v3-api-postman-collection.json)
 * [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
 🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
@@ -140,7 +140,7 @@ If you need to get access to some user information in addition to the recurring 
    [`GET:/recurring/v3/agreements`][list-agreements-endpoint] endpoint.
 
    This includes a query `status=ACTIVE`, so it filters out other
-   [agreement states](vipps-recurring-api.md#agreement-states).
+   [agreement states](recurring-api-guide.md#agreement-states).
 
 2. Change or remove the query to see agreements with other states.
 
@@ -175,7 +175,7 @@ Charges for initial payments are created automatically.
 However, you need to create charge requests for the recurring payments.
 
 A charge must be scheduled a minimum of two days before the payment will occur (it is a minimum one day in the test environment).
-See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details about timing.
+See [Direct Capture](recurring-api-guide.md#direct-capture) for more details about timing.
 
 1. Set `agreementId` to the ID of an ACTIVE agreement.
 
@@ -200,7 +200,7 @@ See [Direct Capture](vipps-recurring-api.md#direct-capture) for more details abo
 2. Send `List Charges` which uses [`GET:/recurring/v3/agreements/{agreementId}/charges`][list-charges-endpoint].
 
    This includes a query `chargeStatus=DUE` and filters out other
-   [charge states](vipps-recurring-api.md#charge-states).
+   [charge states](recurring-api-guide.md#charge-states).
 
 3. Change or remove the query to see charges with other states.
 

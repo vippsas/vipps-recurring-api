@@ -16,17 +16,17 @@ END_METADATA -->
 ### Campaign
 
 The Recurring API V3 adds new campaign types.
-See [Campaigns](vipps-recurring-api.md#campaigns-in-v3-api) in the API Guide.
+See [Campaigns](recurring-api-guide.md#campaigns-in-v3-api) in the API Guide.
 
 ### Reserve capture
 
 The Recurring API V3 adds the functionality to do reserve and capture on recurring charges.
-See [Reserve capture](vipps-recurring-api.md#reserve-capture) in the API Guide.
+See [Reserve capture](recurring-api-guide.md#reserve-capture) in the API Guide.
 
 ### Partial capture
 
 The Recurring API V3 adds the functionality to do partial capture on reserved charges.
-See [partial capture](vipps-recurring-api.md#partial-capture) in the API Guide.
+See [partial capture](recurring-api-guide.md#partial-capture) in the API Guide.
 
 ## What has changed in V3
 
@@ -45,7 +45,7 @@ The API V3 returns different response status for some endpoints:
 
 `202 Accepted` indicates also that the request was successful, but the processing has not been completed yet.
 The request is processed asynchronously and once it is completed, the agreement or charge will be updated.
-Polling can be done to check the status. See [polling guidelines](vipps-recurring-api.md#polling-guidelines) in the API Guide.
+Polling can be done to check the status. See [polling guidelines](recurring-api-guide.md#polling-guidelines) in the API Guide.
 
 **Please note:** Responses might include a `Retry-After`-header that will indicate the earliest time you should
 retry the request or poll the resource to see if an operation has been performed.
@@ -102,7 +102,7 @@ V3 request body
 
 ### Variable amount
 
-To draft agreement with a [variable amount](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
+To draft agreement with a [variable amount](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide#recurring-agreements-with-variable-amount), `pricing.type` should be set to `VARIABLE`.
 
 Truncated example of request body for the [`POST:/recurring/v3/agreements`][draft-agreement-endpoint] endpoint from V2 and the equivalent in V3:
 
@@ -223,13 +223,13 @@ Truncated example of the response from the [`GET:/recurring/v3/agreements/{agree
 
 The misspelled `Idempotent-Key` header is deprecated.
 The`Idempotency-Key` header is now required for the `POST` and `PATCH` endpoints.
-See [Idempotency key header](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api#idempotency-key-header-v3-api-coming-soon) in the API Guide.
+See [Idempotency key header](https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-guide#idempotency-key-header-v3-api-coming-soon) in the API Guide.
 
 ## Product description guidelines
 
 We do not recommend you to use `Product Description` for agreements with a campaign.
 We see that the user experience is not optimal when a lot of text is "squeezed" in the purple bubble displaying an agreement.
-See [Campaigns in v3](vipps-recurring-api.md#campaigns-in-v3-api) in the API Guide.
+See [Campaigns in v3](recurring-api-guide.md#campaigns-in-v3-api) in the API Guide.
 
 ## Update an agreement
 

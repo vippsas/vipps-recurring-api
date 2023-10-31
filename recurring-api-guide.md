@@ -175,7 +175,7 @@ For a `"transactionType": "RESERVE_CAPTURE"` setup, the normal flow would be:
 
 See [Authentication and authorization](#authentication-and-authorization).
 
-See the [Quick start guide](vipps-recurring-api-quick-start.md) for en easy way to test the API.
+See the [Quick start guide](recurring-api-quick-start.md) for en easy way to test the API.
 
 ## Authentication and authorization
 
@@ -1586,14 +1586,14 @@ See also [Knowledge base: Timeouts](https://developer.vippsmobilepay.com/docs/kn
 We notify the user in two ways, through push notifications and failure texts on the charge.
 When a charge fails to be processed, we send the user a push notification letting them know the charge failed to process.
 This push message is sent every time we try to process the charge, see [charge times](#charge-times) for when the processing of charges happen.
-More information about how and when we send push notifications can be found in the [Recurring API FAQ](vipps-recurring-api-faq.md#when-do-users-get-push-messages).
+More information about how and when we send push notifications can be found in the [Recurring API FAQ](recurring-api-faq.md#when-do-users-get-push-messages).
 
 **Please note:** We send push notification for failed payments regardless if `Notification upon payment` is toggled on or off on the agreement.
 This toggle only determine if the user will get notified when a charge is successfully charged.
 
 In addition to sending push notifications, a failure texts is also set on the charge.
 By letting the customer know why the charge failed we enable them to fix the underlying issue before the `retryDays` are over.
-For more information about what the failure texts are, see the [FAQ](vipps-recurring-api-faq.md#what-is-shown-to-users-when-charge-processing-fails).
+For more information about what the failure texts are, see the [FAQ](recurring-api-faq.md#what-is-shown-to-users-when-charge-processing-fails).
 
 **Please note:** These exact reasons why the charge fails is not shown in the recurring API, only to the customers (users).
 See [charge failure reason](#charge-failure-reasons) for an overview of what is available in the merchant API.
@@ -1656,7 +1656,7 @@ As an example: If you have a campaign of 10 NOK for a digital media subscription
 
 This is the preferred flow whenever you have a type of campaign where the subscription has a certain price for a certain interval or time, before it switches over to ordinary price.
 
-See [Campaigns](#campaigns) and [How it works: Campaigns](./how-it-works/vipps-recurring-api-campaigns-howitworks.md) for details about campaigns.
+See [Campaigns](#campaigns) and [How it works: Campaigns](./how-it-works/recurring-api-campaigns-howitworks.md) for details about campaigns.
 
 When setting a campaign, this follows the normal agreement flow - with some changes. Instead of showing the ordinary price of the agreement, the campaign price will override this, and the ordinary price will be shown below together with information about when the change from the campaign price to the ordinary price will happen.
 

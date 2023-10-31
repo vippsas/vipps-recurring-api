@@ -3283,7 +3283,7 @@ components:
         type:
           type: string
           description: Path to type of error
-          example: https://developer.vippsmobilepay.com/docs/APIs/recurring-api/vipps-recurring-api-problems#validation-error
+          example: https://developer.vippsmobilepay.com/docs/APIs/recurring-api/recurring-api-problems#validation-error
         title:
           type: string
           description: Short description of the error
