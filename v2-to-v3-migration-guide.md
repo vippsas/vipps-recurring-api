@@ -250,6 +250,12 @@ See the [`PATCH:/recurring/v3/agreements/{agreementId}`][update-agreement-endpoi
 Also, the API V3 returns different response status. It will return `204 No Content` or `202 Accepted`.
 See [Response statuses](#response-statuses)
 
+## Do we need to migrate our agreements and charges?
+
+No, the API is just your "view" of recurring, so the agreements and charges are the same. 
+Though as older versions of the API might not be able to render all features of newer versions, 
+we recommend to use only one version at a time to avoid confusion.
+
 
 [draft-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/DraftAgreementV3
 [update-agreement-endpoint]: https://developer.vippsmobilepay.com/api/recurring#tag/Agreement-v3-endpoints/operation/UpdateAgreementPatchV3
