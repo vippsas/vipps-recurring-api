@@ -31,7 +31,7 @@ You will need the following values, as described in the
 
 Import the following files into Postman:
 
-* [Recurring API Postman collection](/tools/vipps-recurring-v3-api-postman-collection.json)
+* [Recurring API Postman collection](/tools/recurring-v3-api-postman-collection.json)
 * [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/vipps-api-global-postman-environment.json)
 
 🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
