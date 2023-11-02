@@ -718,7 +718,7 @@ We see that the user experience is not optimal when a lot of text is "squeezed" 
 |----------|-------------------------------------------------------------------------------------------------------------------------|
 | `type`   | The type of the campaign                                                                                                |
 | `price`  | The price that the customer will pay for the period of the campaign                                                     |
-| `period` | The period where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+| `period` | The period where the campaign price is applied. Consists of a `Unit` and a `Count`, for example: `{ "unit": "MONTH", "count": 1 }` |
 
 ![screen-price-campaign](images/campaigns/screens/period-campaign.png)
 
@@ -773,7 +773,7 @@ We see that the user experience is not optimal when a lot of text is "squeezed" 
 | `type`     | The type of the campaign                                                                                                          |
 | `price`    | The price that the customer will pay for each interval during the campaign                                                        |
 | `end`      | The end date of the campaign                                                                                                      |
-| `interval` | The payment interval where the campaign price is applied. Consist of a Unit and a Count, example; { "unit": "MONTH", "count": 1 } |
+| `interval` | The payment interval where the campaign price is applied. Consists of a `Unit` and a `Count`, for example: `{ "unit": "MONTH", "count": 1 }` |
 
 ![screen-full-flex-campaign](images/campaigns/screens/full-flex-campaign.png)
 
