@@ -29,10 +29,12 @@ paths:
         - Agreement v2 endpoints (deprecated)
       summary: List Agreements
       description: |-
-        The API call allows merchant to fetch all agreements.
+        The API endpoint allows merchant to fetch all agreements.
         If no query status is supplied it will default to only retrieving active agreements.
         There is no way to list all Agreements with all statuses, this is due to performance.
-        Use the `createdAfter` query to paginate the response.
+        **Please note:** Use the query parameters `status` and `createdAfter` specify the
+        agreements you want to retrieve, and to speed up the query. Try to avoid
+        requests without query parameters.
       operationId: ListAgreements
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -64,7 +66,7 @@ paths:
         - Agreement v2 endpoints (deprecated)
       summary: Create a new Agreement, to be confirmed in the app
       description: |-
-        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
+        The API endpoint allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
         This is used to redirect the user to the landing page, or to the app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
@@ -346,7 +348,7 @@ paths:
         - Agreement v3 endpoints
       summary: List Agreements
       description: |-
-        The API call allows merchant to fetch all agreements.
+        The API endpoint allows merchant to fetch all agreements.
         If no query status is supplied it will default to only retrieving active agreements.
         There is no way to list all Agreements with all statuses, this is due to performance.
         Use the `createdAfter` query to paginate the response.
@@ -381,7 +383,7 @@ paths:
         - Agreement v3 endpoints
       summary: Create a new Agreement, to be confirmed in the Vipps or MobilePay app
       description: |-
-        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
+        The API endpoint allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
         This is used to redirect the user to the Vipps MobilePay landing page, or to the Vipps or MobilePay app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
@@ -1145,7 +1147,7 @@ components:
       in: header
       name: Authorization
       description: >-
-        The access token is a base64-encoded string that is required for all API calls.
+        The access token is a base64-encoded string that is required for all API requests.
         It is a JWT (JSON Web Token).
         The access token is fetched from the
             [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
