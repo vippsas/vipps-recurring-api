@@ -69,7 +69,7 @@ paths:
         - Agreement v2 endpoints (deprecated)
       summary: Create a new Agreement, to be confirmed in the app
       description: |-
-        The API endpoint allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
+        The API endpoint allows merchants to create agreements for a user to accept. Once the agreement is drafted, you will receive a `vippsConfirmationUrl`.
         This is used to redirect the user to the landing page, or to the app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
