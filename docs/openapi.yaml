@@ -29,10 +29,15 @@ paths:
         - Agreement v2 endpoints (deprecated)
       summary: List Agreements
       description: |-
-        The API call allows merchant to fetch all agreements.
-        If no query status is supplied it will default to only retrieving active agreements.
-        There is no way to list all Agreements with all statuses, this is due to performance.
-        Use the `createdAfter` query to paginate the response.
+        The API endpoint allows merchant to fetch all agreements.
+        If no query status is supplied, it will default to only retrieving active agreements.
+        There is no way to list all agreements with all statuses; this is due to performance.
+        **Please note:** Use the query parameters `status` and `createdAfter` specify the
+        agreements you want to retrieve, in order to speed up the query. Try to avoid
+        requests without query parameters. Set `createdAfter` to the most recent value as possible.
+        For instance, if you fetch ACTIVE agreements every 24 hours, use `createdAfter=now-25h` or similar.
+        Not that, in the future, it may be possible to encounter errors when the number of agreements in the response is too high
+        (e.g., `413 Content Too Large` or similar).
       operationId: ListAgreements
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -64,7 +69,7 @@ paths:
         - Agreement v2 endpoints (deprecated)
       summary: Create a new Agreement, to be confirmed in the app
       description: |-
-        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
+        The API endpoint allows merchants to create agreements for a user to accept. Once the agreement is drafted, you will receive a `vippsConfirmationUrl`.
         This is used to redirect the user to the landing page, or to the app if `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
@@ -346,7 +351,7 @@ paths:
         - Agreement v3 endpoints
       summary: List Agreements
       description: |-
-        The API call allows merchant to fetch all agreements.
+        The API endpoint allows merchant to fetch all agreements.
         If no query status is supplied it will default to only retrieving active agreements.
         There is no way to list all Agreements with all statuses, this is due to performance.
         Use the `createdAfter` query to paginate the response.
@@ -381,11 +386,11 @@ paths:
         - Agreement v3 endpoints
       summary: Create a new Agreement, to be confirmed in the Vipps or MobilePay app
       description: |-
-        The API call allows merchants to create agreements for a user to accept. Once the agreement is drafted you will receive a `vippsConfirmationUrl`.
-        This is used to redirect the user to the Vipps MobilePay landing page, or to the Vipps or MobilePay app if `"isApp":true` is used.
+        The API endpoint allows merchants to create agreements for a user to accept. Once the agreement is drafted, you will receive a `vippsConfirmationUrl`.
+        This is used to redirect the user to the Vipps MobilePay landing page, or to the Vipps or MobilePay app when `"isApp":true` is used.
 
         If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
-        You **have** to implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`.
+        You **must** implement polling on the agreement to check when the status changes to active, instead of relying on the redirect back to the `merchantRedirectUrl`.
         We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
 
         Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType.
@@ -775,7 +780,7 @@ paths:
         - Charge v2 endpoints (deprecated)
       summary: Cancel a Charge
       description: |-
-        Cancels a pending, due or reserved charge.
+        Cancels a pending, due, or reserved charge.
         When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge
         will be released back to the customer.
 
@@ -843,7 +848,7 @@ paths:
         - Charge v2 endpoints (deprecated)
       summary: Refund a charge
       description: |-
-        Refunds a charge, can also do a partial refund (refunding a smaller part of the payment).
+        Refunds a charge, and can also do a partial refund (refunding a smaller part of the payment).
       operationId: RefundCharge
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -1013,7 +1018,7 @@ paths:
       summary: Fetch a charge by id
       description: |-
         Fetch a single charge just by `chargeId`, when the `agreementId` is unknown.
-        Useful for investigating claims from customers, but not intended for automation.
+        This is useful for investigating claims from customers, but not intended for automation.
         This is *not* a replacement for the normal endpoint for fetching charges:
         `GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`.
       operationId: FetchChargeByIdV3
@@ -1145,7 +1150,7 @@ components:
       in: header
       name: Authorization
       description: >-
-        The access token is a base64-encoded string that is required for all API calls.
+        The access token is a base64-encoded string that is required for all API requests.
         It is a JWT (JSON Web Token).
         The access token is fetched from the
             [`POST:/accesstoken/get`](https://developer.vippsmobilepay.com/api/access-token#tag/Authorization-Service/operation/fetchAuthorizationTokenUsingPost)
