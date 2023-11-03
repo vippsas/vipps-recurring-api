@@ -30,11 +30,14 @@ paths:
       summary: List Agreements
       description: |-
         The API endpoint allows merchant to fetch all agreements.
-        If no query status is supplied it will default to only retrieving active agreements.
-        There is no way to list all Agreements with all statuses, this is due to performance.
+        If no query status is supplied, it will default to only retrieving active agreements.
+        There is no way to list all agreements with all statuses; this is due to performance.
         **Please note:** Use the query parameters `status` and `createdAfter` specify the
-        agreements you want to retrieve, and to speed up the query. Try to avoid
-        requests without query parameters.
+        agreements you want to retrieve, in order to speed up the query. Try to avoid
+        requests without query parameters. Set `createdAfter` to the most recent value as possible.
+        For instance, if you fetch ACTIVE agreements every 24 hours, use `createdAfter=now-25h` or similar.
+        Not that, in the future, it may be possible to encounter errors when the number of agreements in the response is too high
+        (e.g., `413 Content Too Large` or similar).
       operationId: ListAgreements
       parameters:
         - $ref: "#/components/parameters/Authorization"
