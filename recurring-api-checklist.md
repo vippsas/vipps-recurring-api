@@ -23,7 +23,7 @@ API version: 3.0
 ## Endpoints to integrate
 
 Integrate _all_ the [API endpoints](https://developer.vippsmobilepay.com/api/recurring/).
-For examples of requests and responses, see the [Postman collection](/tools/recurring-v3-api-postman-collection.json) and [environment](https://github.com/vippsas/vipps-developer-docs/blob/main/static/internal-tools/global-postman-environment.json).
+For examples of requests and responses, see the [Postman collection](/tools/recurring-v3-api-postman-collection.json) and [environment](https://developer.vippsmobilepay.com/internal-tools/global-postman-environment.json).
 
 | Endpoint | Comment |
 |----------|---------|
