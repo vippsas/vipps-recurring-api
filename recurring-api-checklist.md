@@ -37,6 +37,13 @@ For examples of requests and responses, see the [Postman collection](/tools/recu
 | Charge: Refund a charge | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/refund`][refund-charge-endpoint] |
 | Charge: Capture a reserved charge | [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
 
+When the checklist is completed, notify Vipps MobilePay Integration Service
+at [developer@vippsmobilepay.com](mailto:developer@vippsmobilepay.com).
+Include examples from the test environment, pilot customer info, and a description of the implemented solution.
+
+We will verify the integration and contact you.
+After the checklist is approved, we'll send you the information you need to get started.
+
 ## Quality assurance
 
 | Action | Comment |
