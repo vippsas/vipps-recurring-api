@@ -854,7 +854,8 @@ If one or more partial capture have been made, any remaining reserved amount wil
 See [FAQ: For how long is a payment reserved](https://developer.vippsmobilepay.com/docs/knowledge-base/reserve-and-capture/#for-how-long-is-a-payment-reserved)
 for more details.
 
-If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
+If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer
+and the charge status will be set to `CHARGED`.
 
 ### Amount limits
 
@@ -911,7 +912,8 @@ This is an example of a request body for the [`POST:/recurring/v3/agreements/{ag
 ### Cancel a charge
 
 You can cancel charges that are in the `PENDING`, `DUE` or `RESERVED` state.
-If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer.
+If you cancel a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge will be released back to the customer
+and the charge status will be set to `CHARGED`.
 
 **Please note:** If you cancel an agreement, there is no need to cancel the charges that belong to the agreement. We will do this automatically for you.
 
@@ -1146,9 +1148,9 @@ This table has all the details for the charge states returned by the
 | `CHARGED`            | The charge has been successfully processed, and the available amount has been captured. |
 | `FAILED`             | The charge has failed because of insufficient funds, no valid cards, etc. The Vipps or MobilePay app gives the user all possible opportunities to pay, including adding a new card, but does not provide the details to the merchant. |
 | `REFUNDED`           | The charge has been refunded. Refunds are allowed up to 365 days after the capture date. |
-| `PARTIALLY_REFUNDED` | A part of the captured amount has been refunded. |
+| `PARTIALLY_REFUNDED` | Part of the captured amount has been refunded. |
 | `RESERVED`           | The charge amount has been reserved, and can now be captured [`POST:/recurring/v3/agreements/{agreementId}/charges/{chargeId}/capture`][capture-charge-endpoint] |
-| `PARTIALLY_CAPTURED` | Part of the reserved amount has been captured. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer. |
+| `PARTIALLY_CAPTURED` | Part of the reserved amount has been captured and the remaining amount as not been cancelled yet. If you do not plan on capturing the rest, you should cancel the remaining amount to release the funds to the customer. |
 | `CANCELLED`          | The charge has been cancelled. |
 
 **IMPORTANT:** We don't provide details about each charge attempt to the merchant,
