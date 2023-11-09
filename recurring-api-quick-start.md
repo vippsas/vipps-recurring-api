@@ -55,7 +55,7 @@ values={[
 In Postman, import the following files:
 
 * [Recurring API Postman collection](/tools/recurring-v3-api-postman-collection.json)
-* [Global Postman environment](https://github.com/vippsas/vipps-developers/blob/master/tools/global-postman-environment.json)
+* [Global Postman environment](https://github.com/vippsas/vipps-developer-docs/blob/main/static/internal-tools/global-postman-environment.json)
 
 🔥 **To reduce risk of exposure, never store production keys in Postman or any similar tools.** 🔥
 
