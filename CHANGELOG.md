@@ -14,6 +14,11 @@ All notable changes to the current API will be documented in this file.
 See:
 [API Lifecycle](https://developer.vippsmobilepay.com/docs/knowledge-base/api-lifecycle/).
 
+## November 2023
+
+* Landing page update. Due to complexity of which price applies to an agreement, whether it's the agreement price, initial charge price, promotional price etc, the [landing page](https://developer.vippsmobilepay.com/docs/knowledge-base/landing-page/) will show agreement names instead of prices.
+
+
 ## October 2023
 
 * Fixes in the Recurring YAML file: 
