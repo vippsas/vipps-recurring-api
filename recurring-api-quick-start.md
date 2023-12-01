@@ -115,7 +115,7 @@ The property `access_token` should be used for all other API requests in the `Au
 ### Step 3 - Create a minimal agreement
 
 Create an agreement with: [`POST:/recurring/v3/agreements`][draft-agreement-endpoint].
-When your test mobile number is provided in `phoneNumber`, it will be pre-filled in the form.
+When your test mobile number is provided in `phoneNumber`, it will be prefilled in the form.
 
 Note that `orderId` must be unique for each payment you create.
 
