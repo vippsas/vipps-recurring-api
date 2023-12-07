@@ -69,14 +69,14 @@ paths:
         - Agreement v2 endpoints (deprecated)
       summary: Create a new Agreement, to be confirmed in the app
       description: |-
-        The API endpoint allows merchants to create agreements for a user to accept. Once the agreement is drafted, you will receive a `vippsConfirmationUrl`.
-        This is used to redirect the user to the landing page, or to the app if `"isApp":true` is used.
+        The API endpoint allows merchants to create agreements for a user to accept. Once the agreement is drafted,you will receive a `vippsConfirmationUrl`.
+        This is used to redirect the user to the landing page, or automatically app-switched to the app if `"isApp":true` is used.
 
-        If the user accepts or rejects the agreement, the user will be redirected back to whichever URL has been passed in `merchantRedirectUrl`.
+        If the user accepts or rejects the agreement, the user will be redirected back to the URL specified in `merchantRedirectUrl`.
         You **have** to implement polling on the agreement to check when the status changes to active instead of relying on the redirect back to the `merchantRedirectUrl`.
         We have no control over if a user is actually redirected back or not, this depends on what browser the user came from.
 
-        Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as transactionType.
+        Please note the different use cases for `initialCharge` and `campaign`. And when to use `RESERVE_CAPTURE` instead of `DIRECT_CAPTURE` as `transactionType`.
         More information about this can be found in the API documentation.
       operationId: DraftAgreement
       parameters:
@@ -684,7 +684,7 @@ paths:
       summary: List Charges
       description: |-
         Fetches all charges for a single agreement, including the optional initial charge.
-        Supports filtering on status using query parameter.
+        Supports filtering on `status` using it as a query parameter.
       operationId: ListCharges
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -717,6 +717,7 @@ paths:
       description: |-
         Creates a new recurring charge *(payment)* that will charge the user on the date specified.
         If the payment fails, the charge will be retried based on `retryDays`.
+        We recommend at least two days retry.
       operationId: CreateCharge
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -784,9 +785,7 @@ paths:
         When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge
         will be released back to the customer.
 
-        Note if you cancel an agreement,
-        there is no need to cancel the charges that belongs to the agreement.
-        This will be done automatically.
+        Pleaste note: If you cancel an agreement, all the charges for that agreement are automatically cancelled.
       operationId: CancelCharge
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -1017,9 +1016,10 @@ paths:
         - Charge v3 endpoints
       summary: Fetch a charge by id
       description: |-
-        Fetch a single charge just by `chargeId`, when the `agreementId` is unknown.
+        A "special case" endpoint to fetch a single charge just by `chargeId`, when the `agreementId` is unknown.
         This is useful for investigating claims from customers, but not intended for automation.
-        This is *not* a replacement for the normal endpoint for fetching charges:
+        
+        Pleaste note: This is *not* a replacement for the normal endpoint for fetching charges:
         `GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`.
       operationId: FetchChargeByIdV3
       parameters:
@@ -1204,7 +1204,7 @@ components:
       in: query
       name: status
       required: false
-      description: Filter by status of the agreement.
+      description: Filter by the `status` of the agreement.
       schema:
         $ref: "#/components/schemas/AgreementStatus"
 
@@ -2817,6 +2817,7 @@ components:
           description: |-
             The service will attempt to charge the customer for the number of days
             specified in `retryDays` after the `due` date.
+            We recommend at least two days retry.
         orderId:
           type: string
           maximum: 50
@@ -2860,8 +2861,11 @@ components:
           description: |-
             The date when the charge is due to be processed.
 
-            If the charge is `DIRECT_CAPTURE`, the charge is processed and charged on due date.
-            If the charge is `RESERVE_CAPTURE`, the charge is `RESERVED` on due date.
+            Must be at least two days in advance in the production environment,
+            and at least one day in the test environment.
+
+            If the charge is `DIRECT_CAPTURE`, the charge is processed and charged on the `due` date.
+            If the charge is `RESERVE_CAPTURE`, the charge is `RESERVED` on `due` date.
 
             Must be in the format `YYYY-MM-DD` and ISO 8601.
           example: '2030-12-31'
@@ -2874,6 +2878,7 @@ components:
           description: |-
             The service will attempt to charge the customer for the number of days
             specified in `retryDays` after the `due` date.
+            We recommend at least two days retry.
         orderId:
           type: string
           maximum: 50
@@ -2882,6 +2887,7 @@ components:
           description: |-
             An optional, but recommended `orderId` for the charge.
             If provided, this will be the `chargeId` for this charge.
+            This is the unique identifier of the payment, from the payment is initiated and all the way to the settlement data.
             See: https://developer.vippsmobilepay.com/docs/knowledge-base/orderid/
             If no `orderId` is specified, the `chargeId` will be automatically generated.
         externalId:
@@ -2903,6 +2909,7 @@ components:
           type: string
           example: chg_WCVbcAbRCmu2zk
           description: Unique identifier for this charge, up to 15 characters.
+          maxLength: 15
 
     ChargeResponseV2:
       title: ChargeResponse
@@ -3061,6 +3068,7 @@ components:
           description: |-
             The service will attempt to charge the customer for the number of days
             specified in `retryDays` after the `due` date.
+            We recommend at least two days retry.
         status:
           $ref: "#/components/schemas/ChargeStatus"
         transactionId:
