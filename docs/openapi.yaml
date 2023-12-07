@@ -1369,10 +1369,11 @@ components:
       properties:
         occurred:
           type: string
+          format: date-time
           description: |-
-            Date and time of the event, on the format
-            `2022-09-05T14:25:55Z`.
-          example: 2022-09-05T14:25:55Z
+            Date and time of the event, as timestamp on the format `yyyy-MM-dd'T'HH:mm:ss'Z'`,
+            with or without milliseconds.
+          example: "2022-09-05T14:25:55Z"
         event:
           type: string
           enum:
