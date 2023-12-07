@@ -785,7 +785,7 @@ paths:
         When cancelling a charge that is `PARTIALLY_CAPTURED`, the remaining funds on the charge
         will be released back to the customer.
 
-        Pleaste note: If you cancel an agreement, all the charges for that agreement are automatically cancelled.
+        Please note: If you cancel an agreement, all the charges for that agreement are automatically cancelled.
       operationId: CancelCharge
       parameters:
         - $ref: "#/components/parameters/Authorization"
@@ -1019,7 +1019,7 @@ paths:
         A "special case" endpoint to fetch a single charge just by `chargeId`, when the `agreementId` is unknown.
         This is useful for investigating claims from customers, but not intended for automation.
         
-        Pleaste note: This is *not* a replacement for the normal endpoint for fetching charges:
+        Please note: This is *not* a replacement for the normal endpoint for fetching charges:
         `GET:/recurring/v3/agreements/{agreementId}/charges/{chargeId}`.
       operationId: FetchChargeByIdV3
       parameters:
