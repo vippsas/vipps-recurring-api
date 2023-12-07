@@ -787,7 +787,7 @@ Each specific charge on an agreement must be scheduled by the merchant.
 
 To create a charge use the [`POST:/recurring/v3/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 
-For agreements of type `variable`, see [Recurring agreements with variable amount](#create-charge).
+For agreements with `VARIABLE_AMOUNT` pricing, see [Recurring agreements with variable amount](#create-charge).
 
 >### `orderId` and `externalId`
 > The optional `orderId`-field will override the automatically generated `chargeId` for the charge if specified,
