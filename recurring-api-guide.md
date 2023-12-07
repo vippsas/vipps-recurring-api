@@ -226,7 +226,7 @@ The `orderId` replaces the `chargeId`.
 * The value of the `orderId` is used for all instances of `chargeId`
 * The `orderId` (and `chargeId`) is used for all subsequent identification
   of the charge.
-* The `orderId` is used in the settlement files.
+* The `orderId` is used in the settlement files if no `externalId` is specified.
 
 This `orderId` must be unique across all Recurring and eCom
 transactions for the given `merchantSerialNumber`.
@@ -787,9 +787,22 @@ Each specific charge on an agreement must be scheduled by the merchant.
 
 To create a charge use the [`POST:/recurring/v3/agreements/{agreementId}/charges`][create-charge-endpoint] endpoint.
 
-Also see check [Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/knowledge-base/orderid) before creating charges.
+For agreements with `VARIABLE_AMOUNT` pricing, see [Recurring agreements with variable amount](#create-charge).
 
-For agreements of type `variable`, also see [Recurring agreements with variable amount](#create-charge).
+>### `orderId` and `externalId`
+> The optional `orderId`-field will override the automatically generated `chargeId` for the charge if specified,
+> and will be used for all subsequent identification of the charge, and in settlement reports unless an `externalId` is specified.
+> 
+> The `externalId`-field is a more flexible alternative to `orderId` which does not override the `chargeId`, but will be used in settlement reports.
+> 
+> This means that if both `orderId` and `externalId` are specified, 
+> the `orderId` will override `chargeId` and be used for all subsequent identification of the charge, 
+> while the `externalId` will be used in settlement reports.
+> 
+> As `externalId` does not have the same requirements for uniqueness as `orderId`, 
+> it is important that you understand how this will impact your settlements before using it.
+> 
+> Also see [Recommendations for `reference` and `orderId`](https://developer.vippsmobilepay.com/docs/knowledge-base/orderid)
 
 #### Due date
 
