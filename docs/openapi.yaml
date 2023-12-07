@@ -2881,7 +2881,8 @@ components:
             We recommend at least two days retry.
         orderId:
           type: string
-          maximum: 50
+          maxLength: 50
+          minLength: 1
           pattern: "^[a-zA-Z\\d-]+"
           example: acme-shop-123-order123abc
           description: |-
@@ -2893,9 +2894,10 @@ components:
         externalId:
           type: string
           description: |-
-            An optional external id for the charge
-            The `externalId` can be used by the merchant to map the `chargeId`
-            to an id in a subscription system or similar.
+            An optional external id for the charge, that takes the place of the `orderId` in settlement reports without overriding the default `chargeId`
+            The `externalId` can be used by the merchant to map the `chargeId` to an id in a subscription system or similar.
+            Note that while `orderId` must be unique per merchant, `externalId` does not have this limitation, 
+            so you need to avoid assigning the same `externalId` to multiple charges if you want to keep them separate in settlement reports.
           maxLength: 64
           minLength: 1
           pattern: '^.{1,64}$'

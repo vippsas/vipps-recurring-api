@@ -19,6 +19,11 @@ See:
 * Landing page update. Due to complexity of which price applies to an agreement, whether it's the agreement price, initial charge price, promotional price etc, the [landing page](https://developer.vippsmobilepay.com/docs/knowledge-base/landing-page/) will show agreement names instead of prices.
 
 
+## November 2023
+* Charge ``externalId``
+  * If specified, the ``externalId`` will be used as order id, meaning it will show up on settlement reports in place of the orderId-field.
+  * If both ``orderId`` and ``externalId`` are specified, the ``externalId`` will be used as order id, while orderId will just be used to identify the charge in the recurring api.
+
 ## October 2023
 
 * Fixes in the Recurring YAML file: 
