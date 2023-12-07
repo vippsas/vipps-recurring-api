@@ -791,7 +791,8 @@ For agreements of type `variable`, see [Recurring agreements with variable amoun
 
 >### `orderId` and `externalId`
 > The optional `orderId`-field will override the automatically generated `chargeId` for the charge if specified,
-> and will be used for all subsequent identification of the charge, and in settlement reports, unless an `externalId` is specified.
+> and will be used for all subsequent identification of the charge, and in settlement reports unless an `externalId` is specified.
+> 
 > The `externalId`-field is a more flexible alternative to `orderId` which does not override the `chargeId`, but will be used in settlement reports.
 > 
 > This means that if both `orderId` and `externalId` are specified, 
